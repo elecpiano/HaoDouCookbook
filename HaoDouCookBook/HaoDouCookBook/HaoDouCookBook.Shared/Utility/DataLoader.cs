@@ -1,14 +1,11 @@
-﻿using System;
+﻿using HaoDouCookBook;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Linq;
-using Shared.Utility;
 
-namespace HaoDouCookBook.Utility
+namespace Shared.Utility
 {
     public class GenericDataLoader<T> where T : class
     {
@@ -20,16 +17,16 @@ namespace HaoDouCookBook.Utility
         string fileName = string.Empty;
         private bool toCacheData = false;
 
-        public void LoadWithoutCaching(string cmd, Action<T> callback)
+        public void LoadWithoutCaching(string dataURL, Action<T> callback)
         {
-            this.Load(cmd, string.Empty, false, string.Empty, string.Empty, callback);
+            this.Load(dataURL, false, string.Empty, string.Empty, callback);
         }
 
         /* don't even try to convert this method into an awaitable method, as the callback should be called twice: 
          * first when local cache is loaded,  second when the new data is downloaded. Async-callback approach is better solution
          * than awaitable method for such use case.
         */
-        public async void Load(string cmd, string param, bool cacheData, string module, string file, Action<T> callback)
+        public async void Load(string dataURL, bool cacheData, string module, string file, Action<T> callback)
         {
             if (cacheData && (string.IsNullOrEmpty(module) || string.IsNullOrEmpty(file)))
             {
@@ -42,7 +39,7 @@ namespace HaoDouCookBook.Utility
             moduleName = module;
             fileName = file;
 
-            if (!DeviceNetworkInformation.IsNetworkAvailable)
+            if (!NetworkHelper.Current.IsInternetConnectionAvaiable)
             {
                 //load cache
                 if (cacheData)
@@ -53,7 +50,7 @@ namespace HaoDouCookBook.Utility
                         T obj = JsonSerializer.Deserialize<T>(cachedJson);
                         if (obj != null)
                         {
-                            Deployment.Current.Dispatcher.BeginInvoke(() =>
+                            App.Current.RunAsync(() =>
                             {
                                 onCallback(obj);
                             });
@@ -69,8 +66,7 @@ namespace HaoDouCookBook.Utility
             //download new
             try
             {
-                String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim() + CryptographyHelper.GetApiPostfix();
-                HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
+                HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(dataURL));
                 request.Method = "GET";
                 request.BeginGetResponse(GetData_Callback, request);
 
@@ -99,7 +95,7 @@ namespace HaoDouCookBook.Utility
                     T obj = JsonSerializer.Deserialize<T>(json);
                     if (obj != null)
                     {
-                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        App.Current.RunAsync(() =>
                         {
                             onCallback(obj);
                         });
@@ -132,16 +128,16 @@ namespace HaoDouCookBook.Utility
         string fileName = string.Empty;
         private bool toCacheData = false;
 
-        public void LoadWithoutCaching(string cmd, Action<T> callback)
+        public void LoadWithoutCaching(string dataURL, Action<T> callback)
         {
-            this.Load(cmd, string.Empty, false, string.Empty, string.Empty, callback);
+            this.Load(dataURL, false, string.Empty, string.Empty, callback);
         }
 
         /* don't even try to convert this method into an awaitable method, as the callback should be called twice: 
          * first when local cache is loaded,  second when the new data is downloaded. Async-callback approach is better solution
          * than awaitable method for such use case.
         */
-        public async void Load(string cmd, string param, bool cacheData, string module, string file, Action<T> callback)
+        public async void Load(string dataURL, bool cacheData, string module, string file, Action<T> callback)
         {
             if (cacheData && (string.IsNullOrEmpty(module) || string.IsNullOrEmpty(file)))
             {
@@ -154,7 +150,7 @@ namespace HaoDouCookBook.Utility
             moduleName = module;
             fileName = file;
 
-            if (!DeviceNetworkInformation.IsNetworkAvailable)
+            if (!NetworkHelper.Current.IsInternetConnectionAvaiable)
             {
                 //load cache
                 if (cacheData)
@@ -165,7 +161,7 @@ namespace HaoDouCookBook.Utility
                         JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(cachedJson);
                         if (wrapper != null && wrapper.data != null)
                         {
-                            Deployment.Current.Dispatcher.BeginInvoke(() =>
+                            App.Current.RunAsync(() =>
                             {
                                 onCallback(wrapper.data);
                             });
@@ -181,8 +177,7 @@ namespace HaoDouCookBook.Utility
             //download new
             try
             {
-                String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim() + CryptographyHelper.GetApiPostfix();
-                HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
+                HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(dataURL));
                 request.Method = "GET";
                 request.BeginGetResponse(GetData_Callback, request);
 
@@ -211,7 +206,7 @@ namespace HaoDouCookBook.Utility
                     JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(json);
                     if (wrapper != null && wrapper.data != null)
                     {
-                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        App.Current.RunAsync(() =>
                         {
                             onCallback(wrapper.data);
                         });
@@ -255,12 +250,12 @@ namespace HaoDouCookBook.Utility
         private List<T> _LoadedList = new List<T>();
         private Func<T, T, bool> _Comparison;
 
-        public void Load(string cmd, Action<List<T>> callback)
+        public void Load(string dataURL, Action<List<T>> callback)
         {
-            this.Load(cmd, string.Empty, false, string.Empty, string.Empty, callback);
+            this.Load(dataURL, false, string.Empty, string.Empty, callback);
         }
 
-        public async void Load(string cmd, string param, bool cacheData, string module, string file, Action<List<T>> callback)
+        public async void Load(string dataURL, bool cacheData, string module, string file, Action<List<T>> callback)
         {
             if (cacheData && (string.IsNullOrEmpty(module) || string.IsNullOrEmpty(file)))
             {
@@ -273,7 +268,7 @@ namespace HaoDouCookBook.Utility
             fileName = file;
             toCacheData = cacheData;
 
-            if (!DeviceNetworkInformation.IsNetworkAvailable)
+            if (!NetworkHelper.Current.IsInternetConnectionAvaiable)
             {
                 //load cache
                 if (cacheData)
@@ -284,7 +279,7 @@ namespace HaoDouCookBook.Utility
                         JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
                         if (wrapper != null && wrapper.data != null)
                         {
-                            Deployment.Current.Dispatcher.BeginInvoke(() =>
+                           App.Current.RunAsync(() =>
                             {
                                 List<T> list = new List<T>();
                                 for (int i = 0; i < wrapper.data.Length; i++)
@@ -305,8 +300,7 @@ namespace HaoDouCookBook.Utility
             //download new
             try
             {
-                String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim() + CryptographyHelper.GetApiPostfix();
-                HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
+                HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(dataURL));
                 request.Method = "GET";
                 request.BeginGetResponse(GetData_Callback, request);
 
@@ -333,7 +327,7 @@ namespace HaoDouCookBook.Utility
                     JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(json);
                     if (wrapper != null && wrapper.data != null)
                     {
-                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        App.Current.RunAsync(() =>
                         {
                             List<T> list = new List<T>();
                             for (int i = 0; i < wrapper.data.Length; i++)
@@ -370,7 +364,7 @@ namespace HaoDouCookBook.Utility
         /// <param name="file"></param>
         /// <param name="callback"></param>
         /// <param name="comparison"></param>
-        public async void Load(string cmd, string param, bool cacheData, string module, string file, Action<List<T>> callback, Func<T, T, bool> comparison)
+        public async void Load(string dataURL, bool cacheData, string module, string file, Action<List<T>> callback, Func<T, T, bool> comparison)
         {
             {
                 if (cacheData && (string.IsNullOrEmpty(module) || string.IsNullOrEmpty(file)))
@@ -386,7 +380,7 @@ namespace HaoDouCookBook.Utility
 
                 _Comparison = comparison;
 
-                if (!DeviceNetworkInformation.IsNetworkAvailable)
+                if (!NetworkHelper.Current.IsInternetConnectionAvaiable)
                 {
                     //load cache
                     if (cacheData)
@@ -397,7 +391,7 @@ namespace HaoDouCookBook.Utility
                             JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
                             if (wrapper != null && wrapper.data != null)
                             {
-                                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                                App.Current.RunAsync(() =>
                                 {
                                     _LoadedList.Clear();
                                     for (int i = 0; i < wrapper.data.Length; i++)
@@ -418,8 +412,7 @@ namespace HaoDouCookBook.Utility
                 //download new
                 try
                 {
-                    String url = Constants.DOMAIN + "/api/server?cmd=" + cmd.Trim() + param.Trim() + CryptographyHelper.GetApiPostfix();
-                    HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
+                    HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(dataURL));
                     request.Method = "GET";
                     request.BeginGetResponse(GetData_Callback2, request);
 
@@ -447,7 +440,7 @@ namespace HaoDouCookBook.Utility
                     JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(json);
                     if (wrapper != null && wrapper.data != null)
                     {
-                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        App.Current.RunAsync(() =>
                         {
                             List<T> list = new List<T>();
                             for (int i = 0; i < wrapper.data.Length; i++)
@@ -518,11 +511,6 @@ namespace HaoDouCookBook.Utility
                 isEqual = true;
             }
             return isEqual;
-        }
-
-        internal void Load(string p1, string p2, bool p3, string p4, string p5, Action<List<Models.LiveData>> action)
-        {
-            throw new NotImplementedException();
         }
     }
 

@@ -5,10 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -18,35 +16,16 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
+// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
-namespace HaoDouCookBook
+namespace SharedLibraryTest
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     public sealed partial class App : Application
     {
-        public static App Current
-        {
-            get;
-            private set;
-        }
-
-        public void RunAsync(Action action)
-        {
-            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                if (action != null)
-                {
-                    action();
-                }
-            });
-        }
-
-#if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
-#endif
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -56,15 +35,6 @@ namespace HaoDouCookBook
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
-            this.UnhandledException += App_UnhandledException;
-
-            Current = this;
-            Shared.Utility.NetworkHelper.Current.StartListening();
-        }
-
-        void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -105,7 +75,6 @@ namespace HaoDouCookBook
 
             if (rootFrame.Content == null)
             {
-#if WINDOWS_PHONE_APP
                 // Removes the turnstile navigation for startup.
                 if (rootFrame.ContentTransitions != null)
                 {
@@ -118,7 +87,6 @@ namespace HaoDouCookBook
 
                 rootFrame.ContentTransitions = null;
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
-#endif
 
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
@@ -133,7 +101,6 @@ namespace HaoDouCookBook
             Window.Current.Activate();
         }
 
-#if WINDOWS_PHONE_APP
         /// <summary>
         /// Restores the content transitions after the app has launched.
         /// </summary>
@@ -145,7 +112,6 @@ namespace HaoDouCookBook
             rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
             rootFrame.Navigated -= this.RootFrame_FirstNavigated;
         }
-#endif
 
         /// <summary>
         /// Invoked when application execution is being suspended.  Application state is saved
@@ -161,6 +127,5 @@ namespace HaoDouCookBook
             // TODO: Save application state and stop any background activity
             deferral.Complete();
         }
-
     }
 }

@@ -25,9 +25,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\CryptographyHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\MD5.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DataContextGetter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\DataLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DataTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\HttpExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\ImageHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\IsolatedStorageHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\JsonSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\NetworkHelper.cs" />
   </ItemGroup>
 </Project>

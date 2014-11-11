@@ -2,16 +2,14 @@
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 using Windows.Storage;
-using Microsoft.Phone.Net.NetworkInformation;
+using Windows.Storage.Streams;
+using Windows.UI.Xaml.Media.Imaging;
 
-namespace HaoDouCookBook.Utility
+namespace Shared.Utility
 {
     public class ImageHelper
     {
-        App App { get { return App.Current as App; } }
-
         static string folderName = string.Empty;
         static string fileName = string.Empty;
         Action onDownloaded = null;
@@ -48,9 +46,12 @@ namespace HaoDouCookBook.Utility
 
                 //read
                 dataFolder = await local.GetFolderAsync(folder);
-                var fileStream = await dataFolder.OpenStreamForReadAsync(file);
+
+                // Get the file.
+                StorageFile storageFile = await dataFolder.GetFileAsync(file);
+                IRandomAccessStream fileStream = await storageFile.OpenAsync(FileAccessMode.Read);
                 bi = new BitmapImage();
-                bi.SetSource(fileStream);
+                await bi.SetSourceAsync(fileStream);
                 return bi;
             }
             catch (WebException e)
@@ -64,7 +65,7 @@ namespace HaoDouCookBook.Utility
 
         public void Download(string uri, string folder, string file, Action callback)
         {
-            if (!DeviceNetworkInformation.IsNetworkAvailable)
+            if (!NetworkHelper.Current.IsInternetConnectionAvaiable)
             {
                 return;
             }
@@ -138,11 +139,12 @@ namespace HaoDouCookBook.Utility
                     var dataFolder = await local.GetFolderAsync(folder);
 
                     // Get the file.
-                    var stream = await dataFolder.OpenStreamForReadAsync(file);
+                    StorageFile storageFile = await dataFolder.GetFileAsync(file);
+                    IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.Read);
 
                     // Read the data.
                     var bi = new BitmapImage();
-                    bi.SetSource(stream);
+                    await bi.SetSourceAsync(stream);
                     return bi;
                 }
             }

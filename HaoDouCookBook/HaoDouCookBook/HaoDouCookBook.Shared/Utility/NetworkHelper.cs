@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Networking.Connectivity;
 
-namespace HaoDouCookBook.Utility
+namespace Shared.Utility
 {
     public class NetworkHelper
     {
@@ -21,14 +21,25 @@ namespace HaoDouCookBook.Utility
 
         #endregion
 
-        private const string _HOST = "115.28.21.97";
+        //private const string _HOST = "115.28.21.97";
+
+        private bool _isInternetConnectionAvailable;
+
+        public bool IsInternetConnectionAvaiable
+        {
+            get
+            {
+                return _isInternetConnectionAvailable;
+            }
+        }
 
         private bool _IsWifiConnectionAvailable;
         public bool IsWifiConnectionAvailable
         {
             get
             {
-                if (DeviceNetworkInformation.IsNetworkAvailable && DeviceNetworkInformation.IsWiFiEnabled && _IsWifiConnectionAvailable)
+
+                if (_isInternetConnectionAvailable && _IsWifiConnectionAvailable)
                 {
                     return true;
                 }
@@ -39,63 +50,24 @@ namespace HaoDouCookBook.Utility
         private void UpdateStatus()
         {
             _IsWifiConnectionAvailable = false;
+            _isInternetConnectionAvailable = false;
 
-            DeviceNetworkInformation.ResolveHostNameAsync(
-                new DnsEndPoint(_HOST, 80),
-                new NameResolutionCallback(handle =>
+            ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
+
+            if(internetConnectionProfile == null)
+            {
+                _isInternetConnectionAvailable = false;
+                return;
+            }
+            else
+            {
+                _isInternetConnectionAvailable = true;
+
+                if(internetConnectionProfile.IsWlanConnectionProfile)
                 {
-                    NetworkInterfaceInfo info = handle.NetworkInterface;
-                    if (info != null)
-                    {
-                        switch (info.InterfaceType)
-                        {
-                            case NetworkInterfaceType.Ethernet:
-                                //NetName = "Ethernet";
-                                break;
-                            case NetworkInterfaceType.MobileBroadbandCdma:
-                            case NetworkInterfaceType.MobileBroadbandGsm:
-                                switch (info.InterfaceSubtype)
-                                {
-                                    case NetworkInterfaceSubType.Cellular_3G:
-                                        //NetName = "Cellular_3G + 3G";
-                                        break;
-                                    case NetworkInterfaceSubType.Cellular_EVDO:
-                                        //NetName = "Cellular_EVDO + 3G";
-                                        break;
-                                    case NetworkInterfaceSubType.Cellular_EVDV:
-                                        //NetName = "Cellular_EVDV + 3G";
-                                        break;
-                                    case NetworkInterfaceSubType.Cellular_HSPA:
-                                        //NetName = "Cellular_HSPA + 3G";
-                                        break;
-                                    case NetworkInterfaceSubType.Cellular_GPRS:
-                                        //NetName = "Cellular_GPRS + 2G";
-                                        break;
-                                    case NetworkInterfaceSubType.Cellular_EDGE:
-                                        //NetName = "Cellular_EDGE + 2G";
-                                        break;
-                                    case NetworkInterfaceSubType.Cellular_1XRTT:
-                                        //NetName = "Cellular_1XRTT + 2G";
-                                        break;
-                                    default:
-                                        //NetName = "None";
-                                        break;
-                                }
-                                break;
-                            case NetworkInterfaceType.Wireless80211:
-                                _IsWifiConnectionAvailable = true;
-                                //NetName = "WiFi";
-                                break;
-                            default:
-                                //NetName = "None";
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        //NetName = "None";
-                    }
-                }), null);
+                    _IsWifiConnectionAvailable = true;
+                }
+            }
         }
 
         public void StartListening()
