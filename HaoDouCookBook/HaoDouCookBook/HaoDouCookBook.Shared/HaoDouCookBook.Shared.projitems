@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>bf320666-2255-4b52-8996-e5d1470e8719</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>HaoDouCookBook</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="$(MSBuildThisFileDirectory)Animations\AnimationBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Animations\FadeAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Animations\MoveAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Animations\RotateAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Animations\ScaleAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Animations\VibrateAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\BindableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\CryptographyHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\MD5.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\DataContextGetter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\DataTemplateSelector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\HttpExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\IsolatedStorageHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\JsonSerializer.cs" />
+  </ItemGroup>
+</Project>
