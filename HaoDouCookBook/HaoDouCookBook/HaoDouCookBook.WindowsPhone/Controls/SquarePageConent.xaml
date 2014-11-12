@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="HaoDouCookBook.Controls.SquarePageConent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="最新话题" FontSize="28" Foreground="Green"/>
+                <Rectangle Height="1" Width="400" Stroke="Gray" HorizontalAlignment="Left"/>
+                <ItemsControl x:Name="topicList">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="2" BorderBrush="Gray">
+                                <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
+                                       Title="{Binding Title}"
+                                       PreviewContent="{Binding PreviewContent}"
+                                       Author="{Binding Author}"
+                                       CreateTimeDescription="{Binding CreateTimeDescription}"
+                                       Margin="0, 2, 0, 2"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

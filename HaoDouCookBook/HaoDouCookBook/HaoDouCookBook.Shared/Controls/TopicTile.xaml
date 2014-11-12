@@ -1,0 +1,32 @@
+﻿<UserControl
+    x:Class="HaoDouCookBook.Controls.TopicTile"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="134"
+    d:DesignWidth="370">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="67*"/>
+            <ColumnDefinition Width="118*"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" Source="{Binding TopicPreviewImageSource}"/>
+        <Grid Grid.Column="1" Margin=" 20, 25, 0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Binding Title}" Grid.Row="0" Style="{StaticResource TopicTileStyle}" FontSize="28"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,5,0,0">
+                <TextBlock Foreground="Gray" Text="{Binding Author}" Style="{StaticResource TopicContentStyle}"/>
+                <TextBlock Foreground="Gray" Text="{Binding CreateTimeDescription}" Margin="15,0,0,0"  Style="{StaticResource TopicContentStyle}"/>
+            </StackPanel>
+            <TextBlock Text="{Binding PreviewContent}" Grid.Row="2" Style="{StaticResource TopicContentStyle}" Margin="0, 8, 0, 0"/>
+        </Grid>
+    </Grid>
+</UserControl>

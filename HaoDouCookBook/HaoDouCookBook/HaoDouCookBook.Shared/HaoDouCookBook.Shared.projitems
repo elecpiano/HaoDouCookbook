@@ -21,10 +21,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\BindableBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SharedLibraryTest.xaml.cs">
-      <DependentUpon>SharedLibraryTest.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\TopicTile.xaml.cs">
+      <DependentUpon>TopicTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\UserPhoto.xaml.cs">
+      <DependentUpon>UserPhoto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\AnythingToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\BindableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Topic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\CryptographyHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\MD5.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DataContextGetter.cs" />
@@ -37,9 +43,20 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utility\NetworkHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)SharedLibraryTest.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Controls\TopicTile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\UserPhoto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Style\AppStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\noavatar_300.jpg" />
   </ItemGroup>
 </Project>
