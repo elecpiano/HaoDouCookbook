@@ -31,6 +31,12 @@
                     <Image x:Name="image" Stretch="Uniform"/>
                 </StackPanel>
             </PivotItem>
-        </Pivot>
+            <PivotItem Header="Animation">
+                <StackPanel>
+                    <Button Content="StartAnimation" Tapped="Button_Tapped"/>
+                    <Rectangle Fill="Blue" Width="50" Height="50" Name="rect"/>
+                </StackPanel>
+            </PivotItem>
+      </Pivot>
     </Grid>
 </Page>

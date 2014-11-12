@@ -1,4 +1,5 @@
-﻿using Shared.Utility;
+﻿using Shared.Animations;
+using Shared.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -115,5 +116,30 @@ namespace HaoDouCookBook
         }
 
         #endregion
+
+        #region Animation
+        private void Button_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            MoveAnimation.MoveBy(this.rect, 0, 200, TimeSpan.FromSeconds(1), fe =>
+                {
+                    ScaleAnimation.ScaleTo(this.rect, 2, 2, TimeSpan.FromSeconds(1), fe1 =>
+                        {
+                            RotateAnimation.RotateBy(this.rect, 360, TimeSpan.FromSeconds(1), fe2 =>
+                                {
+                                    VibrateAnimation.Vibrate(this.rect, fe3 =>
+                                        {
+                                            MoveAnimation.MoveBy(this.rect, 0, -200, TimeSpan.FromSeconds(1), fe4 =>
+                                                {
+                                                    ScaleAnimation.ScaleTo(this.rect, 1, 1, TimeSpan.FromSeconds(1), null);
+                                                });
+                                        });
+                                });
+
+                        });
+                });
+        }
+
+        #endregion
+
     }
 }
