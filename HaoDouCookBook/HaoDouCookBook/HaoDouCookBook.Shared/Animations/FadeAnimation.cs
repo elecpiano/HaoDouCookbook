@@ -109,9 +109,10 @@ namespace Shared.Animations
                 AnimationCompleted(AnimationTarget);
             }
             AnimationPool.Push(this);
+            AnimationTarget = null;
         }
 
-        public void Stop()
+        public override void Stop()
         {
             if (_Storyboard!=null)
             {

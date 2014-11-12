@@ -195,6 +195,7 @@ namespace Shared.Animations
             }
 
             AnimationPool.Push(this);
+            AnimationTarget = null;
         }
 
         #endregion
