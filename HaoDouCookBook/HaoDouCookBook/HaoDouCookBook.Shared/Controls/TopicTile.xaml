@@ -9,24 +9,28 @@
     d:DesignHeight="134"
     d:DesignWidth="370">
 
-    <Grid>
+    <Grid x:Name="root">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="67*"/>
-            <ColumnDefinition Width="118*"/>
+            <ColumnDefinition Width="62*"/>
+            <ColumnDefinition Width="123*"/>
         </Grid.ColumnDefinitions>
-        <Image Grid.Column="0" Source="{Binding TopicPreviewImageSource}"/>
-        <Grid Grid.Column="1" Margin=" 20, 25, 0,0">
+        <Rectangle Width="122" Height="90" VerticalAlignment="Center" Grid.Column="0">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="{Binding TopicPreviewImageSource}"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Grid Grid.Column="1" Margin="20,0,0,0" VerticalAlignment="Center" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="{Binding Title}" Grid.Row="0" Style="{StaticResource TopicTileStyle}" FontSize="28"/>
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,5,0,0">
+            <TextBlock Text="{Binding Title}" Grid.Row="0" Style="{StaticResource TopicTileStyle}"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" Margin="0,3,0,0">
                 <TextBlock Foreground="Gray" Text="{Binding Author}" Style="{StaticResource TopicContentStyle}"/>
                 <TextBlock Foreground="Gray" Text="{Binding CreateTimeDescription}" Margin="15,0,0,0"  Style="{StaticResource TopicContentStyle}"/>
             </StackPanel>
-            <TextBlock Text="{Binding PreviewContent}" Grid.Row="2" Style="{StaticResource TopicContentStyle}" Margin="0, 8, 0, 0"/>
+            <TextBlock Text="{Binding PreviewContent}" Grid.Row="2" Style="{StaticResource TopicContentStyle}" VerticalAlignment="Center" Margin="0,3,0,0"/>
         </Grid>
     </Grid>
 </UserControl>

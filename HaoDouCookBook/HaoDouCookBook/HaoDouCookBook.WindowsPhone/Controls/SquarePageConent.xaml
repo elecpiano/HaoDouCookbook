@@ -13,8 +13,7 @@
     <Grid>
         <ScrollViewer>
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="最新话题" FontSize="28" Foreground="Green"/>
-                <Rectangle Height="1" Width="400" Stroke="Gray" HorizontalAlignment="Left"/>
+                <controls:CategoryTitle Title="最新话题"/>
                 <ItemsControl x:Name="topicList">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -23,14 +22,13 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderThickness="2" BorderBrush="Gray">
-                                <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
+                            <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
                                        Title="{Binding Title}"
                                        PreviewContent="{Binding PreviewContent}"
                                        Author="{Binding Author}"
                                        CreateTimeDescription="{Binding CreateTimeDescription}"
-                                       Margin="0, 2, 0, 2"/>
-                            </Border>
+                                       HorizontalAlignment="Left" Margin="0, 15, 0, 0"
+                                                />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

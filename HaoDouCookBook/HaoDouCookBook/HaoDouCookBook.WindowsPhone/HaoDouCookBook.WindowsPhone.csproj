@@ -84,6 +84,9 @@
     <Folder Include="Assets\Images\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DiscoveryPageContent.xaml.cs">
+      <DependentUpon>DiscoveryPageContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SquarePageConent.xaml.cs">
       <DependentUpon>SquarePageConent.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
     <Content Include="Assets\WideLogo.scale-240.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\DiscoveryPageContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SquarePageConent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

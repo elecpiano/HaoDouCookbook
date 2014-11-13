@@ -17,28 +17,33 @@ using Windows.UI.Xaml.Navigation;
 
 namespace HaoDouCookBook.Controls
 {
-    public sealed partial class UserPhoto : UserControl
+    public sealed partial class CategoryTitle : ContentControl
     {
 
         #region Dependency Property
-        public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(string), typeof(UserPhoto), new PropertyMetadata("../Assets/Images/noavatar_300.jpg"));
+
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(CategoryTitle), new PropertyMetadata(string.Empty));
 
         #endregion
 
         #region CLR Property Wrapper
 
-        public string ImageSource
+        public string Title
         {
-            get { return (string)GetValue(ImageSourceProperty); }
-            set { SetValue(ImageSourceProperty, value); }
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
         }
 
         #endregion
 
-        public UserPhoto()
+        #region Life Cycle
+
+        public CategoryTitle()
         {
             this.InitializeComponent();
             this.root.DataContext = this;
         }
+
+        #endregion
     }
 }

@@ -10,21 +10,26 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        
+
     </Page.Resources>
 
     <Grid>
-        <Pivot>
+        <Pivot x:Name="mainPivot">
+            <Pivot.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Source="../Assets/Images/logo_recipe.jpg" HorizontalAlignment="Center" Height="28"/>
+                    </StackPanel>
+                </DataTemplate>
+            </Pivot.TitleTemplate>
             <PivotItem Header="精选">
                 <controls:UserPhoto Width="200" Height="200"/>
             </PivotItem>
             <PivotItem Header="发现">
-                <Grid/>
+                <controls:DiscoveryPageContent Margin="5, 0, 5, 0"/>
             </PivotItem>
             <PivotItem Header="广场">
-                <Grid>
-                    <controls:SquarePageConent/>
-                </Grid>
+                <controls:SquarePageConent Margin="5, 0, 5, 0"/>
             </PivotItem>
             <PivotItem Header="我的">
                 <Grid/>

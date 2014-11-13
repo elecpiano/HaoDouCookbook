@@ -1,28 +1,55 @@
-﻿using System;
+﻿using Shared.Infrastructures;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace HaoDouCookBook.Models
 {
-    public class TopicModel
+    public class TopicModel : BindableBase
     {
-        public string TopicPreviewImageSource { get; set; }
+        private string topicPreviewImageSource;
 
-        public string Title { get; set; }
+        public string TopicPreviewImageSource
+        {
+            get { return topicPreviewImageSource; }
+            set { SetProperty<string>(ref topicPreviewImageSource, value); }
+        }
 
-        public string Author { get; set; }
+        private string title;
 
-        public string PreviewContent { get; set; }
+        public string Title
+        {
+            get { return title; }
+            set { SetProperty<string>(ref title, value); }
+        }
 
-        public string CreateTimeDescription { get; set; }
+        private string author;
+
+        public string Author
+        {
+            get { return author; }
+            set { SetProperty<string>(ref author, value); }
+        }
+
+        private string previewContent;
+
+        public string PreviewContent
+        {
+            get { return previewContent; }
+            set { SetProperty<string>(ref previewContent, value); }
+        }
+
+        private string createTimeDescription;
+
+        public string CreateTimeDescription
+        {
+            get { return createTimeDescription; }
+            set { SetProperty<string>(ref createTimeDescription, value); }
+        }
 
         public TopicModel()
         {
-            TopicPreviewImageSource = string.Empty;
-            Title = string.Empty;
-            Author = string.Empty;
-            PreviewContent = string.Empty;
-            CreateTimeDescription = string.Empty;
+
         }
     }
 }

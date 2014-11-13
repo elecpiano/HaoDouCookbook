@@ -23,7 +23,24 @@ namespace HaoDouCookBook.Controls
         #region Dependency Property
 
         public static readonly DependencyProperty TopicPreviewImageSourceProperty = DependencyProperty.Register("TopicPreviewImageSource", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
-        public static readonly DependencyProperty PreviewContentProperty = DependencyProperty.Register("PreviewContent", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty PreviewContentProperty = DependencyProperty.Register("PreviewContent", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty, PropretyChanged));
+
+        private static void PropretyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if(e.NewValue == null)
+            {
+                return;
+            }
+
+            string newString = e.NewValue.ToString();
+            if(newString.Length > 10)
+            {
+                newString = newString.Substring(0, 10) + "...";
+            }
+
+            d.SetValue(PreviewContentProperty, newString);
+        }
+
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty AuthorProperty = DependencyProperty.Register("Author", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty CreateTimeDescriptionProperty = DependencyProperty.Register("CreateTimeDescription", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
@@ -41,17 +58,7 @@ namespace HaoDouCookBook.Controls
         public string Title
         {
             get { return (string)GetValue(TitleProperty); }
-            set
-            {
-                string title = value;
-                if(value.Length > 13)
-                {
-                    title = title.Substring(0, 13) + "...";
-
-                }
-
-                SetValue(TitleProperty, title);
-            }
+            set { SetValue(TitleProperty, value); }
         }
 
         public string Author
@@ -63,15 +70,7 @@ namespace HaoDouCookBook.Controls
         public string PreviewContent
         {
             get { return (string)GetValue(PreviewContentProperty); }
-            set
-            {
-                string content = value;
-                if (value.Length > 13)
-                {
-                    content = content.Substring(0, 13) + "...";
-                }
-                SetValue(PreviewContentProperty, content);
-            }
+            set { SetValue(PreviewContentProperty, value); }
         }
 
         public string CreateTimeDescription
@@ -86,8 +85,8 @@ namespace HaoDouCookBook.Controls
 
         public TopicTile()
         {
-            this.DataContext = this;
             this.InitializeComponent();
+            this.root.DataContext = this;
         }
 
         #endregion
