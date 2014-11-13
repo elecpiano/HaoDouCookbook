@@ -23,25 +23,8 @@ namespace HaoDouCookBook.Controls
         #region Dependency Property
 
         public static readonly DependencyProperty TopicPreviewImageSourceProperty = DependencyProperty.Register("TopicPreviewImageSource", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
-        public static readonly DependencyProperty PreviewContentProperty = DependencyProperty.Register("PreviewContent", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty, PropretyChanged));
-
-        private static void PropretyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if(e.NewValue == null)
-            {
-                return;
-            }
-
-            string newString = e.NewValue.ToString();
-            if(newString.Length > 10)
-            {
-                newString = newString.Substring(0, 10) + "...";
-            }
-
-            d.SetValue(PreviewContentProperty, newString);
-        }
-
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty PreviewContentProperty = DependencyProperty.Register("PreviewContent", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty, PropertyChanged));
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty, PropertyChanged));
         public static readonly DependencyProperty AuthorProperty = DependencyProperty.Register("Author", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty CreateTimeDescriptionProperty = DependencyProperty.Register("CreateTimeDescription", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
 
@@ -90,5 +73,27 @@ namespace HaoDouCookBook.Controls
         }
 
         #endregion
+
+        #region Private Method
+
+        private static void PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue == null)
+            {
+                return;
+            }
+
+            string newString = e.NewValue.ToString();
+            if (newString.Length > 10)
+            {
+                newString = newString.Substring(0, 10) + "...";
+            }
+
+            d.SetValue(PreviewContentProperty, newString);
+        }
+
+        #endregion
     }
+
+
 }

@@ -10,29 +10,27 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
-        <ScrollViewer>
-            <StackPanel Orientation="Vertical">
-                <controls:CategoryTitle Title="最新话题"/>
-                <ItemsControl x:Name="topicList">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
+    <ScrollViewer>
+        <StackPanel Orientation="Vertical">
+            <controls:CategoryTitle Title="最新话题"/>
+            <ItemsControl x:Name="topicList">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
                                        Title="{Binding Title}"
                                        PreviewContent="{Binding PreviewContent}"
                                        Author="{Binding Author}"
                                        CreateTimeDescription="{Binding CreateTimeDescription}"
                                        HorizontalAlignment="Left" Margin="0, 15, 0, 0"
                                                 />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-        </ScrollViewer>
-    </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

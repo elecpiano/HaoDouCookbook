@@ -35,10 +35,14 @@ namespace HaoDouCookBook.Controls
 
         #endregion
 
+        #region Life Cycle
+
         public UserPhoto()
         {
             this.InitializeComponent();
             this.root.DataContext = this;
         }
+
+        #endregion
     }
 }

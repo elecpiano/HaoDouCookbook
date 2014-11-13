@@ -23,7 +23,7 @@
                 </DataTemplate>
             </Pivot.TitleTemplate>
             <PivotItem Header="精选">
-                <controls:UserPhoto Width="200" Height="200"/>
+                <controls:ChoicenessPageContent Margin="5, 0, 5, 0"/>
             </PivotItem>
             <PivotItem Header="发现">
                 <controls:DiscoveryPageContent Margin="5, 0, 5, 0"/>
