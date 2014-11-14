@@ -26,7 +26,8 @@
                                        PreviewContent="{Binding PreviewContent}"
                                        Author="{Binding Author}"
                                        CreateTimeDescription="{Binding CreateTimeDescription}"
-                                       HorizontalAlignment="Left" Margin="0, 15, 0, 0"
+                                       TileType="Full"
+                                       HorizontalAlignment="Left" Margin="0, 30, 0, 0"
                                                 />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

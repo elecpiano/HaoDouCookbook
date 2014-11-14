@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="134"
-    d:DesignWidth="370">
+    d:DesignWidth="370" Background="Transparent">
 
     <Grid x:Name="root">
         <Grid.ColumnDefinitions>
@@ -19,14 +19,14 @@
                 <ImageBrush ImageSource="{Binding TopicPreviewImageSource}"/>
             </Rectangle.Fill>
         </Rectangle>
-        <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center" Margin="20,0,0,0">
-            <TextBlock Text="{Binding Title}" Style="{StaticResource TopicTileStyle}"/>
-            <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
+        <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="18, 0, 0, 0">
+            <TextBlock x:Name="titleInfo" Text="{Binding Title}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0"/>
+            <StackPanel x:Name="authorInfo" Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Foreground="Gray" Text="{Binding Author}" Style="{StaticResource TopicContentStyle}"/>
                 <TextBlock Foreground="Gray" Text="{Binding CreateTimeDescription}" Margin="15,0,0,0"  Style="{StaticResource TopicContentStyle}"/>
             </StackPanel>
-            <TextBlock Text="{Binding PreviewContent}" Style="{StaticResource TopicContentStyle}" VerticalAlignment="Center" Margin="0,5,0,0"/>
-        </StackPanel>
+            <TextBlock x:Name="previewContentInfo" Text="{Binding PreviewContent}" Style="{StaticResource TopicContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
+        </Grid>
 
     </Grid>
 </UserControl>

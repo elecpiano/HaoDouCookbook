@@ -12,14 +12,23 @@
     <Page.Resources>
 
     </Page.Resources>
+    
+    <Page.BottomAppBar>
+        <CommandBar Background="WhiteSmoke">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Find" Label="查找"/>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Sort" Label="分类" FontFamily="Verdana"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 
     <Grid>
         <Pivot x:Name="mainPivot">
             <Pivot.TitleTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <Image Source="../Assets/Images/logo_recipe.jpg" HorizontalAlignment="Center" Height="28"/>
-                    </StackPanel>
+                    <controls:Banner/>
                 </DataTemplate>
             </Pivot.TitleTemplate>
             <PivotItem Header="精选">

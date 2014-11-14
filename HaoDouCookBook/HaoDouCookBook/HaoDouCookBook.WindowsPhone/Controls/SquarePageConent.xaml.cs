@@ -45,9 +45,9 @@ namespace HaoDouCookBook.Controls
             LatestTopics.Clear();
             LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
             LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
+            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒红烧肉青红椒红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
             LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
+            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
             LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
             LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
             LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });

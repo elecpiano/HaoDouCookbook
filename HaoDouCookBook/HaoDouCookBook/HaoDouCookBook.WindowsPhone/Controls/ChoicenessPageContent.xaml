@@ -19,9 +19,24 @@
             <StackPanel Orientation="Vertical">
                 <Grid>
                     <controls:CategoryTitle Title="榜单" HorizontalAlignment="Left"/>
-                    <TextBlock Text="更多榜单" HorizontalAlignment="Right" Style="{StaticResource CategoryTitleStyle}" Foreground="#87000000"/>
+                    <TextBlock x:Name="rankListMore" Text="更多榜单" HorizontalAlignment="Right" Style="{StaticResource CategoryTitleStyle}" Foreground="#87000000" Tapped="rankListMore_Tapped"/>
                 </Grid>
-                <Border Height="400"/>
+                <ItemsControl x:Name="rankList" Margin="0, 0, 0, 30">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:TopicTile TileType="TileAndPreviewContentWrap" 
+                                               TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
+                                               Title="{Binding Title}"
+                                               PreviewContent="{Binding PreviewContent}"
+                                               HorizontalAlignment="Left" Margin="0, 30, 0, 0"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
 
         </StackPanel>

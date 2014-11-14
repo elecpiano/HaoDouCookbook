@@ -33,6 +33,14 @@ namespace HaoDouCookBook
             private set;
         }
 
+        private Frame rootFrame;
+
+        public Frame RootFrame
+        {
+            get { return rootFrame; }
+            set { rootFrame = value; }
+        }
+
         public void RunAsync(Action action)
         {
             CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -82,7 +90,7 @@ namespace HaoDouCookBook
             }
 #endif
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
