@@ -11,9 +11,27 @@
     d:DesignWidth="400">
 
     <ScrollViewer>
+
         <StackPanel Orientation="Vertical">
+            <!--分类-->
+            <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 40">
+                <ItemsControl x:Name="CategoryList">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:CategoryImageTile ImageSource="{Binding ImageSource}" Title="{Binding Title}" Margin="0, 0, 11.5, 0"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <!--最新话题-->
             <controls:CategoryTitle Title="最新话题"/>
-            <ItemsControl x:Name="topicList">
+            <ItemsControl x:Name="topicList" Margin="0, 0, 0, 15">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical"/>

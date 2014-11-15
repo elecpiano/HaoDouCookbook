@@ -25,8 +25,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Banner.xaml.cs">
       <DependentUpon>Banner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\CategoryImageTile.xaml.cs">
+      <DependentUpon>CategoryImageTile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\CategoryTitle.xaml.cs">
       <DependentUpon>CategoryTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\DishTile.xaml.cs">
+      <DependentUpon>DishTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\MealTile.xaml.cs">
+      <DependentUpon>MealTile.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\TopicTile.xaml.cs">
       <DependentUpon>TopicTile.xaml</DependentUpon>
@@ -37,6 +46,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\AnythingToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\BindableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryTileData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\CookMaster.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DishTileData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Meal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Topic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UserData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\CryptographyHelper.cs" />
@@ -56,7 +69,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\CategoryImageTile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Controls\CategoryTitle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\DishTile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\MealTile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

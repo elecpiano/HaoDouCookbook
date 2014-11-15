@@ -12,16 +12,60 @@
 
     <ScrollViewer>
         <StackPanel Orientation="Vertical">
-            <controls:CategoryTitle Title="新手课堂·鸡蛋卷饼（视频）"/>
+            <!--一日三餐-->
+            <Grid Width="380" Height="180" HorizontalAlignment="Left">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <controls:MealTile x:Name="mealLeft" ImageSource="{Binding MealImageSource}" MealName="{Binding Name}" Number="{Binding Number}" Date="{Binding Date}" Margin="3"/>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="90"/>
+                            <RowDefinition Height="90"/>
+                        </Grid.RowDefinitions>
+                        <controls:MealTile x:Name="mealRightTop" Grid.Row="0" ImageSource="{Binding MealImageSource}" MealName="{Binding Name}" Number="{Binding Number}" Date="{Binding Date}" Margin="3"/>
+                        <controls:MealTile x:Name="mealRightBottom" Grid.Row="1" ImageSource="{Binding MealImageSource}" MealName="{Binding Name}" Number="{Binding Number}" Date="{Binding Date}" Margin="3"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            
+            <!--达人-->
+            <Image x:Name="cookMasterImage" Width="380" Height="120" Source="{Binding CookMasterImageSource}" Stretch="Fill" Margin="0, 20, 0, 0" />
+            
+            <!--新手教程-->
+            <controls:CategoryTitle x:Name="dishTutorialForNewbieTitle" Margin="0, 30, 0, 0"/>
             <Border Height="300"/>
 
-            <controls:CategoryTitle Title="煲一锅幸福爆棚的汤"/>
-            <Border Height="300"/>
+            <!--煲一锅幸福爆棚的汤-->
+            <controls:CategoryTitle Title="煲一锅幸福爆棚的汤" Margin="0, 30, 0, 0"/>
+            <StackPanel Orientation="Horizontal" Margin="0, 25, 0, 0">
+                <StackPanel Orientation="Vertical">
+                    <controls:DishTile x:Name="soupItem10" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Width="180" />
+                    <controls:DishTile x:Name="soupItem11" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Width="180" Margin="0, 30, 0, 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="20, 0, 0, 0">
+                    <controls:DishTile x:Name="soupItem20" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}"  Width="180" />
+                    <controls:DishTile x:Name="soupItem21" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Width="180"  Margin="0, 30, 0, 0"/>
+                </StackPanel>
+            </StackPanel>
 
-            <controls:CategoryTitle Title="随手晒晒"/>
-            <Border Height="300"/>
+            <!--随手晒晒-->
+            <controls:CategoryTitle Title="随手晒晒" Margin="0, 30, 0, 0"/>
+            <StackPanel Orientation="Horizontal" Margin="0, 25, 0, 0">
+                <StackPanel Orientation="Vertical">
+                    <controls:DishTile Width="180"  x:Name="shaiShaiItem10" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" />
+                    <controls:DishTile Width="180"  x:Name="shaiShaiItem11" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Margin="0, 30, 0, 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical"  Margin="20, 0, 0, 0">
+                    <controls:DishTile Width="180" x:Name="shaiShaiItem20" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" />
+                    <controls:DishTile Width="180" x:Name="shaiShaiItem21" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Margin="0, 30, 0, 0"/>
+                </StackPanel>
+            </StackPanel>
 
-            <controls:CategoryTitle Title="Ta的作品很被赞"/>
+            <!--的作品很被赞-->
+            <controls:CategoryTitle Title="Ta的作品很被赞" Margin="0, 30, 0, 0"/>
             <ItemsControl x:Name="userMasterList" Margin="2, 12, 0, 30">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

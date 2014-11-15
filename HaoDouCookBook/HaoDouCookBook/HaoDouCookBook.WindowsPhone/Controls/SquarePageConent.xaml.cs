@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.Models;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,6 +25,7 @@ namespace HaoDouCookBook.Controls
         #region Field && Property
 
         public ObservableCollection<TopicModel> LatestTopics = new ObservableCollection<TopicModel>();
+        public ObservableCollection<CategoryTileData> Categories = new ObservableCollection<CategoryTileData>();
 
         #endregion
 
@@ -31,11 +33,28 @@ namespace HaoDouCookBook.Controls
 
         public SquarePageConent()
         {
-            Test();
             this.InitializeComponent();
             this.topicList.ItemsSource = LatestTopics;
+            this.CategoryList.ItemsSource = Categories;
+            Init();
         }
 
+        #endregion
+
+        #region Private Method
+        private void Init()
+        {
+            PrepareCategory();
+            Test();
+        }
+
+        private void PrepareCategory()
+        {
+            Categories.Add(new CategoryTileData() { ImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "乐在厨房" });
+            Categories.Add(new CategoryTileData() { ImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "健康营养" });
+            Categories.Add(new CategoryTileData() { ImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "好好生活" });
+            Categories.Add(new CategoryTileData() { ImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "游山玩水" });
+        }
         #endregion
 
         #region Test

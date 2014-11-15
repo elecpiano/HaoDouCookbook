@@ -42,8 +42,8 @@ namespace HaoDouCookBook.Controls
         #region Dependency Property
 
         public static readonly DependencyProperty TopicPreviewImageSourceProperty = DependencyProperty.Register("TopicPreviewImageSource", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
-        public static readonly DependencyProperty PreviewContentProperty = DependencyProperty.Register("PreviewContent", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty, PreviewContentPropertyChanged));
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty, TitlePropertyChanged));
+        public static readonly DependencyProperty PreviewContentProperty = DependencyProperty.Register("PreviewContent", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty TileTypeProperty = DependencyProperty.Register("TileType", typeof(TileType), typeof(TopicTile), new PropertyMetadata(TileType.Full));
         public static readonly DependencyProperty AuthorProperty = DependencyProperty.Register("Author", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty CreateTimeDescriptionProperty = DependencyProperty.Register("CreateTimeDescription", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
@@ -114,64 +114,20 @@ namespace HaoDouCookBook.Controls
                 case TileType.Full:
                     this.titleInfo.TextWrapping = TextWrapping.NoWrap;
                     this.previewContentInfo.TextWrapping = TextWrapping.NoWrap;
-                    //this.previewContentInfo.Margin = new Thickness(0, 5, 0, 0);
                     this.authorInfo.Visibility = Visibility.Visible;
                     break;
                 case TileType.TileWrapAndPreviewContent:
                     this.authorInfo.Visibility = Visibility.Collapsed;
                     this.previewContentInfo.TextWrapping = TextWrapping.NoWrap;
-                    //this.previewContentInfo.Margin = new Thickness(0, 12, 0, 0);
                     this.titleInfo.TextWrapping = TextWrapping.Wrap;
                     break;
                 case TileType.TileAndPreviewContentWrap:
                     this.authorInfo.Visibility = Visibility.Collapsed;
                     this.previewContentInfo.TextWrapping = TextWrapping.Wrap;
-                    //this.previewContentInfo.Margin = new Thickness(0, 6, 0, 0);
                     this.titleInfo.TextWrapping = TextWrapping.NoWrap;
                     break;
                 default:
                     break;
-            }
-        }
-
-        private static void PreviewContentPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (e.NewValue != null)
-            {
-                TileType type = (TileType)d.GetValue(TileTypeProperty);
-                switch (type)
-                {
-                    case TileType.Full:
-                    case TileType.TileWrapAndPreviewContent:
-                        d.SetValue(PreviewContentProperty, StringHelper.GetShortenStyle(e.NewValue.ToString(), 11));
-                        break;
-                    case TileType.TileAndPreviewContentWrap:
-                        d.SetValue(PreviewContentProperty, StringHelper.GetShortenStyle(e.NewValue.ToString(), 22));
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        private static void TitlePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (e.NewValue != null)
-            {
-                TileType type = (TileType)d.GetValue(TileTypeProperty);
-                switch (type)
-                {
-                    case TileType.TileWrapAndPreviewContent:
-                        d.SetValue(TitleProperty, StringHelper.GetShortenStyle(e.NewValue.ToString(), 18));
-                        break;
-                    case TileType.Full:
-                    case TileType.TileAndPreviewContentWrap:
-                        d.SetValue(TitleProperty, StringHelper.GetShortenStyle(e.NewValue.ToString(), 9));
-                        break;
-                    default:
-                        break;
-                }
-
             }
         }
 
