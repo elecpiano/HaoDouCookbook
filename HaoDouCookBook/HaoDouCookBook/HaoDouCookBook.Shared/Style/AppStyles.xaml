@@ -64,4 +64,13 @@
         <Setter Property="Foreground" Value="White"/>
     </Style>
 
+    
+    <!--Newbie Tutorial-->
+    <Style x:Key="NewbieTutorialText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+    </Style>
+
 </ResourceDictionary>

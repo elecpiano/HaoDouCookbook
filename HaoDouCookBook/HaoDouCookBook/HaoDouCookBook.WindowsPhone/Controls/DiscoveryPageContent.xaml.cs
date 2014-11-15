@@ -32,6 +32,7 @@ namespace HaoDouCookBook.Controls
         private Meal luch = new Meal() { Name = "午餐" };
         private Meal dinner = new Meal() { Name = "晚餐" };
         private CookMaster cookMaster = new CookMaster();
+        private NewbieTutorial newbieTutorial = new NewbieTutorial();
 
         private Random random = new Random();
 
@@ -63,6 +64,7 @@ namespace HaoDouCookBook.Controls
             BindMeales();
             BindCookMaster();
             BindUserData();
+            BindNewbieTutorial();
         }
 
         private void BindUserData()
@@ -97,9 +99,14 @@ namespace HaoDouCookBook.Controls
             SetDishElementDataConextFromListIndex(this.shaiShaiItem21, ShaiShaiDishes, 3);
         }
 
+        private void BindNewbieTutorial()
+        {
+            this.NewbieTutorTile.DataContext = newbieTutorial;
+        }
+
         private void SetNewbieTutorial()
         {
-            SetDishForNewbieTutorial("板栗烧鸡");
+            //SetDishForNewbieTutorial("板栗烧鸡");
         }
 
         private void SetDishForNewbieTutorial(string dishName)
@@ -152,6 +159,18 @@ namespace HaoDouCookBook.Controls
             luch.MealImageSource = Constants.DEFAULT_TOPIC_IMAGE;
             dinner.Number = 343;
             dinner.MealImageSource = Constants.DEFAULT_TOPIC_IMAGE;
+
+            // Newbie Tutorial
+            //
+            newbieTutorial.MainImageSource = Constants.DEFAULT_TOPIC_IMAGE;
+            newbieTutorial.DetailsImageSources.Add(Constants.DEFAULT_USER_PHOTO);
+            newbieTutorial.DetailsImageSources.Add(Constants.DEFAULT_USER_PHOTO);
+            newbieTutorial.DetailsImageSources.Add(Constants.DEFAULT_USER_PHOTO);
+            newbieTutorial.DetailsImageSources.Add(Constants.DEFAULT_USER_PHOTO);
+            newbieTutorial.Teacher.Name = "斯佳丽";
+            newbieTutorial.Teacher.ArchiveDescription = "湖北菜专家啊各种的有木有";
+            SetDishForNewbieTutorial("板栗烧鸡");
+
 
             // Cook master
             //

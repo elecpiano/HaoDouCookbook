@@ -50,6 +50,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\CookMaster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DishTileData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Meal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\NewbieTutorial.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Topic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UserData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\CryptographyHelper.cs" />
