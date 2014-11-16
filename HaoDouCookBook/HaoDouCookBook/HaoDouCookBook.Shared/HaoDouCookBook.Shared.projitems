@@ -40,6 +40,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\RecipeCategoryTile.xaml.cs">
       <DependentUpon>RecipeCategoryTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\RecipeTile.xaml.cs">
+      <DependentUpon>RecipeTile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\TopicTile.xaml.cs">
       <DependentUpon>TopicTile.xaml</DependentUpon>
     </Compile>
@@ -55,6 +58,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Meal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\NewbieTutorial.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RecipeCategoryTileData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\RecipeTileData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Topic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UserData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\CryptographyHelper.cs" />
@@ -94,6 +98,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\RecipeTile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Controls\TopicTile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -109,7 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\DefaultTopicImage.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\like.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\logo_recipe.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\noavatar_300.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\tags.png" />
   </ItemGroup>
 </Project>

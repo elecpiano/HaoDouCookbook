@@ -127,6 +127,12 @@ namespace HaoDouCookBook.Controls
             App.Current.RootFrame.Navigate(typeof(RankListPage));
         }
 
+
+        private void RecipeCategoryTile_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(RecipeCategoryDetailPage));
+        }
+
         #endregion
     }
 }

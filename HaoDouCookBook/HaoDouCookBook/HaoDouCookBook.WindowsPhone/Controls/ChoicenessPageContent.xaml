@@ -17,7 +17,7 @@
                 TileImage="{Binding TileImage}"
                 MarkText="{Binding MarkText}"
                 RecipeDescriptionOnImage="{Binding RecipeDescriptionOnImage}"                         
-                Title="{Binding Title}"
+                Title="{Binding Title}" Tapped="RecipeCategoryTile_Tapped"
              />
             <Rectangle Margin="0, 30, 0, 15" Style="{StaticResource GrayLine}" Width="380"/>
             
@@ -29,6 +29,7 @@
                 AuthorRecipeComment="{Binding AuthorRecipeComment}"
                 Title="{Binding Title}"
                 Description="{Binding Description}"
+                Tapped="RecipeCategoryTile_Tapped"
              />
 
             <Rectangle Margin="0, 30, 0, 15" Style="{StaticResource GrayLine}" Width="380"/>
@@ -42,6 +43,7 @@
                 TitleIcon="{Binding TitleIcon}"
                 Title="{Binding Title}"
                 Description="{Binding Description}"
+                Tapped="RecipeCategoryTile_Tapped"
                 />
 
             <Rectangle Margin="0, 30, 0, 15" Style="{StaticResource GrayLine}" Width="380"/>

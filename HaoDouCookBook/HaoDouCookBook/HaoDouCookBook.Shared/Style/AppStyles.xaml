@@ -101,6 +101,34 @@
         <Setter Property="MaxLines" Value="4"/>
     </Style>
 
+    <!--Recipe Tile-->
+    <Style x:Key="RecipeTileSupportNumber" TargetType="TextBlock">
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="FontSize" Value="11"/>
+    </Style>
+
+    <Style x:Key="RecipeTileTagsStyle" TargetType="TextBlock">
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#CC000000"/>
+    </Style>
+
+    <Style x:Key="RecipeTileRecommendationStyle" TargetType="TextBlock">
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#CC000000"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="4"/>
+    </Style>
+
 
 
 </ResourceDictionary>
