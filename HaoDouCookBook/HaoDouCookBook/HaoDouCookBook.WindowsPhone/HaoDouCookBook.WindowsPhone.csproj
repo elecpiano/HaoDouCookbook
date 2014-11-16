@@ -90,6 +90,9 @@
     <Compile Include="Controls\DiscoveryPageContent.xaml.cs">
       <DependentUpon>DiscoveryPageContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MyPageContent.xaml.cs">
+      <DependentUpon>MyPageContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SquarePageConent.xaml.cs">
       <DependentUpon>SquarePageConent.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\DiscoveryPageContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MyPageContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

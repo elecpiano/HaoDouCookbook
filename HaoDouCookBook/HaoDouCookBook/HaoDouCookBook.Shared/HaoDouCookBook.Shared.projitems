@@ -43,6 +43,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\RecipeTile.xaml.cs">
       <DependentUpon>RecipeTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\SimpleSettingItem.xaml.cs">
+      <DependentUpon>SimpleSettingItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\TopicTile.xaml.cs">
       <DependentUpon>TopicTile.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\SimpleSettingItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Controls\TopicTile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +126,18 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\DefaultTopicImage.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\like.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\logo_recipe.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\AppGems.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Douquan.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Draft.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Favorite.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Friends.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Localdownloads.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Message.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\More.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\MyArticle.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\MyRecipe.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Settings.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\ShippingList.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\noavatar_300.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\tags.png" />
   </ItemGroup>

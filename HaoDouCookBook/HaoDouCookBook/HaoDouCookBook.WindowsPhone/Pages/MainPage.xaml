@@ -40,8 +40,8 @@
             <PivotItem Header="广场">
                 <controls:SquarePageConent Margin="5, 0, 5, 0"/>
             </PivotItem>
-            <PivotItem Header="我的">
-                <Grid/>
+            <PivotItem Header="我的" Width="400" Margin="-20, 20, -20, 0">
+                <controls:MyPageContent/>
             </PivotItem>
         </Pivot>
     </Grid>
