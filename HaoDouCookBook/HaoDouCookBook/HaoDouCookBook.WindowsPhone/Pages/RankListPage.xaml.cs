@@ -51,7 +51,6 @@ namespace HaoDouCookBook.Pages
             Test();
         }
 
-
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);

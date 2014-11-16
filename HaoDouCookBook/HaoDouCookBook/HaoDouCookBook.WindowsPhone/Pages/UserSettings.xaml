@@ -5,10 +5,60 @@
     xmlns:local="using:HaoDouCookBook.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <controls:Banner/>
+        <ScrollViewer Margin="20, 40, 20, 30">
+            <StackPanel Orientation="Vertical">
+                <!--个人-->
+                <controls:SettingGroupTitle Title="个人"/>
+                <controls:SimpleSettingItem ItemText="社交绑定" WithMoreTag="False"/>
+                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
+                
+                <!--通用-->
+                <controls:SettingGroupTitle Title="通用" Margin="0, 30, 0, 0"/>
+                <Grid>
+                    <controls:SimpleSettingItem ItemText="2G/3G下展示图片" WithMoreTag="False"/>
+                    <ToggleSwitch OnContent="" OffContent="" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                </Grid>
+                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
+                <Grid>
+                    <controls:SimpleSettingItem ItemText="开启摇一摇震动" WithMoreTag="False"/>
+                    <ToggleSwitch OnContent="" OffContent="" VerticalAlignment="Bottom"  HorizontalAlignment="Right"/>
+                </Grid>
+                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
+                <Grid>
+                    <controls:SimpleSettingItem ItemText="推送消息" WithMoreTag="False"/>
+                    <ToggleSwitch OnContent="" OffContent="" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                </Grid>
+                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
+                <Grid>
+                    <controls:SimpleSettingItem ItemText="清除缓存" WithMoreTag="False"/>
+                    <TextBlock Text="81.44M" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#66000000"/>
+                </Grid>
+                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
+
+                <!--支持-->
+                <controls:SettingGroupTitle Title="支持" Margin="0, 30, 0, 0"/>
+                <controls:SimpleSettingItem ItemText="关于"/>
+                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
+                <Grid>
+                    <controls:SimpleSettingItem ItemText="更新版本"/>
+                    <TextBlock Text="当前版本4.4.0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0, 0, 45, 0" Foreground="#66000000"/>
+                </Grid>
+                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
+                <controls:SimpleSettingItem ItemText="意见反馈"/>
+                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
+
+                <!--退出-->
+                <controls:SettingGroupTitle Margin="0, 30, 0, 0"/>
+                <controls:SimpleSettingItem ItemText="退出" WithMoreTag="False"/>
+
+            </StackPanel>
+        </ScrollViewer>
 
     </Grid>
 </Page>

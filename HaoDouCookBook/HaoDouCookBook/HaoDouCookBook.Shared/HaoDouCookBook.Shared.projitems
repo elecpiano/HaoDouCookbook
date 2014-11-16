@@ -43,6 +43,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\RecipeTile.xaml.cs">
       <DependentUpon>RecipeTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\SettingGroupTitle.xaml.cs">
+      <DependentUpon>SettingGroupTitle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\SimpleSettingItem.xaml.cs">
       <DependentUpon>SimpleSettingItem.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Controls\RecipeTile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\SettingGroupTitle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

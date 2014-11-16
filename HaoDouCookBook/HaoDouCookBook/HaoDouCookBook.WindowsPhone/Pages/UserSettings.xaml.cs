@@ -22,6 +22,8 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class UserSettings : Page
     {
+        #region Life Cycle
+
         public UserSettings()
         {
             this.InitializeComponent();
@@ -34,6 +36,28 @@ namespace HaoDouCookBook.Pages
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
         }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            Windows.Phone.UI.Input.HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+        }
+
+        #endregion
+
+        #region Event
+
+        void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        {
+            App.Current.RootFrame.GoBack();
+
+            // Need add this line, otherwise it will not back to last page.
+            //
+            e.Handled = true;
+        }
+
+        #endregion
     }
 }

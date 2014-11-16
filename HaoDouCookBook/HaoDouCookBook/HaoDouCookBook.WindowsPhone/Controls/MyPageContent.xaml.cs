@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HaoDouCookBook.Pages;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,9 +20,52 @@ namespace HaoDouCookBook.Controls
 {
     public sealed partial class MyPageContent : UserControl
     {
+        #region Life Cycle
+
         public MyPageContent()
         {
             this.InitializeComponent();
         }
+
+        #endregion
+
+        #region Event
+
+        private void SimpleSettingItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            SimpleSettingItem ssi = sender as SimpleSettingItem;
+            if (ssi != null)
+            {
+                HandlePageItemTapped(ssi.Tag.ToString());
+            }
+        }
+
+        #endregion
+
+        #region Page item tapped logic
+
+        private void HandlePageItemTapped(string tag)
+        {
+            if(string.IsNullOrEmpty(tag))
+            {
+                return;
+            }
+
+            switch(tag.Trim().ToLower())
+            {
+                case "settings":
+                    GotoSettingsPage();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GotoSettingsPage()
+        {
+            App.Current.RootFrame.Navigate(typeof(UserSettings));
+        }
+
+        #endregion
     }
 }

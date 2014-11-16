@@ -11,7 +11,7 @@
     d:DesignWidth="400">
 
     <ScrollViewer>
-        <StackPanel Orientation="Vertical" Background="#22000000">
+        <StackPanel Orientation="Vertical" Background="#22000000" Margin="0, 0, 0, 15">
             <!--User header-->
             <Grid Background="White">
                 <controls:UserPhoto Width="100" Height="100" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10, 10, 0, 10"/>
@@ -23,22 +23,21 @@
             </Grid>
 
             <!--others-->
-                <controls:SimpleSettingItem Icon="../assets/images/MyPage/Message.png" ItemText="消息" Margin="0, 30, 0, 0"/>
-                <controls:SimpleSettingItem Icon="../assets/images/MyPage/Friends.png" ItemText="豆友" Margin="0, 1.5, 0, 0"/>
-                <controls:SimpleSettingItem Icon="../assets/images/MyPage/Douquan.png" ItemText="豆圈" Margin="0, 1.5, 0, 0"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Message.png" ItemText="消息" Margin="0, 30, 0, 0"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Friends.png" ItemText="豆友" Margin="0, 1.5, 0, 0"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Douquan.png" ItemText="豆圈" Margin="0, 1.5, 0, 0"/>
 
-                <controls:SimpleSettingItem Icon="../assets/images/MyPage/Favorite.png" ItemText="我的收藏" Margin="0, 20, 0, 0"/>
-                <controls:SimpleSettingItem Icon="../assets/images/MyPage/LocalDownloads.png" ItemText="本地下载" Margin="0, 1.5, 0, 0"/>
-                <controls:SimpleSettingItem Icon="../assets/images/MyPage/ShippingList.png" ItemText="购买清单" Margin="0, 1.5, 0, 0"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Favorite.png" ItemText="我的收藏" Margin="0, 20, 0, 0"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/LocalDownloads.png" ItemText="本地下载" Margin="0, 1.5, 0, 0"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/ShippingList.png" ItemText="购买清单" Margin="0, 1.5, 0, 0"/>
 
-                <controls:SimpleSettingItem Icon="../assets/images/MyPage/MyArticle.png" ItemText="我的作品" Margin="0, 20, 0, 0"/>
-                <controls:SimpleSettingItem Icon="../assets/images/MyPage/MyRecipe.png" ItemText="我的菜谱" Margin="0, 1.5, 0, 0"/>
-                <controls:SimpleSettingItem Icon="../assets/images/MyPage/Draft.png" ItemText="我的草稿" Margin="0, 1.5, 0, 0"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/MyArticle.png" ItemText="我的作品" Margin="0, 20, 0, 0"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/MyRecipe.png" ItemText="我的菜谱" Margin="0, 1.5, 0, 0"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Draft.png" ItemText="我的草稿" Margin="0, 1.5, 0, 0"/>
 
-                <controls:SimpleSettingItem Icon="../assets/images/MyPage/AppGems.png" ItemText="精品推荐" Margin="0, 20, 0, 0"/>
-                <controls:SimpleSettingItem Icon="../assets/images/MyPage/Settings.png" ItemText="设置" Margin="0, 1.5, 0, 0"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/AppGems.png" ItemText="精品推荐" Margin="0, 20, 0, 0"/>
+            <controls:SimpleSettingItem Tag="settings" Icon="../assets/images/MyPage/Settings.png" ItemText="设置" Margin="0, 1.5, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
 
-                <Rectangle Width="400" VerticalAlignment="Bottom" Height="30" Fill="White" Margin="0, 30, 0, 0"/>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
