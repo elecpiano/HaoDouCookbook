@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid x:Name="root">
         <controls:Banner/>
         <ScrollViewer Margin="20, 40, 20, 30">
             <StackPanel Orientation="Vertical">
@@ -22,12 +22,12 @@
                 <controls:SettingGroupTitle Title="通用" Margin="0, 30, 0, 0"/>
                 <Grid>
                     <controls:SimpleSettingItem ItemText="2G/3G下展示图片" WithMoreTag="False"/>
-                    <ToggleSwitch OnContent="" OffContent="" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                    <ToggleSwitch IsOn="{Binding DownloadImageIn2Gor3G, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" OnContent="" OffContent="" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <Grid>
                     <controls:SimpleSettingItem ItemText="开启摇一摇震动" WithMoreTag="False"/>
-                    <ToggleSwitch OnContent="" OffContent="" VerticalAlignment="Bottom"  HorizontalAlignment="Right"/>
+                    <ToggleSwitch  OnContent="" OffContent="" VerticalAlignment="Bottom"  HorizontalAlignment="Right"/>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <Grid>

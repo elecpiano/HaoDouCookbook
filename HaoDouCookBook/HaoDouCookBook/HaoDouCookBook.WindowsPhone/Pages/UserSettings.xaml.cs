@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HaoDouCookBook.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace HaoDouCookBook.Pages
         public UserSettings()
         {
             this.InitializeComponent();
+            this.root.DataContext = SingletonProvider<UserSettingsConfig>.Instance;
         }
 
         /// <summary>

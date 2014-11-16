@@ -22,6 +22,8 @@ namespace HaoDouCookBook
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        #region Life Cycle
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -44,5 +46,16 @@ namespace HaoDouCookBook
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
         }
+
+        #endregion
+
+        #region BottomAppBar
+
+        private void mainPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }

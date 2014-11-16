@@ -12,16 +12,11 @@
     <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="$(MSBuildThisFileDirectory)Animations\AnimationBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Animations\FadeAnimation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Animations\MoveAnimation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Animations\RotateAnimation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Animations\ScaleAnimation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Animations\VibrateAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\UserSettingsConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Banner.xaml.cs">
       <DependentUpon>Banner.xaml</DependentUpon>
     </Compile>
@@ -57,7 +52,14 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Converters\AnythingToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\AnimationBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\FadeAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\MoveAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\RotateAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\ScaleAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\VibrateAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\BindableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\SingletonProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryTileData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\CookMaster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DishTileData.cs" />
@@ -77,7 +79,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utility\IsolatedStorageHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\JsonSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\NetworkHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utility\StringHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)Controls\Banner.xaml">

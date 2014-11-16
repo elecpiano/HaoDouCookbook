@@ -12,7 +12,7 @@
     <Page.Resources>
 
     </Page.Resources>
-    
+
     <Page.BottomAppBar>
         <CommandBar Background="WhiteSmoke">
             <CommandBar.PrimaryCommands>
@@ -25,7 +25,7 @@
     </Page.BottomAppBar>
 
     <Grid>
-        <Pivot x:Name="mainPivot">
+        <Pivot x:Name="mainPivot" SelectionChanged="mainPivot_SelectionChanged">
             <Pivot.TitleTemplate>
                 <DataTemplate>
                     <controls:Banner/>
