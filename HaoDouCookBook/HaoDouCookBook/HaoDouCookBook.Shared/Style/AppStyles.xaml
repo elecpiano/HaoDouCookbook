@@ -73,4 +73,34 @@
         <Setter Property="TextWrapping" Value="NoWrap"/>
     </Style>
 
+    <!--Recipe Category Tile-->
+    <Style x:Key="RecipeCategoryTileTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="23"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="RecipeCategoryTileDescription" TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="MaxLines" Value="3"/>
+        <Setter Property="Foreground" Value="#99000000"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+
+    <Style x:Name="RecipeCategoryTextOnImage" TargetType="TextBlock">
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style x:Name="RecipeCategoryDescriptionOnImage" TargetType="TextBlock">
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="4"/>
+    </Style>
+
+
+
 </ResourceDictionary>

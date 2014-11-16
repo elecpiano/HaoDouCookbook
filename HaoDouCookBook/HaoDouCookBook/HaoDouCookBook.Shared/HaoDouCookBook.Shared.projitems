@@ -37,6 +37,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MealTile.xaml.cs">
       <DependentUpon>MealTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\RecipeCategoryTile.xaml.cs">
+      <DependentUpon>RecipeCategoryTile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\TopicTile.xaml.cs">
       <DependentUpon>TopicTile.xaml</DependentUpon>
     </Compile>
@@ -51,6 +54,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\DishTileData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Meal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\NewbieTutorial.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\RecipeCategoryTileData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Topic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UserData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\CryptographyHelper.cs" />
@@ -83,6 +87,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Controls\MealTile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\RecipeCategoryTile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

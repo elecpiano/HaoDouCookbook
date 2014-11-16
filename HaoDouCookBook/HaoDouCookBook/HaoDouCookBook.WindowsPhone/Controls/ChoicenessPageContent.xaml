@@ -7,14 +7,46 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:HaoDouCookBook.Controls"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="3000"
     d:DesignWidth="400">
 
     <ScrollViewer>
         <StackPanel Orientation="Vertical">
+            <!--厨房宝典-->
+            <controls:RecipeCategoryTile x:Name="cookGemsTile"
+                TileImage="{Binding TileImage}"
+                MarkText="{Binding MarkText}"
+                RecipeDescriptionOnImage="{Binding RecipeDescriptionOnImage}"                         
+                Title="{Binding Title}"
+             />
+            <Rectangle Margin="0, 30, 0, 15" Style="{StaticResource GrayLine}" Width="380"/>
+            
+            <!--热门菜谱-->
+            <controls:RecipeCategoryTile x:Name="hotRecipesTile"
+                TileImage="{Binding TileImage}"
+                RecipeName="{Binding RecipeName}"
+                Author="{Binding Author}"
+                AuthorRecipeComment="{Binding AuthorRecipeComment}"
+                Title="{Binding Title}"
+                Description="{Binding Description}"
+             />
 
-            <controls:UserPhoto Width="200" Height="200"/>
-            <Border Height="200"/>
+            <Rectangle Margin="0, 30, 0, 15" Style="{StaticResource GrayLine}" Width="380"/>
+
+            <!--私人定制-->
+            <controls:RecipeCategoryTile x:Name="personalRecipesTile"
+                TileImage="{Binding TileImage}"
+                RecipeName="{Binding RecipeName}"
+                Author="{Binding Author}"
+                AuthorRecipeComment="{Binding AuthorRecipeComment}"
+                TitleIcon="{Binding TitleIcon}"
+                Title="{Binding Title}"
+                Description="{Binding Description}"
+                />
+
+            <Rectangle Margin="0, 30, 0, 15" Style="{StaticResource GrayLine}" Width="380"/>
+
+
             <!--榜单-->
             <StackPanel Orientation="Vertical">
                 <Grid>
