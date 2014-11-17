@@ -1,6 +1,7 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.Models;
 using HaoDouCookBook.Pages;
+using Shared.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -130,7 +131,7 @@ namespace HaoDouCookBook.Controls
 
         private void RecipeCategoryTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RecipeCategoryDetailPage));
+            App.Current.RootFrame.Navigate(typeof(RecipeCategoryDetailPage), Utils.GetDataContext<RecipeCategoryTileData>(sender));
         }
 
         #endregion

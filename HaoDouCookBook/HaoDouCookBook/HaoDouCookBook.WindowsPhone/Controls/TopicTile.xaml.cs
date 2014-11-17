@@ -17,24 +17,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace HaoDouCookBook.Controls
 {
-    public enum TileType
-    {
-        /// <summary>
-        /// Full information which contains preview image, title, author, create time description and preview content.
-        /// </summary>
-        Full,
-
-        /// <summary>
-        /// Only contains preview image, title with text wrapping, and preview conent.
-        /// </summary>
-        TileWrapAndPreviewContent,
-
-        /// <summary>
-        /// Only contains preview image, title, and preview conent with text wrapping.
-        /// </summary>
-        TileAndPreviewContentWrap
-    }
-
     public sealed partial class TopicTile : UserControl
     {
 
@@ -43,23 +25,12 @@ namespace HaoDouCookBook.Controls
         public static readonly DependencyProperty TopicPreviewImageSourceProperty = DependencyProperty.Register("TopicPreviewImageSource", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty PreviewContentProperty = DependencyProperty.Register("PreviewContent", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
-        public static readonly DependencyProperty TileTypeProperty = DependencyProperty.Register("TileType", typeof(TileType), typeof(TopicTile), new PropertyMetadata(TileType.Full));
         public static readonly DependencyProperty AuthorProperty = DependencyProperty.Register("Author", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty CreateTimeDescriptionProperty = DependencyProperty.Register("CreateTimeDescription", typeof(string), typeof(TopicTile), new PropertyMetadata(string.Empty));
 
         #endregion
 
         #region CLR Property Wrapper
-
-        public TileType TileType
-        {
-            get { return (TileType)GetValue(TileTypeProperty); }
-            set
-            {
-                SetTopicTextInfoFashion(value);
-                SetValue(TileTypeProperty, value);
-            }
-        }
 
         public string TopicPreviewImageSource
         {
@@ -99,36 +70,11 @@ namespace HaoDouCookBook.Controls
         {
             this.InitializeComponent();
             this.root.DataContext = this;
-            SetTopicTextInfoFashion(TileType);
         }
 
         #endregion
 
         #region Private Method
-
-        private void SetTopicTextInfoFashion(TileType type)
-        {
-            switch (type)
-            {
-                case TileType.Full:
-                    this.titleInfo.TextWrapping = TextWrapping.NoWrap;
-                    this.previewContentInfo.TextWrapping = TextWrapping.NoWrap;
-                    this.authorInfo.Visibility = Visibility.Visible;
-                    break;
-                case TileType.TileWrapAndPreviewContent:
-                    this.authorInfo.Visibility = Visibility.Collapsed;
-                    this.previewContentInfo.TextWrapping = TextWrapping.NoWrap;
-                    this.titleInfo.TextWrapping = TextWrapping.Wrap;
-                    break;
-                case TileType.TileAndPreviewContentWrap:
-                    this.authorInfo.Visibility = Visibility.Collapsed;
-                    this.previewContentInfo.TextWrapping = TextWrapping.Wrap;
-                    this.titleInfo.TextWrapping = TextWrapping.NoWrap;
-                    break;
-                default:
-                    break;
-            }
-        }
 
         #endregion
     }

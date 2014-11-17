@@ -44,7 +44,6 @@
                                        PreviewContent="{Binding PreviewContent}"
                                        Author="{Binding Author}"
                                        CreateTimeDescription="{Binding CreateTimeDescription}"
-                                       TileType="Full"
                                        HorizontalAlignment="Left" Margin="0, 30, 0, 0"
                                                 />
                     </DataTemplate>

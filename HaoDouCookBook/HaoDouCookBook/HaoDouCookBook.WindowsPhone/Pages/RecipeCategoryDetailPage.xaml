@@ -9,8 +9,8 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <controls:Banner/>
+    <Grid Name="root">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="5, 5, 0, 0" Icon="../Assets/Images/logo.png" Title="{Binding Title}"/>
 
         <ScrollViewer Margin="20, 40, 20, 30">
             <ItemsControl Name="recipesList">

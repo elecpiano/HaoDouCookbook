@@ -28,7 +28,7 @@
         <Pivot x:Name="mainPivot" SelectionChanged="mainPivot_SelectionChanged">
             <Pivot.TitleTemplate>
                 <DataTemplate>
-                    <controls:Banner/>
+                    <controls:Banner Title="好豆菜谱"/>
                 </DataTemplate>
             </Pivot.TitleTemplate>
             <PivotItem Header="精选">

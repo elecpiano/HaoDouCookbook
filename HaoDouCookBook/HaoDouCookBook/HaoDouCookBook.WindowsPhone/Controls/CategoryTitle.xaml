@@ -11,7 +11,7 @@
 
     <StackPanel x:Name="root">
         <TextBlock Text="{Binding Title}" Style="{StaticResource CategoryTitleStyle}"/>
-        <Rectangle Width="380" Margin="0, 15, 0, 0" Style="{StaticResource GrayLine}" />
+        <Rectangle Width="380" Margin="0, 15, 0, 0" Style="{StaticResource GrayLine}"/>
     </StackPanel>
 
 </ContentControl>

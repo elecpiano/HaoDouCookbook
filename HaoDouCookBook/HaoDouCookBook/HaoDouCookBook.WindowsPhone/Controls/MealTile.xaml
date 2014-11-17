@@ -5,21 +5,33 @@
     xmlns:local="using:HaoDouCookBook.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="300">
-    
-    <Grid x:Name="root"> 
+    <UserControl.Resources>
+
+    </UserControl.Resources>
+
+    <Grid x:Name="root">
         <Image Source="{Binding ImageSource}" Stretch="UniformToFill" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Border Opacity="0.6">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5, 1" EndPoint="0.5, 0">
+                    <GradientStop Color="Black" Offset="0.0"/>
+                    <GradientStop Color="Transparent" Offset="0.4" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15, 0, 0, 15">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding MealName}" Style="{StaticResource MealText}"/>
-                <TextBlock Text=" · " Style="{StaticResource MealText}"/>
-                <TextBlock Text="{Binding Date}" TextTrimming="WordEllipsis" Style="{StaticResource MealText}"/>
+                <controls:ShadowTextBlock Text="{Binding MealName}" Style="{StaticResource MealText}"/>
+                <controls:ShadowTextBlock Text=" · " Style="{StaticResource MealText}"/>
+                <controls:ShadowTextBlock Text="{Binding Date}" TextTrimming="WordEllipsis" Style="{StaticResource MealText}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0, 3, 0, 0">
-                <TextBlock Text="{Binding Number}" Style="{StaticResource MealText}"/>
-                <TextBlock Text="作品" Style="{StaticResource MealText}"/>
+                <controls:ShadowTextBlock Text="{Binding Number}" Style="{StaticResource MealText}"/>
+                <controls:ShadowTextBlock Text="作品" Style="{StaticResource MealText}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

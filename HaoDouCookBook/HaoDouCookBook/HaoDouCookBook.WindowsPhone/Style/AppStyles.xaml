@@ -9,20 +9,20 @@
     <converters:AnythingToVisibilityConverter x:Key="AnythingToVisiblityConverter"/>
 
     <!--Default Font-->
-    <Style TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
+    <Style x:Key="TextBlockBase" TargetType="TextBlock">
+        <!--<Setter Property="FontFamily" Value="Rosewood Std Regular"/>-->
     </Style>
     
     <!--Topic Tile-->
-    <Style x:Key="TopicTileStyle" TargetType="TextBlock">
+    <Style x:Key="TopicTileStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontSize" Value="21"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
         <Setter Property="MaxLines" Value="2"/>
     </Style>
-    
-    <Style x:Key="TopicContentStyle" TargetType="TextBlock">
+
+    <Style x:Key="TopicContentStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="Foreground" Value="Gray"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
@@ -30,23 +30,23 @@
     </Style>
     
     <!--Category-->
-    <Style x:Key="CategoryTitleStyle" TargetType="TextBlock">
+    <Style x:Key="CategoryTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="FontSize" Value="28"/>
         <Setter Property="Foreground" Value="Green"/>
     </Style>
 
-    <Style x:Key="CategoryTileTitleStyle" TargetType="TextBlock">
+    <Style x:Key="CategoryTileTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontSize" Value="19"/>
     </Style>
 
-    <Style x:Key="DishTileTitleStyle" TargetType="TextBlock">
+    <Style x:Key="DishTileTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontSize" Value="19"/>
     </Style>
 
-    <Style x:Key="DishTileSupportLineStyle" TargetType="TextBlock">
+    <Style x:Key="DishTileSupportLineStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="Foreground" Value="#AA000000"/>
         <Setter Property="FontSize" Value="18"/>
     </Style>
@@ -72,27 +72,29 @@
 
 
     <!--Meal Text Style-->
-    <Style x:Key="MealText" TargetType="TextBlock">
+    <Style x:Key="MealText" TargetType="controls:ShadowTextBlock">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     
     <!--Newbie Tutorial-->
-    <Style x:Key="NewbieTutorialText" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="22"/>
+    <Style x:Key="NewbieTutorialText" TargetType="controls:ShadowTextBlock">
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
         <Setter Property="TextWrapping" Value="NoWrap"/>
     </Style>
 
     <!--Recipe Category Tile-->
-    <Style x:Key="RecipeCategoryTileTitle" TargetType="TextBlock">
+    <Style x:Key="RecipeCategoryTileTitle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="FontSize" Value="23"/>
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
 
-    <Style x:Key="RecipeCategoryTileDescription" TargetType="TextBlock">
+    <Style x:Key="RecipeCategoryTileDescription" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
         <Setter Property="MaxLines" Value="3"/>
@@ -100,22 +102,24 @@
         <Setter Property="FontSize" Value="18"/>
     </Style>
 
-    <Style x:Name="RecipeCategoryTextOnImage" TargetType="TextBlock">
+    <Style x:Name="RecipeCategoryTextOnImage" TargetType="controls:ShadowTextBlock">
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
-        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontSize" Value="23"/>
+        <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Foreground" Value="White"/>
     </Style>
 
-    <Style x:Name="RecipeCategoryDescriptionOnImage" TargetType="TextBlock">
+    <Style x:Name="RecipeCategoryDescriptionOnImage" TargetType="controls:ShadowTextBlock">
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
-        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="MaxLines" Value="4"/>
     </Style>
 
     <!--Recipe Tile-->
-    <Style x:Key="RecipeTileSupportNumber" TargetType="TextBlock">
+    <Style x:Key="RecipeTileSupportNumber" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="Width" Value="25"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
@@ -124,7 +128,7 @@
         <Setter Property="FontSize" Value="11"/>
     </Style>
 
-    <Style x:Key="RecipeTileTagsStyle" TargetType="TextBlock">
+    <Style x:Key="RecipeTileTagsStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="FontSize" Value="18"/>
@@ -132,7 +136,7 @@
         <Setter Property="Foreground" Value="#CC000000"/>
     </Style>
 
-    <Style x:Key="RecipeTileRecommendationStyle" TargetType="TextBlock">
+    <Style x:Key="RecipeTileRecommendationStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="FontSize" Value="18"/>
@@ -143,7 +147,7 @@
     </Style>
 
     <!--Settings-->
-    <Style x:Key="SettingGroupTitleStyle" TargetType="TextBlock">
+    <Style x:Key="SettingGroupTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="Foreground" Value="Green"/>
         <Setter Property="FontSize" Value="17"/>
     </Style>

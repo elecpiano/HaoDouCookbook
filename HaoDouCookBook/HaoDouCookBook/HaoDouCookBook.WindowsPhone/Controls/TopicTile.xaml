@@ -11,8 +11,8 @@
 
     <Grid x:Name="root">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="62*"/>
-            <ColumnDefinition Width="123*"/>
+            <ColumnDefinition Width="124"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Rectangle Width="122" Height="90" VerticalAlignment="Center" Grid.Column="0">
             <Rectangle.Fill>

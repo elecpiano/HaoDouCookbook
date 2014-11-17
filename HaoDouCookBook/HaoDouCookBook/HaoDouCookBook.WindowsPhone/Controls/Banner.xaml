@@ -6,10 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="28"
     d:DesignWidth="400">
 
-    <StackPanel>
-        <Image Source="../Assets/Images/logo_recipe.jpg" HorizontalAlignment="Center" Height="28"/>
+    <StackPanel Orientation="Horizontal" Name="root" VerticalAlignment="Center" HorizontalAlignment="Left" >
+        <Image Source="{Binding Icon}" Visibility="{Binding Icon, Converter={StaticResource AnythingToVisiblityConverter}}" VerticalAlignment="Center" Height="28" Margin="0, 0, 5, 0"/>
+        <TextBlock Text="{Binding Title}" FontSize="24" VerticalAlignment="Bottom"/>
     </StackPanel>
 </UserControl>

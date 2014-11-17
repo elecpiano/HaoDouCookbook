@@ -47,7 +47,12 @@ namespace HaoDouCookBook.Pages
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
+            RecipeCategoryTileData data = e.Parameter as RecipeCategoryTileData;
+            if (data != null && string.IsNullOrEmpty(data.MarkText))
+            {
+                this.banner.Title = data.Title;
+            }
+
             Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
         }
 

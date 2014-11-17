@@ -116,6 +116,9 @@
     <Compile Include="Controls\SettingGroupTitle.xaml.cs">
       <DependentUpon>SettingGroupTitle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ShadowTextBlock.xaml.cs">
+      <DependentUpon>ShadowTextBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SimpleSettingItem.xaml.cs">
       <DependentUpon>SimpleSettingItem.xaml</DependentUpon>
     </Compile>
@@ -153,7 +156,7 @@
   <ItemGroup>
     <Content Include="Assets\Images\DefaultTopicImage.jpg" />
     <Content Include="Assets\Images\like.png" />
-    <Content Include="Assets\Images\logo_recipe.jpg" />
+    <Content Include="Assets\Images\logo.png" />
     <Content Include="Assets\Images\MyPage\AppGems.png" />
     <Content Include="Assets\Images\MyPage\Douquan.png" />
     <Content Include="Assets\Images\MyPage\Draft.png" />
@@ -219,6 +222,10 @@
     <Page Include="Controls\SettingGroupTitle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ShadowTextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SimpleSettingItem.xaml">
       <Generator>MSBuild:Compile</Generator>
