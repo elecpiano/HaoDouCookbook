@@ -81,20 +81,52 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Folder Include="Assets\Images\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Banner.xaml.cs">
+      <DependentUpon>Banner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CategoryImageTile.xaml.cs">
+      <DependentUpon>CategoryImageTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CategoryTitle.xaml.cs">
+      <DependentUpon>CategoryTitle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ChoicenessPageContent.xaml.cs">
       <DependentUpon>ChoicenessPageContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DiscoveryPageContent.xaml.cs">
       <DependentUpon>DiscoveryPageContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DishTile.xaml.cs">
+      <DependentUpon>DishTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MealTile.xaml.cs">
+      <DependentUpon>MealTile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MyPageContent.xaml.cs">
       <DependentUpon>MyPageContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RecipeCategoryTile.xaml.cs">
+      <DependentUpon>RecipeCategoryTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RecipeTile.xaml.cs">
+      <DependentUpon>RecipeTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SettingGroupTitle.xaml.cs">
+      <DependentUpon>SettingGroupTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SimpleSettingItem.xaml.cs">
+      <DependentUpon>SimpleSettingItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SquarePageConent.xaml.cs">
       <DependentUpon>SquarePageConent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TopicTile.xaml.cs">
+      <DependentUpon>TopicTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserPhoto.xaml.cs">
+      <DependentUpon>UserPhoto.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -119,6 +151,23 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\DefaultTopicImage.jpg" />
+    <Content Include="Assets\Images\like.png" />
+    <Content Include="Assets\Images\logo_recipe.jpg" />
+    <Content Include="Assets\Images\MyPage\AppGems.png" />
+    <Content Include="Assets\Images\MyPage\Douquan.png" />
+    <Content Include="Assets\Images\MyPage\Draft.png" />
+    <Content Include="Assets\Images\MyPage\Favorite.png" />
+    <Content Include="Assets\Images\MyPage\Friends.png" />
+    <Content Include="Assets\Images\MyPage\Localdownloads.png" />
+    <Content Include="Assets\Images\MyPage\Message.png" />
+    <Content Include="Assets\Images\MyPage\More.png" />
+    <Content Include="Assets\Images\MyPage\MyArticle.png" />
+    <Content Include="Assets\Images\MyPage\MyRecipe.png" />
+    <Content Include="Assets\Images\MyPage\Settings.png" />
+    <Content Include="Assets\Images\MyPage\ShippingList.png" />
+    <Content Include="Assets\Images\noavatar_300.jpg" />
+    <Content Include="Assets\Images\tags.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
@@ -127,6 +176,18 @@
     <Content Include="Assets\WideLogo.scale-240.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\Banner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CategoryImageTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CategoryTitle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\ChoicenessPageContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,13 +196,45 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\DishTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MealTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\MyPageContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\RecipeCategoryTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RecipeTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SettingGroupTitle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SimpleSettingItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\SquarePageConent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TopicTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UserPhoto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -160,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SharedLibraryTest.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\AppStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
