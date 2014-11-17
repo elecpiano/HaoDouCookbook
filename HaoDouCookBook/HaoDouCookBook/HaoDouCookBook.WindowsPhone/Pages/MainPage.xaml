@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="HaoDouCookBook.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+
+    </Page.Resources>
+
+    <Page.BottomAppBar>
+        <CommandBar Background="WhiteSmoke">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Find" Label="查找"/>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Sort" Label="分类" FontFamily="Verdana"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid>
+        <Pivot x:Name="mainPivot" SelectionChanged="mainPivot_SelectionChanged">
+            <Pivot.TitleTemplate>
+                <DataTemplate>
+                    <controls:Banner/>
+                </DataTemplate>
+            </Pivot.TitleTemplate>
+            <PivotItem Header="精选">
+                <controls:ChoicenessPageContent Margin="5, 0, 5, 0"/>
+            </PivotItem>
+            <PivotItem Header="发现">
+                <controls:DiscoveryPageContent Margin="5, 0, 5, 0"/>
+            </PivotItem>
+            <PivotItem Header="广场">
+                <controls:SquarePageConent Margin="5, 0, 5, 0"/>
+            </PivotItem>
+            <PivotItem Header="我的" Width="400" Margin="-20, 20, -20, 0">
+                <controls:MyPageContent/>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>

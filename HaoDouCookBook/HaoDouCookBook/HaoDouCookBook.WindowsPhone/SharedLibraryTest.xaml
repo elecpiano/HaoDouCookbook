@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="HaoDouCookBook.SharedLibraryTest"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Pivot x:Name="pivot">
+            <PivotItem Header="Network">
+                <StackPanel Orientation="Vertical">
+                    <Button x:Name="network_check" Content="Wifi Check" Tapped="network_check_Tapped"/>
+                    <TextBlock x:Name="wifi_status" Text="Unavailable"/>
+                </StackPanel>
+            </PivotItem>
+            
+            <PivotItem Header="DataLoader">
+                <StackPanel Orientation="Vertical">
+                    <Button Content="Load" x:Name="loadData" Tapped="loadData_Tapped"/>
+                    <TextBlock x:Name="loaderData" Text="" Foreground="Red"/>
+                    <TextBlock x:Name="loaderData2" Text="" Foreground="Green"/>
+                    <TextBlock x:Name="loaderdata3" Text="" Foreground="White"/>
+                </StackPanel>
+            </PivotItem>
+            <PivotItem Header="ImageHelper">
+                <StackPanel>
+                    <Button x:Name="downloadImage" Content="Downlaod" Tapped="downloadImage_Tapped"/>
+                    <Image x:Name="image" Stretch="Uniform"/>
+                </StackPanel>
+            </PivotItem>
+            <PivotItem Header="Animation">
+                <StackPanel>
+                    <Button Content="StartAnimation" Tapped="Button_Tapped"/>
+                    <Rectangle Fill="Blue" Width="50" Height="50" Name="rect"/>
+                </StackPanel>
+            </PivotItem>
+      </Pivot>
+    </Grid>
+</Page>
