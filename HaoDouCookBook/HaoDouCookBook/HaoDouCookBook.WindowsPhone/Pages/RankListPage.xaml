@@ -10,8 +10,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="root" >
-        <controls:Banner VerticalAlignment="Top" Margin="5, 5, 0, 0" Icon="../Assets/Images/logo.png" Title="榜单"/>
-        <ScrollViewer Margin="0, 40, 0, 0" VerticalScrollBarVisibility="Auto">
+        <controls:Banner VerticalAlignment="Top" Margin="5, 5, 0, 0" Title="好豆菜谱"/>
+        <ScrollViewer Margin="0, 65, 0, 0" VerticalScrollBarVisibility="Auto">
             <ItemsControl x:Name="ranklist" Margin="0, 0, 0, 20">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

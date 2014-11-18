@@ -28,15 +28,20 @@
                 <Border.Background>
                     <SolidColorBrush Color="Green" Opacity="0.8"/>
                 </Border.Background>
-                <TextBlock Text="{Binding MarkText}" Foreground="White" FontSize="25" Margin="15, 0, 25, 0"/>
+                <TextBlock Text="{Binding MarkText}" Foreground="White" FontSize="21" Margin="15, 5, 25, 5"/>
             </Border>
-            <StackPanel Orientation="Vertical" Visibility="{Binding Author, Converter={StaticResource AnythingToVisiblityConverter}}" VerticalAlignment="Bottom" Margin="15, 0, 25, 20">
+            <StackPanel Orientation="Vertical" Visibility="{Binding Author, Converter={StaticResource AnythingToVisiblityConverter}}" VerticalAlignment="Bottom" Margin="15, 0, 15, 20">
                 <controls:ShadowTextBlock Text="{Binding RecipeName}" Style="{StaticResource RecipeCategoryTextOnImage}"/>
-                <StackPanel Orientation="Horizontal">
-                    <controls:ShadowTextBlock Text="{Binding Author}" Style="{StaticResource RecipeCategoryTextOnImage}"/>
-                    <controls:ShadowTextBlock Text="：   " Style="{StaticResource RecipeCategoryTextOnImage}"/>
-                    <controls:ShadowTextBlock Text="{Binding AuthorRecipeComment}" Width="150" HorizontalAlignment="Left" Style="{StaticResource RecipeCategoryTextOnImage}"/>
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <controls:ShadowTextBlock HorizontalAlignment="Left" Grid.Column="0" Text="{Binding Author}" Style="{StaticResource RecipeCategoryLittleTextOnImage}" />
+                    <controls:ShadowTextBlock HorizontalAlignment="Left" Grid.Column="1" Text="：" Style="{StaticResource RecipeCategoryLittleTextOnImage}"/>
+                    <controls:ShadowTextBlock Grid.Column="2" Text="{Binding AuthorRecipeComment}" HorizontalAlignment="Left" Style="{StaticResource RecipeCategoryLittleTextOnImage}"/>
+                </Grid>
             </StackPanel>
             <controls:ShadowTextBlock VerticalAlignment="Bottom" Margin="15, 0, 15, 20" HorizontalAlignment="Left" Style="{StaticResource RecipeCategoryDescriptionOnImage}" Text="{Binding RecipeDescriptionOnImage}" Visibility="{Binding RecipeDescriptionOnImage, Converter={StaticResource AnythingToVisiblityConverter}}"/>
         </Grid>

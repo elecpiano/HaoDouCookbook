@@ -83,6 +83,9 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AdImagePivot.xaml.cs">
+      <DependentUpon>AdImagePivot.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Banner.xaml.cs">
       <DependentUpon>Banner.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,9 @@
     <Compile Include="Controls\UserPhoto.xaml.cs">
       <DependentUpon>UserPhoto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TagsPage.xaml.cs">
+      <DependentUpon>TagsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\CategoryTileData.cs" />
     <Compile Include="ViewModels\CookMaster.cs" />
     <Compile Include="ViewModels\DishTileData.cs" />
@@ -138,6 +144,9 @@
     <Compile Include="ViewModels\NewbieTutorial.cs" />
     <Compile Include="ViewModels\RecipeCategoryTileData.cs" />
     <Compile Include="ViewModels\RecipeTileData.cs" />
+    <Compile Include="ViewModels\SpecialRecipeAlbumData.cs" />
+    <Compile Include="ViewModels\TagRecipeData.cs" />
+    <Compile Include="ViewModels\TagsList.cs" />
     <Compile Include="ViewModels\Topic.cs" />
     <Compile Include="ViewModels\UserData.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
@@ -164,6 +173,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Images\DefaultTopicImage.jpg" />
+    <Content Include="Assets\Images\dingzhi.png" />
+    <Content Include="Assets\Images\Heart\heart_1.png" />
+    <Content Include="Assets\Images\Heart\heart_2.png" />
+    <Content Include="Assets\Images\Heart\heart_3.png" />
+    <Content Include="Assets\Images\Heart\heart_4.png" />
+    <Content Include="Assets\Images\Heart\heart_5.png" />
+    <Content Include="Assets\Images\Heart\heart_6.png" />
+    <Content Include="Assets\Images\Heart\heart_7.png" />
+    <Content Include="Assets\Images\Heart\heart_8.png" />
+    <Content Include="Assets\Images\hongbei.png" />
     <Content Include="Assets\Images\like.png" />
     <Content Include="Assets\Images\logo.png" />
     <Content Include="Assets\Images\MyPage\AppGems.png" />
@@ -179,6 +198,7 @@
     <Content Include="Assets\Images\MyPage\Settings.png" />
     <Content Include="Assets\Images\MyPage\ShippingList.png" />
     <Content Include="Assets\Images\noavatar_300.jpg" />
+    <Content Include="Assets\Images\search.png" />
     <Content Include="Assets\Images\tags.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
@@ -188,6 +208,10 @@
     <Content Include="Assets\WideLogo.scale-240.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\AdImagePivot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Banner.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -261,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RecipeCategoryDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TagsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

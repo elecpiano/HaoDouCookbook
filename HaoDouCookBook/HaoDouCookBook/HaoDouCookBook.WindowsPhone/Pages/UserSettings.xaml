@@ -10,8 +10,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="root">
-        <controls:Banner/>
-        <ScrollViewer Margin="20, 40, 20, 30">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="5, 5, 0, 0" Icon="../Assets/Images/logo.png" Title="{Binding Title}"/>
+        <ScrollViewer Margin="20, 65, 20, 30">
             <StackPanel Orientation="Vertical">
                 <!--个人-->
                 <controls:SettingGroupTitle Title="个人"/>

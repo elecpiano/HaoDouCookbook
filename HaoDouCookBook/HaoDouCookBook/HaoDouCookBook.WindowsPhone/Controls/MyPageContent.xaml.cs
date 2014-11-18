@@ -63,7 +63,7 @@ namespace HaoDouCookBook.Controls
 
         private void GotoSettingsPage()
         {
-            App.Current.RootFrame.Navigate(typeof(UserSettings));
+            App.Current.RootFrame.Navigate(typeof(UserSettings), "设置");
         }
 
         #endregion

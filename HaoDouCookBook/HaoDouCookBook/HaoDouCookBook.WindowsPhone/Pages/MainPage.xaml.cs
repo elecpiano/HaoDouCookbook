@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -45,6 +47,8 @@ namespace HaoDouCookBook
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+
+            ShowStatusBarAsync();
         }
 
         #endregion
@@ -54,6 +58,19 @@ namespace HaoDouCookBook
         private void mainPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        #endregion
+
+        #region Status Bar
+        
+        private async void ShowStatusBarAsync()
+        {
+            StatusBar statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+            statusBar.BackgroundColor = Colors.Black;
+            statusBar.ForegroundColor = Colors.White;
+            statusBar.BackgroundOpacity = 1;
+            await statusBar.ShowAsync();
         }
 
         #endregion

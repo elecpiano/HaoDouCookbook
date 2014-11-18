@@ -7,10 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:HaoDouCookBook.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#fff8f8f8">
 
     <Page.Resources>
+        <Style x:Key="pivotItemStyle" TargetType="PivotItem">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="-20, 0, -20, 0"/>
+        </Style>
 
+        <Style x:Key="pivotItemHeader" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+            <Setter Property="FontSize" Value="42"/>
+        </Style>
     </Page.Resources>
 
     <Page.BottomAppBar>
@@ -31,17 +38,29 @@
                     <controls:Banner Title="好豆菜谱"/>
                 </DataTemplate>
             </Pivot.TitleTemplate>
-            <PivotItem Header="精选">
-                <controls:ChoicenessPageContent Margin="5, 0, 5, 0"/>
+            <PivotItem Style="{StaticResource pivotItemStyle}" >
+                <PivotItem.Header>
+                    <TextBlock Text="精选" Style="{StaticResource pivotItemHeader}" />
+                </PivotItem.Header>
+                <controls:ChoicenessPageContent Margin="15, 0, 15, 0"/>
             </PivotItem>
-            <PivotItem Header="发现">
-                <controls:DiscoveryPageContent Margin="5, 0, 5, 0"/>
+            <PivotItem Style="{StaticResource pivotItemStyle}" >
+                <PivotItem.Header>
+                    <TextBlock Text="发现" Style="{StaticResource pivotItemHeader}" />
+                </PivotItem.Header>
+                <controls:DiscoveryPageContent Margin="30, 10, 30, 0"/>
             </PivotItem>
-            <PivotItem Header="广场">
-                <controls:SquarePageConent Margin="5, 0, 5, 0"/>
+            <PivotItem Style="{StaticResource pivotItemStyle}">
+                <PivotItem.Header>
+                    <TextBlock Text="广场" Style="{StaticResource pivotItemHeader}" />
+                </PivotItem.Header>
+                <controls:SquarePageConent Margin="30, 10, 30, 0"/>
             </PivotItem>
-            <PivotItem Header="我的" Width="400" Margin="-20, 20, -20, 0">
-                <controls:MyPageContent/>
+            <PivotItem Style="{StaticResource pivotItemStyle}" >
+                <PivotItem.Header>
+                    <TextBlock Text="我的" Style="{StaticResource pivotItemHeader}" />
+                </PivotItem.Header>
+                <controls:MyPageContent Margin="20, 0, 20, 0"/>
             </PivotItem>
         </Pivot>
     </Grid>
