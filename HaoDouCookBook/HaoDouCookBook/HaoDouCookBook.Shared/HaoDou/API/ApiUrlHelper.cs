@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HaoDouCookBook.Utility;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -23,6 +24,8 @@ namespace HaoDouCookBook.HaoDou.API
             parameters.Add("method", string.Format("{0}.{1}", module, methodName));
             parameters.Add("deviceid", string.Empty); 
             parameters.Add("format", "json");
+            parameters.Add("sessionid", DateTime.Now.GetTimeStamp());
+            parameters.Add("uuid", DeviceHelper.GetUniqueDeviceID());
 
             return string.Format("{0}{1}?{2}", DOMAIN, APIPAGE, CombineURLParameters(parameters));
         }

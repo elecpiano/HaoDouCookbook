@@ -7,7 +7,7 @@ namespace HaoDouCookBook.Utility
 {
     public class DeviceHelper
     {
-        private static string GetUniqueDeviceID()
+        public static string GetUniqueDeviceID()
         {
             HardwareToken token = HardwareIdentification.GetPackageSpecificToken(null);
             IBuffer hardwareId = token.Id;
