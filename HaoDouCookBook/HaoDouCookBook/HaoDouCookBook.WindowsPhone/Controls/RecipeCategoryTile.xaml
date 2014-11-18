@@ -35,7 +35,7 @@
                 <StackPanel Orientation="Horizontal">
                     <controls:ShadowTextBlock Text="{Binding Author}" Style="{StaticResource RecipeCategoryTextOnImage}"/>
                     <controls:ShadowTextBlock Text="：   " Style="{StaticResource RecipeCategoryTextOnImage}"/>
-                    <controls:ShadowTextBlock Text="{Binding AuthorRecipeComment}" HorizontalAlignment="Left" Style="{StaticResource RecipeCategoryTextOnImage}"/>
+                    <controls:ShadowTextBlock Text="{Binding AuthorRecipeComment}" Width="150" HorizontalAlignment="Left" Style="{StaticResource RecipeCategoryTextOnImage}"/>
                 </StackPanel>
             </StackPanel>
             <controls:ShadowTextBlock VerticalAlignment="Bottom" Margin="15, 0, 15, 20" HorizontalAlignment="Left" Style="{StaticResource RecipeCategoryDescriptionOnImage}" Text="{Binding RecipeDescriptionOnImage}" Visibility="{Binding RecipeDescriptionOnImage, Converter={StaticResource AnythingToVisiblityConverter}}"/>

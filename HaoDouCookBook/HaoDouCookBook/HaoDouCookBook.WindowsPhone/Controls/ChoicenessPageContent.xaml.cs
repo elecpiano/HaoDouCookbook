@@ -1,5 +1,5 @@
 ﻿using HaoDouCookBook.Common;
-using HaoDouCookBook.Models;
+using HaoDouCookBook.ViewModels;
 using HaoDouCookBook.Pages;
 using Shared.Utility;
 using System;

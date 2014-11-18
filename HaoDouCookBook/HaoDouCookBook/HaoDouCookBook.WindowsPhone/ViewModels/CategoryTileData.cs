@@ -1,5 +1,5 @@
 ﻿using Shared.Infrastructures;
-namespace HaoDouCookBook.Models
+namespace HaoDouCookBook.ViewModels
 {
     public class CategoryTileData : BindableBase
     {

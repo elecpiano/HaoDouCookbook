@@ -1,5 +1,5 @@
 ﻿using HaoDouCookBook.Common;
-using HaoDouCookBook.Models;
+using HaoDouCookBook.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

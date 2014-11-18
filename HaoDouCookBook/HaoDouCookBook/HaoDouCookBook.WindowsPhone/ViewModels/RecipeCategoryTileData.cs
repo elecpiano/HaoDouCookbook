@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HaoDouCookBook.Models
+namespace HaoDouCookBook.ViewModels
 {
     public class RecipeCategoryTileData : BindableBase
     {

@@ -27,25 +27,21 @@
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\VibrateAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\BindableBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\SingletonProvider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryTileData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\CookMaster.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\DishTileData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Meal.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\NewbieTutorial.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\RecipeCategoryTileData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\RecipeTileData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Topic.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\UserData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\CryptographyHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\MD5.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DataContextGetter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DataLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DataTemplateSelector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\DateTimeExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DeviceHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\HttpExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\ImageHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\IsolatedStorageHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\JsonSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\NetworkHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\" />
+    <Folder Include="$(MSBuildThisFileDirectory)HaoDou\API\" />
   </ItemGroup>
 </Project>

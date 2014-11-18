@@ -131,6 +131,15 @@
     <Compile Include="Controls\UserPhoto.xaml.cs">
       <DependentUpon>UserPhoto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CategoryTileData.cs" />
+    <Compile Include="ViewModels\CookMaster.cs" />
+    <Compile Include="ViewModels\DishTileData.cs" />
+    <Compile Include="ViewModels\Meal.cs" />
+    <Compile Include="ViewModels\NewbieTutorial.cs" />
+    <Compile Include="ViewModels\RecipeCategoryTileData.cs" />
+    <Compile Include="ViewModels\RecipeTileData.cs" />
+    <Compile Include="ViewModels\Topic.cs" />
+    <Compile Include="ViewModels\UserData.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

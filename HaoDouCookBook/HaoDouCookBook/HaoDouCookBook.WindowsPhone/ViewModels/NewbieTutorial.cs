@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace HaoDouCookBook.Models
+namespace HaoDouCookBook.ViewModels
 {
     public class NewbieTutorial : BindableBase
     {
