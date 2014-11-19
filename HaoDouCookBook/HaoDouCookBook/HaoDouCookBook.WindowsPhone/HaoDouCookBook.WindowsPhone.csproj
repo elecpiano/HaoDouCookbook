@@ -174,16 +174,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Images\DefaultTopicImage.jpg" />
-    <Content Include="Assets\Images\dingzhi.png" />
-    <Content Include="Assets\Images\Heart\heart_1.png" />
-    <Content Include="Assets\Images\Heart\heart_2.png" />
-    <Content Include="Assets\Images\Heart\heart_3.png" />
-    <Content Include="Assets\Images\Heart\heart_4.png" />
-    <Content Include="Assets\Images\Heart\heart_5.png" />
-    <Content Include="Assets\Images\Heart\heart_6.png" />
-    <Content Include="Assets\Images\Heart\heart_7.png" />
-    <Content Include="Assets\Images\Heart\heart_8.png" />
-    <Content Include="Assets\Images\hongbei.png" />
     <Content Include="Assets\Images\like.png" />
     <Content Include="Assets\Images\logo.png" />
     <Content Include="Assets\Images\MyPage\AppGems.png" />

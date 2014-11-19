@@ -30,7 +30,7 @@
                                                Title="{Binding Title}"
                                                PreviewContent="{Binding PreviewContent}"
                                                HorizontalAlignment="Left" Margin="20, 30, 0, 0"/>-->
-                            <Grid Margin="20, 30, 5, 0">
+                            <Grid Margin="10, 30, 5, 0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="124"/>
                                     <ColumnDefinition Width="*"/>

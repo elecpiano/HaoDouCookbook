@@ -14,7 +14,7 @@
         <Border Style="{StaticResource PageTitleBorderStyle}">
             <TextBlock x:Name="title" Text="设置" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </Border>
-        <ScrollViewer Margin="20, 125, 20, 30">
+        <ScrollViewer Margin="10, 125, 10, 30">
             <StackPanel Orientation="Vertical">
                 <!--个人-->
                 <controls:SettingGroupTitle Title="个人"/>
