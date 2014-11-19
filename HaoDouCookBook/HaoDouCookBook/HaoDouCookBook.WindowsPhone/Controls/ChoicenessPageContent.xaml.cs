@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using HaoDouCookBook.HaoDou.API;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -197,6 +198,26 @@ namespace HaoDouCookBook.Controls
             // rank list
             //
             RankListTest();
+
+            DataLoaderTest();
+
+        }
+
+        private void DataLoaderTest()
+        {
+            POSTExecuter post = new POSTExecuter(HaoDouApiUrlHelper.GetApiUrl("Recipe", "getCollectList"));
+            post.AddPostData("offset", "1");
+            post.AddPostData("limit", "6");
+            post.AddPostData("type", "1");
+
+            post.RunAsync((result) =>
+                {
+ 
+                }, (fail) =>
+                {
+ 
+                });
+
         }
 
         private void RankListTest()

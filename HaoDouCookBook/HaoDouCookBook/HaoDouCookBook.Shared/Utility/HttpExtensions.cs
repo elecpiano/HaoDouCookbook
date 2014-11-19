@@ -46,7 +46,7 @@ namespace Shared.Utility
 
     public class Http
     {
-        public static async void POSTAsync(string url, 
+        public static async Task POSTAsync(string url, 
                                            string data, 
                                            Dictionary<string, string> additionalHttpReqHeaders = null, 
                                            Action<HttpRequestResult> callback = null)
@@ -90,9 +90,9 @@ namespace Shared.Utility
                 throw;
             }
         }
-            
 
-        public static async void GETAsync(string url,
+
+        public static async Task GETAsync(string url,
                                           Dictionary<string, string> additionalHttpReqHeaders = null,
                                           Action<HttpRequestResult> callback = null)
         {

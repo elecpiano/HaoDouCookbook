@@ -7,7 +7,7 @@ namespace HaoDouCookBook.HaoDou.API
 {
     public class HaoDouApiUrlHelper
     {
-        public const string DOMAIN = "";
+        public const string DOMAIN = "http://api.hoto.cn/";
         public const string APIPAGE = "index.php";
         public const string APPID = "7";
         public const string APPKEY = "37e66171acbfbbb63db742bd3bfc1142";

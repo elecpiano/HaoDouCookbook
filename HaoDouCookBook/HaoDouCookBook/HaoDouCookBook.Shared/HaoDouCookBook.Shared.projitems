@@ -16,10 +16,12 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouHttpExecuter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\UserSettingsConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\AnythingToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\ApiUrlHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\HaodouMetaData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\AnimationBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\FadeAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\MoveAnimation.cs" />
@@ -27,6 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\ScaleAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\VibrateAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\BindableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Interface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\SingletonProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\CryptographyHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\MD5.cs" />
@@ -40,8 +43,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utility\IsolatedStorageHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\JsonSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\NetworkHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\" />
   </ItemGroup>
 </Project>
