@@ -10,9 +10,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Name="root">
-        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="5, 5, 0, 0" Icon="../Assets/Images/logo.png" Title="{Binding Title}"/>
-
-        <ScrollViewer Margin="20, 65, 20, 30">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="5, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        </Border>
+        <ScrollViewer Margin="20, 125, 20, 30">
             <ItemsControl Name="recipesList">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -28,8 +30,8 @@
                             TagsText="{Binding TagsText}"
                             Recommendation="{Binding Recommendation}"
                             SupportNumber="{Binding SupportNumber}"
-                            Margin="0, 30, 0, 0"
-                        />
+                            Author="{Binding Author}"
+                            Margin="0, 0, 0, 30"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

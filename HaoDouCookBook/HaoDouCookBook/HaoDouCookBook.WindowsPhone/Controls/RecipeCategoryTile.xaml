@@ -38,7 +38,7 @@
                     <controls:ShadowTextBlock Grid.Column="2" Text="{Binding AuthorRecipeComment}" HorizontalAlignment="Left" Style="{StaticResource RecipeCategoryLittleTextOnImage}"/>
                 </Grid>
             </StackPanel>
-            <controls:ShadowTextBlock VerticalAlignment="Bottom" Margin="15, 0, 15, 20" HorizontalAlignment="Left" Style="{StaticResource RecipeCategoryDescriptionOnImage}" Text="{Binding RecipeDescriptionOnImage}" Visibility="{Binding RecipeDescriptionOnImage, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+            <controls:ShadowTextBlock VerticalAlignment="Bottom" Margin="15, 0, 15, 20" HorizontalAlignment="Left" Style="{StaticResource RecipeCategoryDescOnImageShadowText}" Text="{Binding RecipeDescriptionOnImage}" Visibility="{Binding RecipeDescriptionOnImage, Converter={StaticResource AnythingToVisiblityConverter}}"/>
         </Grid>
         <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
             <Image Source="{Binding TitleIcon}" Visibility="{Binding TitleIcon, Converter={StaticResource AnythingToVisiblityConverter}}" Height="30" Width="30" VerticalAlignment="Center" Margin="0, 0, 10, 0"/>

@@ -5,6 +5,7 @@
     xmlns:local="using:HaoDouCookBook.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
     mc:Ignorable="d"
     d:DesignHeight="500"
     d:DesignWidth="380">
@@ -14,13 +15,13 @@
             <Grid.Background>
                 <ImageBrush ImageSource="{Binding RecipeImage}"/>
             </Grid.Background>
-            <TextBlock Text="{Binding RecipeName}" VerticalAlignment="Bottom" Style="{StaticResource RecipeCategoryDescriptionOnImage}" Margin="20, 0, 0, 40"/>
+            <controls:ShadowTextBlock  Text="{Binding RecipeName}" VerticalAlignment="Bottom" FontSize="24" Style="{StaticResource RecipeCategoryDescOnImageShadowText}" Margin="20, 0, 0, 40"/>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20, 0, 0, 15">
-                <TextBlock Text="by" Style="{StaticResource RecipeCategoryDescriptionOnImage}"/>
-                <TextBlock Text="{Binding Author}" Style="{StaticResource RecipeCategoryDescriptionOnImage}"/>
+                <controls:ShadowTextBlock Text="by" Style="{StaticResource RecipeCategoryDescOnImageShadowText}"/>
+                <controls:ShadowTextBlock Text="{Binding Author}" Style="{StaticResource RecipeCategoryDescOnImageShadowText}"/>
             </StackPanel>
             <Image Source="../Assets/Images/like.png" VerticalAlignment="Bottom" Height="78" Width="78" HorizontalAlignment="Right" Margin="0, 0, 20, 10" Stretch="Fill"/>
-            <TextBlock Text="{Binding SupportNumber}" Style="{StaticResource RecipeTileSupportNumber}" Margin="0, 0, 24.5, 25.5" />
+            <TextBlock Text="{Binding SupportNumber}" Style="{StaticResource RecipeTileSupportNumber}" Margin="0, 0, 24.5, 25.5"/>
         </Grid>
         <StackPanel Orientation="Horizontal" Visibility="{Binding TagsText, Converter={StaticResource AnythingToVisiblityConverter}}" Margin="0, 5, 0, 0" >
             <Image Source="../Assets/Images/tags.png"/>

@@ -47,7 +47,7 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            this.banner.Title = e.Parameter.ToString();
+            this.title.Text = e.Parameter.ToString();
             DataBinding();
             Test();
         }

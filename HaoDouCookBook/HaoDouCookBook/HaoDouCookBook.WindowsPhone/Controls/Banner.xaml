@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     d:DesignHeight="48"
     d:DesignWidth="400">
-    <Grid Background="#fff8f8f8">
+    <Grid Background="{StaticResource TopAppbarColor}">
         <StackPanel Orientation="Horizontal" Name="root" Margin="0, 10, 0, 10">
             <Image Source="{Binding Icon}" Visibility="{Binding Icon, Converter={StaticResource AnythingToVisiblityConverter}}" Height="28" Margin="0, 0, 5, 0"/>
             <TextBlock Text="{Binding Title}" FontSize="24"/>

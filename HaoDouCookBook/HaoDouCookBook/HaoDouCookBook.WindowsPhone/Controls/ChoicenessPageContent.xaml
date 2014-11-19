@@ -112,10 +112,11 @@
                 TileImage="{Binding TileImage}"
                 MarkText="{Binding MarkText}"
                 RecipeDescriptionOnImage="{Binding RecipeDescriptionOnImage}"                         
-                Title="{Binding Title}" Tapped="RecipeCategoryTile_Tapped"
-             />
+                Title="{Binding Title}" />
+                
                 <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
 
+                <!--菜谱-->
                 <ItemsControl x:Name="recipesList">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -147,7 +148,7 @@
                 MarkText="{Binding MarkText}"
                 RecipeDescriptionOnImage="{Binding RecipeDescriptionOnImage}"                         
                 Description="{Binding Description}"
-                Title="{Binding Title}" Tapped="RecipeCategoryTile_Tapped"
+                Title="{Binding Title}"
              />
 
 

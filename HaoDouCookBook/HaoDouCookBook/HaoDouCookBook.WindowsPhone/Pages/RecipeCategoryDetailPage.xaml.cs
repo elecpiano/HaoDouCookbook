@@ -50,7 +50,7 @@ namespace HaoDouCookBook.Pages
             RecipeCategoryTileData data = e.Parameter as RecipeCategoryTileData;
             if (data != null && string.IsNullOrEmpty(data.MarkText))
             {
-                this.banner.Title = data.Title;
+                this.title.Text = data.Title;
             }
 
             Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;

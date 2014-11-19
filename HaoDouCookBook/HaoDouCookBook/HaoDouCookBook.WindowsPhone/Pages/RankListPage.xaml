@@ -10,8 +10,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="root" >
-        <controls:Banner VerticalAlignment="Top" Margin="5, 5, 0, 0" Title="好豆菜谱"/>
-        <ScrollViewer Margin="0, 65, 0, 0" VerticalScrollBarVisibility="Auto">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="5, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Text="榜单" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        </Border>
+        <ScrollViewer Margin="20, 125, 20, 30">
             <ItemsControl x:Name="ranklist" Margin="0, 0, 0, 20">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

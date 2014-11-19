@@ -56,7 +56,7 @@ namespace HaoDouCookBook.Controls
         void ChoicenessPageContent_Loaded(object sender, RoutedEventArgs e)
         {
             DataBiding();
-            Test();
+            LoadDataAsync();
         }
 
         #endregion
@@ -202,21 +202,6 @@ namespace HaoDouCookBook.Controls
 
         #endregion
 
-        #region Test
-
-        private void Test()
-        {
-            DataLoaderTest();
-
-        }
-
-        private void DataLoaderTest()
-        {
-            LoadDataAsync();
-        }
-
-        #endregion
-
         #region Envent
 
         private void rankListMore_Tapped(object sender, TappedRoutedEventArgs e)
@@ -229,6 +214,7 @@ namespace HaoDouCookBook.Controls
             App.Current.RootFrame.Navigate(typeof(TagsPage), sender.GetDataContext<HaoDouCookBook.ViewModels.TagItem>().Text);
 
         }
+
         private void RecipeCategoryTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
             App.Current.RootFrame.Navigate(typeof(RecipeCategoryDetailPage), Utils.GetDataContext<RecipeCategoryTileData>(sender));

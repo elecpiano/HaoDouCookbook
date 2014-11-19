@@ -10,8 +10,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="5, 5, 0, 0" Icon="../Assets/Images/logo.png" Title=""/>
-        <ScrollViewer Margin="0, 65, 0, 0" VerticalScrollBarVisibility="Auto">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="5, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        </Border>
+        <ScrollViewer Margin="20, 130, 20, 30">
             <ItemsControl Name="recipeList" Margin="0, 0, 0, 20">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -22,7 +25,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
-                            <Grid x:Name="root" Margin="20, 0, 20, 0">
+                            <Grid x:Name="root" Margin="0, 0, 10, 0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="124"/>
                                     <ColumnDefinition Width="*"/>
@@ -40,7 +43,7 @@
                                         <TextBlock Text="{Binding ViewNumber}" Margin="15,0,0,0"  Style="{StaticResource TagsContentStyle}"/>
                                         <TextBlock Text="浏览" Style="{StaticResource TagsContentStyle}"/>
                                     </StackPanel>
-                                    <TextBlock Text="{Binding FoodMaterial}" Style="{StaticResource TagsContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
+                                    <TextBlock Text="{Binding FoodMaterial}" Width="240" Style="{StaticResource TagsContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
                                 </Grid>
                             </Grid>
                             <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 30, 0, 20" VerticalAlignment="Bottom"/>
