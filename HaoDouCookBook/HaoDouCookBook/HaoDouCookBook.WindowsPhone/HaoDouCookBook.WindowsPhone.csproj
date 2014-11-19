@@ -142,6 +142,7 @@
     <Compile Include="ViewModels\DishTileData.cs" />
     <Compile Include="ViewModels\Meal.cs" />
     <Compile Include="ViewModels\NewbieTutorial.cs" />
+    <Compile Include="ViewModels\RankItemData.cs" />
     <Compile Include="ViewModels\RecipeCategoryTileData.cs" />
     <Compile Include="ViewModels\RecipeTileData.cs" />
     <Compile Include="ViewModels\SpecialRecipeAlbumData.cs" />

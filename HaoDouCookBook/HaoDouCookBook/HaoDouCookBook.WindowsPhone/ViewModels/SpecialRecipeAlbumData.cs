@@ -37,10 +37,19 @@ namespace HaoDouCookBook.ViewModels
             get { return description; }
             set { SetProperty<string>(ref description, value); }
         }
-           
+
+        private string albumMarkImageSource;
+
+        public string AlbumMarkImageSource
+        {
+            get { return albumMarkImageSource; }
+            set { SetProperty<string>(ref albumMarkImageSource, value); }
+        }
+        
 
         public SpecialRecipeAlbumData()
         {
+            albumMarkImageSource = string.Empty;
             mainImageSource = Constants.DEFAULT_TOPIC_IMAGE;
             DetailsImageSources = new ObservableCollection<string>();
             title = string.Empty;

@@ -7,82 +7,108 @@ using System.Threading.Tasks;
 
 namespace HaoDouCookBook.ViewModels
 {
+    public class TagItem : BindableBase
+    {
+        private string icon;
+
+        public string Icon
+        {
+            get { return icon; }
+            set { SetProperty<string>(ref icon, value); }
+        }
+
+        private string text;
+
+        public string Text
+        {
+            get { return text; }
+            set { SetProperty<string>(ref text, value); }
+        }
+
+        public TagItem()
+        {
+            icon = string.Empty;
+            text = string.Empty;
+        }
+        
+    }
+
     public class TagsListData : BindableBase
     {
-        private string tag1;
+        private TagItem tag1;
 
-        public string Tag1
+        public TagItem Tag1
         {
             get { return tag1; }
-            set { SetProperty<string>(ref tag1, value); }
+            set { SetProperty<TagItem>(ref tag1, value); }
         }
 
-        private string tag2;
+        private TagItem tag2;
 
-        public string Tag2
+        public TagItem Tag2
         {
             get { return tag2; }
-            set { SetProperty<string>(ref tag2, value); }
+            set { SetProperty<TagItem>(ref tag2, value); }
         }
 
-        private string tag3;
+        private TagItem tag3;
 
-        public string Tag3
+        public TagItem Tag3
         {
             get { return tag3; }
-            set { SetProperty<string>(ref tag3, value); }
+            set { SetProperty<TagItem>(ref tag3, value); }
         }
 
-        private string tag4;
+        private TagItem tag4;
 
-        public string Tag4
+        public TagItem Tag4
         {
             get { return tag4; }
-            set { SetProperty<string>(ref tag4, value); }
+            set { SetProperty<TagItem>(ref tag4, value); }
         }
 
-        private string tag5;
+        private TagItem tag5;
 
-        public string Tag5
+        public TagItem Tag5
         {
             get { return tag5; }
-            set { SetProperty<string>(ref tag5, value); }
+            set { SetProperty<TagItem>(ref tag5, value); }
         }
 
-        private string tag6;
+        private TagItem tag6;
 
-        public string Tag6
+        public TagItem Tag6
         {
             get { return tag6; }
-            set { SetProperty<string>(ref tag6, value); }
+            set { SetProperty<TagItem>(ref tag6, value); }
         }
 
-        private string tag7;
+        private TagItem tag7;
 
-        public string Tag7
+        public TagItem Tag7
         {
             get { return tag7; }
-            set { SetProperty<string>(ref tag7, value); }
+            set { SetProperty<TagItem>(ref tag7, value); }
         }
 
-        private string tag8;
+        private TagItem tag8;
 
-        public string Tag8
+        public TagItem Tag8
         {
             get { return tag8; }
-            set { SetProperty<string>(ref tag8, value); }
+            set { SetProperty<TagItem>(ref tag8, value); }
         }
 
         public TagsListData()
         {
-            tag1 = string.Empty;
-            tag2 = string.Empty;
-            tag3 = string.Empty;
-            tag4 = string.Empty;
-            tag5 = string.Empty;
-            tag6 = string.Empty;
-            tag7 = string.Empty;
-            tag8 = string.Empty;
+            tag1 = new TagItem();
+            tag2 = new TagItem();
+            tag3 = new TagItem();
+            tag4 = new TagItem();
+            tag5 = new TagItem();
+            tag6 = new TagItem();
+            tag7 = new TagItem();
+            tag8 = new TagItem();
         }
     }
 }

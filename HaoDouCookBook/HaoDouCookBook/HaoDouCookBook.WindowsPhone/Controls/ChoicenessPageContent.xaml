@@ -29,7 +29,7 @@
 
             <StackPanel Orientation="Vertical" Margin="25, 0, 25, 0">
                 <!--标签分类-->
-                <Grid Height="100" Margin="0, 10, 0, 0" x:Name="TagsList">
+                <Grid Height="100" Margin="0, 10, 0, 0" x:Name="TagsList" Background="Transparent">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -41,42 +41,42 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag1}"  Orientation="Horizontal" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="../Assets/Images/Heart/heart_1.png" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource TagTextStyle}"/>
+                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
                     </StackPanel>
                     <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag2}"  Orientation="Horizontal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Tapped="Tag_Tapped" Source="../Assets/Images/Heart/heart_2.png" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource TagTextStyle}"/>
+                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
                     </StackPanel>
                     <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag3}"  Orientation="Horizontal" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="../Assets/Images/Heart/heart_3.png" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource TagTextStyle}"/>
+                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
                     </StackPanel>
                     <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag4}"  Orientation="Horizontal" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="../Assets/Images/Heart/heart_4.png" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource TagTextStyle}"/>
+                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
                     </StackPanel>
                     <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag5}"  Orientation="Horizontal" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="../Assets/Images/Heart/heart_5.png" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource TagTextStyle}"/>
+                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
                     </StackPanel>
                     <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag6}"  Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="../Assets/Images/Heart/heart_6.png" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource TagTextStyle}"/>
+                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
                     </StackPanel>
                     <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag7}" Orientation="Horizontal" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="../Assets/Images/Heart/heart_7.png" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource TagTextStyle}"/>
+                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
                     </StackPanel>
                     <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag8}" Orientation="Horizontal" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="../Assets/Images/Heart/heart_8.png" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding}" Style="{StaticResource TagTextStyle}"/>
+                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
                     </StackPanel>
                 </Grid>
 
                 <Rectangle Margin="0, 00, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
                 <!--广告-->
-                <controls:AdImagePivot Width="380"/>
+                <Image x:Name="Ads" Source="{Binding}"/>
 
                 <Rectangle Margin="0, 15, 0, 15" Style="{StaticResource GrayLine}" Width="380"/>
                 <!--专辑-->
@@ -85,12 +85,7 @@
                         <Border.Background>
                             <ImageBrush ImageSource="{Binding MainImageSource}"/>
                         </Border.Background>
-                        <Border VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="{Binding MarkText, Converter={StaticResource AnythingToVisiblityConverter}}">
-                            <Border.Background>
-                                <SolidColorBrush Color="Green" Opacity="0.8"/>
-                            </Border.Background>
-                            <TextBlock Text="专辑" Foreground="White" FontSize="21" Margin="15, 5, 25, 5"/>
-                        </Border>
+                        <Image Source="{Binding AlbumMarkImageSource}" Height="32" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     </Border>
                     <ItemsControl Margin="0, 2, 0, 0" ItemsSource="{Binding DetailsImageSources}">
                         <ItemsControl.ItemsPanel>
@@ -121,88 +116,30 @@
              />
                 <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
 
-                <!--热门菜谱-->
-                <controls:RecipeCategoryTile x:Name="reMenCaiPu"
-                TileImage="{Binding TileImage}"
-                RecipeName="{Binding RecipeName}"
-                Author="{Binding Author}"
-                AuthorRecipeComment="{Binding AuthorRecipeComment}"
-                Title="{Binding Title}"
-                Description="{Binding Description}"
-                Tapped="RecipeCategoryTile_Tapped"
-             />
+                <ItemsControl x:Name="recipesList">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <controls:RecipeCategoryTile x:Name="reMenCaiPu"
+                                    TileImage="{Binding TileImage}"
+                                    RecipeName="{Binding RecipeName}"
+                                    Author="{Binding Author}"
+                                    AuthorRecipeComment="{Binding AuthorRecipeComment}"
+                                    Title="{Binding Title}"
+                                    Description="{Binding Description}"
+                                    Tapped="RecipeCategoryTile_Tapped"
+                                 />
 
-                <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
-
-                <!--私人定制-->
-                <controls:RecipeCategoryTile x:Name="siRenDingZhi"
-                TileImage="{Binding TileImage}"
-                RecipeName="{Binding RecipeName}"
-                Author="{Binding Author}"
-                AuthorRecipeComment="{Binding AuthorRecipeComment}"
-                TitleIcon="{Binding TitleIcon}"
-                Title="{Binding Title}"
-                Description="{Binding Description}"
-                Tapped="RecipeCategoryTile_Tapped"
-                />
-
-                <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
-
-                <!--时令佳肴-->
-                <controls:RecipeCategoryTile x:Name="shiLingJiaYao"
-                TileImage="{Binding TileImage}"
-                RecipeName="{Binding RecipeName}"
-                Author="{Binding Author}"
-                AuthorRecipeComment="{Binding AuthorRecipeComment}"
-                TitleIcon="{Binding TitleIcon}"
-                Title="{Binding Title}"
-                Description="{Binding Description}"
-                Tapped="RecipeCategoryTile_Tapped"
-                />
-
-                <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
-
-                <!--达人菜谱-->
-                <controls:RecipeCategoryTile x:Name="daRenCaiPu"
-                TileImage="{Binding TileImage}"
-                RecipeName="{Binding RecipeName}"
-                Author="{Binding Author}"
-                AuthorRecipeComment="{Binding AuthorRecipeComment}"
-                TitleIcon="{Binding TitleIcon}"
-                Title="{Binding Title}"
-                Description="{Binding Description}"
-                Tapped="RecipeCategoryTile_Tapped"
-                />
-
-                <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
-
-                <!--最新菜谱-->
-                <controls:RecipeCategoryTile x:Name="zuiXinCaiPu"
-                TileImage="{Binding TileImage}"
-                RecipeName="{Binding RecipeName}"
-                Author="{Binding Author}"
-                AuthorRecipeComment="{Binding AuthorRecipeComment}"
-                TitleIcon="{Binding TitleIcon}"
-                Title="{Binding Title}"
-                Description="{Binding Description}"
-                Tapped="RecipeCategoryTile_Tapped"
-                />
-
-                <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
-
-                <!--快乐的烘焙-->
-                <controls:RecipeCategoryTile x:Name="kuaiLeDeHongBei"
-                TileImage="{Binding TileImage}"
-                RecipeName="{Binding RecipeName}"
-                Author="{Binding Author}"
-                AuthorRecipeComment="{Binding AuthorRecipeComment}"
-                TitleIcon="{Binding TitleIcon}"
-                Title="{Binding Title}"
-                Description="{Binding Description}"
-                Tapped="RecipeCategoryTile_Tapped"
-                />
-
-                <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
+                                <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
                 <!--营养餐桌-->
                 <controls:RecipeCategoryTile x:Name="yingYangCanZhuo"
@@ -240,12 +177,12 @@
                                     </Grid.ColumnDefinitions>
                                     <Rectangle Width="122" Height="90" VerticalAlignment="Center" Grid.Column="0">
                                         <Rectangle.Fill>
-                                            <ImageBrush ImageSource="{Binding TopicPreviewImageSource}"/>
+                                            <ImageBrush ImageSource="{Binding CoverImage}"/>
                                         </Rectangle.Fill>
                                     </Rectangle>
                                     <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="18, 0, 0, 0">
                                         <TextBlock Text="{Binding Title}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0" TextTrimming="WordEllipsis"/>
-                                        <TextBlock Text="{Binding PreviewContent}" Style="{StaticResource TopicContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3"  TextWrapping="Wrap" MaxLines="2" TextTrimming="WordEllipsis"/>
+                                        <TextBlock Text="{Binding Description}" Style="{StaticResource TopicContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3"  TextWrapping="Wrap" MaxLines="2" TextTrimming="WordEllipsis"/>
                                     </Grid>
                                 </Grid>
                             </DataTemplate>

@@ -24,12 +24,7 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-            <Border VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="{Binding MarkText, Converter={StaticResource AnythingToVisiblityConverter}}">
-                <Border.Background>
-                    <SolidColorBrush Color="Green" Opacity="0.8"/>
-                </Border.Background>
-                <TextBlock Text="{Binding MarkText}" Foreground="White" FontSize="21" Margin="15, 5, 25, 5"/>
-            </Border>
+            <Image Source="{Binding MarkText}" Height="32" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <StackPanel Orientation="Vertical" Visibility="{Binding Author, Converter={StaticResource AnythingToVisiblityConverter}}" VerticalAlignment="Bottom" Margin="15, 0, 15, 20">
                 <controls:ShadowTextBlock Text="{Binding RecipeName}" Style="{StaticResource RecipeCategoryTextOnImage}"/>
                 <Grid>
