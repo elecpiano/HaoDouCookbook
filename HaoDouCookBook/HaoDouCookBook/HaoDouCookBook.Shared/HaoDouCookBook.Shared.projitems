@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\ApiUrlHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipeAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\TopicAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\ADItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\AlbumItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\ChoicenessPageData.cs" />
@@ -37,6 +38,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\Meal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\NewbieTutorial.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\SquarePage\Class.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\SquarePage\SquarePageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\SquarePage\Topic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\AnimationBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\FadeAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\MoveAnimation.cs" />

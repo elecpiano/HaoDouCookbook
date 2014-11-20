@@ -11,8 +11,7 @@
     d:DesignWidth="400">
 
     <ScrollViewer>
-
-        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical" Margin="10, 10, 10, 0">
             <!--分类-->
             <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 40">
                 <ItemsControl x:Name="CategoryList">
@@ -23,7 +22,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <controls:CategoryImageTile ImageSource="{Binding ImageSource}" Title="{Binding Title}" Margin="0, 0, 11.5, 0"/>
+                            <controls:CategoryImageTile Tapped="CategoryImageTile_Tapped" ImageSource="{Binding ImageSource}" Title="{Binding Title}" Margin="0, 0, 11.5, 0"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -31,7 +30,7 @@
 
             <!--最新话题-->
             <controls:CategoryTitle Title="最新话题"/>
-            <ItemsControl x:Name="topicList" Margin="0, 0, 0, 15">
+            <ItemsControl x:Name="topicList" Margin="0, 0, 0, 35">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical"/>

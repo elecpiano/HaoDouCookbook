@@ -59,10 +59,16 @@ namespace HaoDouCookBook
             switch (mainPivot.SelectedIndex)
             {
                 case 0:
+                    this.bottomAppBar.Visibility = Visibility.Visible;
                     BuildChocinessPageBottomAppBar();
                     break;
                 case 1:
+                    this.bottomAppBar.Visibility = Visibility.Visible;
                     BuildDiscoveryPageBottomAppBar();
+                    break;
+                case 2:
+                case 3:
+                    this.bottomAppBar.Visibility = Visibility.Collapsed;
                     break;
                 default:
                     break;

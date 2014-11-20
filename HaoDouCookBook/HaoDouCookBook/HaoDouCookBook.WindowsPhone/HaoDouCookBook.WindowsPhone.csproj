@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HaoDouCookBook</RootNamespace>
     <AssemblyName>HaoDouCookBook.WindowsPhone</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -136,6 +136,9 @@
     </Compile>
     <Compile Include="Pages\TagsPage.xaml.cs">
       <DependentUpon>TagsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TopicListPage.xaml.cs">
+      <DependentUpon>TopicListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CategoryTileData.cs" />
     <Compile Include="ViewModels\CookMaster.cs" />
@@ -280,6 +283,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TagsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TopicListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

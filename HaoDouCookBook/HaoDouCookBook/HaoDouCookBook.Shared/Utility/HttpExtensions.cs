@@ -55,6 +55,7 @@ namespace Shared.Utility
             {
                 HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(new Uri(url));
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ContentType = "application/x-www-form-urlencoded";
 
                 if (additionalHttpReqHeaders != null)
                 {

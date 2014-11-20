@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="HaoDouCookBook.Pages.TopicListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="5, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        </Border>
+        <ScrollViewer Margin="20, 125, 20, 30">
+            <ItemsControl x:Name="topicList" Margin="0, 0, 0, 35">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
+                                       Title="{Binding Title}"
+                                       PreviewContent="{Binding PreviewContent}"
+                                       Author="{Binding Author}"
+                                       CreateTimeDescription="{Binding CreateTimeDescription}"
+                                       HorizontalAlignment="Left"
+                                                />
+                            <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="-100, 20, 0, 20"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -1,4 +1,7 @@
 ﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.API;
+using HaoDouCookBook.HaoDou.DataModels.SquarePage;
+using HaoDouCookBook.Pages;
 using HaoDouCookBook.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -6,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -15,6 +19,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -29,14 +34,69 @@ namespace HaoDouCookBook.Controls
 
         #endregion
 
-        #region Life Cycle 
+        #region Life Cycle
 
         public SquarePageConent()
         {
             this.InitializeComponent();
+            DataBinding();
+            Init();
+        }
+
+        #endregion
+
+        #region Data Prepare
+
+        private void DataBinding()
+        {
             this.topicList.ItemsSource = LatestTopics;
             this.CategoryList.ItemsSource = Categories;
-            Init();
+        }
+
+        private async Task LoadPageDataAsync()
+        {
+            await TopicAPI.GetGroupIndexData(0, 20, (data) =>
+                {
+                    UpdatePageData(data);
+
+                }, error =>
+                {
+
+                });
+        }
+
+        private void UpdatePageData(SquarePageData data)
+        {
+            // Category
+            //
+            if (data.CateInfos != null)
+            {
+                Categories.Clear();
+                foreach (var item in data.CateInfos)
+                {
+                    Categories.Add(new CategoryTileData() { ImageSource = item.ImageUrl, Title = item.Name, Id = item.CateId });
+                }
+            }
+
+            // Topic
+            //
+
+
+            if (data.Topics != null)
+            {
+                foreach (var item in data.Topics)
+                {
+                    LatestTopics.Add(new TopicModel()
+                    {
+                        Author = item.UserName,
+                        CreateTimeDescription = item.LastPostTime,
+                        PreviewContent = item.PreviewContent,
+                        Title = item.Title,
+                        TopicPreviewImageSource = item.ImageUrl
+                    });
+                }
+
+            }
         }
 
         #endregion
@@ -44,38 +104,16 @@ namespace HaoDouCookBook.Controls
         #region Private Method
         private void Init()
         {
-            PrepareCategory();
-            Test();
+            LoadPageDataAsync();
         }
 
-        private void PrepareCategory()
-        {
-            Categories.Add(new CategoryTileData() { ImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "乐在厨房" });
-            Categories.Add(new CategoryTileData() { ImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "健康营养" });
-            Categories.Add(new CategoryTileData() { ImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "好好生活" });
-            Categories.Add(new CategoryTileData() { ImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "游山玩水" });
-        }
         #endregion
 
-        #region Test
+        #region Envent
 
-        private void Test()
+        private void CategoryImageTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            LatestTopics.Clear();
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒红烧肉青红椒红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
-            LatestTopics.Add(new TopicModel() { Title = "红烧肉青红椒", Author = "爱跳舞的老太", CreateTimeDescription = "1小时前", PreviewContent = "本话题已参加活动：好豆菜谱无哈哈", TopicPreviewImageSource = "../Assets/Images/DefaultTopicImage.jpg" });
+            App.Current.RootFrame.Navigate(typeof(TopicListPage), sender.GetDataContext<CategoryTileData>());
         }
 
         #endregion

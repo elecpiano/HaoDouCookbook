@@ -19,10 +19,20 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref title, value); }
         }
 
+        private string id;
+
+        public string Id
+        {
+            get { return id; }
+            set { SetProperty<string>(ref id, value); }
+        }
+
+
         public CategoryTileData()
         {
             title = string.Empty;
             imageSource = string.Empty;
+            id = "-1";
         }
     }
 }
