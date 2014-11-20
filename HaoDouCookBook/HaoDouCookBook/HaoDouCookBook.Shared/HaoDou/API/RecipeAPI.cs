@@ -1,5 +1,6 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
+using HaoDouCookBook.HaoDou.DataModels.DiscoveryPage;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,6 +27,15 @@ namespace HaoDouCookBook.HaoDou.API
 
             HaoDouJsonDataLoader<ChoicenessPageData> loader = new HaoDouJsonDataLoader<ChoicenessPageData>();
             await loader.LoadAsync(postRequest, true, Moudle, cacheFileName, OnSuccess, OnFail);
+        }
+
+        public static async Task GetDiscoveryData(Action<DiscoveryPageData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getfindRecipe";
+            GETRequestExecuter getRequst = new GETRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(Moudle, methodName));
+            string cacheFileName = methodName;
+            HaoDouJsonDataLoader<DiscoveryPageData> loader = new HaoDouJsonDataLoader<DiscoveryPageData>();
+            await loader.LoadAsync(getRequst, true, Moudle, cacheFileName, onSuccess, onFail);
         }
     }
 }

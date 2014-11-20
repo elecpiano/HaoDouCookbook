@@ -81,11 +81,11 @@
                 <Rectangle Margin="0, 15, 0, 15" Style="{StaticResource GrayLine}" Width="380"/>
                 <!--专辑-->
                 <StackPanel x:Name="SpecialRecipeAlbum" Orientation="Vertical">
-                    <Border Height="230">
+                    <Border Height="160">
                         <Border.Background>
-                            <ImageBrush ImageSource="{Binding MainImageSource}"/>
+                            <ImageBrush ImageSource="{Binding MainImageSource}" AlignmentY="Center" Stretch="UniformToFill"/>
                         </Border.Background>
-                        <Image Source="{Binding AlbumMarkImageSource}" Height="32" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <Image Source="{Binding AlbumMarkImageSource}" Height="36" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     </Border>
                     <ItemsControl Margin="0, 2, 0, 0" ItemsSource="{Binding DetailsImageSources}">
                         <ItemsControl.ItemsPanel>
@@ -95,7 +95,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Image Height="71" Width="71" Source="{Binding}" Stretch="UniformToFill"/>
+                                <Image Height="72.2" Width="72.2" Source="{Binding}" Stretch="UniformToFill"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

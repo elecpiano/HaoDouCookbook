@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HaoDouCookBook.HaoDou.DataModels.ChoicenessPag;
+using HaoDouCookBook.Infrastructures;
+using Shared.Utility;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
 {
     [DataContract]
-    public class ChoicenessPageData
+    public class ChoicenessPageData 
     {
         [DataMember(Name = "ad")]
         public ADItem[] ADs { get; set; }

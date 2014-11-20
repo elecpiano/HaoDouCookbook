@@ -7,13 +7,6 @@ namespace HaoDouCookBook.ViewModels
 {
     public class Meal : BindableBase
     {
-        private string date;
-
-        public string Date
-        {
-            get { return date; }
-            set { SetProperty<string>(ref date, value); }
-        }
 
         private int number;
 
@@ -31,21 +24,20 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref mealImageSource, value); }
         }
 
-        private string name;
+        private string title;
 
-        public string Name
+        public string Title
         {
-            get { return name; }
-            set { SetProperty<string>(ref name, value); }
+            get { return title; }
+            set { SetProperty<string>(ref title, value); }
         }
 
 
         public Meal()
         {
-            DateTime now = DateTime.Now;
-            date = String.Format("{0}月{1}日", now.Month, now.Day);
             Number = 0;
             mealImageSource = string.Empty;
+            title = string.Empty;
         }
     }
 }

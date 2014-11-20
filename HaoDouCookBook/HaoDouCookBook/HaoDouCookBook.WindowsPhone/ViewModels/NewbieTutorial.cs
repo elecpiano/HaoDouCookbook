@@ -31,7 +31,7 @@ namespace HaoDouCookBook.ViewModels
 
         public NewbieTutorial()
         {
-            mainImageSource = Constants.DEFAULT_TOPIC_IMAGE;
+            mainImageSource = string.Empty;
             teacher = new UserData();
             DetailsImageSources = new ObservableCollection<string>();
             DishName = string.Empty;

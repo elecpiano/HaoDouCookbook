@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HaoDouCookBook.Common
 {
-    public class HaoDouJsonDataLoader<T> where T: class
+    public class HaoDouJsonDataLoader<T> where T : class
     {
         /// <summary>
         /// Load data async without cache
@@ -53,16 +53,52 @@ namespace HaoDouCookBook.Common
                         try
                         {
                             var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, cacheFileName);
-                            T dataObject = JsonSerializer.Deserialize<T>(cachedJson);
-                            if (dataObject != null)
+
+                            // If there are customize deserialize method, we use it.
+                            // But if ther are not, we use generic deserialize method
+                            //
+                            T t = Activator.CreateInstance<T>();
+                            if (t is CustomJsonSerializableBase)
                             {
-                                App.Current.RunAsync(() =>
+                                CustomJsonSerializableBase dataObject = t as CustomJsonSerializableBase;
+                                if (dataObject.Deserialize(cachedJson))
                                 {
-                                    if (onSuccess != null)
+                                    App.Current.RunAsync(() =>
+                                   {
+                                       if (onSuccess != null)
+                                       {
+                                           onSuccess.Invoke(dataObject as T);
+                                       }
+                                   });
+                                }
+                                else
+                                {
+                                    if (onFail != null)
                                     {
-                                        onSuccess.Invoke(dataObject);
+                                        onFail.Invoke(new Error() { ErrorCode = int.MaxValue, Message = "Deserialize json failed" });
                                     }
-                                });
+                                }
+                            }
+                            else
+                            {
+                                T dataObject = JsonSerializer.Deserialize<T>(cachedJson);
+                                if (dataObject != null)
+                                {
+                                    App.Current.RunAsync(() =>
+                                    {
+                                        if (onSuccess != null)
+                                        {
+                                            onSuccess.Invoke(dataObject);
+                                        }
+                                    });
+                                }
+                                else
+                                {
+                                    if (onFail != null)
+                                    {
+                                        onFail.Invoke(new Error() { ErrorCode = int.MaxValue, Message = "Deserialize json failed" });
+                                    }
+                                }
                             }
                         }
                         catch (Exception ex)
@@ -81,10 +117,41 @@ namespace HaoDouCookBook.Common
                 //
                 await leechExecuter.RunAsync((json) =>
                     {
-                        T dataObject = JsonSerializer.Deserialize<T>(json);
-                        if (dataObject != null)
+                        T t = Activator.CreateInstance<T>();
+                        if (t is CustomJsonSerializableBase)
                         {
-                            App.Current.RunAsync(async () =>
+                            CustomJsonSerializableBase dataObject = t as CustomJsonSerializableBase;
+                            if (dataObject.Deserialize(json))
+                            {
+                                App.Current.RunAsync(async() =>
+                                {
+                                    if (onSuccess != null)
+                                    {
+                                        onSuccess.Invoke(dataObject as T);
+                                    }
+
+                                    // save to cache if want to cache
+                                    //
+                                    if (cacheData)
+                                    {
+                                       await IsolatedStorageHelper.WriteToFile(moduleName, cacheFileName, json);
+                                    }
+                                });
+                            }
+                            else
+                            {
+                                if (onFail != null)
+                                {
+                                    onFail.Invoke(new Error() { ErrorCode = int.MaxValue, Message = "Deserialize json failed" });
+                                }
+                            }
+                        }
+                        else
+                        {
+                            T dataObject = JsonSerializer.Deserialize<T>(json);
+                            if (dataObject != null)
+                            {
+                                App.Current.RunAsync(async() =>
                                 {
                                     if (onSuccess != null)
                                     {
@@ -98,6 +165,14 @@ namespace HaoDouCookBook.Common
                                         await IsolatedStorageHelper.WriteToFile(moduleName, cacheFileName, json);
                                     }
                                 });
+                            }
+                            else
+                            {
+                                if (onFail != null)
+                                {
+                                    onFail.Invoke(new Error() { ErrorCode = int.MaxValue, Message = "Deserialize json failed" });
+                                }
+                            }
                         }
 
                     }, onFail);

@@ -14,17 +14,17 @@
     <StackPanel Orientation="Vertical" x:Name="root">
         <Grid Height="240">
             <Grid.Background>
-                <ImageBrush ImageSource="{Binding TileImage}"/>
+                <ImageBrush ImageSource="{Binding TileImage}" AlignmentY="Center" Stretch="UniformToFill"/>
             </Grid.Background>
             <Border Opacity="0.6">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0.5, 1" EndPoint="0.5, 0">
                         <GradientStop Color="Black" Offset="0.0"/>
-                        <GradientStop Color="Transparent" Offset="0.5" />
+                        <GradientStop Color="Transparent" Offset="0.7" />
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-            <Image Source="{Binding MarkText}" Height="32" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Image Source="{Binding MarkText}" Height="36" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <StackPanel Orientation="Vertical" Visibility="{Binding Author, Converter={StaticResource AnythingToVisiblityConverter}}" VerticalAlignment="Bottom" Margin="15, 0, 15, 20">
                 <controls:ShadowTextBlock Text="{Binding RecipeName}" Style="{StaticResource RecipeCategoryTextOnImage}"/>
                 <Grid>

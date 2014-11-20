@@ -1,4 +1,6 @@
 ﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.API;
+using HaoDouCookBook.HaoDou.DataModels.DiscoveryPage;
 using HaoDouCookBook.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -24,15 +27,13 @@ namespace HaoDouCookBook.Controls
     {
         #region Field && Property
 
-        private ObservableCollection<DishTileData> Soups = new ObservableCollection<DishTileData>();
-        private ObservableCollection<DishTileData> ShaiShaiDishes = new ObservableCollection<DishTileData>();
+        private ObservableCollection<DishTileData> cateOneDishes = new ObservableCollection<DishTileData>(); //例如煲一锅幸福爆棚的汤
+        private ObservableCollection<DishTileData> cateTwoDishes = new ObservableCollection<DishTileData>(); //例如晒一晒
         private ObservableCollection<UserData> usersData = new ObservableCollection<UserData>();
 
-        private Meal breakfast = new Meal() { Name = "早餐" };
-        private Meal luch = new Meal() { Name = "午餐" };
-        private Meal dinner = new Meal() { Name = "晚餐" };
+        private ObservableCollection<HaoDouCookBook.ViewModels.Meal> dailyMeals = new ObservableCollection<HaoDouCookBook.ViewModels.Meal>();
         private CookMaster cookMaster = new CookMaster();
-        private NewbieTutorial newbieTutorial = new NewbieTutorial();
+        private HaoDouCookBook.ViewModels.NewbieTutorial newbieTutorial = new HaoDouCookBook.ViewModels.NewbieTutorial();
 
         private Random random = new Random();
 
@@ -43,15 +44,17 @@ namespace HaoDouCookBook.Controls
         public DiscoveryPageContent()
         {
             this.InitializeComponent();
+            DataBinding();
+            LoadDataAsync();
+            AdjustDishTiles();
             this.Loaded += DiscoveryPageContent_Loaded;
         }
 
         void DiscoveryPageContent_Loaded(object sender, RoutedEventArgs e)
         {
             Test();
-            DataBinding();
-            AdjustDishTiles();
-            SetNewbieTutorial();
+            
+            
         }
 
         #endregion
@@ -74,9 +77,12 @@ namespace HaoDouCookBook.Controls
 
         private void BindMeales()
         {
-            this.mealLeft.DataContext = dinner;
-            this.mealRightTop.DataContext = luch;
-            this.mealRightBottom.DataContext = breakfast;
+            dailyMeals.Add(new HaoDouCookBook.ViewModels.Meal());
+            dailyMeals.Add(new HaoDouCookBook.ViewModels.Meal());
+            dailyMeals.Add(new HaoDouCookBook.ViewModels.Meal());
+            this.mealLeft.DataContext = dailyMeals[0];
+            this.mealRightTop.DataContext = dailyMeals[1];
+            this.mealRightBottom.DataContext = dailyMeals[2];
         }
 
         private void BindCookMaster()
@@ -86,27 +92,27 @@ namespace HaoDouCookBook.Controls
 
         private void BindDishes()
         {
+            for (int i = 0; i < 4; i++)
+            {
+                cateOneDishes.Add(new DishTileData());
+                cateTwoDishes.Add(new DishTileData());
+            }
             //DataBinding
             //
-            SetDishElementDataConextFromListIndex(this.soupItem10, Soups, 0);
-            SetDishElementDataConextFromListIndex(this.soupItem11, Soups, 1);
-            SetDishElementDataConextFromListIndex(this.soupItem20, Soups, 2);
-            SetDishElementDataConextFromListIndex(this.soupItem21, Soups, 3);
+            SetDishElementDataConextFromListIndex(this.cateOneItem10, cateOneDishes, 0);
+            SetDishElementDataConextFromListIndex(this.cateOneItem11, cateOneDishes, 1);
+            SetDishElementDataConextFromListIndex(this.cateOneItem20, cateOneDishes, 2);
+            SetDishElementDataConextFromListIndex(this.cateOneItem21, cateOneDishes, 3);
 
-            SetDishElementDataConextFromListIndex(this.shaiShaiItem10, ShaiShaiDishes, 0);
-            SetDishElementDataConextFromListIndex(this.shaiShaiItem11, ShaiShaiDishes, 1);
-            SetDishElementDataConextFromListIndex(this.shaiShaiItem20, ShaiShaiDishes, 2);
-            SetDishElementDataConextFromListIndex(this.shaiShaiItem21, ShaiShaiDishes, 3);
+            SetDishElementDataConextFromListIndex(this.cateTwoItem10, cateTwoDishes, 0);
+            SetDishElementDataConextFromListIndex(this.cateTwoItem11, cateTwoDishes, 1);
+            SetDishElementDataConextFromListIndex(this.cateTwoItem20, cateTwoDishes, 2);
+            SetDishElementDataConextFromListIndex(this.cateTwoItem21, cateTwoDishes, 3);
         }
 
         private void BindNewbieTutorial()
         {
             this.NewbieTutorTile.DataContext = newbieTutorial;
-        }
-
-        private void SetNewbieTutorial()
-        {
-            //SetDishForNewbieTutorial("板栗烧鸡");
         }
 
         private void SetDishForNewbieTutorial(string dishName)
@@ -123,16 +129,94 @@ namespace HaoDouCookBook.Controls
             }
         }
 
+        private async Task LoadDataAsync()
+        {
+            await RecipeAPI.GetDiscoveryData(data =>
+                {
+                    UpdatePageData(data);
+
+                }, error =>
+                {
+
+                });
+        }
+
+
+        private void UpdatePageData(DiscoveryPageData data)
+        {
+            if (data == null)
+            {
+                return;
+            }
+
+            // Meals
+            //
+            for (int i = 0; i < 3; i++)
+            {
+                var mealData = data.DailyMeal.Meals[i];
+                dailyMeals[i].Number = mealData.PhotoCount;
+                dailyMeals[i].MealImageSource = mealData.ThemeCover;
+                dailyMeals[i].Title = mealData.ThemeTitle;
+            }
+
+            // Actor
+            //
+            this.cookMaster.CookMasterImageSource = data.Actor.ActImg;
+
+
+            // Tutorial
+            //
+            dishTutorialForNewbieTitle.Title = data.NewbieTutorial.Title;
+            newbieTutorial.Teacher.Name = data.NewbieTutorial.UserName;
+            newbieTutorial.Teacher.UserPhoto = data.NewbieTutorial.UserAvatar;
+            newbieTutorial.MainImageSource = data.NewbieTutorial.RecipeCover;
+
+            newbieTutorial.DetailsImageSources.Clear();
+            foreach (var item in data.NewbieTutorial.SamllCovers)
+            {
+                newbieTutorial.DetailsImageSources.Add(item);
+            }
+            newbieTutorial.Teacher.ArchiveDescription = data.NewbieTutorial.Intro;
+
+
+            // Cate One(例如煲一锅幸福爆棚的汤)
+            // Cate Two(例如晒一晒)
+            //
+            this.cateOneTitle.Title = data.CateOne.Title;
+            this.cateTwoTitle.Title = data.CateTwo.Title;
+
+            for (int i = 0; i < 4; i++)
+            {
+                cateOneDishes[i].Author = data.CateOne.Items[i].UserName;
+                cateOneDishes[i].DishImageSource = data.CateOne.Items[i].Cover;
+                cateOneDishes[i].SupportNumber = data.CateOne.Items[i].Count;
+
+                cateTwoDishes[i].Author = data.CateTwo.Items[i].UserName;
+                cateTwoDishes[i].DishImageSource = data.CateTwo.Items[i].Cover;
+                cateTwoDishes[i].SupportNumber = data.CateTwo.Items[i].Count;
+            }
+
+            // Starred Users
+            //
+            this.usersData.Clear();
+            foreach (var user in data.StarredUser.Users)
+            {
+                this.usersData.Add(new UserData() { UserPhoto = user.Avatar, Name = user.UserName });
+            }
+
+        }
+
+
         #endregion
 
         #region LayoutAdjust
 
         private void AdjustDishTiles()
         {
-            RandomDishTileGroupImageHeight(soupItem10, soupItem11);
-            RandomDishTileGroupImageHeight(soupItem20, soupItem21);
-            RandomDishTileGroupImageHeight(shaiShaiItem10, shaiShaiItem11);
-            RandomDishTileGroupImageHeight(shaiShaiItem20, shaiShaiItem21);
+            RandomDishTileGroupImageHeight(cateOneItem10, cateOneItem11);
+            RandomDishTileGroupImageHeight(cateOneItem20, cateOneItem21);
+            RandomDishTileGroupImageHeight(cateTwoItem10, cateTwoItem11);
+            RandomDishTileGroupImageHeight(cateTwoItem20, cateTwoItem21);
         }
 
         private void RandomDishTileGroupImageHeight(DishTile tileOne, DishTile tileTwo)
@@ -151,62 +235,8 @@ namespace HaoDouCookBook.Controls
 
         private void Test()
         {
-            // meals
-            //
-            breakfast.Number = 4352;
-            breakfast.MealImageSource = Constants.DEFAULT_TOPIC_IMAGE;
-            luch.Number = 12323;
-            luch.MealImageSource = Constants.DEFAULT_TOPIC_IMAGE;
-            dinner.Number = 343;
-            dinner.MealImageSource = Constants.DEFAULT_TOPIC_IMAGE;
-
-            // Newbie Tutorial
-            //
-            newbieTutorial.MainImageSource = Constants.DEFAULT_TOPIC_IMAGE;
-            newbieTutorial.DetailsImageSources.Add(Constants.DEFAULT_USER_PHOTO);
-            newbieTutorial.DetailsImageSources.Add(Constants.DEFAULT_USER_PHOTO);
-            newbieTutorial.DetailsImageSources.Add(Constants.DEFAULT_USER_PHOTO);
-            newbieTutorial.DetailsImageSources.Add(Constants.DEFAULT_USER_PHOTO);
-            newbieTutorial.Teacher.Name = "斯佳丽";
-            newbieTutorial.Teacher.ArchiveDescription = "湖北菜专家啊各种的有木有";
-            SetDishForNewbieTutorial("板栗烧鸡");
-
-
-            // Cook master
-            //
-            cookMaster.CookMasterImageSource = Constants.DEFAULT_TOPIC_IMAGE;
-
-            // soups
-            //
-            Soups.Add(new DishTileData() { DishImageSource = Constants.DEFAULT_TOPIC_IMAGE, Author = "93870920", SupportNumber = 24 });
-            Soups.Add(new DishTileData() { DishImageSource = Constants.DEFAULT_TOPIC_IMAGE, Author = "寡人正在努力中", SupportNumber = 3000000 });
-            Soups.Add(new DishTileData() { DishImageSource = Constants.DEFAULT_TOPIC_IMAGE, Author = "有情姐姐", SupportNumber = 0 });
-            Soups.Add(new DishTileData() { DishImageSource = Constants.DEFAULT_TOPIC_IMAGE, Author = "陈政委", SupportNumber = 31 });
-
-            // shai shai 
-            //
-            ShaiShaiDishes.Add(new DishTileData() { DishImageSource = Constants.DEFAULT_TOPIC_IMAGE, Author = "mschimmey", SupportNumber = 24 });
-            ShaiShaiDishes.Add(new DishTileData() { DishImageSource = Constants.DEFAULT_TOPIC_IMAGE, Author = "爱做美食的小围巾", SupportNumber = 20 });
-            ShaiShaiDishes.Add(new DishTileData() { DishImageSource = Constants.DEFAULT_TOPIC_IMAGE, Author = "YILIAN", SupportNumber = 2 });
-            ShaiShaiDishes.Add(new DishTileData() { DishImageSource = Constants.DEFAULT_TOPIC_IMAGE, Author = "smile", SupportNumber = 2342344 });
-
-
-            // users
-            //
-            usersData.Add(new UserData() { UserPhoto = Constants.DEFAULT_USER_PHOTO, UserID = "1" });
-            usersData.Add(new UserData() { UserPhoto = Constants.DEFAULT_USER_PHOTO, UserID = "1" });
-            usersData.Add(new UserData() { UserPhoto = Constants.DEFAULT_USER_PHOTO, UserID = "1" });
-            usersData.Add(new UserData() { UserPhoto = Constants.DEFAULT_USER_PHOTO, UserID = "1" });
-            usersData.Add(new UserData() { UserPhoto = Constants.DEFAULT_USER_PHOTO, UserID = "1" });
-            usersData.Add(new UserData() { UserPhoto = Constants.DEFAULT_USER_PHOTO, UserID = "1" });
-            usersData.Add(new UserData() { UserPhoto = Constants.DEFAULT_USER_PHOTO, UserID = "1" });
-            usersData.Add(new UserData() { UserPhoto = Constants.DEFAULT_USER_PHOTO, UserID = "1" });
-            usersData.Add(new UserData() { UserPhoto = Constants.DEFAULT_USER_PHOTO, UserID = "1" });
-            usersData.Add(new UserData() { UserPhoto = Constants.DEFAULT_USER_PHOTO, UserID = "1" });
-            usersData.Add(new UserData() { UserPhoto = Constants.DEFAULT_USER_PHOTO, UserID = "1" });
         }
 
         #endregion
-
     }
 }

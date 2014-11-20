@@ -29,7 +29,6 @@ namespace HaoDouCookBook
         public MainPage()
         {
             this.InitializeComponent();
-
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
@@ -57,6 +56,50 @@ namespace HaoDouCookBook
 
         private void mainPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            switch (mainPivot.SelectedIndex)
+            {
+                case 0:
+                    BuildChocinessPageBottomAppBar();
+                    break;
+                case 1:
+                    BuildDiscoveryPageBottomAppBar();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private const string CLASSIFICATION_APPBARBUTTON_TAG = "classification";
+        private const string PUBLISH_RECIPE_APPBARBUTTON_TAG = "publishRecipe";
+
+        private void BuildChocinessPageBottomAppBar()
+        {
+            this.bottomAppBar.PrimaryCommands.Clear();
+
+            AppBarButton classificationAppbarButton = new AppBarButton();
+            classificationAppbarButton.Tag = CLASSIFICATION_APPBARBUTTON_TAG;
+            classificationAppbarButton.Label = "分类";
+            classificationAppbarButton.Icon = new SymbolIcon(Symbol.Flag);
+            classificationAppbarButton.Tapped += AppBarButton_Tapped;
+
+            this.bottomAppBar.PrimaryCommands.Add(classificationAppbarButton);
+        }
+
+        private void BuildDiscoveryPageBottomAppBar()
+        {
+            this.bottomAppBar.PrimaryCommands.Clear();
+
+            AppBarButton publishRecipeAppbarButton = new AppBarButton();
+            publishRecipeAppbarButton.Tag = PUBLISH_RECIPE_APPBARBUTTON_TAG;
+            publishRecipeAppbarButton.Label = "晒一晒";
+            publishRecipeAppbarButton.Icon = new SymbolIcon(Symbol.Edit);
+            publishRecipeAppbarButton.Tapped += AppBarButton_Tapped;
+
+            this.bottomAppBar.PrimaryCommands.Add(publishRecipeAppbarButton);
+        }
+
+        private void AppBarButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
 
         }
 
@@ -74,5 +117,6 @@ namespace HaoDouCookBook
         }
 
         #endregion
+
     }
 }

@@ -34,7 +34,7 @@
 
     <!--Category-->
     <Style x:Key="CategoryTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
-        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="Foreground" Value="Green"/>
     </Style>
 
@@ -79,12 +79,13 @@
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="TextWrapping" Value="WrapWholeWords"/>
     </Style>
 
 
     <!--Newbie Tutorial-->
     <Style x:Key="NewbieTutorialText" TargetType="controls:ShadowTextBlock">
-        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontSize" Value="26"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
@@ -107,7 +108,7 @@
 
     <Style x:Name="RecipeCategoryTextOnImage" TargetType="controls:ShadowTextBlock">
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
-        <Setter Property="FontSize" Value="23"/>
+        <Setter Property="FontSize" Value="26"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Foreground" Value="White"/>
     </Style>

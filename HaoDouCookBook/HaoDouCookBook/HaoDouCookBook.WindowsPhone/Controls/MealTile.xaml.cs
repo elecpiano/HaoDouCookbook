@@ -21,10 +21,9 @@ namespace HaoDouCookBook.Controls
     {
         #region Dependency Property
 
-        public static readonly DependencyProperty DateProperty = DependencyProperty.Register("Date", typeof(string), typeof(MealTile), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty NumberProperty = DependencyProperty.Register("Number", typeof(int), typeof(MealTile), new PropertyMetadata(0));
         public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(string), typeof(MealTile), new PropertyMetadata(string.Empty));
-        public static readonly DependencyProperty MealNameProperty = DependencyProperty.Register("MealName", typeof(string), typeof(MealTile), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(MealTile), new PropertyMetadata(string.Empty));
 
         #endregion
 
@@ -42,16 +41,10 @@ namespace HaoDouCookBook.Controls
             set { SetValue(ImageSourceProperty, value); }
         }
 
-        public string MealName
+        public string Title
         {
-            get { return (string)GetValue(MealNameProperty); }
-            set { SetValue(MealNameProperty, value); }
-        }
-
-        public string Date
-        {
-            get { return (string)GetValue(DateProperty); }
-            set { SetValue(DateProperty, value); }
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
         }
 
         #endregion

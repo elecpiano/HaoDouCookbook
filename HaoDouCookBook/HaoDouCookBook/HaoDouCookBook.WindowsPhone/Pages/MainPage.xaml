@@ -21,13 +21,8 @@
     </Page.Resources>
 
     <Page.BottomAppBar>
-        <CommandBar Background="WhiteSmoke">
-            <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="Find" Label="查找"/>
-            </CommandBar.PrimaryCommands>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton Icon="Sort" Label="分类" FontFamily="Verdana"/>
-            </CommandBar.SecondaryCommands>
+        <CommandBar x:Name="bottomAppBar" Background="Black" Foreground="White">
+            
         </CommandBar>
     </Page.BottomAppBar>
 

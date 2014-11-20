@@ -49,14 +49,15 @@ namespace HaoDouCookBook.Controls
         public ChoicenessPageContent()
         {
             this.InitializeComponent();
+            DataBiding();
+            LoadDataAsync();
             this.Loaded += ChoicenessPageContent_Loaded;
 
         }
 
         void ChoicenessPageContent_Loaded(object sender, RoutedEventArgs e)
         {
-            DataBiding();
-            LoadDataAsync();
+            
         }
 
         #endregion

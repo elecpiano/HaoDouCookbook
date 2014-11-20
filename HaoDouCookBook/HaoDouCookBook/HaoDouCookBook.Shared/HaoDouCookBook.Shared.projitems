@@ -31,6 +31,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\RecipeItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\TagItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\WikiOrTableItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\Actor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\Cate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\DiscoveryPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\Meal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\NewbieTutorial.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\AnimationBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\FadeAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\MoveAnimation.cs" />
@@ -39,6 +45,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\VibrateAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\BindableBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Interface.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\JsonSerializable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\SingletonProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\CryptographyHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\MD5.cs" />

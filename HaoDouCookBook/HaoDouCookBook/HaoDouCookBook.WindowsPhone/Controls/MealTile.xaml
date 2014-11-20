@@ -25,9 +25,7 @@
         </Border>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15, 0, 0, 15">
             <StackPanel Orientation="Horizontal">
-                <controls:ShadowTextBlock Text="{Binding MealName}" Style="{StaticResource MealText}"/>
-                <controls:ShadowTextBlock Text=" · " Style="{StaticResource MealText}"/>
-                <controls:ShadowTextBlock Text="{Binding Date}" TextTrimming="WordEllipsis" Style="{StaticResource MealText}"/>
+                <controls:ShadowTextBlock Text="{Binding Title}" Style="{StaticResource MealText}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0, 3, 0, 0">
                 <controls:ShadowTextBlock Text="{Binding Number}" Style="{StaticResource MealText}"/>
