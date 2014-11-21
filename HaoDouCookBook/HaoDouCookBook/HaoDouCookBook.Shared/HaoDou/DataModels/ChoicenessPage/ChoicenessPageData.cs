@@ -27,7 +27,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
         public RankItem[] Rank { get; set; }
 
         [DataMember(Name = "tag")]
-        public TagItem[] Tags { get; set; }
+        public TagCategoryItem[] Tags { get; set; }
 
         public ChoicenessPageData()
         {

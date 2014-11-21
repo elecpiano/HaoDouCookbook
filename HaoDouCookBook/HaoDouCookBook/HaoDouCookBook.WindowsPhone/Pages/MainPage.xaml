@@ -21,7 +21,7 @@
     </Page.Resources>
 
     <Page.BottomAppBar>
-        <CommandBar x:Name="bottomAppBar" Background="Black" Foreground="White">
+        <CommandBar x:Name="bottomAppBar" Style="{StaticResource bottomAppbarStyle}">
             
         </CommandBar>
     </Page.BottomAppBar>

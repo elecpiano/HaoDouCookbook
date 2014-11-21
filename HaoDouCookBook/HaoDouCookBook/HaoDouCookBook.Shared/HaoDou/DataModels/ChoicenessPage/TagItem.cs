@@ -3,7 +3,7 @@
 namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
 {
     [DataContract]
-    public class TagItem
+    public class TagCategoryItem
     {
         [DataMember]
         public int Id { get; set; }
@@ -23,7 +23,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
         [DataMember]
         public int SortIndex { get; set; }
 
-        public TagItem()
+        public TagCategoryItem()
         {
             Id = -1;
             Title = string.Empty;
@@ -33,5 +33,47 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
             SortIndex = -1;
         }
 
+    }
+
+    [DataContract]
+    public class TagListItem
+    {
+        [DataMember]
+        public int RecipeId { get; set; }
+        
+        [DataMember]
+        public int ViewCount { get; set; }
+
+        [DataMember]
+        public string Cover { get; set; }
+
+        [DataMember]
+        public int LikeCount { get; set; }
+
+        [DataMember]
+        public string Title { get; set; }
+        
+        [DataMember]
+        public string Stuff { get; set; }
+
+        [DataMember]
+        public string Card { get; set; }
+
+        public TagListItem()
+        {
+            RecipeId = -1;
+            ViewCount = 0;
+            LikeCount = 0;
+            Title = string.Empty;
+            Stuff = string.Empty;
+            Card = string.Empty;
+        }
+    }
+
+    [DataContract]
+    public class TagsPageData
+    {
+        [DataMember(Name = "list")]
+        public TagListItem[] Items { get; set; }
     }
 }

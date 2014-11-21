@@ -7,6 +7,15 @@ namespace HaoDouCookBook.ViewModels
 {
     public class RecipeCategoryTileData : BindableBase
     {
+        private int id;
+
+        public int Id
+        {
+            get { return id; }
+            set { SetProperty<int>(ref id, value); }
+        }
+
+
         private string markText;
 
         public string MarkText
@@ -90,6 +99,7 @@ namespace HaoDouCookBook.ViewModels
             recipeDescriptionOnImage = string.Empty;
             author = string.Empty;
             tileImage = string.Empty;
+            id = -1;
         }
 
     }

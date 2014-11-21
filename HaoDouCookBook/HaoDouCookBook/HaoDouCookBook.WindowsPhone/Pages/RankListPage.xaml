@@ -25,12 +25,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
-                            <!--<controls:TopicTile TileType="TileWrapAndPreviewContent" 
-                                               TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
-                                               Title="{Binding Title}"
-                                               PreviewContent="{Binding PreviewContent}"
-                                               HorizontalAlignment="Left" Margin="20, 30, 0, 0"/>-->
-                            <Grid Margin="10, 30, 5, 0">
+                            <Grid Margin="0, 0, 0, 0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="124"/>
                                     <ColumnDefinition Width="*"/>
@@ -45,7 +40,7 @@
                                     <TextBlock Text="{Binding PreviewContent}" Style="{StaticResource TopicContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3" TextTrimming="WordEllipsis"/>
                                 </Grid>
                             </Grid>
-                            <Rectangle Width="800" Margin="0, 15, 0, 0" Style="{StaticResource GrayLine}" />
+                            <Rectangle Width="800" Margin="0, 20, 0, 20" Style="{StaticResource GrayLine}" />
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

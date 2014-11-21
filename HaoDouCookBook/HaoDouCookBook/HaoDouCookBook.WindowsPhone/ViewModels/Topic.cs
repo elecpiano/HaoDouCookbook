@@ -7,6 +7,15 @@ namespace HaoDouCookBook.ViewModels
 {
     public class TopicModel : BindableBase
     {
+        private string id;
+
+        public string Id
+        {
+            get { return id; }
+            set { SetProperty<string>(ref id, value); }
+        }
+
+
         private string topicPreviewImageSource;
 
         public string TopicPreviewImageSource

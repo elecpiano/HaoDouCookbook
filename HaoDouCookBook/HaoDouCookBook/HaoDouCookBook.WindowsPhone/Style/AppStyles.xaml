@@ -16,6 +16,12 @@
         <!--<Setter Property="FontFamily" Value="Rosewood Std Regular"/>-->
     </Style>
 
+    <!--App Bar-->
+    <Style x:Key="bottomAppbarStyle" TargetType="CommandBar">
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
     <!--Topic Tile-->
     <Style x:Key="TopicTileStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="Foreground" Value="Black"/>

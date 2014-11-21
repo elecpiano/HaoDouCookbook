@@ -21,6 +21,8 @@ using HaoDouCookBook.HaoDou.API;
 using System.Threading.Tasks;
 using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
 
+using ViewModels = HaoDouCookBook.ViewModels;
+
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace HaoDouCookBook.Controls
@@ -166,6 +168,7 @@ namespace HaoDouCookBook.Controls
                 {
                     recipes.Add(new RecipeCategoryTileData()
                         {
+                            Id = item.Id,
                             TileImage = item.Cover,
                             TitleIcon = item.Icon,
                             Title = item.Title,
@@ -212,13 +215,13 @@ namespace HaoDouCookBook.Controls
 
         private void Tag_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(TagsPage), sender.GetDataContext<HaoDouCookBook.ViewModels.TagItem>().Text);
+            App.Current.RootFrame.Navigate(typeof(TagsPage), sender.GetDataContext<ViewModels.TagItem>());
 
         }
 
         private void RecipeCategoryTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RecipeCategoryDetailPage), Utils.GetDataContext<RecipeCategoryTileData>(sender));
+            App.Current.RootFrame.Navigate(typeof(RecipeCategoryDetailPage), Utils.GetDataContext<ViewModels.RecipeCategoryTileData>(sender));
         }
 
         #endregion

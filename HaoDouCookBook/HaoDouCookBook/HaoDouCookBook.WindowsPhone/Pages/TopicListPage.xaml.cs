@@ -95,6 +95,7 @@ namespace HaoDouCookBook.Pages
                         {
                             topics.Add(new TopicModel()
                             {
+                                Id = item.TopicId,
                                 TopicPreviewImageSource = item.ImageUrl,
                                 Title = item.Title,
                                 PreviewContent = item.PreviewContent,

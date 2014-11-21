@@ -9,12 +9,20 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.BottomAppBar>
+        <CommandBar x:Name="bottomAppbar" Style="{StaticResource bottomAppbarStyle}">
+            <CommandBar.PrimaryCommands> 
+                <AppBarButton Icon="Edit" Label="偏好设置"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+    
     <Grid Name="root">
         <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="5, 5, 0, 0" Title="好豆菜谱"/>
         <Border Style="{StaticResource PageTitleBorderStyle}">
             <TextBlock x:Name="title" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </Border>
-        <ScrollViewer Margin="15, 125, 15, 0">
+        <ScrollViewer Margin="18, 125, 15, 0">
             <ItemsControl Name="recipesList">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

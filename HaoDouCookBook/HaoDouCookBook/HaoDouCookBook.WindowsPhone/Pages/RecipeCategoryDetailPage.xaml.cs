@@ -1,4 +1,5 @@
 ﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -35,8 +37,7 @@ namespace HaoDouCookBook.Pages
         public RecipeCategoryDetailPage()
         {
             this.InitializeComponent();
-            this.recipesList.ItemsSource = Recipes;
-            Test();
+            DataBinding();
         }
 
 
@@ -48,9 +49,21 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             RecipeCategoryTileData data = e.Parameter as RecipeCategoryTileData;
-            if (data != null && string.IsNullOrEmpty(data.MarkText))
+            if (data != null)
             {
+                // show the bottom appbar if the title is 私人定制
+                //
+                if (data.Id == 391926 || data.Title == "私人定制")
+                {
+                    this.bottomAppbar.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                }
+                else
+                {
+                    this.bottomAppbar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                }
+
                 this.title.Text = data.Title;
+                LoadDataAsync(0, 10, data.Title, data.Id);
             }
 
             Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
@@ -71,28 +84,35 @@ namespace HaoDouCookBook.Pages
 
         #endregion
 
-        #region Test
+        #region Data Prepare
 
-        private void Test()
+        private void DataBinding()
         {
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "12", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "0", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "888", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "343+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "豆皮是去比较大型的超市买回来的，我们这边的超市和市场好像都没有见有卖的，而且我跟老公都是爱吃豆腐皮的呢，觉得直接吃没有那么香口，所以决定加点葱丝一起炒.豆皮是去比较大型的超市买回来的，我们这边的超市和市场好像都没有见有卖的，而且我跟老公都是爱吃豆腐皮的呢，觉得直接吃没有那么香口，所以决定加点葱丝一起炒", SupportNumber = "342+", TagsText = "" });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
+            this.recipesList.ItemsSource = Recipes;
+        }
+
+        private async Task LoadDataAsync(int offset, int limit, string typeName, int recipeId)
+        {
+            await RecipeAPI.GetCollectRecomment(offset, limit, null, null, null, typeName, recipeId, data =>
+                {
+                    foreach (var item in data.Recipes)
+                    {
+                        string support = item.LikeCount.ToString();
+                        if (item.LikeCount > 999)
+                        {
+                            support = "999+";
+                        }
+
+                        Recipes.Add(new RecipeTileData() { Author = item.UserName, TagsText = item.GetTagsString(), RecipeImage = item.Cover, RecipeName = item.Title, SupportNumber = support});
+                    }
+
+                }, error =>
+                {
+
+                });
         }
 
         #endregion
+
     }
 }

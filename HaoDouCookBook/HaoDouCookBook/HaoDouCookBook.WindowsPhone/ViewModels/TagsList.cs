@@ -9,6 +9,15 @@ namespace HaoDouCookBook.ViewModels
 {
     public class TagItem : BindableBase
     {
+        private int id;
+
+        public int Id
+        {
+            get { return id; }
+            set { SetProperty<int>(ref id, value); }
+        }
+
+
         private string icon;
 
         public string Icon

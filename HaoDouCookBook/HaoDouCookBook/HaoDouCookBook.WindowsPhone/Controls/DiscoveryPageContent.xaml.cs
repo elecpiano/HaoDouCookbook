@@ -19,6 +19,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using ViewModels = HaoDouCookBook.ViewModels;
+
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace HaoDouCookBook.Controls
@@ -31,9 +33,9 @@ namespace HaoDouCookBook.Controls
         private ObservableCollection<DishTileData> cateTwoDishes = new ObservableCollection<DishTileData>(); //例如晒一晒
         private ObservableCollection<UserData> usersData = new ObservableCollection<UserData>();
 
-        private ObservableCollection<HaoDouCookBook.ViewModels.Meal> dailyMeals = new ObservableCollection<HaoDouCookBook.ViewModels.Meal>();
+        private ObservableCollection<ViewModels.Meal> dailyMeals = new ObservableCollection<ViewModels.Meal>();
         private CookMaster cookMaster = new CookMaster();
-        private HaoDouCookBook.ViewModels.NewbieTutorial newbieTutorial = new HaoDouCookBook.ViewModels.NewbieTutorial();
+        private ViewModels.NewbieTutorial newbieTutorial = new ViewModels.NewbieTutorial();
 
         private Random random = new Random();
 
@@ -77,9 +79,9 @@ namespace HaoDouCookBook.Controls
 
         private void BindMeales()
         {
-            dailyMeals.Add(new HaoDouCookBook.ViewModels.Meal());
-            dailyMeals.Add(new HaoDouCookBook.ViewModels.Meal());
-            dailyMeals.Add(new HaoDouCookBook.ViewModels.Meal());
+            dailyMeals.Add(new ViewModels.Meal());
+            dailyMeals.Add(new ViewModels.Meal());
+            dailyMeals.Add(new ViewModels.Meal());
             this.mealLeft.DataContext = dailyMeals[0];
             this.mealRightTop.DataContext = dailyMeals[1];
             this.mealRightBottom.DataContext = dailyMeals[2];
