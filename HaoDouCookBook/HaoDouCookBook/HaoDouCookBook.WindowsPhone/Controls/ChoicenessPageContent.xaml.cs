@@ -36,13 +36,7 @@ namespace HaoDouCookBook.Controls
         private ObservableCollection<RankItemData> ranklistData = new ObservableCollection<RankItemData>();
         private RecipeCategoryTileData chuFangBaoDianData = new RecipeCategoryTileData();
         private ObservableCollection<RecipeCategoryTileData> recipes = new ObservableCollection<RecipeCategoryTileData>();
-
-        private RecipeCategoryTileData yingYangCanZhuoData = new RecipeCategoryTileData()
-        {
-            MarkText = "营养餐桌",
-            Title = "冬日食坚果 健康一冬天",
-            Description = "冬季是吃坚果的最好时节，小小一颗不仅营养丰富，味道还很甘美，可说是冬季健康小零嘴的首选食品。"
-        };
+        private RecipeCategoryTileData yingYangCanZhuoData = new RecipeCategoryTileData();
 
         #endregion
 
@@ -59,7 +53,7 @@ namespace HaoDouCookBook.Controls
 
         void ChoicenessPageContent_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         #endregion
@@ -105,19 +99,19 @@ namespace HaoDouCookBook.Controls
             {
                 tags.Tag1.Icon = data.Tags[0].Icon;
                 tags.Tag1.Text = data.Tags[0].Title;
-                
+
                 tags.Tag2.Icon = data.Tags[1].Icon;
                 tags.Tag2.Text = data.Tags[1].Title;
 
                 tags.Tag3.Icon = data.Tags[2].Icon;
                 tags.Tag3.Text = data.Tags[2].Title;
-                
+
                 tags.Tag4.Icon = data.Tags[3].Icon;
                 tags.Tag4.Text = data.Tags[3].Title;
 
                 tags.Tag5.Icon = data.Tags[4].Icon;
                 tags.Tag5.Text = data.Tags[4].Title;
-                
+
                 tags.Tag6.Icon = data.Tags[5].Icon;
                 tags.Tag6.Text = data.Tags[5].Title;
 
@@ -158,6 +152,8 @@ namespace HaoDouCookBook.Controls
                 chuFangBaoDianData.MarkText = baoDianData.Icon;
                 chuFangBaoDianData.RecipeDescriptionOnImage = baoDianData.Intro;
                 chuFangBaoDianData.TileImage = baoDianData.Cover;
+                chuFangBaoDianData.Url = baoDianData.Url;
+                chuFangBaoDianData.Id = baoDianData.Id;
             }
 
             // recipes
@@ -175,7 +171,8 @@ namespace HaoDouCookBook.Controls
                             Description = item.Intro,
                             Author = item.UserName,
                             AuthorRecipeComment = item.Desc,
-                            RecipeName = item.RTitle
+                            RecipeName = item.RTitle,
+                            Url = item.Url
                         });
                 }
             }
@@ -186,10 +183,12 @@ namespace HaoDouCookBook.Controls
             if (data.RecipeTables != null && data.RecipeTables.Length > 0)
             {
                 var tableData = data.RecipeTables[0];
+                yingYangCanZhuoData.Id = tableData.Id;
                 yingYangCanZhuoData.MarkText = tableData.Icon;
                 yingYangCanZhuoData.TileImage = tableData.Cover;
                 yingYangCanZhuoData.Title = tableData.Title;
                 yingYangCanZhuoData.Description = tableData.Intro;
+                yingYangCanZhuoData.Url = tableData.Url;
             }
 
             // Rank
@@ -198,7 +197,7 @@ namespace HaoDouCookBook.Controls
             {
                 foreach (var rankItem in data.Rank)
                 {
-                    ranklistData.Add(new RankItemData() { CoverImage =rankItem.Cover, Description = rankItem.Intro, Title = rankItem.Title }); 
+                    ranklistData.Add(new RankItemData() { CoverImage = rankItem.Cover, Description = rankItem.Intro, Title = rankItem.Title });
                 }
             }
 
@@ -222,6 +221,27 @@ namespace HaoDouCookBook.Controls
         private void RecipeCategoryTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
             App.Current.RootFrame.Navigate(typeof(RecipeCategoryDetailPage), Utils.GetDataContext<ViewModels.RecipeCategoryTileData>(sender));
+        }
+
+
+        private void JustToWebPageRecipeTile_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var tiledata = sender.GetDataContext<RecipeCategoryTileData>();
+            if (tiledata != null)
+            {
+                string searchMark = "&url=";
+                int index = tiledata.Url.IndexOf(searchMark);
+
+                if (index == -1)
+                {
+                    return;
+                }
+
+                string haodouUrlPrefix = string.Format("haodourecipe://haodou.com/wiki/info/?id={0}&url=", tiledata.Id);
+                string targetUrl = tiledata.Url.Substring(index + searchMark.Length);
+                App.Current.RootFrame.Navigate(typeof(ArticleViewer), targetUrl);
+            }
+
         }
 
         #endregion

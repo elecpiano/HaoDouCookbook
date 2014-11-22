@@ -88,6 +88,14 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref tileImage, value); }
         }
 
+        private string url;
+
+        public string Url
+        {
+            get { return url; }
+            set { SetProperty<string>(ref url, value); }
+        }
+
         public RecipeCategoryTileData()
         {
             markText = string.Empty;

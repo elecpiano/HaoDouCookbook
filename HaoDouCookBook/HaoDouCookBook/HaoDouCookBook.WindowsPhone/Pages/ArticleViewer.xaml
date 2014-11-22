@@ -24,5 +24,8 @@
         <Border Background="{StaticResource TopAppbarColor}" Height="50" VerticalAlignment="Top">
             <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="5, 5, 0, 0" Title="好豆菜谱"/>
         </Border>
+        <!--<Border Background="{StaticResource TopAppbarColor}" VerticalAlignment="Bottom" Height="60">
+            <TextBlock Text="查看所有" FontSize="23"/>
+        </Border>-->
     </Grid>
 </Page>

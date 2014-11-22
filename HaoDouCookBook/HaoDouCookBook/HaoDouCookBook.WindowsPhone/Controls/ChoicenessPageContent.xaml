@@ -112,8 +112,8 @@
                 TileImage="{Binding TileImage}"
                 MarkText="{Binding MarkText}"
                 RecipeDescriptionOnImage="{Binding RecipeDescriptionOnImage}"                         
-                Title="{Binding Title}" />
-                
+                Title="{Binding Title}" Tapped="JustToWebPageRecipeTile_Tapped" />
+
                 <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
 
                 <!--菜谱-->
@@ -149,6 +149,7 @@
                 RecipeDescriptionOnImage="{Binding RecipeDescriptionOnImage}"                         
                 Description="{Binding Description}"
                 Title="{Binding Title}"
+                Tapped="JustToWebPageRecipeTile_Tapped"
              />
 
 

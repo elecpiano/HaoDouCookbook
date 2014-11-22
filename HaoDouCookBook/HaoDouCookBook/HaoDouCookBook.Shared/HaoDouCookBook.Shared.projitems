@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\AnythingToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\ApiUrlHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\InfoAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RankAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipeAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\SearchAPI.cs" />
@@ -29,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\ADItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\AlbumItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\ChoicenessPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\Comment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\HaodouMetaData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\InfoPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\RankItem.cs" />
