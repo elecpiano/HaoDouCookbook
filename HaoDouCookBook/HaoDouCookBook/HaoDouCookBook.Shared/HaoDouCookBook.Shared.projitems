@@ -30,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\AlbumItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\ChoicenessPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\HaodouMetaData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\InfoPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\RankItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\RankListItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\RecipeItem.cs" />

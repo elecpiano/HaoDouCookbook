@@ -43,7 +43,7 @@
                                         <TextBlock Text="{Binding ViewNumber}" Margin="15,0,0,0"  Style="{StaticResource TagsContentStyle}"/>
                                         <TextBlock Text="浏览" Style="{StaticResource TagsContentStyle}"/>
                                     </StackPanel>
-                                    <TextBlock Text="{Binding FoodMaterial}" Width="240" Style="{StaticResource TagsContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
+                                    <TextBlock Text="{Binding FoodStuff}" Width="240" Style="{StaticResource TagsContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
                                 </Grid>
                             </Grid>
                             <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 20, 0, 20" VerticalAlignment="Bottom"/>

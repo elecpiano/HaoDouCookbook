@@ -33,12 +33,12 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<int>(ref viewNumber, value); }
         }
 
-        private string foodMaterial;
+        private string foodStuff;
 
-        public string FoodMaterial
+        public string FoodStuff
         {
-            get { return foodMaterial; }
-            set { SetProperty<string>(ref foodMaterial, value); }
+            get { return foodStuff; }
+            set { SetProperty<string>(ref foodStuff, value); }
         }
 
         private string previewImageSource;
@@ -55,7 +55,7 @@ namespace HaoDouCookBook.ViewModels
             previewImageSource = string.Empty;
             likeNumber = 0;
             viewNumber = 0;
-            foodMaterial = string.Empty;
+            foodStuff = string.Empty;
         }
         
     }

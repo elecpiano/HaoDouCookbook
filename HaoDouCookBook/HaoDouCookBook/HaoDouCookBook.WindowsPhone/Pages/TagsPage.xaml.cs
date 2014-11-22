@@ -85,7 +85,7 @@ namespace HaoDouCookBook.Pages
                         foreach (var item in data.Items)
                         {
                             recipes.Add(new TagRecipeData() { 
-                                FoodMaterial = item.Stuff, 
+                                FoodStuff = item.Stuff, 
                                 LikeNumber = item.LikeCount, 
                                 ViewNumber = item.ViewCount, 
                                 PreviewImageSource = item.Cover, 
