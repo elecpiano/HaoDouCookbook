@@ -85,7 +85,7 @@ namespace HaoDouCookBook
             AppBarButton classificationAppbarButton = new AppBarButton();
             classificationAppbarButton.Tag = CLASSIFICATION_APPBARBUTTON_TAG;
             classificationAppbarButton.Label = "分类";
-            classificationAppbarButton.Icon = new SymbolIcon(Symbol.Flag);
+            classificationAppbarButton.Icon = new SymbolIcon(Symbol.List);
             classificationAppbarButton.Tapped += AppBarButton_Tapped;
 
             this.bottomAppBar.PrimaryCommands.Add(classificationAppbarButton);

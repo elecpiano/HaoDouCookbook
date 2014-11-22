@@ -88,6 +88,8 @@ namespace HaoDouCookBook.Controls
                 {
                     LatestTopics.Add(new TopicModel()
                     {
+                        Id = item.TopicId,
+                        Url = item.Url,
                         Author = item.UserName,
                         CreateTimeDescription = item.LastPostTime,
                         PreviewContent = item.PreviewContent,
@@ -114,6 +116,11 @@ namespace HaoDouCookBook.Controls
         private void CategoryImageTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
             App.Current.RootFrame.Navigate(typeof(TopicListPage), sender.GetDataContext<CategoryTileData>());
+        }
+
+        private void TopicTile_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(ArticleViewer), sender.GetDataContext<TopicModel>().Url);
         }
 
         #endregion

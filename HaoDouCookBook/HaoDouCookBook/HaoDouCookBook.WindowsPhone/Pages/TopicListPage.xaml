@@ -29,7 +29,7 @@
                                        PreviewContent="{Binding PreviewContent}"
                                        Author="{Binding Author}"
                                        CreateTimeDescription="{Binding CreateTimeDescription}"
-                                       HorizontalAlignment="Left"
+                                       HorizontalAlignment="Left" Tapped="TopicTile_Tapped"
                                                 />
                             <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="-100, 20, 0, 20"/>
                         </StackPanel>

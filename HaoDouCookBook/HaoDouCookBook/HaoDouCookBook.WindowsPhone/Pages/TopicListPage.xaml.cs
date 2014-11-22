@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -96,6 +97,7 @@ namespace HaoDouCookBook.Pages
                             topics.Add(new TopicModel()
                             {
                                 Id = item.TopicId,
+                                Url = item.Url,
                                 TopicPreviewImageSource = item.ImageUrl,
                                 Title = item.Title,
                                 PreviewContent = item.PreviewContent,
@@ -110,6 +112,15 @@ namespace HaoDouCookBook.Pages
                 });
         }
 
+
+        #endregion
+
+        #region Event
+
+        private void TopicTile_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(ArticleViewer), sender.GetDataContext<TopicModel>().Url);
+        }
 
         #endregion
     }

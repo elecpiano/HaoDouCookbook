@@ -42,7 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\Meal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\NewbieTutorial.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\User.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\SquarePage\Class.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\SquarePage\CateInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\SquarePage\SquarePageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\SquarePage\Topic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\AnimationBase.cs" />

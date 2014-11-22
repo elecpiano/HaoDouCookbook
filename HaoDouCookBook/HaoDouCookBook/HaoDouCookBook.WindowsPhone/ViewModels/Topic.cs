@@ -15,6 +15,13 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref id, value); }
         }
 
+        private string url;
+
+        public string Url
+        {
+            get { return url; }
+            set { SetProperty<string>(ref url, value); }
+        }
 
         private string topicPreviewImageSource;
 
