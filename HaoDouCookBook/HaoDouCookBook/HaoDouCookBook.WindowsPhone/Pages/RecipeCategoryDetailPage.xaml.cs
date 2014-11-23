@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -103,13 +104,29 @@ namespace HaoDouCookBook.Pages
                             support = "999+";
                         }
 
-                        Recipes.Add(new RecipeTileData() { Author = item.UserName, TagsText = item.GetTagsString(), RecipeImage = item.Cover, RecipeName = item.Title, SupportNumber = support});
+                        Recipes.Add(new RecipeTileData() { 
+                            Author = item.UserName, 
+                            TagsText = item.GetTagsString(), 
+                            RecipeImage = item.Cover, 
+                            RecipeName = item.Title, 
+                            SupportNumber = support,
+                            RecipeId = item.RecipeId
+                        });
                     }
 
                 }, error =>
                 {
 
                 });
+        }
+
+        #endregion
+
+        #region Event
+
+        private void RecipeTile_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), sender.GetDataContext<RecipeTileData>().RecipeId);
         }
 
         #endregion

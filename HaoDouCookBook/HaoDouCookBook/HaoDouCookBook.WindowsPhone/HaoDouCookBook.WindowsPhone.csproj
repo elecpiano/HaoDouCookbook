@@ -83,6 +83,7 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\MainStuffColorConverter.cs" />
     <Compile Include="Controls\AdImagePivot.xaml.cs">
       <DependentUpon>AdImagePivot.xaml</DependentUpon>
     </Compile>
@@ -137,6 +138,9 @@
     <Compile Include="Pages\ArticleViewer.xaml.cs">
       <DependentUpon>ArticleViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\RecipeInfoPage.xaml.cs">
+      <DependentUpon>RecipeInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TagsPage.xaml.cs">
       <DependentUpon>TagsPage.xaml</DependentUpon>
     </Compile>
@@ -150,6 +154,7 @@
     <Compile Include="ViewModels\NewbieTutorial.cs" />
     <Compile Include="ViewModels\RankItemData.cs" />
     <Compile Include="ViewModels\RecipeCategoryTileData.cs" />
+    <Compile Include="ViewModels\RecipeInfoPageViewModel.cs" />
     <Compile Include="ViewModels\RecipeTileData.cs" />
     <Compile Include="ViewModels\SpecialRecipeAlbumData.cs" />
     <Compile Include="ViewModels\TagRecipeData.cs" />
@@ -179,7 +184,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\camera.png" />
     <Content Include="Assets\Images\DefaultTopicImage.jpg" />
+    <Content Include="Assets\Images\InfoTag.png" />
     <Content Include="Assets\Images\like.png" />
     <Content Include="Assets\Images\logo.png" />
     <Content Include="Assets\Images\MyPage\AppGems.png" />
@@ -197,6 +204,7 @@
     <Content Include="Assets\Images\noavatar_300.jpg" />
     <Content Include="Assets\Images\search.png" />
     <Content Include="Assets\Images\tags.png" />
+    <Content Include="Assets\Images\vip.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
@@ -286,6 +294,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RecipeCategoryDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RecipeInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

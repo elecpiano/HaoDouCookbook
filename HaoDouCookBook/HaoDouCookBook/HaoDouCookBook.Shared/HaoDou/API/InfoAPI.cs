@@ -29,6 +29,8 @@ namespace HaoDouCookBook.HaoDou.API
             postRequest.AddPostData("uid", uid.HasValue ? uid.Value.ToString() : "0");
             postRequest.AddPostData("uuid", uuid);
             postRequest.AddPostData("rid", recipeId.ToString());
+            postRequest.AddPostData("request_id", string.Empty);
+            //postRequest.PassLeechedDataDirectly = true;
 
             string cacheFileName = string.Format("{0}-{1}", methodName, recipeId.ToString());
 

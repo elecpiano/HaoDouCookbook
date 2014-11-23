@@ -29,6 +29,16 @@ namespace HaoDouCookBook.Common
         private Dictionary<string, string> postData;
         private Dictionary<string, string> additionalRequestHeaders;
 
+        /// <summary>
+        /// If true, will pass leeched data directly
+        /// </summary>
+        public bool PassLeechedDataDirectly { get; set; }
+
+        public POSTRequestExecuter()
+        {
+            PassLeechedDataDirectly = false;
+        }
+
         public POSTRequestExecuter(string url)
         {
             this.apiUrl = url;
@@ -78,6 +88,12 @@ namespace HaoDouCookBook.Common
             {
                 await Http.POSTAsync(apiUrl, HaoDouApiUrlHelper.CombineURLParameters(postData), additionalRequestHeaders, (result) =>
                     {
+                        if (PassLeechedDataDirectly)
+                        {
+                            onSuccess(result.Content);
+                            return;
+                        }
+
                         JsonObject data = JsonObject.Parse(result.Content);
 
                         if (data == null)

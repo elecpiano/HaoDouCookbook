@@ -90,6 +90,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
         }
     }
 
+    [DataContract]
     public class Product
     {
         [DataMember(Name = "Img")]
@@ -202,7 +203,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
         public int CommentCount { get; set; }
 
         [DataMember]
-        public Comment CommentList { get; set; }
+        public Comment[] CommentList { get; set; }
 
         [DataMember]
         public int ProductCount { get; set; }

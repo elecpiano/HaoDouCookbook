@@ -55,6 +55,15 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref recipeImage, value); }
         }
 
+        private int recipeId;
+
+        public int RecipeId
+        {
+            get { return recipeId; }
+            set { SetProperty<int>(ref recipeId, value); }
+        }
+
+
         public RecipeTileData()
         {
             tagsText = string.Empty;
@@ -62,6 +71,7 @@ namespace HaoDouCookBook.ViewModels
             recipeName = string.Empty;
             author = string.Empty;
             supportNumber = "0";
+            recipeId = -1;
             recommendation = string.Empty;
         }
         
