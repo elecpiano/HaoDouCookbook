@@ -38,6 +38,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\RecipeItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\RecipeRecommend.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\TagItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\RankViewPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\ChoicenessPage\WikiOrTableItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\Actor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\DiscoveryPage\Cate.cs" />

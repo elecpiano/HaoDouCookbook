@@ -3,10 +3,12 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:System="clr-namespace:System;assembly=mscorlib" 
     xmlns:converters="using:Shared.Converters"
+    xmlns:common ="using:HaoDouCookBook.Common"
     xmlns:controls="using:HaoDouCookBook.Controls"
     >
     <!--Converters-->
     <converters:AnythingToVisibilityConverter x:Key="AnythingToVisiblityConverter"/>
+    <common:FavoriteCountToStringConverter x:Key="favoriteCountToStringConverter"/>
 
     <!--Colors-->
     <SolidColorBrush x:Name="TopAppbarColor" Color="#fff8f8f8"/>
@@ -200,4 +202,23 @@
         <Setter Property="Margin" Value="5, 52, 0, 0"/>
     </Style>
 
+    <!--Rank view Page-->
+    <Style x:Key="RankViewTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="MaxLines" Value="2"/>
+    </Style>
+
+    <Style x:Key="RankViewIntroductionStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="20, 20, 20, 0"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="FontSize" Value="23"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
 </ResourceDictionary>

@@ -26,5 +26,21 @@ namespace HaoDouCookBook.HaoDou.API
             HaoDouJsonDataLoader<RankPageData> loader = new HaoDouJsonDataLoader<RankPageData>();
             await loader.LoadAsync(postRequest, true, MODULE, cacheFileName, onSuccess, onFail);
         }
+
+        public static async Task GetRankView(int id, string sign, int? uid, string uuid, int type, Action<RankViewPageData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getRankView";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("id", id.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("uid", uid.HasValue ? uid.Value.ToString() : "0");
+            postRequest.AddPostData("uuid", uuid);
+            postRequest.AddPostData("type", type.ToString());
+
+            string cacheFileName = string.Format("{0}-{1}-{2}", methodName, id, type);
+            HaoDouJsonDataLoader<RankViewPageData> loader = new HaoDouJsonDataLoader<RankViewPageData>();
+            await loader.LoadAsync(postRequest, true, MODULE, cacheFileName, onSuccess, onFail);
+
+        }
     }
 }

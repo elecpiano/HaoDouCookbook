@@ -197,7 +197,13 @@ namespace HaoDouCookBook.Controls
             {
                 foreach (var rankItem in data.Rank)
                 {
-                    ranklistData.Add(new RankItemData() { CoverImage = rankItem.Cover, Description = rankItem.Intro, Title = rankItem.Title });
+                    ranklistData.Add(new RankItemData() { 
+                        CoverImage = rankItem.Cover, 
+                        Description = rankItem.Intro, 
+                        Title = rankItem.Title,
+                        Id = rankItem.Id,
+                        Type = rankItem.RankType
+                    });
                 }
             }
 
@@ -243,8 +249,12 @@ namespace HaoDouCookBook.Controls
             }
 
         }
+        private void RankItemGrid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(RankViewPage), sender.GetDataContext<RankItemData>());
+        }
 
         #endregion
-
+      
     }
 }

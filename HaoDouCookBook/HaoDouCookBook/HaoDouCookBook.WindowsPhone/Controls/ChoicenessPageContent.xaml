@@ -167,12 +167,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <!--<controls:TopicTile TileType="TileAndPreviewContentWrap" 
-                                               TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
-                                               Title="{Binding Title}"
-                                               PreviewContent="{Binding PreviewContent}"
-                                               HorizontalAlignment="Left" Margin="0, 30, 0, 0"/>-->
-                                <Grid Margin="0, 30, 0, 0">
+                                <Grid Margin="0, 30, 0, 0" Background="Transparent" Tapped="RankItemGrid_Tapped">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="124"/>
                                         <ColumnDefinition Width="*"/>

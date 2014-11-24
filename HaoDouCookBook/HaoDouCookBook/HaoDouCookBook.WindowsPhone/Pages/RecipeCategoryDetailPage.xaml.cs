@@ -98,18 +98,12 @@ namespace HaoDouCookBook.Pages
                 {
                     foreach (var item in data.Recipes)
                     {
-                        string support = item.LikeCount.ToString();
-                        if (item.LikeCount > 999)
-                        {
-                            support = "999+";
-                        }
-
                         Recipes.Add(new RecipeTileData() { 
                             Author = item.UserName, 
                             TagsText = item.GetTagsString(), 
                             RecipeImage = item.Cover, 
                             RecipeName = item.Title, 
-                            SupportNumber = support,
+                            SupportNumber = item.LikeCount.ToString(),
                             RecipeId = item.RecipeId
                         });
                     }

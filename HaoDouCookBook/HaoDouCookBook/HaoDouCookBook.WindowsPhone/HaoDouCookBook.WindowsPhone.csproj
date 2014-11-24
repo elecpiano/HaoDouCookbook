@@ -83,6 +83,7 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\FavoriteCountToStringConverter.cs" />
     <Compile Include="Common\MainStuffColorConverter.cs" />
     <Compile Include="Controls\AdImagePivot.xaml.cs">
       <DependentUpon>AdImagePivot.xaml</DependentUpon>
@@ -138,6 +139,9 @@
     <Compile Include="Pages\ArticleViewer.xaml.cs">
       <DependentUpon>ArticleViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\RankViewPage.xaml.cs">
+      <DependentUpon>RankViewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RecipeInfoPage.xaml.cs">
       <DependentUpon>RecipeInfoPage.xaml</DependentUpon>
     </Compile>
@@ -153,6 +157,7 @@
     <Compile Include="ViewModels\Meal.cs" />
     <Compile Include="ViewModels\NewbieTutorial.cs" />
     <Compile Include="ViewModels\RankItemData.cs" />
+    <Compile Include="ViewModels\RankViewPageViewModel.cs" />
     <Compile Include="ViewModels\RecipeCategoryTileData.cs" />
     <Compile Include="ViewModels\RecipeInfoPageViewModel.cs" />
     <Compile Include="ViewModels\RecipeTileData.cs" />
@@ -202,6 +207,10 @@
     <Content Include="Assets\Images\MyPage\Settings.png" />
     <Content Include="Assets\Images\MyPage\ShippingList.png" />
     <Content Include="Assets\Images\noavatar_300.jpg" />
+    <Content Include="Assets\Images\Rank\rank-1.png" />
+    <Content Include="Assets\Images\Rank\rank-2.png" />
+    <Content Include="Assets\Images\Rank\rank-3.png" />
+    <Content Include="Assets\Images\Rank\rank-4.png" />
     <Content Include="Assets\Images\search.png" />
     <Content Include="Assets\Images\tags.png" />
     <Content Include="Assets\Images\vip.png" />
@@ -290,6 +299,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\RankListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RankViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
