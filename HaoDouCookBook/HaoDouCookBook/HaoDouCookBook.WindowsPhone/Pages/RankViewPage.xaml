@@ -57,10 +57,10 @@
                 </ItemsControl>
             </StackPanel>
         </ScrollViewer>
-        <Border BorderThickness="0.8" BorderBrush="Gray" Height="70" VerticalAlignment="Bottom" Background="#fff8f8f8" Tapped="ShowAllRanks_Tapped" Margin="-4, 0, -4, -4">
+        <Border BorderThickness="0.8" BorderBrush="#22000000" Height="70" VerticalAlignment="Bottom" Background="#fff8f8f8" Tapped="ShowAllRanks_Tapped" Margin="-4, 0, -4, -4">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock VerticalAlignment="Center" Text="查看所有榜单" FontSize="23"/>
-                <Image Source="../assets/images/MyPage/more.png" Margin="-10, 0, 0, 0"/>
+                <Image Source="../assets/images/MyPage/more.png" Height="38" Margin="-10, 0, 0, 0"/>
             </StackPanel>
         </Border>
     </Grid>

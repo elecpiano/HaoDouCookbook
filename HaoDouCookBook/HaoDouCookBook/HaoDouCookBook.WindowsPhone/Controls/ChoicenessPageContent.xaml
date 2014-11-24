@@ -157,7 +157,7 @@
                 <StackPanel Orientation="Vertical" Margin="0, 40, 0, 0">
                     <Grid>
                         <controls:CategoryTitle Title="榜单" HorizontalAlignment="Left"/>
-                        <TextBlock x:Name="rankListMore" Text="更多榜单" HorizontalAlignment="Right" Style="{StaticResource CategoryTitleStyle}" Foreground="#87000000" Tapped="rankListMore_Tapped"/>
+                        <TextBlock x:Name="rankListMore" Text="更多榜单" FontSize="22" HorizontalAlignment="Right" Style="{StaticResource CategoryTitleStyle}" Foreground="#87000000" Tapped="rankListMore_Tapped"/>
                     </Grid>
                     <ItemsControl x:Name="rankList" Margin="0, 0, 0, 30">
                         <ItemsControl.ItemsPanel>
