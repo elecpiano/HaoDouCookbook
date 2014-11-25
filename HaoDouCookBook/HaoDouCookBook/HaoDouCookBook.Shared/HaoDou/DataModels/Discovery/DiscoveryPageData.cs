@@ -2,37 +2,29 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Collections;
+using System.Linq;
 using System.Text;
 using Windows.Data.Json;
 using Shared.Utility;
 
 namespace HaoDouCookBook.HaoDou.DataModels.Discovery
 {
-    [DataContract]
     public class DiscoveryPageData : Infrastructures.CustomJsonSerializableBase
     {
-        [DataMember]
         public Actor Actor { get; set; }
 
         public NewbieTutorial NewbieTutorial { get; set; }
 
-        [DataMember]
-        public Cate CateOne { get; set; }
+        public List<Cate> Cates { get; set; }
 
-        [DataMember]
-        public Cate CateTwo { get; set; }
-
-        [DataMember]
         public StarredUser StarredUser { get; set; }
 
-        [DataMember]
         public DailyMeal DailyMeal { get; set; }
 
         public DiscoveryPageData()
         {
             Actor = new Actor();
-            CateTwo = new Cate();
-            CateOne = new Cate();
+            Cates = new List<Cate>();
             StarredUser = new StarredUser();
             DailyMeal = new DailyMeal();
             NewbieTutorial = new NewbieTutorial();
@@ -45,13 +37,34 @@ namespace HaoDouCookBook.HaoDou.DataModels.Discovery
                 JsonObject jsonObj = JsonObject.Parse(json);
                 JsonArray jarray = jsonObj.GetNamedArray("list");
 
-                DailyMeal = JsonSerializer.Deserialize<DailyMeal>(jarray[0].Stringify());
-                Actor = JsonSerializer.Deserialize<Actor>(jarray[1].Stringify());
-                NewbieTutorial = JsonSerializer.Deserialize<NewbieTutorial>(jarray[2].Stringify());
-                CateOne = JsonSerializer.Deserialize<Cate>(jarray[3].Stringify());
-                CateTwo = JsonSerializer.Deserialize<Cate>(jarray[4].Stringify());
-                StarredUser = JsonSerializer.Deserialize<StarredUser>(jarray[5].Stringify());
-
+                for (int i = 0; i < jarray.Count; i++)
+                {
+                    string type = jarray[i].GetObject()["ItemType"].GetString().Trim().ToLower();
+                    switch (type)
+                    {
+                        case "day":
+                            DailyMeal = JsonSerializer.Deserialize<DailyMeal>(jarray[i].Stringify());
+                            break;
+                        case "learn":
+                            NewbieTutorial = JsonSerializer.Deserialize<NewbieTutorial>(jarray[i].Stringify());
+                            break;
+                        case "cate":
+                            Cate cate = JsonSerializer.Deserialize<Cate>(jarray[i].Stringify()); 
+                            if(Cates.All(c => !c.TopicName.Equals(cate.TopicName, StringComparison.OrdinalIgnoreCase)))
+                            {
+                                Cates.Add(cate);
+                            }
+                            break;
+                        case "user":
+                            StarredUser = StarredUser = JsonSerializer.Deserialize<StarredUser>(jarray[i].Stringify());
+                            break;
+                        case "act":
+                            Actor = JsonSerializer.Deserialize<Actor>(jarray[i].Stringify());
+                            break;
+                        default:
+                            break;
+                    }
+                }
                 return true;
 
             }

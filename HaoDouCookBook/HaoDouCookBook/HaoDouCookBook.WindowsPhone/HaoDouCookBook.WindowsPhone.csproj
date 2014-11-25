@@ -136,6 +136,9 @@
     <Compile Include="Controls\UserPhoto.xaml.cs">
       <DependentUpon>UserPhoto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AlbumPage.xaml.cs">
+      <DependentUpon>AlbumPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ArticleViewer.xaml.cs">
       <DependentUpon>ArticleViewer.xaml</DependentUpon>
     </Compile>
@@ -151,8 +154,10 @@
     <Compile Include="Pages\TopicListPage.xaml.cs">
       <DependentUpon>TopicListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AlbumPageViewModel.cs" />
     <Compile Include="ViewModels\CategoryTileData.cs" />
     <Compile Include="ViewModels\CookMaster.cs" />
+    <Compile Include="ViewModels\DiscoveryPageViewModel.cs" />
     <Compile Include="ViewModels\DishTileData.cs" />
     <Compile Include="ViewModels\Meal.cs" />
     <Compile Include="ViewModels\NewbieTutorial.cs" />
@@ -289,6 +294,10 @@
     <Page Include="Controls\UserPhoto.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ArticleViewer.xaml">
       <SubType>Designer</SubType>

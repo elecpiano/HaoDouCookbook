@@ -80,7 +80,7 @@
 
                 <Rectangle Margin="0, 15, 0, 15" Style="{StaticResource GrayLine}" Width="380"/>
                 <!--专辑-->
-                <StackPanel x:Name="SpecialRecipeAlbum" Orientation="Vertical">
+                <StackPanel x:Name="SpecialRecipeAlbum" Orientation="Vertical" Background="Transparent" Tapped="SpecialRecipeAlbum_Tapped">
                     <Border Height="160">
                         <Border.Background>
                             <ImageBrush ImageSource="{Binding MainImageSource}" AlignmentY="Center" Stretch="UniformToFill"/>

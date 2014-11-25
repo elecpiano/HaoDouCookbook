@@ -28,12 +28,31 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<int>(ref supportNumber, value); }
         }
 
+        private int dishImageHeight;
+
+        public int DishImageHeight
+        {
+            get { return dishImageHeight; }
+            set { SetProperty<int>(ref dishImageHeight, value); }
+        }
+
+        private int dishImageWidth;
+
+        public int DishImageWidth
+        {
+            get { return dishImageWidth; }
+            set { SetProperty<int>(ref dishImageWidth, value); }
+        }
+
+
         public DishTileData()
         {
             dishImageSource = string.Empty;
             author = string.Empty;
             supportNumber = 0;
+            dishImageHeight = 180;
+            dishImageWidth = 170;
         }
-        
+
     }
 }

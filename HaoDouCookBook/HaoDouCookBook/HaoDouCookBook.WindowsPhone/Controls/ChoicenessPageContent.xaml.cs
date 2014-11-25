@@ -135,6 +135,7 @@ namespace HaoDouCookBook.Controls
                 specialRecipeAlbumData.Description = albumData.Intro;
                 specialRecipeAlbumData.Title = albumData.Title;
                 specialRecipeAlbumData.MainImageSource = albumData.Cover;
+                specialRecipeAlbumData.Id = albumData.Id;
                 foreach (var smallCover in albumData.SmallCover)
                 {
                     specialRecipeAlbumData.DetailsImageSources.Add(smallCover);
@@ -252,6 +253,12 @@ namespace HaoDouCookBook.Controls
         private void RankItemGrid_Tapped(object sender, TappedRoutedEventArgs e)
         {
             App.Current.RootFrame.Navigate(typeof(RankViewPage), sender.GetDataContext<RankItemData>());
+        }
+
+
+        private void SpecialRecipeAlbum_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(AlbumPage), sender.GetDataContext<SpecialRecipeAlbumData>());
         }
 
         #endregion

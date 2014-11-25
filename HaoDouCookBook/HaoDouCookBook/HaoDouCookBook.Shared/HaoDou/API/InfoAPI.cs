@@ -38,5 +38,22 @@ namespace HaoDouCookBook.HaoDou.API
             await loader.LoadAsync(postRequest, true, MODULE, cacheFileName, onSuccess, onFail);
  
         }
+
+
+        public static async Task GetAlbumInfo(int offset, int limit, int albumId, string sign, int? uid, string uuid, Action<AlbumPageData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getAlbumInfo";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("offset", offset.ToString());
+            postRequest.AddPostData("limit", limit.ToString());
+            postRequest.AddPostData("aid", albumId.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("uid", uid.HasValue ? uid.Value.ToString() : "0");
+            postRequest.AddPostData("uuid", uuid);
+
+            string cacheFileName = string.Format("{0}-{1}-{2}-{3}", methodName, albumId, offset, limit);
+            HaoDouJsonDataLoader<AlbumPageData> loader = new HaoDouJsonDataLoader<AlbumPageData>();
+            await loader.LoadAsync(postRequest, true, MODULE, cacheFileName, onSuccess, onFail);
+        }
     }
 }

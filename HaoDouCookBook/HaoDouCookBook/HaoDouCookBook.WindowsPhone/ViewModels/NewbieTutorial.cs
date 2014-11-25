@@ -25,7 +25,14 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<UserData>(ref teacher, value); }
         }
 
-        public string DishName { get; set; }
+        private string title;
+
+        public string Title
+        {
+            get { return title; }
+            set { SetProperty<string>(ref title, value); }
+        }
+
 
         public ObservableCollection<string> DetailsImageSources { get; set; }
 
@@ -34,7 +41,7 @@ namespace HaoDouCookBook.ViewModels
             mainImageSource = string.Empty;
             teacher = new UserData();
             DetailsImageSources = new ObservableCollection<string>();
-            DishName = string.Empty;
+            Title = string.Empty;
         }
         
     }

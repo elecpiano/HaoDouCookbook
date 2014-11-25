@@ -10,7 +10,7 @@
     d:DesignHeight="3000"
     d:DesignWidth="400">
 
-    <ScrollViewer>
+    <ScrollViewer Name="root">
         <StackPanel Orientation="Vertical">
             <!--一日三餐-->
             <Grid Height="180" HorizontalAlignment="Center">
@@ -19,26 +19,26 @@
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="180"/>
                     </Grid.ColumnDefinitions>
-                    <controls:MealTile x:Name="mealLeft" ImageSource="{Binding MealImageSource}"  Title="{Binding Title}" Number="{Binding Number}" Margin="3"/>
+                    <controls:MealTile x:Name="mealLeft" ImageSource="{Binding DailyMeals[0].MealImageSource}"  Title="{Binding DailyMeals[0].Title}" Number="{Binding DailyMeals[0].Number}" Margin="3"/>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="90"/>
                             <RowDefinition Height="90"/>
                         </Grid.RowDefinitions>
-                        <controls:MealTile x:Name="mealRightTop" Grid.Row="0" ImageSource="{Binding MealImageSource}" Title="{Binding Title}" Number="{Binding Number}" Margin="3"/>
-                        <controls:MealTile x:Name="mealRightBottom" Grid.Row="1" ImageSource="{Binding MealImageSource}" Title="{Binding Title}" Number="{Binding Number}"  Margin="3"/>
+                        <controls:MealTile x:Name="mealRightTop" Grid.Row="0" ImageSource="{Binding DailyMeals[1].MealImageSource}" Title="{Binding DailyMeals[1].Title}" Number="{Binding DailyMeals[1].Number}" Margin="3"/>
+                        <controls:MealTile x:Name="mealRightBottom" Grid.Row="1" ImageSource="{Binding DailyMeals[2].MealImageSource}" Title="{Binding DailyMeals[2].Title}" Number="{Binding DailyMeals[2].Number}"  Margin="3"/>
                     </Grid>
                 </Grid>
             </Grid>
-            
-            <Image x:Name="cookMasterImage" Height="120" Source="{Binding CookMasterImageSource}" Stretch="Uniform" Margin="5, 10, 5, 0" />
+
+            <Image x:Name="cookMasterImage" Height="120" Source="{Binding Master.CookMasterImageSource}" Stretch="Uniform" Margin="5, 10, 5, 0" />
 
             <!--新手教程-->
-            <controls:CategoryTitle x:Name="dishTutorialForNewbieTitle" Margin="10, 10, 5, 0"/>
+            <controls:CategoryTitle Title="{Binding Tutorial.Title}" Margin="10, 10, 5, 0"/>
             <StackPanel x:Name="NewbieTutorTile" Orientation="Vertical" Margin="10, 30, 5, 00">
                 <Border Height="230">
                     <Border.Background>
-                        <ImageBrush ImageSource="{Binding MainImageSource}" AlignmentY="Center" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="{Binding Tutorial.MainImageSource}" AlignmentY="Center" Stretch="UniformToFill"/>
                     </Border.Background>
                     <Grid>
                         <Border Opacity="0.6">
@@ -50,18 +50,18 @@
                             </Border.Background>
                         </Border>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="8, 0, 0, 18">
-                            <controls:UserPhoto ImageSource="{Binding Teacher.UserPhoto}" Height="70" Width="70"/>
+                            <controls:UserPhoto ImageSource="{Binding Tutorial.Teacher.UserPhoto}" Height="70" Width="70"/>
                             <StackPanel Orientation="Vertical" Margin="10, 0, 0, 0">
                                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                                     <controls:ShadowTextBlock Text="导师：" Style="{StaticResource NewbieTutorialText}"/>
                                     <controls:ShadowTextBlock  Text="{Binding Teacher.Name}" Style="{StaticResource NewbieTutorialText}"/>
                                 </StackPanel>
-                                <controls:ShadowTextBlock Text="{Binding Teacher.ArchiveDescription}" Width="260" Style="{StaticResource NewbieTutorialText}" FontSize="21" Margin="0, 10, 10, 0"/>
+                                <controls:ShadowTextBlock Text="{Binding Tutorial.Teacher.ArchiveDescription}" Width="260" Style="{StaticResource NewbieTutorialText}" FontSize="21" Margin="0, 10, 10, 0"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
                 </Border>
-                <ItemsControl Margin="0, 2, 0, 0" ItemsSource="{Binding DetailsImageSources}">
+                <ItemsControl Margin="0, 2, 0, 0" ItemsSource="{Binding Tutorial.DetailsImageSources}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>
@@ -75,36 +75,54 @@
                 </ItemsControl>
             </StackPanel>
 
-            <!--第一个美食类（比如汤）-->
-            <controls:CategoryTitle x:Name="cateOneTitle" Title="煲一锅幸福爆棚的汤" Margin="10, 30, 5, 0"/>
-            <StackPanel Orientation="Horizontal" Margin="10, 25, 0, 0">
-                <StackPanel Orientation="Vertical">
-                    <controls:DishTile x:Name="cateOneItem10" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Width="175" />
-                    <controls:DishTile x:Name="cateOneItem11" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Width="175"  Margin="0, 30, 0, 0"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="15, 0, 5, 0">
-                    <controls:DishTile x:Name="cateOneItem20" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Width="175" />
-                    <controls:DishTile x:Name="cateOneItem21" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Width="175" Margin="0, 30, 0, 0"/>
-                </StackPanel>
-            </StackPanel>
 
-            <!--第二个美食类(随手晒晒)-->
-            <controls:CategoryTitle x:Name="cateTwoTitle" Title="随手晒晒" Margin="10, 30, 5, 0"/>
-            <StackPanel Orientation="Horizontal" Margin="10, 25, 0, 0">
-                <StackPanel Orientation="Vertical">
-                    <controls:DishTile Width="175"  x:Name="cateTwoItem10" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" />
-                    <controls:DishTile Width="175"  x:Name="cateTwoItem11" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Margin="0, 30, 0, 0"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical"  Margin="15, 0, 5, 0">
-                    <controls:DishTile Width="175" x:Name="cateTwoItem20" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" />
-                    <controls:DishTile Width="175" x:Name="cateTwoItem21" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Margin="0, 30, 0, 0"/>
-                </StackPanel>
-            </StackPanel>
-            
+            <!--美食-->
+            <ItemsControl ItemsSource="{Binding Cates}" Margin="10, 30, 0, 0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <controls:CategoryTitle Title="{Binding Title}" Margin="0, 30, 5, 0"/>
+                            <ItemsControl ItemsSource="{Binding Dishes}" Margin="0, 25, 0, 0">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapGrid Orientation="Vertical" MaximumRowsOrColumns="2"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
+                                            <Border Margin="0, 0, 15, 10" Width="{Binding DishImageWidth}" Height="{Binding DishImageHeight}">
+                                                <Border.Background>
+                                                    <ImageBrush ImageSource="{Binding DishImageSource}" AlignmentY="Center" Stretch="UniformToFill"/>
+                                                </Border.Background>
+                                            </Border>
+
+                                            <StackPanel Orientation="Horizontal" Height="42" HorizontalAlignment="Left" Margin="0, 0, 0, 6">
+                                                <TextBlock Text="by" Style="{StaticResource DishTileTitleStyle}" Margin="0, 0, 6, 0"/>
+                                                <TextBlock Text="{Binding Author}" Foreground="Black" Style="{StaticResource DishTileTitleStyle}" HorizontalAlignment="Left"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" Height="42" HorizontalAlignment="Left" Margin="0, 0, 0, 0">
+                                                <TextBlock Text="{Binding SupportNumber}" Style="{StaticResource DishTileSupportLineStyle}"/>
+                                                <TextBlock Text="个赞" Margin="1, 0, 0, 0" Style="{StaticResource DishTileSupportLineStyle}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
             <!--的作品很被赞-->
             <controls:CategoryTitle Title="Ta的作品很被赞" Margin="10, 30, 5, 0"/>
-            <ItemsControl x:Name="userMasterList" Margin="12, 12, 12, 30">
+            <ItemsControl ItemsSource="{Binding StarredUsers}" Margin="12, 12, 12, 30">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>

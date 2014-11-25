@@ -45,7 +45,15 @@ namespace HaoDouCookBook.ViewModels
             get { return albumMarkImageSource; }
             set { SetProperty<string>(ref albumMarkImageSource, value); }
         }
-        
+
+        private int id;
+
+        public int Id
+        {
+            get { return id; }
+            set { SetProperty<int>(ref id, value); }
+        }
+
 
         public SpecialRecipeAlbumData()
         {
@@ -54,6 +62,7 @@ namespace HaoDouCookBook.ViewModels
             DetailsImageSources = new ObservableCollection<string>();
             title = string.Empty;
             description = string.Empty;
+            id = -1;
         }
     }
 }
