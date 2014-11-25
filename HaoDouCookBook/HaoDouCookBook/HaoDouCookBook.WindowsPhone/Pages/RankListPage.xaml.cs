@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -31,7 +32,7 @@ namespace HaoDouCookBook.Pages
 
         #region Field && Property
 
-        private ObservableCollection<TopicModel> rankListData = new ObservableCollection<TopicModel>();
+        private ObservableCollection<RankItemData> rankListData = new ObservableCollection<RankItemData>();
 
         #endregion
 
@@ -77,7 +78,13 @@ namespace HaoDouCookBook.Pages
                     {
                         foreach (var item in data.Items)
                         {
-                            rankListData.Add(new TopicModel() { Title = item.Title, TopicPreviewImageSource = item.Cover, PreviewContent = item.Intro, Id = item.Id});
+                            rankListData.Add(new RankItemData() { 
+                                Title = item.Title, 
+                                CoverImage = item.Cover, 
+                                Description = item.Intro, 
+                                Type = item.RankType,
+                                Id = int.Parse(item.Id)
+                            });
                         }
                     }
 
@@ -97,6 +104,13 @@ namespace HaoDouCookBook.Pages
             e.Handled = true;
         }
 
+        private void RecipeItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(RankViewPage), sender.GetDataContext<RankItemData>());
+        }
+
         #endregion
+
+       
     }
 }

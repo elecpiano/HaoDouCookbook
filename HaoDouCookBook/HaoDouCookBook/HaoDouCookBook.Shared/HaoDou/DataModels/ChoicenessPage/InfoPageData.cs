@@ -49,7 +49,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
         [DataMember(Name = "type")]
         public int Type { get; set; }
         
-        [DataMember(Name = "cate_id")]
+        [DataMember(Name = "cateid")]
         public int CategoryId { get; set; }
 
         [DataMember(Name = "cate")]
@@ -191,7 +191,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
         public FoodStuff[] MainStuff { get; set; }
 
         [DataMember]
-        public FoodStuff OtherStuff { get; set; }
+        public FoodStuff[] OtherStuff { get; set; }
 
         [DataMember(Name = "ad_flag")]
         public int AdFlag { get; set; }

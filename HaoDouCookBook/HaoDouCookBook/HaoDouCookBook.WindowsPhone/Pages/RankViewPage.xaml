@@ -26,7 +26,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Grid Height="240" Margin="0, 0, 0, 30">
+                            <Grid Height="240" Margin="0, 0, 0, 30" Tapped="RecipeItem_Tapped">
                                 <Grid.Background>
                                     <ImageBrush ImageSource="{Binding Cover}"/>
                                 </Grid.Background>

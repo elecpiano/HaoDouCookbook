@@ -275,6 +275,9 @@ namespace HaoDouCookBook.ViewModels
             products = new ObservableCollection<Product>();
             cookSteps = new ObservableCollection<CookStep>();
             stuffs = new ObservableCollection<FoodStuff>();
+            ad = new AdItem();
+            tags = new ObservableCollection<TagItem>();
+            photoList = new ObservableCollection<string>();
         }
     }
 

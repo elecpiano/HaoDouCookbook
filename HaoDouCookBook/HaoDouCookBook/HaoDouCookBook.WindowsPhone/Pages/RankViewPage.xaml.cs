@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -47,11 +48,18 @@ namespace HaoDouCookBook.Pages
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             RankItemData rankData = e.Parameter as RankItemData;
             if(rankData != null)
             {
                 LoadDataAsync(rankData.Id, rankData.Type, string.Empty, null);
             }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            Windows.Phone.UI.Input.HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
         #endregion
@@ -116,12 +124,23 @@ namespace HaoDouCookBook.Pages
 
         #region Event
 
+        void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        {
+            App.Current.RootFrame.GoBack();
+            e.Handled = true;
+        }
 
         private void ShowAllRanks_Tapped(object sender, TappedRoutedEventArgs e)
         {
             App.Current.RootFrame.Navigate(typeof(RankListPage));
         }
+        private void RecipeItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), sender.GetDataContext<RankViewRecipeItem>().RecipeId);
+        }
 
         #endregion
+
+       
     }
 }

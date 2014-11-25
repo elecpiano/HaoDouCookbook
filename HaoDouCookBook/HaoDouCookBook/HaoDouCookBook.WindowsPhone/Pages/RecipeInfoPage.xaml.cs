@@ -97,7 +97,7 @@ namespace HaoDouCookBook.Pages
             viewModel.Cover = infoData.Cover;
             viewModel.Title = infoData.Title;
             viewModel.CookTime = infoData.CookTime;
-            viewModel.ReviewTime = infoData.ReadyTime;
+            viewModel.ReadyTime = infoData.ReadyTime;
             viewModel.Tips = infoData.Tips;
             viewModel.UserName = infoData.UserName;
             viewModel.FavoriteCount = infoData.FavoriteCount;
@@ -134,6 +134,7 @@ namespace HaoDouCookBook.Pages
                         stuff.IsMainStuff = infoData.MainStuff.Any(s => s.Id == item.Id);
                     }
 
+                    viewModel.Stuffs.Add(stuff);
                 }
 
             }
@@ -167,7 +168,7 @@ namespace HaoDouCookBook.Pages
             {
                 foreach (var item in infoData.Tags)
                 {
-                    viewModel.Tags.Add(new TagItem() { Id = item.Id, Text = item.Name });
+                    viewModel.Tags.Add(new TagItem() { Id = item.Id, Text = item.Name.Trim() });
                 }
             }
 
@@ -196,6 +197,22 @@ namespace HaoDouCookBook.Pages
                         Content = item.Content,
                         CreateTime = item.CreateTime
                     });
+                }
+            }
+
+            // Products
+            //
+            if (infoData.Product != null)
+            {
+                foreach (var item in infoData.Product)
+                {
+                    viewModel.Products.Add(new ViewModels.Product() {
+                         Content = item.Content,
+                         UserId = item.UserId,
+                         UserName = item.UserName,
+                         Image = item.Image
+                    });
+                    
                 }
             }
         }

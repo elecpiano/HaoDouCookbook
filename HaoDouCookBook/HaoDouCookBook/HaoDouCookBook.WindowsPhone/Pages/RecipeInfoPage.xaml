@@ -66,8 +66,7 @@
                         </Border>
 
                         <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0, 50, 0, 0">
-
-                            <ItemsControl ItemsSource="{Binding Stuff}">
+                            <ItemsControl ItemsSource="{Binding Stuffs}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Vertical"/>
@@ -76,7 +75,7 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Vertical">
-                                            <Grid>
+                                            <Grid Height="32">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="*"/>
@@ -119,26 +118,23 @@
                         </ItemsControl.ItemsPanel> 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid Height="80" Margin="0, 0, 0, 40" >
+                                <Grid Margin="0, 0, 0, 40" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="120"/>
                                         <ColumnDefinition Width="40"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Border Grid.Column="0">
+                                    <Border Grid.Column="0" Height="80" VerticalAlignment="Top">
                                         <Border.Background>
                                             <ImageBrush ImageSource="{Binding Photo}" Stretch="UniformToFill" AlignmentY="Center"/>
                                         </Border.Background>
                                     </Border>
                                     <TextBlock Grid.Column="1" Text="{Binding StepNumber}" FontSize="32" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                                    <TextBlock Margin="0, 6, 0, -60" Grid.Column="2" Text="{Binding Intro}" FontSize="21" VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                                    <TextBlock Margin="0, 6, 0, 0" Grid.Column="2" Text="{Binding Intro}" FontSize="21" VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    
-                    
-
 
                     <!--小贴士-->
                     <TextBlock Text="小贴士" Foreground="#78a708" FontSize="24" Margin="0, 10, 0, 10"/>
@@ -150,26 +146,37 @@
                     <!--作品展示-->
                     <TextBlock Text="作品展示" Foreground="#78a708" FontSize="24" Margin="0, 10, 0, 10"/>
                     
-                    <Grid Height="120" Background="{StaticResource TopAppbarColor}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0">
-                            <Border.Background>
-                                <ImageBrush ImageSource="../assets/images/defaulttopicimage.jpg" Stretch="UniformToFill" AlignmentY="Center"/>
-                            </Border.Background>
-                        </Border>
-                        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10, 10, 0, 0">
-                            <TextBlock Name="productUserName" Text="温杯" FontSize="21" Foreground="Gray"/>
-                            <TextBlock Name="productCotent" Text="好吃" FontSize="21"/>
-                        </StackPanel>
-                    </Grid>
+                    <ItemsControl ItemsSource="{Binding Products}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="120" Background="{StaticResource TopAppbarColor}" Margin="0, 0, 0, 10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" AlignmentY="Center"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10, 10, 0, 0">
+                                        <TextBlock Name="productUserName" Text="{Binding UserName}" FontSize="21" Foreground="Gray"/>
+                                        <TextBlock Name="productCotent" Text="{Binding Content}" FontSize="21"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 10, 0, 20">
-                        <TextBlock Text="查看全部" HorizontalAlignment="Center" FontSize="21" Foreground="Gray" />
-                        <TextBlock Text="20" HorizontalAlignment="Center" FontSize="21" Foreground="Gray" />
-                        <TextBlock Text="作品" HorizontalAlignment="Center" FontSize="21" Foreground="Gray" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 20, 0, 20">
+                        <TextBlock Text="查看全部" HorizontalAlignment="Center" FontSize="24" Foreground="Gray" />
+                        <TextBlock Text="{Binding ProductCount}" HorizontalAlignment="Center" FontSize="24" Foreground="Gray" />
+                        <TextBlock Text="作品" HorizontalAlignment="Center" FontSize="24" Foreground="Gray" />
                     </StackPanel>
 
                     <Border BorderBrush="#78a708" CornerRadius="7" BorderThickness="2" Margin="20, 0, 20, 0">
@@ -181,7 +188,20 @@
 
                     <!--相关标签-->
                     <TextBlock Text="相关标签" Foreground="#78a708" FontSize="24" Margin="0, 40, 0, 10"/>
-                    
+                    <ItemsControl ItemsSource="{Binding Tags}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapGrid Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border VerticalAlignment="Top" HorizontalAlignment="Left" Background="#10000000" Margin="0, 0, 20, 15" >
+                                    <TextBlock Text="{Binding Text}" Margin="10, 6, 10, 6" FontSize="19" TextAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
 
                     <!--评论-->
                     <TextBlock Text="评论" Foreground="#78a708" FontSize="24" Margin="0, 40, 0, 10"/>
@@ -199,7 +219,7 @@
                                             <ColumnDefinition Width="60"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <controls:UserPhoto Grid.Column="0" ImageSource="{Binding Avatar}"/>
+                                        <controls:UserPhoto Grid.Column="0" ImageSource="{Binding Avatar}" Height="48" Width="48" Margin="-8, 0, 0, 0" VerticalAlignment="Top"/>
                                         <Grid Grid.Column="1" Margin="10, 0, 0, 0">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"/>
@@ -207,14 +227,7 @@
                                             </Grid.RowDefinitions>
                                             <TextBlock Text="{Binding UserName}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="21" Foreground="#78a708"/>
                                             <TextBlock Text="{Binding CreateTime}" Foreground="Gray" HorizontalAlignment="Right" Grid.Row="0" VerticalAlignment="Center" FontSize="21"/>
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1">
-                                                <StackPanel Name="atUser" Visibility="{Binding AtUserName, Converter={StaticResource AnythingToVisiblityConverter}}" Orientation="Horizontal">
-                                                    <TextBlock Text="@" FontSize="18"/>
-                                                    <TextBlock Text="{Binding AtUserName}" FontSize="18"/>
-                                                    <TextBlock Text=":" FontSize="18" Margin="0, 0, 4, 0"/>
-                                                </StackPanel>
-                                                <TextBlock Text="{Binding Content}" FontSize="18" />
-                                            </StackPanel>
+                                            <TextBlock Text="{Binding Content}" FontSize="18" Width="260" TextTrimming="WordEllipsis" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" />
                                         </Grid>
                                     </Grid>
                                     <Rectangle Height="0.5" Fill="#10000000"  Width="800" Margin="0, 15, 0, 10"/>
@@ -223,7 +236,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <Border BorderBrush="#78a708" CornerRadius="7" BorderThickness="2" Margin="20, 5, 20, 0">
+                    <Border BorderBrush="#78a708" CornerRadius="7" BorderThickness="2" Margin="20, 5, 20, 20">
                         <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 10" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock Text="我也来说几句" Foreground="#78a708" FontSize="21"/>
                         </StackPanel>
