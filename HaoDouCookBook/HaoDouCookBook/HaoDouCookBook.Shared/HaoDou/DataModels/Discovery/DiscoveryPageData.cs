@@ -6,7 +6,7 @@ using System.Text;
 using Windows.Data.Json;
 using Shared.Utility;
 
-namespace HaoDouCookBook.HaoDou.DataModels.DiscoveryPage
+namespace HaoDouCookBook.HaoDou.DataModels.Discovery
 {
     [DataContract]
     public class DiscoveryPageData : Infrastructures.CustomJsonSerializableBase

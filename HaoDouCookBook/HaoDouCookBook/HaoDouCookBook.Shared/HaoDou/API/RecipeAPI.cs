@@ -1,6 +1,6 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
-using HaoDouCookBook.HaoDou.DataModels.DiscoveryPage;
+using HaoDouCookBook.HaoDou.DataModels.Discovery;
 using System;
 using System.Collections.Generic;
 using System.Text;

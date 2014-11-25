@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace HaoDouCookBook.HaoDou.DataModels.DiscoveryPage
+namespace HaoDouCookBook.HaoDou.DataModels.Discovery
 {
     [DataContract]
     public class Cate

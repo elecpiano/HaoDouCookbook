@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPag
+namespace HaoDouCookBook.HaoDou.DataModels.Choiceness
 {
     [DataContract]
     public class ADItem

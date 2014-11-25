@@ -1,5 +1,5 @@
 ﻿using HaoDouCookBook.Common;
-using HaoDouCookBook.HaoDou.DataModels.SquarePage;
+using HaoDouCookBook.HaoDou.DataModels.Square;
 using System;
 using System.Collections.Generic;
 using System.Text;

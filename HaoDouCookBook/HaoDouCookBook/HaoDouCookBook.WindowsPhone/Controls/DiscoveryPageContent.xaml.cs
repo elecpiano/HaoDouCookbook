@@ -1,6 +1,6 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.HaoDou.API;
-using HaoDouCookBook.HaoDou.DataModels.DiscoveryPage;
+using HaoDouCookBook.HaoDou.DataModels.Discovery;
 using HaoDouCookBook.ViewModels;
 using System;
 using System.Collections.Generic;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace HaoDouCookBook.HaoDou.DataModels.DiscoveryPage
+namespace HaoDouCookBook.HaoDou.DataModels.Discovery
 {
     [DataContract]
     public class User

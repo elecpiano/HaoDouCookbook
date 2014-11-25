@@ -1,4 +1,4 @@
-﻿using HaoDouCookBook.HaoDou.DataModels.ChoicenessPag;
+﻿using HaoDouCookBook.HaoDou.DataModels.Choiceness;
 using HaoDouCookBook.Infrastructures;
 using Shared.Utility;
 using System.Runtime.Serialization;

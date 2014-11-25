@@ -1,6 +1,6 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.HaoDou.API;
-using HaoDouCookBook.HaoDou.DataModels.SquarePage;
+using HaoDouCookBook.HaoDou.DataModels.Square;
 using HaoDouCookBook.Pages;
 using HaoDouCookBook.ViewModels;
 using System;
