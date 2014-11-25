@@ -12,6 +12,16 @@
 
     <Page.Resources>
         <common:MainStuffColorConverter x:Name="stuffColorConverter"/>
+        <Thickness x:Key="PhoneBorderThickness">2.5</Thickness>
+        <FontFamily x:Key="PhoneFontFamilyNormal">Segoe WP</FontFamily>
+        <FontWeight x:Key="PhoneButtonFontWeight">Semibold</FontWeight>
+        <x:Double x:Key="TextStyleLargeFontSize">18.14</x:Double>
+        <Thickness x:Key="PhoneButtonContentPadding">9.5,0,9.5,3.5</Thickness>
+        <x:Double x:Key="PhoneButtonMinHeight">57.5</x:Double>
+        <x:Double x:Key="PhoneButtonMinWidth">109</x:Double>
+        <Thickness x:Key="PhoneTouchTargetOverhang">0,9.5</Thickness>
+        <SolidColorBrush x:Key="ButtonDisabledBackgroundThemeBrush" Color="Transparent"/>
+
     </Page.Resources>
 
     <Grid Margin="0, 0, 0, 0" x:Name="root">
@@ -36,7 +46,7 @@
                         <Border.Background>
                             <ImageBrush ImageSource="../assets/images/like.png"/>
                         </Border.Background>
-                        <TextBlock Name="favoriteCount" Text="{Binding FavoriteCount}" Style="{StaticResource RecipeTileSupportNumber}" Margin="0, 0, 5, 15.5"/>
+                        <TextBlock Name="favoriteCount" Text="{Binding FavoriteCount, Converter={StaticResource favoriteCountToStringConverter}}" Style="{StaticResource RecipeTileSupportNumber}" Margin="0, 0, 5, 15.5"/>
                     </Border>
                 </Grid>
 
@@ -61,9 +71,12 @@
                     <!--食材-->
                     <Grid Margin="0,20, 0, 0">
                         <TextBlock Text="食材" Foreground="#78a708" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                        <Border BorderThickness="2" BorderBrush="#78a708" Width="120" Height="42" VerticalAlignment="Top" HorizontalAlignment="Right" CornerRadius="7" Margin="0, -15, 0, -15">
-                            <TextBlock Text="+购买清单" FontSize="22" Foreground="#78a708" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Border>
+
+                        <Button Width="130" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, -20, 0, 0">
+                            <Button.Content>
+                                <TextBlock Text="+购买清单" FontWeight="Normal" FontSize="22" Margin="0, 2, 0, 0"/>
+                            </Button.Content>
+                        </Button>
 
                         <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0, 50, 0, 0">
                             <ItemsControl ItemsSource="{Binding Stuffs}">
@@ -91,7 +104,7 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                                
+
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="制作时间:" FontSize="21" Margin="0, 0, 10, 0"/>
                                 <TextBlock Text="{Binding ReadyTime}" FontSize="21"/>
@@ -107,7 +120,7 @@
                             <Rectangle Height="0.5" Fill="#10000000"  Width="800" Margin="0, 15, 0, 10"/>
                         </StackPanel>
                     </Grid>
-                    
+
                     <!--步骤-->
                     <TextBlock Text="步骤" Foreground="#78a708" FontSize="24" Margin="0, 10, 0, 20"/>
                     <ItemsControl ItemsSource="{Binding CookSteps}">
@@ -115,7 +128,7 @@
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Vertical"/>
                             </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel> 
+                        </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="0, 0, 0, 40" >
@@ -145,7 +158,7 @@
 
                     <!--作品展示-->
                     <TextBlock Text="作品展示" Foreground="#78a708" FontSize="24" Margin="0, 10, 0, 10"/>
-                    
+
                     <ItemsControl ItemsSource="{Binding Products}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -179,12 +192,14 @@
                         <TextBlock Text="作品" HorizontalAlignment="Center" FontSize="24" Foreground="Gray" />
                     </StackPanel>
 
-                    <Border BorderBrush="#78a708" CornerRadius="7" BorderThickness="2" Margin="20, 0, 20, 0">
-                        <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Image Source="../assets/images/camera.png" Height="27" Margin="0, 0, 10, 0"/>
-                            <TextBlock Text="晒晒我做的这道菜" Foreground="#78a708" FontSize="21"/>
-                        </StackPanel>
-                    </Border>
+                    <Button Margin="20, 0, 20, 0" HorizontalAlignment="Center">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image Source="../assets/images/camera.png" Height="27" Margin="0, 0, 10, -2" VerticalAlignment="Bottom"/>
+                                <TextBlock FontWeight="Normal" Text="晒晒我做的这道菜" Foreground="#78a708" FontSize="21"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
 
                     <!--相关标签-->
                     <TextBlock Text="相关标签" Foreground="#78a708" FontSize="24" Margin="0, 40, 0, 10"/>
@@ -236,11 +251,13 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <Border BorderBrush="#78a708" CornerRadius="7" BorderThickness="2" Margin="20, 5, 20, 20">
-                        <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="我也来说几句" Foreground="#78a708" FontSize="21"/>
-                        </StackPanel>
-                    </Border>
+                    <Button Margin="20, 5, 20, 20" HorizontalAlignment="Center">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock FontWeight="Normal" Text="我也来说几句" Foreground="#78a708" FontSize="21"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
 
                 </StackPanel>
             </StackPanel>
