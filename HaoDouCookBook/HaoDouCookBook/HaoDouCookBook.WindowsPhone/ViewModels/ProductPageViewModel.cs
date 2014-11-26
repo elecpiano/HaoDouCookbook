@@ -159,6 +159,16 @@ namespace HaoDouCookBook.ViewModels
 
         public ObservableCollection<ProductPageComment> Comments { get; set; }
 
+
+        private bool showAllCommentsTextVisible;
+
+        public bool ShowAllCommentsTextVisible
+        {
+            get { return showAllCommentsTextVisible; }
+            set { SetProperty<bool>(ref showAllCommentsTextVisible, value); }
+        }
+        
+
         public ProductPageRecipe()
         {
             title = string.Empty;
@@ -171,6 +181,7 @@ namespace HaoDouCookBook.ViewModels
             intro = string.Empty;
             Comments = new ObservableCollection<ProductPageComment>();
             timeStr = string.Empty;
+            showAllCommentsTextVisible = false;
         }
 
 

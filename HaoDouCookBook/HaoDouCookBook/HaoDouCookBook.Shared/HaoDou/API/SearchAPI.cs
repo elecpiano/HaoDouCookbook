@@ -22,14 +22,14 @@ namespace HaoDouCookBook.HaoDou.API
         /// <param name="onSuccess">Callback when success</param>
         /// <param name="onFail">Callbacak when fail</param>
         /// <returns></returns>
-        public static async Task GetList(int offset, int limit, string uuid, int tagid, string keyword, Action<TagsPageData> onSuccess, Action<Error> onFail)
+        public static async Task GetList(int offset, int limit, string uuid, int? tagid, string keyword, Action<TagsPageData> onSuccess, Action<Error> onFail)
         {
             string methodName = "getList";
             POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
             postRequest.AddPostData("offset", offset.ToString());
             postRequest.AddPostData("limit", limit.ToString());
             postRequest.AddPostData("sence", "t2");
-            postRequest.AddPostData("tagid", tagid.ToString());
+            postRequest.AddPostData("tagid", tagid.HasValue ? tagid.Value.ToString() : "null");
             postRequest.AddPostData("uuid", uuid);
             postRequest.AddPostData("keyword", keyword);
 

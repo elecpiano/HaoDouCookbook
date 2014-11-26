@@ -42,13 +42,8 @@ namespace HaoDouCookBook.Controls
         {
             this.InitializeComponent();
             DataBinding();
-            this.Loaded += DiscoveryPageContent_Loaded;
-            
-        }
-
-        void DiscoveryPageContent_Loaded(object sender, RoutedEventArgs e)
-        {
             LoadDataAsync();
+            
         }
 
         #endregion

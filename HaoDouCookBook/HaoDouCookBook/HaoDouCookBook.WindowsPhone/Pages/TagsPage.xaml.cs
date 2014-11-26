@@ -76,7 +76,7 @@ namespace HaoDouCookBook.Pages
             this.recipeList.ItemsSource = recipes;
         }
 
-        private async Task LoadDataAsync(int offset, int limit, int tagid, string keyword)
+        private async Task LoadDataAsync(int offset, int limit, int? tagid, string keyword)
         {
             await SearchAPI.GetList(offset, limit, DeviceHelper.GetUniqueDeviceID(), tagid, keyword, data =>
                 {

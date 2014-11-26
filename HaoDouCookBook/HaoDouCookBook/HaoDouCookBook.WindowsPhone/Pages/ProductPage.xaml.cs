@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -30,7 +31,8 @@ namespace HaoDouCookBook.Pages
         #region Field && Property
 
         private ProductPageViewModel viewModel = new ProductPageViewModel();
-        
+
+
         #endregion
 
         #region Life Cycle
@@ -122,12 +124,19 @@ namespace HaoDouCookBook.Pages
                     recipeProduct.Intro = item.Intro;
                     recipeProduct.Position = item.Position;
 
+                    if (item.CommentCount > 1)
+                    {
+                        recipeProduct.ShowAllCommentsTextVisible = true;
+                    }
+
+
                     if (item.Comment != null)
                     {
                         foreach (var comment in item.Comment)
                         {
 
-                            recipeProduct.Comments.Add(new ViewModels.ProductPageComment() {
+                            recipeProduct.Comments.Add(new ViewModels.ProductPageComment()
+                            {
                                 Content = comment.Content,
                                 UserId = int.Parse(comment.UserId),
                                 UserName = comment.UserName
@@ -152,20 +161,26 @@ namespace HaoDouCookBook.Pages
 
         private void Recipe_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            FrameworkElement fe = sender as FrameworkElement;
-            if (fe != null)
+            ViewModels.ProductPageRecipe recipeData = sender.GetDataContext<ViewModels.ProductPageRecipe>();
+
+            // if recipeId is 0, it will just to TagsPage
+            //
+            if (0 == recipeData.RecipeId)
             {
-                string recipeId = fe.Tag.ToString();
-                if(!String.IsNullOrEmpty(recipeId))
-                {
-                    App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), recipeId);
-                }
+                TagItem ti = new TagItem();
+                ti.Text = recipeData.Title;
+                ti.Id = null;
+                App.Current.RootFrame.Navigate(typeof(TagsPage), ti);
+            }
+            else // if recipeId is not equal to 0, just to RecipeInfoPage
+            {
+                App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), recipeData.RecipeId);
             }
         }
-        
+
         #endregion
 
-      
+
 
     }
 }
