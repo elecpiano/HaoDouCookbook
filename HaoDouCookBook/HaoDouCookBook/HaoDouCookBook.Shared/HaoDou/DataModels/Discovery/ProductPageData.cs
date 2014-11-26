@@ -5,8 +5,19 @@ using System.Text;
 
 namespace HaoDouCookBook.HaoDou.DataModels.Discovery
 {
+    [DataContract]
     public class ProductPageData
     {
+        [DataMember]
+        public ProductPageInfo Info { get; set; }
+
+        [DataMember]
+        public ProductPageRecipe[] Recipes { get; set; }
+
+        public ProductPageData()
+        {
+            Info = new ProductPageInfo();
+        }
     }
 
 

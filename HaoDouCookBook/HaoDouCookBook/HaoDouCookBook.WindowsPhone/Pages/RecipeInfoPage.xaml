@@ -154,7 +154,7 @@
                     <TextBlock Text="{Binding Tips}" FontSize="21" TextWrapping="Wrap"/>
 
                     <!--广告-->
-                    <Image Name="ad" DataContext="{Binding Ad}" Source="{Binding Ad.Image}" Margin="0, 20, 0, 20"/>
+                    <Image Name="ad" DataContext="{Binding Ad}" Source="{Binding Image}" Margin="0, 20, 0, 20"/>
 
                     <!--作品展示-->
                     <TextBlock Text="作品展示" Foreground="#78a708" FontSize="24" Margin="0, 10, 0, 10"/>
