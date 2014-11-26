@@ -19,14 +19,14 @@
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="180"/>
                     </Grid.ColumnDefinitions>
-                    <controls:MealTile x:Name="mealLeft" ImageSource="{Binding DailyMeals[0].MealImageSource}"  Title="{Binding DailyMeals[0].Title}" Number="{Binding DailyMeals[0].Number}" Margin="3" Tapped="Meal_Tapped"/>
+                    <controls:MealTile x:Name="mealLeft" DataContext="{Binding DailyMeals[0]}" ImageSource="{Binding MealImageSource}"  Title="{Binding Title}" Number="{Binding Number}" Margin="3" Tapped="Meal_Tapped"/>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="90"/>
                             <RowDefinition Height="90"/>
                         </Grid.RowDefinitions>
-                        <controls:MealTile x:Name="mealRightTop" Grid.Row="0" ImageSource="{Binding DailyMeals[1].MealImageSource}" Title="{Binding DailyMeals[1].Title}" Number="{Binding DailyMeals[1].Number}" Margin="3" Tapped="Meal_Tapped"/>
-                        <controls:MealTile x:Name="mealRightBottom" Grid.Row="1" ImageSource="{Binding DailyMeals[2].MealImageSource}" Title="{Binding DailyMeals[2].Title}" Number="{Binding DailyMeals[2].Number}"  Margin="3" Tapped="Meal_Tapped"/>
+                        <controls:MealTile x:Name="mealRightTop" DataContext="{Binding DailyMeals[1]}"  Grid.Row="0" ImageSource="{Binding MealImageSource}" Title="{Binding Title}" Number="{Binding Number}" Margin="3" Tapped="Meal_Tapped"/>
+                        <controls:MealTile x:Name="mealRightBottom" DataContext="{Binding DailyMeals[2]}"  Grid.Row="1" ImageSource="{Binding MealImageSource}" Title="{Binding Title}" Number="{Binding Number}"  Margin="3" Tapped="Meal_Tapped"/>
                     </Grid>
                 </Grid>
             </Grid>
