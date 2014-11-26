@@ -216,6 +216,12 @@
     <Content Include="Assets\Images\MyPage\Settings.png" />
     <Content Include="Assets\Images\MyPage\ShippingList.png" />
     <Content Include="Assets\Images\noavatar_300.jpg" />
+    <Content Include="Assets\Images\ProductPage\comment_gray.png" />
+    <Content Include="Assets\Images\ProductPage\comment_green.png" />
+    <Content Include="Assets\Images\ProductPage\like_gray.png" />
+    <Content Include="Assets\Images\ProductPage\like_Green.png" />
+    <Content Include="Assets\Images\ProductPage\position.png" />
+    <Content Include="Assets\Images\ProductPage\social.png" />
     <Content Include="Assets\Images\Rank\rank-1.png" />
     <Content Include="Assets\Images\Rank\rank-2.png" />
     <Content Include="Assets\Images\Rank\rank-3.png" />

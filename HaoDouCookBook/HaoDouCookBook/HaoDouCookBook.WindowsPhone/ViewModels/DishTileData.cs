@@ -4,6 +4,23 @@ namespace HaoDouCookBook.ViewModels
 {
     public class DishTileData : BindableBase
     {
+
+        private int id;
+
+        public int Id
+        {
+            get { return id; }
+            set { SetProperty<int>(ref id, value); }
+        }
+
+        private int productId;
+
+        public int ProductId
+        {
+            get { return productId; }
+            set { SetProperty<int>(ref productId, value); }
+        }
+        
         private string dishImageSource;
 
         public string DishImageSource

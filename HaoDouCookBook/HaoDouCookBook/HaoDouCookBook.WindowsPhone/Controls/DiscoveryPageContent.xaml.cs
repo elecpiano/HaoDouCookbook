@@ -1,6 +1,7 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.HaoDou.DataModels.Discovery;
+using HaoDouCookBook.Pages;
 using HaoDouCookBook.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
 using ViewModels = HaoDouCookBook.ViewModels;
+using Shared.Utility;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -41,15 +42,13 @@ namespace HaoDouCookBook.Controls
         {
             this.InitializeComponent();
             DataBinding();
-            LoadDataAsync();
             this.Loaded += DiscoveryPageContent_Loaded;
+            
         }
 
         void DiscoveryPageContent_Loaded(object sender, RoutedEventArgs e)
         {
-            Test();
-
-
+            LoadDataAsync();
         }
 
         #endregion
@@ -91,7 +90,9 @@ namespace HaoDouCookBook.Controls
                     {
                         MealImageSource = item.ThemeCover,
                         Number = item.PhotoCount,
-                        Title = item.ThemeTitle
+                        Title = item.ThemeTitle,
+                        Id = item.TopicId,
+                        ProductId = item.Pid
                     });
 
                 }
@@ -132,7 +133,9 @@ namespace HaoDouCookBook.Controls
                                 Author = item.UserName,
                                 DishImageSource = item.Cover,
                                 SupportNumber = item.Count,
-                                DishImageWidth = 175
+                                DishImageWidth = 175,
+                                Id = dCate.TopicId,
+                                ProductId = item.Id
                             });
                         }
                     }
@@ -180,12 +183,15 @@ namespace HaoDouCookBook.Controls
 
         #endregion
 
-        #region Test
-
-        private void Test()
+        private void Meal_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            App.Current.RootFrame.Navigate(typeof(ProductPage), sender.GetDataContext<ViewModels.Meal>());
         }
 
-        #endregion
+        private void cateItems_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(ProductPage), sender.GetDataContext<DishTileData>());
+        }
+
     }
 }

@@ -32,12 +32,30 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref title, value); }
         }
 
+        private int id;
 
+        public int Id
+        {
+            get { return id; }
+            set { SetProperty<int>(ref id, value); }
+        }
+
+        private int productId;
+
+        public int ProductId
+        {
+            get { return productId; }
+            set { SetProperty<int>(ref productId, value); }
+        }
+        
         public Meal()
         {
             Number = 0;
             mealImageSource = string.Empty;
             title = string.Empty;
+
+            productId = -1;
+            ProductId = -1;
         }
     }
 }

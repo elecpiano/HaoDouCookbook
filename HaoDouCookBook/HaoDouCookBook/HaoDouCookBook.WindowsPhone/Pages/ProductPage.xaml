@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Margin="0, 0, 0, -2000" x:Name="root" Background="{StaticResource TopAppbarColor}">
+    <Grid Margin="0, 0, 0, 0" x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
         <ScrollViewer Background="White" Margin="0, 65, 0, 0">
             <StackPanel Orientation="Vertical">
@@ -17,19 +17,21 @@
                 <!--页首-->
                 <Border VerticalAlignment="Top" Height="140" >
                     <Border.Background>
-                        <ImageBrush ImageSource="http://img1.hoto.cn/haodou/recipev4/discovery/18655be68.jpg"/>
+                        <ImageBrush ImageSource="{Binding Cover}"/>
                     </Border.Background>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0, 20">
-                        <TextBlock Text="随手晒晒" FontSize="28"/>
+                        <TextBlock Text="{Binding Title}" FontSize="28"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 5, 0, 0">
-                            <TextBlock Text="501" FontSize="21" Foreground="Gray"/>
+                            <TextBlock Text="{Binding Count}" FontSize="21" Foreground="Gray"/>
                             <TextBlock Text="作品" FontSize="21" Foreground="Gray"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
 
+                <TextBlock Text="{Binding Content}" Visibility="{Binding Converter, Converter={StaticResource AnythingToVisiblityConverter}}" TextWrapping="Wrap" FontSize="19" HorizontalAlignment="Center" Margin="20, 30, 20, 0"/>
+
                 <!--列表-->
-                <ItemsControl ItemsSource="{Binding Products}" Margin="20, 30, 20, 0">
+                <ItemsControl ItemsSource="{Binding Products}" Margin="20, 10, 20, 0">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Vertical"/>
@@ -37,56 +39,69 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Vertical" Margin="20, 0, 20, 20">
+                            <StackPanel Orientation="Vertical" Margin="0, 0, 0, 40">
+                                <!--标题-->
                                 <Grid>
-                                    <controls:UserPhoto Height="32" Width="32" HorizontalAlignment="Left" />
-                                    <TextBlock Text="糖豆妈妈88" FontSize="19" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45, 0, 0, 0"/>
-                                    <TextBlock Text="前天 17：53" Foreground="Gray" FontSize="19" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                </Grid>
+                                    <controls:UserPhoto ImageSource="{Binding UserAvatar}" Height="48" Width="48" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="60, 0, 0, 0">
+                                        <TextBlock Text="{Binding UserName}" FontSize="19" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        <StackPanel Orientation="Horizontal" Visibility="{Binding Position, Converter={StaticResource AnythingToVisiblityConverter}}" >
+                                            <Image Source="../assets/images/ProductPage/position.png" Height="24" Width="24"/>
+                                            <TextBlock Text="{Binding Position}" FontSize="18" Foreground="Gray" Margin="0, 3, 0, 0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding TimeStr}" Foreground="Gray" FontSize="19" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                </Grid> 
+                                <!--图片-->
                                 <Border Height="360" Margin="0, 7, 0, 0">
                                     <Border.Background>
-                                        <ImageBrush ImageSource="../assets/images/defaulttopicimage.jpg" AlignmentY="Center" Stretch="UniformToFill"/>
+                                        <ImageBrush ImageSource="{Binding PhotoUrl}" AlignmentY="Center" Stretch="UniformToFill"/>
                                     </Border.Background>
                                 </Border>
-                                <Grid Height="36" Margin="0, 5, 0, 5">
-                                    <TextBlock Text="枪版土豆丝" HorizontalAlignment="Left" FontSize="20" VerticalAlignment="Center"/>
+                                
+                                <!--菜谱-->
+                                <Grid Height="48" Margin="0, 5, 0, 5" Tag="{Binding RecipeId}" Visibility="{Binding Title, Converter={StaticResource AnythingToVisiblityConverter}}" Tapped="Recipe_Tapped">
+                                    <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" FontSize="21" VerticalAlignment="Center"/>
                                     <Image Source="../assets/images/myPage/more.png" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                                 </Grid>
 
-                                <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 0, 0, 10"/>
+                                <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 0, 0, 0" Visibility="{Binding Title, Converter={StaticResource AnythingToVisiblityConverter}}"/>
 
-                                <StackPanel Orientation="Horizontal" >
-                                    <Image Source="../assets/images/myPage/more.png" Width="24" Height="24" VerticalAlignment="Top"/>
-                                    <TextBlock Text="1" FontSize="19" Foreground="#78a708"/>
-                                    <TextBlock Text="次赞" FontSize="19" Foreground="#78a708"/>
+                                <!--赞-->
+                                <StackPanel Orientation="Horizontal" Visibility="{Binding LikeNumber, Converter={StaticResource AnythingToVisiblityConverter}}" Margin="0, 15, 0, 0" >
+                                    <Image Source="../assets/images/ProductPage/like_gray.png" Width="24" Height="24" VerticalAlignment="Top"/>
+                                    <TextBlock Text="{Binding LikeNumber}" FontSize="19" Foreground="#78a708" Margin="5, 3, 0, 0"/>
+                                    <TextBlock Text="次赞" FontSize="19" Foreground="#78a708" Margin="0, 3, 0, 0"/>
                                 </StackPanel>
 
-                                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                                    <Image Source="../assets/images/myPage/more.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
-                                    <TextBlock Text="枪版土豆丝枪版土豆丝枪版土豆丝枪版土豆丝枪版土豆丝枪版土豆丝枪版土豆丝" Width="320" FontSize="20" TextWrapping="Wrap"/>
+                                <!--评论-->
+                                <StackPanel Orientation="Horizontal" Margin="0, 15, 0, 0" Visibility="{Binding Intro, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                    <Image Source="../assets/images/ProductPage/comment_gray.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
+                                    <TextBlock Text="{Binding Intro}" Width="320" FontSize="20" TextWrapping="Wrap"/>
                                 </StackPanel>
 
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
-                                    <Button>
+                                <!--按钮-->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 20, 0, 0">
+                                    <Button Width="48">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal">
-                                                <Image Source="../assets/images/myPage/more.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
+                                                <Image Source="../assets/images/ProductPage/like_Green.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
                                                 <TextBlock Text="赞" FontWeight="Normal" Margin="0, 2, 0, 0"/>
                                             </StackPanel>
                                         </Button.Content>
                                     </Button>
-                                    <Button Margin="10, 0, 0, 0">
+                                    <Button Margin="10, 0, 0, 0" Width="48">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal">
-                                                <Image Source="../assets/images/myPage/more.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
+                                                <Image Source="../assets/images/ProductPage/Comment_green.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
                                                 <TextBlock Text="评论" FontWeight="Normal" Margin="0, 2, 0, 0"/>
                                             </StackPanel>
                                         </Button.Content>
                                     </Button>
-                                    <Button Margin="10, 0, 0, 0">
+                                    <Button Margin="10, 0, 0, 0" Width="48">
                                         <Button.Content>
                                             <StackPanel Orientation="Horizontal">
-                                                <Image Source="../assets/images/myPage/more.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
+                                                <Image Source="../assets/images/ProductPage/social.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
                                                 <TextBlock Text="分享" FontWeight="Normal" Margin="0, 2, 0, 0"/>
                                             </StackPanel>
                                         </Button.Content>
@@ -97,12 +112,18 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
 
-                
+
                 <!--<StackPanel Orientation="Vertical" Margin="20, 0, 20, 0">
                     <Grid>
-                        <controls:UserPhoto Height="32" Width="32" HorizontalAlignment="Left" />
-                        <TextBlock Text="糖豆妈妈88" FontSize="19" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45, 0, 0, 0"/>
-                        <TextBlock Text="前天 17：53" Foreground="Gray" FontSize="19" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <controls:UserPhoto Height="32" Width="32" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <StackPanel Orientation="Vertical" Margin="45, 0, 0, 0">
+                            <TextBlock Text="糖豆妈妈88" FontSize="19" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../assets/images/myPage/more.png" Height="24" Width="24"/>
+                                <TextBlock Text="瑞金市" FontSize="18" Foreground="Gray" Margin="0, 3, 0, 0"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <TextBlock Text="前天 17：53" Foreground="Gray" FontSize="19" VerticalAlignment="Top" HorizontalAlignment="Right"/>
                     </Grid>
                     <Border Height="360" Margin="0, 7, 0, 0">
                         <Border.Background>
@@ -113,9 +134,9 @@
                         <TextBlock Text="枪版土豆丝" HorizontalAlignment="Left" FontSize="20" VerticalAlignment="Center"/>
                         <Image Source="../assets/images/myPage/more.png" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     </Grid>
-                    
+
                     <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 0, 0, 10"/>
-                    
+
                     <StackPanel Orientation="Horizontal" >
                         <Image Source="../assets/images/myPage/more.png" Width="24" Height="24" VerticalAlignment="Top"/>
                         <TextBlock Text="1" FontSize="19" Foreground="#78a708"/>
@@ -126,7 +147,7 @@
                         <Image Source="../assets/images/myPage/more.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
                         <TextBlock Text="枪版土豆丝枪版土豆丝枪版土豆丝枪版土豆丝枪版土豆丝枪版土豆丝枪版土豆丝" Width="320" FontSize="20" TextWrapping="Wrap"/>
                     </StackPanel>
-                    
+
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
                         <Button>
                             <Button.Content>

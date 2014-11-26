@@ -8,10 +8,10 @@ namespace HaoDouCookBook.HaoDou.DataModels.Discovery
     [DataContract]
     public class ProductPageData
     {
-        [DataMember]
+        [DataMember(Name = "info")]
         public ProductPageInfo Info { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "list")]
         public ProductPageRecipe[] Recipes { get; set; }
 
         public ProductPageData()
@@ -109,8 +109,8 @@ namespace HaoDouCookBook.HaoDou.DataModels.Discovery
         [DataMember]
         public ProductPageComment[] Comment { get; set; }
 
-        [DataMember]
-        public ProdcutPageAtUser AtUser { get; set; }
+        //[DataMember]
+        //public ProdcutPageAtUser AtUser { get; set; }
 
         public ProductPageRecipe()
         {
