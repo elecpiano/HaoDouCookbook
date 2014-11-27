@@ -152,11 +152,17 @@
     <Compile Include="Pages\RecipeInfoPage.xaml.cs">
       <DependentUpon>RecipeInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SingleProductViewPage.xaml.cs">
+      <DependentUpon>SingleProductViewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TagsPage.xaml.cs">
       <DependentUpon>TagsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TopicListPage.xaml.cs">
       <DependentUpon>TopicListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TutorialViewPage.xaml.cs">
+      <DependentUpon>TutorialViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AlbumPageViewModel.cs" />
     <Compile Include="ViewModels\CategoryTileData.cs" />
@@ -171,6 +177,7 @@
     <Compile Include="ViewModels\RecipeCategoryTileData.cs" />
     <Compile Include="ViewModels\RecipeInfoPageViewModel.cs" />
     <Compile Include="ViewModels\RecipeTileData.cs" />
+    <Compile Include="ViewModels\SingleProductViewPageViewModel.cs" />
     <Compile Include="ViewModels\SpecialRecipeAlbumData.cs" />
     <Compile Include="ViewModels\TagRecipeData.cs" />
     <Compile Include="ViewModels\TagsList.cs" />
@@ -217,6 +224,7 @@
     <Content Include="Assets\Images\MyPage\Settings.png" />
     <Content Include="Assets\Images\MyPage\ShippingList.png" />
     <Content Include="Assets\Images\noavatar_300.jpg" />
+    <Content Include="Assets\Images\no_result_search.png" />
     <Content Include="Assets\Images\ProductPage\comment_gray.png" />
     <Content Include="Assets\Images\ProductPage\comment_green.png" />
     <Content Include="Assets\Images\ProductPage\like_gray.png" />
@@ -338,11 +346,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\SingleProductViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\TagsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TopicListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TutorialViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

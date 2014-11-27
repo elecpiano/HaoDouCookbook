@@ -95,7 +95,17 @@ namespace HaoDouCookBook.Controls
 
             // Actor
             //
-            viewModel.Master.CookMasterImageSource = data.Actor.ActImg;
+            if(data.Actors != null)
+            {
+                foreach (var item in data.Actors)
+                {
+                    viewModel.Masters.Add(new CookMaster() {
+                        CookMasterImageSource = item.ActImg,
+                        OpenUrl = item.OpenUrl
+                    });
+                }
+
+            }
 
 
             // Tutorial
@@ -104,6 +114,7 @@ namespace HaoDouCookBook.Controls
             viewModel.Tutorial.Teacher.Name = data.NewbieTutorial.UserName;
             viewModel.Tutorial.Teacher.UserPhoto = data.NewbieTutorial.UserAvatar;
             viewModel.Tutorial.MainImageSource = data.NewbieTutorial.RecipeCover;
+            viewModel.Tutorial.OpenUrl = data.NewbieTutorial.OpenUrl;
 
             viewModel.Tutorial.DetailsImageSources.Clear();
             foreach (var item in data.NewbieTutorial.SamllCovers)
@@ -164,19 +175,7 @@ namespace HaoDouCookBook.Controls
 
         #endregion
 
-        #region LayoutAdjust
-
-        private void RandomDishTileGroupImageHeight(DishTile tileOne, DishTile tileTwo)
-        {
-            double totalHeight = 360;
-            double itemOneHeight = random.Next(160, 220);
-            double itemTwoHeight = totalHeight - itemOneHeight;
-
-            tileOne.SetImageHight(itemOneHeight);
-            tileTwo.SetImageHight(itemTwoHeight);
-        }
-
-        #endregion
+        #region Event
 
         private void Meal_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -188,5 +187,11 @@ namespace HaoDouCookBook.Controls
             App.Current.RootFrame.Navigate(typeof(ProductPage), sender.GetDataContext<DishTileData>());
         }
 
+        private void Tutorial_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(TutorialViewPage), "http://m.haodou.com/app/recipe/act/novice.php");
+        }
+
+        #endregion
     }
 }

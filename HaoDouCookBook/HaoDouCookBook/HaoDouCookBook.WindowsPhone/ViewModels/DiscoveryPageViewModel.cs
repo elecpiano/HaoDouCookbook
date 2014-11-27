@@ -15,13 +15,7 @@ namespace HaoDouCookBook.ViewModels
 
         public ObservableCollection<Cate> Cates { get; set; }
 
-        private CookMaster master;
-
-        public CookMaster Master
-        {
-            get { return master; }
-            set { SetProperty<CookMaster>(ref master, value); }
-        }
+        public ObservableCollection<CookMaster> Masters { get; set; }
 
         private NewbieTutorial tutorial;
 
@@ -37,7 +31,7 @@ namespace HaoDouCookBook.ViewModels
         {
             DailyMeals = new ObservableCollection<Meal>();
             StarredUsers = new ObservableCollection<UserData>();
-            master = new CookMaster();
+            Masters = new ObservableCollection<CookMaster>();
             tutorial = new NewbieTutorial();
             Cates = new ObservableCollection<Cate>();
         }

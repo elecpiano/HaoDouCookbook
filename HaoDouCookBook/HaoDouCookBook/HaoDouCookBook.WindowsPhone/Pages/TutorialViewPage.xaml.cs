@@ -1,6 +1,4 @@
 ﻿using HaoDouCookBook.Controls;
-using HaoDouCookBook.HaoDou.API;
-using HaoDouCookBook.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,19 +22,19 @@ namespace HaoDouCookBook.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ArticleViewer : BackablePage
+    public sealed partial class TutorialViewPage : BackablePage
     {
-        #region Life Cycle
+        #region Lief Cycle
 
-        public ArticleViewer()
+        #endregion
+        public TutorialViewPage()
         {
             this.InitializeComponent();
-            this.webview.ScriptNotify += webview_ScriptNotify;
         }
 
         void webview_ScriptNotify(object sender, NotifyEventArgs e)
         {
-
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -47,25 +45,12 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (e.NavigationMode == NavigationMode.Back)
-            {
-                return;
-            }
-
             if (e.Parameter != null)
             {
                 string url = e.Parameter.ToString();
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(url));
-                request.Headers.Add("Cookies", string.Format("appid={0};uuid={1}", HaoDouApiUrlHelper.APPID, DeviceHelper.GetUniqueDeviceID()));
                 webview.NavigateWithHttpRequestMessage(request);
             }
         }
-
-        #endregion
-
-        #region Event
-
-
-        #endregion
     }
 }

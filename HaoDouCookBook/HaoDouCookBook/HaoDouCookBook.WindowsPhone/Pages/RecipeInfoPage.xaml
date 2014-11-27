@@ -16,7 +16,7 @@
 
     <Grid Margin="0, 0, 0, 0" x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner Title="好豆菜谱" Margin="20, 0, 0, 0"/>
-        <ScrollViewer Name="rootScrollViewer" Background="White" Margin="0,65, 0, 0">
+        <ScrollViewer Name="rootScrollViewer" Background="White" Margin="0, 50, 0, 0">
             <StackPanel>
 
                 <!--页头图片-->
@@ -62,7 +62,7 @@
                     <Grid Margin="0,20, 0, 0">
                         <TextBlock Text="食材" Foreground="#78a708" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" />
 
-                        <Button Width="130" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, -20, 0, 0">
+                        <Button Width="160" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, -20, 0, 0">
                             <Button.Content>
                                 <TextBlock Text="+购买清单" FontWeight="Normal" FontSize="22" Margin="0, 2, 0, 0"/>
                             </Button.Content>
@@ -176,7 +176,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 20, 0, 20">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 20, 0, 20" Visibility="{Binding ProductCount, Converter={StaticResource AnythingToVisiblityConverter}}">
                         <TextBlock Text="查看全部" HorizontalAlignment="Center" FontSize="24" Foreground="Gray" />
                         <TextBlock Text="{Binding ProductCount}" HorizontalAlignment="Center" FontSize="24" Foreground="Gray" />
                         <TextBlock Text="作品" HorizontalAlignment="Center" FontSize="24" Foreground="Gray" />

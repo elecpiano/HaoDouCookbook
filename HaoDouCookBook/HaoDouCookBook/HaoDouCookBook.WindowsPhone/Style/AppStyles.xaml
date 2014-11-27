@@ -11,7 +11,8 @@
     <common:FavoriteCountToStringConverter x:Key="favoriteCountToStringConverter"/>
 
     <!--Colors-->
-    <SolidColorBrush x:Name="TopAppbarColor" Color="#fff8f8f8"/>
+    <SolidColorBrush x:Key="TopAppbarColor" Color="#fff8f8f8"/>
+    <SolidColorBrush x:Key="GreenMain" Color="#78a708"/>
 
     <!--Default Font-->
     <Style x:Key="TextBlockBase" TargetType="TextBlock">
@@ -65,6 +66,12 @@
     <!--Line Style-->
     <Style x:Key="GrayLine" TargetType="Rectangle">
         <Setter Property="Stroke" Value="#44000000"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Height" Value="0.8"/>
+    </Style>
+
+    <Style x:Key="LightGaryLine" TargetType="Rectangle">
+        <Setter Property="Stroke" Value="#10000000"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Height" Value="0.8"/>
     </Style>
@@ -268,7 +275,7 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="Border" CornerRadius="7" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
+                        <Border x:Name="Border" CornerRadius="7" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="9.5">
                             <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                     </Grid>

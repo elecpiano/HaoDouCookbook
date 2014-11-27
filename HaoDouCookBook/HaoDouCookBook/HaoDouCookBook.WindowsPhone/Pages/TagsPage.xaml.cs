@@ -85,20 +85,30 @@ namespace HaoDouCookBook.Pages
                 {
                     DataBinding();
 
-                    if (data.Items != null)
+                    if (data.Items != null && data.Items.Length > 0)
                     {
+                        if (noResultGrid.Visibility == Visibility.Visible)
+                        {
+                            noResultGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                        }
+
                         foreach (var item in data.Items)
                         {
-                            recipes.Add(new TagRecipeData() { 
-                                FoodStuff = item.Stuff, 
-                                LikeNumber = item.LikeCount, 
-                                ViewNumber = item.ViewCount, 
-                                PreviewImageSource = item.Cover, 
+                            recipes.Add(new TagRecipeData()
+                            {
+                                FoodStuff = item.Stuff,
+                                LikeNumber = item.LikeCount,
+                                ViewNumber = item.ViewCount,
+                                PreviewImageSource = item.Cover,
                                 RecipeName = item.Title,
                                 RecipeId = item.RecipeId
                             });
                         }
 
+                    }
+                    else
+                    {
+                        this.noResultGrid.Visibility = Windows.UI.Xaml.Visibility.Visible;
                     }
 
                 }, error => { });

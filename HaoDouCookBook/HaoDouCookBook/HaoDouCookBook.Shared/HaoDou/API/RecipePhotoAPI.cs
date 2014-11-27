@@ -29,5 +29,18 @@ namespace HaoDouCookBook.HaoDou.API
             HaoDouJsonDataLoader<ProductPageData> loader = new HaoDouJsonDataLoader<ProductPageData>();
             await loader.LoadAsync(postRequest, true, MODULE, cacheFileName, onSuccess, onFail);
         }
+
+
+        public static async Task GetPhotoView(int id, int? uid, Action<SingleProductViewPageData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "photoView";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("id", id.ToString());
+            postRequest.AddPostData("uid", uid.HasValue ? uid.Value.ToString() : "0");
+
+            string cacheFileName = string.Format("{0}-{1}", methodName, id);
+            HaoDouJsonDataLoader<SingleProductViewPageData> loader = new HaoDouJsonDataLoader<SingleProductViewPageData>();
+            await loader.LoadAsync(postRequest, true, MODULE, cacheFileName, onSuccess, onFail);
+        }
     }
 }

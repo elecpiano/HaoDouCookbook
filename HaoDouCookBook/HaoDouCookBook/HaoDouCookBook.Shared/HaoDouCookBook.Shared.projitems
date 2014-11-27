@@ -48,6 +48,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\Meal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\NewbieTutorial.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\ProductPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\SingleProductViewPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Square\CateInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Square\SquarePageData.cs" />

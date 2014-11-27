@@ -12,7 +12,7 @@
     <Grid Background="{StaticResource TopAppbarColor}">
         <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
         <Border Style="{StaticResource PageTitleBorderStyle}">
-            <TextBlock x:Name="title" Margin="13, 0, 0, 15" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="title" Margin="13, 0, 0, 15" FontSize="42" TextTrimming="WordEllipsis" Width="380" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </Border>
         <ScrollViewer Name="rootScrollViewer" Margin="0, 110, 0, 0" Background="White">
             <ItemsControl Name="recipeList" Margin="20, 20, 20, 20">
@@ -52,5 +52,12 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        <Grid Name="noResultGrid" Visibility="Collapsed" Margin="0, 110, 0, 0" Background="White">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image Source="../assets/images/no_result_search.png" Stretch="None" HorizontalAlignment="Center" Margin="0, 0, 0, 30"/>
+                <TextBlock Text="没有搜索到相关的菜谱哦~" HorizontalAlignment="Center" FontSize="24" Foreground="Gray"/>
+                <TextBlock Text="去搜索别的美味吧~" HorizontalAlignment="Center" FontSize="24" Foreground="Gray"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </controls:BackablePage>

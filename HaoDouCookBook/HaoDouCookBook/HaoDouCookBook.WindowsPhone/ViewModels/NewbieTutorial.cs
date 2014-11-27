@@ -33,6 +33,14 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref title, value); }
         }
 
+        private string openUrl;
+
+        public string OpenUrl
+        {
+            get { return openUrl; }
+            set { SetProperty<string>(ref openUrl, value); }
+        }
+
 
         public ObservableCollection<string> DetailsImageSources { get; set; }
 

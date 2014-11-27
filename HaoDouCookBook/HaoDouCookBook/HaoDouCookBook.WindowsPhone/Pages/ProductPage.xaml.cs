@@ -175,6 +175,14 @@ namespace HaoDouCookBook.Pages
             }
         }
 
+
+
+        private void RecipeImage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ViewModels.ProductPageRecipe recipeData = sender.GetDataContext<ViewModels.ProductPageRecipe>();
+            App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), recipeData.ProductId);
+        }
+
         #endregion
 
 

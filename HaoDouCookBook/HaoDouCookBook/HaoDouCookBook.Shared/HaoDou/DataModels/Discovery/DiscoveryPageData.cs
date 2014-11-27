@@ -11,7 +11,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.Discovery
 {
     public class DiscoveryPageData : Infrastructures.CustomJsonSerializableBase
     {
-        public Actor Actor { get; set; }
+        public List<Actor> Actors { get; set; }
 
         public NewbieTutorial NewbieTutorial { get; set; }
 
@@ -23,7 +23,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.Discovery
 
         public DiscoveryPageData()
         {
-            Actor = new Actor();
+            Actors = new List<Actor>();
             Cates = new List<Cate>();
             StarredUser = new StarredUser();
             DailyMeal = new DailyMeal();
@@ -59,7 +59,11 @@ namespace HaoDouCookBook.HaoDou.DataModels.Discovery
                             StarredUser = StarredUser = JsonSerializer.Deserialize<StarredUser>(jarray[i].Stringify());
                             break;
                         case "act":
-                            Actor = JsonSerializer.Deserialize<Actor>(jarray[i].Stringify());
+                            Actor act =  JsonSerializer.Deserialize<Actor>(jarray[i].Stringify());
+                            if(Actors.All(a => !a.OpenUrl.Equals(act.OpenUrl, StringComparison.OrdinalIgnoreCase)))
+                            {
+                                Actors.Add(act);
+                            }
                             break;
                         default:
                             break;
