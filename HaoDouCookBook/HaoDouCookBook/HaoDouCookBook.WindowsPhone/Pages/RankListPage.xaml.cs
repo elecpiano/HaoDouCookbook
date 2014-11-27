@@ -60,6 +60,7 @@ namespace HaoDouCookBook.Pages
             }
 
             rankListData.Clear();
+            rootScrollViewer.ScrollToVerticalOffset(0);
             LoadDataAsync(0, 20, null, null);
         }
 

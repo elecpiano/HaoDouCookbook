@@ -57,6 +57,7 @@ namespace HaoDouCookBook.Pages
             }
 
             viewModel = new RankViewPageViewModel();
+            rootScrollViewer.ScrollToVerticalOffset(0);
             RankItemData rankData = e.Parameter as RankItemData;
             if(rankData != null)
             {

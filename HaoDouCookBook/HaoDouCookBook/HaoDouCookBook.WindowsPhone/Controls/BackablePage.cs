@@ -9,6 +9,8 @@ namespace HaoDouCookBook.Controls
 {
     public class BackablePage : Page
     {
+        #region Life Cycle
+
         public BackablePage()
         {
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Required;
@@ -26,6 +28,8 @@ namespace HaoDouCookBook.Controls
             base.OnNavigatedFrom(e);
             Windows.Phone.UI.Input.HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
+        
+        #endregion
 
         #region Event
 

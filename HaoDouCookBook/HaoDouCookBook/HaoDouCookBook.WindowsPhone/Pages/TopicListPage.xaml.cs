@@ -60,6 +60,7 @@ namespace HaoDouCookBook.Pages
             if (e.Parameter != null)
             {
                 topics.Clear();
+                rootScrollViewer.ScrollToVerticalOffset(0);
                 CategoryTileData category = e.Parameter as CategoryTileData;
                 this.title.Text = category.Title;
                 LoadDataAsync(int.Parse(category.Id));

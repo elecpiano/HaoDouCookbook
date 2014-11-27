@@ -41,6 +41,12 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                return;
+            }
+
+            rootScrollViewer.ScrollToVerticalOffset(0);
         }
 
         #endregion

@@ -22,7 +22,7 @@
         <Border Style="{StaticResource PageTitleBorderStyle}">
             <TextBlock Margin="11, 0, 0, 13" x:Name="title" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </Border>
-        <ScrollViewer Margin="0, 105, 0, 0" Background="White">
+        <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
             <ItemsControl Name="recipesList" Margin="18, 20, 15, 0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

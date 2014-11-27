@@ -59,6 +59,7 @@ namespace HaoDouCookBook.Pages
             if (data != null)
             {
                 viewModel = new AlbumPageViewModel();
+                rootScrollViewer.ScrollToVerticalOffset(0);
                 LoadDataAsync(0, 20, data.Id, string.Empty, null);
             }
         }

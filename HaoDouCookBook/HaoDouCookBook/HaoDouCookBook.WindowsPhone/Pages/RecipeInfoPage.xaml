@@ -16,7 +16,7 @@
 
     <Grid Margin="0, 0, 0, 0" x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner Title="好豆菜谱" Margin="20, 0, 0, 0"/>
-        <ScrollViewer Background="White" Margin="0,65, 0, 0">
+        <ScrollViewer Name="rootScrollViewer" Background="White" Margin="0,65, 0, 0">
             <StackPanel>
 
                 <!--页头图片-->

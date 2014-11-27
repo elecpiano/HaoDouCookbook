@@ -72,6 +72,7 @@ namespace HaoDouCookBook.Pages
                 }
 
                 this.title.Text = data.Title;
+                rootScrollViewer.ScrollToVerticalOffset(0);
                 Recipes.Clear();
                 LoadDataAsync(0, 10, data.Title, data.Id);
             }

@@ -57,6 +57,7 @@ namespace HaoDouCookBook.Pages
             }
 
             viewModel = new RecipeInfoPageViewModel();
+            rootScrollViewer.ScrollToVerticalOffset(0);
             int recipeId;
 
             if (Int32.TryParse(e.Parameter.ToString(), out recipeId))
@@ -150,7 +151,7 @@ namespace HaoDouCookBook.Pages
                     {
                         Intro = stepData.Intro,
                         Photo = stepData.StepPhoto,
-                        StepNumber = i
+                        StepNumber = i + 1
                     });
 
                 }

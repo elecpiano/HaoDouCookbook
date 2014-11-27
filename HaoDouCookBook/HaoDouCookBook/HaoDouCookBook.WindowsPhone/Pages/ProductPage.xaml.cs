@@ -77,6 +77,7 @@ namespace HaoDouCookBook.Pages
             if (topicId != int.MinValue && productId != int.MinValue)
             {
                 viewModel = new ProductPageViewModel();
+                rooScrollViewer.ScrollToVerticalOffset(0);
                 LoadDataAsync(0, 20, productId, topicId, type, string.Empty, null);
             }
         }

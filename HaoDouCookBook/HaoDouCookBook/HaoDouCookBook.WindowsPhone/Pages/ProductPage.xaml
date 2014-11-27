@@ -11,7 +11,7 @@
 
     <Grid Margin="0, 0, 0, 0" x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="18, 5, 0, 0" Title="好豆菜谱"/>
-        <ScrollViewer Background="White" Margin="0, 65, 0, 0">
+        <ScrollViewer Name="rooScrollViewer"  Background="White" Margin="0, 65, 0, 0">
             <StackPanel Orientation="Vertical">
 
                 <!--页首-->
