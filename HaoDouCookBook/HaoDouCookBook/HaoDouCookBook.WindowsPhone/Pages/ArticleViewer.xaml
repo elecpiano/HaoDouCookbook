@@ -1,4 +1,4 @@
-﻿<Page
+﻿<controls:BackablePage
     x:Class="HaoDouCookBook.Pages.ArticleViewer"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,8 +8,8 @@
     xmlns:controls="using:HaoDouCookBook.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Page.Resources>
-    </Page.Resources>
+    <controls:BackablePage.Resources>
+    </controls:BackablePage.Resources>
 
     <Page.BottomAppBar>
         <CommandBar Style="{StaticResource bottomAppbarStyle}">
@@ -28,4 +28,4 @@
             <TextBlock Text="查看所有" FontSize="23"/>
         </Border>-->
     </Grid>
-</Page>
+</controls:BackablePage>

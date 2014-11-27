@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Shared.Utility;
+using HaoDouCookBook.Controls;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -26,7 +27,7 @@ namespace HaoDouCookBook.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RecipeCategoryDetailPage : Page
+    public sealed partial class RecipeCategoryDetailPage : BackablePage
     {
 
         #region Field && Property
@@ -49,6 +50,8 @@ namespace HaoDouCookBook.Pages
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+
             RecipeCategoryTileData data = e.Parameter as RecipeCategoryTileData;
             if (data != null)
             {
@@ -67,21 +70,8 @@ namespace HaoDouCookBook.Pages
                 LoadDataAsync(0, 10, data.Title, data.Id);
             }
 
-            Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
         }
 
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            base.OnNavigatedFrom(e);
-            Windows.Phone.UI.Input.HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-        }
-
-        void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
-        {
-            App.Current.RootFrame.GoBack();
-            e.Handled = true;
-        }
 
         #endregion
 

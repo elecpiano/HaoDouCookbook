@@ -1,4 +1,5 @@
 ﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
 using Shared.Infrastructures;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace HaoDouCookBook.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class UserSettings : Page
+    public sealed partial class UserSettings : BackablePage
     {
         #region Life Cycle
 
@@ -39,27 +40,12 @@ namespace HaoDouCookBook.Pages
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            base.OnNavigatedFrom(e);
-            Windows.Phone.UI.Input.HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+            base.OnNavigatedTo(e);
         }
 
         #endregion
 
         #region Event
-
-        void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
-        {
-            App.Current.RootFrame.GoBack();
-
-            // Need add this line, otherwise it will not back to last page.
-            //
-            e.Handled = true;
-        }
 
         #endregion
     }
