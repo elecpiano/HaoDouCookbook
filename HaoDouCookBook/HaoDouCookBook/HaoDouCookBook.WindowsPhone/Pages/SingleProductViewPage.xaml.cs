@@ -59,6 +59,8 @@ namespace HaoDouCookBook.Pages
                 int id;
                 if (int.TryParse(e.Parameter.ToString(), out id))
                 {
+                    viewModel = new SingleProductViewPageViewModel();
+                    rootScollViewer.ScrollToVerticalOffset(0);
                     LoadDataAsync(id, null);
                 }
             }

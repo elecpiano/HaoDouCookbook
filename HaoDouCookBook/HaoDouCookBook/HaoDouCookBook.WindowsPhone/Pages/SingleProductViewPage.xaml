@@ -28,7 +28,7 @@
         <ScrollViewer Name="rootScollViewer" Background="White" Margin="0, 55, 0, 0">
             <StackPanel Orientation="Vertical" Margin="18, 10, 18, 0">
                 <Grid>
-                    <controls:UserPhoto Height="48" Width="48" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <controls:UserPhoto ImageSource="{Binding UserAvatar}" Height="48" Width="48" HorizontalAlignment="Left" VerticalAlignment="Top" />
                     <StackPanel Orientation="Vertical" Margin="60, 0, 0, 0" VerticalAlignment="Bottom">
                         <Grid Margin="0, 0, 0, 12">
                             <TextBlock Text="{Binding UserName}" FontSize="19" VerticalAlignment="Center" HorizontalAlignment="Left" />
@@ -46,13 +46,13 @@
                     </Border.Background>
                 </Border>
 
-                <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 20" Width="360" Visibility="{Binding Intro, Converter={StaticResource AnythingToVisiblityConverter}}">
+                <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0" Width="360" Visibility="{Binding Intro, Converter={StaticResource AnythingToVisiblityConverter}}">
                     <TextBlock Text="{Binding UserName}" FontSize="21" Foreground="{StaticResource GreenMain}"/>
                     <TextBlock Text=":" FontSize="21" Margin="5, 0, 5, 0"/>
                     <TextBlock Text="{Binding Intro}" FontSize="21" TextWrapping="Wrap"/>
                 </StackPanel>
 
-                <ItemsControl ItemsSource="{Binding DiggList}">
+                <ItemsControl ItemsSource="{Binding DiggList}" Margin="0, 20, 0, 0">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapGrid Orientation="Horizontal"/>
@@ -65,8 +65,8 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
 
-                <StackPanel Orientation="Horizontal" Margin="0, 15, 0, 0">
-                    <Button Width="48">
+                <StackPanel Orientation="Horizontal" Margin="0, 25, 0, 0">
+                    <Button>
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="../assets/images/ProductPage/like_Green.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
@@ -74,7 +74,7 @@
                             </StackPanel>
                         </Button.Content>
                     </Button>
-                    <Button Margin="10, 0, 0, 0" Width="50">
+                    <Button>
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="../assets/images/ProductPage/social.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 2, 5, 0"/>
