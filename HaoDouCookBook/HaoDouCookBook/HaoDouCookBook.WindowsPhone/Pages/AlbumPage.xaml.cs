@@ -50,10 +50,15 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                return;
+            }
 
             SpecialRecipeAlbumData data = e.Parameter as SpecialRecipeAlbumData;
             if (data != null)
             {
+                viewModel = new AlbumPageViewModel();
                 LoadDataAsync(0, 20, data.Id, string.Empty, null);
             }
         }
@@ -71,6 +76,7 @@ namespace HaoDouCookBook.Pages
         {
             await InfoAPI.GetAlbumInfo(offset, limit, albumId, sign, uid, DeviceHelper.GetUniqueDeviceID(), data =>
                 {
+                    DataBinding();
                     viewModel.AlbumAvatar = data.Info.AlbumAvatarUrl;
                     viewModel.AlbumContent = data.Info.AlbumContent;
                     viewModel.AlbumCover = data.Info.AlbumCover;

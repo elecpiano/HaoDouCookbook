@@ -52,6 +52,11 @@ namespace HaoDouCookBook.Pages
         {
             base.OnNavigatedTo(e);
 
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                return;
+            }
+
             RecipeCategoryTileData data = e.Parameter as RecipeCategoryTileData;
             if (data != null)
             {
@@ -67,6 +72,7 @@ namespace HaoDouCookBook.Pages
                 }
 
                 this.title.Text = data.Title;
+                Recipes.Clear();
                 LoadDataAsync(0, 10, data.Title, data.Id);
             }
 

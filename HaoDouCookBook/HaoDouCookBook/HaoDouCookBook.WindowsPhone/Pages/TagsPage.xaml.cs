@@ -52,11 +52,16 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                return;
+            }
 
             TagItem tagCategoryItem = e.Parameter as TagItem;
 
             if (tagCategoryItem != null)
             {
+                recipes.Clear();
                 this.title.Text = tagCategoryItem.Text;
                 LoadDataAsync(0, 10, tagCategoryItem.Id, tagCategoryItem.Text);
 
@@ -76,6 +81,8 @@ namespace HaoDouCookBook.Pages
         {
             await SearchAPI.GetList(offset, limit, DeviceHelper.GetUniqueDeviceID(), tagid, keyword, data =>
                 {
+                    DataBinding();
+
                     if (data.Items != null)
                     {
                         foreach (var item in data.Items)

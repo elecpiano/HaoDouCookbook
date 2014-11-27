@@ -51,7 +51,12 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                return;
+            }
 
+            viewModel = new RecipeInfoPageViewModel();
             int recipeId;
 
             if (Int32.TryParse(e.Parameter.ToString(), out recipeId))
@@ -79,6 +84,8 @@ namespace HaoDouCookBook.Pages
 
         private void UpdateViewModel(InfoPageData data)
         {
+            DataBinding();
+
             var infoData = data.Info;
 
             if (infoData == null)

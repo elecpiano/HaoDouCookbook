@@ -51,6 +51,12 @@ namespace HaoDouCookBook.Pages
         {
             base.OnNavigatedTo(e);
 
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                return;
+            }
+
+            viewModel = new RankViewPageViewModel();
             RankItemData rankData = e.Parameter as RankItemData;
             if(rankData != null)
             {
@@ -71,6 +77,8 @@ namespace HaoDouCookBook.Pages
         {
             await RankAPI.GetRankView(id, sign, uid, DeviceHelper.GetUniqueDeviceID(), type, data =>
                 {
+                    DataBinding();
+
                     viewModel.Title = data.Info.Title;
                     viewModel.Intro = data.Info.Intro;
 

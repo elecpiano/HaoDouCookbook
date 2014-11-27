@@ -51,10 +51,15 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                return;
+            }
+            
             topics.Clear();
             if (e.Parameter != null)
             {
+                topics.Clear();
                 CategoryTileData category = e.Parameter as CategoryTileData;
                 this.title.Text = category.Title;
                 LoadDataAsync(int.Parse(category.Id));

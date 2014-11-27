@@ -9,6 +9,11 @@ namespace HaoDouCookBook.Controls
 {
     public class BackablePage : Page
     {
+        public BackablePage()
+        {
+            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Required;
+        }
+
         protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);

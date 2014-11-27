@@ -52,6 +52,10 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                return;
+            }
 
             int topicId = int.MinValue;
             int productId = int.MinValue;
@@ -72,6 +76,7 @@ namespace HaoDouCookBook.Pages
 
             if (topicId != int.MinValue && productId != int.MinValue)
             {
+                viewModel = new ProductPageViewModel();
                 LoadDataAsync(0, 20, productId, topicId, type, string.Empty, null);
             }
         }
@@ -96,6 +101,8 @@ namespace HaoDouCookBook.Pages
 
         private void UpdateData(ProductPageData data)
         {
+            DataBinding();
+
             viewModel.Content = data.Info.Content;
             viewModel.Title = data.Info.Title;
             viewModel.Cover = data.Info.Cover;

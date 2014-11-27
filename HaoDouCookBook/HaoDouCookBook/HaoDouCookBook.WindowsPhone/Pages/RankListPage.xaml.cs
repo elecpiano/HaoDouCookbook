@@ -53,6 +53,13 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                return;
+            }
+
+            rankListData.Clear();
             LoadDataAsync(0, 20, null, null);
         }
 
