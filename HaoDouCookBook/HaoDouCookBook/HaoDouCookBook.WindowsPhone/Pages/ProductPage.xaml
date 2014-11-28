@@ -88,7 +88,7 @@
 
                                     <TextBlock FontSize="26" Foreground="Gray" HorizontalAlignment="Left"  Margin="30, 15, 0, 0" Visibility="{Binding ShowAllCommentsTextVisible, Converter={StaticResource AnythingToVisiblityConverter}}" Tapped="ShoAllComment_Tapped">
                                         <Run Text="查看所有"/>
-                                        <Run Text="{Binding Comments.Count}"/>
+                                        <Run Text="{Binding CommentCount}"/>
                                         <Run Text="条评论"/>
                                     </TextBlock>
 

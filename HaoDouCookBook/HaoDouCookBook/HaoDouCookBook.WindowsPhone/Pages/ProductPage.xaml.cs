@@ -80,7 +80,7 @@ namespace HaoDouCookBook.Pages
             {
                 viewModel = new ProductPageViewModel();
                 rooScrollViewer.ScrollToVerticalOffset(0);
-                LoadDataAsync(0, 20, paras.ProductId, paras.ProductId, paras.Type, string.Empty, null);
+                LoadDataAsync(0, 20, paras.ProductId, paras.TopicId, paras.Type, string.Empty, null);
             }
             
         }
@@ -129,6 +129,7 @@ namespace HaoDouCookBook.Pages
                     recipeProduct.PhotoUrl = item.PhotoUrl;
                     recipeProduct.Intro = item.Intro;
                     recipeProduct.Position = item.Position;
+                    recipeProduct.CommentCount = item.CommentCount;
 
                     if (item.CommentCount > 1)
                     {

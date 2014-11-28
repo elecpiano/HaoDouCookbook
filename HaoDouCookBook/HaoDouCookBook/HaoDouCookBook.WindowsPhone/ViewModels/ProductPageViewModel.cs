@@ -156,6 +156,14 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref timeStr, value); }
         }
 
+        private int commentCount;
+
+        public int CommentCount
+        {
+            get { return commentCount; }
+            set { SetProperty<int>(ref commentCount, value); }
+        }
+
 
         public ObservableCollection<ProductPageComment> Comments { get; set; }
 
@@ -182,6 +190,7 @@ namespace HaoDouCookBook.ViewModels
             Comments = new ObservableCollection<ProductPageComment>();
             timeStr = string.Empty;
             showAllCommentsTextVisible = false;
+            commentCount = 0;
         }
 
 
