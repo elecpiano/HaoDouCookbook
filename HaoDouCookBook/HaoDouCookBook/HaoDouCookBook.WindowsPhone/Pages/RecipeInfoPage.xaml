@@ -230,8 +230,8 @@
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Text="{Binding UserName}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="21" Foreground="#78a708"/>
-                                            <TextBlock Text="{Binding CreateTime}" Foreground="Gray" HorizontalAlignment="Right" Grid.Row="0" VerticalAlignment="Center" FontSize="21"/>
+                                            <TextBlock Text="{Binding UserName}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="19" Foreground="#78a708"/>
+                                            <TextBlock Text="{Binding CreateTime}" Foreground="Gray" HorizontalAlignment="Right" Grid.Row="0" VerticalAlignment="Center" FontSize="19"/>
                                             <TextBlock Text="{Binding Content}" FontSize="18" Width="260" TextTrimming="WordEllipsis" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" />
                                         </Grid>
                                     </Grid>

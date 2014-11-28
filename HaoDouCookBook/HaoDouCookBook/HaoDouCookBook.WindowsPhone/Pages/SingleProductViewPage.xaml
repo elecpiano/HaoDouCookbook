@@ -9,14 +9,6 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <controls:BackablePage.Resources>
-        <Style x:Key="commentCountStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
-            <Setter Property="VerticalAlignment" Value="Bottom"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Foreground" Value="Gray"/>
-        </Style>
-    </controls:BackablePage.Resources>
-    
     <controls:BackablePage.BottomAppBar>
         <CommandBar Style="{StaticResource bottomAppbarStyle}">
             <AppBarButton Icon="Comment"/>
@@ -46,11 +38,25 @@
                     </Border.Background>
                 </Border>
 
-                <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0" Width="360" Visibility="{Binding Intro, Converter={StaticResource AnythingToVisiblityConverter}}">
-                    <TextBlock Text="{Binding UserName}" FontSize="21" Foreground="{StaticResource GreenMain}"/>
-                    <TextBlock Text=":" FontSize="21" Margin="5, 0, 5, 0"/>
-                    <TextBlock Text="{Binding Intro}" FontSize="21" TextWrapping="Wrap"/>
-                </StackPanel>
+                <!--菜谱-->
+                <Grid Background="Transparent" Visibility="{Binding RecipeName, Converter={StaticResource AnythingToVisiblityConverter}}" Tapped="RecipeName_Tapped">
+                    <TextBlock Text="{Binding RecipeName}" FontSize="21" Width="310" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0, 18, 0, 18"/>
+                    <Image Source="../assets/images/myPage/more.png" VerticalAlignment="Center" HorizontalAlignment="Right" Height="36" Width="36"/>
+                    <Rectangle Width="800" Style="{StaticResource LightGaryLine}" VerticalAlignment="Bottom"/>
+                </Grid>
+
+                <!--话题-->
+                <Grid Background="Transparent" Visibility="{Binding TopicName, Converter={StaticResource AnythingToVisiblityConverter}}" Tapped="TopicName_Tapped">
+                    <TextBlock Text="{Binding TopicName}" FontSize="21" Width="310" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0, 18, 0, 18"/>
+                    <Image Source="../assets/images/myPage/more.png" VerticalAlignment="Center" HorizontalAlignment="Right" Height="36" Width="36"/>
+                    <Rectangle Width="800" Style="{StaticResource LightGaryLine}" VerticalAlignment="Bottom"/>
+                </Grid>
+
+                <TextBlock FontSize="21" Margin="0, 20, 0, 0" TextWrapping="Wrap" Width="360" Visibility="{Binding Intro, Converter={StaticResource AnythingToVisiblityConverter}}">
+                        <Run Foreground="{StaticResource GreenMain}" Text="{Binding UserName}"/>
+                        <Run Text=":"/>
+                        <Run Text="{Binding Intro}"/>
+                </TextBlock>
 
                 <ItemsControl ItemsSource="{Binding DiggList}" Margin="0, 20, 0, 0">
                     <ItemsControl.ItemsPanel>
@@ -85,14 +91,15 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Margin="5, 40, 0, 30">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="评论" FontSize="20"/>
-                        <TextBlock Text="(" Style="{StaticResource commentCountStyle}"/>
-                        <TextBlock Text="{Binding Comments.Count}" Style="{StaticResource commentCountStyle}"/>
-                        <TextBlock Text=")" Style="{StaticResource commentCountStyle}"/>
-                    </StackPanel>
-                    <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 5, 0, 12"/>
+                    <TextBlock>
+                        <Run Text="评论" FontSize="20"/>
+                        <Run  Text="(" Foreground="Gray" FontSize="16"/>
+                        <Run Text="{Binding Comments.Count}" Foreground="Gray" FontSize="16"/>>
+                        <Run Text=")" Foreground="Gray" FontSize="16"/>
+                    </TextBlock>
                     
+                    <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 5, 0, 12"/>
+
                     <ItemsControl ItemsSource="{Binding Comments}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -113,18 +120,16 @@
                                             <RowDefinition Height="*"/>
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="{Binding UserName}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{StaticResource GreenMain}" FontSize="23"/>
-                                        <TextBlock Text="{Binding CreateTime}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="Gray" FontSize="20"/>
-                                        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" Margin="0, 10, 0, 0">
-                                            <StackPanel Orientation="Horizontal" Visibility="{Binding AtUserName, Converter={StaticResource AnythingToVisiblityConverter}}">
-                                                <TextBlock Text="回复" FontSize="20"/>
-                                                <TextBlock Text="{Binding AtUserName}" FontSize="20" Foreground="{StaticResource GreenMain}"/>
-                                                <TextBlock Text=":" Margin="5, 0, 5, 0" FontSize="20"/>
-                                            </StackPanel>
-                                            <TextBlock Text="{Binding Content}" FontSize="20" TextWrapping="WrapWholeWords"/>
-                                        </StackPanel>
+                                        <TextBlock Text="{Binding UserName}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{StaticResource GreenMain}" FontSize="22"/>
+                                        <TextBlock Text="{Binding CreateTime}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="Gray" FontSize="21"/>
+                                        <TextBlock TextWrapping="Wrap"  Margin="0, 5, 0, 0" Grid.Row="1">
+                                            <Run Text="回复" FontSize="19"/>
+                                            <Run Text="{Binding AtUserName}" FontSize="19" Foreground="{StaticResource GreenMain}"/>
+                                            <Run Text=":" FontSize="19"/>
+                                            <Run Text="{Binding Content}" FontSize="19"/>
+                                        </TextBlock>
                                     </Grid>
-                                    <Rectangle Style="{StaticResource LightGaryLine}"/>
+                                    <Rectangle Grid.Row="2" Style="{StaticResource LightGaryLine}"/>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

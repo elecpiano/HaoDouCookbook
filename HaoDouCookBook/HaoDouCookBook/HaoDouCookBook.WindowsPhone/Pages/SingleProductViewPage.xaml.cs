@@ -91,6 +91,10 @@ namespace HaoDouCookBook.Pages
                     viewModel.Intro = data.Info.Intro;
                     viewModel.Title = data.Info.Title;
                     viewModel.Position = data.Info.Position;
+                    viewModel.TopicId = data.Info.TopicId;
+                    viewModel.TopicName = data.Info.TopicName;
+                    viewModel.RecipeId = data.Info.RecipeId;
+                    viewModel.RecipeName = data.Info.RecipeTitle;
 
 
                     // digg list
@@ -127,6 +131,35 @@ namespace HaoDouCookBook.Pages
                     }
 
                 }, error => { });
+        }
+
+        #endregion
+
+        #region Event
+
+        private void RecipeName_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            // if recipeId is 0, it will just to TagsPage
+            //
+            if (0 == viewModel.RecipeId)
+            {
+                TagItem ti = new TagItem();
+                ti.Text = viewModel.RecipeName;
+                ti.Id = null;
+                App.Current.RootFrame.Navigate(typeof(TagsPage), ti);
+            }
+            else // if recipeId is not equal to 0, just to RecipeInfoPage
+            {
+                App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), viewModel.RecipeId);
+            }
+        }
+
+        private void TopicName_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            DishTileData data = new DishTileData();
+            data.Id = viewModel.TopicId;
+            data.ProductId = viewModel.ProductId;
+            App.Current.RootFrame.Navigate(typeof(ProductPage), data);
         }
 
         #endregion
