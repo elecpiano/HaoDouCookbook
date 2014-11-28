@@ -183,8 +183,10 @@
     <Compile Include="ViewModels\RecipeTileData.cs" />
     <Compile Include="ViewModels\SingleProductViewPageViewModel.cs" />
     <Compile Include="ViewModels\SpecialRecipeAlbumData.cs" />
+    <Compile Include="ViewModels\StuffInfoViewModel.cs" />
     <Compile Include="ViewModels\TagRecipeData.cs" />
     <Compile Include="ViewModels\TagsList.cs" />
+    <Compile Include="ViewModels\TagsPageViewModel.cs" />
     <Compile Include="ViewModels\Topic.cs" />
     <Compile Include="ViewModels\UserData.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">

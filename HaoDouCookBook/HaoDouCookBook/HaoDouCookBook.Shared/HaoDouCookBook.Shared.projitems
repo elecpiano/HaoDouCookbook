@@ -28,12 +28,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipeAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipePhotoAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\SearchAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\StuffAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\TopicAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\ADItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\AlbumItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\AlbumPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\ChoicenessPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\Comment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\FoodPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\HaodouMetaData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\InfoPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RankItem.cs" />

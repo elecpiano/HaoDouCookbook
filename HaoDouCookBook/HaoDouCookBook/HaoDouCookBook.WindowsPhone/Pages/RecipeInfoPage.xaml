@@ -219,7 +219,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical">
-                                    <Grid Height="60">
+                                    <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="60"/>
                                             <ColumnDefinition Width="*"/>
@@ -232,7 +232,7 @@
                                             </Grid.RowDefinitions>
                                             <TextBlock Text="{Binding UserName}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="19" Foreground="#78a708"/>
                                             <TextBlock Text="{Binding CreateTime}" Foreground="Gray" HorizontalAlignment="Right" Grid.Row="0" VerticalAlignment="Center" FontSize="19"/>
-                                            <TextBlock Text="{Binding Content}" FontSize="18" Width="260" TextTrimming="WordEllipsis" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" />
+                                            <TextBlock Text="{Binding Content}" FontSize="18" Width="260" TextTrimming="WordEllipsis" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" />
                                         </Grid>
                                     </Grid>
                                     <Rectangle Height="0.5" Fill="#10000000"  Width="800" Margin="0, 15, 0, 10"/>

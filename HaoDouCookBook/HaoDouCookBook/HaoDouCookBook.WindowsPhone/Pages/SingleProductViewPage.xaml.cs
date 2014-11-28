@@ -69,17 +69,14 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            SingleProductViewPageParams paras = new SingleProductViewPageParams();
+            SingleProductViewPageParams paras = e.Parameter as SingleProductViewPageParams;
 
             if(paras != null)
             {
-                int id;
-                if (int.TryParse(e.Parameter.ToString(), out id))
-                {
-                    viewModel = new SingleProductViewPageViewModel();
-                    rootScollViewer.ScrollToVerticalOffset(0);
-                    LoadDataAsync(paras.ProductId, null);
-                }
+                viewModel = new SingleProductViewPageViewModel();
+                rootScollViewer.ScrollToVerticalOffset(0);
+                DataBinding();
+                LoadDataAsync(paras.ProductId, null);
             }
 
         }
@@ -97,7 +94,6 @@ namespace HaoDouCookBook.Pages
         {
             await RecipePhotoAPI.GetPhotoView(id, uid, data =>
                 {
-                    DataBinding();
                     viewModel.ProductId = data.Info.Pid;
                     viewModel.UserAvatar = data.Info.Avatar;
                     viewModel.UserName = data.Info.UserName;

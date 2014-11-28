@@ -195,7 +195,7 @@ namespace HaoDouCookBook.Pages
         }
 
 
-        private void ShoAllComment_Tapped(object sender, TappedRoutedEventArgs e)
+        private void ShowAllComment_Tapped(object sender, TappedRoutedEventArgs e)
         {
             CommentListPage.CommentListPageParams paras = new CommentListPage.CommentListPageParams();
             ViewModels.ProductPageRecipe recipeData = sender.GetDataContext<ViewModels.ProductPageRecipe>();

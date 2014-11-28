@@ -49,7 +49,7 @@ namespace HaoDouCookBook.Pages
 
         #region Field && Property
 
-        private ObservableCollection<TagRecipeData> recipes = new ObservableCollection<TagRecipeData>();
+        private TagsPageViewModel viewModel = new TagsPageViewModel();
 
         #endregion
 
@@ -78,8 +78,9 @@ namespace HaoDouCookBook.Pages
 
             if (paras != null)
             {
-                recipes.Clear();
+                viewModel = new TagsPageViewModel();
                 rootScrollViewer.ScrollToVerticalOffset(0);
+                DataBinding();
                 this.title.Text = paras.TagText;
                 LoadDataAsync(0, 10, paras.Id, paras.TagText);
 
@@ -92,15 +93,13 @@ namespace HaoDouCookBook.Pages
 
         private void DataBinding()
         {
-            this.recipeList.ItemsSource = recipes;
+            this.root.DataContext = viewModel;
         }
 
         private async Task LoadDataAsync(int offset, int limit, int? tagid, string keyword)
         {
             await SearchAPI.GetList(offset, limit, DeviceHelper.GetUniqueDeviceID(), tagid, keyword, data =>
                 {
-                    DataBinding();
-
                     if (data.Items != null && data.Items.Length > 0)
                     {
                         if (noResultGrid.Visibility == Visibility.Visible)
@@ -110,7 +109,7 @@ namespace HaoDouCookBook.Pages
 
                         foreach (var item in data.Items)
                         {
-                            recipes.Add(new TagRecipeData()
+                            viewModel.Recipes.Add(new TagRecipeData()
                             {
                                 FoodStuff = item.Stuff,
                                 LikeNumber = item.LikeCount,
