@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\AnythingToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\ApiUrlHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\CommentAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\InfoAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RankAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipeAPI.cs" />
@@ -44,6 +45,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\WikiOrTableItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\Actor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\Cate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\CommentListPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\DiscoveryPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\Meal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\NewbieTutorial.cs" />

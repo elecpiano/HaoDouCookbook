@@ -183,6 +183,20 @@ namespace HaoDouCookBook.Pages
             App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), recipeData.ProductId);
         }
 
+
+        private void ShoAllComment_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            CommentListPage.CommentListPageParams parmas = new CommentListPage.CommentListPageParams();
+            ViewModels.ProductPageRecipe recipeData = sender.GetDataContext<ViewModels.ProductPageRecipe>();
+
+            parmas.Offset = 0;
+            parmas.Limit = 20;
+            parmas.RecipeId = recipeData.RecipeId;
+            //parmas.Type = 
+
+            App.Current.RootFrame.Navigate(typeof(CommentListPage), parmas);
+        }
+
         #endregion
 
 

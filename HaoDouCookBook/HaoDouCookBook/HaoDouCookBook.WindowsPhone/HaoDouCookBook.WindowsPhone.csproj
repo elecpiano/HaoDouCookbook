@@ -143,6 +143,9 @@
     <Compile Include="Pages\ArticleViewer.xaml.cs">
       <DependentUpon>ArticleViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CommentListPage.xaml.cs">
+      <DependentUpon>CommentListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
@@ -166,6 +169,7 @@
     </Compile>
     <Compile Include="ViewModels\AlbumPageViewModel.cs" />
     <Compile Include="ViewModels\CategoryTileData.cs" />
+    <Compile Include="ViewModels\CommentListPageViewModel.cs" />
     <Compile Include="ViewModels\CookMaster.cs" />
     <Compile Include="ViewModels\DiscoveryPageViewModel.cs" />
     <Compile Include="ViewModels\DishTileData.cs" />
@@ -319,6 +323,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ArticleViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CommentListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
