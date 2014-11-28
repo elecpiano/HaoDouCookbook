@@ -176,11 +176,11 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 20, 0, 20" Visibility="{Binding ProductCount, Converter={StaticResource AnythingToVisiblityConverter}}">
-                        <TextBlock Text="查看全部" HorizontalAlignment="Center" FontSize="24" Foreground="Gray" />
-                        <TextBlock Text="{Binding ProductCount}" HorizontalAlignment="Center" FontSize="24" Foreground="Gray" />
-                        <TextBlock Text="作品" HorizontalAlignment="Center" FontSize="24" Foreground="Gray" />
-                    </StackPanel>
+                    <TextBlock HorizontalAlignment="Center" Margin="0, 20, 0, 20" FontSize="24" Foreground="Gray"  Visibility="{Binding ProductCount, Converter={StaticResource AnythingToVisiblityConverter}}">
+                        <Run Text="查看全部"/>
+                        <Run Text="{Binding ProductCount}"/>
+                        <Run Text="作品"/>
+                    </TextBlock>
 
                     <Button Margin="20, 0, 20, 0" HorizontalAlignment="Center">
                         <Button.Content>

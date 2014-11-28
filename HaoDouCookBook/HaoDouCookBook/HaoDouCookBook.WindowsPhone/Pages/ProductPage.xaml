@@ -54,7 +54,7 @@
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
-                                
+
                                 <!--图片-->
                                 <Border Height="360" Margin="0, 10, 0, 0" Tapped="RecipeImage_Tapped">
                                     <Border.Background>
@@ -77,7 +77,7 @@
                                     <TextBlock Text="次赞" FontSize="19" Foreground="#78a708" Margin="0, 3, 0, 0"/>
                                 </StackPanel>
 
-                                <!--说明--> 
+                                <!--说明-->
                                 <StackPanel Orientation="Horizontal" Margin="0, 15, 0, 0" Visibility="{Binding Intro, Converter={StaticResource AnythingToVisiblityConverter}}">
                                     <Image Source="../assets/images/ProductPage/comment_gray.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
                                     <TextBlock Text="{Binding Intro}" Width="320" FontSize="20" TextWrapping="Wrap"/>
@@ -85,17 +85,18 @@
 
                                 <!--评论-->
                                 <StackPanel Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="30, 15, 0, 0" Visibility="{Binding ShowAllCommentsTextVisible, Converter={StaticResource AnythingToVisiblityConverter}}">
-                                        <TextBlock Text="查看所有" FontSize="26" Foreground="Gray"/>
-                                        <TextBlock Text="{Binding Comments.Count}" FontSize="26" Foreground="Gray"/>
-                                        <TextBlock Text="条评论" FontSize="26" Foreground="Gray"/>
-                                    </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal" Margin="28, 15, 0, 0" Visibility="{Binding Comments.Count, Converter={StaticResource AnythingToVisiblityConverter}}">
-                                        <TextBlock Text="{Binding Comments[0].UserName}" FontSize="21" Foreground="#78a708"/>
-                                        <TextBlock Text=":" FontSize="21" Margin="5, 0, 5, 0"/>
-                                        <TextBlock Text="{Binding Comments[0].Content}" FontSize="21" TextWrapping="Wrap"/>
-                                    </StackPanel>
+                                    <TextBlock FontSize="26" Foreground="Gray" HorizontalAlignment="Left"  Margin="30, 15, 0, 0" Visibility="{Binding ShowAllCommentsTextVisible, Converter={StaticResource AnythingToVisiblityConverter}}" Tapped="ShoAllComment_Tapped">
+                                        <Run Text="查看所有"/>
+                                        <Run Text="{Binding Comments.Count}"/>
+                                        <Run Text="条评论"/>
+                                    </TextBlock>
+
+                                    <TextBlock Margin="28, 15, 0, 0" TextWrapping="Wrap" FontSize="21" Visibility="{Binding Comments.Count, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                        <Run Text="{Binding Comments[0].UserName}" Foreground="#78a708"/>
+                                        <Run Text=":"/>
+                                        <Run Text="{Binding Comments[0].Content}"/>
+                                    </TextBlock>
                                 </StackPanel>
 
                                 <!--按钮-->
@@ -130,7 +131,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
 
-               
+
                 <!--<StackPanel Orientation="Vertical" Margin="20, 0, 20, 0">
                     <Grid>
                         <controls:UserPhoto Height="48" Width="48" HorizontalAlignment="Left" VerticalAlignment="Top" />
@@ -169,18 +170,18 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="30, 15, 0, 0">
-                            <TextBlock Text="查看所有" FontSize="26" Foreground="Gray"/>
-                            <TextBlock Text="2" FontSize="26" Foreground="Gray"/>
-                            <TextBlock Text="条评论" FontSize="26" Foreground="Gray"/>
-                        </StackPanel>
+                            <TextBlock FontSize="26" Foreground="Gray" HorizontalAlignment="Left"  Margin="30, 15, 0, 0" Visibility="{Binding ShowAllCommentsTextVisible, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                <Run Text="查看所有"/>
+                                <Run Text="{Binding Comments.Count}"/>
+                                <Run Text="条评论"/>
+                            </TextBlock>
 
-                        <StackPanel Orientation="Horizontal" Margin="28, 15, 0, 0">
-                            <TextBlock Text="12343567" FontSize="21" Foreground="#78a708"/>
-                            <TextBlock Text=":" FontSize="21" Margin="5, 0, 5, 0"/>
-                            <TextBlock Text="好吃" FontSize="21" TextWrapping="NoWrap"/>
-                        </StackPanel>
-                    </StackPanel>
+                            <TextBlock Margin="28, 15, 0, 0" TextWrapping="Wrap" FontSize="21" Visibility="{Binding Comments.Count, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                <Run Text="123123" Foreground="#78a708"/>
+                                <Run Text=":"/>
+                                <Run Text="12312323"/>
+                            </TextBlock>
+                     </StackPanel>
                     
                      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 20, 0, 0">
                         <Button>
