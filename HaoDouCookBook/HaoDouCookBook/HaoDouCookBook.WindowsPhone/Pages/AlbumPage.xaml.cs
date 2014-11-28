@@ -28,6 +28,21 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class AlbumPage : BackablePage
     {
+        #region Page Parameters Definition 
+
+        public class AlbumPageParams
+        {
+            public int AlbumId { get; set; }
+
+            public AlbumPageParams()
+            {
+                AlbumId = -1;
+            }
+ 
+        }
+
+        #endregion
+
         #region Field && Property
 
         private AlbumPageViewModel viewModel = new AlbumPageViewModel();
@@ -55,12 +70,12 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            SpecialRecipeAlbumData data = e.Parameter as SpecialRecipeAlbumData;
-            if (data != null)
+            AlbumPageParams paras = e.Parameter as AlbumPageParams;
+            if (paras != null)
             {
                 viewModel = new AlbumPageViewModel();
                 rootScrollViewer.ScrollToVerticalOffset(0);
-                LoadDataAsync(0, 20, data.Id, string.Empty, null);
+                LoadDataAsync(0, 20, paras.AlbumId, string.Empty, null);
             }
         }
        
@@ -111,7 +126,11 @@ namespace HaoDouCookBook.Pages
 
         private void RecipeTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), sender.GetDataContext<RecipeTileData>().RecipeId);
+            var dataContext = sender.GetDataContext<RecipeTileData>(); 
+            RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
+            paras.RecipeId = dataContext.RecipeId;
+
+            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
         
         #endregion

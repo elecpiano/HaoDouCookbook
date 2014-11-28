@@ -28,6 +28,21 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class SingleProductViewPage : BackablePage
     {
+        #region Page Parameters Definition
+
+        public class SingleProductViewPageParams
+        {
+            public int ProductId { get; set; }
+
+            public SingleProductViewPageParams()
+            {
+
+            }
+        }
+
+
+        #endregion
+
         #region Field && Property
 
         private SingleProductViewPageViewModel viewModel = new SingleProductViewPageViewModel();
@@ -54,14 +69,16 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            if(e.Parameter != null)
+            SingleProductViewPageParams paras = new SingleProductViewPageParams();
+
+            if(paras != null)
             {
                 int id;
                 if (int.TryParse(e.Parameter.ToString(), out id))
                 {
                     viewModel = new SingleProductViewPageViewModel();
                     rootScollViewer.ScrollToVerticalOffset(0);
-                    LoadDataAsync(id, null);
+                    LoadDataAsync(paras.ProductId, null);
                 }
             }
 
@@ -143,23 +160,29 @@ namespace HaoDouCookBook.Pages
             //
             if (0 == viewModel.RecipeId)
             {
-                TagItem ti = new TagItem();
-                ti.Text = viewModel.RecipeName;
-                ti.Id = null;
-                App.Current.RootFrame.Navigate(typeof(TagsPage), ti);
+                TagsPage.TagPageParams paras = new TagsPage.TagPageParams();
+                paras.Id = null;
+                paras.TagText = viewModel.RecipeName;
+
+                App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
             }
             else // if recipeId is not equal to 0, just to RecipeInfoPage
             {
-                App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), viewModel.RecipeId);
+                RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
+                paras.RecipeId = viewModel.RecipeId;
+
+                App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
             }
         }
 
         private void TopicName_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            DishTileData data = new DishTileData();
-            data.Id = viewModel.TopicId;
-            data.ProductId = viewModel.ProductId;
-            App.Current.RootFrame.Navigate(typeof(ProductPage), data);
+            ProductPage.ProductPageParams paras = new ProductPage.ProductPageParams();
+            paras.ProductId = viewModel.ProductId;
+            paras.TopicId = viewModel.ProductId;
+            paras.Type = 1;
+
+            App.Current.RootFrame.Navigate(typeof(ProductPage), paras);
         }
 
         #endregion

@@ -29,6 +29,20 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class RecipeInfoPage : BackablePage
     {
+        #region Page Parameters Definition
+
+        public class RecipeInfoPageParams
+        {
+            public int RecipeId { get; set; }
+
+            public RecipeInfoPageParams()
+            {
+
+            }
+        }
+
+        #endregion
+
         #region Field && Property
 
         private RecipeInfoPageViewModel viewModel = new RecipeInfoPageViewModel();
@@ -56,13 +70,12 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            viewModel = new RecipeInfoPageViewModel();
-            rootScrollViewer.ScrollToVerticalOffset(0);
-            int recipeId;
-
-            if (Int32.TryParse(e.Parameter.ToString(), out recipeId))
+            RecipeInfoPageParams paras = e.Parameter as RecipeInfoPageParams;
+            if(paras != null)
             {
-                LoadDataAsync(string.Empty, null, recipeId);
+                viewModel = new RecipeInfoPageViewModel();
+                rootScrollViewer.ScrollToVerticalOffset(0);
+                LoadDataAsync(string.Empty, null, paras.RecipeId);
             }
 
         }

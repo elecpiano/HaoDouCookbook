@@ -179,17 +179,33 @@ namespace HaoDouCookBook.Controls
 
         private void Meal_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(ProductPage), sender.GetDataContext<ViewModels.Meal>());
+            var meal = sender.GetDataContext<ViewModels.Meal>();
+
+            ProductPage.ProductPageParams paras = new ProductPage.ProductPageParams();
+            paras.ProductId = meal.ProductId;
+            paras.TopicId = meal.Id;
+            paras.Type = 1;
+
+            App.Current.RootFrame.Navigate(typeof(ProductPage), paras);
         }
 
         private void cateItems_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(ProductPage), sender.GetDataContext<DishTileData>());
+            var dish = sender.GetDataContext<DishTileData>();
+            ProductPage.ProductPageParams paras = new ProductPage.ProductPageParams();
+            paras.ProductId = dish.ProductId;
+            paras.TopicId = dish.Id;
+            paras.Type = 1;
+
+            App.Current.RootFrame.Navigate(typeof(ProductPage), paras);
         }
 
         private void Tutorial_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(TutorialViewPage), "http://m.haodou.com/app/recipe/act/novice.php");
+            TutorialViewPage.TutorialViewPageParams paras = new TutorialViewPage.TutorialViewPageParams();
+            paras.Url = "http://m.haodou.com/app/recipe/act/novice.php";
+
+            App.Current.RootFrame.Navigate(typeof(TutorialViewPage), paras);
         }
 
         #endregion

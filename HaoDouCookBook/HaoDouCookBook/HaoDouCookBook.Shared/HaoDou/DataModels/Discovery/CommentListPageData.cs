@@ -7,7 +7,6 @@ using System.Text;
 namespace HaoDouCookBook.HaoDou.DataModels.Discovery
 {
     [DataContract]
-    [DataContract]
     public class CommentListPageData
     {
         [DataMember(Name = "info")]

@@ -100,7 +100,11 @@ namespace HaoDouCookBook.Pages
 
         private void RecipeItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RankViewPage), sender.GetDataContext<RankItemData>());
+            var rankItemData = sender.GetDataContext<RankItemData>();
+            RankViewPage.RankViewPageParams paras = new RankViewPage.RankViewPageParams();
+            paras.Id = rankItemData.Id;
+            paras.Type = rankItemData.Type;
+            App.Current.RootFrame.Navigate(typeof(RankViewPage), paras);
         }
 
         #endregion

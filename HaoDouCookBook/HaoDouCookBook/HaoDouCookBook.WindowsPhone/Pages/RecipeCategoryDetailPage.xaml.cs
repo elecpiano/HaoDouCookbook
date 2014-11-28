@@ -29,6 +29,20 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class RecipeCategoryDetailPage : BackablePage
     {
+        #region Page Parameters Definition
+
+        public class RecipeCategoryDefailPageParams
+        {
+            public int Id { get; set; }
+            public string Title { get; set; }
+
+            public RecipeCategoryDefailPageParams()
+            {
+
+            }
+        }
+
+        #endregion
 
         #region Field && Property
         private ObservableCollection<RecipeTileData> Recipes = new ObservableCollection<RecipeTileData>();
@@ -57,12 +71,12 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            RecipeCategoryTileData data = e.Parameter as RecipeCategoryTileData;
-            if (data != null)
+            RecipeCategoryDefailPageParams paras = e.Parameter as RecipeCategoryDefailPageParams;
+            if (paras != null)
             {
                 // show the bottom appbar if the title is 私人定制
                 //
-                if (data.Id == 391926 || data.Title == "私人定制")
+                if (paras.Id == 391926 || paras.Title == "私人定制")
                 {
                     this.bottomAppbar.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 }
@@ -71,10 +85,10 @@ namespace HaoDouCookBook.Pages
                     this.bottomAppbar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 }
 
-                this.title.Text = data.Title;
+                this.title.Text = paras.Title;
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 Recipes.Clear();
-                LoadDataAsync(0, 10, data.Title, data.Id);
+                LoadDataAsync(0, 10, paras.Title, paras.Id);
             }
 
         }
@@ -117,7 +131,10 @@ namespace HaoDouCookBook.Pages
 
         private void RecipeTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), sender.GetDataContext<RecipeTileData>().RecipeId);
+            var dataContext = sender.GetDataContext<RecipeTileData>(); 
+            RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
+            paras.RecipeId = dataContext.RecipeId;
+            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
         #endregion

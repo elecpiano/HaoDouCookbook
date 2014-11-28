@@ -28,6 +28,22 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class TopicListPage : BackablePage
     {
+        #region Page Parameters Definition
+
+        public class TopicListPageParams
+        {
+            public int CategoryId { get; set; }
+
+            public string CategoryName { get; set; }
+
+            public TopicListPageParams()
+            {
+
+            }
+        }
+
+        #endregion
+
         #region Field && Property
 
         private ObservableCollection<TopicModel> topics = new ObservableCollection<TopicModel>();
@@ -55,15 +71,15 @@ namespace HaoDouCookBook.Pages
             {
                 return;
             }
-            
-            topics.Clear();
-            if (e.Parameter != null)
+
+            TopicListPageParams paras = new TopicListPageParams();
+
+            if (paras != null)
             {
                 topics.Clear();
                 rootScrollViewer.ScrollToVerticalOffset(0);
-                CategoryTileData category = e.Parameter as CategoryTileData;
-                this.title.Text = category.Title;
-                LoadDataAsync(int.Parse(category.Id));
+                this.title.Text = paras.CategoryName;
+                LoadDataAsync(paras.CategoryId);
             }
 
         }

@@ -28,6 +28,21 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class RankViewPage : BackablePage
     {
+        #region Page Parameters Definition
+
+        public class RankViewPageParams
+        {
+            public int Id { get; set; }
+            public int Type { get; set; }
+
+            public RankViewPageParams()
+            {
+
+            }
+        }
+
+        #endregion
+
         #region Field && Property
 
         private RankViewPageViewModel viewModel = new RankViewPageViewModel();
@@ -56,12 +71,12 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            viewModel = new RankViewPageViewModel();
-            rootScrollViewer.ScrollToVerticalOffset(0);
-            RankItemData rankData = e.Parameter as RankItemData;
-            if(rankData != null)
+            RankViewPageParams paras = e.Parameter as RankViewPageParams;
+            if(paras != null)
             {
-                LoadDataAsync(rankData.Id, rankData.Type, string.Empty, null);
+                viewModel = new RankViewPageViewModel();
+                rootScrollViewer.ScrollToVerticalOffset(0);
+                LoadDataAsync(paras.Id, paras.Type, string.Empty, null);
             }
         }
 
@@ -135,7 +150,10 @@ namespace HaoDouCookBook.Pages
         }
         private void RecipeItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), sender.GetDataContext<RankViewRecipeItem>().RecipeId);
+            RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
+            paras.RecipeId = sender.GetDataContext<RankViewRecipeItem>().RecipeId;
+
+            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
         #endregion

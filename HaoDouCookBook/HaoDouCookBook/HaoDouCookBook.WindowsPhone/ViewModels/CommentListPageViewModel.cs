@@ -132,6 +132,7 @@ namespace HaoDouCookBook.ViewModels
             cid = -1;
             userId = -1;
             avatar = string.Empty;
+            atUserId = -1;
             atUserName = string.Empty;
             userName = string.Empty;
             content = string.Empty;

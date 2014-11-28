@@ -30,6 +30,22 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class TagsPage : BackablePage
     {
+        #region Page Parameters Definition
+
+        public class TagPageParams
+        {
+            public int? Id { get; set; }
+
+            public string TagText { get; set; }
+
+            public TagPageParams()
+            {
+
+            }
+
+        }
+
+        #endregion
 
         #region Field && Property
 
@@ -58,14 +74,14 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            TagItem tagCategoryItem = e.Parameter as TagItem;
+            TagPageParams paras = e.Parameter as TagPageParams;
 
-            if (tagCategoryItem != null)
+            if (paras != null)
             {
                 recipes.Clear();
                 rootScrollViewer.ScrollToVerticalOffset(0);
-                this.title.Text = tagCategoryItem.Text;
-                LoadDataAsync(0, 10, tagCategoryItem.Id, tagCategoryItem.Text);
+                this.title.Text = paras.TagText;
+                LoadDataAsync(0, 10, paras.Id, paras.TagText);
 
             }
         }
@@ -120,7 +136,10 @@ namespace HaoDouCookBook.Pages
 
         private void Recipe_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), sender.GetDataContext<TagRecipeData>().RecipeId);
+            RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
+            paras.RecipeId = sender.GetDataContext<TagRecipeData>().RecipeId;
+
+            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
         #endregion

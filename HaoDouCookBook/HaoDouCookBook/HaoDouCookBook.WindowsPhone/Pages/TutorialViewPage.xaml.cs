@@ -24,17 +24,25 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class TutorialViewPage : BackablePage
     {
-        #region Lief Cycle
+        #region Page Parameters Definition
+
+        public class TutorialViewPageParams
+        {
+            public string Url { get; set; }
+
+            public TutorialViewPageParams()
+            {
+
+            }
+        }
 
         #endregion
+
+        #region Lief Cycle
+
         public TutorialViewPage()
         {
             this.InitializeComponent();
-        }
-
-        void webview_ScriptNotify(object sender, NotifyEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -45,12 +53,16 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (e.Parameter != null)
+
+            TutorialViewPageParams paras = new TutorialViewPageParams();
+
+            if (paras != null)
             {
-                string url = e.Parameter.ToString();
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(url));
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(paras.Url));
                 webview.NavigateWithHttpRequestMessage(request);
             }
         }
+
+        #endregion
     }
 }

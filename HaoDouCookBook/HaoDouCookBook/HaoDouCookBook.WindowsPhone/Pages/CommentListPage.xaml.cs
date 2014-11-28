@@ -26,24 +26,24 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class CommentListPage : BackablePage
     {
+        #region Page Parameters Definition
+
         public class CommentListPageParams
         {
-            public int Offset { get; set; }
-            public int Limit { get; set; }
             public int Type { get; set; }
             public int Cid { get; set; }
             public int RecipeId { get; set; }
 
             public CommentListPageParams()
             {
-                Offset = 0;
-                Limit = 20;
                 Type = 1;
                 Cid = 0;
                 RecipeId = 0;
             }
 
         }
+
+        #endregion
 
         #region Field && Property
 
@@ -79,7 +79,7 @@ namespace HaoDouCookBook.Pages
                 viewModel = new CommentListPageViewModel();
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 DataBinding();
-                LoadDataAsync(paras.Offset, paras.Limit, paras.Type, paras.Cid, paras.RecipeId);
+                LoadDataAsync(0, 20, paras.Type, paras.Cid, paras.RecipeId);
             }
         }
 
@@ -103,11 +103,11 @@ namespace HaoDouCookBook.Pages
 
         private void UpdatePageData(HaoDou.DataModels.Discovery.CommentListPageData data)
         {
+            viewModel.UserId = data.Info.UserId;
+            viewModel.Image = data.Info.Img;
+
             if (data.Comments != null)
             {
-                viewModel.UserId = data.Info.UserId;
-                viewModel.Image = data.Info.Img;
-
                 foreach (var item in data.Comments)
                 {
                     string content = item.Content;

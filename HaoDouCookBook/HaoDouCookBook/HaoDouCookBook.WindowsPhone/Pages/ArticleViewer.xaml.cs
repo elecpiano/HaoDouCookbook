@@ -26,6 +26,20 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class ArticleViewer : BackablePage
     {
+        #region Page Parameter Definition
+
+        public class ArticleViewerPageParams
+        {
+            public string Url { get; set; }
+
+            public ArticleViewerPageParams()
+            {
+                Url = string.Empty;
+            }
+        }
+
+        #endregion
+
         #region Life Cycle
 
         public ArticleViewer()
@@ -54,8 +68,8 @@ namespace HaoDouCookBook.Pages
 
             if (e.Parameter != null)
             {
-                string url = e.Parameter.ToString();
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(url));
+                ArticleViewerPageParams paras = e.Parameter as  ArticleViewerPageParams;
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(paras.Url));
                 request.Headers.Add("Cookies", string.Format("appid={0};uuid={1}", HaoDouApiUrlHelper.APPID, DeviceHelper.GetUniqueDeviceID()));
                 webview.NavigateWithHttpRequestMessage(request);
             }

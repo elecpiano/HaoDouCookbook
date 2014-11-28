@@ -115,12 +115,21 @@ namespace HaoDouCookBook.Controls
 
         private void CategoryImageTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(TopicListPage), sender.GetDataContext<CategoryTileData>());
+            var dataContext = sender.GetDataContext<CategoryTileData>(); 
+            TopicListPage.TopicListPageParams paras = new TopicListPage.TopicListPageParams();
+            paras.CategoryId = int.Parse(dataContext.Id);
+            paras.CategoryName = dataContext.Title;
+
+            App.Current.RootFrame.Navigate(typeof(TopicListPage), paras);
         }
 
         private void TopicTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(ArticleViewer), sender.GetDataContext<TopicModel>().Url);
+            var dataContet = sender.GetDataContext<TopicModel>(); 
+            ArticleViewer.ArticleViewerPageParams paras = new ArticleViewer.ArticleViewerPageParams();
+            paras.Url = dataContet.Url;
+
+            App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
         }
 
         #endregion

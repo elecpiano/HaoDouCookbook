@@ -29,6 +29,24 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class ProductPage : BackablePage
     {
+        #region Page Parameters Definition
+
+        public class ProductPageParams
+        {
+            public int TopicId { get; set; }
+
+            public int ProductId { get; set; }
+
+            public int Type { get; set; }
+
+            public ProductPageParams()
+            {
+
+            }
+        }
+
+        #endregion
+
         #region Field && Property
 
         private ProductPageViewModel viewModel = new ProductPageViewModel();
@@ -57,29 +75,14 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            int topicId = int.MinValue;
-            int productId = int.MinValue;
-            int type = 1;
-
-            if (e.Parameter is DishTileData)
-            {
-                var data = e.Parameter as DishTileData;
-                topicId = data.Id;
-                productId = data.ProductId;
-            }
-            else if (e.Parameter is ViewModels.Meal)
-            {
-                var data = e.Parameter as ViewModels.Meal;
-                topicId = data.Id;
-                productId = data.Id;
-            }
-
-            if (topicId != int.MinValue && productId != int.MinValue)
+            ProductPageParams paras = e.Parameter as ProductPageParams;
+            if (paras != null)
             {
                 viewModel = new ProductPageViewModel();
                 rooScrollViewer.ScrollToVerticalOffset(0);
-                LoadDataAsync(0, 20, productId, topicId, type, string.Empty, null);
+                LoadDataAsync(0, 20, paras.ProductId, paras.ProductId, paras.Type, string.Empty, null);
             }
+            
         }
 
         #endregion
@@ -164,14 +167,18 @@ namespace HaoDouCookBook.Pages
             //
             if (0 == recipeData.RecipeId)
             {
-                TagItem ti = new TagItem();
-                ti.Text = recipeData.Title;
-                ti.Id = null;
-                App.Current.RootFrame.Navigate(typeof(TagsPage), ti);
+                TagsPage.TagPageParams paras = new TagsPage.TagPageParams();
+                paras.Id = null;
+                paras.TagText = recipeData.Title;
+
+                App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
             }
             else // if recipeId is not equal to 0, just to RecipeInfoPage
             {
-                App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), recipeData.RecipeId);
+                RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
+                paras.RecipeId = recipeData.RecipeId;
+
+                App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
             }
         }
 
@@ -180,21 +187,23 @@ namespace HaoDouCookBook.Pages
         private void RecipeImage_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ViewModels.ProductPageRecipe recipeData = sender.GetDataContext<ViewModels.ProductPageRecipe>();
-            App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), recipeData.ProductId);
+            SingleProductViewPage.SingleProductViewPageParams paras = new SingleProductViewPage.SingleProductViewPageParams();
+            paras.ProductId = recipeData.ProductId;
+
+            App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), paras);
         }
 
 
         private void ShoAllComment_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            CommentListPage.CommentListPageParams parmas = new CommentListPage.CommentListPageParams();
+            CommentListPage.CommentListPageParams paras = new CommentListPage.CommentListPageParams();
             ViewModels.ProductPageRecipe recipeData = sender.GetDataContext<ViewModels.ProductPageRecipe>();
 
-            parmas.Offset = 0;
-            parmas.Limit = 20;
-            parmas.RecipeId = recipeData.RecipeId;
-            //parmas.Type = 
+            paras.RecipeId = recipeData.ProductId;
+            paras.Type = 2;
+            paras.Cid = 0;
 
-            App.Current.RootFrame.Navigate(typeof(CommentListPage), parmas);
+            App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
         }
 
         #endregion

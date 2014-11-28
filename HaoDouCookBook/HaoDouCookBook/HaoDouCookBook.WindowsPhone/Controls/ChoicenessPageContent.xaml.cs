@@ -221,13 +221,23 @@ namespace HaoDouCookBook.Controls
 
         private void Tag_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(TagsPage), sender.GetDataContext<ViewModels.TagItem>());
+            var dataContext = sender.GetDataContext<ViewModels.TagItem>();
+            TagsPage.TagPageParams paras = new TagsPage.TagPageParams();
+            paras.Id = dataContext.Id;
+            paras.TagText = dataContext.Text;
+
+            App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
 
         }
 
         private void RecipeCategoryTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RecipeCategoryDetailPage), Utils.GetDataContext<ViewModels.RecipeCategoryTileData>(sender));
+            RecipeCategoryDetailPage.RecipeCategoryDefailPageParams paras = new RecipeCategoryDetailPage.RecipeCategoryDefailPageParams();
+            var dataContext = sender.GetDataContext<ViewModels.RecipeCategoryTileData>();
+            paras.Id = dataContext.Id;
+            paras.Title = dataContext.Title;
+
+            App.Current.RootFrame.Navigate(typeof(RecipeCategoryDetailPage), paras);
         }
 
 
@@ -246,19 +256,27 @@ namespace HaoDouCookBook.Controls
 
                 string haodouUrlPrefix = string.Format("haodourecipe://haodou.com/wiki/info/?id={0}&url=", tiledata.Id);
                 string targetUrl = tiledata.Url.Substring(index + searchMark.Length);
-                App.Current.RootFrame.Navigate(typeof(ArticleViewer), targetUrl);
+                App.Current.RootFrame.Navigate(typeof(ArticleViewer), new ArticleViewer.ArticleViewerPageParams() { Url = targetUrl });
             }
 
         }
         private void RankItemGrid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RankViewPage), sender.GetDataContext<RankItemData>());
+            var rankItemData = sender.GetDataContext<RankItemData>();
+            RankViewPage.RankViewPageParams paras = new RankViewPage.RankViewPageParams();
+            paras.Id = rankItemData.Id;
+            paras.Type = rankItemData.Type;
+
+            App.Current.RootFrame.Navigate(typeof(RankViewPage), paras);
         }
 
 
         private void SpecialRecipeAlbum_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(AlbumPage), sender.GetDataContext<SpecialRecipeAlbumData>());
+            var dataContext = sender.GetDataContext<SpecialRecipeAlbumData>();
+            AlbumPage.AlbumPageParams paras = new AlbumPage.AlbumPageParams();
+            paras.AlbumId = dataContext.Id;
+            App.Current.RootFrame.Navigate(typeof(AlbumPage), paras);
         }
 
         #endregion
