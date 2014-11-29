@@ -22,7 +22,7 @@
                 <Border Background="White" BorderBrush="DarkGray" BorderThickness="1" CornerRadius="7" Margin="17, 15, 17, 15">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Image Source="../Assets/Images/search.png" Height="24" Margin="0, 0, 6, 0"/>
-                        <TextBlock Text="搜索菜谱、功效、食材" Foreground="#88000000" VerticalAlignment="Bottom" FontSize="18"/>
+                        <TextBlock x:Name="searchText" Foreground="#88000000" VerticalAlignment="Bottom" FontSize="18"/>
                     </StackPanel>
                 </Border>
             </Border>

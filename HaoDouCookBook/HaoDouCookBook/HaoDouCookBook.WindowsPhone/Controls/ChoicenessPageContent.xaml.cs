@@ -48,6 +48,7 @@ namespace HaoDouCookBook.Controls
             DataBiding();
             LoadDataAsync();
             this.Loaded += ChoicenessPageContent_Loaded;
+            searchText.Text = "搜索菜谱、专题、话题";
 
         }
 
@@ -198,9 +199,10 @@ namespace HaoDouCookBook.Controls
             {
                 foreach (var rankItem in data.Rank)
                 {
-                    ranklistData.Add(new RankItemData() { 
-                        CoverImage = rankItem.Cover, 
-                        Description = rankItem.Intro, 
+                    ranklistData.Add(new RankItemData()
+                    {
+                        CoverImage = rankItem.Cover,
+                        Description = rankItem.Intro,
                         Title = rankItem.Title,
                         Id = rankItem.Id,
                         Type = rankItem.RankType
@@ -280,6 +282,6 @@ namespace HaoDouCookBook.Controls
         }
 
         #endregion
-      
+
     }
 }

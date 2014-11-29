@@ -74,7 +74,7 @@ namespace HaoDouCookBook.Pages
             if(paras != null)
             {
                 viewModel = new SingleProductViewPageViewModel();
-                rootScollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ScrollToVerticalOffset(0);
                 DataBinding();
                 LoadDataAsync(paras.ProductId, null);
             }

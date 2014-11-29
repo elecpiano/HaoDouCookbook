@@ -537,12 +537,22 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<int>(ref userId, value); }
         }
 
+        private int productId;
+
+        public int ProductId
+        {
+            get { return productId; }
+            set { SetProperty<int>(ref productId, value); }
+        }
+
+
         public Product()
         {
             Image = string.Empty;
             UserId = -1;
             UserName = string.Empty;
             Content = string.Empty;
+            productId = -1;
         }
     }
 

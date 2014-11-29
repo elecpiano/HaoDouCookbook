@@ -13,7 +13,7 @@
     <StackPanel Orientation="Vertical" Name="root">
         <Grid Height="240">
             <Grid.Background>
-                <ImageBrush ImageSource="{Binding RecipeImage}"/>
+                <ImageBrush ImageSource="{Binding RecipeImage}" AlignmentY="Center" Stretch="UniformToFill"/>
             </Grid.Background>
             <Border Opacity="0.6">
                 <Border.Background>

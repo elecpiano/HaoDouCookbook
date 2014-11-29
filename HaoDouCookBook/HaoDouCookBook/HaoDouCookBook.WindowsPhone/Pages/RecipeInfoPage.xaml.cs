@@ -128,6 +128,7 @@ namespace HaoDouCookBook.Pages
             viewModel.AdFlag = infoData.AdFlag;
             viewModel.ProductCount = infoData.ProductCount;
             viewModel.IsVip = infoData.Vip == 1 ? true : false;
+            viewModel.Intro = infoData.Intro;
 
             // Fodd stuff
             //
@@ -177,7 +178,7 @@ namespace HaoDouCookBook.Pages
             viewModel.Ad.Title = infoData.AD.Title;
             viewModel.Ad.Url = infoData.AD.Url;
 
-            // Tgs
+            // Tags
             //
             if (infoData.Tags != null)
             {
@@ -225,7 +226,8 @@ namespace HaoDouCookBook.Pages
                          Content = item.Content,
                          UserId = item.UserId,
                          UserName = item.UserName,
-                         Image = item.Image
+                         Image = item.Image,
+                         ProductId = item.Pid
                     });
                     
                 }
@@ -255,8 +257,6 @@ namespace HaoDouCookBook.Pages
             this.addToShoppingListText.Text = "√购买清单";
         }
 
-        #endregion
-
         private void ShowAllProduct_Tapped(object sender, TappedRoutedEventArgs e)
         {
             ProductPage.ProductPageParams paras = new ProductPage.ProductPageParams();
@@ -266,5 +266,17 @@ namespace HaoDouCookBook.Pages
 
             App.Current.RootFrame.Navigate(typeof(ProductPage), paras);
         }
+
+        private void SingleProduct_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+            SingleProductViewPage.SingleProductViewPageParams paras = new SingleProductViewPage.SingleProductViewPageParams();
+            var dataContext = sender.GetDataContext<ViewModels.Product>();
+            paras.ProductId = dataContext.ProductId;
+
+            App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), paras);
+        }
+
+        #endregion
     }
 }
