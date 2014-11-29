@@ -249,8 +249,22 @@ namespace HaoDouCookBook.Pages
                 App.Current.RootFrame.Navigate(typeof(StuffInfoPage), paras);
             }
         }
-       
+
+        private void AddToShoppingList_Tapped(object sender, RoutedEventArgs e)
+        {
+            this.addToShoppingListText.Text = "√购买清单";
+        }
 
         #endregion
+
+        private void ShowAllProduct_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ProductPage.ProductPageParams paras = new ProductPage.ProductPageParams();
+            paras.ProductId = 0;
+            paras.TopicId = viewModel.RecipeId;
+            paras.Type = 2;
+
+            App.Current.RootFrame.Navigate(typeof(ProductPage), paras);
+        }
     }
 }

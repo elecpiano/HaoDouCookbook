@@ -111,6 +111,8 @@ namespace HaoDouCookBook.Pages
             viewModel.Title = data.Info.Title;
             viewModel.Cover = data.Info.Cover;
             viewModel.Count = data.Info.Count;
+            viewModel.RecipeId = data.Info.RecipeId;
+            viewModel.RecipeTitle = data.Info.RecipeTitle;
 
             if (data.Recipes != null)
             {

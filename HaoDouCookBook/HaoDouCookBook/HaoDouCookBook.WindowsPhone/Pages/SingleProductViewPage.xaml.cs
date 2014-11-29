@@ -175,7 +175,7 @@ namespace HaoDouCookBook.Pages
         {
             ProductPage.ProductPageParams paras = new ProductPage.ProductPageParams();
             paras.ProductId = viewModel.ProductId;
-            paras.TopicId = viewModel.ProductId;
+            paras.TopicId = viewModel.TopicId;
             paras.Type = 1;
 
             App.Current.RootFrame.Navigate(typeof(ProductPage), paras);

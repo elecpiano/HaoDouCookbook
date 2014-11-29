@@ -43,6 +43,23 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref cover, value); }
         }
 
+        private int recipeId;
+
+        public int RecipeId
+        {
+            get { return recipeId; }
+            set { SetProperty<int>(ref recipeId, value); }
+        }
+
+        private string recipeTitle;
+
+        public string RecipeTitle
+        {
+            get { return recipeTitle; }
+            set { SetProperty<string>(ref recipeTitle, value); }
+        }
+
+
         public ObservableCollection<ProductPageRecipe> Products { get; set; }
 
         public ProductPageViewModel()
@@ -51,6 +68,8 @@ namespace HaoDouCookBook.ViewModels
             count = 0;
             content = string.Empty;
             cover = string.Empty;
+            recipeId = -1;
+            recipeTitle = string.Empty;
             Products = new ObservableCollection<ProductPageRecipe>();
         }
 

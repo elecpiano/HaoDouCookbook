@@ -35,6 +35,12 @@ namespace HaoDouCookBook.HaoDou.DataModels.Discovery
 
         [DataMember]
         public string Date { get; set; }
+
+        [DataMember]
+        public int RecipeId { get; set; }
+
+        [DataMember]
+        public string RecipeTitle { get; set; }
         
         [DataMember]
         public int Id { get; set; }

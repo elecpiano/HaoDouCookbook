@@ -62,9 +62,9 @@
                     <Grid Margin="0,20, 0, 0">
                         <TextBlock Text="食材" Foreground="#78a708" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" />
 
-                        <Button Width="160" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, -20, 0, 0">
+                        <Button Width="160" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, -20, 0, 0" Click="AddToShoppingList_Tapped">
                             <Button.Content>
-                                <TextBlock Text="+购买清单" FontWeight="Normal" FontSize="22" Margin="0, 2, 0, 0"/>
+                                <TextBlock Name="addToShoppingListText" Text="+购买清单" FontWeight="Normal" FontSize="22" Margin="0, 2, 0, 0"/>
                             </Button.Content>
                         </Button>
 
@@ -176,7 +176,9 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <TextBlock HorizontalAlignment="Center" Margin="0, 20, 0, 20" FontSize="24" Foreground="Gray"  Visibility="{Binding ProductCount, Converter={StaticResource AnythingToVisiblityConverter}}">
+                    <TextBlock HorizontalAlignment="Center" Margin="0, 20, 0, 20" FontSize="24" Foreground="Gray"  
+                               Tapped="ShowAllProduct_Tapped"
+                               Visibility="{Binding ProductCount, Converter={StaticResource AnythingToVisiblityConverter}}">
                         <Run Text="查看全部"/>
                         <Run Text="{Binding ProductCount}"/>
                         <Run Text="作品"/>
