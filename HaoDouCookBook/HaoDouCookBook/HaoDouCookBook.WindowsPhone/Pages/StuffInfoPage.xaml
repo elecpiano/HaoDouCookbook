@@ -44,7 +44,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Vertical" Background="Transparent" Tapped="Recipe_Tapped">
                                     <StackPanel Width="120" HorizontalAlignment="Left">
                                         <Image Source="{Binding Cover}" Width="120" Height="120"/>
                                         <TextBlock Text="{Binding Title}" Margin="0, 15, 0, 0" FontSize="21" TextWrapping="Wrap" Width="110" TextAlignment="Center" HorizontalAlignment="Center"/>

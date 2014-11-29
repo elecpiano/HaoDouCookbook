@@ -20,13 +20,13 @@
                             Visibility="{Binding FoodName, Converter={StaticResource AnythingToVisiblityConverter}}">
                     <Grid Margin="20, 0, 20, 0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="90"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="35"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="{Binding FoodCover}" Stretch="UniformToFill" Width="60" Height="60" Grid.Column="0" HorizontalAlignment="Left"/>
-                        <TextBlock Text="{Binding FoodName}" Grid.Column="1" HorizontalAlignment="Left" FontSize="21"/>
-                        <TextBlock Text="{Binding FoodIntro}" FontSize="19" HorizontalAlignment="Left" Grid.Column="1" Margin="0, 25, 0, 20" TextWrapping="Wrap" MaxLines="2" TextTrimming="WordEllipsis"/>
+                        <Image Source="{Binding FoodCover}" Stretch="UniformToFill" Width="80" Height="80" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBlock Text="{Binding FoodName}" Grid.Column="1" HorizontalAlignment="Left" FontSize="24"/>
+                        <TextBlock Text="{Binding FoodIntro}" FontSize="19" HorizontalAlignment="Left" Grid.Column="1" Margin="0, 30, 0, 20" TextWrapping="Wrap" MaxLines="2" TextTrimming="WordEllipsis"/>
                         <Image Source="../assets/images/mypage/more.png" Grid.Column="2"/>
                     </Grid>
                     <Rectangle Style="{StaticResource GrayLine}" Width="800" />

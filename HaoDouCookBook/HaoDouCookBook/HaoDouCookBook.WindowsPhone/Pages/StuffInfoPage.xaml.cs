@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -127,6 +128,16 @@ namespace HaoDouCookBook.Pages
             paras.TagText = viewModel.StuffName;
 
             App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
+        }
+
+
+        private void Recipe_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<StuffRecipe>();
+            RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
+            paras.RecipeId = dataContext.RecipeId;
+
+            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
         #endregion
