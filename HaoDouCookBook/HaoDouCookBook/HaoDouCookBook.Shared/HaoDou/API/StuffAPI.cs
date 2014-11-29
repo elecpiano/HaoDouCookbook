@@ -11,7 +11,7 @@ namespace HaoDouCookBook.HaoDou.API
     {
         public const string MODULE = "Stuff";
 
-        public static async Task GetStuffInfo(int id, Action<FoodPageData> onSuccess, Action<Error> onFail)
+        public static async Task GetStuffInfo(int id, Action<StuffData> onSuccess, Action<Error> onFail)
         {
             string methodName = "getStuffInfo";
             POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
@@ -19,7 +19,7 @@ namespace HaoDouCookBook.HaoDou.API
 
             string cacheFileName = string.Format("{0}-{1}", methodName, id);
 
-            HaoDouJsonDataLoader<FoodPageData> loader = new HaoDouJsonDataLoader<FoodPageData>();
+            HaoDouJsonDataLoader<StuffData> loader = new HaoDouJsonDataLoader<StuffData>();
             await loader.LoadAsync(postRequest, true, MODULE, cacheFileName, onSuccess, onFail);
 
         }

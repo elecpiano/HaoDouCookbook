@@ -158,6 +158,9 @@
     <Compile Include="Pages\SingleProductViewPage.xaml.cs">
       <DependentUpon>SingleProductViewPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\StuffInfoPage.xaml.cs">
+      <DependentUpon>StuffInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TagsPage.xaml.cs">
       <DependentUpon>TagsPage.xaml</DependentUpon>
     </Compile>
@@ -357,6 +360,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SingleProductViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StuffInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

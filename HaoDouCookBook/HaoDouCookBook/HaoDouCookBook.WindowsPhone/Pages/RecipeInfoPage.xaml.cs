@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using ViewModels = HaoDouCookBook.ViewModels;
+using Shared.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -233,8 +234,21 @@ namespace HaoDouCookBook.Pages
 
         #endregion
 
+
         #region Event
 
+        private void Stuff_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<ViewModels.FoodStuff>();
+
+            if (dataContext.FoodFlag)
+            {
+                StuffInfoPage.StuffInfoPageParams paras = new StuffInfoPage.StuffInfoPageParams();
+                paras.Id = dataContext.Id;
+                paras.Title = dataContext.Name;
+                App.Current.RootFrame.Navigate(typeof(StuffInfoPage), paras);
+            }
+        }
        
 
         #endregion

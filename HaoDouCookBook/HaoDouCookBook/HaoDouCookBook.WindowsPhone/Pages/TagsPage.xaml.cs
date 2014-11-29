@@ -100,6 +100,14 @@ namespace HaoDouCookBook.Pages
         {
             await SearchAPI.GetList(offset, limit, DeviceHelper.GetUniqueDeviceID(), tagid, keyword, data =>
                 {
+                    if(data.Food != null)
+                    {
+                        viewModel.FoodCover = data.Food.Cover;
+                        viewModel.FoodId = data.Food.Id;
+                        viewModel.FoodIntro = data.Food.Intro;
+                        viewModel.FoodName = data.Food.Name;
+                    }
+
                     if (data.Items != null && data.Items.Length > 0)
                     {
                         if (noResultGrid.Visibility == Visibility.Visible)
@@ -139,6 +147,16 @@ namespace HaoDouCookBook.Pages
             paras.RecipeId = sender.GetDataContext<TagRecipeData>().RecipeId;
 
             App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+        }
+
+
+        private void Food_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            StuffInfoPage.StuffInfoPageParams paras = new StuffInfoPage.StuffInfoPageParams();
+            paras.Id = viewModel.FoodId;
+            paras.Title = viewModel.FoodName;
+
+            App.Current.RootFrame.Navigate(typeof(StuffInfoPage), paras);
         }
 
         #endregion

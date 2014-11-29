@@ -15,42 +15,62 @@
             <TextBlock x:Name="title" Margin="13, 0, 0, 15" FontSize="42" TextTrimming="WordEllipsis" Width="380" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </Border>
         <ScrollViewer Name="rootScrollViewer" Margin="0, 110, 0, 0" Background="White">
-            <ItemsControl Name="recipeList" ItemsSource="{Binding Recipes}" Margin="20, 20, 20, 20">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
+            <StackPanel>
+                <StackPanel Orientation="Vertical" Margin="0, 20, 0, 0" Tapped="Food_Tapped"
+                            Visibility="{Binding FoodName, Converter={StaticResource AnythingToVisiblityConverter}}">
+                    <Grid Margin="20, 0, 20, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="35"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding FoodCover}" Stretch="UniformToFill" Width="60" Height="60" Grid.Column="0" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding FoodName}" Grid.Column="1" HorizontalAlignment="Left" FontSize="21"/>
+                        <TextBlock Text="{Binding FoodIntro}" FontSize="19" HorizontalAlignment="Left" Grid.Column="1" Margin="0, 25, 0, 0" TextWrapping="Wrap" MaxLines="2" TextTrimming="WordEllipsis" Margin="0, 0, 0, 20" />
+                        <Image Source="../assets/images/mypage/more.png" Grid.Column="2"/>
+                    </Grid>
+                    <Rectangle Style="{StaticResource GrayLine}" Width="800" />
+                </StackPanel>
 
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical" Background="Transparent" Tapped="Recipe_Tapped">
-                            <Grid x:Name="root" Margin="0, 0, 10, 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="124"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Rectangle Width="122" Height="90" VerticalAlignment="Center" Grid.Column="0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{Binding PreviewImageSource}"/>
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="8, 0, 0, 0">
-                                    <TextBlock Text="{Binding RecipeName}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0" TextTrimming="WordEllipsis"/>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                        <TextBlock Text="{Binding LikeNumber}" Style="{StaticResource TagsContentStyle}"/>
-                                        <TextBlock Text="喜欢" Style="{StaticResource TagsContentStyle}"/>
-                                        <TextBlock Text="{Binding ViewNumber}" Margin="15,0,0,0"  Style="{StaticResource TagsContentStyle}"/>
-                                        <TextBlock Text="浏览" Style="{StaticResource TagsContentStyle}"/>
-                                    </StackPanel>
-                                    <TextBlock Text="{Binding FoodStuff}" Width="240" Style="{StaticResource TagsContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
-                                </Grid>
-                            </Grid>
-                            <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 20, 0, 20" VerticalAlignment="Bottom"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                <ItemsControl Name="recipeList" ItemsSource="{Binding Recipes}" Margin="20, 20, 20, 20">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Vertical" Background="Transparent" Tapped="Recipe_Tapped">
+                                    <Grid x:Name="root" Margin="0, 0, 10, 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="124"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Rectangle Width="122" Height="90" VerticalAlignment="Center" Grid.Column="0">
+                                            <Rectangle.Fill>
+                                                <ImageBrush ImageSource="{Binding PreviewImageSource}"/>
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                        <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="8, 0, 0, 0">
+                                            <TextBlock Text="{Binding RecipeName}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0" TextTrimming="WordEllipsis"/>
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                                <TextBlock Text="{Binding LikeNumber}" Style="{StaticResource TagsContentStyle}"/>
+                                                <TextBlock Text="喜欢" Style="{StaticResource TagsContentStyle}"/>
+                                                <TextBlock Text="{Binding ViewNumber}" Margin="15,0,0,0"  Style="{StaticResource TagsContentStyle}"/>
+                                                <TextBlock Text="浏览" Style="{StaticResource TagsContentStyle}"/>
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding FoodStuff}" Width="240" Style="{StaticResource TagsContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
+                                        </Grid>
+                                    </Grid>
+                                </StackPanel>
+                                <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 20, 0, 20" VerticalAlignment="Bottom"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
         </ScrollViewer>
         <Grid Name="noResultGrid" Visibility="Collapsed" Margin="0, 110, 0, 0" Background="White">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">

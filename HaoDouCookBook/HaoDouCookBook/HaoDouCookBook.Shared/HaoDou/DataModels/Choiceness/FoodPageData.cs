@@ -6,19 +6,19 @@ using System.Text;
 namespace HaoDouCookBook.HaoDou.DataModels.Choiceness
 {
     [DataContract]
-    public class FoodPageData
+    public class StuffData
     {
         [DataMember(Name = "info")]
-        public FoodPageInfo Info { get; set; }
+        public StuffInfo Info { get; set; }
 
-        FoodPageData()
+        public StuffData()
         { 
 
         }
     }
 
     [DataContract]
-    public class FoodPageInfo
+    public class StuffInfo
     {
         [DataMember]
         public int TagId { get; set; }
@@ -42,12 +42,22 @@ namespace HaoDouCookBook.HaoDou.DataModels.Choiceness
         public string Storage { get; set; }
 
         [DataMember]
-        public FoodPageRecipe[] RecipeList { get; set; }
+        public StuffRecipe[] RecipeList { get; set; }
 
+        public StuffInfo()
+        {
+            TagId = -1;
+            Intro = string.Empty;
+            Cover = string.Empty;
+            Effect = string.Empty;
+            Pick = string.Empty;
+            Skill = string.Empty;
+            Storage = string.Empty;
+        }
     }
 
     [DataContract]
-    public class FoodPageRecipe
+    public class StuffRecipe
     {
         [DataMember]
         public string Title { get; set; }
@@ -58,7 +68,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.Choiceness
         [DataMember]
         public int RecipeId { get; set; }
 
-        public FoodPageRecipe()
+        public StuffRecipe()
         {
             Title = string.Empty;
             Cover = string.Empty;

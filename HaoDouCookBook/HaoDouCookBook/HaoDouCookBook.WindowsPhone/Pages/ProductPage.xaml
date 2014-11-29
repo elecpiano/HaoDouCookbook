@@ -87,13 +87,11 @@
                                 <StackPanel Orientation="Vertical">
 
                                     <TextBlock FontSize="26" Foreground="Gray" HorizontalAlignment="Left"  Margin="30, 15, 0, 0" Visibility="{Binding ShowAllCommentsTextVisible, Converter={StaticResource AnythingToVisiblityConverter}}" Tapped="ShowAllComment_Tapped">
-                                        <Run Text="查看所有"/>
-                                        <Run Text="{Binding CommentCount}"/>
-                                        <Run Text="条评论"/>
+                                        查看所有<Run Text="{Binding CommentCount}"/>条评论
                                     </TextBlock>
 
                                     <TextBlock Margin="28, 15, 0, 0" TextWrapping="Wrap" FontSize="21" Visibility="{Binding Comments.Count, Converter={StaticResource AnythingToVisiblityConverter}}">
-                                        <Run Text="{Binding Comments[0].UserName}" Foreground="#78a708"/>
+                                        <Run Text="{Binding Comments[0].UserName}" Foreground="#78a708"/>:
                                         <Run Text=":"/>
                                         <Run Text="{Binding Comments[0].Content}"/>
                                     </TextBlock>
