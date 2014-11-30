@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouHttpExecuter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouJsonDataLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouSearchHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\UserSettingsConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\AnythingToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
@@ -42,6 +43,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RankListItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RecipeItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RecipeRecommend.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\SearchPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\StuffInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\TagItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RankViewPage.cs" />

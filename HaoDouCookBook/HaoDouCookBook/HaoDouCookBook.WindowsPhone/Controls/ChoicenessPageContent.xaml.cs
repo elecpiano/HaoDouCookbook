@@ -281,6 +281,11 @@ namespace HaoDouCookBook.Controls
             App.Current.RootFrame.Navigate(typeof(AlbumPage), paras);
         }
 
+        private void searchBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(SearchPage));
+        }
+
         #endregion
 
     }

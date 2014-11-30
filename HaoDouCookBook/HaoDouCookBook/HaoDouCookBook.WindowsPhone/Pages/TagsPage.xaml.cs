@@ -84,6 +84,11 @@ namespace HaoDouCookBook.Pages
                 this.title.Text = paras.TagText;
                 LoadDataAsync(0, 10, paras.Id, paras.TagText);
 
+                if(!string.IsNullOrEmpty(paras.TagText))
+                {
+                    HaoDouSearchHelper.AddSearchKeywordAsync(paras.TagText);
+                }
+
             }
         }
 

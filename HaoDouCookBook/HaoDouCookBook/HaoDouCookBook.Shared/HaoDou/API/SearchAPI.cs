@@ -1,4 +1,5 @@
 ﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.DataModels.Choiceness;
 using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,16 @@ namespace HaoDouCookBook.HaoDou.API
 
             HaoDouJsonDataLoader<TagsPageData> loader = new HaoDouJsonDataLoader<TagsPageData>();
             await loader.LoadAsync(postRequest, true, MODULE, cacheFile, onSuccess, onFail);
+        }
+
+        public static async Task GetHotSearch(Action<SearchPageData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getHotSearch";
+            GETRequestExecuter getRequest = new GETRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+
+            string cacheFileName = methodName;
+            HaoDouJsonDataLoader<SearchPageData> loader = new HaoDouJsonDataLoader<SearchPageData>();
+            await loader.LoadAsync(getRequest, true, MODULE, cacheFileName, onSuccess, onFail);
         }
     }
 }

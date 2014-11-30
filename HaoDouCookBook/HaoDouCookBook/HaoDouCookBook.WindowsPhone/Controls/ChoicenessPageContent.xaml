@@ -18,7 +18,7 @@
     <ScrollViewer>
         <StackPanel Orientation="Vertical">
             <!--搜索-->
-            <Border Height="70" Background="#12000000" Name="searchBox" >
+            <Border Height="70" Background="#12000000" Name="searchBox" Tapped="searchBox_Tapped">
                 <Border Background="White" BorderBrush="DarkGray" BorderThickness="1" CornerRadius="7" Margin="17, 15, 17, 15">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Image Source="../Assets/Images/search.png" Height="24" Margin="0, 0, 6, 0"/>

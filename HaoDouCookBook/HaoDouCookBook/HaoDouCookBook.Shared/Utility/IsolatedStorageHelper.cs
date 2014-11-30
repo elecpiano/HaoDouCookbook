@@ -75,19 +75,42 @@ namespace Shared.Utility
             if (local != null)
             {
                 // Get the DataFolder folder.
-                var dataFolder = await local.GetFolderAsync(folderName);
+                StorageFolder dataFolder = null;
+
+                try
+                {
+                    dataFolder = await local.GetFolderAsync(folderName);
+                }
+                catch (FileNotFoundException)
+                {
+                    return null;
+                }
 
                 if (dataFolder == null)
                 {
                     return null;
                 }
-                // Get the file.
-                var file = await dataFolder.OpenStreamForReadAsync(fileName);
 
-                // Read the data.
-                using (StreamReader streamReader = new StreamReader(file))
+                try
                 {
-                    return streamReader.ReadToEnd();
+
+                    // Get the file.
+                    var file = await dataFolder.OpenStreamForReadAsync(fileName);
+
+                    if (file == null)
+                    {
+                        return null;
+                    }
+
+                    // Read the data.
+                    using (StreamReader streamReader = new StreamReader(file))
+                    {
+                        return streamReader.ReadToEnd();
+                    }
+                }
+                catch (FileNotFoundException)
+                {
+                    return null;
                 }
             }
             return null;
@@ -150,7 +173,7 @@ namespace Shared.Utility
             catch (Exception ex)
             {
             }
-            
+
             return size;
         }
 

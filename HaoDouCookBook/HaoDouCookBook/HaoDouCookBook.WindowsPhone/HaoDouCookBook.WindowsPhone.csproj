@@ -155,6 +155,9 @@
     <Compile Include="Pages\RecipeInfoPage.xaml.cs">
       <DependentUpon>RecipeInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SearchPage.xaml.cs">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SingleProductViewPage.xaml.cs">
       <DependentUpon>SingleProductViewPage.xaml</DependentUpon>
     </Compile>
@@ -184,6 +187,7 @@
     <Compile Include="ViewModels\RecipeCategoryTileData.cs" />
     <Compile Include="ViewModels\RecipeInfoPageViewModel.cs" />
     <Compile Include="ViewModels\RecipeTileData.cs" />
+    <Compile Include="ViewModels\SearchPageViewModel.cs" />
     <Compile Include="ViewModels\SingleProductViewPageViewModel.cs" />
     <Compile Include="ViewModels\SpecialRecipeAlbumData.cs" />
     <Compile Include="ViewModels\StuffInfoViewModel.cs" />
@@ -245,6 +249,9 @@
     <Content Include="Assets\Images\Rank\rank-3.png" />
     <Content Include="Assets\Images\Rank\rank-4.png" />
     <Content Include="Assets\Images\search.png" />
+    <Content Include="Assets\Images\SearchPage\clear.png" />
+    <Content Include="Assets\Images\SearchPage\search_history.png" />
+    <Content Include="Assets\Images\SearchPage\search_texbox.png" />
     <Content Include="Assets\Images\tags.png" />
     <Content Include="Assets\Images\vip.png" />
     <Content Include="Assets\Logo.scale-240.png" />
@@ -356,6 +363,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RecipeInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SearchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
