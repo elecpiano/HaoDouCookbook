@@ -204,7 +204,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border VerticalAlignment="Top" HorizontalAlignment="Left" Background="#10000000" Margin="0, 0, 20, 15" >
+                                <Border Tapped="Tags_Tapped" Style="{StaticResource RecipeInfoPage_Tags_Style}">
                                     <TextBlock Text="{Binding Text}" Margin="10, 6, 10, 6" FontSize="19" TextAlignment="Center"/>
                                 </Border>
                             </DataTemplate>

@@ -231,6 +231,13 @@
         <Setter Property="MaxLines" Value="2"/>
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
+
+    <Style x:Key="RecipeInfoPage_Tags_Style" TargetType="Border">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Background" Value="#10000000"/>
+        <Setter Property="Margin" Value="0, 0, 20, 15"/>
+    </Style>
     
     <!--Page Title-->
     <Style x:Key="PageTitleBorderStyle" TargetType="Border">

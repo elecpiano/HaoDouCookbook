@@ -277,6 +277,16 @@ namespace HaoDouCookBook.Pages
             App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), paras);
         }
 
+        private void Tags_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<TagItem>();
+            TagsPage.TagPageParams paras = new TagsPage.TagPageParams();
+            paras.TagText = dataContext.Text;
+            paras.Id = dataContext.Id;
+
+            App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
+        }
+
         #endregion
     }
 }
