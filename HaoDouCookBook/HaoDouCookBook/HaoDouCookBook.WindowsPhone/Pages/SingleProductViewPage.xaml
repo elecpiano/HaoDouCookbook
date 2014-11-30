@@ -23,7 +23,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Border Visibility="{Binding RecipeName, Converter={StaticResource AnythingToVisiblityConverter}}" Grid.Row="0" Margin="0" Style="{StaticResource PageTitleBorderStyle}">
-                <TextBlock x:Name="title" Margin="12, 0, 0, 15" Width="370" Text="{Binding RecipeName}" TextTrimming="WordEllipsis" FontSize="42" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock x:Name="title"  Style="{StaticResource SubTitleStyle}">
                     <Run Text="{Binding RecipeName}"/>的作品
                 </TextBlock>
             </Border>

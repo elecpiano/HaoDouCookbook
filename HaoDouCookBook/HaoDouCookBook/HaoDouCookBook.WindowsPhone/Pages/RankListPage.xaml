@@ -12,7 +12,7 @@
     <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
         <Border Style="{StaticResource PageTitleBorderStyle}">
-            <TextBlock x:Name="title" Margin="12, 0, 0, 15" Text="榜单" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="title" Text="榜单" Style="{StaticResource SubTitleStyle}"/>
         </Border>
         <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
             <ItemsControl x:Name="ranklist" Margin="20, 20, 20, 20">
