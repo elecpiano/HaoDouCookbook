@@ -158,6 +158,9 @@
     <Compile Include="Pages\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ShakePage.xaml.cs">
+      <DependentUpon>ShakePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SingleProductViewPage.xaml.cs">
       <DependentUpon>SingleProductViewPage.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,7 @@
     <Compile Include="ViewModels\RecipeInfoPageViewModel.cs" />
     <Compile Include="ViewModels\RecipeTileData.cs" />
     <Compile Include="ViewModels\SearchPageViewModel.cs" />
+    <Compile Include="ViewModels\ShakePageViewModel.cs" />
     <Compile Include="ViewModels\SingleProductViewPageViewModel.cs" />
     <Compile Include="ViewModels\SpecialRecipeAlbumData.cs" />
     <Compile Include="ViewModels\StuffInfoViewModel.cs" />
@@ -367,6 +371,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ShakePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -54,7 +54,7 @@ namespace HaoDouCookBook.Pages
         {
             base.OnNavigatedTo(e);
 
-            TutorialViewPageParams paras = new TutorialViewPageParams();
+            TutorialViewPageParams paras = e.Parameter as  TutorialViewPageParams;
 
             if (paras != null)
             {

@@ -1,4 +1,5 @@
 ﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.DataModels.Choiceness;
 using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,19 @@ namespace HaoDouCookBook.HaoDou.API
             string cacheFileName = string.Format("{0}-{1}-{2}-{3}", methodName, albumId, offset, limit);
             HaoDouJsonDataLoader<AlbumPageData> loader = new HaoDouJsonDataLoader<AlbumPageData>();
             await loader.LoadAsync(postRequest, true, MODULE, cacheFileName, onSuccess, onFail);
+        }
+
+        public static async Task Shake(string sign, int? uid, string uuid, Action<ShakePageData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "shake";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("uid", uid.HasValue ? uid.Value.ToString() : "0");
+            postRequest.AddPostData("uuid", uuid.ToString());
+
+            string cacheFileName = methodName;
+            HaoDouJsonDataLoader<ShakePageData> loader = new HaoDouJsonDataLoader<ShakePageData>();
+            await loader.LoadAsync(postRequest, true, MODULE, methodName, onSuccess, onFail);
         }
     }
 }

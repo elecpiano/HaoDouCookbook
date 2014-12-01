@@ -73,9 +73,9 @@
                 </ScrollViewer>
             </PivotItem>
             <PivotItem Header="摇一摇">
-                <StackPanel Margin="-20, 0, -20, 0" Background="White">
-
-                </StackPanel>
+                <Border Margin="-20, 0, -20, 0" Background="White">
+                    <TextBlock Text="摇一摇" FontSize="46" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
             </PivotItem>
         </Pivot>
     </Grid>

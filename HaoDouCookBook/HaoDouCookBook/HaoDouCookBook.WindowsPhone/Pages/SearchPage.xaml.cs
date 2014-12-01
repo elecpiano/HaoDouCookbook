@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Shared.Utility;
+using HaoDouCookBook.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -52,6 +53,7 @@ namespace HaoDouCookBook.Pages
             base.OnNavigatedTo(e);
 
             LoadSearchLogsAsync();
+            ShakeGesture.StartListenning(ShakenTracking);
 
             if (e.NavigationMode == NavigationMode.Back)
             {
@@ -63,6 +65,7 @@ namespace HaoDouCookBook.Pages
             hotSearchScrollViewer.ScrollToVerticalOffset(0);
 
             LoadHotSearchDataAsync();
+
         }
 
         #endregion
@@ -105,6 +108,20 @@ namespace HaoDouCookBook.Pages
         #endregion
 
         #region Event
+
+        private void ShakenTracking()
+        {
+            App.Current.RunAsync(() =>
+                {
+                    // Only do somethings when the pivot item is "摇一摇"
+                    //
+                    if (this.pivot.SelectedIndex == 2)
+                    {
+                        ShakeGesture.StopListenning();
+                        App.Current.RootFrame.Navigate(typeof(ShakePage));
+                    }
+                });
+        }
 
         private void ClearSearchLogs_Tapped(object sender, TappedRoutedEventArgs e)
         {

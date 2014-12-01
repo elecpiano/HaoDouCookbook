@@ -44,6 +44,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RecipeItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RecipeRecommend.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\SearchPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\ShakePageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\StuffInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\TagItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RankViewPage.cs" />
