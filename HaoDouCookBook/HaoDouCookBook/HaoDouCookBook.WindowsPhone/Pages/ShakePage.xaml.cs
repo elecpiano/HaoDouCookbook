@@ -31,7 +31,7 @@ namespace HaoDouCookBook.Pages
         #region Field && Property
 
         private ShakePageViewModel viewModel = new ShakePageViewModel();
-        
+
 
         #endregion
 
@@ -77,13 +77,14 @@ namespace HaoDouCookBook.Pages
                     {
                         foreach (var item in data.Items)
                         {
-                            viewModel.Recipes.Add(new TagRecipeData() { 
-                                    FoodStuff = item.Stuff,
-                                    LikeNumber = item.LikeCount,
-                                    PreviewImageSource = item.Cover,
-                                    ViewNumber = item.ViewCount,
-                                    RecipeName = item.Title,
-                                    RecipeId = item.RecipeId
+                            viewModel.Recipes.Add(new TagRecipeData()
+                            {
+                                FoodStuff = item.Stuff,
+                                LikeNumber = item.LikeCount,
+                                PreviewImageSource = item.Cover,
+                                ViewNumber = item.ViewCount,
+                                RecipeName = item.Title,
+                                RecipeId = item.RecipeId
                             });
 
                         }

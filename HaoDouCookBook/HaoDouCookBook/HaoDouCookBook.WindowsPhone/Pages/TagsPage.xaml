@@ -43,27 +43,13 @@
                         <DataTemplate>
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Vertical" Background="Transparent" Tapped="Recipe_Tapped">
-                                    <Grid x:Name="root" Margin="0, 0, 10, 0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="124"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Rectangle Width="122" Height="90" VerticalAlignment="Center" Grid.Column="0">
-                                            <Rectangle.Fill>
-                                                <ImageBrush ImageSource="{Binding PreviewImageSource}"/>
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                        <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="8, 0, 0, 0">
-                                            <TextBlock Text="{Binding RecipeName}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0" TextTrimming="WordEllipsis"/>
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                                <TextBlock Text="{Binding LikeNumber}" Style="{StaticResource TagsContentStyle}"/>
-                                                <TextBlock Text="喜欢" Style="{StaticResource TagsContentStyle}"/>
-                                                <TextBlock Text="{Binding ViewNumber}" Margin="15,0,0,0"  Style="{StaticResource TagsContentStyle}"/>
-                                                <TextBlock Text="浏览" Style="{StaticResource TagsContentStyle}"/>
-                                            </StackPanel>
-                                            <TextBlock Text="{Binding FoodStuff}" Width="240" Style="{StaticResource TagsContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
-                                        </Grid>
-                                    </Grid>
+                                    <Border Margin="0, 0, 10, 0">
+                                        <controls:TagRecipeItem ViewNumber="{Binding ViewNumber}" 
+                                                                LikeNumber="{Binding LikeNumber}"
+                                                                PreviewImageSource="{Binding PreviewImageSource}"
+                                                                RecipeName="{Binding RecipeName}"
+                                                                FoodStuff="{Binding FoodStuff}"/>
+                                    </Border>
                                 </StackPanel>
                                 <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 20, 0, 20" VerticalAlignment="Bottom"/>
                             </StackPanel>

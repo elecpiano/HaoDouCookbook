@@ -8,6 +8,11 @@
     xmlns:controls="using:HaoDouCookBook.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <controls:BackablePage.BottomAppBar>
+        <CommandBar Style="{StaticResource bottomAppbarStyle}">
+            <AppBarButton Icon="Find" Label="查找"/>
+        </CommandBar>
+    </controls:BackablePage.BottomAppBar>
 
     <Grid x:Name="root" Margin="0, 0, 0, 0" Background="{StaticResource TopAppbarColor}">
         <Pivot x:Name="pivot" Background="{StaticResource TopAppbarColor}">

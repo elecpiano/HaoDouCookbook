@@ -40,7 +40,6 @@ namespace HaoDouCookBook.HaoDou.API
  
         }
 
-
         public static async Task GetAlbumInfo(int offset, int limit, int albumId, string sign, int? uid, string uuid, Action<AlbumPageData> onSuccess, Action<Error> onFail)
         {
             string methodName = "getAlbumInfo";
@@ -67,7 +66,7 @@ namespace HaoDouCookBook.HaoDou.API
 
             string cacheFileName = methodName;
             HaoDouJsonDataLoader<ShakePageData> loader = new HaoDouJsonDataLoader<ShakePageData>();
-            await loader.LoadAsync(postRequest, true, MODULE, methodName, onSuccess, onFail);
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
         }
     }
 }
