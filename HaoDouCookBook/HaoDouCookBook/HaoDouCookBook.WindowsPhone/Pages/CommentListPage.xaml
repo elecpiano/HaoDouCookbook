@@ -36,13 +36,13 @@
                                             <RowDefinition Height="*"/>
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="{Binding UserName}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{StaticResource GreenMain}" FontSize="22"/>
-                                        <TextBlock Text="{Binding CreateTime}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="Gray" FontSize="21"/>
-                                        <TextBlock TextWrapping="Wrap"  Margin="0, 5, 0, 0" Grid.Row="1">
-                                            <Run Text="回复" FontSize="19"/>
-                                            <Run Text="{Binding AtUserName}" FontSize="19" Foreground="{StaticResource GreenMain}"/>
-                                            <Run Text=":" FontSize="19"/>
-                                            <Run Text="{Binding Content}" FontSize="19"/>
+                                        <TextBlock Text="{Binding UserName}" Grid.Row="0" Style="{StaticResource CommentListPage_UserName_Style}" />
+                                        <TextBlock Text="{Binding CreateTime}" Grid.Row="0" Style="{StaticResource CommentListPage_CreateTime_Style}"/>
+                                        <TextBlock Grid.Row="1" Style="{StaticResource CommentListPage_CommentContent_Style}">
+                                            <Run Text="回复"/>
+                                            <Run Text="{Binding AtUserName}" Foreground="{StaticResource GreenMain}"/>
+                                            <Run Text=":"/>
+                                            <Run Text="{Binding Content}"/>
                                         </TextBlock>
                                     </Grid>
                                 </Grid>

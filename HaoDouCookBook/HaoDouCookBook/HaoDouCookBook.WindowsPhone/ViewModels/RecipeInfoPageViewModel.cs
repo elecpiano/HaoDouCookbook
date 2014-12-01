@@ -210,7 +210,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int commentCount;
 
-        public int CommonCount
+        public int CommentCount
         {
             get { return commentCount; }
             set { SetProperty<int>(ref commentCount, value); }

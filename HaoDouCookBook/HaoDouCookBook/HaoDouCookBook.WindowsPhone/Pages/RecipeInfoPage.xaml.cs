@@ -129,6 +129,7 @@ namespace HaoDouCookBook.Pages
             viewModel.ProductCount = infoData.ProductCount;
             viewModel.IsVip = infoData.Vip == 1 ? true : false;
             viewModel.Intro = infoData.Intro;
+            viewModel.CommentCount = infoData.CommentCount;
 
             // Fodd stuff
             //
@@ -288,5 +289,15 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+        private void ShowAllComment_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            CommentListPage.CommentListPageParams paras = new CommentListPage.CommentListPageParams();
+            paras.RecipeId = viewModel.RecipeId;
+            paras.Type = 0;
+            paras.Cid = 0;
+
+            App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
+        }
     }
 }

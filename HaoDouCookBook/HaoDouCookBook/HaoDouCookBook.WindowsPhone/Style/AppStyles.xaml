@@ -340,4 +340,26 @@
         <Setter Property="Foreground" Value="Gray"/>
         <Setter Property="Margin" Value="20, 15"/>
     </Style>
+
+    <!--Comment List Page-->
+    <Style x:Key="CommentListPage_CommentContent_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="Margin" Value="0, 10, 0, 0"/>
+    </Style>
+
+    <Style x:Key="CommentListPage_UserName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="#78a708"/>
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <Style x:Key="CommentListPage_CreateTime_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="FontSize" Value="17"/>
+    </Style>
+
 </ResourceDictionary>
