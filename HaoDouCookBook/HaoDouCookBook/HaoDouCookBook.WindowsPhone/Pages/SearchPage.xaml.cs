@@ -131,12 +131,15 @@ namespace HaoDouCookBook.Pages
 
         private void SearchLogs_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            TagsPage.TagPageParams paras = new TagsPage.TagPageParams();
-            paras.TagText = sender.GetDataContext<string>();
+            
+        }
 
-            App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
+        private void Search_AppbarButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(SearchInputPage));
         }
 
         #endregion
+
     }
 }

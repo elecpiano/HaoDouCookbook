@@ -10,6 +10,25 @@ namespace HaoDouCookBook.ViewModels
 {
     public class TagsPageViewModel : BindableBase
     {
+        private Food food;
+
+        public Food Food
+        {
+            get { return food; }
+            set { SetProperty<Food>(ref food, value); }
+        }
+
+        public ObservableCollection<TagRecipeData> Recipes { get; set; }
+
+        public TagsPageViewModel()
+        {
+            Recipes = new ObservableCollection<TagRecipeData>();
+            food = new Food();
+        }
+    }
+
+    public class Food : BindableBase
+    {
         private int foodId;
 
         public int FoodId
@@ -43,14 +62,15 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref foodIntro, value); }
         }
 
-
-        public ObservableCollection<TagRecipeData> Recipes { get; set; }
-
-        public TagsPageViewModel()
+        public Food()
         {
-            Recipes = new ObservableCollection<TagRecipeData>();
+            foodId = -1;
+            foodIntro = string.Empty;
+            foodName = string.Empty;
+            foodCover = string.Empty;
         }
     }
+
 
 
 

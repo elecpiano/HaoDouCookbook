@@ -49,5 +49,31 @@ namespace HaoDouCookBook.HaoDou.API
             HaoDouJsonDataLoader<SearchPageData> loader = new HaoDouJsonDataLoader<SearchPageData>();
             await loader.LoadAsync(getRequest, true, MODULE, cacheFileName, onSuccess, onFail);
         }
+
+
+        public static async Task GetSuggestion(string keyword, Action<SearchSuggestionData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getSuggestion";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("keyword", keyword);
+            
+
+            HaoDouJsonDataLoader<SearchSuggestionData> loader = new HaoDouJsonDataLoader<SearchSuggestionData>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+
+        public static async Task GetSearchIndex(string keyword, string tagid, string uuid, Action<SearchResultPageData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getSearchIndex";
+            POSTRequestExecuter postRequset = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequset.AddPostData("scene", "k1");
+            postRequset.AddPostData("keyword", keyword);
+            postRequset.AddPostData("tagid", tagid);
+            postRequset.AddPostData("uuid", uuid);
+
+            string cacheFileName = string.Format("{0}-{1}", methodName, keyword);
+            HaoDouJsonDataLoader<SearchResultPageData> loader = new HaoDouJsonDataLoader<SearchResultPageData>();
+            await loader.LoadAsync(postRequset, true, MODULE, cacheFileName, onSuccess, onFail);
+        }
     }
 }

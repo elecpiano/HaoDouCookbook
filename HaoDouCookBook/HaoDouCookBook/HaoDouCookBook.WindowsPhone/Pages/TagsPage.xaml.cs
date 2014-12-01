@@ -107,10 +107,10 @@ namespace HaoDouCookBook.Pages
                 {
                     if(data.Food != null)
                     {
-                        viewModel.FoodCover = data.Food.Cover;
-                        viewModel.FoodId = data.Food.Id;
-                        viewModel.FoodIntro = data.Food.Intro;
-                        viewModel.FoodName = data.Food.Name;
+                        viewModel.Food.FoodCover = data.Food.Cover;
+                        viewModel.Food.FoodId = data.Food.Id;
+                        viewModel.Food.FoodIntro = data.Food.Intro;
+                        viewModel.Food.FoodName = data.Food.Name;
                     }
 
                     if (data.Items != null && data.Items.Length > 0)
@@ -158,8 +158,8 @@ namespace HaoDouCookBook.Pages
         private void Food_Tapped(object sender, TappedRoutedEventArgs e)
         {
             StuffInfoPage.StuffInfoPageParams paras = new StuffInfoPage.StuffInfoPageParams();
-            paras.Id = viewModel.FoodId;
-            paras.Title = viewModel.FoodName;
+            paras.Id = viewModel.Food.FoodId;
+            paras.Title = viewModel.Food.FoodName;
 
             App.Current.RootFrame.Navigate(typeof(StuffInfoPage), paras);
         }

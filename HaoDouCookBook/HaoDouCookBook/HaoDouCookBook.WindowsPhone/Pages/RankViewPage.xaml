@@ -16,8 +16,6 @@
             <StackPanel Orientation="Vertical" Margin="0, 30, 0, 0">
                 <TextBlock Text="{Binding Title}" Style="{StaticResource RankViewTitleStyle}"/>
                 <TextBlock Text="{Binding Intro}" Style="{StaticResource RankViewIntroductionStyle}"/>
-
-
                 <ItemsControl ItemsSource="{Binding Recipes}" Margin="20, 20, 20, 70">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>

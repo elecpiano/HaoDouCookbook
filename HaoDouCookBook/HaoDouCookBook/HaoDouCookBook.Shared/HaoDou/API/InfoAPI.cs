@@ -64,7 +64,6 @@ namespace HaoDouCookBook.HaoDou.API
             postRequest.AddPostData("uid", uid.HasValue ? uid.Value.ToString() : "0");
             postRequest.AddPostData("uuid", uuid.ToString());
 
-            string cacheFileName = methodName;
             HaoDouJsonDataLoader<ShakePageData> loader = new HaoDouJsonDataLoader<ShakePageData>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
         }

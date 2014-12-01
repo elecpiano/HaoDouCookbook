@@ -17,16 +17,16 @@
         <ScrollViewer Name="rootScrollViewer" Margin="0, 110, 0, 0" Background="White">
             <StackPanel>
                 <StackPanel Orientation="Vertical" Margin="0, 20, 0, 0" Tapped="Food_Tapped"
-                            Visibility="{Binding FoodName, Converter={StaticResource AnythingToVisiblityConverter}}">
+                            Visibility="{Binding Food.FoodName, Converter={StaticResource AnythingToVisiblityConverter}}">
                     <Grid Margin="20, 0, 20, 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="90"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="35"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="{Binding FoodCover}" Grid.Column="0" Style="{StaticResource TagsPage_FoodCover_Style}"/>
-                        <TextBlock Text="{Binding FoodName}" Grid.Column="1" Style="{StaticResource TagsPage_FoodName_Style}"/>
-                        <TextBlock Text="{Binding FoodIntro}" Grid.Column="1" Style="{StaticResource TagsPage_FoodIntro_Style}"/>
+                        <Image Source="{Binding Food.FoodCover}" Grid.Column="0" Style="{StaticResource TagsPage_FoodCover_Style}"/>
+                        <TextBlock Text="{Binding Food.FoodName}" Grid.Column="1" Style="{StaticResource TagsPage_FoodName_Style}"/>
+                        <TextBlock Text="{Binding Food.FoodIntro}" Grid.Column="1" Style="{StaticResource TagsPage_FoodIntro_Style}"/>
                         <Image Source="../assets/images/mypage/more.png" Grid.Column="2"/>
                     </Grid>
                     <Rectangle Style="{StaticResource GrayLine}" Width="800" />

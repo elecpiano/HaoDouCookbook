@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <controls:BackablePage.BottomAppBar>
         <CommandBar Style="{StaticResource bottomAppbarStyle}">
-            <AppBarButton Icon="Find" Label="查找"/>
+            <AppBarButton Icon="Find" Label="查找" Click="Search_AppbarButton_Click"/>
         </CommandBar>
     </controls:BackablePage.BottomAppBar>
 
