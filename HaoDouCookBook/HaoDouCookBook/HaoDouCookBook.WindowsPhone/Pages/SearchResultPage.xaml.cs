@@ -125,6 +125,7 @@ namespace HaoDouCookBook.Pages
                         viewModel.AlbumTitle = albumData.Title;
                         viewModel.AlbumViewCount = albumData.ViewCount;
                         viewModel.AlbumLikeCount = albumData.LikeCount;
+                        viewModel.AlbumCover = albumData.Cover;
                     }
 
                     if (data.TopicData != null && data.TopicData.Topics != null && data.TopicData.Topics.Length > 0)
@@ -140,6 +141,25 @@ namespace HaoDouCookBook.Pages
                     }
 
                 }, error => { });
+        }
+
+        #endregion
+
+        #region Event
+
+        private void Search_AppbarButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(SearchInputPage));
+        }
+
+
+        private void Stuff_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            StuffInfoPage.StuffInfoPageParams paras = new StuffInfoPage.StuffInfoPageParams();
+            paras.Title = viewModel.Food.FoodName;
+            paras.Id = viewModel.Food.FoodId;
+
+            App.Current.RootFrame.Navigate(typeof(StuffInfoPage), paras);
         }
 
         #endregion

@@ -89,7 +89,11 @@ namespace HaoDouCookBook.Pages
 
         private void Suggestion_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            
+            SearchResultPage.SearchResultPageParams paras = new SearchResultPage.SearchResultPageParams();
+            paras.Keyword = sender.GetDataContext<string>();
+            paras.TagId = string.Empty;
+
+            App.Current.RootFrame.Navigate(typeof(SearchResultPage), paras);
         }
 
         private async void TextBox_TextChanged(object sender, TextChangedEventArgs e)

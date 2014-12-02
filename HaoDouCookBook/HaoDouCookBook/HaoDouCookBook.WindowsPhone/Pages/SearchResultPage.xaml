@@ -8,19 +8,25 @@
     xmlns:controls="using:HaoDouCookBook.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    
+    <controls:BackablePage.BottomAppBar>
+        <CommandBar Style="{StaticResource bottomAppbarStyle}">
+            <AppBarButton Icon="Find" Label="查找" Click="Search_AppbarButton_Click"/>
+        </CommandBar>
+    </controls:BackablePage.BottomAppBar>
+    
     <Grid Margin="0, 0, 0, 0" x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner Title="好豆菜谱" Margin="20, 0, 0, 0"/>
         <ScrollViewer Name="rootScrollViewer" Background="White" Margin="0, 50, 0, 0">
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" Margin="0, 0, 0, 20">
 
                 <!--食材-->
-                <StackPanel Orientation="Vertical" Margin="0, 20, 0, 0" 
+                <StackPanel Orientation="Vertical" Margin="0, 0, 0, 20" 
                             Visibility="{Binding Food.FoodName, Converter={StaticResource AnythingToVisiblityConverter}}">
                     <Border Style="{StaticResource SearchResultPage_SectionTitleBackground_Style}">
                         <TextBlock Text="食材百科" Style="{StaticResource SearchResultPage_SectionTitle_style}" />
                     </Border>
-                    <Grid Margin="20, 0, 20, 0">
+                    <Grid Margin="20, 20, 20, 0" Background="Transparent" Tapped="Stuff_Tapped">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="90"/>
                             <ColumnDefinition Width="*"/>
@@ -34,12 +40,12 @@
                 </StackPanel>
 
                 <!--菜谱-->
-                <StackPanel Orientation="Vertical" Margin="0, 20, 0, 0" 
+                <StackPanel Orientation="Vertical" Margin="0, 0, 0, 20" 
                             Visibility="{Binding Recipes.Count, Converter={StaticResource AnythingToVisiblityConverter}}">
                     <Border Style="{StaticResource SearchResultPage_SectionTitleBackground_Style}">
                         <TextBlock Text="菜谱" Style="{StaticResource SearchResultPage_SectionTitle_style}" />
                     </Border>
-                    <ItemsControl Name="recipeList" ItemsSource="{Binding Recipes}" Margin="20, 20, 20, 20">
+                    <ItemsControl Name="recipeList" ItemsSource="{Binding Recipes}" Margin="20, -20, 20, 20">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Vertical"/>
@@ -50,7 +56,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Vertical" Background="Transparent">
-                                        <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 20, 0, 20" VerticalAlignment="Bottom"/>
+                                        <Rectangle Style="{StaticResource SearchResultPage_RecipeLine_Style}"/>
                                         <Border Margin="0, 0, 10, 0">
                                             <controls:TagRecipeItem ViewNumber="{Binding ViewNumber}" 
                                                                 LikeNumber="{Binding LikeNumber}"
@@ -75,35 +81,40 @@
                     <Border Style="{StaticResource SearchResultPage_SectionTitleBackground_Style}">
                         <TextBlock Text="专辑" Style="{StaticResource SearchResultPage_SectionTitle_style}" />
                     </Border>
-                    <Grid Margin="20, 20, 20, 20">
+                    <Grid Margin="20, 15, 20, 20">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="124"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Border Width="122" Height="140" VerticalAlignment="Center" Grid.Column="0">
+                        <Border Width="122" Height="135" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0">
                             <Border.Background>
                                 <ImageBrush ImageSource="{Binding AlbumCover}" AlignmentY="Center" Stretch="UniformToFill"/>
                             </Border.Background>
-                            <Border Opacity="0.6">
+                            <Border>
                                 <Border.Background>
-                                    <LinearGradientBrush StartPoint="0.5, 1" EndPoint="0.5, 0">
+                                    <LinearGradientBrush Opacity="0.8" StartPoint="0.5, 1" EndPoint="0.5, 0">
                                         <GradientStop Color="Black" Offset="0.0"/>
-                                        <GradientStop Color="Transparent" Offset="0.7" />
+                                        <GradientStop Color="Transparent" Offset="0.6" />
                                     </LinearGradientBrush>
                                 </Border.Background>
-                                <StackPanel Orientation="Horizontal">
-                                    <controls:ShadowTextBlock Text=""/>
-                                </StackPanel>
+                                <TextBlock Style="{StaticResource SearchResultPage_AlbumRecipeCountText_style}">
+                                    <Run Text="{Binding AlbumRecipeCount}"/>道菜
+                                </TextBlock>
                             </Border>
                         </Border>
-                        <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="8, 0, 0, 0">
-                            <TextBlock Text="{Binding AlbumTitle}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0"/>
-                            <TextBlock Style="{StaticResource TagsContentStyle}" Width="240">
-                                <Run Text="{Binding AlbumLikeCount}"/>喜欢
+                        <Grid Height="140" VerticalAlignment="Center" Grid.Column="1" Margin="10, 0, 0, 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding AlbumTitle}" Grid.Row="0" Style="{StaticResource TopicTileStyle}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            <TextBlock Style="{StaticResource TagsContentStyle}" Grid.Row="1" Width="240" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <Run Text="{Binding AlbumLikeCount}"/>收藏
                                 <Run Text="  "/>
                                 <Run Text="{Binding AlbumViewCount}"/>浏览
                             </TextBlock>
-                            <TextBlock Text="{Binding AlbumIntro}" Width="240" Style="{StaticResource TagsContentStyle}" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
+                            <TextBlock Text="{Binding AlbumIntro}" Grid.Row="2" Style="{StaticResource SearchResultPage_AlbumIntro_Style}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                         </Grid>
                     </Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -118,12 +129,12 @@
                     <Border Style="{StaticResource SearchResultPage_SectionTitleBackground_Style}">
                         <TextBlock Text="话题" Style="{StaticResource SearchResultPage_SectionTitle_style}" />
                     </Border>
-                    <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
-                                       Title="{Binding Title}"
-                                       PreviewContent="{Binding PreviewContent}"
-                                       Author="{Binding Author}"
-                                       CreateTimeDescription="{Binding CreateTimeDescription}"
-                                       HorizontalAlignment="Left" Margin="20, 30, 20, 20"
+                    <controls:TopicTile TopicPreviewImageSource="{Binding Topic.TopicPreviewImageSource}"  
+                                       Title="{Binding Topic.Title}"
+                                       PreviewContent="{Binding Topic.PreviewContent}"
+                                       Author="{Binding Topic.Author}"
+                                       CreateTimeDescription="{Binding Topic.CreateTimeDescription}"
+                                       HorizontalAlignment="Left" Margin="20, 15, 20, 20"
                                                 />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Image Source="../assets/images/search.png" Height="24" Width="24" Margin="0, 0, 5, 0"/>
