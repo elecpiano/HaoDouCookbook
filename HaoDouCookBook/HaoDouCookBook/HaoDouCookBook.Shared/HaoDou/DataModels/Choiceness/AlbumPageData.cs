@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HaoDouCookBook.HaoDou.DataModels.Choiceness;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
@@ -105,4 +106,23 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
             IsLike = 0;
         }
     }
+
+
+    [DataContract]
+    public class AlbumListPageData
+    {
+
+        [DataMember(Name = "count")]
+        public int Count { get; set; }
+
+
+        [DataMember(Name = "list")]
+        public SearchResultPageAlbumItem[] AlbumItems { get; set; }
+
+        public AlbumListPageData()
+        {
+            Count = 0;
+        }
+    }
+
 }

@@ -13,7 +13,7 @@
         <controls:Banner Title="好豆菜谱" Margin="20, 0, 0, 0"/>
         <ScrollViewer x:Name="rootScrollViewer" Background="White" Margin="0, 50, 0, 0">
             <StackPanel Orientation="Vertical">
-                <TextBox TextChanged="TextBox_TextChanged" Margin="20, 20, 20, 0"/>
+                <TextBox TextChanged="TextBox_TextChanged" KeyDown="TextBox_KeyDown" Margin="20, 20, 20, 0"/>
 
                 <ItemsControl x:Name="keywordsList" Margin="20, 15, 20, 0">
                     <ItemsControl.ItemsPanel>

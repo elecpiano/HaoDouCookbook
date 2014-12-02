@@ -21,60 +21,12 @@ namespace HaoDouCookBook.ViewModels
 
         public ObservableCollection<TagRecipeData> Recipes { get; set; }
 
-        private int albumId;
+        private AlbumTile album;
 
-        public int AlbumId
+        public AlbumTile Album
         {
-            get { return albumId; }
-            set { SetProperty<int>(ref albumId, value); }
-        }
-
-        private string albumTitle;
-
-        public string AlbumTitle
-        {
-            get { return albumTitle; }
-            set { SetProperty<string>(ref albumTitle, value); }
-        }
-
-        private string albumIntro;
-
-        public string AlbumIntro
-        {
-            get { return albumIntro; }
-            set { SetProperty<string>(ref albumIntro, value); }
-        }
-
-        private int albumViewCount;
-
-        public int AlbumViewCount
-        {
-            get { return albumViewCount; }
-            set { SetProperty<int>(ref albumViewCount, value); }
-        }
-
-        private int albumRecipeCount;
-
-        public int AlbumRecipeCount
-        {
-            get { return albumRecipeCount; }
-            set { SetProperty<int>(ref albumRecipeCount, value); }
-        }
-
-        private string albumCover;
-
-        public string AlbumCover
-        {
-            get { return albumCover; }
-            set { SetProperty<string>(ref albumCover, value); }
-        }
-
-        private int albumlikeCount;
-
-        public int AlbumLikeCount
-        {
-            get { return albumlikeCount; }
-            set { SetProperty<int>(ref albumlikeCount, value); }
+            get { return album; }
+            set { SetProperty<AlbumTile>(ref album, value); }
         }
 
         private TopicModel  topic;
@@ -89,15 +41,9 @@ namespace HaoDouCookBook.ViewModels
         {
 
             food = new Food();
-            albumId = -1;
-            albumTitle = string.Empty;
-            albumCover = string.Empty;
-            albumRecipeCount = 0;
-            albumViewCount = 0;
-            albumlikeCount = 0;
+            album = new AlbumTile();
             topic = new TopicModel();
             Recipes = new ObservableCollection<TagRecipeData>();
         }
     }
-
 }

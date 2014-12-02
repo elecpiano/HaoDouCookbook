@@ -78,19 +78,19 @@
                 
                 <!--专辑-->
                 <StackPanel Orientation="Vertical" Margin="0, 20, 0, 0" 
-                            Visibility="{Binding AlbumTitle, Converter={StaticResource AnythingToVisiblityConverter}}">
+                            Visibility="{Binding Album.AlbumTitle, Converter={StaticResource AnythingToVisiblityConverter}}">
                     <Border Style="{StaticResource SearchResultPage_SectionTitleBackground_Style}">
                         <TextBlock Text="专辑" Style="{StaticResource SearchResultPage_SectionTitle_style}" />
                     </Border>
                     <controls:AlbumTile Margin="20, 15, 20, 20" Background="Transparent" Tapped="AlbumItem_Tapped"
-                                        AlbumRecipeCount="{Binding AlbumRecipeCount}"
-                                        AlbumCover="{Binding AlbumCover}"
-                                        AlbumLikeCount="{Binding AlbumLikeCount}"
-                                        AlbumViewCount="{Binding AlbumViewCount}"
-                                        AlbumIntro="{Binding AlbumIntro}"
-                                        AlbumTitle="{Binding AlbumTitle}"/>
+                                        AlbumRecipeCount="{Binding Album.AlbumRecipeCount}"
+                                        AlbumCover="{Binding Album.AlbumCover}"
+                                        AlbumLikeCount="{Binding Album.AlbumLikeCount}"
+                                        AlbumViewCount="{Binding Album.AlbumViewCount}"
+                                        AlbumIntro="{Binding Album.AlbumIntro}"
+                                        AlbumTitle="{Binding Album.AlbumTitle}"/>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Background="Transparent" Tapped="ShowAllAlbums_tapped">
                         <Image Source="../assets/images/search.png" Height="24" Width="24" Margin="0, 0, 5, 0"/>
                         <TextBlock Text="查看全部专辑" FontSize="18" Foreground="{StaticResource GreenMain}" VerticalAlignment="Center"/>
                     </StackPanel>

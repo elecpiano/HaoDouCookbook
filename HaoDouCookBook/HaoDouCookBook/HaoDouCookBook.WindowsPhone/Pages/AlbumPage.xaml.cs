@@ -100,7 +100,10 @@ namespace HaoDouCookBook.Pages
                     viewModel.AlbumTitle = data.Info.AlbumTitle;
                     viewModel.AlbumUserId = data.Info.AlbumUserId;
                     viewModel.AlbumUserName = data.Info.AlbumUserName;
-                    viewModel.CommentCount = int.Parse(data.Info.CommentCount);
+                    if(!string.IsNullOrEmpty(data.Info.CommentCount))
+                    {
+                        viewModel.CommentCount = int.Parse(data.Info.CommentCount);
+                    }
 
                     if (data.Recipes != null)
                     {

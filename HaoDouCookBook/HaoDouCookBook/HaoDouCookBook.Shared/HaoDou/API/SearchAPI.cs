@@ -50,7 +50,6 @@ namespace HaoDouCookBook.HaoDou.API
             await loader.LoadAsync(getRequest, true, MODULE, cacheFileName, onSuccess, onFail);
         }
 
-
         public static async Task GetSuggestion(string keyword, Action<SearchSuggestionData> onSuccess, Action<Error> onFail)
         {
             string methodName = "getSuggestion";
@@ -74,6 +73,23 @@ namespace HaoDouCookBook.HaoDou.API
             string cacheFileName = string.Format("{0}-{1}", methodName, keyword);
             HaoDouJsonDataLoader<SearchResultPageData> loader = new HaoDouJsonDataLoader<SearchResultPageData>();
             await loader.LoadAsync(postRequset, true, MODULE, cacheFileName, onSuccess, onFail);
+        }
+
+        public static async Task GetAlbumList(int offset, int limit, string uuid, int? tagid, string keyword, Action<AlbumListPageData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getAlbumList";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("offset", offset.ToString());
+            postRequest.AddPostData("limit", limit.ToString());
+            postRequest.AddPostData("tagid", tagid.HasValue ? tagid.Value.ToString() : "null");
+            postRequest.AddPostData("uuid", uuid);
+            postRequest.AddPostData("keyword", keyword);
+
+            string cacheFile = string.Format("{0}-{1}-{2}-{3}", methodName, offset, limit, tagid);
+
+            HaoDouJsonDataLoader<AlbumListPageData> loader = new HaoDouJsonDataLoader<AlbumListPageData>();
+            await loader.LoadAsync(postRequest, true, MODULE, cacheFile, onSuccess, onFail);
+
         }
     }
 }

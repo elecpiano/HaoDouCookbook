@@ -247,7 +247,7 @@
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="5, 2, 5, 1"/>
-        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontSize" Value="16"/>
     </Style>
 
     <!--Page Title-->
@@ -350,7 +350,7 @@
         <Setter Property="Margin" Value="20, 15"/>
     </Style>
 
-    <!--Comment List Page-->
+    <!--Comments-->
     <Style x:Key="CommentListPage_CommentContent_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="FontSize" Value="19"/>
@@ -367,8 +367,31 @@
     <Style x:Key="CommentListPage_CreateTime_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Foreground" Value="#78000000"/>
         <Setter Property="FontSize" Value="17"/>
+    </Style>
+
+    <Style x:Key="RecipeInfoPage_CommentContent_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Width" Value="260"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="RecipeInfoPage_CommentCreateTimeText_style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="#78000000"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="19"/>
+    </Style>
+
+    <Style x:Key="RecipeInfoPage_CommentUserName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="Foreground" Value="#78a708"/>
     </Style>
 
     <!--Search Result Page-->
@@ -406,6 +429,11 @@
         <Setter Property="Fill" Value="#22000000"/>
         <Setter Property="Margin" Value="-20, 20, -20, 20"/>
         <Setter Property="Width" Value="800"/>
+    </Style>
+
+    <!--Album List Page-->
+    <Style x:Key="AlbumList_Line_Style" TargetType="Rectangle" BasedOn="{StaticResource SearchResultPage_RecipeLine_Style}">
+        <Setter Property="Height" Value="1"/>
     </Style>
 
 </ResourceDictionary>

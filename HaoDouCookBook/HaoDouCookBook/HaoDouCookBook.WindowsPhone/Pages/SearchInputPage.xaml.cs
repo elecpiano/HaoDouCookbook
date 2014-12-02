@@ -89,11 +89,7 @@ namespace HaoDouCookBook.Pages
 
         private void Suggestion_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            SearchResultPage.SearchResultPageParams paras = new SearchResultPage.SearchResultPageParams();
-            paras.Keyword = sender.GetDataContext<string>();
-            paras.TagId = string.Empty;
-
-            App.Current.RootFrame.Navigate(typeof(SearchResultPage), paras);
+            GotoResultPage(sender.GetDataContext<string>());
         }
 
         private async void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -119,6 +115,39 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+        #region Search
+
+        private void GotoResultPage(string keyword)
+        {
+            SearchResultPage.SearchResultPageParams paras = new SearchResultPage.SearchResultPageParams();
+            paras.Keyword = keyword;
+            paras.TagId = string.Empty;
+
+            App.Current.RootFrame.Navigate(typeof(SearchResultPage), paras); 
+        }
+
+
+        private void TextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                TextBox senderTextBox = sender as TextBox;
+                if (senderTextBox != null)
+                {
+                    string kw = senderTextBox.Text.Trim();
+                    Keywords.Clear();
+
+                    if (!string.IsNullOrEmpty(kw))
+                    {
+                        GotoResultPage(kw);
+                    }
+                }
+            }
+        }
+
+        #endregion
+
 
     }
 }

@@ -126,13 +126,13 @@ namespace HaoDouCookBook.Pages
                     if (data.Album != null && data.Album.AlbumItems != null && data.Album.AlbumItems.Length > 0)
                     {
                         var albumData = data.Album.AlbumItems[0];
-                        viewModel.AlbumId = int.Parse(albumData.AlbumId);
-                        viewModel.AlbumIntro = albumData.Intro;
-                        viewModel.AlbumRecipeCount = albumData.RecipeCount;
-                        viewModel.AlbumTitle = albumData.Title;
-                        viewModel.AlbumViewCount = albumData.ViewCount;
-                        viewModel.AlbumLikeCount = albumData.LikeCount;
-                        viewModel.AlbumCover = albumData.Cover;
+                        viewModel.Album.AlbumId = int.Parse(albumData.AlbumId);
+                        viewModel.Album.AlbumIntro = albumData.Intro;
+                        viewModel.Album.AlbumRecipeCount = albumData.RecipeCount;
+                        viewModel.Album.AlbumTitle = albumData.Title;
+                        viewModel.Album.AlbumViewCount = albumData.ViewCount;
+                        viewModel.Album.AlbumLikeCount = albumData.LikeCount;
+                        viewModel.Album.AlbumCover = albumData.Cover;
                     }
 
                     if (data.TopicData != null && data.TopicData.Topics != null && data.TopicData.Topics.Length > 0)
@@ -181,7 +181,7 @@ namespace HaoDouCookBook.Pages
         private void AlbumItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
             AlbumPage.AlbumPageParams paras = new AlbumPage.AlbumPageParams();
-            paras.AlbumId = viewModel.AlbumId;
+            paras.AlbumId = viewModel.Album.AlbumId;
 
             App.Current.RootFrame.Navigate(typeof(AlbumPage), paras);
         }
@@ -201,6 +201,14 @@ namespace HaoDouCookBook.Pages
             tagPageParams.FromPage = TagsPage.SourcePage.SEARCH_RESULT;
 
             App.Current.RootFrame.Navigate(typeof(TagsPage), tagPageParams);
+        }
+
+        private void ShowAllAlbums_tapped(object sender, TappedRoutedEventArgs e)
+        {
+            AlbumListPage.AlbumListPageParams albumListPageParas = new AlbumListPage.AlbumListPageParams();
+            albumListPageParas.Keyword = paras.Keyword;
+
+            App.Current.RootFrame.Navigate(typeof(AlbumListPage), albumListPageParas);
         }
 
         #endregion

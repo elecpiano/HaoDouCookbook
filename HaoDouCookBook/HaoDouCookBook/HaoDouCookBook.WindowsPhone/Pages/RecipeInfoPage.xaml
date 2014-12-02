@@ -233,9 +233,9 @@
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Text="{Binding UserName}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="19" Foreground="#78a708"/>
-                                            <TextBlock Text="{Binding CreateTime}" Foreground="Gray" HorizontalAlignment="Right" Grid.Row="0" VerticalAlignment="Center" FontSize="19"/>
-                                            <TextBlock Text="{Binding Content}" FontSize="18" Width="260" TextTrimming="WordEllipsis" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" />
+                                            <TextBlock Text="{Binding UserName}" Grid.Row="0" Style="{StaticResource RecipeInfoPage_CommentUserName_Style}"/>
+                                            <TextBlock Text="{Binding CreateTime}" Grid.Row="0" Style="{StaticResource RecipeInfoPage_CommentCreateTimeText_style}"/>
+                                            <TextBlock Text="{Binding Content}" Grid.Row="1" Style="{StaticResource RecipeInfoPage_CommentContent_Style}"/>
                                         </Grid>
                                     </Grid>
                                     <Rectangle Height="0.5" Fill="#10000000"  Width="800" Margin="0, 15, 0, 10"/>
@@ -253,7 +253,7 @@
                     <Button Margin="20, 5, 20, 20" HorizontalAlignment="Center">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 5" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock FontWeight="Normal" Text="我也来说几句" Foreground="#78a708" FontSize="21"/>
+                                <TextBlock FontWeight="Normal" Text="我也来说几句" FontSize="21"/>
                             </StackPanel>
                         </Button.Content>
                     </Button>
