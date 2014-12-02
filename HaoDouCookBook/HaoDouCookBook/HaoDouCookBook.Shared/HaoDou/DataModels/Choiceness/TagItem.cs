@@ -101,6 +101,9 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
         [DataMember(Name = "food")]
         public FoodInfo Food { get; set; }
 
+        [DataMember(Name = "count")]
+        public int Count { get; set; }
+
         [DataMember(Name = "list")]
         public TagListItem[] Items { get; set; }
 

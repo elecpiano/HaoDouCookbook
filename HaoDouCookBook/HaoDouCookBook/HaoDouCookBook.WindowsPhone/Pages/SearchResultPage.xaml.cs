@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.Controls;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
@@ -17,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -46,6 +48,7 @@ namespace HaoDouCookBook.Pages
         #region Field && Property
 
         private SearchResultPageViewModel viewModel = new SearchResultPageViewModel();
+        private SearchResultPageParams paras;
 
         #endregion
 
@@ -65,14 +68,17 @@ namespace HaoDouCookBook.Pages
         {
             base.OnNavigatedTo(e);
 
+
             if (e.NavigationMode == NavigationMode.Back)
             {
                 return;
             }
 
-            SearchResultPageParams paras = e.Parameter as SearchResultPageParams;
+            paras = e.Parameter as SearchResultPageParams;
             if (paras != null)
             {
+                HaoDouSearchHelper.AddSearchKeywordAsync(paras.Keyword);
+
                 viewModel = new SearchResultPageViewModel();
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 DataBinding();
@@ -111,7 +117,8 @@ namespace HaoDouCookBook.Pages
                                 LikeNumber = item.LikeCount,
                                 ViewNumber = item.ViewCount,
                                 RecipeName = item.Title,
-                                PreviewImageSource = item.Cover
+                                PreviewImageSource = item.Cover,
+                                Card = item.Card
                             });
                         }
                     }
@@ -152,7 +159,6 @@ namespace HaoDouCookBook.Pages
             App.Current.RootFrame.Navigate(typeof(SearchInputPage));
         }
 
-
         private void Stuff_Tapped(object sender, TappedRoutedEventArgs e)
         {
             StuffInfoPage.StuffInfoPageParams paras = new StuffInfoPage.StuffInfoPageParams();
@@ -160,6 +166,41 @@ namespace HaoDouCookBook.Pages
             paras.Id = viewModel.Food.FoodId;
 
             App.Current.RootFrame.Navigate(typeof(StuffInfoPage), paras);
+        }
+
+        private void RecipeItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<TagRecipeData>();
+
+            RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
+            paras.RecipeId = dataContext.RecipeId;
+
+            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+        }
+
+        private void AlbumItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            AlbumPage.AlbumPageParams paras = new AlbumPage.AlbumPageParams();
+            paras.AlbumId = viewModel.AlbumId;
+
+            App.Current.RootFrame.Navigate(typeof(AlbumPage), paras);
+        }
+
+        private void TopicItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ArticleViewer.ArticleViewerPageParams paras = new ArticleViewer.ArticleViewerPageParams();
+            paras.Url = viewModel.Topic.Url;
+
+            App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
+        }
+
+        private void ShowAllRecipes_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            TagsPage.TagPageParams tagPageParams = new TagsPage.TagPageParams();
+            tagPageParams.TagText = paras.Keyword;
+            tagPageParams.FromPage = TagsPage.SourcePage.SEARCH_RESULT;
+
+            App.Current.RootFrame.Navigate(typeof(TagsPage), tagPageParams);
         }
 
         #endregion

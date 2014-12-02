@@ -32,15 +32,23 @@ namespace HaoDouCookBook.Pages
     {
         #region Page Parameters Definition
 
+        public enum SourcePage
+        {
+            SEARCH_RESULT,
+            NORMAL
+        }
+
         public class TagPageParams
         {
             public int? Id { get; set; }
 
             public string TagText { get; set; }
 
+            public SourcePage FromPage { get; set; }
+
             public TagPageParams()
             {
-
+                FromPage = SourcePage.NORMAL;
             }
 
         }
@@ -50,6 +58,7 @@ namespace HaoDouCookBook.Pages
         #region Field && Property
 
         private TagsPageViewModel viewModel = new TagsPageViewModel();
+        private TagPageParams paras;
 
         #endregion
 
@@ -74,7 +83,7 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            TagPageParams paras = e.Parameter as TagPageParams;
+            paras = e.Parameter as TagPageParams;
 
             if (paras != null)
             {
@@ -105,6 +114,11 @@ namespace HaoDouCookBook.Pages
         {
             await SearchAPI.GetList(offset, limit, DeviceHelper.GetUniqueDeviceID(), tagid, keyword, data =>
                 {
+                    if(paras != null && paras.FromPage == SourcePage.SEARCH_RESULT)
+                    {
+                        viewModel.Count = data.Count;
+                    }
+
                     if(data.Food != null)
                     {
                         viewModel.Food.FoodCover = data.Food.Cover;
@@ -129,7 +143,8 @@ namespace HaoDouCookBook.Pages
                                 ViewNumber = item.ViewCount,
                                 PreviewImageSource = item.Cover,
                                 RecipeName = item.Title,
-                                RecipeId = item.RecipeId
+                                RecipeId = item.RecipeId,
+                                Card = item.Card
                             });
                         }
 

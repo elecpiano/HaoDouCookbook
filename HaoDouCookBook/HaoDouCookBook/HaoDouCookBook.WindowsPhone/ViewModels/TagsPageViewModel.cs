@@ -18,6 +18,15 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<Food>(ref food, value); }
         }
 
+        private int count;
+
+        public int Count
+        {
+            get { return count; }
+            set { SetProperty<int>(ref count, value); }
+        }
+
+
         public ObservableCollection<TagRecipeData> Recipes { get; set; }
 
         public TagsPageViewModel()

@@ -20,7 +20,7 @@
     </Page.BottomAppBar>
 
     <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
-        <WebView x:Name="webview" Margin="0, -105, 0, -235"/>
+        <WebView x:Name="webview" Margin="0, -10, 0, -235"/>
         <Border Background="{StaticResource TopAppbarColor}" Height="50" VerticalAlignment="Top">
             <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="12, 5, 0, 0" Title="好豆菜谱"/>
         </Border>

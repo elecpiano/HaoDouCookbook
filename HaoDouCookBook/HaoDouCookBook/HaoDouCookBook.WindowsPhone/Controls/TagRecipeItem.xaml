@@ -20,7 +20,12 @@
             </Rectangle.Fill>
         </Rectangle>
         <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="8, 0, 0, 0">
-            <TextBlock Text="{Binding RecipeName}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0"/>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0, 3, 0, 0">
+                <TextBlock Text="{Binding RecipeName}" Style="{StaticResource TopicTileStyle}"/>
+                <Border Background="{StaticResource GreenMain}" VerticalAlignment="Center" Margin="8, 0, 0, 0" Visibility="{Binding CardText, Converter={StaticResource AnythingToVisiblityConverter}}">
+                    <TextBlock Text="{Binding CardText}" Style="{StaticResource TagRecipeItem_CardText_Style}"/>
+                </Border>
+            </StackPanel>
             <TextBlock Style="{StaticResource TagsContentStyle}" Width="240">
                 <Run Text="{Binding LikeNumber}"/>喜欢
                 <Run Text="  "/>

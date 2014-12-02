@@ -15,6 +15,11 @@ namespace HaoDouCookBook.Common
 
         public static async Task AddSearchKeywordAsync(string keyword)
         {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return;
+            }
+
             var searchLogs = await GetAllKeywordsAsync();
             if(searchLogs.All(log => !log.Equals(keyword, StringComparison.OrdinalIgnoreCase)))
             {

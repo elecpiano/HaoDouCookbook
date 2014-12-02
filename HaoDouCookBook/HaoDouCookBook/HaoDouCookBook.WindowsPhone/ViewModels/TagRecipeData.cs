@@ -57,6 +57,13 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<int>(ref recipeId, value); }
         }
 
+        private string card;
+
+        public string Card
+        {
+            get { return card; }
+            set { SetProperty<string>(ref card, value); }
+        }
 
         public TagRecipeData()
         {

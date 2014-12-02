@@ -88,6 +88,9 @@
     <Compile Include="Controls\AdImagePivot.xaml.cs">
       <DependentUpon>AdImagePivot.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AlbumTile.xaml.cs">
+      <DependentUpon>AlbumTile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BackablePage.cs" />
     <Compile Include="Controls\Banner.xaml.cs">
       <DependentUpon>Banner.xaml</DependentUpon>
@@ -277,6 +280,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\AdImagePivot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AlbumTile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

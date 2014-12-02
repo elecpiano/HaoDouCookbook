@@ -28,10 +28,17 @@ namespace HaoDouCookBook.Controls
         public static readonly DependencyProperty FoodStuffProperty = DependencyProperty.Register("FoodStuff", typeof(string), typeof(TagRecipeItem), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty PreviewImageSourceProperty = DependencyProperty.Register("PreviewImageSource", typeof(string), typeof(TagRecipeItem), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty RecipeNameProperty = DependencyProperty.Register("RecipeName", typeof(string), typeof(TagRecipeItem), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty CardTextProperty = DependencyProperty.Register("CardText", typeof(string), typeof(TagRecipeItem), new PropertyMetadata(string.Empty));
 
         #endregion
 
         #region CLR Proprety Wrapper
+
+        public string CardText
+        {
+            get { return (string)GetValue(CardTextProperty); }
+            set { SetValue(CardTextProperty, value); }
+        }
 
         public int LikeNumber
         {
