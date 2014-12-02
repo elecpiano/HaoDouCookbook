@@ -108,20 +108,20 @@ namespace HaoDouCookBook.Controls
             }
 
 
-            // Tutorial
-            //
-            viewModel.Tutorial.Title = data.NewbieTutorial.Title;
-            viewModel.Tutorial.Teacher.Name = data.NewbieTutorial.UserName;
-            viewModel.Tutorial.Teacher.UserPhoto = data.NewbieTutorial.UserAvatar;
-            viewModel.Tutorial.MainImageSource = data.NewbieTutorial.RecipeCover;
-            viewModel.Tutorial.OpenUrl = data.NewbieTutorial.OpenUrl;
+            //// Tutorial
+            ////
+            //viewModel.Tutorial.Title = data.NewbieTutorial.Title;
+            //viewModel.Tutorial.Teacher.Name = data.NewbieTutorial.UserName;
+            //viewModel.Tutorial.Teacher.UserPhoto = data.NewbieTutorial.UserAvatar;
+            //viewModel.Tutorial.MainImageSource = data.NewbieTutorial.RecipeCover;
+            //viewModel.Tutorial.OpenUrl = data.NewbieTutorial.OpenUrl;
 
-            viewModel.Tutorial.DetailsImageSources.Clear();
-            foreach (var item in data.NewbieTutorial.SamllCovers)
-            {
-                viewModel.Tutorial.DetailsImageSources.Add(item);
-            }
-            viewModel.Tutorial.Teacher.ArchiveDescription = data.NewbieTutorial.Intro;
+            //viewModel.Tutorial.DetailsImageSources.Clear();
+            //foreach (var item in data.NewbieTutorial.SamllCovers)
+            //{
+            //    viewModel.Tutorial.DetailsImageSources.Add(item);
+            //}
+            //viewModel.Tutorial.Teacher.ArchiveDescription = data.NewbieTutorial.Intro;
 
             //cates
             //

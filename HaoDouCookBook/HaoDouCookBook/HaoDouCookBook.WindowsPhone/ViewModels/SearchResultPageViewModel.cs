@@ -61,12 +61,20 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<int>(ref albumRecipeCount, value); }
         }
 
-        private int likeCount;
+        private string albumCover;
 
-        public int LikeCount
+        public string AlbumCover
         {
-            get { return likeCount; }
-            set { SetProperty<int>(ref likeCount, value); }
+            get { return albumCover; }
+            set { SetProperty<string>(ref albumCover, value); }
+        }
+
+        private int albumlikeCount;
+
+        public int AlbumLikeCount
+        {
+            get { return albumlikeCount; }
+            set { SetProperty<int>(ref albumlikeCount, value); }
         }
 
         private TopicModel  topic;
@@ -80,6 +88,15 @@ namespace HaoDouCookBook.ViewModels
         public SearchResultPageViewModel()
         {
 
+            food = new Food();
+            albumId = -1;
+            albumTitle = string.Empty;
+            albumCover = string.Empty;
+            albumRecipeCount = 0;
+            albumViewCount = 0;
+            albumlikeCount = 0;
+            topic = new TopicModel();
+            Recipes = new ObservableCollection<TagRecipeData>();
         }
     }
 

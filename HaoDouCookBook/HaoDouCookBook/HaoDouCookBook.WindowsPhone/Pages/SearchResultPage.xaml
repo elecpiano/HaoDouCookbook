@@ -15,7 +15,7 @@
             <StackPanel Orientation="Vertical">
 
                 <!--食材-->
-                <StackPanel Orientation="Vertical" Margin="0, 20, 0, 0" DataContext="{Binding Food}"
+                <StackPanel Orientation="Vertical" Margin="0, 20, 0, 0" 
                             Visibility="{Binding Food.FoodName, Converter={StaticResource AnythingToVisiblityConverter}}">
                     <Border Style="{StaticResource SearchResultPage_SectionTitleBackground_Style}">
                         <TextBlock Text="食材百科" Style="{StaticResource SearchResultPage_SectionTitle_style}" />
@@ -80,19 +80,30 @@
                             <ColumnDefinition Width="124"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Rectangle Width="122" Height="140" VerticalAlignment="Center" Grid.Column="0">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding PreviewImageSource}" AlignmentY="Center" Stretch="UniformToFill"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
+                        <Border Width="122" Height="140" VerticalAlignment="Center" Grid.Column="0">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding AlbumCover}" AlignmentY="Center" Stretch="UniformToFill"/>
+                            </Border.Background>
+                            <Border Opacity="0.6">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0.5, 1" EndPoint="0.5, 0">
+                                        <GradientStop Color="Black" Offset="0.0"/>
+                                        <GradientStop Color="Transparent" Offset="0.7" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <StackPanel Orientation="Horizontal">
+                                    <controls:ShadowTextBlock Text=""/>
+                                </StackPanel>
+                            </Border>
+                        </Border>
                         <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="8, 0, 0, 0">
-                            <TextBlock Text="{Binding RecipeName}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0"/>
+                            <TextBlock Text="{Binding AlbumTitle}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0"/>
                             <TextBlock Style="{StaticResource TagsContentStyle}" Width="240">
-                                <Run Text="{Binding LikeNumber}"/>喜欢
+                                <Run Text="{Binding AlbumLikeCount}"/>喜欢
                                 <Run Text="  "/>
-                                <Run Text="{Binding ViewNumber}"/>浏览
+                                <Run Text="{Binding AlbumViewCount}"/>浏览
                             </TextBlock>
-                            <TextBlock Text="{Binding FoodStuff}" Width="240" Style="{StaticResource TagsContentStyle}" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
+                            <TextBlock Text="{Binding AlbumIntro}" Width="240" Style="{StaticResource TagsContentStyle}" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
                         </Grid>
                     </Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

@@ -34,7 +34,7 @@
             <Image x:Name="cookMasterImage" Height="120" Visibility="{Binding Masters[0], Converter={StaticResource AnythingToVisiblityConverter}}" Source="{Binding Masters[0].CookMasterImageSource}" Stretch="Uniform" Margin="5, 10, 5, 0" />
 
             <!--新手教程-->
-            <controls:CategoryTitle Title="{Binding Tutorial.Title}" Margin="10, 10, 5, 0"/>
+            <!--<controls:CategoryTitle Title="{Binding Tutorial.Title}" Margin="10, 10, 5, 0"/>
             <StackPanel x:Name="NewbieTutorTile" DataContext="{Binding Tutorial}" Orientation="Vertical" Margin="10, 30, 5, 00" Background="Transparent" Tapped="Tutorial_Tapped">
                 <Border Height="230">
                     <Border.Background>
@@ -73,7 +73,7 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </StackPanel>
+            </StackPanel>-->
 
             <!--<Image Height="120" Visibility="{Binding Masters[1], Converter={StaticResource AnythingToVisiblityConverter}}" Source="{Binding Masters[1].CookMasterImageSource}" Stretch="Uniform" Margin="5, 10, 5, 0" />-->
 

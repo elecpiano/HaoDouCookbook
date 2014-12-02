@@ -43,20 +43,78 @@ namespace HaoDouCookBook.HaoDou.DataModels.Choiceness
 
 
         [DataMember(Name = "recipe")]
-        public TagsPageData Recipes { get; set; }
+        public TagsPageData Recipe { get; set; }
 
 
-        [DataMember]
-        public AlbumPageData Album { get; set; }
+        [DataMember(Name = "album")]
+        public SearchResultPageAlbum Album { get; set; }
 
 
-        [DataMember]
+        [DataMember(Name = "topic")]
         public SearchResultPageTopicsData TopicData { get; set; }
 
 
         public SearchResultPageData()
         {
 
+        }
+    }
+
+
+    [DataContract]
+    public class SearchResultPageAlbum
+    {
+
+        [DataMember(Name = "list")]
+        public SearchResultPageAlbumItem[] AlbumItems { get; set; }
+
+        public SearchResultPageAlbum()
+        {
+
+        }
+    }
+
+
+    [DataContract]
+    public class SearchResultPageAlbumItem
+    {
+
+        [DataMember]
+        public string AlbumId { get; set; }
+
+
+        [DataMember]
+        public string Title { get; set; }
+
+
+        [DataMember]
+        public string Intro { get; set; }
+
+
+        [DataMember]
+        public string Cover { get; set; }
+
+
+        [DataMember]
+        public int ViewCount { get; set; }
+
+
+        [DataMember]
+        public int RecipeCount { get; set; }
+
+
+        [DataMember]
+        public int LikeCount { get; set; }
+
+        public SearchResultPageAlbumItem()
+        {
+            AlbumId = "-1";
+            Title = string.Empty;
+            Intro = string.Empty;
+            Cover = string.Empty;
+            ViewCount = 0;
+            LikeCount = 0;
+            RecipeCount = 0;
         }
     }
 

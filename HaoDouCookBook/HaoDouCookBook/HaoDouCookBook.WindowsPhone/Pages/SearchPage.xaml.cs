@@ -131,7 +131,12 @@ namespace HaoDouCookBook.Pages
 
         private void SearchLogs_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            
+            SearchResultPage.SearchResultPageParams paras = new SearchResultPage.SearchResultPageParams();
+            paras.Keyword = sender.GetDataContext<string>();
+            paras.TagId = string.Empty;
+
+            App.Current.RootFrame.Navigate(typeof(SearchResultPage), paras);
+
         }
 
         private void Search_AppbarButton_Click(object sender, RoutedEventArgs e)

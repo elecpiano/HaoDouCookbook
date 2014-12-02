@@ -46,7 +46,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.Discovery
                             DailyMeal = JsonSerializer.Deserialize<DailyMeal>(jarray[i].Stringify());
                             break;
                         case "learn":
-                            NewbieTutorial = JsonSerializer.Deserialize<NewbieTutorial>(jarray[i].Stringify());
+                            //NewbieTutorial = JsonSerializer.Deserialize<NewbieTutorial>(jarray[i].Stringify());
                             break;
                         case "cate":
                             Cate cate = JsonSerializer.Deserialize<Cate>(jarray[i].Stringify()); 

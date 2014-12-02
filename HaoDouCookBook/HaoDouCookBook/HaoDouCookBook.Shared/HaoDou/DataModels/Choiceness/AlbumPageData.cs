@@ -43,6 +43,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
         [DataMember]
         public string CommentCount { get; set; }
 
+
         public AlbumInfo()
         {
             AlbumTitle = string.Empty;
