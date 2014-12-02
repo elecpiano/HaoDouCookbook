@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Shared.Infrastructures
 {
     public class SingletonProvider<T> where T : new()

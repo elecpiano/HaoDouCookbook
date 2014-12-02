@@ -1,8 +1,6 @@
 ﻿using HaoDouCookBook.Infrastructures;
 using Shared.Utility;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HaoDouCookBook.Common

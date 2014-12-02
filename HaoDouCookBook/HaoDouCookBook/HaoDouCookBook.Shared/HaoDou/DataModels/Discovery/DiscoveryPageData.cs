@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Shared.Utility;
+using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Collections;
 using System.Linq;
-using System.Text;
 using Windows.Data.Json;
-using Shared.Utility;
 
 namespace HaoDouCookBook.HaoDou.DataModels.Discovery
 {

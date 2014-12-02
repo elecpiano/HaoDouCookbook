@@ -1,7 +1,6 @@
 ﻿using HaoDouCookBook.Utility;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HaoDouCookBook.HaoDou.API
 {

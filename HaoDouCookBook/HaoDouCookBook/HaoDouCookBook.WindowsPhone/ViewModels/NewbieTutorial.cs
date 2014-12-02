@@ -1,9 +1,5 @@
-﻿using HaoDouCookBook.Common;
-using Shared.Infrastructures;
-using System;
-using System.Collections.Generic;
+﻿using Shared.Infrastructures;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace HaoDouCookBook.ViewModels
 {

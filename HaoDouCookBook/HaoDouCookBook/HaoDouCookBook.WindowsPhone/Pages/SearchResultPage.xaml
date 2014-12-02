@@ -109,7 +109,7 @@
                                        CreateTimeDescription="{Binding Topic.CreateTimeDescription}"
                                        HorizontalAlignment="Left" Margin="20, 15, 20, 20" Tapped="TopicItem_Tapped"
                                                 />
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Tapped="ShowAllTopics_Tapped">
                         <Image Source="../assets/images/search.png" Height="24" Width="24" Margin="0, 0, 5, 0"/>
                         <TextBlock Text="查看全部话题" FontSize="18" Foreground="{StaticResource GreenMain}" VerticalAlignment="Center"/>
                     </StackPanel>

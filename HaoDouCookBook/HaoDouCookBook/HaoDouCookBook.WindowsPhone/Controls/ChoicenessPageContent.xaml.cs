@@ -1,27 +1,14 @@
-﻿using HaoDouCookBook.Common;
-using HaoDouCookBook.ViewModels;
+﻿using HaoDouCookBook.HaoDou.API;
+using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
 using HaoDouCookBook.Pages;
+using HaoDouCookBook.ViewModels;
 using Shared.Utility;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using HaoDouCookBook.HaoDou.API;
-using System.Threading.Tasks;
-using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
 
-using ViewModels = HaoDouCookBook.ViewModels;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 

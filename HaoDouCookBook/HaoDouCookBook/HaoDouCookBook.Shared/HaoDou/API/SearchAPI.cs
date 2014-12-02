@@ -2,8 +2,6 @@
 using HaoDouCookBook.HaoDou.DataModels.Choiceness;
 using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HaoDouCookBook.HaoDou.API
