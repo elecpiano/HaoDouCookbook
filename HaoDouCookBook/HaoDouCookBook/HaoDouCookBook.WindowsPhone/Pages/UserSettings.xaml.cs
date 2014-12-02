@@ -1,5 +1,6 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.Controls;
+using HaoDouCookBook.ViewModels;
 using Shared.Infrastructures;
 using Windows.UI.Xaml.Navigation;
 
@@ -17,7 +18,7 @@ namespace HaoDouCookBook.Pages
         public UserSettings()
         {
             this.InitializeComponent();
-            this.root.DataContext = SingletonProvider<UserSettingsConfig>.Instance;
+            this.root.DataContext = SettingsPageViewModel.Instance;
         }
 
         /// <summary>
@@ -34,6 +35,12 @@ namespace HaoDouCookBook.Pages
             }
 
             rootScrollViewer.ScrollToVerticalOffset(0);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            SettingsPageViewModel.Instance.SaveDataAsync();
         }
 
         #endregion

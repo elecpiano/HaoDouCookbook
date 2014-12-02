@@ -30,12 +30,12 @@
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <Grid>
                     <controls:SimpleSettingItem ItemText="开启摇一摇震动" WithMoreTag="False"/>
-                    <ToggleSwitch  OnContent="" OffContent="" VerticalAlignment="Bottom"  HorizontalAlignment="Right"/>
+                    <ToggleSwitch  OnContent="" OffContent="" IsOn="{Binding ShakeWithVibration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Bottom"  HorizontalAlignment="Right"/>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <Grid>
                     <controls:SimpleSettingItem ItemText="推送消息" WithMoreTag="False"/>
-                    <ToggleSwitch OnContent="" OffContent="" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                    <ToggleSwitch OnContent="" OffContent="" IsOn="{Binding PushMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <Grid>
@@ -50,7 +50,9 @@
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <Grid>
                     <controls:SimpleSettingItem ItemText="更新版本"/>
-                    <TextBlock Text="当前版本4.4.0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0, 0, 45, 0" Foreground="#66000000"/>
+                    <TextBlock Style="{StaticResource CurrentVersionTextStyle}">
+                        当前版本<Run Text="{Binding Version}"/>
+                    </TextBlock>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <controls:SimpleSettingItem ItemText="意见反馈"/>

@@ -3,8 +3,11 @@ using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
+using Shared.Infrastructures;
 using Shared.Utility;
+using System;
 using System.Threading.Tasks;
+using Windows.Phone.Devices.Notification;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
@@ -107,6 +110,18 @@ namespace HaoDouCookBook.Pages
                     if (this.pivot.SelectedIndex == 2)
                     {
                         ShakeGesture.StopListenning();
+
+                        // Shake with vibration
+                        //
+                        if (SettingsPageViewModel.Instance.ShakeWithVibration)
+                        {
+                            VibrationDevice vd = VibrationDevice.GetDefault();
+                            if(vd != null)
+                            {
+                                vd.Vibrate(TimeSpan.FromSeconds(0.3));
+                            }
+                        }
+
                         App.Current.RootFrame.Navigate(typeof(ShakePage));
                     }
                 });

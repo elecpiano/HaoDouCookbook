@@ -11,9 +11,11 @@
 
     <Grid Name="root" Background="White" VerticalAlignment="Center">
         <StackPanel Orientation="Horizontal" Height="56">
-            <Image Width="36" Height="36" Stretch="UniformToFill" Source="{Binding Icon}" Visibility="{Binding Icon, Converter={StaticResource AnythingToVisiblityConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15, 0, 10, 0"/>
-            <TextBlock Text="{Binding ItemText}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <Image Source="{Binding Icon}" Visibility="{Binding Icon, Converter={StaticResource AnythingToVisiblityConverter}}" Style="{StaticResource SettingItem_Icon}"/>
+            <TextBlock Text="{Binding ItemText}" Style="{StaticResource SettingItem_Text}"/>
         </StackPanel>
-        <Image Height="56" Stretch="Uniform" Visibility="{Binding WithMoreTag, Converter={StaticResource AnythingToVisiblityConverter}}" VerticalAlignment="Center" HorizontalAlignment="Right" Source="../Assets/Images/MyPage/more.png" Margin="0, 0, 5, 0"/>
+        <Image Visibility="{Binding WithMoreTag, Converter={StaticResource AnythingToVisiblityConverter}}"
+               Source="../Assets/Images/MyPage/more.png"
+               Style="{StaticResource SettingItem_MoreTag}"/>
     </Grid>
 </UserControl>

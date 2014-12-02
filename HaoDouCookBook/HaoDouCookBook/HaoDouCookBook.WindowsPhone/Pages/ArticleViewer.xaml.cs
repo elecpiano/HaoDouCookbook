@@ -58,9 +58,12 @@ namespace HaoDouCookBook.Pages
             if (e.Parameter != null)
             {
                 ArticleViewerPageParams paras = e.Parameter as  ArticleViewerPageParams;
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(paras.Url));
-                request.Headers.Add("Cookies", string.Format("appid={0};uuid={1}", HaoDouApiUrlHelper.APPID, DeviceHelper.GetUniqueDeviceID()));
-                webview.NavigateWithHttpRequestMessage(request);
+                if(!string.IsNullOrEmpty(paras.Url))
+                {
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(paras.Url));
+                    request.Headers.Add("Cookies", string.Format("appid={0};uuid={1}", HaoDouApiUrlHelper.APPID, DeviceHelper.GetUniqueDeviceID()));
+                    webview.NavigateWithHttpRequestMessage(request);
+                }
             }
         }
 

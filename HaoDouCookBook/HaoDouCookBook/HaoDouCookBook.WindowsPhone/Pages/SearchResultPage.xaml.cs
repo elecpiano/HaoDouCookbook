@@ -204,7 +204,11 @@ namespace HaoDouCookBook.Pages
 
         private void ShowAllTopics_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            TopicListPage.TopicListPageParams topicListPageParams = new TopicListPage.TopicListPageParams();
+            topicListPageParams.CategoryName = paras.Keyword;
+            topicListPageParams.SourcePage = TopicListPage.SourcePage.SEARCH_RESULT;
 
+            App.Current.RootFrame.Navigate(typeof(TopicListPage), topicListPageParams);
         }
     }
 }

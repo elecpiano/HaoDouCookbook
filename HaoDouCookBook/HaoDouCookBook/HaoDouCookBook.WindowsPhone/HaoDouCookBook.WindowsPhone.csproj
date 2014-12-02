@@ -208,6 +208,7 @@
     <Compile Include="ViewModels\RecipeTileData.cs" />
     <Compile Include="ViewModels\SearchPageViewModel.cs" />
     <Compile Include="ViewModels\SearchResultPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ShakePageViewModel.cs" />
     <Compile Include="ViewModels\SingleProductViewPageViewModel.cs" />
     <Compile Include="ViewModels\SpecialRecipeAlbumData.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="ViewModels\TagRecipeData.cs" />
     <Compile Include="ViewModels\TagsList.cs" />
     <Compile Include="ViewModels\TagsPageViewModel.cs" />
+    <Compile Include="ViewModels\TopciListPageViewModel.cs" />
     <Compile Include="ViewModels\Topic.cs" />
     <Compile Include="ViewModels\UserData.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">

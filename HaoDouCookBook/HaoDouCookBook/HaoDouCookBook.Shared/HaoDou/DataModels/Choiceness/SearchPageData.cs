@@ -129,6 +129,21 @@ namespace HaoDouCookBook.HaoDou.DataModels.Choiceness
         }
     }
 
+
+    [DataContract]
+    public class SearchResultTopicListPageData : SearchResultPageTopicsData
+    {
+
+        [DataMember(Name = "count")]
+        public int Count { get; set; }
+
+        public SearchResultTopicListPageData()
+        {
+
+        }
+    }
+
+
     
 
     [DataContract]
@@ -173,6 +188,4 @@ namespace HaoDouCookBook.HaoDou.DataModels.Choiceness
             Url = string.Empty;
         }
     }
-
-
 }

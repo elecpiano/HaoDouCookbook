@@ -1,5 +1,6 @@
 ﻿using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
+using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
 using Shared.Utility;
 using System.Collections.ObjectModel;
@@ -18,15 +19,23 @@ namespace HaoDouCookBook.Pages
     {
         #region Page Parameters Definition
 
+        public enum SourcePage
+        {
+            SEARCH_RESULT,
+            NORMAL
+        }
+
         public class TopicListPageParams
         {
             public int CategoryId { get; set; }
 
             public string CategoryName { get; set; }
 
+            public SourcePage SourcePage { get; set; }
+
             public TopicListPageParams()
             {
-
+                SourcePage = TopicListPage.SourcePage.NORMAL;
             }
         }
 
@@ -34,8 +43,9 @@ namespace HaoDouCookBook.Pages
 
         #region Field && Property
 
-        private ObservableCollection<TopicModel> topics = new ObservableCollection<TopicModel>();
+        private TopicListPageViewModel viewModel = new TopicListPageViewModel();
         private int pageOffset = 0;
+        private TopicListPageParams pageParams;
 
         #endregion
 
@@ -60,14 +70,25 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            TopicListPageParams paras = new TopicListPageParams();
+            pageParams = e.Parameter as TopicListPageParams;
 
-            if (paras != null)
+            if (pageParams != null)
             {
-                topics.Clear();
+                viewModel = new TopicListPageViewModel();
                 rootScrollViewer.ScrollToVerticalOffset(0);
-                this.title.Text = paras.CategoryName;
-                LoadDataAsync(paras.CategoryId);
+                DataBinding();
+                this.title.Text = pageParams.CategoryName;
+
+                switch (pageParams.SourcePage)
+                {
+                    case SourcePage.SEARCH_RESULT:
+                        LoadDataByKeywordAsync(pageParams.CategoryName);
+                        break;
+                    case SourcePage.NORMAL:
+                    default:
+                        LoadDataByIdAsync(pageParams.CategoryId);
+                        break;
+                }
             }
 
         }
@@ -78,18 +99,44 @@ namespace HaoDouCookBook.Pages
 
         private void DataBinding()
         {
-            this.topicList.ItemsSource = topics;
+            this.root.DataContext = viewModel;
         }
 
-        private async Task LoadDataAsync(int cateId)
+        private async Task LoadDataByKeywordAsync(string keyword)
+        {
+            await SearchAPI.getTopicList(pageOffset, 20, DeviceHelper.GetUniqueDeviceID(), null, keyword, data =>
+                {
+                    viewModel.Count = data.Count;
+
+                    if (data.Topics != null)
+                    {
+                        foreach (var item in data.Topics)
+                        {
+                            viewModel.Topics.Add(new TopicModel() { 
+                                    Id = item.TopicId.ToString(),
+                                    Url= item.Url,
+                                    TopicPreviewImageSource = item.Cover,
+                                    Title = item.Title,
+                                    PreviewContent = item.Intro,
+                                    Author = item.UserName,
+                                    CreateTimeDescription = item.CreateTime
+                            });
+                        }
+                    }
+                }, error => { });
+        }
+
+        private async Task LoadDataByIdAsync(int cateId)
         {
             await TopicAPI.GetList(pageOffset, 20, cateId, null, data =>
                 {
+                    viewModel.Count = 0;
+
                     if (data.Items != null)
                     {
                         foreach (var item in data.Items)
                         {
-                            topics.Add(new TopicModel()
+                            viewModel.Topics.Add(new TopicModel()
                             {
                                 Id = item.TopicId,
                                 Url = item.Url,
@@ -114,7 +161,10 @@ namespace HaoDouCookBook.Pages
 
         private void TopicTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(ArticleViewer), sender.GetDataContext<TopicModel>().Url);
+            ArticleViewer.ArticleViewerPageParams paras = new ArticleViewer.ArticleViewerPageParams();
+            paras.Url = sender.GetDataContext<TopicModel>().Url;
+
+            App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
         }
 
         #endregion

@@ -89,5 +89,21 @@ namespace HaoDouCookBook.HaoDou.API
             await loader.LoadAsync(postRequest, true, MODULE, cacheFile, onSuccess, onFail);
 
         }
+
+        public static async Task getTopicList(int offset, int limit, string uuid, int? tagid, string keyword, Action<SearchResultTopicListPageData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getTopicList";
+
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("offset", offset.ToString());
+            postRequest.AddPostData("limit", limit.ToString());
+            postRequest.AddPostData("tagid", tagid.HasValue ? tagid.Value.ToString() : "null");
+            postRequest.AddPostData("uuid", uuid);
+            postRequest.AddPostData("keyword", keyword);
+
+            string cacheFile = string.Format("{0}-{1}-{2}-{3}", methodName, offset, limit, tagid);
+            HaoDouJsonDataLoader<SearchResultTopicListPageData> loader = new HaoDouJsonDataLoader<SearchResultTopicListPageData>();
+            await loader.LoadAsync(postRequest, true, MODULE, cacheFile, onSuccess, onFail);
+        }
     }
 }
