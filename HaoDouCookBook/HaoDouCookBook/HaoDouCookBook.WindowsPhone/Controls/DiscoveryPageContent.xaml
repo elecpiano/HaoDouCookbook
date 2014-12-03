@@ -87,37 +87,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <controls:CategoryTitle Title="{Binding Title}" Margin="0, 30, 5, 0"/>
-                            <ItemsControl ItemsSource="{Binding Dishes}" Margin="0, 25, 0, 0">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapGrid Orientation="Vertical" MaximumRowsOrColumns="2"/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel VerticalAlignment="Bottom" Orientation="Vertical" Background="Transparent" Tapped="cateItems_Tapped">
-                                            <Border Margin="0, 0, 15, 10" Width="{Binding DishImageWidth}" Height="{Binding DishImageHeight}">
-                                                <Border.Background>
-                                                    <ImageBrush ImageSource="{Binding DishImageSource}" AlignmentY="Center" Stretch="UniformToFill"/>
-                                                </Border.Background>
-                                            </Border>
-
-                                            <StackPanel Orientation="Horizontal" Height="42" HorizontalAlignment="Left" Margin="0, 0, 0, 6">
-                                                <TextBlock Text="by" Style="{StaticResource DishTileTitleStyle}" Margin="0, 0, 6, 0"/>
-                                                <TextBlock Text="{Binding Author}" Foreground="Black" Style="{StaticResource DishTileTitleStyle}" HorizontalAlignment="Left"/>
-                                            </StackPanel>
-
-                                            <StackPanel Orientation="Horizontal" Height="42" HorizontalAlignment="Left" Margin="0, 0, 0, 0">
-                                                <TextBlock Text="{Binding SupportNumber}" Style="{StaticResource DishTileSupportLineStyle}"/>
-                                                <TextBlock Text="个赞" Margin="1, 0, 0, 0" Style="{StaticResource DishTileSupportLineStyle}"/>
-                                            </StackPanel>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
+                        <controls:Cate Loaded="Cate_Loaded" CateTitle="{Binding Title}" Recipes="{Binding Dishes}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

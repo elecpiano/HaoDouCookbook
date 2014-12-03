@@ -95,6 +95,9 @@
     <Compile Include="Controls\Banner.xaml.cs">
       <DependentUpon>Banner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Cate.xaml.cs">
+      <DependentUpon>Cate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CategoryImageTile.xaml.cs">
       <DependentUpon>CategoryImageTile.xaml</DependentUpon>
     </Compile>
@@ -303,6 +306,10 @@
     <Page Include="Controls\Banner.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Cate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CategoryImageTile.xaml">
       <Generator>MSBuild:Compile</Generator>

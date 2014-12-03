@@ -195,5 +195,17 @@ namespace HaoDouCookBook.Controls
         }
 
         #endregion
+
+        private void Cate_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Cate cate = sender as Cate;
+            ViewModels.Cate dataContext = sender.GetDataContext<ViewModels.Cate>();
+            int index = viewModel.Cates.IndexOf(dataContext);
+
+            if(cate != null)
+            {
+                cate.AdjustLayout(index);
+            }
+        }
     }
 }
