@@ -10,7 +10,6 @@ namespace HaoDouCookBook.Common
     public class HaoDouSearchHelper
     {
         public const string SEARCH_HISTORY_FILENAME = "serachLog.json";
-        public const string SEARCH_FOLDER = "USER_SEARCH";
 
         public static async Task AddSearchKeywordAsync(string keyword)
         {
@@ -24,20 +23,20 @@ namespace HaoDouCookBook.Common
             {
                 searchLogs.Add(keyword);
                 string json = JsonSerializer.Serialize(new Data() { SearchLogs = searchLogs });
-                await IsolatedStorageHelper.WriteToFile(SEARCH_FOLDER, SEARCH_HISTORY_FILENAME, json);
+                await IsolatedStorageHelper.WriteToFileAsync(Constants.LOCAL_USERDATA_FOLDER, SEARCH_HISTORY_FILENAME, json);
             }
         }
 
         public static async Task ClearAllKeywordsAsync()
         {
             string emptyJson = JsonSerializer.Serialize(new Data());
-            await IsolatedStorageHelper.WriteToFile(SEARCH_FOLDER, SEARCH_HISTORY_FILENAME, emptyJson);
+            await IsolatedStorageHelper.WriteToFileAsync(Constants.LOCAL_USERDATA_FOLDER, SEARCH_HISTORY_FILENAME, emptyJson);
         }
 
 
         public static async Task<List<string>> GetAllKeywordsAsync()
         {
-            string logJson = await IsolatedStorageHelper.ReadFile(SEARCH_FOLDER, SEARCH_HISTORY_FILENAME);
+            string logJson = await IsolatedStorageHelper.ReadFileAsync(Constants.LOCAL_USERDATA_FOLDER, SEARCH_HISTORY_FILENAME);
             if (string.IsNullOrEmpty(logJson))
             {
                 return new List<string>();

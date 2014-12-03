@@ -38,9 +38,9 @@
                     <ToggleSwitch OnContent="" OffContent="" IsOn="{Binding PushMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
-                <Grid>
+                <Grid Background="Transparent" Tapped="ClearCache_Tapped">
                     <controls:SimpleSettingItem ItemText="清除缓存" WithMoreTag="False"/>
-                    <TextBlock Text="81.44M" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#66000000"/>
+                    <TextBlock Text="{Binding CacheSize}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#66000000"/>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
 

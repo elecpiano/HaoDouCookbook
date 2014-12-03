@@ -46,7 +46,7 @@ namespace Shared.Utility
                 {
                     try
                     {
-                        var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                        var cachedJson = await IsolatedStorageHelper.ReadFileAsync(moduleName, fileName);
                         T obj = JsonSerializer.Deserialize<T>(cachedJson);
                         if (obj != null)
                         {
@@ -103,7 +103,7 @@ namespace Shared.Utility
 
                     if (toCacheData)
                     {
-                        await IsolatedStorageHelper.WriteToFile(moduleName, fileName, json);
+                        await IsolatedStorageHelper.WriteToFileAsync(moduleName, fileName, json);
                     }
                 }
                 Loaded = true;
@@ -157,7 +157,7 @@ namespace Shared.Utility
                 {
                     try
                     {
-                        var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                        var cachedJson = await IsolatedStorageHelper.ReadFileAsync(moduleName, fileName);
                         JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(cachedJson);
                         if (wrapper != null && wrapper.data != null)
                         {
@@ -214,7 +214,7 @@ namespace Shared.Utility
 
                     if (toCacheData)
                     {
-                        await IsolatedStorageHelper.WriteToFile(moduleName, fileName, json);
+                        await IsolatedStorageHelper.WriteToFileAsync(moduleName, fileName, json);
                     }
                 }
                 Loaded = true;
@@ -275,7 +275,7 @@ namespace Shared.Utility
                 {
                     try
                     {
-                        var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                        var cachedJson = await IsolatedStorageHelper.ReadFileAsync(moduleName, fileName);
                         JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
                         if (wrapper != null && wrapper.data != null)
                         {
@@ -340,7 +340,7 @@ namespace Shared.Utility
 
                     if (toCacheData)
                     {
-                        await IsolatedStorageHelper.WriteToFile(moduleName, fileName, json);
+                        await IsolatedStorageHelper.WriteToFileAsync(moduleName, fileName, json);
                     }
                 }
                 Loaded = true;
@@ -387,7 +387,7 @@ namespace Shared.Utility
                     {
                         try
                         {
-                            var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                            var cachedJson = await IsolatedStorageHelper.ReadFileAsync(moduleName, fileName);
                             JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
                             if (wrapper != null && wrapper.data != null)
                             {
@@ -458,7 +458,7 @@ namespace Shared.Utility
 
                     if (toCacheData)
                     {
-                        await IsolatedStorageHelper.WriteToFile(moduleName, fileName, json);
+                        await IsolatedStorageHelper.WriteToFileAsync(moduleName, fileName, json);
                     }
                 }
                 Loaded = true;

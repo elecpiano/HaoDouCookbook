@@ -50,7 +50,7 @@ namespace HaoDouCookBook.Common
                     {
                         try
                         {
-                            var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, cacheFileName);
+                            var cachedJson = await IsolatedStorageHelper.ReadFileAsync(moduleName, cacheFileName);
 
                             // If there are customize deserialize method, we use it.
                             // But if ther are not, we use generic deserialize method
@@ -132,7 +132,7 @@ namespace HaoDouCookBook.Common
                                     //
                                     if (cacheData)
                                     {
-                                       await IsolatedStorageHelper.WriteToFile(moduleName, cacheFileName, json);
+                                       await IsolatedStorageHelper.WriteToFileAsync(moduleName, cacheFileName, json);
                                     }
                                 });
                             }
@@ -160,7 +160,7 @@ namespace HaoDouCookBook.Common
                                     //
                                     if (cacheData)
                                     {
-                                        await IsolatedStorageHelper.WriteToFile(moduleName, cacheFileName, json);
+                                        await IsolatedStorageHelper.WriteToFileAsync(moduleName, cacheFileName, json);
                                     }
                                 });
                             }

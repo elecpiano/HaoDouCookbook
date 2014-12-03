@@ -1,4 +1,5 @@
-﻿using Shared.Infrastructures;
+﻿using HaoDouCookBook.Common;
+using Shared.Infrastructures;
 using Shared.Utility;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,6 @@ namespace HaoDouCookBook.ViewModels
     [DataContract]
     public class SettingsPageViewModel : BindableBase
     {
-        private const string MODULE = "SETTINGS";
         private const string FILE_NAME = "Settings.json";
 
         #region Singleton
@@ -89,7 +89,7 @@ namespace HaoDouCookBook.ViewModels
 
         public async Task LoadDataAsync()
         {
-            string json = await IsolatedStorageHelper.ReadFile(MODULE, FILE_NAME);
+            string json = await IsolatedStorageHelper.ReadFileAsync(Constants.LOCAL_USERDATA_FOLDER, FILE_NAME);
             if (!string.IsNullOrEmpty(json))
             {
                 var data = JsonSerializer.Deserialize<SettingsPageViewModel>(json);
@@ -105,7 +105,7 @@ namespace HaoDouCookBook.ViewModels
         public async Task SaveDataAsync()
         {
             string json = JsonSerializer.Serialize(_instance);
-            await IsolatedStorageHelper.WriteToFile(MODULE, FILE_NAME, json);
+            await IsolatedStorageHelper.WriteToFileAsync(Constants.LOCAL_USERDATA_FOLDER, FILE_NAME, json);
         }
     }
 }

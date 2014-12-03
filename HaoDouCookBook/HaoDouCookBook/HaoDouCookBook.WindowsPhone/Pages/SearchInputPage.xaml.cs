@@ -126,20 +126,6 @@ namespace HaoDouCookBook.Pages
             this.clearSearchImage.Opacity = 0;
         }
 
-        #endregion
-
-        #region Search
-
-        private void GotoResultPage(string keyword)
-        {
-            SearchResultPage.SearchResultPageParams paras = new SearchResultPage.SearchResultPageParams();
-            paras.Keyword = keyword;
-            paras.TagId = string.Empty;
-
-            App.Current.RootFrame.Navigate(typeof(SearchResultPage), paras); 
-        }
-
-
         private void TextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
@@ -162,6 +148,19 @@ namespace HaoDouCookBook.Pages
         {
             this.searchTexBox.Text = string.Empty;
             this.searchImage.Opacity = 1;
+        }
+
+        #endregion
+
+        #region Search
+
+        private void GotoResultPage(string keyword)
+        {
+            SearchResultPage.SearchResultPageParams paras = new SearchResultPage.SearchResultPageParams();
+            paras.Keyword = keyword;
+            paras.TagId = string.Empty;
+
+            App.Current.RootFrame.Navigate(typeof(SearchResultPage), paras); 
         }
 
         #endregion
