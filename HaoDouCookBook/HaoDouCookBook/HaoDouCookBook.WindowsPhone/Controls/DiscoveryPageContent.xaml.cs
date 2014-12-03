@@ -175,17 +175,6 @@ namespace HaoDouCookBook.Controls
             App.Current.RootFrame.Navigate(typeof(ProductPage), paras);
         }
 
-        private void cateItems_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            var dish = sender.GetDataContext<DishTileData>();
-            ProductPage.ProductPageParams paras = new ProductPage.ProductPageParams();
-            paras.ProductId = dish.ProductId;
-            paras.TopicId = dish.Id;
-            paras.Type = 1;
-
-            App.Current.RootFrame.Navigate(typeof(ProductPage), paras);
-        }
-
         private void Tutorial_Tapped(object sender, TappedRoutedEventArgs e)
         {
             TutorialViewPage.TutorialViewPageParams paras = new TutorialViewPage.TutorialViewPageParams();
@@ -194,18 +183,20 @@ namespace HaoDouCookBook.Controls
             App.Current.RootFrame.Navigate(typeof(TutorialViewPage), paras);
         }
 
-        #endregion
-
         private void Cate_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Cate cate = sender as Cate;
             ViewModels.Cate dataContext = sender.GetDataContext<ViewModels.Cate>();
             int index = viewModel.Cates.IndexOf(dataContext);
 
-            if(cate != null)
+            if (cate != null)
             {
                 cate.AdjustLayout(index);
             }
         }
+
+        #endregion
+
+        
     }
 }

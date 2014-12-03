@@ -49,13 +49,5 @@ namespace HaoDouCookBook.Controls
 
         #endregion
 
-        #region Public Methods
-
-        public void SetImageHight(double height) 
-        {
-            this.imageRect.Height = height;
-        }
-
-        #endregion
     }
 }

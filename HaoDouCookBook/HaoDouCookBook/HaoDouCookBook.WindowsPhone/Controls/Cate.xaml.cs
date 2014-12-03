@@ -1,19 +1,10 @@
-﻿using HaoDouCookBook.ViewModels;
-using System;
-using System.Collections.Generic;
+﻿using HaoDouCookBook.Pages;
+using HaoDouCookBook.ViewModels;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -51,6 +42,8 @@ namespace HaoDouCookBook.Controls
             
         }
 
+        #region Public Methods
+
         public void AdjustLayout(int index)
         {
             if (index % 2 == 0)
@@ -68,5 +61,22 @@ namespace HaoDouCookBook.Controls
                 cateItem21.Height = 245;
             }
         }
+
+        #endregion
+
+        #region Event
+
+        private void cateItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dish = sender.GetDataContext<DishTileData>();
+            ProductPage.ProductPageParams paras = new ProductPage.ProductPageParams();
+            paras.ProductId = dish.ProductId;
+            paras.TopicId = dish.Id;
+            paras.Type = 1;
+
+            App.Current.RootFrame.Navigate(typeof(ProductPage), paras);
+        }
+
+        #endregion
     }
 }

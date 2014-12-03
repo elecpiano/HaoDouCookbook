@@ -14,12 +14,28 @@
         <controls:CategoryTitle Title="{Binding CateTitle}" Margin="0, 30, 5, 0"/>
         <StackPanel Orientation="Horizontal" Margin="0, 15, 0, 0">
             <StackPanel Orientation="Vertical">
-                <controls:DishTile Width="178" x:Name="cateItem10" DataContext="{Binding Recipes[0]}" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" />
-                <controls:DishTile Width="178" x:Name="cateItem11" DataContext="{Binding Recipes[1]}" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Margin="0, 30, 0, 0"/>
+                <controls:DishTile Width="178" x:Name="cateItem10" 
+                                   DataContext="{Binding Recipes[0]}"
+                                   ImageSource="{Binding DishImageSource}" 
+                                   Author="{Binding Author}" 
+                                   SupportNumber="{Binding SupportNumber}" Tapped="cateItem_Tapped" />
+                <controls:DishTile Width="178" x:Name="cateItem11" 
+                                   DataContext="{Binding Recipes[1]}" 
+                                   ImageSource="{Binding DishImageSource}" 
+                                   Author="{Binding Author}"  Tapped="cateItem_Tapped"
+                                   SupportNumber="{Binding SupportNumber}" Margin="0, 30, 0, 0"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="11, 0, 5, 0">
-                <controls:DishTile Width="178" x:Name="cateItem20" DataContext="{Binding Recipes[2]}" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" />
-                <controls:DishTile Width="178" x:Name="cateItem21" DataContext="{Binding Recipes[3]}" ImageSource="{Binding DishImageSource}" Author="{Binding Author}" SupportNumber="{Binding SupportNumber}" Margin="0, 30, 0, 0"/>
+                <controls:DishTile Width="178" x:Name="cateItem20" 
+                                   DataContext="{Binding Recipes[2]}" 
+                                   ImageSource="{Binding DishImageSource}" 
+                                   Author="{Binding Author}" Tapped="cateItem_Tapped"
+                                   SupportNumber="{Binding SupportNumber}" />
+                <controls:DishTile Width="178" x:Name="cateItem21" 
+                                   DataContext="{Binding Recipes[3]}" 
+                                   ImageSource="{Binding DishImageSource}" 
+                                   Author="{Binding Author}" Tapped="cateItem_Tapped"
+                                   SupportNumber="{Binding SupportNumber}" Margin="0, 30, 0, 0"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>
