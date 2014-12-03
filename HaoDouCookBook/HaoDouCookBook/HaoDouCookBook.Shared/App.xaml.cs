@@ -1,5 +1,4 @@
-﻿using HaoDouCookBook.ViewModels;
-using System;
+﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
@@ -159,10 +158,6 @@ namespace HaoDouCookBook
 
             // TODO: Save application state and stop any background activity
             deferral.Complete();
-
-            // Save settings
-            // 
-            SettingsPageViewModel.Instance.SaveDataAsync();
 
         }
 

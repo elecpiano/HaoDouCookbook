@@ -11,11 +11,30 @@
 
     <Grid Margin="0, 0, 0, 0" x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner Title="好豆菜谱" Margin="20, 0, 0, 0"/>
-        <ScrollViewer x:Name="rootScrollViewer" Background="White" Margin="0, 50, 0, 0">
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Text="搜索" Style="{StaticResource SubTitleStyle}"/>
+        </Border>
+        <ScrollViewer x:Name="rootScrollViewer" Margin="0, 110, 0, 0" Background="White">
             <StackPanel Orientation="Vertical">
-                <TextBox TextChanged="TextBox_TextChanged" KeyDown="TextBox_KeyDown" Margin="20, 20, 20, 0"/>
 
-                <ItemsControl x:Name="keywordsList" Margin="20, 15, 20, 0">
+                <Grid Height="55" Margin="20, 20, 20, 0" VerticalAlignment="Top">
+                    <Image x:Name="searchImage" Source="../Assets/Images/searchPage/search_texbox.png" Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10, -1, 0, 0"/>
+                    <TextBox x:Name="searchTexBox" 
+                             TextChanged="TextBox_TextChanged" 
+                             KeyDown="TextBox_KeyDown"
+                             GotFocus="TextBox_GotFocus" 
+                             LostFocus="TextBox_LostFocus" 
+                             PlaceholderText="    搜索菜谱、专题、话题" 
+                             FontSize="24" VerticalAlignment="Center" Margin="10, 5, 30, 0"
+                            />
+                    <Image x:Name="textBoxline" Source="../Assets/images/textboxGrayLine.png" Height="4" Stretch="Fill" VerticalAlignment="Bottom"/>
+                    <Image x:Name="clearSearchImage" 
+                           Source="../Assets/Images/clear.png" 
+                           Tapped="clearSearchImage_Tapped"
+                           Style="{StaticResource SearchInputPage_ClearImae_Style}"/>
+                </Grid>
+
+                <ItemsControl x:Name="keywordsList" Margin="20, 25, 20, 0">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Vertical"/>

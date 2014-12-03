@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -104,6 +105,27 @@ namespace HaoDouCookBook.Pages
             }
         }
 
+        private void TextBox_GotFocus(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            this.searchImage.Opacity = 0;
+            this.textBoxline.Source = new BitmapImage(new Uri("ms-appx:///../Assets/images/textboxBlueLine.png", UriKind.RelativeOrAbsolute));
+            this.clearSearchImage.Opacity = 1;
+        }
+
+        private void TextBox_LostFocus(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            TextBox senderTextBox = sender as TextBox;
+            if (senderTextBox != null)
+            {
+                if (string.IsNullOrEmpty(senderTextBox.Text.Trim()))
+                {
+                    this.searchImage.Opacity = 1;
+                }
+            }
+            this.textBoxline.Source = new BitmapImage(new Uri("ms-appx:///../Assets/images/textboxGrayLine.png", UriKind.RelativeOrAbsolute));
+            this.clearSearchImage.Opacity = 0;
+        }
+
         #endregion
 
         #region Search
@@ -136,8 +158,13 @@ namespace HaoDouCookBook.Pages
             }
         }
 
-        #endregion
+        private void clearSearchImage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.searchTexBox.Text = string.Empty;
+            this.searchImage.Opacity = 1;
+        }
 
+        #endregion
 
     }
 }
