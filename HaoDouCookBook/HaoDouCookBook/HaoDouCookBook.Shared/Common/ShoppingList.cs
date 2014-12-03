@@ -98,7 +98,7 @@ namespace HaoDouCookBook.Common
                     Weight = item.Weight
                 });
 
-                // Add stuff int list of local data
+                // Add stuff into list of local data
                 //
                 if (data.Stuffs.All(s => s.StuffId != item.Id))
                 {

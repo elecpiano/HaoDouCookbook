@@ -41,12 +41,20 @@ namespace HaoDouCookBook.Controls
 
             switch(tag.Trim().ToLower())
             {
+                case "shoppinglist":
+                    GotoShoppingListPage();
+                    break;
                 case "settings":
                     GotoSettingsPage();
                     break;
                 default:
                     break;
             }
+        }
+
+        private void GotoShoppingListPage()
+        {
+            App.Current.RootFrame.Navigate(typeof(ShoppingListPage));
         }
 
         private void GotoSettingsPage()

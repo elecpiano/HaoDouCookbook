@@ -176,6 +176,9 @@
     <Compile Include="Pages\ShakePage.xaml.cs">
       <DependentUpon>ShakePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ShoppingListPage.xaml.cs">
+      <DependentUpon>ShoppingListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SingleProductViewPage.xaml.cs">
       <DependentUpon>SingleProductViewPage.xaml</DependentUpon>
     </Compile>
@@ -418,6 +421,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ShakePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ShoppingListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
