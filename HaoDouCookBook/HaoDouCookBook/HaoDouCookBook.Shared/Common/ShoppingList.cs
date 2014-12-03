@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using System.Linq;
+using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
+using System;
 
 namespace HaoDouCookBook.Common
 {
@@ -34,6 +36,8 @@ namespace HaoDouCookBook.Common
 
         #endregion
 
+        #region Filed && Property
+
         private const string SHOPPINGLIST_DATAFILE = "ShoppingList.json";
         private ShoppingListData data;
 
@@ -47,13 +51,20 @@ namespace HaoDouCookBook.Common
             }
         }
 
+        #endregion
+
+        #region Constructor
+
         private ShoppingList()
         {
-            StuffsDict = new Dictionary<int,ShoppingListStuff>();
+            StuffsDict = new Dictionary<int, ShoppingListStuff>();
         }
 
+        #endregion
 
-        private async Task DeleteRecipByIdAsync(int recipeId)
+        #region Public Methods
+
+        public async Task DeleteRecipByIdAsync(int recipeId)
         {
             var recipe = data.Recipes.Find(r => r.RecipeId == recipeId);
             if (recipe != null)
@@ -64,33 +75,111 @@ namespace HaoDouCookBook.Common
                     data.Stuffs.RemoveAll(s => s.StuffId == stuff.StuffId);
                 }
 
-                await SaveDataAsync();
+                await CommitDataAsync();
             }
         }
 
-        private async Task AddRecipeAsync(ShoppingListRecipe recipe)
+        public async Task AddRecipeAsync(int recipeId, string recipeName, List<FoodStuff> Stuffs)
         {
-            if (data.Recipes.All(r => r.RecipeId != recipe.RecipeId))
+            if (recipeId == -1 || string.IsNullOrEmpty(recipeName) || Stuffs == null)
             {
-                data.Recipes.Add(recipe);
+                throw new ArgumentException(); 
+            }
 
-                // TODO : Add stuffs data
+            ShoppingListRecipe recipe = new ShoppingListRecipe();
+            recipe.RecipeId = recipeId;
+            recipe.RecipeName = recipeName;
+
+            foreach (var item in Stuffs)
+            {
+                recipe.Stuffs.Add(new ShoppingListRecipeStuff()
+                {
+                    StuffId = item.Id,
+                    Weight = item.Weight
+                });
+
+                // Add stuff int list of local data
                 //
+                if (data.Stuffs.All(s => s.StuffId != item.Id))
+                {
+                    data.Stuffs.Add(new ShoppingListStuff()
+                    {
+                        StuffId = item.Id,
+                        StuffName = item.Name,
+                        CategoryId = item.CategoryId,
+                        CategoryName = item.Category,
+                        IsBought = false
+                    });
+                }
+                else
+                {
+                    // If the stuff already in local data, we reset the IsBought to false,
+                    // because it's in new recipe
+                    //
+                    var stuff = data.Stuffs.Find(s => s.StuffId == item.Id);
+                    stuff.IsBought = false;
+                }
+            }
 
-                await SaveDataAsync();
+            data.Recipes.Add(recipe);
+
+            await CommitDataAsync();
+        }
+
+        public bool RecipeExists(int recipeId)
+        {
+            return data.Recipes.Any(r => r.RecipeId == recipeId);
+        }
+
+        public async Task SetStuffBoughtStateAsync(int stuffid, bool isBought)
+        {
+            var stuff = data.Stuffs.Find(s => s.StuffId == stuffid);
+            if (stuff == null)
+            {
+                throw new Exception("Stuff is not exist");
+            }
+            else
+            {
+                stuff.IsBought = isBought;
+            }
+
+            await CommitDataAsync(); 
+        }
+
+        public async Task CommitDataAsync()
+        {
+            if (data == null)
+            {
+                return;
+            }
+
+            string dataJson = JsonSerializer.Serialize<ShoppingListData>(data);
+            if (!string.IsNullOrEmpty(dataJson))
+            {
+                await IsolatedStorageHelper.WriteToFileAsync(Constants.LOCAL_USERDATA_FOLDER, SHOPPINGLIST_DATAFILE, dataJson);
             }
         }
 
-        private async Task LoadDataAsync()
+        #endregion
+
+        #region Private Methods
+
+        public async Task LoadDataAsync()
         {
             string dataJson = await IsolatedStorageHelper.ReadFileAsync(Constants.LOCAL_USERDATA_FOLDER, SHOPPINGLIST_DATAFILE);
+            
             if (!string.IsNullOrEmpty(dataJson))
             {
                 data = JsonSerializer.Deserialize<ShoppingListData>(dataJson);
+                GetStuffDict();
             }
-
-            GetStuffDict();
-
+            else
+            {
+                // If not exist data file, we create it with empty data
+                //
+                data = new ShoppingListData();
+                await CommitDataAsync();
+            }
         }
 
         private void GetStuffDict()
@@ -108,21 +197,8 @@ namespace HaoDouCookBook.Common
                 }
             }
         }
-        
-        private async Task SaveDataAsync()
-        {
-            if (data == null)
-            {
-                return;
-            }
 
-            string dataJson = JsonSerializer.Serialize<ShoppingListData>(data);
-            if (!string.IsNullOrEmpty(dataJson))
-            {
-                await IsolatedStorageHelper.WriteToFileAsync(Constants.LOCAL_USERDATA_FOLDER, SHOPPINGLIST_DATAFILE, dataJson);
-            }
-        }
-
+        #endregion
     }
 
 

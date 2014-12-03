@@ -1,14 +1,17 @@
-﻿using HaoDouCookBook.Controls;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
 using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
 using Shared.Utility;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using DataModels = HaoDouCookBook.HaoDou.DataModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -65,7 +68,9 @@ namespace HaoDouCookBook.Pages
             {
                 viewModel = new RecipeInfoPageViewModel();
                 rootScrollViewer.ScrollToVerticalOffset(0);
+                DataBinding();
                 LoadDataAsync(string.Empty, null, paras.RecipeId);
+
             }
 
         }
@@ -88,7 +93,7 @@ namespace HaoDouCookBook.Pages
 
         private void UpdateViewModel(InfoPageData data)
         {
-            DataBinding();
+            CheckIfAddedToShoppingList(data.Info.RecipeId);
 
             var infoData = data.Info;
 
@@ -224,8 +229,19 @@ namespace HaoDouCookBook.Pages
             }
         }
 
-        #endregion
+        private void CheckIfAddedToShoppingList(int recipeId)
+        {
+            if (ShoppingList.Instance.RecipeExists(recipeId))
+            {
+                this.addToShoppingListText.Text = "√购买清单";
+            }
+            else
+            {
+                this.addToShoppingListText.Text = "+购买清单";
+            }
+        }
 
+        #endregion
 
         #region Event
 
@@ -242,9 +258,35 @@ namespace HaoDouCookBook.Pages
             }
         }
 
-        private void AddToShoppingList_Tapped(object sender, RoutedEventArgs e)
+        private async void AddToShoppingList_Tapped(object sender, RoutedEventArgs e)
         {
-            this.addToShoppingListText.Text = "√购买清单";
+            int recipeId = viewModel.RecipeId;
+
+            if (ShoppingList.Instance.RecipeExists(recipeId))
+            {
+                // TODO: Notify user that it has already added into local data
+            }
+            else
+            {
+                string recipeName = viewModel.Title;
+                List<DataModels.ChoicenessPage.FoodStuff> sstuff = new List<DataModels.ChoicenessPage.FoodStuff>();
+
+                foreach (var item in viewModel.Stuffs)
+                {
+                    sstuff.Add(new DataModels.ChoicenessPage.FoodStuff()
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        CategoryId = item.CategoryId,
+                        Category = item.Category,
+                        Weight = item.Weight,
+                    });
+                }
+
+                await ShoppingList.Instance.AddRecipeAsync(recipeId, recipeName, sstuff);
+                this.addToShoppingListText.Text = "√购买清单";
+            }
+
         }
 
         private void ShowAllProduct_Tapped(object sender, TappedRoutedEventArgs e)
@@ -277,8 +319,6 @@ namespace HaoDouCookBook.Pages
             App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
         }
 
-        #endregion
-
         private void ShowAllComment_Tapped(object sender, TappedRoutedEventArgs e)
         {
             CommentListPage.CommentListPageParams paras = new CommentListPage.CommentListPageParams();
@@ -288,5 +328,8 @@ namespace HaoDouCookBook.Pages
 
             App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
         }
+
+        #endregion
+
     }
 }

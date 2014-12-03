@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HaoDouCookBook.Common;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
@@ -126,6 +127,8 @@ namespace HaoDouCookBook
                     throw new Exception("Failed to create initial page");
                 }
             }
+
+            ShoppingList.Instance.LoadDataAsync();
 
             // Ensure the current window is active
             Window.Current.Activate();
