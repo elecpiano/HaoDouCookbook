@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouHttpExecuter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouJsonDataLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouSearchHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ShoppingList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\AnythingToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\ApiUrlHelper.cs" />

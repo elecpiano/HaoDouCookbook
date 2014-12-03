@@ -1,7 +1,6 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.Controls;
 using HaoDouCookBook.ViewModels;
-using Shared.Infrastructures;
 using Shared.Utility;
 using System;
 using System.Threading.Tasks;

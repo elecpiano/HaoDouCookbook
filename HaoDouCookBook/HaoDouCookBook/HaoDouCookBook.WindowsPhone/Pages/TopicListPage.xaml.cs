@@ -3,7 +3,6 @@ using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
 using Shared.Utility;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
