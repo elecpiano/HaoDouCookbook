@@ -12,11 +12,15 @@ namespace HaoDouCookBook.ViewModels
     {
         public ObservableCollection<StuffCategory> StuffCategories { get; set; }
 
+        public ObservableCollection<ShoppingListRecipe> Recipes { get; set; }
+
         public ShoppingListPageViewModel()
         {
             StuffCategories = new ObservableCollection<StuffCategory>();
+            Recipes = new ObservableCollection<ShoppingListRecipe>();
         }
     }
+
 
 
     public class StuffCategory : BindableBase
@@ -39,6 +43,11 @@ namespace HaoDouCookBook.ViewModels
 
         public ObservableCollection<StuffItem> Stuffs { get; set; }
 
+        public StuffItem FindStuffByName(string Name)
+        {
+            return Stuffs.FirstOrDefault(s => s.Name == Name);
+        }
+
         public StuffCategory()
         {
             category = string.Empty;
@@ -46,14 +55,14 @@ namespace HaoDouCookBook.ViewModels
         }
     }
 
-    public class StuffItem : BindableBase
+    public class ShoppingListRecipe : BindableBase
     {
-        private int id;
+        private int recipeId;
 
-        public int Id
+        public int RecipeId
         {
-            get { return id; }
-            set { SetProperty<int>(ref id, value); }
+            get { return recipeId; }
+            set { SetProperty<int>(ref recipeId, value); }
         }
 
         private string name;
@@ -64,11 +73,40 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref name, value); }
         }
 
-        public StuffItem()
-        {
 
+        public ObservableCollection<StuffItem> Stuffs { get; set; }
+
+        public ShoppingListRecipe()
+        {
+            recipeId = 0;
+            name = string.Empty;
+            Stuffs = new ObservableCollection<StuffItem>();
         }
     }
 
 
+    public class StuffItem : BindableBase
+    {
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set { SetProperty<string>(ref name, value); }
+        }
+
+        private string weight;
+
+        public string Weight
+        {
+            get { return weight; }
+            set { SetProperty<string>(ref weight, value); }
+        }
+
+        public StuffItem()
+        {
+            name = string.Empty;
+            weight = string.Empty;
+        }
+    }
 }

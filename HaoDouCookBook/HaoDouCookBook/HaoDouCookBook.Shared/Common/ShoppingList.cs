@@ -41,7 +41,7 @@ namespace HaoDouCookBook.Common
         private const string SHOPPINGLIST_DATAFILE = "ShoppingList.json";
         private ShoppingListData data;
 
-        public Dictionary<int, ShoppingListStuff> StuffsDict { get; set; }
+        public Dictionary<string, ShoppingListStuff> StuffsDict { get; set; }
 
         public List<ShoppingListRecipe> Recipes
         {
@@ -57,7 +57,7 @@ namespace HaoDouCookBook.Common
 
         private ShoppingList()
         {
-            StuffsDict = new Dictionary<int, ShoppingListStuff>();
+            StuffsDict = new Dictionary<string, ShoppingListStuff>();
         }
 
         #endregion
@@ -70,13 +70,41 @@ namespace HaoDouCookBook.Common
             if (recipe != null)
             {
                 data.Recipes.Remove(recipe);
-                foreach (var stuff in data.Stuffs)
+                foreach (var stuff in recipe.Stuffs)
                 {
-                    data.Stuffs.RemoveAll(s => s.StuffId == stuff.StuffId);
+                    // delete stuff when it is not referenced by other recipes
+                    //
+                    bool isNotReferencedByOther = true;
+
+                    foreach (var recipeItem in data.Recipes)
+                    {
+                        if (recipeItem.RecipeId == recipeId)
+                        {
+                            continue;
+                        }
+
+                        isNotReferencedByOther = recipeItem.Stuffs.All(s => s.StuffName != stuff.StuffName);
+                        if (!isNotReferencedByOther)
+                        {
+                            break;
+                        }
+                    }
+
+                    if (isNotReferencedByOther)
+                    {
+                        data.Stuffs.RemoveAll(s => s.StuffName == stuff.StuffName);
+                    }
                 }
 
                 await CommitDataAsync();
             }
+        }
+
+        public async Task DeleteAllRecipes()
+        {
+            data = new ShoppingListData();
+            StuffsDict.Clear();
+            await CommitDataAsync();
         }
 
         public async Task AddRecipeAsync(int recipeId, string recipeName, List<FoodStuff> Stuffs)
@@ -94,17 +122,16 @@ namespace HaoDouCookBook.Common
             {
                 recipe.Stuffs.Add(new ShoppingListRecipeStuff()
                 {
-                    StuffId = item.Id,
+                    StuffName = item.Name,
                     Weight = item.Weight
                 });
 
                 // Add stuff into list of local data
                 //
-                if (data.Stuffs.All(s => s.StuffId != item.Id))
+                if (data.Stuffs.All(s => s.StuffName != item.Name))
                 {
                     data.Stuffs.Add(new ShoppingListStuff()
                     {
-                        StuffId = item.Id,
                         StuffName = item.Name,
                         CategoryId = item.CategoryId,
                         CategoryName = item.Category,
@@ -116,13 +143,13 @@ namespace HaoDouCookBook.Common
                     // If the stuff already in local data, we reset the IsBought to false,
                     // because it's in new recipe
                     //
-                    var stuff = data.Stuffs.Find(s => s.StuffId == item.Id);
+                    var stuff = data.Stuffs.Find(s => s.StuffName == item.Name);
                     stuff.IsBought = false;
                 }
             }
 
             data.Recipes.Add(recipe);
-
+            GetStuffDict();
             await CommitDataAsync();
         }
 
@@ -131,9 +158,9 @@ namespace HaoDouCookBook.Common
             return data.Recipes.Any(r => r.RecipeId == recipeId);
         }
 
-        public async Task SetStuffBoughtStateAsync(int stuffid, bool isBought)
+        public async Task SetStuffBoughtStateAsync(string stuffName, bool isBought)
         {
-            var stuff = data.Stuffs.Find(s => s.StuffId == stuffid);
+            var stuff = data.Stuffs.Find(s => s.StuffName == stuffName);
             if (stuff == null)
             {
                 throw new Exception("Stuff is not exist");
@@ -141,6 +168,7 @@ namespace HaoDouCookBook.Common
             else
             {
                 stuff.IsBought = isBought;
+                StuffsDict[stuffName].IsBought = isBought;
             }
 
             await CommitDataAsync(); 
@@ -188,14 +216,23 @@ namespace HaoDouCookBook.Common
             {
                 return;
             }
-
-            foreach (var item in data.Stuffs)
+            StuffsDict.Clear();
+            foreach (var recipe in Recipes)
             {
-                if (!StuffsDict.ContainsKey(item.StuffId))
+                foreach (var stuff in recipe.Stuffs)
                 {
-                    StuffsDict.Add(item.StuffId, item);
+                    var stuffData = data.Stuffs.Find(s => s.StuffName == stuff.StuffName);
+                    if (stuffData != null)
+                    {
+                        if (!StuffsDict.ContainsKey(stuff.StuffName))
+                        {
+                            StuffsDict.Add(stuff.StuffName, stuffData);
+                        }
+ 
+                    }
                 }
             }
+
         }
 
         #endregion
@@ -246,7 +283,7 @@ namespace HaoDouCookBook.Common
     {
 
         [DataMember]
-        public int StuffId { get; set; }
+        public string StuffName { get; set; }
 
 
         [DataMember]
@@ -254,7 +291,7 @@ namespace HaoDouCookBook.Common
 
         public ShoppingListRecipeStuff()
         {
-            StuffId = -1;
+            StuffName = string.Empty;
             Weight = string.Empty;
         }
     }
@@ -263,9 +300,6 @@ namespace HaoDouCookBook.Common
     [DataContract]
     public class ShoppingListStuff
     {
-        [DataMember]
-        public int StuffId { get; set; }
-
         [DataMember]
         public string StuffName { get; set; }
 
@@ -281,7 +315,6 @@ namespace HaoDouCookBook.Common
 
         public ShoppingListStuff()
         {
-            StuffId = -1;
             StuffName = string.Empty;
             CategoryId = -1;
             CategoryName = string.Empty;

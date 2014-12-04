@@ -586,4 +586,20 @@
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Margin" Value="47, 15, 0, 15"/>
     </Style>
+
+    <Style x:Key="ShoppingListPage_StuffItemWeight_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0, 15, 47, 15"/>
+    </Style>
+
+    <Style x:Key="ShoppingListPage_ShowRecipeImge_Style" TargetType="Image">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0, 15, 47, 15"/>
+        <Setter Property="Height" Value="42"/>
+        <Setter Property="Width" Value="42"/>
+    </Style>
+    
 </ResourceDictionary>
