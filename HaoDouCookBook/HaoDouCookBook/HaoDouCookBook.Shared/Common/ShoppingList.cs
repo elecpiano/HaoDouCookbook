@@ -160,10 +160,6 @@ namespace HaoDouCookBook.Common
             }
         }
 
-        #endregion
-
-        #region Private Methods
-
         public async Task LoadDataAsync()
         {
             string dataJson = await IsolatedStorageHelper.ReadFileAsync(Constants.LOCAL_USERDATA_FOLDER, SHOPPINGLIST_DATAFILE);
@@ -181,6 +177,10 @@ namespace HaoDouCookBook.Common
                 await CommitDataAsync();
             }
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void GetStuffDict()
         {

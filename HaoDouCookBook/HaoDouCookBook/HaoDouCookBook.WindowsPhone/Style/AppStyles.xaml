@@ -568,7 +568,7 @@
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="30, 15, 0, 15"/>
+        <Setter Property="Margin" Value="47, 15, 0, 15"/>
     </Style>
 
     <Style x:Key="SimpleTreeList_Arrow_Style" TargetType="Image">
@@ -577,12 +577,13 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="Margin" Value="17, 0, 0, 0"/>
     </Style>
 
     <Style x:Key="ShoppingListPage_StuffCategoryItem_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="FontSize" Value="21"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="30, 15, 0, 15"/>
+        <Setter Property="Margin" Value="47, 15, 0, 15"/>
     </Style>
 </ResourceDictionary>

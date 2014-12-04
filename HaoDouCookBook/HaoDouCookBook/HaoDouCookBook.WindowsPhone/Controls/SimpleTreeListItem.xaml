@@ -15,7 +15,7 @@
             <Image x:Name="arrowImage" Source="../assets/images/down_arrow.png" Style="{StaticResource SimpleTreeList_Arrow_Style}" />
             <TextBlock Text="{Binding Title}" Style="{StaticResource SimpleTreeList_Title_Style}"/>
         </controls:SmartGrid> 
-        <Rectangle Width="800" Style="{StaticResource LightGaryLine}" Height="1" Margin="-30, 0, -30, 0"/>
+        <Rectangle Width="800" Style="{StaticResource LightGaryLine}" Height="1"/>
         <ItemsControl x:Name="stuffsList" ItemsSource="{Binding ItemsSource}" ItemTemplate="{Binding ItemDataTemplate}" ItemsPanel="{Binding ItemsPanel}">
         </ItemsControl>
     </StackPanel>
