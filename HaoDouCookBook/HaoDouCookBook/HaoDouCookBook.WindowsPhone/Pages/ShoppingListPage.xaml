@@ -29,12 +29,39 @@
                 </DataTemplate>
             </Pivot.TitleTemplate>
             <PivotItem Header="清单查看">
-                <ScrollViewer Background="White" Margin="-20, -15, -20, 0">
-                    
+                <ScrollViewer x:Name="stuffCategoryScrollViewer" Background="White" Margin="-20, -15, -20, 0">
+                    <ItemsControl ItemsSource="{Binding StuffCategories}" Margin="17, 0, 17, 0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <controls:SimpleTreeListItem Title="{Binding Category}" ItemsSource="{Binding Stuffs}">
+                                    <controls:SimpleTreeListItem.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical"/>
+                                        </ItemsPanelTemplate>
+                                    </controls:SimpleTreeListItem.ItemsPanel> 
+                                    <controls:SimpleTreeListItem.ItemDataTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical" Background="Transparent" Tapped="StuffItem_Tapped">
+                                                <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" IsHitTestVisible="True">
+                                                    <TextBlock Text="{Binding Name}" Style="{StaticResource ShoppingListPage_StuffCategoryItem_Style}"/>
+                                                </controls:SmartGrid>
+                                                <Rectangle Width="800" Style="{StaticResource LightGaryLine}" Margin="-30, 0, -30, 0"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </controls:SimpleTreeListItem.ItemDataTemplate>
+                                </controls:SimpleTreeListItem>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </ScrollViewer>
             </PivotItem>
             <PivotItem Header="菜谱查看">
-                <ScrollViewer Background="White" Margin="-20, -15, -20, 0">
+                <ScrollViewer x:Name="recipesScrollViewer" Background="White" Margin="-20, -15, -20, 0">
                     
                 </ScrollViewer>
             </PivotItem>

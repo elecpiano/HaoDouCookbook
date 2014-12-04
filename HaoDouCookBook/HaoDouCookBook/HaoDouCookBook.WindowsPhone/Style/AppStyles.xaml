@@ -13,6 +13,7 @@
     <!--Colors-->
     <SolidColorBrush x:Key="TopAppbarColor" Color="#fff8f8f8"/>
     <SolidColorBrush x:Key="GreenMain" Color="#78a708"/>
+    <SolidColorBrush x:Key="SmartGridTouchColor" Color="#8837afd6"/>
 
     <!--Default Font-->
     <Style x:Key="TextBlockBase" TargetType="TextBlock">
@@ -561,4 +562,27 @@
         <Setter Property="Opacity" Value="0"/>
     </Style>
 
+    <!--Simple Tree list-->
+    <Style x:Key="SimpleTreeList_Title_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="#78a708"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="30, 15, 0, 15"/>
+    </Style>
+
+    <Style x:Key="SimpleTreeList_Arrow_Style" TargetType="Image">
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
+
+    <Style x:Key="ShoppingListPage_StuffCategoryItem_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="30, 15, 0, 15"/>
+    </Style>
 </ResourceDictionary>

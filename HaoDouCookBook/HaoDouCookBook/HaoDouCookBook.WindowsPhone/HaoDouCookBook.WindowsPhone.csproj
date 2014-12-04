@@ -134,6 +134,10 @@
     <Compile Include="Controls\SimpleSettingItem.xaml.cs">
       <DependentUpon>SimpleSettingItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SimpleTreeListItem.xaml.cs">
+      <DependentUpon>SimpleTreeListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SmartGrid.cs" />
     <Compile Include="Controls\SquarePageConent.xaml.cs">
       <DependentUpon>SquarePageConent.xaml</DependentUpon>
     </Compile>
@@ -216,6 +220,7 @@
     <Compile Include="ViewModels\SearchResultPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ShakePageViewModel.cs" />
+    <Compile Include="ViewModels\ShoppingListPageViewModel.cs" />
     <Compile Include="ViewModels\SingleProductViewPageViewModel.cs" />
     <Compile Include="ViewModels\SpecialRecipeAlbumData.cs" />
     <Compile Include="ViewModels\StuffInfoViewModel.cs" />
@@ -251,6 +256,7 @@
     <Content Include="Assets\Images\camera.png" />
     <Content Include="Assets\Images\clear.png" />
     <Content Include="Assets\Images\DefaultTopicImage.jpg" />
+    <Content Include="Assets\Images\down_arrow.png" />
     <Content Include="Assets\Images\InfoTag.png" />
     <Content Include="Assets\Images\like.png" />
     <Content Include="Assets\Images\logo.png" />
@@ -286,6 +292,7 @@
     <Content Include="Assets\Images\TextBoxBlueLine.png" />
     <Content Include="Assets\Images\TextBoxGrayLine.png" />
     <Content Include="Assets\Images\TextBoxGreenLine.png" />
+    <Content Include="Assets\Images\up_arrow.png" />
     <Content Include="Assets\Images\vip.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
@@ -356,6 +363,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SimpleSettingItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SimpleTreeListItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
