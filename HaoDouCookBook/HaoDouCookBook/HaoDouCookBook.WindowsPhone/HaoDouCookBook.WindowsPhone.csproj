@@ -144,6 +144,9 @@
     <Compile Include="Controls\TagRecipeItem.xaml.cs">
       <DependentUpon>TagRecipeItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Toast.xaml.cs">
+      <DependentUpon>Toast.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TopicTile.xaml.cs">
       <DependentUpon>TopicTile.xaml</DependentUpon>
     </Compile>
@@ -375,6 +378,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TagRecipeItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Toast.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
