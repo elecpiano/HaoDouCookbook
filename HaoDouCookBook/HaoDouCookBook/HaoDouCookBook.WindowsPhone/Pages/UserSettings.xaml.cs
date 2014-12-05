@@ -71,7 +71,7 @@ namespace HaoDouCookBook.Pages
             ContentDialog dialog = new ContentDialog()
             {
                 Title = "清理缓存提示",
-                Content = "清除缓存之后，收藏的菜谱将无法离线继续查看，确认清除？",
+                Content = "清除缓存之后，收藏的菜谱将无法离线\n继续查看，确认清除？",
                 FullSizeDesired = false,
                 PrimaryButtonText = "确定",
                 SecondaryButtonText = "取消"
@@ -106,6 +106,14 @@ namespace HaoDouCookBook.Pages
             ulong size = await IsolatedStorageHelper.GetUserDataSizeAsync(Constants.LOCAL_USERDATA_FOLDER);
             string sizeDesc = "无缓存";
 
+            if (size == 0)
+            {
+                if (onCompleted != null)
+                {
+                    App.Current.RunAsync(() => onCompleted.Invoke(sizeDesc));
+                }
+                return;
+            }
             if (size > 0)
             {
                 if (size < 1024d)

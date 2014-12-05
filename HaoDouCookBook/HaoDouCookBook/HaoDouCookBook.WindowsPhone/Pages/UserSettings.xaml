@@ -40,7 +40,7 @@
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <Grid Background="Transparent" Tapped="ClearCache_Tapped">
                     <controls:SimpleSettingItem ItemText="清除缓存" WithMoreTag="False"/>
-                    <TextBlock Text="{Binding CacheSize}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#66000000"/>
+                    <TextBlock Text="{Binding CacheSize}" Style="{StaticResource SettingPage_CacheSizeText_Style}"/>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
 

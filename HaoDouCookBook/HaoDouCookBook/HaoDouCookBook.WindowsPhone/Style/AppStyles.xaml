@@ -199,8 +199,8 @@
 
     <!--Settings-->
     <Style x:Key="SettingGroupTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
-        <Setter Property="Foreground" Value="Green"/>
-        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="Foreground" Value="#8cb446"/>
+        <Setter Property="FontSize" Value="18"/>
     </Style>
 
     <Style x:Key="ToggleSwitchNoTextStyle" TargetType="ToggleSwitch">
@@ -455,6 +455,7 @@
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment"  Value="Left"/>
+        <Setter Property="Margin" Value="0, 15, 0, 15"/>
     </Style>
 
     <Style x:Key="SettingItem_MoreTag" TargetType="Image">
@@ -470,6 +471,13 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="Margin" Value="0, 0, 45, 0"/>
+        <Setter Property="Foreground" Value="#66000000"/>
+    </Style>
+
+    <Style x:Key="SettingPage_CacheSizeText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="Foreground" Value="#66000000"/>
     </Style>
 

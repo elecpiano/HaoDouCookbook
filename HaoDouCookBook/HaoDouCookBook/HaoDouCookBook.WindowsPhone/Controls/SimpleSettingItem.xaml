@@ -10,7 +10,7 @@
     d:DesignWidth="400">
 
     <Grid Name="root" Background="White" VerticalAlignment="Center">
-        <StackPanel Orientation="Horizontal" Height="56">
+        <StackPanel Orientation="Horizontal">
             <Image Source="{Binding Icon}" Visibility="{Binding Icon, Converter={StaticResource AnythingToVisiblityConverter}}" Style="{StaticResource SettingItem_Icon}"/>
             <TextBlock Text="{Binding ItemText}" Style="{StaticResource SettingItem_Text}"/>
         </StackPanel>
