@@ -1,9 +1,12 @@
-﻿using HaoDouCookBook.Controls;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
 using Shared.Utility;
+using System;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
@@ -63,6 +66,7 @@ namespace HaoDouCookBook.Pages
             {
                 viewModel = new AlbumPageViewModel();
                 rootScrollViewer.ScrollToVerticalOffset(0);
+                DataBinding();
                 LoadDataAsync(0, 20, paras.AlbumId, string.Empty, null);
             }
         }
@@ -78,9 +82,11 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadDataAsync(int offset, int limit, int albumId, string sign, int? uid)
         {
+            // show loading
+            //
+            loading.SetState(LoadingState.LOADING);
             await InfoAPI.GetAlbumInfo(offset, limit, albumId, sign, uid, DeviceHelper.GetUniqueDeviceID(), data =>
                 {
-                    DataBinding();
                     viewModel.AlbumAvatar = data.Info.AlbumAvatarUrl;
                     viewModel.AlbumContent = data.Info.AlbumContent;
                     viewModel.AlbumCover = data.Info.AlbumCover;
@@ -107,8 +113,28 @@ namespace HaoDouCookBook.Pages
                             });
                         }
                     }
+
+                    // loaded
+                    //
+                    loading.SetState(LoadingState.SUCCESS);
  
-                }, error => { });
+                }, error => {
+                    if (error.ErrorCode == Constants.ERRORCODE_JSON_PARSE_FAILED // parse json data failed
+                        || error.ErrorCode == Constants.ERRORCODE_METAJSON_PARSE_FAILED //parse the original json data from haodou failed
+                        || error.ErrorCode == Constants.ERRORCODE_REMOTE_SERVER_UNAVAILABLE) // remote server unavaiable
+                    {
+                        DelayHelper.Delay(TimeSpan.FromSeconds(0.7), () =>
+                            {
+                                // retry action
+                                //
+                                loading.RetryAction = async () => { await LoadDataAsync(offset, limit, albumId, sign, uid); };
+
+                                // show netork unavailable
+                                //
+                                loading.SetState(LoadingState.NETWORK_UNAVAILABLE);
+                            });
+                    }
+                });
         }
 
         #endregion

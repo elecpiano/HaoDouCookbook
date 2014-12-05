@@ -33,7 +33,7 @@
                 </DataTemplate>
             </Pivot.TitleTemplate>
             <PivotItem Header="清单查看">
-                <ScrollViewer x:Name="stuffCategoryScrollViewer" Background="White" Margin="-20, -15, -20, 0">
+                <ScrollViewer x:Name="stuffCategoryScrollViewer" Background="White" Margin="-20, -15, -20, 20">
                     <Grid>
                         <ItemsControl ItemsSource="{Binding StuffCategories}">
                             <ItemsControl.ItemsPanel>
@@ -71,7 +71,7 @@
                 </ScrollViewer>
             </PivotItem>
             <PivotItem Header="菜谱查看">
-                <ScrollViewer x:Name="recipesScrollViewer" Background="White" Margin="-20, -15, -20, 0" BringIntoViewOnFocusChange="True">
+                <ScrollViewer x:Name="recipesScrollViewer" Background="White" Margin="-20, -15, -20, 20" BringIntoViewOnFocusChange="True">
                     <Grid>
                         <ItemsControl ItemsSource="{Binding Recipes}">
                             <ItemsControl.ItemsPanel>

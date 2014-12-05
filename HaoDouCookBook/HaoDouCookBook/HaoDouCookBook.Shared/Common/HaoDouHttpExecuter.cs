@@ -170,7 +170,7 @@ namespace HaoDouCookBook.Common
 
                     if (data == null)
                     {
-                        onFail.Invoke(new Error() { ErrorCode = 1, Message = "parse json data failed" });
+                        onFail.Invoke(new Error() { ErrorCode = Constants.ERRORCODE_METAJSON_PARSE_FAILED, Message = "parse json data failed" });
                         return;
                     }
 

@@ -120,6 +120,9 @@
     <Compile Include="Controls\MyPageContent.xaml.cs">
       <DependentUpon>MyPageContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NetworkLoading.xaml.cs">
+      <DependentUpon>NetworkLoading.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RecipeCategoryTile.xaml.cs">
       <DependentUpon>RecipeCategoryTile.xaml</DependentUpon>
     </Compile>
@@ -273,6 +276,7 @@
     <Content Include="Assets\Images\down_arrow.png" />
     <Content Include="Assets\Images\InfoTag.png" />
     <Content Include="Assets\Images\like.png" />
+    <Content Include="Assets\Images\loading.png" />
     <Content Include="Assets\Images\logo.png" />
     <Content Include="Assets\Images\logo_recipe.jpg" />
     <Content Include="Assets\Images\MyPage\AppGems.png" />
@@ -288,6 +292,7 @@
     <Content Include="Assets\Images\MyPage\Settings.png" />
     <Content Include="Assets\Images\MyPage\ShippingList.png" />
     <Content Include="Assets\Images\noavatar_300.jpg" />
+    <Content Include="Assets\Images\nonetwork.png" />
     <Content Include="Assets\Images\noshopping.png" />
     <Content Include="Assets\Images\no_result_search.png" />
     <Content Include="Assets\Images\ProductPage\comment_gray.png" />
@@ -359,6 +364,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\MyPageContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NetworkLoading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -78,6 +78,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DataLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DataTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DateTimeExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\DelayHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DeviceHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\HttpExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\ImageHelper.cs" />
