@@ -163,6 +163,12 @@
     <Compile Include="Pages\ArticleViewer.xaml.cs">
       <DependentUpon>ArticleViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CategoryPage.xaml.cs">
+      <DependentUpon>CategoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CategoryTagsPage.xaml.cs">
+      <DependentUpon>CategoryTagsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CommentListPage.xaml.cs">
       <DependentUpon>CommentListPage.xaml</DependentUpon>
     </Compile>
@@ -207,6 +213,7 @@
     </Compile>
     <Compile Include="ViewModels\AlbumListPageViewModel.cs" />
     <Compile Include="ViewModels\AlbumPageViewModel.cs" />
+    <Compile Include="ViewModels\CategoryPageViewModel.cs" />
     <Compile Include="ViewModels\CategoryTileData.cs" />
     <Compile Include="ViewModels\CommentListPageViewModel.cs" />
     <Compile Include="ViewModels\CookMaster.cs" />
@@ -404,6 +411,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ArticleViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CategoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CategoryTagsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

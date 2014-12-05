@@ -4,6 +4,7 @@ using HaoDouCookBook.ViewModels;
 using Shared.Utility;
 using System;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -54,7 +55,7 @@ namespace HaoDouCookBook.Pages
         {
             GetCacheSizeAsync(() =>
                 {
-                    SettingsPageViewModel.Instance.CacheSize = "努力计算中...";
+                    SettingsPageViewModel.Instance.CacheSize = "正在获取缓存大小...";
                 }, result =>
                 {
                     SettingsPageViewModel.Instance.CacheSize = result;
@@ -65,14 +66,30 @@ namespace HaoDouCookBook.Pages
 
         #region Event
 
-        private void ClearCache_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void ClearCache_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            ClearCacheAsync(() => {
-                SettingsPageViewModel.Instance.CacheSize = "缓存清理中...";
-            },
-            () => {
-                SettingsPageViewModel.Instance.CacheSize = "0 B";
-            });
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "清理缓存提示",
+                Content = "清除缓存之后，收藏的菜谱将无法离线继续查看，确认清除？",
+                FullSizeDesired = false,
+                PrimaryButtonText = "确定",
+                SecondaryButtonText = "取消"
+            };
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                await ClearCacheAsync(() =>
+                {
+                    SettingsPageViewModel.Instance.CacheSize = "缓存清理中...";
+                },
+                () =>
+                {
+                    SettingsPageViewModel.Instance.CacheSize = "无缓存";
+                });
+            }
         }
 
         #endregion
@@ -87,19 +104,22 @@ namespace HaoDouCookBook.Pages
             }
 
             ulong size = await IsolatedStorageHelper.GetUserDataSizeAsync(Constants.LOCAL_USERDATA_FOLDER);
-            string sizeDesc = "0 B";
+            string sizeDesc = "无缓存";
 
-            if (size < 1024d)
+            if (size > 0)
             {
-                sizeDesc = size.ToString() + " B";
-            }
-            else if (size < 1048576d)
-            {
-                sizeDesc = Math.Round(((double)size / 1024d), 2).ToString() + " KB";
-            }
-            else
-            {
-                sizeDesc = Math.Round(((double)size / 1048576d), 2).ToString() + " MB"; 
+                if (size < 1024d)
+                {
+                    sizeDesc = size.ToString() + " B";
+                }
+                else if (size < 1048576d)
+                {
+                    sizeDesc = Math.Round(((double)size / 1024d), 2).ToString() + " KB";
+                }
+                else
+                {
+                    sizeDesc = Math.Round(((double)size / 1048576d), 2).ToString() + " MB";
+                }
             }
 
             if (onCompleted != null)

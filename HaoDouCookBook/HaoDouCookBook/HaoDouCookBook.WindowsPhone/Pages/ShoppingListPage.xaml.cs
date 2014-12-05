@@ -325,8 +325,8 @@ namespace HaoDouCookBook.Pages
         {
             ContentDialog dialog = new ContentDialog()
             {
-                Title = "删除",
-                Content = "确定要删除该菜谱吗？",
+                Title = "删除全部",
+                Content = "确定要删除全部菜谱吗？",
                 FullSizeDesired = false,
                 PrimaryButtonText = "确定",
                 SecondaryButtonText = "取消"

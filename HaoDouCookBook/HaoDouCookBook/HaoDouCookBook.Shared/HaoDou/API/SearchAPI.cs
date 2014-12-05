@@ -90,7 +90,7 @@ namespace HaoDouCookBook.HaoDou.API
 
         }
 
-        public static async Task getTopicList(int offset, int limit, string uuid, int? tagid, string keyword, Action<SearchResultTopicListPageData> onSuccess, Action<Error> onFail)
+        public static async Task GetTopicList(int offset, int limit, string uuid, int? tagid, string keyword, Action<SearchResultTopicListPageData> onSuccess, Action<Error> onFail)
         {
             string methodName = "getTopicList";
 
@@ -104,6 +104,19 @@ namespace HaoDouCookBook.HaoDou.API
             string cacheFile = string.Format("{0}-{1}-{2}-{3}", methodName, offset, limit, tagid);
             HaoDouJsonDataLoader<SearchResultTopicListPageData> loader = new HaoDouJsonDataLoader<SearchResultTopicListPageData>();
             await loader.LoadAsync(postRequest, true, MODULE, cacheFile, onSuccess, onFail);
+        }
+
+        public static async Task GetCateList(string uuid, Action<CategoryPageData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getCateList";
+            POSTRequestExecuter postRequeset = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequeset.AddPostData("uuid", uuid);
+            postRequeset.AddPostData("offset", "0");
+
+            string cacheFileName = methodName;
+
+            HaoDouJsonDataLoader<CategoryPageData> loader = new HaoDouJsonDataLoader<CategoryPageData>();
+            await loader.LoadAsync(postRequeset, true, MODULE, cacheFileName, onSuccess, onFail);
         }
     }
 }

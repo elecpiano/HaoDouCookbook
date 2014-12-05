@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HaoDouCookBook.Pages;
+using System;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -77,7 +78,7 @@ namespace HaoDouCookBook
             classificationAppbarButton.Tag = CLASSIFICATION_APPBARBUTTON_TAG;
             classificationAppbarButton.Label = "分类";
             classificationAppbarButton.Icon = new SymbolIcon(Symbol.List);
-            classificationAppbarButton.Tapped += AppBarButton_Tapped;
+            classificationAppbarButton.Click += AppbarButton_Click;
 
             this.bottomAppBar.PrimaryCommands.Add(classificationAppbarButton);
         }
@@ -90,14 +91,31 @@ namespace HaoDouCookBook
             publishRecipeAppbarButton.Tag = PUBLISH_RECIPE_APPBARBUTTON_TAG;
             publishRecipeAppbarButton.Label = "晒一晒";
             publishRecipeAppbarButton.Icon = new SymbolIcon(Symbol.Edit);
-            publishRecipeAppbarButton.Tapped += AppBarButton_Tapped;
+            publishRecipeAppbarButton.Click += AppbarButton_Click;
 
             this.bottomAppBar.PrimaryCommands.Add(publishRecipeAppbarButton);
         }
 
-        private void AppBarButton_Tapped(object sender, TappedRoutedEventArgs e)
+        void AppbarButton_Click(object sender, RoutedEventArgs e)
         {
+            AppBarButton button = sender as AppBarButton;
+            if (button != null)
+            {
+                string tag = button.Tag.ToString();
+                if (tag.Equals(CLASSIFICATION_APPBARBUTTON_TAG, StringComparison.OrdinalIgnoreCase))
+                {
+                    GotoCateogryPage();
+                }
+                else if (tag.Equals(PUBLISH_RECIPE_APPBARBUTTON_TAG, StringComparison.OrdinalIgnoreCase))
+                {
 
+                }
+            }
+        }
+
+        private void GotoCateogryPage()
+        {
+            App.Current.RootFrame.Navigate(typeof(CategoryPage));
         }
 
         #endregion

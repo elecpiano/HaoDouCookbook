@@ -103,7 +103,7 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadDataByKeywordAsync(string keyword)
         {
-            await SearchAPI.getTopicList(pageOffset, 20, DeviceHelper.GetUniqueDeviceID(), null, keyword, data =>
+            await SearchAPI.GetTopicList(pageOffset, 20, DeviceHelper.GetUniqueDeviceID(), null, keyword, data =>
                 {
                     viewModel.Count = data.Count;
 

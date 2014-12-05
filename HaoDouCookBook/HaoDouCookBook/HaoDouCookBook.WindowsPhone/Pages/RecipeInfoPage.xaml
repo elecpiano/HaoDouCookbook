@@ -61,7 +61,7 @@
 
                     <!--食材-->
                     <Grid Margin="0,20, 0, 0">
-                        <TextBlock Text="食材" Foreground="#78a708" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        <TextBlock Text="食材" Foreground="{StaticResource GreenMain}" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" />
 
                         <Button Width="160" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0, -20, 0, 0" Click="AddToShoppingList_Tapped">
                             <Button.Content>
@@ -113,7 +113,7 @@
                     </Grid>
 
                     <!--步骤-->
-                    <TextBlock Text="步骤" Foreground="#78a708" FontSize="24" Margin="0, 10, 0, 20"/>
+                    <TextBlock Text="步骤" Foreground="{StaticResource GreenMain}" FontSize="24" Margin="0, 10, 0, 20"/>
                     <ItemsControl ItemsSource="{Binding CookSteps}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -141,14 +141,14 @@
                     </ItemsControl>
 
                     <!--小贴士-->
-                    <TextBlock Text="小贴士" Foreground="#78a708" FontSize="24" Margin="0, 10, 0, 10"/>
+                    <TextBlock Text="小贴士" Foreground="{StaticResource GreenMain}" FontSize="24" Margin="0, 10, 0, 10"/>
                     <TextBlock Text="{Binding Tips}" FontSize="21" TextWrapping="Wrap"/>
 
                     <!--广告-->
                     <Image Name="ad" DataContext="{Binding Ad}" Source="{Binding Image}" Margin="0, 20, 0, 20"/>
 
                     <!--作品展示-->
-                    <TextBlock Text="作品展示" Foreground="#78a708" FontSize="24" Margin="0, 10, 0, 10"/>
+                    <TextBlock Text="作品展示" Foreground="{StaticResource GreenMain}" FontSize="24" Margin="0, 10, 0, 10"/>
 
                     <ItemsControl ItemsSource="{Binding Products}">
                         <ItemsControl.ItemsPanel>
@@ -189,13 +189,13 @@
                         <Button.Content>
                             <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 10" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Image Source="../assets/images/camera.png" Height="27" Margin="0, 0, 10, -2" VerticalAlignment="Bottom"/>
-                                <TextBlock FontWeight="Normal" Text="晒晒我做的这道菜" Foreground="#78a708" FontSize="21"/>
+                                <TextBlock FontWeight="Normal" Text="晒晒我做的这道菜" Foreground="{StaticResource GreenMain}" FontSize="21"/>
                             </StackPanel>
                         </Button.Content>
                     </Button>
 
                     <!--相关标签-->
-                    <TextBlock Text="相关标签" Foreground="#78a708" FontSize="24" Margin="0, 40, 0, 10"/>
+                    <TextBlock Text="相关标签" Foreground="{StaticResource GreenMain}" FontSize="24" Margin="0, 40, 0, 10"/>
                     <ItemsControl ItemsSource="{Binding Tags}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -212,7 +212,7 @@
                     </ItemsControl>
 
                     <!--评论-->
-                    <TextBlock Text="评论" Foreground="#78a708" FontSize="24" Margin="0, 40, 0, 10"/>
+                    <TextBlock Text="评论" Foreground="{StaticResource GreenMain}" FontSize="24" Margin="0, 40, 0, 10"/>
                     <ItemsControl ItemsSource="{Binding Comments}" Margin="10, 10, 0, 0">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
