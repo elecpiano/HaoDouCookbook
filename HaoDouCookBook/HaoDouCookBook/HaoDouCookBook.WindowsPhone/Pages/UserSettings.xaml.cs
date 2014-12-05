@@ -91,7 +91,10 @@ namespace HaoDouCookBook.Pages
                 });
             }
         }
-
+        private void About_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(AboutPage));
+        }
         #endregion
 
         #region Private Method
@@ -153,6 +156,8 @@ namespace HaoDouCookBook.Pages
 
 
         #endregion
+
+       
 
     }
 }

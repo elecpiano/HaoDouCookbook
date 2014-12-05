@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Calls;
 using Windows.Devices.Sensors;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
@@ -19,6 +21,38 @@ namespace HaoDouCookBook.Utility
 
             string hashedString = CryptographicBuffer.EncodeToHexString(hashed);
             return hashedString;
+        }
+
+#if WINDOWS_PHONE_APP 
+        public static void PhoneCall(string phoneNumber)
+        {
+            PhoneCallManager.ShowPhoneCallUI(phoneNumber, "");
+        }
+#endif
+        public async static Task OpenHttpURL(string url)
+        {
+            if (!url.StartsWith("http"))
+            {
+                url = "http://" + url;
+            }
+
+            await OpenUrl(url);
+            
+        }
+
+        public async static Task OpenHttpsUrl(string url)
+        {
+            if (!url.StartsWith("https"))
+            {
+                url = "https://" + url;
+            }
+
+            await OpenUrl(url);
+        }
+
+        private async static Task OpenUrl(string url)
+        {
+            await Windows.System.Launcher.LaunchUriAsync(new Uri(url));
         }
     
     }

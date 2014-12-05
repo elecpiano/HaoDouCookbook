@@ -30,7 +30,7 @@ namespace HaoDouCookBook.HaoDou.API
             postRequest.AddPostData("sence", "t2");
             postRequest.AddPostData("tagid", tagid.HasValue ? tagid.Value.ToString() : "null");
             postRequest.AddPostData("uuid", uuid);
-            postRequest.AddPostData("keyword", keyword);
+            postRequest.AddPostData("keyword", Uri.EscapeDataString(keyword.Trim()));
 
             string cacheFile = string.Format("{0}-{1}-{2}-{3}", methodName, offset, limit, tagid);
 
@@ -52,7 +52,7 @@ namespace HaoDouCookBook.HaoDou.API
         {
             string methodName = "getSuggestion";
             POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
-            postRequest.AddPostData("keyword", keyword);
+            postRequest.AddPostData("keyword", Uri.EscapeDataString(keyword.Trim()));
             
 
             HaoDouJsonDataLoader<SearchSuggestionData> loader = new HaoDouJsonDataLoader<SearchSuggestionData>();
@@ -64,7 +64,7 @@ namespace HaoDouCookBook.HaoDou.API
             string methodName = "getSearchIndex";
             POSTRequestExecuter postRequset = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
             postRequset.AddPostData("scene", "k1");
-            postRequset.AddPostData("keyword", keyword);
+            postRequset.AddPostData("keyword", Uri.EscapeDataString(keyword.Trim()));
             postRequset.AddPostData("tagid", tagid);
             postRequset.AddPostData("uuid", uuid);
 
@@ -81,7 +81,7 @@ namespace HaoDouCookBook.HaoDou.API
             postRequest.AddPostData("limit", limit.ToString());
             postRequest.AddPostData("tagid", tagid.HasValue ? tagid.Value.ToString() : "null");
             postRequest.AddPostData("uuid", uuid);
-            postRequest.AddPostData("keyword", keyword);
+            postRequest.AddPostData("keyword", Uri.EscapeDataString(keyword.Trim()));
 
             string cacheFile = string.Format("{0}-{1}-{2}-{3}", methodName, offset, limit, tagid);
 
@@ -99,7 +99,7 @@ namespace HaoDouCookBook.HaoDou.API
             postRequest.AddPostData("limit", limit.ToString());
             postRequest.AddPostData("tagid", tagid.HasValue ? tagid.Value.ToString() : "null");
             postRequest.AddPostData("uuid", uuid);
-            postRequest.AddPostData("keyword", keyword);
+            postRequest.AddPostData("keyword", Uri.EscapeDataString(keyword.Trim()));
 
             string cacheFile = string.Format("{0}-{1}-{2}-{3}", methodName, offset, limit, tagid);
             HaoDouJsonDataLoader<SearchResultTopicListPageData> loader = new HaoDouJsonDataLoader<SearchResultTopicListPageData>();

@@ -22,7 +22,7 @@
         </Border>
         <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
 
-            <ItemsControl ItemsSource="{Binding Categories}" Margin="20, 0, 0, 0">
+            <ItemsControl ItemsSource="{Binding Categories}" Margin="15, 0, 0, 0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical"/>

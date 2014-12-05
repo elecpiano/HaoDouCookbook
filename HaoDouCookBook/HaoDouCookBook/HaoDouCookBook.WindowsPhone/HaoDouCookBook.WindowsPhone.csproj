@@ -154,6 +154,9 @@
     <Compile Include="Controls\UserPhoto.xaml.cs">
       <DependentUpon>UserPhoto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AlbumListPage.xaml.cs">
       <DependentUpon>AlbumListPage.xaml</DependentUpon>
     </Compile>
@@ -271,6 +274,7 @@
     <Content Include="Assets\Images\InfoTag.png" />
     <Content Include="Assets\Images\like.png" />
     <Content Include="Assets\Images\logo.png" />
+    <Content Include="Assets\Images\logo_recipe.jpg" />
     <Content Include="Assets\Images\MyPage\AppGems.png" />
     <Content Include="Assets\Images\MyPage\Douquan.png" />
     <Content Include="Assets\Images\MyPage\Draft.png" />
@@ -401,6 +405,10 @@
     <Page Include="Controls\UserPhoto.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AlbumListPage.xaml">
       <SubType>Designer</SubType>

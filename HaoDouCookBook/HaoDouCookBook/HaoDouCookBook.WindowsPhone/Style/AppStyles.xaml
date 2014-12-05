@@ -81,21 +81,21 @@
 
     <!--Line Style-->
     <Style x:Key="GrayLine" TargetType="Rectangle">
-        <Setter Property="Stroke" Value="#44000000"/>
+        <Setter Property="Stroke" Value="#dedede"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Height" Value="0.8"/>
+        <Setter Property="Height" Value="1"/>
     </Style>
 
     <Style x:Key="LightGaryLine" TargetType="Rectangle">
-        <Setter Property="Stroke" Value="#10000000"/>
+        <Setter Property="Stroke" Value="#dfdfdf"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Height" Value="0.8"/>
+        <Setter Property="Height" Value="1"/>
     </Style>
 
     <Style x:Key="DarkGrayLine" TargetType="Rectangle">
-        <Setter Property="Stroke" Value="DarkGray"/>
+        <Setter Property="Stroke" Value="#d1d1d1"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Height" Value="0.8"/>
+        <Setter Property="Height" Value="1.5"/>
     </Style>
 
     <Style x:Key="GreenLine" TargetType="Rectangle">
@@ -606,7 +606,7 @@
     <Style x:Key="ShoppingListPage_ShowRecipeImge_Style" TargetType="Image">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="Margin" Value="0, 15, 47, 15"/>
+        <Setter Property="Margin" Value="0, 15, 47, 5"/>
         <Setter Property="Height" Value="42"/>
         <Setter Property="Width" Value="42"/>
     </Style>
@@ -632,6 +632,20 @@
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0, 0, 8, 0"/>
+    </Style>
+
+    <!--About Page-->
+    <Style x:Key="AboutPage_ItemKeyText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkerGreenMain}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="AboutPage_HaoDouIntroduction_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="24.5"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Margin" Value="25, 30, 40, 30"/>
     </Style>
 
 </ResourceDictionary>

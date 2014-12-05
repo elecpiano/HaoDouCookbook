@@ -64,7 +64,7 @@ namespace HaoDouCookBook.Pages
                 this.title.Text = paras.Keyword;
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 DataBinding();
-                LoadDataAsync(20, 0, paras.Keyword);
+                LoadDataAsync(0, 20, paras.Keyword);
             }
         }
 

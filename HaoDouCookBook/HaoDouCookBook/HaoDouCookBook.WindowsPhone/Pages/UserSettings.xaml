@@ -46,7 +46,7 @@
 
                 <!--支持-->
                 <controls:SettingGroupTitle Title="支持" Margin="0, 30, 0, 0"/>
-                <controls:SimpleSettingItem ItemText="关于"/>
+                <controls:SimpleSettingItem ItemText="关于" Tapped="About_Tapped"/>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <Grid>
                     <controls:SimpleSettingItem ItemText="更新版本"/>
