@@ -83,5 +83,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utility\IsolatedStorageHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\JsonSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\NetworkHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\UIExtersion.cs" />
   </ItemGroup>
 </Project>

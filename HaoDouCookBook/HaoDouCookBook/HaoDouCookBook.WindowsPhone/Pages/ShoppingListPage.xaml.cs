@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Shared.Utility;
 using System.Linq;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Popups;
+using System;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -72,18 +79,11 @@ namespace HaoDouCookBook.Pages
             {
                 foreach (var stuff in ShoppingList.Instance.StuffsDict.Values)
                 {
-                    StuffItem sfi = new StuffItem() { Id = stuff.StuffId, Name = stuff.StuffName };
+                    StuffItem sfi = new StuffItem() { Name = stuff.StuffName };
 
                     if (categoryStuffDict.ContainsKey(stuff.CategoryId))
                     {
-                        if (stuff.IsBought)
-                        {
-                            boughtCategory.Stuffs.Add(sfi);
-                        }
-                        else
-                        {
-                            categoryStuffDict[stuff.CategoryId].Add(sfi);
-                        }
+                        categoryStuffDict[stuff.CategoryId].Add(sfi);
                     }
                     else
                     {
@@ -111,7 +111,14 @@ namespace HaoDouCookBook.Pages
                 {
                     foreach (var item in categoryStuffDict[kv.Key])
                     {
-                        ca.Stuffs.Add(new StuffItem() { Id = item.Id, Name = item.Name });
+                        if (ShoppingList.Instance.StuffsDict[item.Name].IsBought)
+                        {
+                            boughtCategory.Stuffs.Add(item);
+                        }
+                        else
+                        {
+                            ca.Stuffs.Add(item);
+                        }
                     }
 
                     viewModel.StuffCategories.Add(ca);
@@ -120,6 +127,27 @@ namespace HaoDouCookBook.Pages
 
             viewModel.StuffCategories.Add(boughtCategory);
             SortViewModelStuffCategories();
+
+            viewModel.Recipes.Clear();
+            if (ShoppingList.Instance.Recipes != null)
+            {
+                foreach (var item in ShoppingList.Instance.Recipes)
+                {
+                    ViewModels.ShoppingListRecipe recipe = new ViewModels.ShoppingListRecipe();
+                    recipe.RecipeId = item.RecipeId;
+                    recipe.Name = item.RecipeName;
+
+                    foreach (var sf in item.Stuffs)
+                    {
+                        recipe.Stuffs.Add(new StuffItem() { 
+                            Name = sf.StuffName,
+                            Weight = sf.Weight
+                        });
+                    }
+
+                    viewModel.Recipes.Add(recipe);
+                }
+            }
         }
 
         #endregion
@@ -132,12 +160,12 @@ namespace HaoDouCookBook.Pages
 
             // check if exist in "已购买食材"
             //
-            if (ExistInBoughtStuffCategory(dataContext.Id))
+            if (ExistInBoughtStuffCategory(dataContext.Name))
             {
                 // add to normal category
                 //
-                int realCategoryId = ShoppingList.Instance.StuffsDict[dataContext.Id].CategoryId;
-                var category = viewModel.StuffCategories.First(c => c.CategoryId == realCategoryId);
+                int realCategoryId = ShoppingList.Instance.StuffsDict[dataContext.Name].CategoryId;
+                var category = FindStuffCategoryInViewModelById(realCategoryId);
                 if (category != null)
                 {
                     category.Stuffs.Add(dataContext);
@@ -147,24 +175,25 @@ namespace HaoDouCookBook.Pages
                     // if don't exist category, create one.
                     // 
                     StuffCategory cate = new StuffCategory();
-                    cate.CategoryId = ShoppingList.Instance.StuffsDict[dataContext.Id].CategoryId;
-                    cate.Category = ShoppingList.Instance.StuffsDict[dataContext.Id].CategoryName;
+                    cate.CategoryId = ShoppingList.Instance.StuffsDict[dataContext.Name].CategoryId;
+                    cate.Category = ShoppingList.Instance.StuffsDict[dataContext.Name].CategoryName;
                     cate.Stuffs.Add(dataContext);
+                    SortViewModelStuffCategories();
                 }
-
-                // update local data
-                //
-                await ShoppingList.Instance.SetStuffBoughtStateAsync(dataContext.Id, false);
 
                 // remove from "已购买食材" 
                 //
-                RemoveItemFromBoughStuffCategory(dataContext.Id);
+                RemoveItemFromBoughStuffCategory(dataContext.Name);
+
+                // update local data
+                //
+                await ShoppingList.Instance.SetStuffBoughtStateAsync(dataContext.Name, false);
             }
             else
             {
 
-                int realCategoryId = ShoppingList.Instance.StuffsDict[dataContext.Id].CategoryId;
-                var category = viewModel.StuffCategories.First(c => c.CategoryId == realCategoryId);
+                int realCategoryId = ShoppingList.Instance.StuffsDict[dataContext.Name].CategoryId;
+                var category = FindStuffCategoryInViewModelById(realCategoryId);
 
                 // remove from NORAML
                 //
@@ -172,11 +201,11 @@ namespace HaoDouCookBook.Pages
 
                 // if "已购买食材" don't contain this stuff, add it into the category
                 //
-                var boughtCategory = viewModel.StuffCategories.FirstOrDefault(c => c.CategoryId == Constants.BOUGHT_STUFFCATEGORY_ID);
+                var boughtCategory = FindStuffCategoryInViewModelById(Constants.BOUGHT_STUFFCATEGORY_ID);
                 if (boughtCategory != null)
                 {
 
-                    if (boughtCategory.Stuffs.All(s => s.Id != dataContext.Id))
+                    if (boughtCategory.Stuffs.All(s => s.Name != dataContext.Name))
                     {
                         boughtCategory.Stuffs.Add(dataContext);
                     }
@@ -194,35 +223,143 @@ namespace HaoDouCookBook.Pages
 
                 // update local data
                 // 
-                await ShoppingList.Instance.SetStuffBoughtStateAsync(dataContext.Id, true);
+                await ShoppingList.Instance.SetStuffBoughtStateAsync(dataContext.Name, true);
             }
         }
 
+        private void ShowRecipe_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            FrameworkElement element = sender as FrameworkElement;
+            var stuff = sender.GetDataContext<StuffItem>();
+            var parent = element.GetParent<SimpleTreeListItem>();
+            if (parent != null)
+            {
+                var stuffLists = parent.ItemsSource as IList<StuffItem>;
+                if (stuffLists != null)
+                {
+                    int index = stuffLists.IndexOf(stuff);
+                    if (index != 0)
+                    {
+                        element.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    }
+                }
+            }
+        }
+
+        private void ShowRecipe_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            FrameworkElement element = sender as FrameworkElement;
+            var parent = element.GetParent<SimpleTreeListItem>();
+            if (parent != null)
+            {
+                var dataContext = parent.GetDataContext<ViewModels.ShoppingListRecipe>();
+                if (dataContext != null)
+                {
+                    RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
+                    paras.RecipeId = dataContext.RecipeId;
+
+                    App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+                }
+            }
+        }
+        private void Recipe_Hoding(object sender, HoldingRoutedEventArgs e)
+        {
+            FrameworkElement senderElement = sender as FrameworkElement;
+            if (senderElement == null)
+            {
+                return;
+            }
+
+            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+            if (flyoutBase != null)
+            {
+                flyoutBase.ShowAt(senderElement);
+            }
+        }
+
+        private async void DeleteRecipe_Click(object sender, RoutedEventArgs e)
+        {
+            var recipe = sender.GetDataContext<ViewModels.ShoppingListRecipe>();
+
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "删除",
+                Content = "确定要删除该菜谱吗？",
+                FullSizeDesired = false,
+                PrimaryButtonText = "确定",
+                SecondaryButtonText = "取消"
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                if (recipe != null)
+                {
+                    await ShoppingList.Instance.DeleteRecipByIdAsync(recipe.RecipeId);
+                    viewModel.Recipes.Remove(recipe);
+
+                    foreach (var stuff in recipe.Stuffs)
+                    {
+                        bool isReferencedByOthers = false;
+                        foreach (var recipeItem in viewModel.Recipes)
+                        {
+                            if (recipeItem.Stuffs.Any(s => s.Name == stuff.Name))
+                            {
+                                isReferencedByOthers = true;
+                                break;
+                            }
+                        }
+
+                        if (!isReferencedByOthers)
+                        {
+                            DeleteStuffInCatergory(ShoppingList.Instance.StuffsDict[stuff.Name].CategoryId, stuff.Name);
+                            RemoveItemFromBoughStuffCategory(stuff.Name);
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private async void DeleteAllRecipes_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "删除",
+                Content = "确定要删除该菜谱吗？",
+                FullSizeDesired = false,
+                PrimaryButtonText = "确定",
+                SecondaryButtonText = "取消"
+            };
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                await ShoppingList.Instance.DeleteAllRecipes();
+                viewModel.Recipes.Clear();
+                viewModel.StuffCategories.Clear();
+            }
+        }
 
         #endregion
 
         #region Private Methods
 
-        private bool ExistInBoughtStuffCategory(int stuffId)
+        private bool ExistInBoughtStuffCategory(string stuffName)
         {
-            var boughtStuffCategory = viewModel.StuffCategories.FirstOrDefault(f => f.CategoryId == Constants.BOUGHT_STUFFCATEGORY_ID);
+            var boughtStuffCategory = FindStuffCategoryInViewModelById(Constants.BOUGHT_STUFFCATEGORY_ID);
             if (boughtStuffCategory != null)
             {
-                return boughtStuffCategory.Stuffs.Any(s => s.Id == stuffId);
+                return boughtStuffCategory.FindStuffByName(stuffName) != null;
             }
 
             return false;
         }
 
-        private void RemoveItemFromBoughStuffCategory(int stuffId)
+        private void RemoveItemFromBoughStuffCategory(string stuffName)
         {
-            var boughtStuffCategory = viewModel.StuffCategories.First(f => f.CategoryId == Constants.BOUGHT_STUFFCATEGORY_ID);
-
-            if (boughtStuffCategory != null)
-            {
-                var stuff = boughtStuffCategory.Stuffs.First(s => s.Id == stuffId);
-                boughtStuffCategory.Stuffs.Remove(stuff);
-            }
+            DeleteStuffInCatergory(Constants.BOUGHT_STUFFCATEGORY_ID, stuffName);
         }
 
         private void SortViewModelStuffCategories()
@@ -234,6 +371,26 @@ namespace HaoDouCookBook.Pages
                 viewModel.StuffCategories.Add(item);
             }
         }
+
+        private StuffCategory FindStuffCategoryInViewModelById(int id)
+        {
+            return viewModel.StuffCategories.FirstOrDefault(s => s.CategoryId == id);
+        }
+
+        private void DeleteStuffInCatergory(int categoryId, string stuffName)
+        {
+            var category = FindStuffCategoryInViewModelById(categoryId);
+            if (category != null)
+            {
+                var stuffInCate = category.FindStuffByName(stuffName);
+                if (stuffInCate != null)
+                {
+                    category.Stuffs.Remove(stuffInCate);
+                }
+            }
+        }
+
+      
 
         #endregion
     }
