@@ -24,7 +24,7 @@
         <TextBlock x:Name="content" 
                    Text="Binding Text" 
                    Foreground="White" 
-                   FontSize="24" TextWrapping="Wrap" MaxWidth="280"
+                   FontSize="19" TextWrapping="Wrap" MaxWidth="280"
                    HorizontalAlignment="Center" Margin="20, 8"/>
     </Border>
 </UserControl>

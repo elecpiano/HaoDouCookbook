@@ -8,10 +8,8 @@ using Shared.Utility;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Popups;
 using System;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -185,6 +183,8 @@ namespace HaoDouCookBook.Pages
                 //
                 RemoveItemFromBoughStuffCategory(dataContext.Name);
 
+                this.toast.Show(@"取消""标记""");
+
                 // update local data
                 //
                 await ShoppingList.Instance.SetStuffBoughtStateAsync(dataContext.Name, false);
@@ -221,6 +221,7 @@ namespace HaoDouCookBook.Pages
                     viewModel.StuffCategories.Add(bc);
                 }
 
+                this.toast.Show(@"标记为""已购买食材""");
                 // update local data
                 // 
                 await ShoppingList.Instance.SetStuffBoughtStateAsync(dataContext.Name, true);
@@ -316,7 +317,6 @@ namespace HaoDouCookBook.Pages
                             RemoveItemFromBoughStuffCategory(stuff.Name);
                         }
                     }
-
                 }
             }
         }

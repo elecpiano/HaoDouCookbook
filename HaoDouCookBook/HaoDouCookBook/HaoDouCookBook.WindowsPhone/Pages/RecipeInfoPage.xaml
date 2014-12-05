@@ -261,5 +261,6 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+        <controls:Toast x:Name="toast" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0, 0, 0, 120"/>
     </Grid>
 </controls:BackablePage>

@@ -264,7 +264,7 @@ namespace HaoDouCookBook.Pages
 
             if (ShoppingList.Instance.RecipeExists(recipeId))
             {
-                // TODO: Notify user that it has already added into local data
+                this.toast.Show("请勿重复添加");
             }
             else
             {

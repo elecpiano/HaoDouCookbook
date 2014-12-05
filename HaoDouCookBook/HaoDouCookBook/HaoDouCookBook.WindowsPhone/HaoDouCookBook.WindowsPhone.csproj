@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\FavoriteCountToStringConverter.cs" />
+    <Compile Include="Common\ListCountToNoItemsVisiblityConverter.cs" />
     <Compile Include="Common\MainStuffColorConverter.cs" />
     <Compile Include="Controls\AdImagePivot.xaml.cs">
       <DependentUpon>AdImagePivot.xaml</DependentUpon>
@@ -276,6 +277,7 @@
     <Content Include="Assets\Images\MyPage\Settings.png" />
     <Content Include="Assets\Images\MyPage\ShippingList.png" />
     <Content Include="Assets\Images\noavatar_300.jpg" />
+    <Content Include="Assets\Images\noshopping.png" />
     <Content Include="Assets\Images\no_result_search.png" />
     <Content Include="Assets\Images\ProductPage\comment_gray.png" />
     <Content Include="Assets\Images\ProductPage\comment_green.png" />
