@@ -22,7 +22,7 @@ namespace HaoDouCookBook.Controls
         private void SimpleSettingItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
             SimpleSettingItem ssi = sender as SimpleSettingItem;
-            if (ssi != null)
+            if (ssi != null && ssi.Tag != null)
             {
                 HandlePageItemTapped(ssi.Tag.ToString());
             }
@@ -47,9 +47,17 @@ namespace HaoDouCookBook.Controls
                 case "settings":
                     GotoSettingsPage();
                     break;
+                case "adrecommendation":
+                    GotoAdRecommendationPage();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void GotoAdRecommendationPage()
+        {
+            App.Current.RootFrame.Navigate(typeof(AdRecommendationPage));
         }
 
         private void GotoShoppingListPage()

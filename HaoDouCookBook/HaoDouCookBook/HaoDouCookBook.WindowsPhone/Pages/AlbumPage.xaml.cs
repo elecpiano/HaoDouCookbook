@@ -6,7 +6,6 @@ using HaoDouCookBook.ViewModels;
 using Shared.Utility;
 using System;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
@@ -53,7 +52,7 @@ namespace HaoDouCookBook.Pages
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             if (e.NavigationMode == NavigationMode.Back)
@@ -67,7 +66,7 @@ namespace HaoDouCookBook.Pages
                 viewModel = new AlbumPageViewModel();
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 DataBinding();
-                LoadDataAsync(0, 20, paras.AlbumId, string.Empty, null);
+                await LoadDataAsync(0, 20, paras.AlbumId, string.Empty, null);
             }
         }
        
@@ -119,9 +118,7 @@ namespace HaoDouCookBook.Pages
                     loading.SetState(LoadingState.SUCCESS);
  
                 }, error => {
-                    if (error.ErrorCode == Constants.ERRORCODE_JSON_PARSE_FAILED // parse json data failed
-                        || error.ErrorCode == Constants.ERRORCODE_METAJSON_PARSE_FAILED //parse the original json data from haodou failed
-                        || error.ErrorCode == Constants.ERRORCODE_REMOTE_SERVER_UNAVAILABLE) // remote server unavaiable
+                    if (Utilities.IsMatchNetworkFail(error.ErrorCode))
                     {
                         DelayHelper.Delay(TimeSpan.FromSeconds(0.7), () =>
                             {
