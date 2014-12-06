@@ -1,4 +1,6 @@
-﻿using HaoDouCookBook.Pages;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Pages;
+using HaoDouCookBook.ViewModels;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -8,16 +10,42 @@ namespace HaoDouCookBook.Controls
 {
     public sealed partial class MyPageContent : UserControl
     {
+        #region Field && Property
+
+        private MyPageViewModel viewModel = new MyPageViewModel();
+
+        #endregion
+
         #region Life Cycle
 
         public MyPageContent()
         {
             this.InitializeComponent();
+            DataBinding();
+        }
+
+        #endregion
+
+        #region Data Prepare
+
+        private void DataBinding()
+        {
+            this.root.DataContext = viewModel; 
+        }
+
+        public void UpdateViewModel()
+        {
+            viewModel.SignedIn = !string.IsNullOrEmpty(UserGlobal.Instance.UserInfo.Sign);
         }
 
         #endregion
 
         #region Event
+
+        private void GotoLogin_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(LoginPage));
+        }
 
         private void SimpleSettingItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -71,5 +99,6 @@ namespace HaoDouCookBook.Controls
         }
 
         #endregion
+
     }
 }

@@ -10,10 +10,10 @@
     d:DesignHeight="3000"
     d:DesignWidth="400">
 
-    <ScrollViewer>
+    <ScrollViewer x:Name="root">
         <StackPanel Orientation="Vertical" Background="#22000000" Margin="0, 0, 0, 15">
             <!--User header-->
-            <Grid Background="White">
+            <Grid Background="White" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}">
                 <controls:UserPhoto Width="100" Height="100" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10, 10, 0, 10"/>
                 <TextBlock Text="haodoudou001" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="28" Margin="127,15,0,0"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="127, 50, 0, 0">
@@ -22,18 +22,58 @@
                 </StackPanel>
             </Grid>
 
-            <!--others-->
-            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Message.png" ItemText="消息" Margin="0, 30, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
-            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Friends.png" ItemText="豆友" Margin="0, 1.5, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
-            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Douquan.png" ItemText="豆圈" Margin="0, 1.5, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
+            <StackPanel Orientation="Vertical" Background="White" Margin="0, 0, 0, 30"
+                        Visibility="{Binding ShowLoginNotify, Converter={StaticResource AnythingToVisiblityConverter}}">
+                <Grid >
+                    <TextBlock Text="{Binding LoginNotifyInfo}" Style="{StaticResource MyPage_LoginNotifyInfo_style}"/>
+                </Grid>
 
-            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Favorite.png" ItemText="我的收藏" Margin="0, 20, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
+                <Button HorizontalAlignment="Center" Margin="0, 0, 0, 40" Tapped="GotoLogin_Tapped">
+                    <Button.Content>
+                        <TextBlock Text="登陆/注册" FontSize="24" FontWeight="Normal" Margin="80, 5, 80, 5"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+
+            <!--others-->
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Message.png" 
+                                        ItemText="消息" Margin="0, 30, 0, 0" 
+                                        Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
+                                        Tapped="SimpleSettingItem_Tapped"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Friends.png" 
+                                        ItemText="豆友" 
+                                        Margin="0, 1.5, 0, 0"
+                                        Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
+                                        Tapped="SimpleSettingItem_Tapped"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Douquan.png"
+                                        ItemText="豆圈"
+                                        Margin="0, 1.5, 0, 0"
+                                        Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
+                                        Tapped="SimpleSettingItem_Tapped"/>
+
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Favorite.png"
+                                        ItemText="我的收藏"
+                                        Margin="0, 20, 0, 0"
+                                        Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
+                                        Tapped="SimpleSettingItem_Tapped"/>
             <controls:SimpleSettingItem Icon="../assets/images/MyPage/LocalDownloads.png" ItemText="本地下载" Margin="0, 1.5, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
             <controls:SimpleSettingItem Tag="shoppingList" Icon="../assets/images/MyPage/ShippingList.png" ItemText="购买清单" Margin="0, 1.5, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
 
-            <controls:SimpleSettingItem Icon="../assets/images/MyPage/MyArticle.png" ItemText="我的作品" Margin="0, 20, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
-            <controls:SimpleSettingItem Icon="../assets/images/MyPage/MyRecipe.png" ItemText="我的菜谱" Margin="0, 1.5, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
-            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Draft.png" ItemText="我的草稿" Margin="0, 1.5, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/MyArticle.png" 
+                                        ItemText="我的作品" 
+                                        Margin="0, 20, 0, 0"
+                                        Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
+                                        Tapped="SimpleSettingItem_Tapped"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/MyRecipe.png"
+                                        ItemText="我的菜谱" 
+                                        Margin="0, 1.5, 0, 0"
+                                        Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
+                                        Tapped="SimpleSettingItem_Tapped"/>
+            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Draft.png"
+                                        ItemText="我的草稿"
+                                        Margin="0, 1.5, 0, 0" 
+                                        Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
+                                        Tapped="SimpleSettingItem_Tapped"/>
 
             <controls:SimpleSettingItem Tag="adrecommendation" Icon="../assets/images/MyPage/AppGems.png" ItemText="精品推荐" Margin="0, 20, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
             <controls:SimpleSettingItem Tag="settings" Icon="../assets/images/MyPage/Settings.png" ItemText="设置" Margin="0, 1.5, 0, 0" Tapped="SimpleSettingItem_Tapped"/>

@@ -24,8 +24,8 @@
                              KeyDown="TextBox_KeyDown"
                              GotFocus="TextBox_GotFocus" 
                              LostFocus="TextBox_LostFocus" 
-                             PlaceholderText="    搜索菜谱、专题、话题" 
-                             FontSize="24" VerticalAlignment="Center" Margin="10, 5, 30, 0"
+                             PlaceholderText="    搜索菜谱、专题、话题" Style="{StaticResource SearchInputPage_KeywordTextBox_Style}"
+                             
                             />
                     <Image x:Name="textBoxline" Source="../Assets/images/textboxGrayLine.png" Height="4" Stretch="Fill" VerticalAlignment="Bottom"/>
                     <Image x:Name="clearSearchImage" 

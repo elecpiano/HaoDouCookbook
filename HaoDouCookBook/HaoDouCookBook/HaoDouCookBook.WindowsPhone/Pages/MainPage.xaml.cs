@@ -40,13 +40,14 @@ namespace HaoDouCookBook
             // this event is handled for you.
 
             ShowStatusBarAsync();
+            myPage.UpdateViewModel();
         }
 
         #endregion
 
         #region BottomAppBar
 
-        private void mainPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void HandleAppBar()
         {
             switch (mainPivot.SelectedIndex)
             {
@@ -121,7 +122,7 @@ namespace HaoDouCookBook
         #endregion
 
         #region Status Bar
-        
+
         private async void ShowStatusBarAsync()
         {
             StatusBar statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
@@ -130,6 +131,20 @@ namespace HaoDouCookBook
             statusBar.BackgroundOpacity = 1;
             await statusBar.ShowAsync();
         }
+
+        #endregion
+
+        #region Pivot Selection Changed
+        private void mainPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (mainPivot.SelectedIndex == 3)
+            {
+                this.myPage.UpdateViewModel();
+            }
+
+            HandleAppBar();
+        }
+
 
         #endregion
 

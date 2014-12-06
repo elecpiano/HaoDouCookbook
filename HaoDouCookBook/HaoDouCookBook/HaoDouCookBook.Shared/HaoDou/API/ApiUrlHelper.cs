@@ -1,6 +1,8 @@
 ﻿using HaoDouCookBook.Utility;
 using System;
 using System.Collections.Generic;
+using Windows.Security.Cryptography;
+using Windows.Security.Cryptography.Core;
 
 namespace HaoDouCookBook.HaoDou.API
 {
@@ -43,6 +45,12 @@ namespace HaoDouCookBook.HaoDou.API
             }
 
             return string.Join("&", paras.ToArray());
+        }
+
+        public static string RSABase64Encode(string s)
+        {
+            AsymmetricKeyAlgorithmProvider provider = AsymmetricKeyAlgorithmProvider.OpenAlgorithm(AsymmetricAlgorithmNames.RsaOaepSha1);
+            return string.Empty;
         }
     }
 }

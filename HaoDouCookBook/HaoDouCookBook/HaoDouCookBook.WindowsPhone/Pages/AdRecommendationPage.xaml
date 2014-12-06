@@ -31,11 +31,11 @@
                                     <ColumnDefinition Width="120"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" Source="{Binding Image}" Stretch="Uniform"/>
-                                <TextBlock Grid.Column="1" Text="{Binding Title}" FontSize="22" VerticalAlignment="Center" Margin="15, 0, 0, 20" TextWrapping="NoWrap" TextTrimming="WordEllipsis" />
-                                <TextBlock Grid.Column="1" Text="{Binding Description}" Foreground="Gray" FontSize="19" TextWrapping="NoWrap" TextTrimming="WordEllipsis" VerticalAlignment="Center" Margin="15, 35, 0, 0"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Title}" Style="{StaticResource AdRecommendation_Title_style}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Description}" Style="{StaticResource AdRecommendation_Description_Style}"/>
                                 <Button Grid.Column="2" VerticalAlignment="Center" Click="GoDownload_Click">
                                     <Button.Content>
-                                        <TextBlock Text="免费" Margin="0, 0, 0, 0" FontSize="22"/>
+                                        <TextBlock Text="免费" FontSize="22" FontWeight="Normal"/>
                                     </Button.Content>
                                 </Button>
                             </Grid>

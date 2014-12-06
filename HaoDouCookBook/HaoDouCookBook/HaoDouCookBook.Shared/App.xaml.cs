@@ -129,6 +129,7 @@ namespace HaoDouCookBook
             }
 
             ShoppingList.Instance.LoadDataAsync();
+            UserGlobal.Instance.LoadDataAsync();
 
             // Ensure the current window is active
             Window.Current.Activate();

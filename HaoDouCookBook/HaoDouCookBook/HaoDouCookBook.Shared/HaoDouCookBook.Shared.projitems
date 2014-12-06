@@ -16,6 +16,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\UserGlobal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouHttpExecuter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouJsonDataLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouSearchHelper.cs" />
@@ -26,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\ApiUrlHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\CommentAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\InfoAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\Accounts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RankAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipeAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipePhotoAPI.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\ProductPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\SingleProductViewPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Passport.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Recommendation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Square\CateInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Square\SquarePageData.cs" />

@@ -60,7 +60,7 @@
 
                 <!--退出-->
                 <controls:SettingGroupTitle Margin="0, 30, 0, 0"/>
-                <controls:SimpleSettingItem ItemText="退出" WithMoreTag="False"/>
+                <controls:SimpleSettingItem ItemText="退出" WithMoreTag="False" Tapped="Logout_Tapped"/>
 
             </StackPanel>
         </ScrollViewer>

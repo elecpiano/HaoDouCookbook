@@ -95,6 +95,29 @@ namespace HaoDouCookBook.Pages
         {
             App.Current.RootFrame.Navigate(typeof(AboutPage));
         }
+
+        private async void Logout_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            ContentDialog dialog = new ContentDialog()
+            {
+                Title = "提示",
+                Content = "您确定要退出登录吗？",
+                FullSizeDesired = false,
+                PrimaryButtonText = "确定",
+                SecondaryButtonText = "取消"
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                await UserGlobal.Instance.Logout(() =>
+                {
+                    App.Current.RootFrame.Navigate(typeof(MainPage));
+
+                }, error => { });
+            }
+        }
+
         #endregion
 
         #region Private Method
@@ -156,8 +179,6 @@ namespace HaoDouCookBook.Pages
 
 
         #endregion
-
-       
 
     }
 }

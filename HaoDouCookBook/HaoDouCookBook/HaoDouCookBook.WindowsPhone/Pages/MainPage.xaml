@@ -55,7 +55,7 @@
                 <PivotItem.Header>
                     <TextBlock Text="我的" Style="{StaticResource pivotItemHeader}" />
                 </PivotItem.Header>
-                <controls:MyPageContent Margin="20, 0, 20, 0"/>
+                <controls:MyPageContent x:Name="myPage" Margin="20, 0, 20, 0"/>
             </PivotItem>
         </Pivot>
     </Grid>
