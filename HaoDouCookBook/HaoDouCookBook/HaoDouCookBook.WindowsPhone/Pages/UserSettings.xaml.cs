@@ -44,7 +44,7 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            SettingsPageViewModel.Instance.SaveDataAsync();
+            SettingsPageViewModel.Instance.CommitDataAsync();
         }
 
         #endregion
@@ -53,6 +53,7 @@ namespace HaoDouCookBook.Pages
 
         private void LoadDataAsync()
         {
+            SettingsPageViewModel.Instance.SignedIn = Utilities.SignedIn();
             GetCacheSizeAsync(() =>
                 {
                     SettingsPageViewModel.Instance.CacheSize = "正在获取缓存大小...";

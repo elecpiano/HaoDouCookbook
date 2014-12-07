@@ -73,12 +73,22 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref version, value); }
         }
 
+        private bool signedIn;
+
+        [IgnoreDataMember]
+        public bool SignedIn
+        {
+            get { return signedIn; }
+            set { SetProperty<bool>(ref signedIn, value); }
+        }
+
+
         private SettingsPageViewModel()
         {
             shakeWithVibration = false;
             pushMessage = true;
             version = "1.0.0";
-
+            SignedIn = Utilities.SignedIn();
             LoadDataAsync();
         }
 
@@ -94,11 +104,11 @@ namespace HaoDouCookBook.ViewModels
             }
             else 
             {
-               await SaveDataAsync();
+               await CommitDataAsync();
             }
         }
 
-        public async Task SaveDataAsync()
+        public async Task CommitDataAsync()
         {
             string json = JsonSerializer.Serialize(_instance);
             await IsolatedStorageHelper.WriteToFileAsync(Constants.LOCAL_USERDATA_FOLDER, FILE_NAME, json);

@@ -14,5 +14,10 @@ namespace HaoDouCookBook.Common
 
             return false;
         }
+
+        public static bool SignedIn()
+        {
+            return !string.IsNullOrEmpty(UserGlobal.Instance.UserInfo.Sign);
+        }
     }
 }

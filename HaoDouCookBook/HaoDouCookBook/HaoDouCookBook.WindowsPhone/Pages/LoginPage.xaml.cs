@@ -1,17 +1,8 @@
 ﻿using HaoDouCookBook.Common;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using HaoDouCookBook.Utility;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -23,6 +14,8 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class LoginPage : Page
     {
+        #region Life Cycle
+
         public LoginPage()
         {
             this.InitializeComponent();
@@ -35,13 +28,35 @@ namespace HaoDouCookBook.Pages
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
 
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                return;
+            }
         }
+
+        #endregion
+
+        #region Event
 
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
             string userName = this.userName.Text.Trim();
             string password = this.userPwd.Password.Trim();
+
+            if (string.IsNullOrEmpty(userName)) 
+            {
+                toast.Show("请输入注册的邮箱或者手机号码");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(password))
+            {
+                toast.Show("请输入您的密码");
+                return;
+            }
+
             await UserGlobal.Instance.Login(userName, password, () =>
                 {
                     App.Current.RootFrame.Navigate(typeof(MainPage));
@@ -52,5 +67,12 @@ namespace HaoDouCookBook.Pages
                 });
 
         }
+
+        private async void forgetPassword_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            await DeviceHelper.OpenHttpURL(Constants.HAODOU_FIND_LOSTPASSWORD);
+        }
+
+        #endregion
     }
 }

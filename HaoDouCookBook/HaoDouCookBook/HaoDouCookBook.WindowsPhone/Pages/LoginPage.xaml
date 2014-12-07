@@ -16,7 +16,7 @@
         </Border>
         <Border Margin="0, 105, 0, 0" Background="White">
             <StackPanel Orientation="Vertical">
-                <Grid Margin="20, 0, 20, 0">
+                <Grid Margin="20, 20, 20, 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -33,14 +33,32 @@
 
                     <Button Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0, 20, 0, 0" Click="Login_Click">
                         <Button.Content>
-                            <TextBlock FontSize="24" Text="登陆好豆" FontWeight="Normal" Margin="80, 0, 80, 0"/>
+                            <TextBlock FontSize="24" Text="登陆好豆" FontWeight="Normal" Margin="80, 3, 80, 3"/>
                         </Button.Content>
                     </Button>
                 </Grid>
-                <TextBlock Text="忘记密码？" FontSize="19" Foreground="{StaticResource GreenMain}" HorizontalAlignment="Center" Margin="0, 30, 0, 0"/>
+                
+                <TextBlock Text="忘记密码？" Style="{StaticResource LoginPage_ForgetPassword_Style}" Tapped="forgetPassword_Tapped"/>
+
+                <StackPanel Orientation="Horizontal" Margin="20, 50, 20, 0">
+                    <Rectangle Style="{StaticResource DarkGrayLine}" Height="0.8" Width="80"/>
+                    <TextBlock Text="或使用第三方登录" FontSize="18" Foreground="Gray" Margin="20, 0, 20, 0"/>
+                    <Rectangle Style="{StaticResource DarkGrayLine}" Height="0.8" Width="80"/>
+                </StackPanel>
+
+                <Grid Margin="0, 30, 0, 0">
+                    <StackPanel Orientation="Vertical" Margin="0, 0, 120, 0">
+                        <Image Source="../assets/images/qq.png" Style="{StaticResource LoginPage_QQorSina_Style}"/>
+                        <TextBlock Text="QQ" Style="{StaticResource LoginPage_QQorSinaText_Style}"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Vertical" Margin="120, 0, 0, 0">
+                        <Image Source="../assets/images/sina.png" Style="{StaticResource LoginPage_QQorSina_Style}"/>
+                        <TextBlock Text="微博" Style="{StaticResource LoginPage_QQorSinaText_Style}"/>
+                    </StackPanel>
+                </Grid>
             </StackPanel>
         </Border>
-
         <controls:Toast x:Name="toast" VerticalAlignment="Bottom" Margin="0, 0, 0, 180" HorizontalAlignment="Center"/>
     </Grid>
 </Page>

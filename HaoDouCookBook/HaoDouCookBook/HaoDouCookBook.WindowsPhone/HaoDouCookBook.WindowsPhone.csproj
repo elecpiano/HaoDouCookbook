@@ -310,6 +310,7 @@
     <Content Include="Assets\Images\ProductPage\like_Green.png" />
     <Content Include="Assets\Images\ProductPage\position.png" />
     <Content Include="Assets\Images\ProductPage\social.png" />
+    <Content Include="Assets\Images\qq.png" />
     <Content Include="Assets\Images\Rank\rank-1.png" />
     <Content Include="Assets\Images\Rank\rank-2.png" />
     <Content Include="Assets\Images\Rank\rank-3.png" />
@@ -318,6 +319,7 @@
     <Content Include="Assets\Images\SearchPage\clear.png" />
     <Content Include="Assets\Images\SearchPage\search_history.png" />
     <Content Include="Assets\Images\SearchPage\search_texbox.png" />
+    <Content Include="Assets\Images\sina.png" />
     <Content Include="Assets\Images\tags.png" />
     <Content Include="Assets\Images\TextBoxBlueLine.png" />
     <Content Include="Assets\Images\TextBoxGrayLine.png" />

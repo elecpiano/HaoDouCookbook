@@ -177,6 +177,15 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Margin" Value="0, 0, 21, 25"/>
+    </Style>
+
+    <Style x:Key="RecipTile_Like_Image" TargetType="Image">
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="Margin" Value="0, 0, 20, 20"/>
+        <Setter Property="Width" Value="68"/>
     </Style>
 
     <Style x:Key="RecipeTileTagsStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
@@ -185,6 +194,8 @@
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="#CC000000"/>
+        <Setter Property="Margin" Value="10, 0, 0, 0"/>
+        <Setter Property="Width" Value="320"/>
     </Style>
 
     <Style x:Key="RecipeTileRecommendationStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
@@ -195,6 +206,7 @@
         <Setter Property="Foreground" Value="#CC000000"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="MaxLines" Value="4"/>
+        <Setter Property="Margin" Value="0, 5, 0, 0"/>
     </Style>
     
     <!--My Page-->
@@ -785,25 +797,47 @@
         <Setter Property="PlaceholderText" Value="请输入邮箱或者手机号码"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="60, 0, 0, 0"/>
-        <Setter Property="Width" Value="260"/>
+        <Setter Property="Margin" Value="40, 0, 0, 0"/>
+        <Setter Property="Width" Value="280"/>
     </Style>
 
     <Style x:Key="LoginPage_TextBox_line_Style" TargetType="Image">
         <Setter Property="Height" Value="4"/>
         <Setter Property="Stretch" Value="Fill"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
-        <Setter Property="Margin" Value="60, 0, 0, 0"/>
+        <Setter Property="Margin" Value="40, 0, 0, 0"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Width" Value="260"/>
+        <Setter Property="Width" Value="280"/>
     </Style>
 
     <Style x:Key="LoginPage_Password_Style" TargetType="PasswordBox" BasedOn="{StaticResource PasswordBoxBase}">
         <Setter Property="VerticalAlignment" Value="Bottom"/>
         <Setter Property="PlaceholderText" Value="请输入密码"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="60, 0, 0, 0"/>
-        <Setter Property="Width" Value="240"/>
+        <Setter Property="Margin" Value="40, 0, 0, 0"/>
+        <Setter Property="Width" Value="280"/>
     </Style>
+
+    <Style x:Key="LoginPage_ForgetPassword_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="Foreground" Value="{StaticResource GreenMain}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, 30, 0, 0"/>
+    </Style>
+
+    <Style x:Key="LoginPage_QQorSina_Style" TargetType="Image">
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Width" Value="60"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="LoginPage_QQorSinaText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="Margin" Value="0, 20, 0, 0"/>
+    </Style>
+
 
 </ResourceDictionary>

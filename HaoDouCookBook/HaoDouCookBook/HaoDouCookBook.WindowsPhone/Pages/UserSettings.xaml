@@ -15,11 +15,11 @@
             <TextBlock x:Name="title" Margin="2,0,0,0" Text="设置" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </Border>
         <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
-            <StackPanel Orientation="Vertical" Margin="10, 20, 10, 30">
+            <StackPanel Orientation="Vertical" Margin="10, 0, 10, 30">
                 <!--个人-->
-                <controls:SettingGroupTitle Title="个人"/>
-                <controls:SimpleSettingItem ItemText="社交绑定" WithMoreTag="False"/>
-                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
+                <controls:SettingGroupTitle Margin="0, 30, 0, 0" Title="个人" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                <controls:SimpleSettingItem ItemText="社交绑定" WithMoreTag="False" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
                 
                 <!--通用-->
                 <controls:SettingGroupTitle Title="通用" Margin="0, 30, 0, 0"/>
@@ -56,11 +56,11 @@
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <controls:SimpleSettingItem ItemText="意见反馈"/>
-                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
+                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
 
                 <!--退出-->
-                <controls:SettingGroupTitle Margin="0, 30, 0, 0"/>
-                <controls:SimpleSettingItem ItemText="退出" WithMoreTag="False" Tapped="Logout_Tapped"/>
+                <controls:SettingGroupTitle Margin="0, 30, 0, 0" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                <controls:SimpleSettingItem ItemText="退出" WithMoreTag="False" Tapped="Logout_Tapped" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
 
             </StackPanel>
         </ScrollViewer>

@@ -35,7 +35,7 @@ namespace HaoDouCookBook.Controls
 
         public void UpdateViewModel()
         {
-            viewModel.SignedIn = !string.IsNullOrEmpty(UserGlobal.Instance.UserInfo.Sign);
+            viewModel.SignedIn = Utilities.SignedIn();
         }
 
         #endregion
