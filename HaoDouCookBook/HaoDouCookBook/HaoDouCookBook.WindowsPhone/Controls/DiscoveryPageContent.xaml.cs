@@ -153,7 +153,7 @@ namespace HaoDouCookBook.Controls
             viewModel.StarredUsers.Clear();
             foreach (var user in data.StarredUser.Users)
             {
-                viewModel.StarredUsers.Add(new UserData() { UserPhoto = user.Avatar, Name = user.UserName });
+                viewModel.StarredUsers.Add(new UserData() { UserPhoto = user.Avatar, Name = user.UserName, UserID = user.UserId });
             }
 
         }
@@ -196,7 +196,6 @@ namespace HaoDouCookBook.Controls
         }
 
         #endregion
-
         
     }
 }

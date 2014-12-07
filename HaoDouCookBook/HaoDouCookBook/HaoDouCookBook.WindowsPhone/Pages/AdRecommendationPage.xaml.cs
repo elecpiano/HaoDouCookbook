@@ -64,7 +64,7 @@ namespace HaoDouCookBook.Pages
         private async Task LoadDataAsync()
         {
             loading.SetState(LoadingState.LOADING);
-            await AdAPI.GetRecommendAdList(0, DeviceHelper.GetUniqueDeviceID(), data =>
+            await AdAPI.GetRecommendAdList(0, UserGlobal.Instance.uuid, data =>
                 {
                     if (data.Items != null)
                     {

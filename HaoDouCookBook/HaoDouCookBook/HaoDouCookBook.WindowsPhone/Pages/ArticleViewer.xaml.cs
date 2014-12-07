@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.Controls;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Utility;
 using System;
@@ -61,7 +62,7 @@ namespace HaoDouCookBook.Pages
                 if(!string.IsNullOrEmpty(paras.Url))
                 {
                     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(paras.Url));
-                    request.Headers.Add("Cookies", string.Format("appid={0};uuid={1}", HaoDouApiUrlHelper.APPID, DeviceHelper.GetUniqueDeviceID()));
+                    request.Headers.Add("Cookies", string.Format("appid={0};uuid={1}", HaoDouApiUrlHelper.APPID, UserGlobal.Instance.uuid));
                     webview.NavigateWithHttpRequestMessage(request);
                 }
             }

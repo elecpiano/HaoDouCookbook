@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.Controls;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
@@ -62,7 +63,7 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadDataAsync(int offset, int limit, int? sign, int? uid)
         {
-            await RankAPI.GetRankList(offset, limit, sign, uid, DeviceHelper.GetUniqueDeviceID(), data =>
+            await RankAPI.GetRankList(offset, limit, sign, uid, UserGlobal.Instance.uuid, data =>
                 {
                     if (data.Items != null)
                     {

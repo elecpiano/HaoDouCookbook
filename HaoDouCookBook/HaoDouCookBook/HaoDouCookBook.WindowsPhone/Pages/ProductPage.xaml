@@ -51,7 +51,7 @@
                                 <StackPanel Orientation="Vertical" Margin="0, 0, 0, 50">
                                     <!--标题-->
                                     <Grid>
-                                        <controls:UserPhoto ImageSource="{Binding UserAvatar}" Height="48" Width="48" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding UserAvatar}" Height="48" Width="48" HorizontalAlignment="Left" VerticalAlignment="Top" />
                                         <StackPanel Orientation="Vertical" Margin="60, 0, 0, 0" VerticalAlignment="Bottom">
                                             <Grid Margin="0, 0, 0, 12">
                                                 <TextBlock Text="{Binding UserName}" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Left" />

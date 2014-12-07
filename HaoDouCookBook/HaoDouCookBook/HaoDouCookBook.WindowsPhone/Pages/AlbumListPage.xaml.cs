@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.Controls;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
@@ -79,7 +80,7 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadDataAsync(int offset, int limit, string keyword)
         {
-            await SearchAPI.GetAlbumList(offset, limit, DeviceHelper.GetUniqueDeviceID(), null, keyword, data =>
+            await SearchAPI.GetAlbumList(offset, limit, UserGlobal.Instance.uuid, null, keyword, data =>
                 {
                     viewModel.Count = data.Count;
 

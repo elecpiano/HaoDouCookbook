@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.Controls;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
@@ -59,7 +60,7 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadDataAsync(string sign, int? uid)
         {
-            await InfoAPI.Shake(sign, uid, DeviceHelper.GetUniqueDeviceID(), data =>
+            await InfoAPI.Shake(sign, uid, UserGlobal.Instance.uuid, data =>
                 {
                     if (data.Items != null)
                     {

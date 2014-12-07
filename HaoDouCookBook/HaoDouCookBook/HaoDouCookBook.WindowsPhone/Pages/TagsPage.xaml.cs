@@ -100,7 +100,7 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadDataAsync(int offset, int limit, int? tagid, string keyword)
         {
-            await SearchAPI.GetList(offset, limit, DeviceHelper.GetUniqueDeviceID(), tagid, keyword, data =>
+            await SearchAPI.GetList(offset, limit, UserGlobal.Instance.uuid, tagid, keyword, data =>
                 {
                     if(paras != null && paras.FromPage == SourcePage.SEARCH_RESULT)
                     {

@@ -14,12 +14,12 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref userPhoto, value); }
         }
 
-        private string userid;
+        private int userid;
 
-        public string UserID 
+        public int UserID 
         {
             get { return userid; }
-            set { SetProperty<string>(ref userid, value); }
+            set { SetProperty<int>(ref userid, value); }
         }
 
         private string name;
@@ -41,7 +41,7 @@ namespace HaoDouCookBook.ViewModels
         public UserData()
         {
             userPhoto = Constants.DEFAULT_USER_PHOTO;
-            userid = "0";
+            userid = 0;
             name = string.Empty;
             archiveDescription = string.Empty;
 

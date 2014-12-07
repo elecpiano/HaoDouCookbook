@@ -84,7 +84,7 @@ namespace HaoDouCookBook.Pages
             // show loading
             //
             loading.SetState(LoadingState.LOADING);
-            await InfoAPI.GetAlbumInfo(offset, limit, albumId, sign, uid, DeviceHelper.GetUniqueDeviceID(), data =>
+            await InfoAPI.GetAlbumInfo(offset, limit, albumId, sign, uid, UserGlobal.Instance.uuid, data =>
                 {
                     viewModel.AlbumAvatar = data.Info.AlbumAvatarUrl;
                     viewModel.AlbumContent = data.Info.AlbumContent;

@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Shared.Utility;
+using HaoDouCookBook.Common;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -72,7 +73,7 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadDataAsync()
         {
-            await SearchAPI.GetCateList(DeviceHelper.GetUniqueDeviceID(), data =>
+            await SearchAPI.GetCateList(UserGlobal.Instance.uuid, data =>
                 {
                     if (data.Categories != null)
                     {

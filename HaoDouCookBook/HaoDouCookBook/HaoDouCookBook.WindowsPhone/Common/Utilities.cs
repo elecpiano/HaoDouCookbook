@@ -19,5 +19,16 @@ namespace HaoDouCookBook.Common
         {
             return !string.IsNullOrEmpty(UserGlobal.Instance.UserInfo.Sign);
         }
+
+        public static bool IsSignedInUser(int userId)
+        {
+            if (string.IsNullOrEmpty(UserGlobal.Instance.UserInfo.UserId)
+                || userId <= 0)
+            {
+                return false;
+            }
+
+            return userId.ToString().Equals(UserGlobal.Instance.UserInfo.UserId);
+        }
     }
 }

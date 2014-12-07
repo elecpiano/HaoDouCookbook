@@ -32,11 +32,11 @@
                             </LinearGradientBrush>
                         </Border.Background>
                     </Border>
-                    <Border Name="likeCount" Height="80" Width="80" Margin="0, 0, 10, 10" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <Border Name="likeCount" Height="80" Width="99" Margin="0, 0, 10, 10" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                         <Border.Background>
                             <ImageBrush ImageSource="../assets/images/like.png"/>
                         </Border.Background>
-                        <TextBlock Name="favoriteCount" Text="{Binding FavoriteCount, Converter={StaticResource favoriteCountToStringConverter}}" Style="{StaticResource RecipeTileSupportNumber}" Margin="0, 0, 5, 15.5"/>
+                        <TextBlock Name="favoriteCount" Text="{Binding FavoriteCount, Converter={StaticResource favoriteCountToStringConverter}}" Style="{StaticResource RecipeTileSupportNumber}" Margin="0,0,6.167,11"/>
                     </Border>
                 </Grid>
 
@@ -44,7 +44,7 @@
                     <!--菜谱标题、作者信息及菜谱简单描述-->
                     <TextBlock Name="title" Text="{Binding Title}"  FontSize="24"/>
                     <StackPanel Orientation="Horizontal" Height="60" Margin="0, 10, 0, 0">
-                        <controls:UserPhoto ImageSource="{Binding Avatar}" Width="60"/>
+                        <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding Avatar}" Width="60"/>
                         <StackPanel Orientation="Vertical" Margin="10, 5, 0, 0">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Name="userName" Text="{Binding UserName}" FontSize="21"/>
@@ -227,7 +227,7 @@
                                             <ColumnDefinition Width="60"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <controls:UserPhoto Grid.Column="0" ImageSource="{Binding Avatar}" Height="48" Width="48" Margin="-8, 0, 0, 0" VerticalAlignment="Top"/>
+                                        <controls:UserPhoto Grid.Column="0" UserId="{Binding UserId}" ImageSource="{Binding Avatar}" Height="48" Width="48" Margin="-8, 0, 0, 0" VerticalAlignment="Top"/>
                                         <Grid Grid.Column="1" Margin="10, 0, 0, 0">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"/>

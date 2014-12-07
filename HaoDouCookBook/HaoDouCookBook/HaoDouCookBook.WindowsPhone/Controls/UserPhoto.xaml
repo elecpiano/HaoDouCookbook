@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="300" Background="Transparent">
+    d:DesignWidth="300" Background="Transparent" Tapped="UserControl_Tapped">
     <Border x:Name="root">
         <Ellipse>
             <Ellipse.Fill>

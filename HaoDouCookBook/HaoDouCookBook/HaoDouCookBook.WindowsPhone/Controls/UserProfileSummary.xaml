@@ -1,0 +1,73 @@
+﻿<UserControl
+    x:Class="HaoDouCookBook.Controls.UserProfileSummary"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid x:Name="root">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left" Margin="10, 0, 0, 20">
+            <Border Height="100" Width="100">
+                <Ellipse>
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="../assets/images/noavatar_300.jpg"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Border>
+            <StackPanel Orientation="Vertical" Margin="50, 0, 0, 0">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding FollowCount}" TextAlignment="Center" FontWeight="Normal"/>
+                        <TextBlock Text="关注" TextAlignment="Center" Margin="0, 5, 0, 0" Foreground="Gray" FontWeight="Normal"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="40, 0, 0, 0">
+                        <TextBlock Text="{Binding FansCount}" TextAlignment="Center"/>
+                        <TextBlock Text="粉丝" TextAlignment="Center" Margin="0, 5, 0, 0" Foreground="Gray" FontWeight="Normal"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="40, 0, 0, 0">
+                        <TextBlock Text="{Binding Coin}" TextAlignment="Center"/>
+                        <TextBlock Text="豆币" TextAlignment="Center" Margin="0, 5, 0, 0" Foreground="Gray" FontWeight="Normal"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="-30, 5, 0, 0">
+                    <Button x:Name="follow" Width="124">
+                        <Button.Content>
+                            <TextBlock Text="+ 关注" FontWeight="Normal" Margin="10, 2"/>
+                        </Button.Content>
+                    </Button>
+
+                    <Button x:Name="chat" Width="124" >
+                        <Button.Content>
+                            <TextBlock Text="聊天" FontWeight="Normal" Margin="15, 2"/>
+                        </Button.Content>
+                    </Button>
+
+                    <Button x:Name="checkin" Width="124">
+                        <Button.Content>
+                            <TextBlock Text="签到" FontWeight="Normal" Margin="15, 2"/>
+                        </Button.Content>
+                    </Button>
+
+                    <Button x:Name="personal" Width="124">
+                        <Button.Content>
+                            <TextBlock Text="个人" FontWeight="Normal" Margin="15, 2"/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <Border Grid.Row="1" >
+            <TextBlock Text="{Binding UserIntro}" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="0, 0, 20, 30" FontSize="22" FontWeight="Normal" Foreground="Gray"/>
+        </Border>
+
+    </Grid>
+</UserControl>

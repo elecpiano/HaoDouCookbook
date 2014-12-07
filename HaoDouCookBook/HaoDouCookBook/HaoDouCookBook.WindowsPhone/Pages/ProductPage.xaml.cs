@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.Controls;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.HaoDou.DataModels.Discovery;
 using HaoDouCookBook.Utility;
@@ -84,7 +85,7 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadDataAsync(int offset, int limit, int productId, int topicId, int type, string sign, int? uid)
         {
-            await RecipePhotoAPI.GetProdcuts(offset, limit, type, productId, topicId, sign, uid, DeviceHelper.GetUniqueDeviceID(), data =>
+            await RecipePhotoAPI.GetProdcuts(offset, limit, type, productId, topicId, sign, uid, UserGlobal.Instance.uuid, data =>
                 {
                     UpdateData(data);
 

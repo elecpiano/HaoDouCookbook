@@ -103,7 +103,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <controls:UserPhoto ImageSource="{Binding UserPhoto}" Width="58" Height="58" Margin="0,0,2.5,0"/>
+                            <controls:UserPhoto UserId="{Binding UserID}" ImageSource="{Binding UserPhoto}" Width="58" Height="58" Margin="0,0,2.5,0"/>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

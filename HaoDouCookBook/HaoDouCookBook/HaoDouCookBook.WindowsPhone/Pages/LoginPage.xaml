@@ -23,10 +23,12 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" Margin="0, 30, 0, 0">
+                        <Image Stretch="None" Source="../assets/images/username.png" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         <TextBox Name="userName" Style="{StaticResource LoginPage_UserName_Style}"/>
                         <Image Source="../Assets/images/textboxGrayLine.png" Style="{StaticResource LoginPage_TextBox_line_Style}"/>
                     </Grid>
                     <Grid Grid.Row="1" Margin="0, 30, 0, 0">
+                        <Image Stretch="None" Source="../assets/images/password.png" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         <PasswordBox Name="userPwd" Style="{StaticResource LoginPage_Password_Style}"/>
                         <Image Source="../Assets/images/textboxGrayLine.png" Style="{StaticResource LoginPage_TextBox_line_Style}"/>
                     </Grid>

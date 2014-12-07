@@ -86,7 +86,7 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadDataAsync(string keyword, string tagid)
         {
-            await SearchAPI.GetSearchIndex(keyword, tagid, DeviceHelper.GetUniqueDeviceID(), data =>
+            await SearchAPI.GetSearchIndex(keyword, tagid, UserGlobal.Instance.uuid, data =>
                 {
                     if (data.Food != null)
                     {

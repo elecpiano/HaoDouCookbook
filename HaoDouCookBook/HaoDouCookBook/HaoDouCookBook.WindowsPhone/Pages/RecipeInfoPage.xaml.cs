@@ -85,7 +85,7 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadDataAsync(string sign, int? uid, int recipeId)
         {
-            await InfoAPI.GetInfo(sign, uid, DeviceHelper.GetUniqueDeviceID(), recipeId, data =>
+            await InfoAPI.GetInfo(sign, uid, UserGlobal.Instance.uuid, recipeId, data =>
                 {
                     UpdateViewModel(data);
                 }, error => { });
