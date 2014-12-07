@@ -1,4 +1,6 @@
 ﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.API;
+using HaoDouCookBook.Pages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,14 +28,14 @@ namespace HaoDouCookBook.Controls
         public static readonly DependencyProperty FollowCountProperty = DependencyProperty.Register("FollowCount", typeof(int), typeof(UserProfileSummary), new PropertyMetadata(0));
         public static readonly DependencyProperty FansCountProperty = DependencyProperty.Register("FansCount", typeof(int), typeof(UserProfileSummary), new PropertyMetadata(0));
         public static readonly DependencyProperty CoinProperty = DependencyProperty.Register("Coin", typeof(int), typeof(UserProfileSummary), new PropertyMetadata(0));
-        public static readonly DependencyProperty UserIntroProperty = DependencyProperty.Register("UserIntro", typeof(string), typeof(UserProfileSummary), new PropertyMetadata("这个豆子很懒，\n还没有给自己加个人价绍~"));
+        public static readonly DependencyProperty UserIntroProperty = DependencyProperty.Register("UserIntro", typeof(string), typeof(UserProfileSummary), new PropertyMetadata(Constants.DEFAULT_USER_INTRO));
         public static readonly DependencyProperty UserIdProperty = DependencyProperty.Register("UserId", typeof(int), typeof(UserProfileSummary), new PropertyMetadata(0));
         public static readonly DependencyProperty AvatarProperty = DependencyProperty.Register("Avatar", typeof(string), typeof(UserProfileSummary), new PropertyMetadata(Constants.DEFAULT_USER_PHOTO));
+        public static readonly DependencyProperty CanFollowProperty = DependencyProperty.Register("CanFollow", typeof(bool), typeof(UserProfileSummary), new PropertyMetadata(true));
 
         #endregion
 
         #region CLR Property Wrapper
-
 
 
         public string Avatar
@@ -72,6 +74,12 @@ namespace HaoDouCookBook.Controls
             set { SetValue(UserIdProperty, value); }
         }
 
+        public bool CanFollow
+        {
+            get { return (bool)GetValue(CanFollowProperty); }
+            set { SetValue(CanFollowProperty, value); }
+        }
+
         #endregion
 
         #region Life Cycle
@@ -83,5 +91,29 @@ namespace HaoDouCookBook.Controls
         }
 
         #endregion
+
+        #region Event
+
+        private void Follower_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            UserFollowersPage.UserFollowsPageParams paras = new UserFollowersPage.UserFollowsPageParams();
+            paras.PageType = UserFollowersPage.PageType.FOLLOW;
+            paras.UserId = UserId;
+
+            App.Current.RootFrame.Navigate(typeof(UserFollowersPage), paras);
+        }
+
+        private void Fans_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            UserFollowersPage.UserFollowsPageParams paras = new UserFollowersPage.UserFollowsPageParams();
+            paras.PageType = UserFollowersPage.PageType.FANS;
+            paras.UserId = UserId;
+
+            App.Current.RootFrame.Navigate(typeof(UserFollowersPage), paras);
+
+        }
+
+        #endregion
+
     }
 }

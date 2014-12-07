@@ -58,8 +58,26 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref userintro, value); }
         }
 
+        private string userName;
+
+        public string UserName
+        {
+            get { return userName; }
+            set { SetProperty<string>(ref userName, value); }
+        }
+
+        private bool canFollow;
+
+        public bool CanFollow
+        {
+            get { return canFollow; }
+            set { SetProperty<bool>(ref canFollow, value); }
+        }
+
+
         public UserProfilePageViewModel()
         {
+            userName = string.Empty;
             followCount = 0;
             userId = 0;
             fansCount = 0;

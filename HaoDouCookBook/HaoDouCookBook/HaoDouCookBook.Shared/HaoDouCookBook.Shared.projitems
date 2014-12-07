@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\ShoppingList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\AnythingToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ReverseAnythingToVisibiltyConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\AdAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\ApiUrlHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\CommentAPI.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Passport.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Recommendation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\UserFollower.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\UserProfile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Square\CateInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Square\SquarePageData.cs" />

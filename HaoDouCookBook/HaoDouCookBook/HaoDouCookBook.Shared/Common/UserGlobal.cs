@@ -59,6 +59,16 @@ namespace HaoDouCookBook.Common
 
         #region Public Methods
 
+        public int GetInt32UserId()
+        {
+            if (string.IsNullOrEmpty(UserInfo.UserId))
+            {
+                return 0;
+            }
+
+            return int.Parse(UserInfo.UserId);
+        }
+
         public async Task Login(string username, string password, Action onSuccess, Action<Error> onFail)
         {
             await AccountAPI.Login(username, password, async data =>

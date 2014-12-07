@@ -109,7 +109,9 @@ namespace HaoDouCookBook.Pages
                     viewModel.FansCount = data.SummaryInfo.FansCount;
                     viewModel.Coin = data.SummaryInfo.Wealth;
                     viewModel.UserAvatar = data.SummaryInfo.Avatar;
-                    viewModel.UserIntro = data.SummaryInfo.Intro;
+                    viewModel.UserIntro = string.IsNullOrEmpty(data.SummaryInfo.Intro) ? Constants.DEFAULT_USER_INTRO : data.SummaryInfo.Intro;
+                    viewModel.UserName = data.SummaryInfo.UserName;
+                    viewModel.CanFollow = data.SummaryInfo.CanFollow == 0 ? true : false;
                 }
 
                 loading.SetState(LoadingState.SUCCESS);
