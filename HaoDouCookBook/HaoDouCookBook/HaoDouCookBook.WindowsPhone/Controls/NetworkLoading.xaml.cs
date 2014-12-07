@@ -11,7 +11,8 @@ namespace HaoDouCookBook.Controls
     {
         LOADING,
         NETWORK_UNAVAILABLE,
-        SUCCESS
+        SUCCESS,
+        DONE
     }
 
     public sealed partial class NetworkLoading : UserControl
@@ -49,6 +50,7 @@ namespace HaoDouCookBook.Controls
                     ShowNetworkUnAvailableState();
                     break;
                 case LoadingState.SUCCESS:
+                case LoadingState.DONE:
                     this.loading.Visibility = Visibility.Collapsed;
                     this.noNetwork.Visibility = Visibility.Collapsed;
                     break;

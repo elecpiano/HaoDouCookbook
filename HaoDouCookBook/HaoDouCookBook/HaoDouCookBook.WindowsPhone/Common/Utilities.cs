@@ -30,5 +30,12 @@ namespace HaoDouCookBook.Common
 
             return userId.ToString().Equals(UserGlobal.Instance.UserInfo.UserId);
         }
+
+        public static int GetInt32UserId(string userId)
+        {
+            int uid = 0;
+            int.TryParse(UserGlobal.Instance.UserInfo.UserId, out uid);
+            return uid;
+        }
     }
 }

@@ -13,7 +13,7 @@
     <ScrollViewer x:Name="root">
         <StackPanel Orientation="Vertical" Background="#22000000" Margin="0, 0, 0, 15">
             <!--User header-->
-            <Grid Background="White" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}">
+            <Grid Background="White" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}" Tapped="personalInfo_Tapped">
                 <controls:UserPhoto Width="100" Height="100" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10, 10, 0, 10"/>
                 <TextBlock Text="haodoudou001" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="28" Margin="127,15,0,0"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="127, 50, 0, 0">

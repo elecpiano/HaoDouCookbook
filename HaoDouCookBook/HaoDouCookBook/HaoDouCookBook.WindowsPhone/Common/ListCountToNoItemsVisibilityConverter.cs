@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Data;
 
 namespace HaoDouCookBook.Common
 {
-    public class ListCountToNoItemsVisiblityConverter : IValueConverter
+    public class ListCountToNoItemsVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
@@ -22,7 +22,6 @@ namespace HaoDouCookBook.Common
 
             return visible ? Visibility.Visible : Visibility.Collapsed;
 
-            
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

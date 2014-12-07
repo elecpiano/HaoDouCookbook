@@ -9,6 +9,8 @@
     <!--Converters-->
     <converters:AnythingToVisibilityConverter x:Key="AnythingToVisiblityConverter"/>
     <common:FavoriteCountToStringConverter x:Key="favoriteCountToStringConverter"/>
+    <common:SignedInUserIdToVisibilityConverter x:Key="signedInUserIdToVisibilityConverter"/>
+    <common:NotSignedInUserIdToVisibilityConverter x:Key="notSignedInUserIdToVisibilityConverter"/>
 
     <!--Colors-->
     <SolidColorBrush x:Key="TopAppbarColor" Color="#fff8f8f8"/>
@@ -18,6 +20,7 @@
 
     <!--Default Font-->
     <Style x:Key="TextBlockBase" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18"/>
         <!--<Setter Property="FontFamily" Value="Rosewood Std Regular"/>-->
     </Style>
 
@@ -839,5 +842,26 @@
         <Setter Property="Margin" Value="0, 20, 0, 0"/>
     </Style>
 
+    <!--User Profile-->
+    <Style x:Key="UserProfileSummary_PropretyValue_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
 
+    <Style x:Key="UserProfileSummary_PropertyName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, 5, 0, 0"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+    <Style x:Key="UserProfieSummary_Intro_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="0, 0, 20, 30"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
 </ResourceDictionary>

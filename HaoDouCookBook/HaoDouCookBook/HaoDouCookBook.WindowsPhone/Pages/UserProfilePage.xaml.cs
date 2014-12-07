@@ -16,6 +16,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
+using HaoDouCookBook.HaoDou.API;
+using HaoDouCookBook.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -69,7 +72,7 @@ namespace HaoDouCookBook.Pages
             }
 
             pageParams = e.Parameter as UserProfilePageParams;
-            if(pageParams != null)
+            if (pageParams != null)
             {
                 viewModel = new UserProfilePageViewModel();
                 DataBinding();
@@ -89,12 +92,46 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadDataAsync()
         {
-            if(pageParams != null)
+            loading.SetState(LoadingState.LOADING);
+
+            int uid = Utilities.GetInt32UserId(UserGlobal.Instance.UserInfo.UserId);
+
+            await RecipeUserAPI.GetUserInfo(pageParams.UserId, uid, UserGlobal.Instance.UserInfo.Sign, data =>
             {
-                viewModel.IsSignedInUser = Utilities.IsSignedInUser(pageParams.UserId);
-            }
+                if (pageParams != null)
+                {
+                    viewModel.UserId = pageParams.UserId;
+                }
+
+                if (data.SummaryInfo != null)
+                {
+                    viewModel.FollowCount = data.SummaryInfo.FollowCnt;
+                    viewModel.FansCount = data.SummaryInfo.FansCount;
+                    viewModel.Coin = data.SummaryInfo.Wealth;
+                    viewModel.UserAvatar = data.SummaryInfo.Avatar;
+                    viewModel.UserIntro = data.SummaryInfo.Intro;
+                }
+
+                loading.SetState(LoadingState.SUCCESS);
+
+            }, error =>
+            {
+                if (Utilities.IsMatchNetworkFail(error.ErrorCode))
+                {
+                    DelayHelper.Delay(TimeSpan.FromSeconds(0.7), () =>
+                    {
+                        loading.RetryAction = async () => await LoadDataAsync();
+                        loading.SetState(LoadingState.NETWORK_UNAVAILABLE);
+                    });
+                }
+                else
+                {
+                    loading.SetState(LoadingState.DONE);
+                }
+            });
         }
 
         #endregion
+
     }
 }

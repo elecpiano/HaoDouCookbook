@@ -55,6 +55,14 @@ namespace HaoDouCookBook.Controls
                 HandlePageItemTapped(ssi.Tag.ToString());
             }
         }
+        private void personalInfo_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            UserProfilePage.UserProfilePageParams paras = new UserProfilePage.UserProfilePageParams();
+            paras.UserId = int.Parse(UserGlobal.Instance.UserInfo.UserId);
+
+            App.Current.RootFrame.Navigate(typeof(UserProfilePage), paras);
+        }
+
 
         #endregion
 
@@ -99,6 +107,8 @@ namespace HaoDouCookBook.Controls
         }
 
         #endregion
+
+      
 
     }
 }

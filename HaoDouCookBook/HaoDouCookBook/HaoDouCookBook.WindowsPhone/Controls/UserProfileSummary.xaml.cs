@@ -23,22 +23,23 @@ namespace HaoDouCookBook.Controls
 
         #region Dependency Property
 
-        public static readonly DependencyProperty UserPhotoProperty = DependencyProperty.Register("UserPhoto", typeof(string), typeof(UserProfileSummary), new PropertyMetadata(Constants.DEFAULT_USER_PHOTO));
         public static readonly DependencyProperty FollowCountProperty = DependencyProperty.Register("FollowCount", typeof(int), typeof(UserProfileSummary), new PropertyMetadata(0));
         public static readonly DependencyProperty FansCountProperty = DependencyProperty.Register("FansCount", typeof(int), typeof(UserProfileSummary), new PropertyMetadata(0));
         public static readonly DependencyProperty CoinProperty = DependencyProperty.Register("Coin", typeof(int), typeof(UserProfileSummary), new PropertyMetadata(0));
-        public static readonly DependencyProperty IsSignedInUserProperty = DependencyProperty.Register("IsSignedInUser", typeof(bool), typeof(UserProfileSummary), new PropertyMetadata(false));
         public static readonly DependencyProperty UserIntroProperty = DependencyProperty.Register("UserIntro", typeof(string), typeof(UserProfileSummary), new PropertyMetadata("这个豆子很懒，\n还没有给自己加个人价绍~"));
         public static readonly DependencyProperty UserIdProperty = DependencyProperty.Register("UserId", typeof(int), typeof(UserProfileSummary), new PropertyMetadata(0));
+        public static readonly DependencyProperty AvatarProperty = DependencyProperty.Register("Avatar", typeof(string), typeof(UserProfileSummary), new PropertyMetadata(Constants.DEFAULT_USER_PHOTO));
 
         #endregion
 
         #region CLR Property Wrapper
 
-        public string UserPhoto
+
+
+        public string Avatar
         {
-            get { return (string)GetValue(UserPhotoProperty); }
-            set { SetValue(UserPhotoProperty, value); }
+            get { return (string)GetValue(AvatarProperty); }
+            set { SetValue(AvatarProperty, value); }
         }
 
         public int FollowCount
@@ -57,31 +58,6 @@ namespace HaoDouCookBook.Controls
         {
             get { return (int)GetValue(CoinProperty); }
             set { SetValue(CoinProperty, value); }
-        }
-
-        public bool IsSignedInUser
-        {
-            get { return (bool)GetValue(IsSignedInUserProperty); }
-            set
-            {
-                SetValue(IsSignedInUserProperty, value);
-                if (value)
-                {
-                    this.checkin.Visibility = Visibility.Visible;
-                    this.personal.Visibility = Visibility.Visible;
-
-                    this.chat.Visibility = Visibility.Collapsed;
-                    this.follow.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    this.checkin.Visibility = Visibility.Collapsed;
-                    this.personal.Visibility = Visibility.Collapsed;
-
-                    this.chat.Visibility = Visibility.Visible;
-                    this.chat.Visibility = Visibility.Visible;
-                }
-            }
         }
 
         public string UserIntro

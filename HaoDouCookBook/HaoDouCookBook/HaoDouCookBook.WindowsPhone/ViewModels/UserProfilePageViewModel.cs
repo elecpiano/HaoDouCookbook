@@ -10,17 +10,62 @@ namespace HaoDouCookBook.ViewModels
     public class UserProfilePageViewModel : BindableBase
     {
 
-        private bool isSignedInUser;
+        private int followCount;
 
-        public bool IsSignedInUser
+        public int FollowCount 
         {
-            get { return isSignedInUser; }
-            set { SetProperty<bool>(ref isSignedInUser, value); }
+            get { return followCount; }
+            set { SetProperty<int>(ref followCount, value); }
+        }
+
+        private int userId;
+
+        public int UserId
+        {
+            get { return userId; }
+            set { SetProperty<int>(ref userId, value); }
+        }
+
+        private int fansCount;
+
+        public int FansCount
+        {
+            get { return fansCount; }
+            set { SetProperty<int>(ref fansCount, value); }
+        }
+
+        private int coin;
+
+        public int Coin
+        {
+            get { return coin; }
+            set { SetProperty<int>(ref coin, value); }
+        }
+
+        private string userAvatar;
+
+        public string UserAvatar
+        {
+            get { return userAvatar; }
+            set { SetProperty<string>(ref userAvatar, value); }
+        }
+
+        private string userintro;
+
+        public string UserIntro
+        {
+            get { return userintro; }
+            set { SetProperty<string>(ref userintro, value); }
         }
 
         public UserProfilePageViewModel()
         {
-            isSignedInUser = false;
+            followCount = 0;
+            userId = 0;
+            fansCount = 0;
+            coin = 0;
+            userAvatar = string.Empty;
+            userintro = string.Empty;
         }
     }
 }

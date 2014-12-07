@@ -9,9 +9,8 @@
     xmlns:common="using:HaoDouCookBook.Common"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+
     <controls:BackablePage.Resources>
-        <common:SignedUserToHeaderWidthConverter x:Key="signedUserToHeaderWidthConverter" />
     </controls:BackablePage.Resources>
 
     <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
@@ -20,34 +19,80 @@
             <TextBlock x:Name="title" Text="分类" Style="{StaticResource SubTitleStyle}"/>
         </Border>
         <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
-            <Pivot>
-                <Pivot.TitleTemplate>
-                    <DataTemplate>
-                        <controls:UserProfileSummary IsSignedInUser="{Binding IsSignedInUser}"/>
-                    </DataTemplate>
-                </Pivot.TitleTemplate>
-                <Pivot.HeaderTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" FontSize="28" Width="{Binding IsSignedInUser, Converter={StaticResource signedUserToHeaderWidthConverter}}" TextAlignment="Center"/>
-                    </DataTemplate>
-                </Pivot.HeaderTemplate>
-                <PivotItem Header="动态">
+            <StackPanel Orientation="Vertical" Margin="0, 10, 0, 20">
+                <Pivot Visibility="{Binding UserId, Converter={StaticResource notSignedInUserIdToVisibilityConverter}}">
+                    <Pivot.TitleTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <controls:UserProfileSummary 
+                                    UserId="{Binding UserId}" 
+                                    FollowCount="{Binding FollowCount}"
+                                    FansCount="{Binding FansCount}"
+                                    Coin="{Binding Coin}"
+                                    Avatar="{Binding UserAvatar}"
+                                    UserIntro="{Binding UserIntro}"
+                                    />
+                                <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="-20, -10, -20, 20"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </Pivot.TitleTemplate>
+                    <Pivot.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontSize="28" Width="120" TextAlignment="Center"/>
+                        </DataTemplate>
+                    </Pivot.HeaderTemplate>
+                    <PivotItem Header="动态">
 
-                </PivotItem>
+                    </PivotItem>
 
-                <PivotItem Header="作品">
+                    <PivotItem Header="作品">
 
-                </PivotItem>
-                <PivotItem Header="菜谱">
+                    </PivotItem>
 
-                </PivotItem>
-                <PivotItem Header="草稿" Visibility="{Binding IsSignedInUser, Converter={StaticResource AnythingToVisiblityConverter}}">
+                    <PivotItem Header="菜谱">
 
-                </PivotItem>
-            </Pivot>
+                    </PivotItem>
+                </Pivot>
 
+                <Pivot Visibility="{Binding UserId, Converter={StaticResource signedInUserIdToVisibilityConverter}}">
+                    <Pivot.TitleTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <controls:UserProfileSummary 
+                                    UserId="{Binding UserId}" 
+                                    FollowCount="{Binding FollowCount}"
+                                    FansCount="{Binding FansCount}"
+                                    Coin="{Binding Coin}"
+                                    Avatar="{Binding UserAvatar}"
+                                    UserIntro="{Binding UserIntro}"
+                                    />
+                                <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="-20, -10, -20, 20"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </Pivot.TitleTemplate>
+                    <Pivot.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontSize="28" Width="80" TextAlignment="Center"/>
+                        </DataTemplate>
+                    </Pivot.HeaderTemplate>
+                    <PivotItem Header="动态">
 
+                    </PivotItem>
+
+                    <PivotItem Header="作品">
+
+                    </PivotItem>
+
+                    <PivotItem Header="菜谱">
+
+                    </PivotItem>
+
+                    <PivotItem Header="草稿">
+                        
+                    </PivotItem>
+                </Pivot>
+            </StackPanel>
         </ScrollViewer>
-
+        <controls:NetworkLoading x:Name="loading" Margin="0, 105, 0, 0"/>
     </Grid>
 </controls:BackablePage>

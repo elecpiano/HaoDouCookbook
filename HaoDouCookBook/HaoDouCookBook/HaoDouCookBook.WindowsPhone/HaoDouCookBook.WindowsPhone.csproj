@@ -84,9 +84,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\FavoriteCountToStringConverter.cs" />
-    <Compile Include="Common\ListCountToNoItemsVisiblityConverter.cs" />
+    <Compile Include="Common\ListCountToNoItemsVisibilityConverter.cs" />
     <Compile Include="Common\MainStuffColorConverter.cs" />
-    <Compile Include="Common\SignedUserToHeaderWidthConverter.cs" />
+    <Compile Include="Common\UserIdToVisibilityConverter.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Controls\AdImagePivot.xaml.cs">
       <DependentUpon>AdImagePivot.xaml</DependentUpon>
