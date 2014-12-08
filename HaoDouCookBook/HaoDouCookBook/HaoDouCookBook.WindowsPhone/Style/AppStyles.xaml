@@ -486,7 +486,7 @@
     </Style>
 
     <Style x:Key="SettingItem_MoreTag" TargetType="Image">
-        <Setter Property="Height" Value="56"/>
+        <Setter Property="Height" Value="48"/>
         <Setter Property="Stretch" Value="None"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>

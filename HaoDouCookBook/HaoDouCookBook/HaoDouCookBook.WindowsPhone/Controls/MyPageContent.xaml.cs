@@ -1,6 +1,8 @@
 ﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Pages;
 using HaoDouCookBook.ViewModels;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -33,9 +35,26 @@ namespace HaoDouCookBook.Controls
             this.root.DataContext = viewModel; 
         }
 
-        public void UpdateViewModel()
+        public async Task UpdateViewModel()
         {
             viewModel.SignedIn = Utilities.SignedIn();
+            if(viewModel.SignedIn)
+            {
+                int uid = UserGlobal.Instance.GetInt32UserId();
+                await RecipeUserAPI.GetUserInfo(uid, uid, UserGlobal.Instance.UserInfo.Sign, data =>
+                    {
+                        UserGlobal.Instance.UserInfo.Name = data.SummaryInfo.UserName;
+                        viewModel.UserName = data.SummaryInfo.UserName;
+
+                        viewModel.UserCover = data.SummaryInfo.Avatar;
+                        UserGlobal.Instance.UserInfo.Avatar = data.SummaryInfo.Avatar;
+
+                        viewModel.Coin = data.SummaryInfo.Wealth;
+
+                        UserGlobal.Instance.CommitDataAsync();
+
+                    }, error => { });
+            }
         }
 
         #endregion

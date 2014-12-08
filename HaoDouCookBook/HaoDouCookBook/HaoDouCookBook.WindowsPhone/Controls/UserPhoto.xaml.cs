@@ -50,6 +50,11 @@ namespace HaoDouCookBook.Controls
         {
             var userData = this.root.GetDataContext<UserPhoto>();
 
+            if (userData.UserId == 0)
+            {
+                return;
+            }
+
             UserProfilePage.UserProfilePageParams paras = new UserProfilePage.UserProfilePageParams();
             paras.UserId = userData.UserId;
 
