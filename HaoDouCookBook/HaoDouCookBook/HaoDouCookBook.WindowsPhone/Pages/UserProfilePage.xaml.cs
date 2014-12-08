@@ -93,6 +93,12 @@ namespace HaoDouCookBook.Pages
                     viewModel.UserIntro = string.IsNullOrEmpty(data.SummaryInfo.Intro) ? Constants.DEFAULT_USER_INTRO : data.SummaryInfo.Intro;
                     viewModel.UserName = data.SummaryInfo.UserName;
                     viewModel.CanFollow = data.SummaryInfo.CanFollow == 1 ? true : false;
+                    viewModel.CheckIn = data.SummaryInfo.CheckIn;
+
+                    if (Utilities.IsSignedInUser(data.SummaryInfo.UserId))
+                    {
+                        UserGlobal.Instance.UpdateUserInfoBySummary(data.SummaryInfo);
+                    };
 
                 }, error => { });
         }
@@ -158,6 +164,12 @@ namespace HaoDouCookBook.Pages
                     viewModel.UserIntro = string.IsNullOrEmpty(data.SummaryInfo.Intro) ? Constants.DEFAULT_USER_INTRO : data.SummaryInfo.Intro;
                     viewModel.UserName = data.SummaryInfo.UserName;
                     viewModel.CanFollow = data.SummaryInfo.CanFollow == 1 ? true : false;
+                    viewModel.CheckIn = data.SummaryInfo.CheckIn;
+
+                    if (Utilities.IsSignedInUser(data.SummaryInfo.UserId))
+                    {
+                        UserGlobal.Instance.UpdateUserInfoBySummary(data.SummaryInfo);
+                    }
                 }
 
                 loading.SetState(LoadingState.SUCCESS);

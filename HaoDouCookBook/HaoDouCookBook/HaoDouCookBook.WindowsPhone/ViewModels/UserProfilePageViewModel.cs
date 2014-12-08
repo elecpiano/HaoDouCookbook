@@ -75,6 +75,15 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<bool>(ref canFollow, value); }
         }
 
+        private bool checkIn;
+
+        public bool CheckIn
+        {
+            get { return checkIn; }
+            set { SetProperty<bool>(ref checkIn, value); }
+        }
+
+
         public ObservableCollection<UserProduct> Products { get; set; }
 
         public ObservableCollection<UserRecipe> Recipes { get; set; }
@@ -90,6 +99,7 @@ namespace HaoDouCookBook.ViewModels
             userintro = string.Empty;
             Products = new ObservableCollection<UserProduct>();
             Recipes = new ObservableCollection<UserRecipe>();
+            checkIn = false;
         }
     }
 }

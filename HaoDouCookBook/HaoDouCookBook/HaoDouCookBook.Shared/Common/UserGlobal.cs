@@ -97,7 +97,7 @@ namespace HaoDouCookBook.Common
             {
                 if (onFail != null)
                 {
-                    onFail.Invoke(new Error() { ErrorCode = int.MaxValue - 1, Message = "Not login"});
+                    onFail.Invoke(new Error() { ErrorCode = int.MaxValue - 1, Message = "Not login" });
                 }
             }
 
@@ -125,6 +125,7 @@ namespace HaoDouCookBook.Common
                 await IsolatedStorageHelper.WriteToFileAsync(Constants.LOCAL_USERDATA_FOLDER, FILE_NAME, dataJson);
             }
         }
+
         public async Task LoadDataAsync()
         {
             string dataJson = await IsolatedStorageHelper.ReadFileAsync(Constants.LOCAL_USERDATA_FOLDER, FILE_NAME);
@@ -137,11 +138,31 @@ namespace HaoDouCookBook.Common
                 _instance = JsonSerializer.Deserialize<UserGlobal>(dataJson);
             }
         }
+
+        public async Task UpdateUserInfoBySummary(UserSummaryInfo summary)
+        {
+            try
+            {
+                UserInfo.Avatar = summary.Avatar;
+                UserInfo.CheckIn = summary.CheckIn;
+                UserInfo.MessageCnt = summary.MessageCnt;
+                UserInfo.MsgCnt = summary.MessageCnt;
+                UserInfo.Name = summary.UserName;
+                UserInfo.NoticCnt = summary.NoticeCnt;
+                UserInfo.UserId = summary.UserId.ToString();
+                UserInfo.Vip = summary.Vip;
+
+                await CommitDataAsync();
+            }
+            catch
+            { }
+        }
+
         #endregion
 
         #region Private methods
 
-        
+
 
         #endregion
     }

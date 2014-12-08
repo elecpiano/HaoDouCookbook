@@ -32,11 +32,17 @@ namespace HaoDouCookBook.Controls
         public static readonly DependencyProperty UserIdProperty = DependencyProperty.Register("UserId", typeof(int), typeof(UserProfileSummary), new PropertyMetadata(0));
         public static readonly DependencyProperty AvatarProperty = DependencyProperty.Register("Avatar", typeof(string), typeof(UserProfileSummary), new PropertyMetadata(Constants.DEFAULT_USER_PHOTO));
         public static readonly DependencyProperty CanFollowProperty = DependencyProperty.Register("CanFollow", typeof(bool), typeof(UserProfileSummary), new PropertyMetadata(true));
+        public static readonly DependencyProperty CheckInProperty = DependencyProperty.Register("CheckIn", typeof(bool), typeof(UserProfileSummary), new PropertyMetadata(false));
 
         #endregion
 
         #region CLR Property Wrapper
 
+        public bool CheckIn
+        {
+            get { return (bool)GetValue(CheckInProperty); }
+            set { SetValue(CheckInProperty, value); }
+        }
 
         public string Avatar
         {

@@ -43,15 +43,11 @@ namespace HaoDouCookBook.Controls
                 int uid = UserGlobal.Instance.GetInt32UserId();
                 await RecipeUserAPI.GetUserInfo(uid, uid, UserGlobal.Instance.UserInfo.Sign, data =>
                     {
-                        UserGlobal.Instance.UserInfo.Name = data.SummaryInfo.UserName;
                         viewModel.UserName = data.SummaryInfo.UserName;
-
                         viewModel.UserCover = data.SummaryInfo.Avatar;
-                        UserGlobal.Instance.UserInfo.Avatar = data.SummaryInfo.Avatar;
-
                         viewModel.Coin = data.SummaryInfo.Wealth;
 
-                        UserGlobal.Instance.CommitDataAsync();
+                        UserGlobal.Instance.UpdateUserInfoBySummary(data.SummaryInfo);
 
                     }, error => { });
             }

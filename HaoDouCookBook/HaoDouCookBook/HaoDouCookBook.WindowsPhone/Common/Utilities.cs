@@ -1,4 +1,5 @@
-﻿using Shared.Utility;
+﻿using HaoDouCookBook.HaoDou.DataModels.My;
+using Shared.Utility;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
