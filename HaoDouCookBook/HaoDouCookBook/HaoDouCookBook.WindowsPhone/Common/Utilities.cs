@@ -1,4 +1,8 @@
-﻿
+﻿using Shared.Utility;
+using System.Collections.Generic;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
 namespace HaoDouCookBook.Common
 {
     public class Utilities
@@ -36,6 +40,54 @@ namespace HaoDouCookBook.Common
             int uid = 0;
             int.TryParse(UserGlobal.Instance.UserInfo.UserId, out uid);
             return uid;
+        }
+
+        public static void ElementInItemsControl_SetVisibleAtEnd<T>(object sender, bool visible) where T : class
+        {
+            FrameworkElement fe = sender as FrameworkElement;
+
+            if(fe != null)
+            {
+                var parent = fe.GetParent<ItemsControl>();
+                if (parent != null)
+                {
+                    var collections = parent.ItemsSource as IList<T>;
+                    if (collections == null)
+                    {
+                        return;
+                    }
+
+                    int index = collections.IndexOf(fe.GetDataContext<T>());
+                    if (index == collections.Count - 1)
+                    {
+                        fe.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
+                    }
+                }
+            }
+        }
+
+        public static void ElementInItemsControl_SetVisibleAtBegin<T>(object sender, bool visible) where T : class
+        {
+            FrameworkElement fe = sender as FrameworkElement;
+
+            if(fe != null)
+            {
+                var parent = fe.GetParent<ItemsControl>();
+                if (parent != null)
+                {
+                    var collections = parent.ItemsSource as IList<T>;
+                    if (collections == null)
+                    {
+                        return;
+                    }
+
+                    int index = collections.IndexOf(fe.GetDataContext<T>());
+                    if (index == 0)
+                    {
+                        fe.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
+                    }
+                }
+            }
         }
     }
 }

@@ -42,8 +42,7 @@
                         </DataTemplate>
                     </Pivot.HeaderTemplate>
                     <PivotItem Header="动态">
-                        <ScrollViewer Height="460"/>
-
+                        <controls:UserActivity x:Name="userActivities1" Height="460"/>
                     </PivotItem>
 
                     <PivotItem Header="作品" DataContext="{Binding}">
@@ -75,8 +74,8 @@
                             <TextBlock Text="{Binding}" FontSize="28" Width="80" TextAlignment="Center"/>
                         </DataTemplate>
                     </Pivot.HeaderTemplate>
-                    <PivotItem Header="动态" DataContext="{Binding}">
-                        <ScrollViewer Height="460"/>
+                    <PivotItem Header="动态">
+                        <controls:UserActivity x:Name="userActivities2" Height="460"/>
                     </PivotItem>
 
                     <PivotItem Header="作品" DataContext="{Binding}">

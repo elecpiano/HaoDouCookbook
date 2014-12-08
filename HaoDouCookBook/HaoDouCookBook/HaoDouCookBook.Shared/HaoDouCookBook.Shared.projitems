@@ -35,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\SearchAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\StuffAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\TopicAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\UserFeedAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\ADItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\AlbumItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\AlbumPageData.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\ProductPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\SingleProductViewPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Activity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Passport.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Recommendation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\UserFollower.cs" />

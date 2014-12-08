@@ -200,13 +200,20 @@ namespace HaoDouCookBook.Pages
 
                 this.userRecipes1.NoItemsText = Constants.I_DONT_HAVE_RECIPES;
                 this.userRecipes2.NoItemsText = Constants.I_DONT_HAVE_RECIPES;
+
+                this.userActivities1.NoItemsText = Constants.I_DONT_HAVE_ACTIVITIES;
+                this.userActivities2.NoItemsText = Constants.I_DONT_HAVE_ACTIVITIES;
             }
             else
             {
                 this.userProducts1.NoItemsText = Constants.OTHERUSER_DONT_HAVE_PRODUCTS;
                 this.userProducts2.NoItemsText = Constants.OTHERUSER_DONT_HAVE_PRODUCTS;
+
                 this.userRecipes1.NoItemsText = Constants.OTHERUSER_DONT_HAVE_RECIPES;
                 this.userRecipes2.NoItemsText = Constants.OTHERUSER_DONT_HAVE_RECIPES;
+
+                this.userActivities1.NoItemsText = Constants.OTHERUSER_DONT_HAVE_ACTIVITIES;
+                this.userActivities2.NoItemsText = Constants.OTHERUSER_DONT_HAVE_ACTIVITIES;
             }
         }
 
@@ -250,7 +257,7 @@ namespace HaoDouCookBook.Pages
 
         #region Event
 
-        private void Pivot_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
+        private async void Pivot_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
         {
             if (pageParams == null)
             {
@@ -263,6 +270,17 @@ namespace HaoDouCookBook.Pages
                 switch (pivot.SelectedIndex)
                 {
                     case 0:  //动态
+                        if (pageParams != null)
+                        {
+                            if (Utilities.IsSignedInUser(pageParams.UserId))
+                            {
+                                await this.userActivities2.LoadFirstDataAsync(pageParams.UserId);
+                            }
+                            else
+                            {
+                                await this.userActivities1.LoadFirstDataAsync(pageParams.UserId);
+                            }
+                        }
                         break;
                     case 1:  //作品
                         break;

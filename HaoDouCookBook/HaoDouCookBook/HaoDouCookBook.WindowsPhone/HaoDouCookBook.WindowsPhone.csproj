@@ -157,6 +157,9 @@
     <Compile Include="Controls\TopicTile.xaml.cs">
       <DependentUpon>TopicTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserActivity.xaml.cs">
+      <DependentUpon>UserActivity.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserPhoto.xaml.cs">
       <DependentUpon>UserPhoto.xaml</DependentUpon>
     </Compile>
@@ -269,6 +272,7 @@
     <Compile Include="ViewModels\TagsPageViewModel.cs" />
     <Compile Include="ViewModels\TopciListPageViewModel.cs" />
     <Compile Include="ViewModels\Topic.cs" />
+    <Compile Include="ViewModels\UserActivity.cs" />
     <Compile Include="ViewModels\UserData.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -446,6 +450,10 @@
     <Page Include="Controls\TopicTile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UserActivity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\UserPhoto.xaml">
       <Generator>MSBuild:Compile</Generator>

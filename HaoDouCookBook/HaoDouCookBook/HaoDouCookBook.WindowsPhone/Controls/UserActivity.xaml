@@ -1,0 +1,83 @@
+﻿<UserControl
+    x:Class="HaoDouCookBook.Controls.UserActivity"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="460"
+    d:DesignWidth="400">
+
+    <Grid Background="White" x:Name="root">
+        <ScrollViewer>
+            <ItemsControl x:Name="list" ItemsSource="{Binding ActivitiesGroups}" Margin="0, 0, 0, 20">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Grid Margin="0, 20, 0, 20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Vertical">
+                                    <TextBlock Text="{Binding Day}" TextAlignment="Center" FontSize="21"/>
+                                    <TextBlock Text="{Binding Month}" TextAlignment="Center" FontSize="21" Foreground="Gray"/>
+                                </StackPanel>
+
+                                <ItemsControl Grid.Column="1" ItemsSource="{Binding Activities}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="发布了作品" FontSize="18"/>
+                                                <Border Background="#1a000000" Margin="0, 15, 0, 0">
+                                                    <Grid Margin="7">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="80"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Border Grid.Column="0" Height="80">
+                                                            <Border.Background>
+                                                                <ImageBrush ImageSource="{Binding Image}" AlignmentY="Center" Stretch="UniformToFill"/>
+                                                            </Border.Background>
+                                                        </Border>
+                                                        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="15, 0, 0, 0">
+                                                            <TextBlock Text="{Binding Name}" FontSize="18"/>
+                                                            <TextBlock Margin="0, 5, 0, 0" FontSize="19" Text="{Binding Content}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxLines="2"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                                <TextBlock Text="{Binding CreateTime}" FontSize="19" Foreground="Gray" Margin="0, 15, 0, 0"/>
+                                                <Rectangle Loaded="activity_Line_Loaded" Style="{StaticResource LightGaryLine}" Width="400" Margin="0, 15, 0, 15"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                            <Rectangle Loaded="activitiesGroup_Line_Loaded" Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 20, 0, 0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Grid Margin="0, 80, 0, 0" x:Name="noItemsPanel" Visibility="{Binding Count, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
+            <Image Source="../assets/images/user_noactivities.png" Stretch="None" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="noItemsText" Text="{Binding NoItemsText}" Style="{StaticResource UserProfile_NoItemsText_Style}"/>
+        </Grid>
+
+        <controls:NetworkLoading x:Name="loading" />
+    </Grid>
+
+</UserControl>
