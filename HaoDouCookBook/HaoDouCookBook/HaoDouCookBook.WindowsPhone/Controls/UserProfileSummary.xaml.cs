@@ -82,6 +82,10 @@ namespace HaoDouCookBook.Controls
 
         #endregion
 
+        public Action<UserProfileSummary> FollowAction { get; set; }
+
+        public Action<UserProfileSummary> UnFollowAction { get; set; }
+
         #region Life Cycle
 
         public UserProfileSummary()
@@ -112,8 +116,25 @@ namespace HaoDouCookBook.Controls
             App.Current.RootFrame.Navigate(typeof(UserFollowersPage), paras);
 
         }
+        private void follow_Click(object sender, RoutedEventArgs e)
+        {
+            if (FollowAction != null)
+            {
+                FollowAction.Invoke(this);
+            }
+        }
+
+        private void unFollow_Click(object sender, RoutedEventArgs e)
+        {
+            if (UnFollowAction != null)
+            {
+                UnFollowAction.Invoke(this);
+            }
+        }
 
         #endregion
+
+       
 
     }
 }

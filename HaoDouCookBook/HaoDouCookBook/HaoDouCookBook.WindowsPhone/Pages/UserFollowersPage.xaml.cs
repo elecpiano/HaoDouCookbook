@@ -216,7 +216,6 @@ namespace HaoDouCookBook.Pages
                     toast.Show(data.Message);
                 }, error =>
                 {
-                    dataContext.CanFollow = true;
                     toast.Show(error.Message);
                 });
         }
@@ -226,7 +225,7 @@ namespace HaoDouCookBook.Pages
             var dataContext = sender.GetDataContext<UserFollower>();
             await RecipeUserAPI.UnFollow(dataContext.UserId, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, data =>
                 {
-                    dataContext.CanFollow = false;
+                    dataContext.CanFollow = true;
                     toast.Show(data.Message);
                 }, error =>
                 {

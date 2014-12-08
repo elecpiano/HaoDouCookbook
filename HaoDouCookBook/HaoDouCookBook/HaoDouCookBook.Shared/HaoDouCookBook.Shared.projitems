@@ -23,7 +23,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\ShoppingList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\AnythingToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Converters\ReverseAnythingToVisibiltyConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\AdAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\ApiUrlHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\CommentAPI.cs" />

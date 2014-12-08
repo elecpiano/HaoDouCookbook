@@ -22,7 +22,7 @@ namespace HaoDouCookBook.Common
         public const string NOONE_FOLLOW_OTHERUSER = "没有人关注ta,\n 好可怜~~你去关注下呗";
         public const string ONONE_FOLLOW_ME = "没有人关注你\n要加油咯~";
         public const string I_FOLLOW_NOONE = "没有关注的做菜高手~\n你怎么成长嘞？";
-        public const string OTHERUSER_FOLLOW_NOONE = "ta没有关注的人";
+        public const string OTHERUSER_FOLLOW_NOONE = "TA还没来得及关注别人哦";
 
 
         public const int ERRORCODE_JSON_PARSE_FAILED = int.MaxValue;

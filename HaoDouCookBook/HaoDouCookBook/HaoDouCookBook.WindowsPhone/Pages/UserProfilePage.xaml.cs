@@ -2,21 +2,8 @@
 using HaoDouCookBook.Controls;
 using HaoDouCookBook.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Shared.Utility;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Utility;
 
@@ -55,6 +42,7 @@ namespace HaoDouCookBook.Pages
         public UserProfilePage()
         {
             this.InitializeComponent();
+            InitUserInfoSummary();
             DataBinding();
         }
 
@@ -111,7 +99,7 @@ namespace HaoDouCookBook.Pages
                     viewModel.UserAvatar = data.SummaryInfo.Avatar;
                     viewModel.UserIntro = string.IsNullOrEmpty(data.SummaryInfo.Intro) ? Constants.DEFAULT_USER_INTRO : data.SummaryInfo.Intro;
                     viewModel.UserName = data.SummaryInfo.UserName;
-                    viewModel.CanFollow = data.SummaryInfo.CanFollow == 0 ? true : false;
+                    viewModel.CanFollow = data.SummaryInfo.CanFollow == 1 ? true : false;
                 }
 
                 loading.SetState(LoadingState.SUCCESS);
@@ -135,5 +123,40 @@ namespace HaoDouCookBook.Pages
 
         #endregion
 
+        #region Private method
+
+        private void InitUserInfoSummary()
+        {
+            this.otherUserProfile.FollowAction = Follow;
+            this.otherUserProfile.UnFollowAction = UnFollow;
+        }
+
+        private async void UnFollow(UserProfileSummary userSummary)
+        {
+            await RecipeUserAPI.UnFollow(userSummary.UserId, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, data =>
+            {
+                viewModel.CanFollow = true;
+                toast.Show(data.Message);
+
+            }, error =>
+            {
+                toast.Show(error.Message);
+            });
+        }
+
+        private async void Follow(UserProfileSummary userSummary)
+        {
+            await RecipeUserAPI.Follow(userSummary.UserId, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, data =>
+            {
+                viewModel.CanFollow = false;
+                toast.Show(data.Message);
+
+            }, error =>
+            {
+                toast.Show(error.Message);
+            });
+        }
+
+        #endregion
     }
 }

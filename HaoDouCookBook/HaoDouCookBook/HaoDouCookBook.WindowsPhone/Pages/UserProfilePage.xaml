@@ -21,10 +21,9 @@
         <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
             <StackPanel Orientation="Vertical" Margin="0, 10, 0, 20">
                 <Pivot Visibility="{Binding UserId, Converter={StaticResource notSignedInUserIdToVisibilityConverter}}">
-                    <Pivot.TitleTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <controls:UserProfileSummary 
+                    <Pivot.Title>
+                        <StackPanel Orientation="Vertical">
+                            <controls:UserProfileSummary x:Name="otherUserProfile"
                                     UserId="{Binding UserId}" 
                                     FollowCount="{Binding FollowCount}"
                                     FansCount="{Binding FansCount}"
@@ -33,10 +32,9 @@
                                     UserIntro="{Binding UserIntro}"
                                     CanFollow="{Binding CanFollow}"
                                     />
-                                <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="-20, -10, -20, 20"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </Pivot.TitleTemplate>
+                            <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="-20, -10, -20, 20"/>
+                        </StackPanel>
+                    </Pivot.Title>
                     <Pivot.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" FontSize="28" Width="120" TextAlignment="Center"/>
@@ -56,10 +54,9 @@
                 </Pivot>
 
                 <Pivot Visibility="{Binding UserId, Converter={StaticResource signedInUserIdToVisibilityConverter}}">
-                    <Pivot.TitleTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <controls:UserProfileSummary 
+                    <Pivot.Title>
+                        <StackPanel Orientation="Vertical">
+                            <controls:UserProfileSummary 
                                     UserId="{Binding UserId}" 
                                     FollowCount="{Binding FollowCount}"
                                     FansCount="{Binding FansCount}"
@@ -67,10 +64,9 @@
                                     Avatar="{Binding UserAvatar}"
                                     UserIntro="{Binding UserIntro}"
                                     />
-                                <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="-20, -10, -20, 20"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </Pivot.TitleTemplate>
+                            <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="-20, -10, -20, 20"/>
+                        </StackPanel>
+                    </Pivot.Title>
                     <Pivot.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" FontSize="28" Width="80" TextAlignment="Center"/>
@@ -89,11 +85,12 @@
                     </PivotItem>
 
                     <PivotItem Header="草稿">
-                        
+
                     </PivotItem>
                 </Pivot>
             </StackPanel>
         </ScrollViewer>
         <controls:NetworkLoading x:Name="loading" Margin="0, 105, 0, 0"/>
+        <controls:Toast x:Name="toast" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0, 0, 0, 140"/>
     </Grid>
 </controls:BackablePage>

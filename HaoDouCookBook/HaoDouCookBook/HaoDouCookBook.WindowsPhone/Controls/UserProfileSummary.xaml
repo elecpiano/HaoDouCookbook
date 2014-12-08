@@ -26,43 +26,54 @@
             <StackPanel Orientation="Vertical" Margin="50, 0, 0, 0">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical" Background="Transparent" Tapped="Follower_Tapped">
-                        <TextBlock Text="{Binding FollowCount}" Style="{StaticResource UserProfileSummary_PropretyValue_Style}"/>
+                        <TextBlock Text="{Binding FollowCount, Converter={StaticResource countToDescConverter}}" Style="{StaticResource UserProfileSummary_PropretyValue_Style}"/>
                         <TextBlock Text="关注" Style="{StaticResource UserProfileSummary_PropertyName_Style}"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="35, 0, 0, 0" Background="Transparent" Tapped="Fans_Tapped">
-                        <TextBlock Text="{Binding FansCount}" Style="{StaticResource UserProfileSummary_PropretyValue_Style}"/>
+                        <TextBlock Text="{Binding FansCount, Converter={StaticResource countToDescConverter}}" Style="{StaticResource UserProfileSummary_PropretyValue_Style}"/>
                         <TextBlock Text="粉丝" Style="{StaticResource UserProfileSummary_PropertyName_Style}"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="35, 0, 0, 0">
-                        <TextBlock Text="{Binding Coin}"  Style="{StaticResource UserProfileSummary_PropretyValue_Style}"/>
+                        <TextBlock Text="{Binding Coin, Converter={StaticResource countToDescConverter}}"  Style="{StaticResource UserProfileSummary_PropretyValue_Style}"/>
                         <TextBlock Text="豆币" Style="{StaticResource UserProfileSummary_PropertyName_Style}"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="-30, 5, 0, 0">
-                    <Button x:Name="follow" Width="124" 
-                            Visibility="{Binding UserId, Converter={StaticResource notSignedInUserIdToVisibilityConverter}}">
-                        <Button.Content>
-                            <TextBlock Text="+关注" FontWeight="Normal" Margin="10, 2"/>
-                        </Button.Content>
-                    </Button>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding UserId, Converter={StaticResource notSignedInUserIdToVisibilityConverter}}">
+                        <Button x:Name="follow" Click="follow_Click" Width="124" Visibility="{Binding CanFollow, Converter={StaticResource AnythingToVisiblityConverter}}">
+                            <Button.Content>
+                                <TextBlock Text="+关注" FontWeight="Normal" Margin="10, 2"/>
+                            </Button.Content>
+                        </Button>
 
-                    <Button x:Name="chat" Width="124" Visibility="{Binding UserId, Converter={StaticResource notSignedInUserIdToVisibilityConverter}}">
-                        <Button.Content>
-                            <TextBlock Text="聊天" FontWeight="Normal" Margin="15, 2"/>
-                        </Button.Content>
-                    </Button>
+                        <Button x:Name="unFollow" Click="unFollow_Click" Width="124" Foreground="White" Background="{StaticResource DarkerGreenMain}"
+                                Visibility="{Binding CanFollow, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
+                            <Button.Content>
+                                <TextBlock Text="已关注" FontWeight="Normal" Margin="10, 2"/>
+                            </Button.Content> 
+                        </Button>
 
-                    <Button x:Name="checkin" Width="124" Visibility="{Binding UserId, Converter={StaticResource signedInUserIdToVisibilityConverter}}">
-                        <Button.Content>
-                            <TextBlock Text="签到" FontWeight="Normal" Margin="15, 2"/>
-                        </Button.Content>
-                    </Button>
+                        <Button x:Name="chat" Width="124">
+                            <Button.Content>
+                                <TextBlock Text="聊天" FontWeight="Normal" Margin="15, 2"/>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
 
-                    <Button x:Name="personal" Width="124" Visibility="{Binding UserId, Converter={StaticResource signedInUserIdToVisibilityConverter}}">
-                        <Button.Content>
-                            <TextBlock Text="个人" FontWeight="Normal" Margin="15, 2"/>
-                        </Button.Content>
-                    </Button>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding UserId, Converter={StaticResource signedInUserIdToVisibilityConverter}}">
+                        <Button x:Name="checkin" Width="124">
+                            <Button.Content>
+                                <TextBlock Text="签到" FontWeight="Normal" Margin="15, 2"/>
+                            </Button.Content>
+                        </Button>
+
+                        <Button x:Name="personal" Width="124">
+                            <Button.Content>
+                                <TextBlock Text="个人" FontWeight="Normal" Margin="15, 2"/>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                    
                 </StackPanel>
             </StackPanel>
         </StackPanel>
