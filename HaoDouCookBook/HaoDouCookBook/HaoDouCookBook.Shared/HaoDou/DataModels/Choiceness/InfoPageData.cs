@@ -5,7 +5,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
     [DataContract]
     public class InfoPageData
     {
-        [DataMember(Name="info")]
+        [DataMember(Name = "info")]
         public Info Info { get; set; }
 
         public InfoPageData()
@@ -197,7 +197,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
         public AdData AD { get; set; }
 
         [DataMember]
-        public int CommentCount { get; set; }
+        public string CommentCount { get; set; }
 
         [DataMember]
         public Comment[] CommentList { get; set; }
@@ -234,6 +234,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
             AdFlag = -1;
             ProductCount = 0;
             Vip = -1;
+            CommentCount = string.Empty;
         }
 
     }

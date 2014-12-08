@@ -64,12 +64,7 @@ namespace HaoDouCookBook.Pages
             pageParams = e.Parameter as UserProfilePageParams;
             if (pageParams != null)
             {
-                viewModel = new UserProfilePageViewModel();
-                DataBinding();
-                InitNoItemsImageAndText(pageParams.UserId);
-                UpdateProductsData(0, 21, pageParams.UserId);
-                UpdateRecipes(0, 21, pageParams.UserId);
-                LoadDataAsync();
+                Init(pageParams);
             }
         }
 
@@ -233,6 +228,27 @@ namespace HaoDouCookBook.Pages
         {
             this.otherUserProfile.FollowAction = Follow;
             this.otherUserProfile.UnFollowAction = UnFollow;
+        }
+
+        private void Init(UserProfilePageParams paras)
+        {
+            viewModel = new UserProfilePageViewModel();
+            DataBinding();
+            InitNoItemsImageAndText(pageParams.UserId);
+            if (Utilities.IsSignedInUser(pageParams.UserId))
+            {
+                this.pivoitMe.SelectedIndex = 0;
+                userActivities2.LoadFirstDataAsync(pageParams.UserId);
+            }
+            else
+            {
+                this.pivotOtherUser.SelectedIndex = 0;
+                this.userActivities1.LoadFirstDataAsync(pageParams.UserId);
+            }
+            this.rootScrollViewer.ScrollToVerticalOffset(0);
+            UpdateProductsData(0, 21, pageParams.UserId);
+            UpdateRecipes(0, 21, pageParams.UserId);
+            LoadDataAsync();
         }
 
         #endregion

@@ -123,7 +123,7 @@ namespace HaoDouCookBook.Pages
             viewModel.ProductCount = infoData.ProductCount;
             viewModel.IsVip = infoData.Vip == 1 ? true : false;
             viewModel.Intro = infoData.Intro;
-            viewModel.CommentCount = infoData.CommentCount;
+            viewModel.CommentCount = string.IsNullOrEmpty(infoData.CommentCount) ? 0 : int.Parse(infoData.CommentCount);
 
             // Fodd stuff
             //
