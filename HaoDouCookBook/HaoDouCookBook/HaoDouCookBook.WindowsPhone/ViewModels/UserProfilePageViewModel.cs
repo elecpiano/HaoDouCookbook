@@ -1,6 +1,7 @@
 ﻿using Shared.Infrastructures;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,6 +75,9 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<bool>(ref canFollow, value); }
         }
 
+        public ObservableCollection<UserProduct> Products { get; set; }
+
+        public ObservableCollection<UserRecipe> Recipes { get; set; }
 
         public UserProfilePageViewModel()
         {
@@ -84,6 +88,8 @@ namespace HaoDouCookBook.ViewModels
             coin = 0;
             userAvatar = string.Empty;
             userintro = string.Empty;
+            Products = new ObservableCollection<UserProduct>();
+            Recipes = new ObservableCollection<UserRecipe>();
         }
     }
 }

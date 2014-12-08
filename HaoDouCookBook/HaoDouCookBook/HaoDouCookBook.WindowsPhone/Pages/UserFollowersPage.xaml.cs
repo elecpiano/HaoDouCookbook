@@ -58,7 +58,7 @@ namespace HaoDouCookBook.Pages
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             if (e.NavigationMode == NavigationMode.Back)
@@ -73,7 +73,7 @@ namespace HaoDouCookBook.Pages
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 SetPageTypeRelatedItems(pageParams.UserId, pageParams.PageType);
                 DataBinding();
-                LoadDataAsync(20, 0, pageParams.UserId);
+                await LoadDataAsync(20, 0, pageParams.UserId);
             }
             
         }
@@ -207,6 +207,8 @@ namespace HaoDouCookBook.Pages
 
         #endregion
 
+        #region Follow/UnFollow
+
         private async void Follow_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             var dataContext = sender.GetDataContext<UserFollower>();
@@ -232,5 +234,7 @@ namespace HaoDouCookBook.Pages
                     toast.Show(error.Message);
                 });
         }
+
+        #endregion
     }
 }

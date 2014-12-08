@@ -1,5 +1,6 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.HaoDou.DataModels.Discovery;
+using HaoDouCookBook.HaoDou.DataModels.My;
 using System;
 using System.Threading.Tasks;
 
@@ -28,7 +29,6 @@ namespace HaoDouCookBook.HaoDou.API
             await loader.LoadAsync(postRequest, true, MODULE, cacheFileName, onSuccess, onFail);
         }
 
-
         public static async Task GetPhotoView(int id, int? uid, Action<SingleProductViewPageData> onSuccess, Action<Error> onFail)
         {
             string methodName = "photoView";
@@ -40,5 +40,21 @@ namespace HaoDouCookBook.HaoDou.API
             HaoDouJsonDataLoader<SingleProductViewPageData> loader = new HaoDouJsonDataLoader<SingleProductViewPageData>();
             await loader.LoadAsync(postRequest, true, MODULE, cacheFileName, onSuccess, onFail);
         }
+
+        public static async Task GetList(int offset, int limit, int userId, int uid, string sign, Action<UserProductsData> onSuccess, Action<Error> onFail)
+        { 
+            string methodName = "getList";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("offset", offset.ToString());
+            postRequest.AddPostData("limit", limit.ToString());
+            postRequest.AddPostData("userid", userId.ToString());
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+
+            string cacheFilename = string.Format("{0}-{1}-{2}-{3}", methodName, userId.ToString(), offset.ToString(), limit.ToString());
+            HaoDouJsonDataLoader<UserProductsData> loader = new HaoDouJsonDataLoader<UserProductsData>();
+            await loader.LoadAsync(postRequest, true, MODULE, cacheFilename, onSuccess, onFail);
+        }
+
     }
 }

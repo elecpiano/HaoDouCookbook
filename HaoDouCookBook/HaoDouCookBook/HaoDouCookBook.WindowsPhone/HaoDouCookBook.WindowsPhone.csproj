@@ -163,6 +163,9 @@
     <Compile Include="Controls\UserProfileSummary.xaml.cs">
       <DependentUpon>UserProfileSummary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserRecipesControl.xaml.cs">
+      <DependentUpon>UserRecipesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
@@ -285,6 +288,7 @@
     </Compile>
     <Compile Include="ViewModels\UserFollowersPageViewModel.cs" />
     <Compile Include="ViewModels\UserProfilePageViewModel.cs" />
+    <Compile Include="ViewModels\UserRecipe.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -341,6 +345,10 @@
     <Content Include="Assets\Images\TextBoxGreenLine.png" />
     <Content Include="Assets\Images\up_arrow.png" />
     <Content Include="Assets\Images\username.png" />
+    <Content Include="Assets\Images\user_noactivities.png" />
+    <Content Include="Assets\Images\user_nodraft.png" />
+    <Content Include="Assets\Images\user_noproducts.png" />
+    <Content Include="Assets\Images\user_norecipes.png" />
     <Content Include="Assets\Images\vip.png" />
     <Content Include="Assets\Images\vip_photo_mark.png" />
     <Content Include="Assets\Logo.scale-240.png" />
@@ -444,6 +452,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\UserProfileSummary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserRecipesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

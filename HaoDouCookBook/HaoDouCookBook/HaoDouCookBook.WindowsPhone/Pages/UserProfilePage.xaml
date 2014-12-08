@@ -19,8 +19,9 @@
             <TextBlock x:Name="title" Text="{Binding UserName}" Style="{StaticResource SubTitleStyle}"/>
         </Border>
         <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
-            <StackPanel Orientation="Vertical" Margin="0, 10, 0, 20">
-                <Pivot Visibility="{Binding UserId, Converter={StaticResource notSignedInUserIdToVisibilityConverter}}">
+            <StackPanel Orientation="Vertical" Margin="0, 10, 0, 0">
+                <Pivot Visibility="{Binding UserId, Converter={StaticResource notSignedInUserIdToVisibilityConverter}}"
+                       SelectionChanged="Pivot_SelectionChanged">
                     <Pivot.Title>
                         <StackPanel Orientation="Vertical">
                             <controls:UserProfileSummary x:Name="otherUserProfile"
@@ -37,23 +38,25 @@
                     </Pivot.Title>
                     <Pivot.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" FontSize="28" Width="120" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding}" FontSize="28" Width="120" TextAlignment="Center" Margin="0"/>
                         </DataTemplate>
                     </Pivot.HeaderTemplate>
                     <PivotItem Header="动态">
+                        <ScrollViewer Height="460"/>
 
                     </PivotItem>
 
-                    <PivotItem Header="作品">
-
+                    <PivotItem Header="作品" DataContext="{Binding}">
+                        <controls:UserRecipesControl Margin="-20, 0, -30, 0" x:Name="userProducts1" ItemsSource="{Binding Products}"/>
                     </PivotItem>
 
-                    <PivotItem Header="菜谱">
-
+                    <PivotItem Header="菜谱" DataContext="{Binding}">
+                        <controls:UserRecipesControl Margin="-20, 0, -30, 0" x:Name="userRecipes1" ItemsSource="{Binding Recipes}"/>
                     </PivotItem>
                 </Pivot>
 
-                <Pivot Visibility="{Binding UserId, Converter={StaticResource signedInUserIdToVisibilityConverter}}">
+                <Pivot Visibility="{Binding UserId, Converter={StaticResource signedInUserIdToVisibilityConverter}}"
+                       SelectionChanged="Pivot_SelectionChanged">
                     <Pivot.Title>
                         <StackPanel Orientation="Vertical">
                             <controls:UserProfileSummary 
@@ -72,20 +75,20 @@
                             <TextBlock Text="{Binding}" FontSize="28" Width="80" TextAlignment="Center"/>
                         </DataTemplate>
                     </Pivot.HeaderTemplate>
-                    <PivotItem Header="动态">
-
+                    <PivotItem Header="动态" DataContext="{Binding}">
+                        <ScrollViewer Height="460"/>
                     </PivotItem>
 
-                    <PivotItem Header="作品">
-
+                    <PivotItem Header="作品" DataContext="{Binding}">
+                        <controls:UserRecipesControl Margin="-20, 0, -30, 0" x:Name="userProducts2" ItemsSource="{Binding Products}"/>
                     </PivotItem>
 
-                    <PivotItem Header="菜谱">
-
+                    <PivotItem Header="菜谱" DataContext="{Binding}">
+                        <controls:UserRecipesControl Margin="-20, 0, -30, 0" x:Name="userRecipes2" ItemsSource="{Binding Recipes}"/>
                     </PivotItem>
 
                     <PivotItem Header="草稿">
-
+                        <ScrollViewer Height="460"/>
                     </PivotItem>
                 </Pivot>
             </StackPanel>

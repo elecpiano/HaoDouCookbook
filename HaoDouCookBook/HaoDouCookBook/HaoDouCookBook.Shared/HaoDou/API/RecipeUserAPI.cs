@@ -78,5 +78,19 @@ namespace HaoDouCookBook.HaoDou.API
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
         }
 
+        public static async Task GetUserRecipeList(int offset, int limit, int userId, int uid, Action<UserRecipesData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getUserRecipeList";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("offset", offset.ToString());
+            postRequest.AddPostData("limit", limit.ToString());
+            postRequest.AddPostData("userid", userId.ToString());
+            postRequest.AddPostData("uid", uid.ToString());
+
+
+            string cacheFilename = string.Format("{0}-{1}-{2}-{3}", methodName, userId.ToString(), offset.ToString(), limit.ToString());
+            HaoDouJsonDataLoader<UserRecipesData> loader = new HaoDouJsonDataLoader<UserRecipesData>();
+            await loader.LoadAsync(postRequest, true, MODULE, cacheFilename, onSuccess, onFail);
+        }
     }
 }

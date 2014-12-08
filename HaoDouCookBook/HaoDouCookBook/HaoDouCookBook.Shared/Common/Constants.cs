@@ -23,6 +23,13 @@ namespace HaoDouCookBook.Common
         public const string ONONE_FOLLOW_ME = "没有人关注你\n要加油咯~";
         public const string I_FOLLOW_NOONE = "没有关注的做菜高手~\n你怎么成长嘞？";
         public const string OTHERUSER_FOLLOW_NOONE = "TA还没来得及关注别人哦";
+        public const string I_DONT_HAVE_PRODUCTS = "学习很久了吧\n也来秀秀你的作品呗~~";
+        public const string OTHERUSER_DONT_HAVE_PRODUCTS = "TA还没有作品嘞~\n去别人家蹭饭吧！";
+        public const string I_DONT_HAVE_RECIPES = "你的碗里没有菜啦~\n快去厨房炒菜吧！";
+        public const string OTHERUSER_DONT_HAVE_RECIPES = "TA的碗里没有菜哟~\n去吃别人的吧！";
+        public const string I_DONT_HAVE_ACTIVITIES = "来了这么久\n怎么还没有动静嘞？";
+        public const string OTHERUSER_DONT_HAVE_ACTIVITIES = "TA还没有最新动态哦\n去别人家里逛逛吧~";
+        public const string I_DONT_HAVE_DRAFT = "暂时没有发布的草稿哦~";
 
 
         public const int ERRORCODE_JSON_PARSE_FAILED = int.MaxValue;
