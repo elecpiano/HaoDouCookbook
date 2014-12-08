@@ -154,7 +154,7 @@ namespace HaoDouCookBook.Common
 
                 await CommitDataAsync();
             }
-            catch
+            catch(UnauthorizedAccessException)
             { }
         }
 
