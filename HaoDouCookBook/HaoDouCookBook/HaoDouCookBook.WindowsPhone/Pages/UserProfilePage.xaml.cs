@@ -68,15 +68,6 @@ namespace HaoDouCookBook.Pages
             }
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            if(pageParams != null && Utilities.IsSignedInUser(pageParams.UserId))
-            {
-                UserGlobal.Instance.CommitDataAsync();
-            }
-            base.OnNavigatedFrom(e);
-        }
-
         #endregion
 
         #region Data Prepare

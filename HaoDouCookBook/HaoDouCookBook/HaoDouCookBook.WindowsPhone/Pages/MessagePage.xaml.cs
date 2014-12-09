@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -75,6 +76,7 @@ namespace HaoDouCookBook.Pages
                     if (data.Notice != null)
                     {
                         viewModel.NoticeContent = data.Notice.Content;
+                        viewModel.SubType = data.Notice.SubType;
                     }
 
                     if (data.Messages != null)
@@ -109,5 +111,13 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+        private void Notice_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            NoticeDetailPage.NoticeDetailPageParams paras = new NoticeDetailPage.NoticeDetailPageParams();
+            paras.SubType = viewModel.SubType; 
+
+            App.Current.RootFrame.Navigate(typeof(NoticeDetailPage), paras);
+        }
     }
 }

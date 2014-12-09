@@ -18,11 +18,21 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref noticeContent, value); }
         }
 
+        private string subType;
+
+        public string SubType
+        {
+            get { return subType; }
+            set { SetProperty<string>(ref subType, value); }
+        }
+
+
         public ObservableCollection<Message> Messages { get; set; }
 
         public MessagePageViewModel()
         {
             noticeContent = "暂时还没有新的通知";
+            subType = string.Empty;
             Messages = new ObservableCollection<Message>();
         }
     }

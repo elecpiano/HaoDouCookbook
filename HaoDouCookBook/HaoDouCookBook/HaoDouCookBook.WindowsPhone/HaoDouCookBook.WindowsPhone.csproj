@@ -201,6 +201,9 @@
     <Compile Include="Pages\MessagePage.xaml.cs">
       <DependentUpon>MessagePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\NoticeDetailPage.xaml.cs">
+      <DependentUpon>NoticeDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
@@ -259,6 +262,7 @@
     <Compile Include="ViewModels\MessagePageViewModel.cs" />
     <Compile Include="ViewModels\MyPageViewModel.cs" />
     <Compile Include="ViewModels\NewbieTutorial.cs" />
+    <Compile Include="ViewModels\NoticePageViewModel.cs" />
     <Compile Include="ViewModels\ProductPageViewModel.cs" />
     <Compile Include="ViewModels\RankItemData.cs" />
     <Compile Include="ViewModels\RankViewPageViewModel.cs" />
@@ -516,6 +520,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\MessagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\NoticeDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

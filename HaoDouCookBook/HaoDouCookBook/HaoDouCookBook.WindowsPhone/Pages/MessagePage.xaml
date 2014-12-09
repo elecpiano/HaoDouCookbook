@@ -16,7 +16,7 @@
         </Border>
         <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
             <StackPanel Margin="20, 20, 20, 0">
-                <Grid>
+                <Grid Background="Transparent" Tapped="Notice_Tapped">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="65"/>
                         <ColumnDefinition Width="*"/>
