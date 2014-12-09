@@ -24,7 +24,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" IsHitTestVisible="True">
-                            <StackPanel Orientation="Vertical" Margin="0, 15, 0, 0">
+                            <StackPanel Orientation="Vertical" Margin="0, 15, 0, 0" Tapped="Notice_Tapped">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="65"/>

@@ -15,17 +15,26 @@ namespace HaoDouCookBook.Pages
     {
         #region Page Parameters Definition
 
+        public enum SourcePage
+        {
+            NORMAL,
+            NOTICE_PAGE
+        }
+
         public class CommentListPageParams
         {
             public int Type { get; set; }
             public int Cid { get; set; }
             public int RecipeId { get; set; }
 
+            public SourcePage SourcePage { get; set; }
+
             public CommentListPageParams()
             {
                 Type = 1;
                 Cid = 0;
                 RecipeId = 0;
+                SourcePage = CommentListPage.SourcePage.NORMAL;
             }
 
         }
@@ -35,6 +44,7 @@ namespace HaoDouCookBook.Pages
         #region Field && Property
 
         private CommentListPageViewModel viewModel = new CommentListPageViewModel();
+        private CommentListPageParams pageParams;
 
         #endregion
 
@@ -60,13 +70,22 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            CommentListPageParams paras = e.Parameter as CommentListPageParams;
-            if (paras != null)
+            pageParams = e.Parameter as CommentListPageParams;
+            if (pageParams != null)
             {
                 viewModel = new CommentListPageViewModel();
                 rootScrollViewer.ScrollToVerticalOffset(0);
+                if (pageParams.SourcePage == SourcePage.NOTICE_PAGE)
+                {
+                    this.recipeHeader.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                }
+                else
+                {
+                    this.recipeHeader.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                }
+
                 DataBinding();
-                LoadDataAsync(0, 20, paras.Type, paras.Cid, paras.RecipeId);
+                LoadDataAsync(0, 20, pageParams.Type, pageParams.Cid, pageParams.RecipeId);
             }
         }
 
@@ -90,8 +109,15 @@ namespace HaoDouCookBook.Pages
 
         private void UpdatePageData(HaoDou.DataModels.Discovery.CommentListPageData data)
         {
-            viewModel.UserId = data.Info.UserId;
-            viewModel.Image = data.Info.Img;
+            if(data.Info != null)
+            {
+                viewModel.UserId = data.Info.UserId;
+                viewModel.Image = data.Info.Img;
+                viewModel.Info.Image = data.Info.Img;
+                viewModel.Info.Title = data.Info.Title;
+                viewModel.Info.Type = data.Info.Type;
+                viewModel.Info.UserId = data.Info.UserId;
+            }
 
             if (data.Comments != null)
             {
@@ -125,5 +151,13 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+        private void Recipe_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
+            paras.RecipeId = pageParams.RecipeId;
+
+            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+        }
     }
 }

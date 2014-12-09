@@ -69,6 +69,14 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref time, value); }
         }
 
+        private int contentId;
+
+        public int ContentId
+        {
+            get { return contentId; }
+            set { SetProperty<int>(ref contentId, value); }
+        }
+
         public NoticeItem()
         {
             userId = 0;
@@ -77,6 +85,8 @@ namespace HaoDouCookBook.ViewModels
             avatar = string.Empty;
             content = string.Empty;
             time = string.Empty;
+
+
         }
     }
 

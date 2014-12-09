@@ -16,6 +16,24 @@
         </Border>
         <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
             <StackPanel Margin="0, 20, 0, 0">
+                <Border x:Name="recipeHeader" Height="120" Margin="0, -20, 0, 20" Background="#10000000"
+                        Tapped="Recipe_Tapped">
+                       
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="94"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding Info.Image}" AlignmentY="Center" Stretch="UniformToFill"/>
+                            </Border.Background>
+                        </Border>
+                        <TextBlock Grid.Column="1" Text="查看这个菜谱：" FontSize="18" Margin="10, 20, 0, 0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Info.Title}" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10, 55, 0, 0"/>
+                        <Image Source="../assets/images/mypage/more.png" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Stretch="None"/>
+                    </Grid> 
+                </Border>
                 <ItemsControl ItemsSource="{Binding Comments}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>

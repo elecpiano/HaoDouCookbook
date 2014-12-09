@@ -21,6 +21,15 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref image, value); }
         }
 
+        private CommentListRecipeInfo info;
+
+        public CommentListRecipeInfo Info
+        {
+            get { return info; }
+            set { SetProperty<CommentListRecipeInfo>(ref info, value); }
+        }
+
+
         public ObservableCollection<CommentListComment> Comments { get; set; }
 
         public CommentListPageViewModel()
@@ -28,6 +37,7 @@ namespace HaoDouCookBook.ViewModels
             userId = -1;
             image = string.Empty;
             Comments = new ObservableCollection<CommentListComment>();
+            info = new CommentListRecipeInfo();
         }
     }
 
@@ -137,4 +147,45 @@ namespace HaoDouCookBook.ViewModels
             createTime = string.Empty;
         }
     }
+
+    public class CommentListRecipeInfo : BindableBase
+    {
+        private int userId;
+
+        public int UserId
+        {
+            get { return userId; }
+            set { SetProperty<int>(ref userId, value); }
+        }
+
+        private string image;
+
+        public string Image
+        {
+            get { return image; }
+            set { SetProperty<string>(ref image, value); }
+        }
+
+        private string title;
+
+        public string Title
+        {
+            get { return title; }
+            set { SetProperty<string>(ref title, value); }
+        }
+
+        private int type;
+
+        public int Type
+        {
+            get { return type; }
+            set { SetProperty<int>(ref type, value); }
+        }
+
+        public CommentListRecipeInfo()
+        {
+
+        }
+    }
+
 }

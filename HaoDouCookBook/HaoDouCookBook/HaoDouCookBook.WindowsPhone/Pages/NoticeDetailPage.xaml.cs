@@ -4,6 +4,7 @@ using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -86,6 +87,11 @@ namespace HaoDouCookBook.Pages
                         foreach (var item in data.Notices)
                         {
                             string content = "回复了您，快去看看吧！";
+                            int recpieId = 0;
+                            if(!string.IsNullOrEmpty(item.Content.Rid))
+                            {
+                                recpieId = int.Parse(item.Content.Rid);
+                            }
 
                             viewModel.Notices.Add(new NoticeItem() { 
                                 Avatar = item.Avatar,
@@ -93,7 +99,8 @@ namespace HaoDouCookBook.Pages
                                 Time = item.Time,
                                 Type = item.Type,
                                 UserId = item.Uid,
-                                UserName = item.UserName
+                                UserName = item.UserName,
+                                ContentId = recpieId
                             });
                         }
                     }
@@ -113,6 +120,30 @@ namespace HaoDouCookBook.Pages
                 });
         }
 
+
+        #endregion
+
+        #region Event
+
+        private void Notice_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<NoticeItem>();
+            switch (dataContext.Type)
+            {
+                case 3:
+                    CommentListPage.CommentListPageParams paras = new CommentListPage.CommentListPageParams();
+                    paras.RecipeId = dataContext.ContentId;
+                    paras.Type = 0;
+                    paras.Cid = 0;
+                    paras.SourcePage = CommentListPage.SourcePage.NOTICE_PAGE;
+
+                    App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
+
+                    break;
+                default:
+                    break;
+            }
+        }
 
         #endregion
     }
