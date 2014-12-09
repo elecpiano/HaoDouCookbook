@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\CommentAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\InfoAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\Accounts.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\MessageAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\NoticeAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RankAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipeAPI.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Activity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\CheckInData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\MessagePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Notice.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Passport.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Recommendation.cs" />

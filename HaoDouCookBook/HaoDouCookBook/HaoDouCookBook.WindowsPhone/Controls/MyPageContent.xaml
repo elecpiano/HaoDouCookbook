@@ -37,7 +37,7 @@
             </StackPanel>
 
             <!--others-->
-            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Message.png" 
+            <controls:SimpleSettingItem Tag="message" Icon="../assets/images/MyPage/Message.png" 
                                         ItemText="消息" Margin="0, 30, 0, 0" Count="{Binding MessageNoticeCount}"
                                         Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
                                         Tapped="SimpleSettingItem_Tapped"/>

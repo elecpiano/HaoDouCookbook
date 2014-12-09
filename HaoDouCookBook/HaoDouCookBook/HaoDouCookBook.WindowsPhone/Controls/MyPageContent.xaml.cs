@@ -109,9 +109,17 @@ namespace HaoDouCookBook.Controls
                 case "adrecommendation":
                     GotoAdRecommendationPage();
                     break;
+                case "message":
+                    GotoMessagePage();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void GotoMessagePage()
+        {
+            App.Current.RootFrame.Navigate(typeof(MessagePage));
         }
 
         private void GotoAdRecommendationPage()

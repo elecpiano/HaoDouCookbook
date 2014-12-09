@@ -15,6 +15,8 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{76F1466A-8B6D-4E39-A767-685A06062A39};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -196,6 +198,9 @@
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MessagePage.xaml.cs">
+      <DependentUpon>MessagePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
@@ -251,6 +256,7 @@
     <Compile Include="ViewModels\DiscoveryPageViewModel.cs" />
     <Compile Include="ViewModels\DishTileData.cs" />
     <Compile Include="ViewModels\Meal.cs" />
+    <Compile Include="ViewModels\MessagePageViewModel.cs" />
     <Compile Include="ViewModels\MyPageViewModel.cs" />
     <Compile Include="ViewModels\NewbieTutorial.cs" />
     <Compile Include="ViewModels\ProductPageViewModel.cs" />
@@ -304,6 +310,7 @@
     <Content Include="Assets\Images\clear.png" />
     <Content Include="Assets\Images\DefaultTopicImage.jpg" />
     <Content Include="Assets\Images\down_arrow.png" />
+    <Content Include="Assets\Images\messageNotice.png" />
     <Content Include="Assets\Images\nofollow.png" />
     <Content Include="Assets\Images\InfoTag.png" />
     <Content Include="Assets\Images\like.png" />
@@ -323,6 +330,7 @@
     <Content Include="Assets\Images\MyPage\Settings.png" />
     <Content Include="Assets\Images\MyPage\ShippingList.png" />
     <Content Include="Assets\Images\noavatar_300.jpg" />
+    <Content Include="Assets\Images\noMessage.png" />
     <Content Include="Assets\Images\nonetwork.png" />
     <Content Include="Assets\Images\noshopping.png" />
     <Content Include="Assets\Images\no_result_search.png" />
@@ -506,6 +514,10 @@
     <Page Include="Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MessagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ProductPage.xaml">
       <SubType>Designer</SubType>
