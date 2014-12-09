@@ -51,7 +51,7 @@
         <Setter Property="MaxLines" Value="2"/>
     </Style>
 
-    
+
     <Style x:Key="TopicContentStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="Foreground" Value="Gray"/>
         <Setter Property="FontSize" Value="18"/>
@@ -89,24 +89,28 @@
         <Setter Property="Stroke" Value="#dedede"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Height" Value="1"/>
+        <Setter Property="Fill" Value="#dedede"/>
     </Style>
 
     <Style x:Key="LightGaryLine" TargetType="Rectangle">
         <Setter Property="Stroke" Value="#dfdfdf"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Height" Value="1"/>
+        <Setter Property="Fill" Value="#dfdfdf"/>
     </Style>
 
     <Style x:Key="DarkGrayLine" TargetType="Rectangle">
         <Setter Property="Stroke" Value="#d1d1d1"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Height" Value="1.5"/>
+        <Setter Property="Fill" Value="#d1d1d1"/>
     </Style>
 
     <Style x:Key="GreenLine" TargetType="Rectangle">
         <Setter Property="Stroke" Value="Green"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Height" Value="1.5"/>
+        <Setter Property="Fill" Value="Green"/>
     </Style>
 
 
@@ -213,7 +217,7 @@
         <Setter Property="MaxLines" Value="4"/>
         <Setter Property="Margin" Value="0, 5, 0, 0"/>
     </Style>
-    
+
     <!--My Page-->
     <Style x:Key="MyPage_LoginNotifyInfo_style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -695,7 +699,7 @@
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="Opacity" Value="0"/>
     </Style>
-    
+
     <Style x:Key="SearchInputPage_KeywordTextBox_Style" TargetType="TextBox" BasedOn="{StaticResource TextBoxBase}">
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -741,7 +745,7 @@
         <Setter Property="Height" Value="42"/>
         <Setter Property="Width" Value="42"/>
     </Style>
-    
+
     <!--Category Page-->
     <Style x:Key="CategoryPage_CategoryIcon_Style" TargetType="Image">
         <Setter Property="Height" Value="36"/>
@@ -796,7 +800,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="15, 35, 0, 0"/>
     </Style>
-    
+
     <!--Login Page-->
     <Style x:Key="LoginPage_UserName_Style" TargetType="TextBox" BasedOn="{StaticResource TextBoxBase}">
         <Setter Property="PlaceholderText" Value="请输入邮箱或者手机号码"/>
@@ -948,4 +952,36 @@
         <Setter Property="FontSize" Value="21"/>
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
+
+    <Style x:Key="FriendsPage_NOItemText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Margin" Value="0, 180, 0, 0"/>
+    </Style>
+
+    <Style x:Key="FriendsPage_Title_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <Style x:Key="FriendsPage_Content_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0, 42, 0, 0"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="FriendsPage_Description_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0, 35, 0, 0"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="2"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
 </ResourceDictionary>

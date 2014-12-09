@@ -113,6 +113,9 @@
     <Compile Include="Controls\ChoicenessPageContent.xaml.cs">
       <DependentUpon>ChoicenessPageContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CountMark.xaml.cs">
+      <DependentUpon>CountMark.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DiscoveryPageContent.xaml.cs">
       <DependentUpon>DiscoveryPageContent.xaml</DependentUpon>
     </Compile>
@@ -194,6 +197,9 @@
     </Compile>
     <Compile Include="Pages\CommentListPage.xaml.cs">
       <DependentUpon>CommentListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FriendsPage.xaml.cs">
+      <DependentUpon>FriendsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -303,6 +309,7 @@
     <Compile Include="ViewModels\UserFollowersPageViewModel.cs" />
     <Compile Include="ViewModels\UserProfilePageViewModel.cs" />
     <Compile Include="ViewModels\UserRecipe.cs" />
+    <Compile Include="ViewModels\FriendsPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -314,6 +321,8 @@
     <Content Include="Assets\Images\clear.png" />
     <Content Include="Assets\Images\DefaultTopicImage.jpg" />
     <Content Include="Assets\Images\down_arrow.png" />
+    <Content Include="Assets\Images\findfriends.png" />
+    <Content Include="Assets\Images\friends.png" />
     <Content Include="Assets\Images\messageNotice.png" />
     <Content Include="Assets\Images\nofollow.png" />
     <Content Include="Assets\Images\InfoTag.png" />
@@ -400,6 +409,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ChoicenessPageContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CountMark.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -508,6 +521,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CommentListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FriendsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

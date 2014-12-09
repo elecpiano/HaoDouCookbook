@@ -60,6 +60,7 @@ namespace HaoDouCookBook.HaoDou.API
             postRequest.AddPostData("userid", userId.ToString());
             postRequest.AddPostData("offst", offset.ToString());
             postRequest.AddPostData("limit", limit.ToString());
+            postRequest.AddPostData("refresh", "1");
 
             HaoDouJsonDataLoader<UserFollowersData> loader = new HaoDouJsonDataLoader<UserFollowersData>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
@@ -92,5 +93,21 @@ namespace HaoDouCookBook.HaoDou.API
             HaoDouJsonDataLoader<UserRecipesData> loader = new HaoDouJsonDataLoader<UserRecipesData>();
             await loader.LoadAsync(postRequest, true, MODULE, cacheFilename, onSuccess, onFail);
         }
+
+        public static async Task GetFriendList(int offset, int limit, int uid, string sign, Action<FriendsData> onSuccess, Action<Error> onFail)
+        { 
+            string methodName = "getFriendList";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("offset", offset.ToString());
+            postRequest.AddPostData("limit", limit.ToString());
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("is_get_last_fans_count", "1");
+
+            string cacheFilename = string.Format("{0}-{1}-{2}-{3}", methodName, uid.ToString(), offset.ToString(), limit.ToString());
+            HaoDouJsonDataLoader<FriendsData> loader = new HaoDouJsonDataLoader<FriendsData>();
+            await loader.LoadAsync(postRequest, true, MODULE, cacheFilename, onSuccess, onFail);
+        }
+
     }
 }

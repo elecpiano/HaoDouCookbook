@@ -31,7 +31,7 @@ namespace HaoDouCookBook.Common
         public const string I_DONT_HAVE_ACTIVITIES = "来了这么久\n怎么还没有动静嘞？";
         public const string OTHERUSER_DONT_HAVE_ACTIVITIES = "TA还没有最新动态哦\n去别人家里逛逛吧~";
         public const string I_DONT_HAVE_DRAFT = "暂时没有发布的草稿哦~";
-
+        public const string I_DONT_HAVE_FRIENDS = "找啊找啊找朋友\n快去找个好朋友~";
 
         public const int ERRORCODE_JSON_PARSE_FAILED = int.MaxValue;
         public const int ERRORCODE_METAJSON_PARSE_FAILED = int.MinValue;
