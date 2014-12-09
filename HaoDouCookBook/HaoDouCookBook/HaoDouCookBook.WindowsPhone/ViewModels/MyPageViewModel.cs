@@ -56,6 +56,30 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref userCover, value); }
         }
 
+        private int messageNoticeCount;
+
+        public int MessageNoticeCount
+        {
+            get { return messageNoticeCount; }
+            set { SetProperty<int>(ref messageNoticeCount, value); }
+        }
+
+        private int noticeCount;
+
+        public int NoticeCount
+        {
+            get { return noticeCount; }
+            set { SetProperty<int>(ref noticeCount, value); }
+        }
+
+        private int friendNoticeCount;
+
+        public int FriendNoticeCount
+        {
+            get { return friendNoticeCount; }
+            set { SetProperty<int>(ref friendNoticeCount, value); }
+        }
+
         public MyPageViewModel()
         {
             SignedIn = false;
@@ -63,6 +87,9 @@ namespace HaoDouCookBook.ViewModels
             coin = 0;
             userName = string.Empty;
             UserCover = string.Empty;
+            messageNoticeCount = 0;
+            noticeCount = 0;
+            friendNoticeCount = 0;
         }
     }
 }

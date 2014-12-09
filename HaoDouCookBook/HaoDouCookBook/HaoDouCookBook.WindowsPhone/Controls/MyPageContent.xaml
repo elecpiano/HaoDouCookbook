@@ -38,11 +38,11 @@
 
             <!--others-->
             <controls:SimpleSettingItem Icon="../assets/images/MyPage/Message.png" 
-                                        ItemText="消息" Margin="0, 30, 0, 0" 
+                                        ItemText="消息" Margin="0, 30, 0, 0" Count="{Binding MessageNoticeCount}"
                                         Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
                                         Tapped="SimpleSettingItem_Tapped"/>
             <controls:SimpleSettingItem Icon="../assets/images/MyPage/Friends.png" 
-                                        ItemText="豆友" 
+                                        ItemText="豆友"  Count="{Binding FriendNoticeCount}"
                                         Margin="0, 1.5, 0, 0"
                                         Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
                                         Tapped="SimpleSettingItem_Tapped"/>

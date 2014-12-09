@@ -13,6 +13,7 @@ namespace HaoDouCookBook.Controls
         public static readonly DependencyProperty WithMoreTagProperty = DependencyProperty.Register("WithMoreTag", typeof(bool), typeof(SimpleSettingItem), new PropertyMetadata(true));
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(string), typeof(SimpleSettingItem), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty ItemTextProperty = DependencyProperty.Register("ItemText", typeof(string), typeof(SimpleSettingItem), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty CountProperty = DependencyProperty.Register("Count", typeof(int), typeof(SimpleSettingItem), new PropertyMetadata(0));
 
         #endregion
 
@@ -34,6 +35,12 @@ namespace HaoDouCookBook.Controls
         {
             get { return (bool)GetValue(WithMoreTagProperty); }
             set { SetValue(WithMoreTagProperty, value); }
+        }
+
+        public int Count
+        {
+            get { return (int)GetValue(CountProperty); }
+            set { SetValue(CountProperty, value); }
         }
 
         #endregion

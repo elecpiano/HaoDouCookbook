@@ -13,6 +13,10 @@
         <StackPanel Orientation="Horizontal">
             <Image Source="{Binding Icon}" Visibility="{Binding Icon, Converter={StaticResource AnythingToVisiblityConverter}}" Style="{StaticResource SettingItem_Icon}"/>
             <TextBlock Text="{Binding ItemText}" Style="{StaticResource SettingItem_Text}"/>
+            <Grid Margin="10, 0, 0, 0" VerticalAlignment="Center" Visibility="{Binding Count, Converter={StaticResource AnythingToVisiblityConverter}}">
+                <Ellipse Width="28" Height="28" Fill="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock FontSize="17" Text="{Binding Count}" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 2, 0, 0"/>
+            </Grid>
         </StackPanel>
         <Image Visibility="{Binding WithMoreTag, Converter={StaticResource AnythingToVisiblityConverter}}"
                Source="../Assets/Images/MyPage/more.png"

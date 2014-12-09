@@ -35,19 +35,27 @@ namespace HaoDouCookBook.Controls
             this.root.DataContext = viewModel; 
         }
 
-        public async Task UpdateViewModel()
+        public void UpdateViewModel()
         {
             viewModel.SignedIn = Utilities.SignedIn();
             if(viewModel.SignedIn)
             {
                 int uid = UserGlobal.Instance.GetInt32UserId();
-                await RecipeUserAPI.GetUserInfo(uid, uid, UserGlobal.Instance.UserInfo.Sign, data =>
+                RecipeUserAPI.GetUserInfo(uid, uid, UserGlobal.Instance.UserInfo.Sign, data =>
                     {
                         viewModel.UserName = data.SummaryInfo.UserName;
                         viewModel.UserCover = data.SummaryInfo.Avatar;
                         viewModel.Coin = data.SummaryInfo.Wealth;
 
                         UserGlobal.Instance.UpdateUserInfoBySummary(data.SummaryInfo);
+
+                    }, error => { });
+
+                NoticeAPI.GetCount(uid, UserGlobal.Instance.UserInfo.Sign, data =>
+                    {
+                        viewModel.NoticeCount = data.Info.NoticeCnt;
+                        viewModel.MessageNoticeCount = data.Info.MessageCnt;
+                        viewModel.FriendNoticeCount = data.Info.FriendCnt;
 
                     }, error => { });
             }
