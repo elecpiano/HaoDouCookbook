@@ -65,6 +65,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\SingleProductViewPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Activity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\CheckInData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Passport.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Recommendation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\UserFollower.cs" />

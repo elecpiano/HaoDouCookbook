@@ -61,7 +61,7 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Visibility="{Binding UserId, Converter={StaticResource signedInUserIdToVisibilityConverter}}">
-                        <Button x:Name="checkin" Width="124"
+                        <Button x:Name="checkin" Width="124" Tapped="checkIn_Tapped"
                                 Visibility="{Binding CheckIn, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
                             <Button.Content>
                                 <TextBlock Text="签到" FontWeight="Normal" Margin="15, 2"/>

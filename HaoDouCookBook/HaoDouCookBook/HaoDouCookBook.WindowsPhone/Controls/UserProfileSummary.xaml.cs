@@ -92,6 +92,8 @@ namespace HaoDouCookBook.Controls
 
         public Action<UserProfileSummary> UnFollowAction { get; set; }
 
+        public Action<UserProfileSummary> CheckInAction { get; set; }
+
         #region Life Cycle
 
         public UserProfileSummary()
@@ -138,8 +140,18 @@ namespace HaoDouCookBook.Controls
             }
         }
 
+        private void checkIn_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (CheckInAction != null)
+            {
+                CheckInAction.Invoke(this);
+            }
+        }
+
+
         #endregion
 
+        
        
 
     }

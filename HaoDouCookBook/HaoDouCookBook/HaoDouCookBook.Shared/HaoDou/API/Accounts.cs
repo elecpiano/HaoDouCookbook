@@ -62,5 +62,16 @@ namespace HaoDouCookBook.HaoDou.API
             HaoDouJsonDataLoader<PassportLoginResultData> loader = new HaoDouJsonDataLoader<PassportLoginResultData>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
         }
+
+        public static async Task Checkin(int uid, string sign, Action<CheckinData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "checkin";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+
+            HaoDouJsonDataLoader<CheckinData> loader = new HaoDouJsonDataLoader<CheckinData>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
     }
 }

@@ -59,7 +59,7 @@
                        SelectionChanged="Pivot_SelectionChanged">
                     <Pivot.Title>
                         <StackPanel Orientation="Vertical">
-                            <controls:UserProfileSummary 
+                            <controls:UserProfileSummary x:Name="myProfileSummary"
                                     UserId="{Binding UserId}" 
                                     FollowCount="{Binding FollowCount}"
                                     FansCount="{Binding FansCount}"

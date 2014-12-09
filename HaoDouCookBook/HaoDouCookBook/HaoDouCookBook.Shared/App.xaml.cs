@@ -1,5 +1,6 @@
 ﻿using HaoDouCookBook.Common;
 using System;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
@@ -56,9 +57,16 @@ namespace HaoDouCookBook
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
             this.UnhandledException += App_UnhandledException;
+            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
 
             Current = this;
             Shared.Utility.NetworkHelper.Current.StartListening();
+        }
+
+        void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            e.SetObserved();
+            throw new NotImplementedException();
         }
 
         void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)

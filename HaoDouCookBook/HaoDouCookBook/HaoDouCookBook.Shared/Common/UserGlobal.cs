@@ -71,7 +71,7 @@ namespace HaoDouCookBook.Common
 
         public async Task Login(string username, string password, Action onSuccess, Action<Error> onFail)
         {
-            await AccountAPI.Login(username, password, async data =>
+            await AccountAPI.Login(username, password, data =>
                 {
                     UserInfo = data;
 
@@ -80,7 +80,7 @@ namespace HaoDouCookBook.Common
                         onSuccess.Invoke();
                     }
 
-                    await CommitDataAsync();
+                    CommitDataAsync();
 
                 }, error =>
                 {
@@ -102,12 +102,12 @@ namespace HaoDouCookBook.Common
             }
 
             await PassportAPI.Logout(uuid, UserInfo.Sign,
-                async () =>
+               () =>
                 {
                     // clear data by assign to new instance.
                     //
                     UserInfo = new PassportLoginResultData();
-                    await CommitDataAsync();
+                    CommitDataAsync();
 
                     if (onSuccess != null)
                     {
@@ -117,12 +117,17 @@ namespace HaoDouCookBook.Common
                 }, onFail);
         }
 
-        public async Task CommitDataAsync()
+        public async void CommitDataAsync()
         {
             string dataJson = JsonSerializer.Serialize<UserGlobal>(_instance);
             if (!string.IsNullOrEmpty(dataJson))
             {
-                await IsolatedStorageHelper.WriteToFileAsync(Constants.LOCAL_USERDATA_FOLDER, FILE_NAME, dataJson);
+                try
+                {
+                    await IsolatedStorageHelper.WriteToFileAsync(Constants.LOCAL_USERDATA_FOLDER, FILE_NAME, dataJson);
+                }
+                catch
+                {}
             }
         }
 
@@ -131,7 +136,7 @@ namespace HaoDouCookBook.Common
             string dataJson = await IsolatedStorageHelper.ReadFileAsync(Constants.LOCAL_USERDATA_FOLDER, FILE_NAME);
             if (string.IsNullOrEmpty(dataJson))
             {
-                await CommitDataAsync();
+                CommitDataAsync();
             }
             else
             {
@@ -139,23 +144,16 @@ namespace HaoDouCookBook.Common
             }
         }
 
-        public async Task UpdateUserInfoBySummary(UserSummaryInfo summary)
+        public void UpdateUserInfoBySummary(UserSummaryInfo summary)
         {
-            try
-            {
-                UserInfo.Avatar = summary.Avatar;
-                UserInfo.CheckIn = summary.CheckIn;
-                UserInfo.MessageCnt = summary.MessageCnt;
-                UserInfo.MsgCnt = summary.MessageCnt;
-                UserInfo.Name = summary.UserName;
-                UserInfo.NoticCnt = summary.NoticeCnt;
-                UserInfo.UserId = summary.UserId.ToString();
-                UserInfo.Vip = summary.Vip;
-
-                await CommitDataAsync();
-            }
-            catch(UnauthorizedAccessException)
-            { }
+            UserInfo.Avatar = summary.Avatar;
+            UserInfo.CheckIn = summary.CheckIn;
+            UserInfo.MessageCnt = summary.MessageCnt;
+            UserInfo.MsgCnt = summary.MessageCnt;
+            UserInfo.Name = summary.UserName;
+            UserInfo.NoticCnt = summary.NoticeCnt;
+            UserInfo.UserId = summary.UserId.ToString();
+            UserInfo.Vip = summary.Vip;
         }
 
         #endregion

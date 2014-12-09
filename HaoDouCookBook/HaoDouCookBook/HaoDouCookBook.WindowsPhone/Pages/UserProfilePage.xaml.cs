@@ -68,6 +68,15 @@ namespace HaoDouCookBook.Pages
             }
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            if(pageParams != null && Utilities.IsSignedInUser(pageParams.UserId))
+            {
+                UserGlobal.Instance.CommitDataAsync();
+            }
+            base.OnNavigatedFrom(e);
+        }
+
         #endregion
 
         #region Data Prepare
@@ -228,7 +237,10 @@ namespace HaoDouCookBook.Pages
         {
             this.otherUserProfile.FollowAction = Follow;
             this.otherUserProfile.UnFollowAction = UnFollow;
+            this.myProfileSummary.CheckInAction = CheckIn;
         }
+
+        
 
         private void Init(UserProfilePageParams paras)
         {
@@ -260,7 +272,7 @@ namespace HaoDouCookBook.Pages
 
         #endregion
 
-        #region Follow/UnFollow
+        #region Follow/UnFollow/Checkin
 
         private async void UnFollow(UserProfileSummary userSummary)
         {
@@ -284,6 +296,22 @@ namespace HaoDouCookBook.Pages
 
             }, error =>
             {
+                toast.Show(error.Message);
+            });
+        }
+
+        private async void CheckIn(UserProfileSummary obj)
+        {
+            await AccountAPI.Checkin(UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, data =>
+            {
+                if (data.Message == "签到成功")
+                {
+                    viewModel.CheckIn = true;
+                    viewModel.Coin = data.Wealth;
+                }
+
+                toast.Show(data.Message);
+            }, error => {
                 toast.Show(error.Message);
             });
         }
