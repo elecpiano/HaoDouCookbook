@@ -52,6 +52,15 @@ namespace HaoDouCookBook.Controls
 
         #endregion
 
+        #region Public Methods
+        
+        public void ResetScrollViewerToBegin()
+        {
+            this.rootScrollViewer.ScrollToVerticalOffset(0);
+        }
+
+        #endregion
+
         #region Event
 
         private void Recipe_Tapped(object sender, TappedRoutedEventArgs e)

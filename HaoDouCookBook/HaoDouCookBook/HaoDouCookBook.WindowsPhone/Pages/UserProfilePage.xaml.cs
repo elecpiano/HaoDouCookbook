@@ -245,6 +245,13 @@ namespace HaoDouCookBook.Pages
                 this.pivotOtherUser.SelectedIndex = 0;
                 this.userActivities1.LoadFirstDataAsync(pageParams.UserId);
             }
+
+            this.userActivities1.ResetScrollViewerToBegin();
+            this.userActivities2.ResetScrollViewerToBegin();
+            this.userProducts1.ResetScrollViewerToBegin();
+            this.userProducts2.ResetScrollViewerToBegin();
+            this.userRecipes1.ResetScrollViewerToBegin();
+            this.userRecipes2.ResetScrollViewerToBegin();
             this.rootScrollViewer.ScrollToVerticalOffset(0);
             UpdateProductsData(0, 21, pageParams.UserId);
             UpdateRecipes(0, 21, pageParams.UserId);

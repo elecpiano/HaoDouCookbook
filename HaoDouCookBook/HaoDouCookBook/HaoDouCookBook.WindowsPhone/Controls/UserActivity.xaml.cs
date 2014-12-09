@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Shared.Utility;
+using HaoDouCookBook.Pages;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -41,7 +43,7 @@ namespace HaoDouCookBook.Controls
 
         #endregion
 
-        #region Public Method
+        #region DataBinding
 
         private void DataBinding()
         {
@@ -50,8 +52,18 @@ namespace HaoDouCookBook.Controls
             this.noItemsText.DataContext = this;
         }
 
+        #endregion
+
+        #region Public Method
+
+        public void ResetScrollViewerToBegin()
+        {
+            this.rootScrollViewer.ScrollToVerticalOffset(0);
+        }
+
         public async Task LoadFirstDataAsync(int userId)
         {
+            ResetScrollViewerToBegin();
             this.loading.SetState(LoadingState.LOADING);
             DataBinding();
             await UserFeedAPI.GetFollowUserFeed(0, 10, userId, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, data =>
@@ -62,12 +74,15 @@ namespace HaoDouCookBook.Controls
                         Dictionary<string, List<UserActivityItem>> dict = new Dictionary<string, List<UserActivityItem>>();
                         foreach (var item in data.Activities)
                         {
+
                             UserActivityItem usi = new UserActivityItem() {
                                 Name = item.Name,
                                 Content = item.Content,
                                 CreateTime = item.CreateTime,
                                 Image = item.Pic,
-                                ProductId = item.ItemId
+                                ProductId = item.ItemId,
+                                TypeId = item.Type,
+                                Type = Constants.ACTIVITY_TYPE_MAP.ContainsKey(item.Type) ? Constants.ACTIVITY_TYPE_MAP[item.Type] : string.Empty
                             };
 
                             if (dict.ContainsKey(item.FormatTime))
@@ -125,6 +140,28 @@ namespace HaoDouCookBook.Controls
         private void activitiesGroup_Line_Loaded(object sender, RoutedEventArgs e)
         {
             Utilities.ElementInItemsControl_SetVisibleAtEnd<UserActivitiesGroup>(sender, false);
+        }
+
+        private void Activity_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<UserActivityItem>();
+            switch (dataContext.TypeId)
+            {
+                case 10:
+                    RecipeInfoPage.RecipeInfoPageParams para = new RecipeInfoPage.RecipeInfoPageParams();
+                    para.RecipeId = dataContext.ProductId;
+
+                    App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), para);
+                    break;
+                case 30:
+                    SingleProductViewPage.SingleProductViewPageParams p = new SingleProductViewPage.SingleProductViewPageParams();
+                    p.ProductId = dataContext.ProductId;
+
+                    App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), p);
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion

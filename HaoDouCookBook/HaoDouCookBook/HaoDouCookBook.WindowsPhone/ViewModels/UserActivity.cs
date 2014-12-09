@@ -83,6 +83,22 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<int>(ref productId, value); }
         }
 
+        private string type;
+
+        public string Type
+        {
+            get { return type; }
+            set { SetProperty<string>(ref type, value); }
+        }
+
+        private int typeId;
+
+        public int TypeId
+        {
+            get { return typeId; }
+            set { SetProperty<int>(ref typeId, value); }
+        }
+
         public UserActivityItem()
         {
             name = string.Empty;
@@ -90,6 +106,8 @@ namespace HaoDouCookBook.ViewModels
             image = string.Empty;
             createTime = string.Empty;
             productId = 0;
+            typeId = 0;
+            type = string.Empty;
         }
     }
 

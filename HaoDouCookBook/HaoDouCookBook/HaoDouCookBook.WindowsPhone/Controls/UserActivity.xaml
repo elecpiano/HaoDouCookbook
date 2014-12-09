@@ -11,7 +11,7 @@
     d:DesignWidth="400">
 
     <Grid Background="White" x:Name="root">
-        <ScrollViewer>
+        <ScrollViewer x:Name="rootScrollViewer">
             <ItemsControl x:Name="list" ItemsSource="{Binding ActivitiesGroups}" Margin="0, 0, 0, 20">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -39,8 +39,10 @@
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock Text="发布了作品" FontSize="18"/>
+                                            <StackPanel Orientation="Vertical" Background="Transparent" Tapped="Activity_Tapped">
+                                                <TextBlock FontSize="18">
+                                                    发布了<Run Text="{Binding Type}"/>
+                                                </TextBlock>
                                                 <Border Background="#1a000000" Margin="0, 15, 0, 0">
                                                     <Grid Margin="7">
                                                         <Grid.ColumnDefinitions>

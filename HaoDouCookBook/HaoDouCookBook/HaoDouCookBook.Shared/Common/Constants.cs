@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 namespace HaoDouCookBook.Common
 {
     public class Constants
@@ -35,5 +36,11 @@ namespace HaoDouCookBook.Common
         public const int ERRORCODE_JSON_PARSE_FAILED = int.MaxValue;
         public const int ERRORCODE_METAJSON_PARSE_FAILED = int.MinValue;
         public const int ERRORCODE_REMOTE_SERVER_UNAVAILABLE = -2146233079;
+
+        public readonly static Dictionary<int, string> ACTIVITY_TYPE_MAP = new Dictionary<int, string>() 
+        {
+            {10, "菜谱"},
+            {30, "作品"}
+        };
     }
 }
