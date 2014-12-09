@@ -2,23 +2,66 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using Shared.Infrastructures;
+using Windows.Data.Json;
+using Shared.Utility;
 
 namespace HaoDouCookBook.HaoDou.DataModels.My
 {
 
     [DataContract]
-    public class MessagePageData
+    public class MessagePageData : CustomJsonSerializableBase
     {
 
         [DataMember(Name = "list")]
-        public MessageItem[] Messages { get; set; }
+        public List<MessageItem> Messages { get; set; }
 
         [DataMember(Name = "notice")]
-        public MessagePageNoticeInfo Notice { get; set; }
+        public List<MessagePageNoticeInfo> Notices { get; set; }
 
         public MessagePageData()
         {
+            Messages = new List<MessageItem>();
+            Notices = new List<MessagePageNoticeInfo>();
+        }
 
+        public override bool Deserialize(string json)
+        {
+            try
+            {
+                Messages.Clear();
+                JsonObject jsonObj = JsonObject.Parse(json);
+                JsonArray messageList = jsonObj.GetNamedArray("list");
+
+                for (int i = 0; i < messageList.Count; i++)
+                {
+                    var item = JsonSerializer.Deserialize<MessageItem>(messageList[i].Stringify());
+                    Messages.Add(item);
+                }
+
+                try
+                {
+                    JsonArray noticeArray = jsonObj.GetNamedArray("notice");
+                    for (int i = 0; i < noticeArray.Count; i++)
+                    {
+                        var noticeObject = JsonSerializer.Deserialize<MessagePageNoticeInfo>(noticeArray[i].Stringify());
+                        Notices.Add(noticeObject);
+                    }
+                }
+                catch
+                {
+                    JsonObject notice = jsonObj["notice"].GetObject();
+                    var noticeObject = JsonSerializer.Deserialize<MessagePageNoticeInfo>(notice.Stringify());
+                    Notices.Add(noticeObject);
+                }
+
+                return true;
+
+            }
+            catch 
+            {
+                return false;
+            }
         }
     }
 
@@ -26,7 +69,6 @@ namespace HaoDouCookBook.HaoDou.DataModels.My
     [DataContract]
     public class MessageItem
     {
-
         [DataMember]
         public int MessageId { get; set; }
 

@@ -5,6 +5,7 @@
     xmlns:local="using:HaoDouCookBook.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
     mc:Ignorable="d"
     d:DesignHeight="56"
     d:DesignWidth="400">
@@ -13,10 +14,10 @@
         <StackPanel Orientation="Horizontal">
             <Image Source="{Binding Icon}" Visibility="{Binding Icon, Converter={StaticResource AnythingToVisiblityConverter}}" Style="{StaticResource SettingItem_Icon}"/>
             <TextBlock Text="{Binding ItemText}" Style="{StaticResource SettingItem_Text}"/>
-            <Grid Margin="10, 0, 0, 0" VerticalAlignment="Center" Visibility="{Binding Count, Converter={StaticResource AnythingToVisiblityConverter}}">
-                <Ellipse Width="28" Height="28" Fill="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock FontSize="17" Text="{Binding Count}" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 2, 0, 0"/>
-            </Grid>
+            <local:CountMark Number="{Binding Count}" Height="28" Width="28" 
+                             Margin="10, 0, 0, 0" 
+                             VerticalAlignment="Center" 
+                             Visibility="{Binding Count, Converter={StaticResource AnythingToVisiblityConverter}}"/>
         </StackPanel>
         <Image Visibility="{Binding WithMoreTag, Converter={StaticResource AnythingToVisiblityConverter}}"
                Source="../Assets/Images/MyPage/more.png"

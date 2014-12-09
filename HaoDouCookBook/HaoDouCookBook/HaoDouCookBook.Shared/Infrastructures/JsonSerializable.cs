@@ -1,5 +1,5 @@
 ﻿
-namespace HaoDouCookBook.Infrastructures
+namespace Shared.Infrastructures
 {
     public abstract class CustomJsonSerializableBase
     {

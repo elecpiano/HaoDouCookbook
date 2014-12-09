@@ -1,6 +1,6 @@
 ﻿using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.HaoDou.DataModels;
-using HaoDouCookBook.Infrastructures;
+using Shared.Infrastructures;
 using Shared.Utility;
 using System;
 using System.Collections.Generic;

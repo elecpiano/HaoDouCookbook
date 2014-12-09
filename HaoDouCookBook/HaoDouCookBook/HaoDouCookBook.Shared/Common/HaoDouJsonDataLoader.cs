@@ -1,4 +1,4 @@
-﻿using HaoDouCookBook.Infrastructures;
+﻿using Shared.Infrastructures;
 using Shared.Utility;
 using System;
 using System.Threading.Tasks;

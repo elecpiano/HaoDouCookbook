@@ -73,10 +73,10 @@ namespace HaoDouCookBook.Pages
             loading.SetState(LoadingState.LOADING);
             await MessageAPI.GetListByUid(0, 20, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign, data =>
                 {
-                    if (data.Notice != null)
+                    if (data.Notices != null && data.Notices.Count > 0)
                     {
-                        viewModel.NoticeContent = data.Notice.Content;
-                        viewModel.SubType = data.Notice.SubType;
+                        viewModel.NoticeContent = data.Notices[0].Content;
+                        viewModel.SubType = data.Notices[0].SubType;
                     }
 
                     if (data.Messages != null)

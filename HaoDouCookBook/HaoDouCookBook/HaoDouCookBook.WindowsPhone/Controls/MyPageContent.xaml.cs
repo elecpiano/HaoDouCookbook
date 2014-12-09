@@ -112,9 +112,17 @@ namespace HaoDouCookBook.Controls
                 case "message":
                     GotoMessagePage();
                     break;
+                case "friends":
+                    GotoFriendsPage();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void GotoFriendsPage()
+        {
+            App.Current.RootFrame.Navigate(typeof(FriendsPage));
         }
 
         private void GotoMessagePage()
@@ -138,8 +146,6 @@ namespace HaoDouCookBook.Controls
         }
 
         #endregion
-
-      
 
     }
 }

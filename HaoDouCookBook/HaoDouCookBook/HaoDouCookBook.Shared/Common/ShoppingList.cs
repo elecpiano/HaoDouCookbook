@@ -96,7 +96,7 @@ namespace HaoDouCookBook.Common
                     }
                 }
 
-                await CommitDataAsync();
+                CommitDataAsync();
             }
         }
 
@@ -104,7 +104,7 @@ namespace HaoDouCookBook.Common
         {
             data = new ShoppingListData();
             StuffsDict.Clear();
-            await CommitDataAsync();
+            CommitDataAsync();
         }
 
         public async Task AddRecipeAsync(int recipeId, string recipeName, List<FoodStuff> Stuffs)
@@ -150,7 +150,7 @@ namespace HaoDouCookBook.Common
 
             data.Recipes.Add(recipe);
             GetStuffDict();
-            await CommitDataAsync();
+            CommitDataAsync();
         }
 
         public bool RecipeExists(int recipeId)
@@ -171,10 +171,10 @@ namespace HaoDouCookBook.Common
                 StuffsDict[stuffName].IsBought = isBought;
             }
 
-            await CommitDataAsync(); 
+            CommitDataAsync(); 
         }
 
-        public async Task CommitDataAsync()
+        public async void CommitDataAsync()
         {
             if (data == null)
             {
@@ -202,7 +202,7 @@ namespace HaoDouCookBook.Common
                 // If not exist data file, we create it with empty data
                 //
                 data = new ShoppingListData();
-                await CommitDataAsync();
+                CommitDataAsync();
             }
         }
 

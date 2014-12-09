@@ -1,4 +1,5 @@
-﻿using Shared.Utility;
+﻿using Shared.Infrastructures;
+using Shared.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using Windows.Data.Json;
 
 namespace HaoDouCookBook.HaoDou.DataModels.Discovery
 {
-    public class DiscoveryPageData : Infrastructures.CustomJsonSerializableBase
+    public class DiscoveryPageData : CustomJsonSerializableBase
     {
         public List<Actor> Actors { get; set; }
 

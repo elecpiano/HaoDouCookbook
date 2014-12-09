@@ -104,11 +104,11 @@ namespace HaoDouCookBook.ViewModels
             }
             else 
             {
-               await CommitDataAsync();
+               CommitDataAsync();
             }
         }
 
-        public async Task CommitDataAsync()
+        public async void CommitDataAsync()
         {
             string json = JsonSerializer.Serialize(_instance);
             await IsolatedStorageHelper.WriteToFileAsync(Constants.LOCAL_USERDATA_FOLDER, FILE_NAME, json);

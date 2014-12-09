@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace HaoDouCookBook.Infrastructures
+namespace Shared.Infrastructures
 {
     public interface ILeechExecuter<TSucceess, TError>
     {
