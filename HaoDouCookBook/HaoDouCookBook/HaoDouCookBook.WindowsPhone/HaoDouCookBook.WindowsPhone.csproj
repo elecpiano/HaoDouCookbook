@@ -210,6 +210,9 @@
     <Compile Include="Pages\FavoritePage.xaml.cs">
       <DependentUpon>FavoritePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\FavoriteRecipeAlbumPage.xaml.cs">
+      <DependentUpon>FavoriteRecipeAlbumPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\FriendsPage.xaml.cs">
       <DependentUpon>FriendsPage.xaml</DependentUpon>
     </Compile>
@@ -277,6 +280,7 @@
     <Compile Include="ViewModels\DiscoveryPageViewModel.cs" />
     <Compile Include="ViewModels\DishTileData.cs" />
     <Compile Include="ViewModels\FavoritePageViewlModel.cs" />
+    <Compile Include="ViewModels\FavoriteRecipesAlbumPageViewModel.cs" />
     <Compile Include="ViewModels\Meal.cs" />
     <Compile Include="ViewModels\MessagePageViewModel.cs" />
     <Compile Include="ViewModels\MyPageViewModel.cs" />
@@ -553,6 +557,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\FavoritePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FavoriteRecipeAlbumPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
