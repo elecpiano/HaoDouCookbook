@@ -12,7 +12,7 @@
 
         <StackPanel x:Name="root" Orientation="Vertical" Background="White">
             <!--创建新分类-->
-            <Grid VerticalAlignment="Top" Margin="20, 15, 20, 0">
+            <Grid VerticalAlignment="Top" Margin="20, 15, 20, 0" Tapped="CreateNew_Tapped">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
@@ -20,14 +20,14 @@
                 <Image Grid.Column="0" Source="../assets/images/addRecipeAlbum.png" VerticalAlignment="Center" Stretch="Uniform"/>
                 <TextBlock Grid.Column="1" Text="创建新分类" Style="{StaticResource MyFavorite_CreateNewRecipeAblum_Text_Style}"/>
             </Grid>
-            <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5, 0, 0"/>
+            <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 7, 0, 0"/>
 
             <!--我喜欢的菜谱-->
             <controls:SmartGrid DataContext="{Binding MyLikeRecipesAlbum}"
                                 HoverOnBackground="{StaticResource SmartGridTouchColor}"
                                 Tapped="RecipeAlbum_Tapped">
                 <StackPanel Orientation="Vertical">
-                    <Grid VerticalAlignment="Top" Margin="20, 5, 20, 0">
+                    <Grid VerticalAlignment="Top" Margin="20, 10, 20, 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
@@ -39,7 +39,7 @@
                         </TextBlock>
                         <Image Grid.Column="1" Source="../assets/images/mypage/more.png" HorizontalAlignment="Right" Stretch="None"/>
                     </Grid>
-                    <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5, 0, 0"/>
+                    <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 7, 0, 0"/>
                 </StackPanel>
             </controls:SmartGrid>
 
@@ -48,7 +48,7 @@
                                 HoverOnBackground="{StaticResource SmartGridTouchColor}"
                                 Tapped="RecipeAlbum_Tapped">
                 <StackPanel Orientation="Vertical">
-                    <Grid VerticalAlignment="Top" Margin="20, 5, 20, 0">
+                    <Grid VerticalAlignment="Top" Margin="20, 10, 20, 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
@@ -60,12 +60,12 @@
                         </TextBlock>
                         <Image Grid.Column="1" Source="../assets/images/mypage/more.png" HorizontalAlignment="Right" Stretch="None"/>
                     </Grid>
-                    <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5, 0, 0"/>
+                    <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 7, 0, 0"/>
                 </StackPanel>
             </controls:SmartGrid>
 
             <!--用户创建的分类-->
-            <ItemsControl ItemsSource="{Binding AlbumsCreatedByMe}">
+            <ItemsControl ItemsSource="{Binding AlbumsCreatedByMe}" Background="Transparent">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical"/>
@@ -73,9 +73,16 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" Tapped="RecipeAlbum_Tapped">
-                            <StackPanel Orientation="Vertical">
-                                <Grid VerticalAlignment="Top" Margin="20, 5, 20, 0">
+                        <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" Background="Transparent" IsHitTestVisible="True"
+                                            Tapped="RecipeAlbum_Tapped" Holding="SmartGrid_Holding">
+                            <FlyoutBase.AttachedFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="编辑" Click="EditAlbum_Click"/>
+                                    <MenuFlyoutItem Text="删除" Click="DeleteAlbum_Click"/>
+                                </MenuFlyout>
+                            </FlyoutBase.AttachedFlyout>
+                            <StackPanel Orientation="Vertical" Background="Transparent">
+                                <Grid VerticalAlignment="Top" Margin="20, 10, 20, 0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="60"/>
                                         <ColumnDefinition Width="*"/>
@@ -87,14 +94,14 @@
                                     </TextBlock>
                                     <Image Grid.Column="1" Source="../assets/images/mypage/more.png" HorizontalAlignment="Right" Stretch="None"/>
                                 </Grid>
-                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5, 0, 0"/>
+                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 7, 0, 0"/>
                             </StackPanel>
                         </controls:SmartGrid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-
         <controls:NetworkLoading x:Name="loading"/>
+        <controls:Toast x:Name="toast" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 140, 0, 0"/>
     </Grid>
 </UserControl>

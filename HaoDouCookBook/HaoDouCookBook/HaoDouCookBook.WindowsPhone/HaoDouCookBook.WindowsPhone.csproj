@@ -258,6 +258,9 @@
     <Compile Include="Pages\TagsPage.xaml.cs">
       <DependentUpon>TagsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BigTextBox.xaml.cs">
+      <DependentUpon>BigTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TopicListPage.xaml.cs">
       <DependentUpon>TopicListPage.xaml</DependentUpon>
     </Compile>
@@ -633,6 +636,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TagsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BigTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

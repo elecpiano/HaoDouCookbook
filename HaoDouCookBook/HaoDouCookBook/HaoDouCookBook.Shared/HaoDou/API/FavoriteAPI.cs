@@ -1,4 +1,5 @@
 ﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.DataModels;
 using HaoDouCookBook.HaoDou.DataModels.My;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,45 @@ namespace HaoDouCookBook.HaoDou.API
     public class FavoriteAPI
     {
         public const string MODULE = "Favorite";
+
+        public static async Task AddMyAlbum(int uid, string sign, string title, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "addMyAlbum";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("title", title);
+
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+
+        public static async Task DeleteMyAlbum(int uid, int albumId, string sign, string uuid, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "delMyAlbum";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("albumid", albumId.ToString());
+            postRequest.AddPostData("uuid", uuid);
+
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+
+        public static async Task RenameMyAlbum(int albumId, int uid, string title, string sign, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "renameMyAlbum"; 
+
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("albumid", albumId.ToString());
+            postRequest.AddPostData("title", title);
+
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
 
         public static async Task GetMyAlbum(int offset, int limit, int uid, string sign, string uuid, Action<FavoriteAlbumsData> onSuccess, Action<Error> onFail)
         {
@@ -23,6 +63,7 @@ namespace HaoDouCookBook.HaoDou.API
         {
             await LoadDataAsync<FavoriteTopicsData>("getGroupList", offset, limit, uid, sign, uuid, onSuccess, onFail);
         }
+
 
         private static async Task LoadDataAsync<T>(
             string methodName, 
