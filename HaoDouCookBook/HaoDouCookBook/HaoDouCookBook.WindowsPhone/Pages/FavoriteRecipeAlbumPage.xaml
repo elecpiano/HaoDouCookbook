@@ -55,6 +55,11 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+
+        <Grid Margin="0, 105, 0, 0" Visibility="{Binding Recipes.Count, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
+            <Image x:Name="noItemsImage" Source="../assets/images/likeheart.png" Style="{StaticResource NoItemImage_Style}"/>
+            <TextBlock x:Name="noItemsText" Style="{StaticResource NoItemText_Style}" Margin="0, 120, 0, 0"/>
+        </Grid>
         <controls:NetworkLoading x:Name="loading" />
     </Grid>
 </controls:BackablePage>

@@ -1033,5 +1033,21 @@
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
         <Setter Property="MaxLines" Value="2"/>
     </Style>
+
+    <Style x:Key="NoItemText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Margin" Value="0, 180, 0, 0"/>
+    </Style>
+
+    <Style x:Key="NoItemImage_Style" TargetType="Image">
+        <Setter Property="Stretch" Value="None"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, -120, 0, 0"/>
+    </Style>
     
 </ResourceDictionary>

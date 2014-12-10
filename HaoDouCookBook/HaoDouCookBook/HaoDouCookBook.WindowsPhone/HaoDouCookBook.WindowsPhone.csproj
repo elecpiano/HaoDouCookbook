@@ -344,6 +344,7 @@
     <Content Include="Assets\Images\down_arrow.png" />
     <Content Include="Assets\Images\findfriends.png" />
     <Content Include="Assets\Images\friends.png" />
+    <Content Include="Assets\Images\likeheart.png" />
     <Content Include="Assets\Images\messageNotice.png" />
     <Content Include="Assets\Images\myFavoriteRecipeAlbum.png" />
     <Content Include="Assets\Images\myLikeRecipeAlbum.png" />
@@ -387,6 +388,7 @@
     <Content Include="Assets\Images\SearchPage\search_history.png" />
     <Content Include="Assets\Images\SearchPage\search_texbox.png" />
     <Content Include="Assets\Images\sina.png" />
+    <Content Include="Assets\Images\star.png" />
     <Content Include="Assets\Images\tags.png" />
     <Content Include="Assets\Images\TextBoxBlueLine.png" />
     <Content Include="Assets\Images\TextBoxGrayLine.png" />

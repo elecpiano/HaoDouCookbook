@@ -27,6 +27,7 @@ namespace HaoDouCookBook.Controls
             this.InitializeComponent();
             Topics = new ObservableCollection<FavoriteTopicItem>();
             DataBinding();
+            noItemsText.Text = Constants.NO_FAVORITE_TOPICS;
         }
 
         #endregion

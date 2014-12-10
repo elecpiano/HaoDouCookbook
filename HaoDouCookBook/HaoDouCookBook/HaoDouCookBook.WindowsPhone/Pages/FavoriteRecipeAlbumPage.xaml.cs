@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Common;
 using Shared.Utility;
+using Windows.UI.Xaml.Media.Imaging;
+using System;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -66,6 +68,18 @@ namespace HaoDouCookBook.Pages
                 this.rootScrollViewer.ScrollToVerticalOffset(0);
                 viewModel = new FavoriteRecipesAlbumPageViewModel();
                 this.title.Text = pageParams.Title;
+
+                if (pageParams.Title.Equals("我喜欢的菜谱") && pageParams.AlbumId == 0)
+                {
+                    this.noItemsImage.Source = new BitmapImage(new Uri("ms-appx:///../assets/images/likeheart.png", UriKind.RelativeOrAbsolute));
+                    this.noItemsText.Text = Constants.NO_LIKE_RECIPES;
+                }
+                else
+                {
+                    this.noItemsImage.Source = new BitmapImage(new Uri("ms-appx:///../assets/images/star.png", UriKind.RelativeOrAbsolute));
+                    this.noItemsText.Text = Constants.NO_FAVORITE_RECIPES;
+                }
+
                 DataBinding();
                 LoadFisrtPageDataAsync(pageParams.AlbumId);
             }

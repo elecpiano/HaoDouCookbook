@@ -32,6 +32,10 @@ namespace HaoDouCookBook.Common
         public const string OTHERUSER_DONT_HAVE_ACTIVITIES = "TA还没有最新动态哦\n去别人家里逛逛吧~";
         public const string I_DONT_HAVE_DRAFT = "暂时没有发布的草稿哦~";
         public const string I_DONT_HAVE_FRIENDS = "找啊找啊找朋友\n快去找个好朋友~";
+        public const string NO_FAVORITE_ALUMBS = "去收藏专辑吧~\n寻找属于你的对味美食";
+        public const string NO_FAVORITE_TOPICS = "去收藏话题吧~\n一秒钟变成生活小达人";
+        public const string NO_FAVORITE_RECIPES = "去收藏菜谱吧~\n出得了厅堂，下得了厨房";
+        public const string NO_LIKE_RECIPES = "赞美他们快乐自己\n为你喜欢的菜谱送红心~";
 
         public const int ERRORCODE_JSON_PARSE_FAILED = int.MaxValue;
         public const int ERRORCODE_METAJSON_PARSE_FAILED = int.MinValue;
