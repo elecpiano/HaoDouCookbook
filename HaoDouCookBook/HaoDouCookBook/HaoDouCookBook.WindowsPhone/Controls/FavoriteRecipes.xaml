@@ -12,7 +12,7 @@
 
         <StackPanel x:Name="root" Orientation="Vertical" Background="White">
             <!--创建新分类-->
-            <Grid VerticalAlignment="Top" Margin="20, 5, 20, 0">
+            <Grid VerticalAlignment="Top" Margin="20, 15, 20, 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
@@ -20,10 +20,12 @@
                 <Image Grid.Column="0" Source="../assets/images/addRecipeAlbum.png" VerticalAlignment="Center" Stretch="Uniform"/>
                 <TextBlock Grid.Column="1" Text="创建新分类" Style="{StaticResource MyFavorite_CreateNewRecipeAblum_Text_Style}"/>
             </Grid>
-            <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 15, 0, 0"/>
+            <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5, 0, 0"/>
 
             <!--我喜欢的菜谱-->
-            <controls:SmartGrid DataContext="{Binding MyLikeRecipesAlbum}">
+            <controls:SmartGrid DataContext="{Binding MyLikeRecipesAlbum}"
+                                HoverOnBackground="{StaticResource SmartGridTouchColor}"
+                                Tapped="RecipeAlbum_Tapped">
                 <StackPanel Orientation="Vertical">
                     <Grid VerticalAlignment="Top" Margin="20, 5, 20, 0">
                         <Grid.ColumnDefinitions>
@@ -37,12 +39,14 @@
                         </TextBlock>
                         <Image Grid.Column="1" Source="../assets/images/mypage/more.png" HorizontalAlignment="Right" Stretch="None"/>
                     </Grid>
-                    <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5"/>
+                    <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5, 0, 0"/>
                 </StackPanel>
             </controls:SmartGrid>
 
             <!--我收藏的菜谱-->
-            <controls:SmartGrid DataContext="{Binding MyFavoriteRecipesAlbum}">
+            <controls:SmartGrid DataContext="{Binding MyFavoriteRecipesAlbum}" 
+                                HoverOnBackground="{StaticResource SmartGridTouchColor}"
+                                Tapped="RecipeAlbum_Tapped">
                 <StackPanel Orientation="Vertical">
                     <Grid VerticalAlignment="Top" Margin="20, 5, 20, 0">
                         <Grid.ColumnDefinitions>
@@ -56,7 +60,7 @@
                         </TextBlock>
                         <Image Grid.Column="1" Source="../assets/images/mypage/more.png" HorizontalAlignment="Right" Stretch="None"/>
                     </Grid>
-                    <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5"/>
+                    <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5, 0, 0"/>
                 </StackPanel>
             </controls:SmartGrid>
 
@@ -69,7 +73,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <controls:SmartGrid>
+                        <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" Tapped="RecipeAlbum_Tapped">
                             <StackPanel Orientation="Vertical">
                                 <Grid VerticalAlignment="Top" Margin="20, 5, 20, 0">
                                     <Grid.ColumnDefinitions>
@@ -83,7 +87,7 @@
                                     </TextBlock>
                                     <Image Grid.Column="1" Source="../assets/images/mypage/more.png" HorizontalAlignment="Right" Stretch="None"/>
                                 </Grid>
-                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5"/>
+                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5, 0, 0"/>
                             </StackPanel>
                         </controls:SmartGrid>
                     </DataTemplate>

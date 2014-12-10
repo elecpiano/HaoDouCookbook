@@ -60,6 +60,14 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref cover, value); }
         }
 
+        private string intro;
+
+        public string Intro
+        {
+            get { return intro; }
+            set { SetProperty<string>(ref intro, value); }
+        }
+
         public FavoriteRecipe()
         {
             recipeId = 0;

@@ -23,31 +23,34 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <Grid VerticalAlignment="Top" Margin="20, 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="124"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Border Width="122" Height="90" VerticalAlignment="Center" Grid.Column="0">
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="{Binding Cover}" AlignmentY="Center" Stretch="UniformToFill"/>
-                                    </Border.Background>
-                                </Border>
-                                <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="8, 0, 0, 0">
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0, 3, 0, 0">
-                                        <TextBlock Text="{Binding Title}" Style="{StaticResource FavoriteRecipesAlbum_Title_Style}"/>
-                                    </StackPanel>
-                                    <TextBlock Text="{Binding Intro}" Width="240" Style="{StaticResource FavoriteRecipesAlbum_Content_Style}" Margin="0,0,0,3"/>
-                                    <TextBlock Style="{StaticResource FavoriteRecipesAlbum_Content_Style}" Width="240" VerticalAlignment="Bottom">
+                        <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}"
+                                            Tapped="Recipe_Tapped">
+                            <StackPanel Orientation="Vertical" Margin="0, 20, 0 0">
+                                <Grid VerticalAlignment="Top" Margin="20, 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="124"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="122" Height="90" VerticalAlignment="Center" Grid.Column="0">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Cover}" AlignmentY="Center" Stretch="UniformToFill"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="8, 0, 0, 0">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0, 3, 0, 0">
+                                            <TextBlock Text="{Binding Title}" Style="{StaticResource FavoriteRecipesAlbum_Title_Style}"/>
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding Intro}" Width="240" Style="{StaticResource FavoriteRecipesAlbum_Content_Style}" Margin="0,0,0,3"/>
+                                        <TextBlock Style="{StaticResource FavoriteRecipesAlbum_Content_Style}" Width="240" VerticalAlignment="Bottom">
                                         <Run Text="{Binding LikeNumber}"/>喜欢
                                         <Run Text="  "/>
                                         <Run Text="{Binding ViewNumber}"/>浏览
-                                    </TextBlock>
+                                        </TextBlock>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                            <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 10"/>
-                        </StackPanel>
+                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 20, 0, 0"/>
+                            </StackPanel>
+                        </controls:SmartGrid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

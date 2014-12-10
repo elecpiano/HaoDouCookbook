@@ -1,22 +1,11 @@
 ﻿using HaoDouCookBook.Controls;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using HaoDouCookBook.ViewModels;
 using System.Threading.Tasks;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Common;
+using Shared.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -76,7 +65,9 @@ namespace HaoDouCookBook.Pages
             {
                 this.rootScrollViewer.ScrollToVerticalOffset(0);
                 viewModel = new FavoriteRecipesAlbumPageViewModel();
+                this.title.Text = pageParams.Title;
                 DataBinding();
+                LoadFisrtPageDataAsync(pageParams.AlbumId);
             }
         }
 
@@ -93,10 +84,46 @@ namespace HaoDouCookBook.Pages
             await InfoAPI.GetAlbumInfo(0, 20, albumId, UserGlobal.Instance.UserInfo.Sign, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid,
                                         data =>
                                         {
+                                            if (data.Recipes != null)
+                                            {
+                                                foreach (var item in data.Recipes)
+                                                {
+                                                    viewModel.Recipes.Add(new FavoriteRecipe() {
+                                                        Cover = item.Cover,
+                                                        LikeNumber = item.LikeCount,
+                                                        ViewNumber = item.ViewCount,
+                                                        Title = item.Title,
+                                                        RecipeId = item.RecipeId,
+                                                        Intro = item.Stuff
+                                                    });
+                                                }
+                                            }
 
-                                        }, error => { 
+                                        }, error => {
+                                            if (Utilities.IsMatchNetworkFail(error.ErrorCode))
+                                            {
+                                                loading.RetryAction = async () => await LoadFisrtPageDataAsync(albumId);
+                                                loading.SetState(LoadingState.NETWORK_UNAVAILABLE);
+                                            }
+                                            else
+                                            {
+                                                loading.SetState(LoadingState.DONE);
+                                            }
 
                                         });
+        }
+
+        #endregion
+
+        #region Event
+
+        private void Recipe_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<FavoriteRecipe>();
+            RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
+            paras.RecipeId = dataContext.RecipeId;
+
+            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
         #endregion

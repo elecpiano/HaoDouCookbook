@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
+using HaoDouCookBook.Pages;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -103,6 +105,18 @@ namespace HaoDouCookBook.Controls
         }
 
         #endregion
+
+        private void RecipeAlbum_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<RecipesAblum>();
+
+            FavoriteRecipeAlbumPage.FavoriteRecipeAlbumPageParams paras = new FavoriteRecipeAlbumPage.FavoriteRecipeAlbumPageParams();
+            paras.AlbumId = dataContext.AlbumId;
+            paras.Title = dataContext.AlbumName;
+
+            App.Current.RootFrame.Navigate(typeof(FavoriteRecipeAlbumPage), paras);
+
+        }
 
         #region Event
 
