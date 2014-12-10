@@ -228,6 +228,9 @@
     <Compile Include="Pages\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AllAlbumsListPage.xaml.cs">
+      <DependentUpon>AllAlbumsListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RankViewPage.xaml.cs">
       <DependentUpon>RankViewPage.xaml</DependentUpon>
     </Compile>
@@ -592,6 +595,10 @@
     <Page Include="Pages\ProductPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AllAlbumsListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\RankListPage.xaml">
       <SubType>Designer</SubType>

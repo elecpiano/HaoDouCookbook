@@ -35,7 +35,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
         [DataMember]
         public string AlbumCover { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "AlbumIsLike")]
         public int AlbumIsLike { get; set; }
 
         [DataMember]
@@ -50,7 +50,6 @@ namespace HaoDouCookBook.HaoDou.DataModels.ChoicenessPage
             AlbumUserId = -1;
             AlbumContent = string.Empty;
             AlbumCover = string.Empty;
-            AlbumIsLike = 0;
             CommentCount = "0";
         }
     }

@@ -1,4 +1,5 @@
 ﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.DataModels.Choiceness;
 using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
 using HaoDouCookBook.HaoDou.DataModels.Discovery;
 using System;
@@ -80,6 +81,21 @@ namespace HaoDouCookBook.HaoDou.API
 
             HaoDouJsonDataLoader<RecipeRecommendPageData> loader = new HaoDouJsonDataLoader<RecipeRecommendPageData>();
             await loader.LoadAsync(postRequest, true, Moudle, filename, onSuccess, onFail);
+        }
+
+        public static async Task GetAlbumList(int offset, int limit, string uuid, Action<AllAlbumsData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getAlbumList";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(Moudle, methodName));
+            postRequest.AddPostData("offset", offset.ToString());
+            postRequest.AddPostData("limit", limit.ToString());
+            postRequest.AddPostData("uuid", uuid);
+
+            string filename = string.Format("{0}-{1}-{2}", methodName, offset.ToString(), limit.ToString());
+
+            HaoDouJsonDataLoader<AllAlbumsData> loader = new HaoDouJsonDataLoader<AllAlbumsData>();
+            await loader.LoadAsync(postRequest, true, Moudle, filename, onSuccess, onFail);
+
         }
     }
 }

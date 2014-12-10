@@ -36,6 +36,7 @@ namespace HaoDouCookBook.Pages
         #region Field && Property
 
         private AlbumPageViewModel viewModel = new AlbumPageViewModel();
+        private AlbumPageParams pageParams;
 
         #endregion
 
@@ -60,13 +61,13 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            AlbumPageParams paras = e.Parameter as AlbumPageParams;
-            if (paras != null)
+            pageParams = e.Parameter as AlbumPageParams;
+            if (pageParams != null)
             {
                 viewModel = new AlbumPageViewModel();
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 DataBinding();
-                await LoadDataAsync(0, 20, paras.AlbumId, string.Empty, null);
+                await LoadDataAsync(0, 20, pageParams.AlbumId, string.Empty, null);
             }
         }
        
@@ -77,6 +78,7 @@ namespace HaoDouCookBook.Pages
         private void DataBinding()
         {
             this.root.DataContext = viewModel;
+            this.cmd.DataContext = viewModel;
         }
 
         private async Task LoadDataAsync(int offset, int limit, int albumId, string sign, int? uid)
@@ -89,10 +91,21 @@ namespace HaoDouCookBook.Pages
                     viewModel.AlbumAvatar = data.Info.AlbumAvatarUrl;
                     viewModel.AlbumContent = data.Info.AlbumContent;
                     viewModel.AlbumCover = data.Info.AlbumCover;
-                    viewModel.AlbumIsLike = data.Info.AlbumIsLike == 0 ? false : true;
                     viewModel.AlbumTitle = data.Info.AlbumTitle;
                     viewModel.AlbumUserId = data.Info.AlbumUserId;
                     viewModel.AlbumUserName = data.Info.AlbumUserName;
+
+                    if (data.Info.AlbumIsLike == 0)
+                    {
+                        this.favorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                        this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        this.favorite.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                        this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    }
+
                     if(!string.IsNullOrEmpty(data.Info.CommentCount))
                     {
                         viewModel.CommentCount = int.Parse(data.Info.CommentCount);
@@ -146,7 +159,60 @@ namespace HaoDouCookBook.Pages
 
             App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
-        
+
+        private void Comments_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if(pageParams != null)
+            {
+                CommentListPage.CommentListPageParams paras = new CommentListPage.CommentListPageParams();
+                paras.RecipeId = pageParams.AlbumId;
+
+                App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
+            }
+        }
+
+        private async void Favorite_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if(pageParams != null)
+            {
+                await FavoriteAPI.Add(UserGlobal.Instance.GetInt32UserId(), 2, pageParams.AlbumId, UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign,
+                    success => {
+                        toast.Show(success.Message);
+                        viewModel.AlbumIsLike = true;
+                        this.favorite.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                        this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    }, 
+                    error => {
+                        toast.Show(error.Message);
+                    });
+            }
+        }
+
+        private void ShowAllAlbums_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(AllAlbumListPage));
+        }
+
         #endregion
+
+        private async void removeFavorite_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if (pageParams != null)
+            {
+                await FavoriteAPI.Del(UserGlobal.Instance.GetInt32UserId(), 2, pageParams.AlbumId, UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign,
+                    success =>
+                    {
+                        toast.Show(success.Message);
+                        viewModel.AlbumIsLike = true;
+                        this.favorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                        this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    },
+                    error =>
+                    {
+                        toast.Show(error.Message);
+                    });
+            }
+        }
+
     }
 }

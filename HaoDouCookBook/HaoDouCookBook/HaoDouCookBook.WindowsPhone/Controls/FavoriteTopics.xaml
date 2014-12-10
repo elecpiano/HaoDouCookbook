@@ -45,8 +45,8 @@
         </ItemsControl>
 
         <Grid Visibility="{Binding Topics.Count, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
-            <Image Source="../assets/images/noMessage.png" Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBlock x:Name="noItemsText" Style="{StaticResource NoItemText_Style}" Margin="0, 120, 0, 0"/>
+            <Image Source="../assets/images/noMessage.png" Style="{StaticResource NoItemImage_Style}"/>
+            <TextBlock x:Name="noItemsText" Style="{StaticResource NoItemText_Style}" Margin="0, 135, 0, 0"/>
         </Grid>
 
         <controls:NetworkLoading x:Name="loading"/>

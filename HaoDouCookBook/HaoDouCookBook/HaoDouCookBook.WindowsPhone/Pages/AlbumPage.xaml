@@ -10,9 +10,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <controls:BackablePage.BottomAppBar>
-        <CommandBar Style="{StaticResource bottomAppbarStyle}">
-            <AppBarButton x:Name="favorite" Icon="Favorite" Label="收藏"/>
-            <AppBarButton x:Name="comment" Icon="Comment" Label="评论"/>
+        <CommandBar x:Name="cmd" Style="{StaticResource bottomAppbarStyle}">
+            <AppBarButton x:Name="allAlbums" Icon="AllApps" Label="所有专辑" Click="ShowAllAlbums_Click"/>
+            <AppBarButton x:Name="favorite" Icon="Favorite" Label="收藏" Click="Favorite_Click"/>
+            <AppBarButton x:Name="removeFavorite" Icon="Remove" Label="取消收藏" Click="removeFavorite_Click"/> 
+            <AppBarButton x:Name="comment" Icon="Comment" Label="评论" Click="Comments_Click"/>
             <AppBarButton x:Name="share" Icon="Forward" Label="分享"/>
         </CommandBar>
     </controls:BackablePage.BottomAppBar>
@@ -63,5 +65,6 @@
             </StackPanel>
         </ScrollViewer>
         <controls:NetworkLoading x:Name="loading" Margin="0, 65, 0, 0"/>
+        <controls:Toast x:Name="toast" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 140, 0, 0"/>
     </Grid>
 </controls:BackablePage>

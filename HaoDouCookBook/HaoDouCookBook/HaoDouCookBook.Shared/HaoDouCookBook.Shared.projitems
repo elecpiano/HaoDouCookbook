@@ -42,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\ADItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\AlbumItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\AlbumPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\AllAlbumsListData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\Category.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\ChoicenessPageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\Comment.cs" />
