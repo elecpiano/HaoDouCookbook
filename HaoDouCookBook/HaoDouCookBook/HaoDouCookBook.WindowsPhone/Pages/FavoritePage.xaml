@@ -25,7 +25,9 @@
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             <PivotItem Header="菜谱" Margin="-20, 0" Background="White">
-            
+                <ScrollViewer Margin="20, 0" x:Name="favoriteRecipesAlbumsScrollViewer">
+                    <controls:FavoriteRecipes x:Name="favoriteRecipesAlubm"/>
+                </ScrollViewer>
             </PivotItem>
             <PivotItem Header="专辑" Margin="-20, 0" Background="White">
                 <ScrollViewer Margin="20, 0" x:Name="favoriteAlbumsScrollViewer">

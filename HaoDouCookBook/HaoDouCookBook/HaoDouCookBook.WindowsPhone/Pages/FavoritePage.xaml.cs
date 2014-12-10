@@ -40,6 +40,7 @@ namespace HaoDouCookBook.Pages
             base.OnNavigatedTo(e);
             if(e.NavigationMode == NavigationMode.Back)
             {
+                favoriteRecipesAlubm.LoadFirstPageDataAsync();
                 return;
             }
 
@@ -51,10 +52,13 @@ namespace HaoDouCookBook.Pages
             // init
             //
             this.pivot.SelectedIndex = 0;
+            favoriteRecipesAlbumsScrollViewer.ScrollToVerticalOffset(0);
             favoriteAlbumsScrollViewer.ScrollToVerticalOffset(0);
             favoriteTopicsScrollViewer.ScrollToVerticalOffset(0);
 
             // load data
+            //
+            favoriteRecipesAlubm.LoadFirstPageDataAsync();
             favoriteAlbums.LoadFirstPageDataAsync();
             favoriteTopics.LoadFirstPageDataAsync();
         }

@@ -1,0 +1,96 @@
+﻿<UserControl
+    x:Class="HaoDouCookBook.Controls.FavoriteRecipes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="560"
+    d:DesignWidth="400">
+    <Grid>
+
+        <StackPanel x:Name="root" Orientation="Vertical" Background="White">
+            <!--创建新分类-->
+            <Grid VerticalAlignment="Top" Margin="20, 5, 20, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="../assets/images/addRecipeAlbum.png" VerticalAlignment="Center" Stretch="Uniform"/>
+                <TextBlock Grid.Column="1" Text="创建新分类" Style="{StaticResource MyFavorite_CreateNewRecipeAblum_Text_Style}"/>
+            </Grid>
+            <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 15, 0, 0"/>
+
+            <!--我喜欢的菜谱-->
+            <controls:SmartGrid DataContext="{Binding MyLikeRecipesAlbum}">
+                <StackPanel Orientation="Vertical">
+                    <Grid VerticalAlignment="Top" Margin="20, 5, 20, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="../assets/images/myLikeRecipeAlbum.png" VerticalAlignment="Center" Stretch="Uniform"/>
+                        <TextBlock Grid.Column="1" Text="{Binding AlbumName}" Style="{StaticResource MyFavorite_RecipeAlbumTitle_Style}"/>
+                        <TextBlock Grid.Column="1" Style="{StaticResource MyFavorite_RecipeAlbumRecipeNumber_Style}">
+                        <Run Text="{Binding RecipeNumber}"/>道菜
+                        </TextBlock>
+                        <Image Grid.Column="1" Source="../assets/images/mypage/more.png" HorizontalAlignment="Right" Stretch="None"/>
+                    </Grid>
+                    <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5"/>
+                </StackPanel>
+            </controls:SmartGrid>
+
+            <!--我收藏的菜谱-->
+            <controls:SmartGrid DataContext="{Binding MyFavoriteRecipesAlbum}">
+                <StackPanel Orientation="Vertical">
+                    <Grid VerticalAlignment="Top" Margin="20, 5, 20, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="../assets/images/myFavoriteRecipeAlbum.png" VerticalAlignment="Center" Stretch="Uniform"/>
+                        <TextBlock Grid.Column="1" Text="{Binding AlbumName}" Style="{StaticResource MyFavorite_RecipeAlbumTitle_Style}"/>
+                        <TextBlock Grid.Column="1" Style="{StaticResource MyFavorite_RecipeAlbumRecipeNumber_Style}">
+                        <Run Text="{Binding RecipeNumber}"/>道菜
+                        </TextBlock>
+                        <Image Grid.Column="1" Source="../assets/images/mypage/more.png" HorizontalAlignment="Right" Stretch="None"/>
+                    </Grid>
+                    <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5"/>
+                </StackPanel>
+            </controls:SmartGrid>
+
+            <!--用户创建的分类-->
+            <ItemsControl ItemsSource="{Binding AlbumsCreatedByMe}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:SmartGrid>
+                            <StackPanel Orientation="Vertical">
+                                <Grid VerticalAlignment="Top" Margin="20, 5, 20, 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="{Binding Cover}" VerticalAlignment="Center" Stretch="Uniform"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding AlbumName}" Style="{StaticResource MyFavorite_RecipeAlbumTitle_Style}"/>
+                                    <TextBlock Grid.Column="1" Style="{StaticResource MyFavorite_RecipeAlbumRecipeNumber_Style}">
+                                    <Run Text="{Binding RecipeNumber}"/>道菜
+                                    </TextBlock>
+                                    <Image Grid.Column="1" Source="../assets/images/mypage/more.png" HorizontalAlignment="Right" Stretch="None"/>
+                                </Grid>
+                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 5"/>
+                            </StackPanel>
+                        </controls:SmartGrid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <controls:NetworkLoading x:Name="loading"/>
+    </Grid>
+</UserControl>

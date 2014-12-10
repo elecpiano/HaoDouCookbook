@@ -122,6 +122,9 @@
     <Compile Include="Controls\DishTile.xaml.cs">
       <DependentUpon>DishTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FavoriteRecipes.xaml.cs">
+      <DependentUpon>FavoriteRecipes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FavoriteTopics.xaml.cs">
       <DependentUpon>FavoriteTopics.xaml</DependentUpon>
     </Compile>
@@ -327,6 +330,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\addRecipeAlbum.png" />
     <Content Include="Assets\Images\camera.png" />
     <Content Include="Assets\Images\clear.png" />
     <Content Include="Assets\Images\DefaultTopicImage.jpg" />
@@ -334,6 +338,8 @@
     <Content Include="Assets\Images\findfriends.png" />
     <Content Include="Assets\Images\friends.png" />
     <Content Include="Assets\Images\messageNotice.png" />
+    <Content Include="Assets\Images\myFavoriteRecipeAlbum.png" />
+    <Content Include="Assets\Images\myLikeRecipeAlbum.png" />
     <Content Include="Assets\Images\nofollow.png" />
     <Content Include="Assets\Images\InfoTag.png" />
     <Content Include="Assets\Images\like.png" />
@@ -433,6 +439,10 @@
     <Page Include="Controls\DishTile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FavoriteRecipes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\FavoriteTopics.xaml">
       <Generator>MSBuild:Compile</Generator>

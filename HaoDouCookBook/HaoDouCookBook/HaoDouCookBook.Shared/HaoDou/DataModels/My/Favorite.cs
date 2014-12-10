@@ -10,7 +10,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.My
     [DataContract]
     public class FavoriteAlbumsData
     {
-        [DataMember]
+        [DataMember(Name = "list")]
         public FavoriteRecipesAlbum[] Albums { get; set; }
 
         public FavoriteAlbumsData()
@@ -19,7 +19,23 @@ namespace HaoDouCookBook.HaoDou.DataModels.My
         }
     }
 
-
+    /*
+     *'Cid:Int'	=&gt; '专辑ID',
+        Avatar'	=&gt; '作者图像',
+	   'Cover:String'	=&gt; '专辑封面图片',
+	    'Title:String'	=&gt; '专辑标题',
+		'Status:Int'=&gt; '状态 1-审核 0-为审核',
+		'Sys:Int'=&gt; '1 系统专辑 0 普通专辑',
+		'RecipeCount' =&gt; '专辑下菜谱总数',
+		'UserId' =&gt; '用户ID',
+		'UserName' =&gt; '用户昵称',
+		'Recipe:Array'=&gt; array(
+			array(
+				'Id:Int' =&gt; '菜谱ID',
+				'RecipeId:Int' =&gt; '菜谱ID',
+				'Cover:String' =&gt; '菜谱封面'
+			),      
+     */
     [DataContract]
     public class FavoriteRecipesAlbum
     {
