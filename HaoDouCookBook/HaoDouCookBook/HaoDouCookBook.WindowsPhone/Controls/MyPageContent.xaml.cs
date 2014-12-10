@@ -115,9 +115,17 @@ namespace HaoDouCookBook.Controls
                 case "friends":
                     GotoFriendsPage();
                     break;
+                case "favorite":
+                    GotoFavoritePage();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void GotoFavoritePage()
+        {
+            App.Current.RootFrame.Navigate(typeof(FavoritePage));
         }
 
         private void GotoFriendsPage()

@@ -52,7 +52,7 @@
                                         Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
                                         Tapped="SimpleSettingItem_Tapped"/>
 
-            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Favorite.png"
+            <controls:SimpleSettingItem Tag="favorite" Icon="../assets/images/MyPage/Favorite.png"
                                         ItemText="我的收藏"
                                         Margin="0, 20, 0, 0"
                                         Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"

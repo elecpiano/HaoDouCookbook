@@ -122,6 +122,12 @@
     <Compile Include="Controls\DishTile.xaml.cs">
       <DependentUpon>DishTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FavoriteTopics.xaml.cs">
+      <DependentUpon>FavoriteTopics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FavoriteAlbums.xaml.cs">
+      <DependentUpon>FavoriteAlbums.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MealTile.xaml.cs">
       <DependentUpon>MealTile.xaml</DependentUpon>
     </Compile>
@@ -198,6 +204,9 @@
     <Compile Include="Pages\CommentListPage.xaml.cs">
       <DependentUpon>CommentListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\FavoritePage.xaml.cs">
+      <DependentUpon>FavoritePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\FriendsPage.xaml.cs">
       <DependentUpon>FriendsPage.xaml</DependentUpon>
     </Compile>
@@ -264,6 +273,7 @@
     <Compile Include="ViewModels\CookMaster.cs" />
     <Compile Include="ViewModels\DiscoveryPageViewModel.cs" />
     <Compile Include="ViewModels\DishTileData.cs" />
+    <Compile Include="ViewModels\FavoritePageViewlModel.cs" />
     <Compile Include="ViewModels\Meal.cs" />
     <Compile Include="ViewModels\MessagePageViewModel.cs" />
     <Compile Include="ViewModels\MyPageViewModel.cs" />
@@ -424,6 +434,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\FavoriteTopics.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FavoriteAlbums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MealTile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -521,6 +539,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CommentListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FavoritePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

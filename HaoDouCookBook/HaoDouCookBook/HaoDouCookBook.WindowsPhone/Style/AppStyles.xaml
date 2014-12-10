@@ -984,4 +984,17 @@
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
 
+    <Style x:Key="MyFavorite_TileInto_Style" TargetType="TextBlock" BasedOn="{StaticResource TopicContentStyle}">
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="0, 0, 0, 3"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="MyFavorite_Title_Style" TargetType="TextBlock" BasedOn="{StaticResource TopicTileStyle}">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0, 3, 0, 0"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="2"/>
+    </Style>
 </ResourceDictionary>
