@@ -1,6 +1,7 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
+using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
 using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
 using Shared.Utility;
@@ -53,7 +54,7 @@ namespace HaoDouCookBook.Pages
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             if (e.NavigationMode == NavigationMode.Back)
@@ -67,7 +68,7 @@ namespace HaoDouCookBook.Pages
                 viewModel = new AlbumPageViewModel();
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 DataBinding();
-                await LoadDataAsync(0, 20, pageParams.AlbumId, string.Empty, null);
+                LoadFirstPageDataAsync(pageParams.AlbumId);
             }
         }
        
@@ -81,50 +82,14 @@ namespace HaoDouCookBook.Pages
             this.cmd.DataContext = viewModel;
         }
 
-        private async Task LoadDataAsync(int offset, int limit, int albumId, string sign, int? uid)
+        private async Task LoadFirstPageDataAsync(int albumId)
         {
             // show loading
             //
             loading.SetState(LoadingState.LOADING);
-            await InfoAPI.GetAlbumInfo(offset, limit, albumId, sign, uid, UserGlobal.Instance.uuid, data =>
+            await InfoAPI.GetAlbumInfo(0, 20, albumId, UserGlobal.Instance.UserInfo.Sign, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, success=>
                 {
-                    viewModel.AlbumAvatar = data.Info.AlbumAvatarUrl;
-                    viewModel.AlbumContent = data.Info.AlbumContent;
-                    viewModel.AlbumCover = data.Info.AlbumCover;
-                    viewModel.AlbumTitle = data.Info.AlbumTitle;
-                    viewModel.AlbumUserId = data.Info.AlbumUserId;
-                    viewModel.AlbumUserName = data.Info.AlbumUserName;
-
-                    if (data.Info.AlbumIsLike == 0)
-                    {
-                        this.favorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                        this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        this.favorite.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                        this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                    }
-
-                    if(!string.IsNullOrEmpty(data.Info.CommentCount))
-                    {
-                        viewModel.CommentCount = int.Parse(data.Info.CommentCount);
-                    }
-
-                    if (data.Recipes != null)
-                    {
-                        foreach (var item in data.Recipes)
-                        {
-                            viewModel.Recipes.Add(new RecipeTileData() { 
-                                RecipeId = item.RecipeId,
-                                SupportNumber = item.LikeCount.ToString(),
-                                Recommendation = item.Intro,
-                                Author = item.UserName,
-                                RecipeImage = item.Cover,
-                                RecipeName = item.Title
-                            });
-                        }
-                    }
+                    UpdateData(success);
 
                     // loaded
                     //
@@ -137,7 +102,7 @@ namespace HaoDouCookBook.Pages
                             {
                                 // retry action
                                 //
-                                loading.RetryAction = async () => { await LoadDataAsync(offset, limit, albumId, sign, uid); };
+                                loading.RetryAction = async () => { await LoadFirstPageDataAsync(albumId); };
 
                                 // show netork unavailable
                                 //
@@ -145,6 +110,48 @@ namespace HaoDouCookBook.Pages
                             });
                     }
                 });
+        }
+
+        private void UpdateData(AlbumPageData data)
+        {
+            viewModel.AlbumAvatar = data.Info.AlbumAvatarUrl;
+            viewModel.AlbumContent = data.Info.AlbumContent;
+            viewModel.AlbumCover = data.Info.AlbumCover;
+            viewModel.AlbumTitle = data.Info.AlbumTitle;
+            viewModel.AlbumUserId = data.Info.AlbumUserId;
+            viewModel.AlbumUserName = data.Info.AlbumUserName;
+
+            if (data.Info.AlbumIsLike == 0)
+            {
+                this.favorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            }
+            else
+            {
+                this.favorite.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            }
+
+            if (!string.IsNullOrEmpty(data.Info.CommentCount))
+            {
+                viewModel.CommentCount = int.Parse(data.Info.CommentCount);
+            }
+
+            if (data.Recipes != null)
+            {
+                foreach (var item in data.Recipes)
+                {
+                    viewModel.Recipes.Add(new RecipeTileData()
+                    {
+                        RecipeId = item.RecipeId,
+                        SupportNumber = item.LikeCount.ToString(),
+                        Recommendation = item.Intro,
+                        Author = item.UserName,
+                        RecipeImage = item.Cover,
+                        RecipeName = item.Title
+                    });
+                }
+            }
         }
 
         #endregion
@@ -199,7 +206,7 @@ namespace HaoDouCookBook.Pages
         {
             if (pageParams != null)
             {
-                await FavoriteAPI.Del(UserGlobal.Instance.GetInt32UserId(), 2, pageParams.AlbumId, UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign,
+                await FavoriteAPI.Del(UserGlobal.Instance.GetInt32UserId(), 2, pageParams.AlbumId.ToString(), UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign,
                     success =>
                     {
                         toast.Show(success.Message);
