@@ -85,12 +85,16 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ActivityTypeToStringConverter.cs" />
     <Compile Include="Common\FavoriteCountToStringConverter.cs" />
     <Compile Include="Common\FollowCountConverter.cs" />
     <Compile Include="Common\ListCountToNoItemsVisibilityConverter.cs" />
     <Compile Include="Common\MainStuffColorConverter.cs" />
     <Compile Include="Common\UserIdToVisibilityConverter.cs" />
     <Compile Include="Common\Utilities.cs" />
+    <Compile Include="Controls\ActivitySupportAndComment.xaml.cs">
+      <DependentUpon>ActivitySupportAndComment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AdImagePivot.xaml.cs">
       <DependentUpon>AdImagePivot.xaml</DependentUpon>
     </Compile>
@@ -212,6 +216,9 @@
     </Compile>
     <Compile Include="Pages\FavoriteRecipeAlbumPage.xaml.cs">
       <DependentUpon>FavoriteRecipeAlbumPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FriendsCirclePage.xaml.cs">
+      <DependentUpon>FriendsCirclePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\FriendsPage.xaml.cs">
       <DependentUpon>FriendsPage.xaml</DependentUpon>
@@ -340,7 +347,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\activitycomment.png" />
     <Content Include="Assets\Images\addRecipeAlbum.png" />
+    <Content Include="Assets\Images\background1.png" />
     <Content Include="Assets\Images\camera.png" />
     <Content Include="Assets\Images\clear.png" />
     <Content Include="Assets\Images\DefaultTopicImage.jpg" />
@@ -351,6 +360,7 @@
     <Content Include="Assets\Images\messageNotice.png" />
     <Content Include="Assets\Images\myFavoriteRecipeAlbum.png" />
     <Content Include="Assets\Images\myLikeRecipeAlbum.png" />
+    <Content Include="Assets\Images\noactivity.png" />
     <Content Include="Assets\Images\nofollow.png" />
     <Content Include="Assets\Images\InfoTag.png" />
     <Content Include="Assets\Images\like.png" />
@@ -392,6 +402,7 @@
     <Content Include="Assets\Images\SearchPage\search_texbox.png" />
     <Content Include="Assets\Images\sina.png" />
     <Content Include="Assets\Images\star.png" />
+    <Content Include="Assets\Images\supportandcomment.png" />
     <Content Include="Assets\Images\tags.png" />
     <Content Include="Assets\Images\TextBoxBlueLine.png" />
     <Content Include="Assets\Images\TextBoxGrayLine.png" />
@@ -412,6 +423,10 @@
     <Content Include="Assets\WideLogo.scale-240.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\ActivitySupportAndComment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AdImagePivot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -569,6 +584,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\FavoriteRecipeAlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FriendsCirclePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

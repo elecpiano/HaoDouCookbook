@@ -13,6 +13,7 @@
     <common:NotSignedInUserIdToVisibilityConverter x:Key="notSignedInUserIdToVisibilityConverter"/>
     <common:ListCountToNoItemsVisibilityConverter x:Key="countToNoItemsVisiblityConverter" />
     <common:CountToDescriptionStringConverter x:Key="countToDescConverter"/>
+    <common:ActivityTypeToStringConverter x:Key="activityTypeToStringConverter"/>
 
     <!--Colors-->
     <SolidColorBrush x:Key="TopAppbarColor" Color="#fff8f8f8"/>
@@ -1030,6 +1031,14 @@
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontSize" Value="21"/>
         <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="MaxLines" Value="2"/>
+    </Style>
+
+    <Style x:Key="Activity_ItemContent_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Margin" Value="0, 5, 0, 0"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
         <Setter Property="MaxLines" Value="2"/>
     </Style>

@@ -83,20 +83,52 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<int>(ref productId, value); }
         }
 
-        private string type;
+        private int type;
 
-        public string Type
+        public int Type
         {
             get { return type; }
-            set { SetProperty<string>(ref type, value); }
+            set { SetProperty<int>(ref type, value); }
         }
 
-        private int typeId;
+        private int diggCount;
 
-        public int TypeId
+        public int DiggCount
         {
-            get { return typeId; }
-            set { SetProperty<int>(ref typeId, value); }
+            get { return diggCount; }
+            set { SetProperty<int>(ref diggCount, value); }
+        }
+
+        private int userId;
+
+        public int UserId
+        {
+            get { return userId; }
+            set { SetProperty<int>(ref userId, value); }
+        }
+
+        private string avatar;
+
+        public string Avatar
+        {
+            get { return avatar; }
+            set { SetProperty<string>(ref avatar, value); }
+        }
+
+        private int activityId;
+
+        public int ActivityId
+        {
+            get { return activityId; }
+            set { SetProperty<int>(ref activityId, value); }
+        }
+
+        private bool isDigg;
+
+        public bool IsDigg
+        {
+            get { return isDigg; }
+            set { SetProperty<bool>(ref isDigg, value); }
         }
 
         public UserActivityItem()
@@ -106,8 +138,10 @@ namespace HaoDouCookBook.ViewModels
             image = string.Empty;
             createTime = string.Empty;
             productId = 0;
-            typeId = 0;
-            type = string.Empty;
+            type = 0;
+            userId = 0;
+            avatar = string.Empty;
+            isDigg = false;
         }
     }
 

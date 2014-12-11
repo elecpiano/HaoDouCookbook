@@ -41,7 +41,7 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Vertical" Background="Transparent" Tapped="Activity_Tapped">
                                                 <TextBlock FontSize="18">
-                                                    发布了<Run Text="{Binding Type}"/>
+                                                    发布了<Run Text="{Binding Type, Converter={StaticResource activityTypeToStringConverter}}"/>
                                                 </TextBlock>
                                                 <Border Background="#1a000000" Margin="0, 15, 0, 0">
                                                     <Grid Margin="7">
