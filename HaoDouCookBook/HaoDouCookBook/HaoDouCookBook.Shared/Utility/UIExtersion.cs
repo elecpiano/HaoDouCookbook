@@ -1,4 +1,5 @@
 ﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 
 namespace Shared.Utility
@@ -32,6 +33,34 @@ namespace Shared.Utility
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// 显示context menu, date picker 等附加在FrameworkElement上的Flayout
+        /// </summary>
+        /// <param name="obj"></param>
+        public static void ShowFlayout(this FrameworkElement element)
+        {
+            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(element);
+            if (flyoutBase != null)
+            {
+                flyoutBase.ShowAt(element);
+            }
+        }
+
+        /// <summary>
+        /// 显示context menu, date picker 等附加在FrameworkElement上的Flayout
+        /// </summary>
+        /// <param name="obj"></param>
+        public static void ShowFlayout(this object obj)
+        {
+            FrameworkElement element = obj as FrameworkElement;
+            if (element == null)
+            {
+                return;
+            }
+
+            element.ShowFlayout();
         }
     }
 }

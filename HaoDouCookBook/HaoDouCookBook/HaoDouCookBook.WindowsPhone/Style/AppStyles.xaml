@@ -1050,4 +1050,9 @@
         <Setter Property="Margin" Value="0, -120, 0, 0"/>
     </Style>
     
+    <Style x:Name="Toast_Common_Style" TargetType="controls:Toast">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, 240, 0, 0"/>
+    </Style>
 </ResourceDictionary>

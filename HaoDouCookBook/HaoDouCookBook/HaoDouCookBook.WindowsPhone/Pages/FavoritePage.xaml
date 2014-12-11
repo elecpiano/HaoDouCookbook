@@ -40,5 +40,7 @@
                 </ScrollViewer>
             </PivotItem>
         </Pivot>
+
+        <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/> 
     </Grid>
 </controls:BackablePage>

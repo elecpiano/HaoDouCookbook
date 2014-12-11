@@ -1,6 +1,8 @@
 ﻿using HaoDouCookBook.HaoDou.DataModels.My;
 using Shared.Utility;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -88,6 +90,36 @@ namespace HaoDouCookBook.Common
                         fe.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
                     }
                 }
+            }
+        }
+
+        public static async Task ShowOKCancelDialog(string title, string content, Action okAction, Action cancelAction)
+        {
+            ContentDialog dialog = new ContentDialog() { 
+                Title = title,
+                Content = content,
+                PrimaryButtonText = "确定",
+                SecondaryButtonText = "取消"
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                if (okAction != null)
+                {
+                    okAction.Invoke();
+                }
+                return;
+            }
+
+            if (result == ContentDialogResult.Secondary)
+            {
+                if (cancelAction != null)
+                {
+                    cancelAction.Invoke();
+                }
+
+                return;
             }
         }
     }

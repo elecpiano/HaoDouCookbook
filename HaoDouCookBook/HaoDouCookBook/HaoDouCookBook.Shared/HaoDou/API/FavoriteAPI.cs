@@ -32,9 +32,8 @@ namespace HaoDouCookBook.HaoDou.API
 
         /// <summary>
         /// 删除专辑
-        ///  - rid为空时，删除所有收藏的专辑
         /// </summary>
-        public static async Task Del(int uid, int type, string rid, string uuid, string sign, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        public static async Task Del(int uid, int type, string rid, string uuid, string sign, bool delAll, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
         {
             string methodName = "del";
             POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
@@ -43,6 +42,10 @@ namespace HaoDouCookBook.HaoDou.API
             postRequest.AddPostData("uuid", uuid);
             postRequest.AddPostData("rid", rid);
             postRequest.AddPostData("type", type.ToString());
+            if(delAll)
+            {
+                postRequest.AddPostData("delAll", "1");
+            }
 
             HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);

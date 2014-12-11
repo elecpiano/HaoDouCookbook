@@ -60,7 +60,17 @@ namespace HaoDouCookBook.Pages
             //
             favoriteRecipesAlubm.LoadFirstPageDataAsync();
             favoriteAlbums.LoadFirstPageDataAsync();
+            favoriteAlbums.DeleteAllSuccessAction = (message) => toast.Show(message);
+            favoriteAlbums.DeleteSingleSuccessAction = (message) => toast.Show(message);
+            favoriteAlbums.DeleteAllFailAction = (error) => toast.Show(error.Message);
+            favoriteAlbums.DeleteSingleFailAction = (error) => toast.Show(error.Message);
+
+
             favoriteTopics.LoadFirstPageDataAsync();
+            favoriteTopics.DeleteAllSuccessAction = (message) => toast.Show(message);
+            favoriteTopics.DeleteSingleSuccessAction = (message) => toast.Show(message);
+            favoriteTopics.DeleteAllFailAction = (error) => toast.Show(error.Message);
+            favoriteTopics.DeleteSingleFailAction = (error) => toast.Show(error.Message);
         }
 
         #endregion

@@ -206,17 +206,7 @@ namespace HaoDouCookBook.Controls
 
         private void SmartGrid_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            FrameworkElement senderElement = sender as FrameworkElement;
-            if (senderElement == null)
-            {
-                return;
-            }
-
-            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
-            if (flyoutBase != null)
-            {
-                flyoutBase.ShowAt(senderElement);
-            }
+            sender.ShowFlayout(); 
         }
 
         private void EditAlbum_Click(object sender, RoutedEventArgs e)

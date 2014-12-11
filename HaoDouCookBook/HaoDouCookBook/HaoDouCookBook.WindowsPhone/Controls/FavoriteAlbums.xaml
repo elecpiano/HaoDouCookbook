@@ -19,7 +19,13 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}">
+                    <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" Holding="Album_Hoding">
+                        <FlyoutBase.AttachedFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="删除" Click="Delete_Click"/>
+                                <MenuFlyoutItem Text="删除全部" Click="AllDelete_Click"/>
+                            </MenuFlyout>
+                        </FlyoutBase.AttachedFlyout>
                         <StackPanel Orientation="Vertical" Margin="20, 15, 20, 0">
                             <Grid Background="Transparent" Tapped="Recipe_Tapped">
                                 <Grid.ColumnDefinitions>

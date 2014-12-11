@@ -200,13 +200,12 @@ namespace HaoDouCookBook.Pages
             App.Current.RootFrame.Navigate(typeof(AllAlbumListPage));
         }
 
-        #endregion
 
         private async void removeFavorite_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             if (pageParams != null)
             {
-                await FavoriteAPI.Del(UserGlobal.Instance.GetInt32UserId(), 2, pageParams.AlbumId.ToString(), UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign,
+                await FavoriteAPI.Del(UserGlobal.Instance.GetInt32UserId(), 2, pageParams.AlbumId.ToString(), UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign, false,
                     success =>
                     {
                         toast.Show(success.Message);
@@ -220,6 +219,8 @@ namespace HaoDouCookBook.Pages
                     });
             }
         }
+
+        #endregion
 
     }
 }
