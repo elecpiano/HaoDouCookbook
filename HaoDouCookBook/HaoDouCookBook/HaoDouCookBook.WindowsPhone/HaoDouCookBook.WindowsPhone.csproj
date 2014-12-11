@@ -225,6 +225,9 @@
     <Compile Include="Pages\MessagePage.xaml.cs">
       <DependentUpon>MessagePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MyRecipesPage.xaml.cs">
+      <DependentUpon>MyRecipesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\NoticeDetailPage.xaml.cs">
       <DependentUpon>NoticeDetailPage.xaml</DependentUpon>
     </Compile>
@@ -596,6 +599,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\MessagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MyRecipesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
