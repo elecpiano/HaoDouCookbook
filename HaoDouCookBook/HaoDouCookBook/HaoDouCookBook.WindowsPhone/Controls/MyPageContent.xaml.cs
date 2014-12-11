@@ -65,6 +65,11 @@ namespace HaoDouCookBook.Controls
 
         #region Event
 
+        private void PublishRecipe_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(PublishRecipePage));
+        }
+
         private void GotoLogin_Tapped(object sender, TappedRoutedEventArgs e)
         {
             App.Current.RootFrame.Navigate(typeof(LoginPage));

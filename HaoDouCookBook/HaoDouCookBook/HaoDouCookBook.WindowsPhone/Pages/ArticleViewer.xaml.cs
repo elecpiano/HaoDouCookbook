@@ -33,7 +33,11 @@ namespace HaoDouCookBook.Pages
 
         #endregion
 
+        #region Field && Property
+
         private ArticleViewerPageParams pageParams;
+
+        #endregion
 
         #region Life Cycle
 

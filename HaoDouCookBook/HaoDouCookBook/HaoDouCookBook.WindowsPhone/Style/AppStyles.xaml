@@ -1055,4 +1055,10 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0, 240, 0, 0"/>
     </Style>
+
+    <Style x:Name="PublishRecipe_AddStuffText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, 15"/>
+    </Style>
 </ResourceDictionary>

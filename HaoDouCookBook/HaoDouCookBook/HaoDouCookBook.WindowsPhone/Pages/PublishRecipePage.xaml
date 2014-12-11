@@ -1,0 +1,105 @@
+﻿<Page
+    x:Class="HaoDouCookBook.Pages.PublishRecipePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.BottomAppBar>
+        <CommandBar Style="{StaticResource bottomAppbarStyle}">
+            <AppBarButton Icon="Forward" Label="下一步"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Text="发布菜谱" Style="{StaticResource SubTitleStyle}"/>
+        </Border>
+        <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
+            <StackPanel Margin="20, 20, 20, 0">
+                <!--菜谱名称-->
+                <StackPanel Orientation="Vertical" >
+                    <StackPanel Orientation="Horizontal" Margin="5, 0, 0, 0">
+                        <TextBlock Text="*" Foreground="Red" FontSize="36" VerticalAlignment="Center" Height="32"/>
+                        <TextBox Text="{Binding RecipeName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                 Style="{StaticResource TextBoxBase}" MaxLength="15"
+                                 PlaceholderText="输入菜谱名称，最多15个字符"/>
+                    </StackPanel>
+                    <Image Source="../assets/images/textboxGreenLine.png"/>
+                </StackPanel>
+
+                <!--主料-->
+                <StackPanel Orientation="Vertical" Margin="0, 40, 0, 20">
+                    <TextBlock Text="主料" FontSize="19"/>
+                    <Rectangle Style="{StaticResource LightGaryLine}" Height="2" Width="800" Margin="0, 8"/>
+                    <ItemsControl ItemsSource="{Binding MainStuffs}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <controls:StuffControl StuffName="{Binding StuffName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                       Weight="{Binding Weight, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <Image Source="../assets/images/searchPage/clear.png" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           Loaded="Clear_Loaded" Tapped="RemoveMainStuff_Tapped"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <TextBlock Foreground="{StaticResource GreenMain}" 
+                               Text="+   添加" Tapped="AddMainStuff_Tapped"
+                               Style="{StaticResource PublishRecipe_AddStuffText_Style}"/>
+                </StackPanel>
+
+                <!--辅料-->
+                <StackPanel Orientation="Vertical" Margin="0, 20">
+                    <TextBlock Text="辅料" FontSize="19"/>
+                    <Rectangle Style="{StaticResource LightGaryLine}" Height="2" Width="800" Margin="0, 8"/>
+                    <ItemsControl ItemsSource="{Binding OtherStuffs}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <controls:StuffControl StuffName="{Binding StuffName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                       Weight="{Binding Weight, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <Image Source="../assets/images/searchPage/clear.png" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           Loaded="Clear_Loaded" Tapped="RemoveOtherStuff_Tapped"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <TextBlock Foreground="{StaticResource GreenMain}" 
+                               Text="+   添加" Tapped="AddOtherStuff_Tapped"
+                               Style="{StaticResource PublishRecipe_AddStuffText_Style}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+                    <TextBox Text="{Binding Intro, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                             Style="{StaticResource TextBoxBase}" TextWrapping="Wrap" AcceptsReturn="True"
+                             PlaceholderText="填写这道菜的简介"/>
+                    <Image Source="../assets/images/textboxGrayLine.png"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBox Text="{Binding Skills, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                             Style="{StaticResource TextBoxBase}" TextWrapping="Wrap" AcceptsReturn="True"
+                             PlaceholderText="分享一下小技巧吧~"/>
+                    <Image Source="../assets/images/textboxGrayLine.png"/>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

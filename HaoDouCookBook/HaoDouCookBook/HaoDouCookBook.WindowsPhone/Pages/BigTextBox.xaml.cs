@@ -39,6 +39,10 @@ namespace HaoDouCookBook.Pages
 
             public string Description { get; set; }
 
+            public bool AcceptReturn { get; set; }
+
+            public TextWrapping TextWrapping { get; set; }
+
             public int MaxLength { get; set; }
 
             /// <summary>
@@ -52,6 +56,8 @@ namespace HaoDouCookBook.Pages
                 Text = string.Empty;
                 PlaceholderText = string.Empty;
                 Description = string.Empty;
+                AcceptReturn = true;
+                TextWrapping = Windows.UI.Xaml.TextWrapping.Wrap;
             }
         }
 
@@ -90,6 +96,8 @@ namespace HaoDouCookBook.Pages
                 this.textBox.PlaceholderText = pageParams.PlaceholderText;
                 this.textBox.MaxLength = pageParams.MaxLength;
                 this.textBox.Text = pageParams.Text;
+                this.textBox.AcceptsReturn = pageParams.AcceptReturn;
+                this.textBox.TextWrapping = pageParams.TextWrapping;
                 this.desc.Text = pageParams.Description;
             }
         }

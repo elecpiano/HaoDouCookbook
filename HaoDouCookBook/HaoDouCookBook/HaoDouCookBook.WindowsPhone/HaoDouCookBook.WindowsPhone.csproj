@@ -162,6 +162,9 @@
     <Compile Include="Controls\SquarePageConent.xaml.cs">
       <DependentUpon>SquarePageConent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StuffControl.xaml.cs">
+      <DependentUpon>StuffControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TagRecipeItem.xaml.cs">
       <DependentUpon>TagRecipeItem.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,9 @@
     <Compile Include="Pages\AllAlbumsListPage.xaml.cs">
       <DependentUpon>AllAlbumsListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PublishRecipePage.xaml.cs">
+      <DependentUpon>PublishRecipePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RankViewPage.xaml.cs">
       <DependentUpon>RankViewPage.xaml</DependentUpon>
     </Compile>
@@ -293,6 +299,7 @@
     <Compile Include="ViewModels\NewbieTutorial.cs" />
     <Compile Include="ViewModels\NoticePageViewModel.cs" />
     <Compile Include="ViewModels\ProductPageViewModel.cs" />
+    <Compile Include="ViewModels\PublishRecipePageViewModel.cs" />
     <Compile Include="ViewModels\RankItemData.cs" />
     <Compile Include="ViewModels\RankViewPageViewModel.cs" />
     <Compile Include="ViewModels\RecipeCategoryTileData.cs" />
@@ -504,6 +511,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\StuffControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\TagRecipeItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -599,6 +610,10 @@
     <Page Include="Pages\AllAlbumsListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PublishRecipePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RankListPage.xaml">
       <SubType>Designer</SubType>
