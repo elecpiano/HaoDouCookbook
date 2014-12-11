@@ -95,6 +95,7 @@ namespace HaoDouCookBook.Controls
             var dataContext = sender.GetDataContext<FavoriteTopicItem>();
             ArticleViewer.ArticleViewerPageParams paras = new ArticleViewer.ArticleViewerPageParams();
             paras.Url = dataContext.Url;
+            paras.TopicId = dataContext.TopicId;
 
             App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
         }

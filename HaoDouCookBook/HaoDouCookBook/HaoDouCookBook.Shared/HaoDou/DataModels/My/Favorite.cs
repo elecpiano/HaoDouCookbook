@@ -153,6 +153,21 @@ namespace HaoDouCookBook.HaoDou.DataModels.My
 
     #region Topics
 
+
+    [DataContract]
+    public class CheckIsFavoriteData
+    {
+
+        [DataMember(Name = "flag")]
+        public int Flag { get; set; }
+
+        public CheckIsFavoriteData()
+        {
+            Flag = 0;
+        }
+    }
+
+
     [DataContract]
     public class FavoriteTopicsData
     {

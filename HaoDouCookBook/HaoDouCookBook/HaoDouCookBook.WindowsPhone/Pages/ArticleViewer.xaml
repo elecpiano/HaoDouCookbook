@@ -13,8 +13,9 @@
 
     <Page.BottomAppBar>
         <CommandBar Style="{StaticResource bottomAppbarStyle}">
-            <AppBarButton x:Name="favorite" Icon="Favorite" Label="收藏"/>
-            <AppBarButton x:Name="comment" Icon="Comment" Label="评论"/>
+            <AppBarButton x:Name="favorite" Icon="Favorite" Label="收藏" Click="Favorite_Click"/>
+            <AppBarButton x:Name="removeFavorite" Icon="Remove" Label="取消收藏" Click="removeFavorite_Click"/>
+            <AppBarButton x:Name="comment" Icon="Comment" Label="评论" Click="Comments_Click"/>
             <AppBarButton x:Name="share" Icon="Forward" Label="分享"/>
         </CommandBar>
     </Page.BottomAppBar>
@@ -24,8 +25,7 @@
         <Border Background="{StaticResource TopAppbarColor}" Height="50" VerticalAlignment="Top">
             <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="12, 5, 0, 0" Title="好豆菜谱"/>
         </Border>
-        <!--<Border Background="{StaticResource TopAppbarColor}" VerticalAlignment="Bottom" Height="60">
-            <TextBlock Text="查看所有" FontSize="23"/>
-        </Border>-->
+        <controls:NetworkLoading x:Name="loading" Margin="0, 55, 0, 0"/>
+        <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/>
     </Grid>
 </controls:BackablePage>

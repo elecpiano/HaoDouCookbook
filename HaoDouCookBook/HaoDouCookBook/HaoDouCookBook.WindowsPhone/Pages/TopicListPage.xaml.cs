@@ -113,7 +113,7 @@ namespace HaoDouCookBook.Pages
                         foreach (var item in data.Topics)
                         {
                             viewModel.Topics.Add(new TopicModel() { 
-                                    Id = item.TopicId.ToString(),
+                                    Id = item.TopicId,
                                     Url= item.Url,
                                     TopicPreviewImageSource = item.Cover,
                                     Title = item.Title,
@@ -136,9 +136,11 @@ namespace HaoDouCookBook.Pages
                     {
                         foreach (var item in data.Items)
                         {
+                            int topicId = 0;
+                            int.TryParse(item.TopicId.ToString(), out topicId);
                             viewModel.Topics.Add(new TopicModel()
                             {
-                                Id = item.TopicId,
+                                Id = topicId,
                                 Url = item.Url,
                                 TopicPreviewImageSource = item.ImageUrl,
                                 Title = item.Title,
@@ -161,8 +163,11 @@ namespace HaoDouCookBook.Pages
 
         private void TopicTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            var dataContext = sender.GetDataContext<TopicModel>();
             ArticleViewer.ArticleViewerPageParams paras = new ArticleViewer.ArticleViewerPageParams();
-            paras.Url = sender.GetDataContext<TopicModel>().Url;
+            paras.Url = dataContext.Url;
+            paras.TopicId = dataContext.Id;
+
 
             App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
         }

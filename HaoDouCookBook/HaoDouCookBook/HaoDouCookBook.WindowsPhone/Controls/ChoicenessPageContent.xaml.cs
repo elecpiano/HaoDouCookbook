@@ -245,7 +245,7 @@ namespace HaoDouCookBook.Controls
 
                 string haodouUrlPrefix = string.Format("haodourecipe://haodou.com/wiki/info/?id={0}&url=", tiledata.Id);
                 string targetUrl = tiledata.Url.Substring(index + searchMark.Length);
-                App.Current.RootFrame.Navigate(typeof(ArticleViewer), new ArticleViewer.ArticleViewerPageParams() { Url = targetUrl });
+                App.Current.RootFrame.Navigate(typeof(ArticleViewer), new ArticleViewer.ArticleViewerPageParams() { Url = targetUrl, TopicId = tiledata.Id });
             }
 
         }

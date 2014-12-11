@@ -52,6 +52,19 @@ namespace HaoDouCookBook.HaoDou.API
 
         }
 
+        public static async Task IsFav(int uid, int type, int rid, string uuid, string sign, Action<CheckIsFavoriteData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "isFav";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("uuid", uuid);
+            postRequest.AddPostData("rid", rid.ToString());
+            postRequest.AddPostData("type", type.ToString());
+
+            HaoDouJsonDataLoader<CheckIsFavoriteData> loader = new HaoDouJsonDataLoader<CheckIsFavoriteData>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
 
         public static async Task AddMyAlbum(int uid, string sign, string title, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
         {

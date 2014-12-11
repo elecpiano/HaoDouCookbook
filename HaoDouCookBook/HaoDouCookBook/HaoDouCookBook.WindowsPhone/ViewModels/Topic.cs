@@ -4,12 +4,12 @@ namespace HaoDouCookBook.ViewModels
 {
     public class TopicModel : BindableBase
     {
-        private string id;
+        private int id;
 
-        public string Id
+        public int Id
         {
             get { return id; }
-            set { SetProperty<string>(ref id, value); }
+            set { SetProperty<int>(ref id, value); }
         }
 
         private string url;
@@ -62,7 +62,8 @@ namespace HaoDouCookBook.ViewModels
 
         public TopicModel()
         {
-
+            id = 0;
+            url = string.Empty;
         }
     }
 }

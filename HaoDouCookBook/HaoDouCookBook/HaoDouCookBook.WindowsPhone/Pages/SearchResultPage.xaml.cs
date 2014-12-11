@@ -129,7 +129,7 @@ namespace HaoDouCookBook.Pages
                         var topicData = data.TopicData.Topics[0];
                         viewModel.Topic.Author = topicData.UserName;
                         viewModel.Topic.CreateTimeDescription = topicData.CreateTime;
-                        viewModel.Topic.Id = topicData.TopicId.ToString();
+                        viewModel.Topic.Id = topicData.TopicId;
                         viewModel.Topic.PreviewContent = topicData.Intro;
                         viewModel.Topic.Title = topicData.Title;
                         viewModel.Topic.Url = topicData.Url;
@@ -179,6 +179,7 @@ namespace HaoDouCookBook.Pages
         {
             ArticleViewer.ArticleViewerPageParams paras = new ArticleViewer.ArticleViewerPageParams();
             paras.Url = viewModel.Topic.Url;
+            paras.TopicId = viewModel.Topic.Id;
 
             App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
         }

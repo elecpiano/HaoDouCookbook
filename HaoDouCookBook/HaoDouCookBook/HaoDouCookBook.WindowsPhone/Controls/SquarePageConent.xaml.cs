@@ -73,9 +73,11 @@ namespace HaoDouCookBook.Controls
             {
                 foreach (var item in data.Topics)
                 {
+                    int topicId = 0;
+                    int.TryParse(item.TopicId.ToString(), out topicId);
                     LatestTopics.Add(new TopicModel()
                     {
-                        Id = item.TopicId,
+                        Id = topicId,
                         Url = item.Url,
                         Author = item.UserName,
                         CreateTimeDescription = item.LastPostTime,
@@ -112,9 +114,10 @@ namespace HaoDouCookBook.Controls
 
         private void TopicTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var dataContet = sender.GetDataContext<TopicModel>(); 
+            var dataContext = sender.GetDataContext<TopicModel>(); 
             ArticleViewer.ArticleViewerPageParams paras = new ArticleViewer.ArticleViewerPageParams();
-            paras.Url = dataContet.Url;
+            paras.Url = dataContext.Url;
+            paras.TopicId = dataContext.Id;
 
             App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
         }
