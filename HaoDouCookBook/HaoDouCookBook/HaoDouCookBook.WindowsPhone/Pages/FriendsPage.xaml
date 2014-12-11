@@ -8,9 +8,6 @@
     xmlns:controls="using:HaoDouCookBook.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <controls:BackablePage.Resources>
-        <SolidColorBrush x:Key="hoverGray" Color="#10000000"/>
-    </controls:BackablePage.Resources>
 
     <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>

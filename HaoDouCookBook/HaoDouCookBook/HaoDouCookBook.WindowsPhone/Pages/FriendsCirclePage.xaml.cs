@@ -143,5 +143,15 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+        private void DiggPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<UserActivityItem>();
+            DiggUserListPage.DiggUserListPageParams paras = new DiggUserListPage.DiggUserListPageParams();
+            paras.ActivityId = dataContext.ActivityId;
+
+            App.Current.RootFrame.Navigate(typeof(DiggUserListPage), paras);
+
+        }
     }
 }

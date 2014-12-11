@@ -57,7 +57,8 @@
                                         <controls:ActivitySupportAndComment HorizontalAlignment="Right" Loaded="ActivitySupportAndComment_Loaded"/>
                                     </Grid>
 
-                                    <Border Height="73" Margin="0, -7, 0, 0" Visibility="{Binding DiggCount, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                    <Border Height="73" Margin="0, -7, 0, 0" Tapped="DiggPanel_Tapped"
+                                            Visibility="{Binding DiggCount, Converter={StaticResource AnythingToVisiblityConverter}}">
                                         <Border.Background>
                                             <ImageBrush ImageSource="../assets/images/background1.png" Stretch="Uniform"/>
                                         </Border.Background>

@@ -211,6 +211,9 @@
     <Compile Include="Pages\CommentListPage.xaml.cs">
       <DependentUpon>CommentListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DiggUserListPage.xaml.cs">
+      <DependentUpon>DiggUserListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\FavoritePage.xaml.cs">
       <DependentUpon>FavoritePage.xaml</DependentUpon>
     </Compile>
@@ -290,6 +293,7 @@
     <Compile Include="ViewModels\CategoryTileData.cs" />
     <Compile Include="ViewModels\CommentListPageViewModel.cs" />
     <Compile Include="ViewModels\CookMaster.cs" />
+    <Compile Include="ViewModels\DiggUserListPageViewModel.cs" />
     <Compile Include="ViewModels\DiscoveryPageViewModel.cs" />
     <Compile Include="ViewModels\DishTileData.cs" />
     <Compile Include="ViewModels\FavoritePageViewlModel.cs" />
@@ -576,6 +580,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CommentListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DiggUserListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
