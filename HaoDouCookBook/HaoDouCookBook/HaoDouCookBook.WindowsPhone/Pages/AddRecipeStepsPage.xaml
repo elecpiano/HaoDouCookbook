@@ -11,7 +11,7 @@
 
     <controls:BackablePage.BottomAppBar>
         <CommandBar Style="{StaticResource bottomAppbarStyle}">
-            <AppBarButton Icon="Accept" Label="完成"/>
+            <AppBarButton Icon="Accept" Label="完成" Click="Completed_Click"/>
         </CommandBar>
     </controls:BackablePage.BottomAppBar>
 
@@ -25,20 +25,21 @@
                 <Border Background="#74a500" Height="240" VerticalAlignment="Top">
                     <Image Source="../assets/images/camera.png" Stretch="None" 
                        VerticalAlignment="Center" HorizontalAlignment="Center" 
-                        Visibility="{Binding Photo, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}"/>
+                        Visibility="{Binding StepPhoto, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}"/>
                 </Border>
-                <Image Stretch="Uniform" Source="{Binding Photo}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Image Stretch="Uniform" Source="{Binding StepPhoto}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
 
             <StackPanel Orientation="Vertical" Margin="20" >
                 <StackPanel Orientation="Horizontal" Margin="5, 0, 0, 0">
                     <TextBlock Text="*" Foreground="Red" FontSize="36" VerticalAlignment="Center" Height="32"/>
-                    <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                    <TextBox Text="{Binding StepIntro, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                  Style="{StaticResource TextBoxBase}" MaxLength="100" AcceptsReturn="True" TextWrapping="Wrap"
                                  PlaceholderText="请填写步骤说明(不超过100字)"/>
                 </StackPanel>
                 <Image Source="../assets/images/textboxGreenLine.png"/>
             </StackPanel>
         </StackPanel>
+        <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}" Margin="0, 380, 0, 0"/>
     </Grid>
 </controls:BackablePage>

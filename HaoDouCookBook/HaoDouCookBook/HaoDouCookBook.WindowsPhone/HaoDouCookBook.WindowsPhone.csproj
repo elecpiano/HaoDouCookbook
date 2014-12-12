@@ -370,6 +370,7 @@
   <ItemGroup>
     <Content Include="Assets\Images\activitycomment.png" />
     <Content Include="Assets\Images\addRecipeAlbum.png" />
+    <Content Include="Assets\Images\addstep.png" />
     <Content Include="Assets\Images\background1.png" />
     <Content Include="Assets\Images\camera.png" />
     <Content Include="Assets\Images\clear.png" />
@@ -423,6 +424,8 @@
     <Content Include="Assets\Images\SearchPage\search_texbox.png" />
     <Content Include="Assets\Images\sina.png" />
     <Content Include="Assets\Images\star.png" />
+    <Content Include="Assets\Images\stepcamera.png" />
+    <Content Include="Assets\Images\stepMark.png" />
     <Content Include="Assets\Images\supportandcomment.png" />
     <Content Include="Assets\Images\tags.png" />
     <Content Include="Assets\Images\TextBoxBlueLine.png" />

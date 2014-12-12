@@ -44,8 +44,30 @@ namespace HaoDouCookBook.ViewModels
 
         public ObservableCollection<StuffItem> OtherStuffs { get; set; }
 
+        public ObservableCollection<PublishRecipeStep> RecipeSteps { get; set; }
+
+        private bool isInStepOne;
+
+        public bool IsInStepOne
+        {
+            get { return isInStepOne; }
+            set { SetProperty<bool>(ref isInStepOne, value); }
+        }
+
+        private string recipeCover;
+
+        public string RecipeCover
+        {
+            get { return recipeCover; }
+            set { SetProperty<string>(ref recipeCover, value); }
+        }
+
+
         public PublishRecipePageViewModel()
         {
+            recipeName = string.Empty;
+            intro = string.Empty;
+            skills = string.Empty;
             MainStuffs = new ObservableCollection<StuffItem>();
             MainStuffs.Add(new StuffItem());
             MainStuffs.CollectionChanged += (s, e) => { ContentChanged = true; };
@@ -53,6 +75,44 @@ namespace HaoDouCookBook.ViewModels
             OtherStuffs.Add(new StuffItem());
             OtherStuffs.CollectionChanged += (s, e) => { ContentChanged = true; };
             ContentChanged = false;
+            IsInStepOne = true;
+            RecipeSteps = new ObservableCollection<PublishRecipeStep>();
+            RecipeSteps.Add(new PublishRecipeStep());
         }
     }
+
+    public class PublishRecipeStep : BindableBase
+    {
+        private int stepNumber;
+
+        public int StepNumber
+        {
+            get { return stepNumber; }
+            set { SetProperty<int>(ref stepNumber, value); }
+        }
+
+        private string stepPhoto;
+
+        public string StepPhoto
+        {
+            get { return stepPhoto; }
+            set { SetProperty<string>(ref stepPhoto, value); }
+        }
+
+        private string stepIntro;
+
+        public string StepIntro
+        {
+            get { return stepIntro; }
+            set { SetProperty<string>(ref stepIntro, value); }
+        }
+
+        public PublishRecipeStep()
+        {
+            stepNumber = 0;
+            stepPhoto = string.Empty;
+            stepIntro = string.Empty;
+        }
+    }
+
 }

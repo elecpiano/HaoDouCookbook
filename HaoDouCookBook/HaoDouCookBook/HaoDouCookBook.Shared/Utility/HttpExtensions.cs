@@ -45,16 +45,22 @@ namespace Shared.Utility
 
     public class Http
     {
+        public const string MULTIPART_BOUNDARY = "6CUS_DxALdoqFbRCOr86dQnoOjTVpFFR";
+
         public static async Task POSTAsync(string url, 
                                            string data, 
-                                           Dictionary<string, string> additionalHttpReqHeaders = null, 
-                                           Action<HttpRequestResult> callback = null)
+                                           Dictionary<string, string> additionalHttpReqHeaders = null,
+                                           Action<HttpRequestResult> callback = null, bool multipart = false)
         {
             try
             {
                 HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(new Uri(url));
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/x-www-form-urlencoded";
+                if (multipart)
+                {
+                    httpWebRequest.ContentType = string.Format("multipart/form-data; boundary={0}", MULTIPART_BOUNDARY);
+                }
 
                 if (additionalHttpReqHeaders != null)
                 {

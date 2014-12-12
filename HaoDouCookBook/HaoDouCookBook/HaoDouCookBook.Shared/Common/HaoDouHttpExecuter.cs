@@ -4,6 +4,7 @@ using Shared.Infrastructures;
 using Shared.Utility;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Windows.Data.Json;
 
@@ -21,12 +22,14 @@ namespace HaoDouCookBook.Common
         }
     }
 
-
     public class POSTRequestExecuter : ILeechExecuter<string, Error>
     {
         private string apiUrl;
         private Dictionary<string, string> postData;
         private Dictionary<string, string> additionalRequestHeaders;
+        public StringBuilder multipartDataBuilder;
+
+        public bool IsMultipart { get; set; }
 
         /// <summary>
         /// If true, will pass leeched data directly
@@ -36,11 +39,33 @@ namespace HaoDouCookBook.Common
         public POSTRequestExecuter()
         {
             PassLeechedDataDirectly = false;
+            multipartDataBuilder = new StringBuilder();
+            multipartDataBuilder.Append(string.Format("--{0}", Http.MULTIPART_BOUNDARY));
+            IsMultipart = false;
         }
 
         public POSTRequestExecuter(string url)
         {
             this.apiUrl = url;
+        }
+
+        public void AddMultipart8BitData(string key, string value)
+        {
+            multipartDataBuilder.AppendLine("Content-Type: text/plain; charset=UTF-8");
+            multipartDataBuilder.AppendLine("Content-Transfer-Encoding: 8bit");
+            multipartDataBuilder.AppendLine();
+            multipartDataBuilder.AppendLine(value);
+            multipartDataBuilder.AppendLine(string.Format("--{0}", Http.MULTIPART_BOUNDARY)); 
+        }
+
+        public void AddMultiparFileData(string key, byte[] data)
+        {
+            multipartDataBuilder.AppendLine(string.Format(@"Content-Disposition: form-data; name=""filedata""; filename=""{0}""", key));
+            multipartDataBuilder.AppendLine("Content-Type: application/octet-stream");
+            multipartDataBuilder.AppendLine("Content-Transfer-Encoding: binary");
+            multipartDataBuilder.AppendLine();
+            multipartDataBuilder.AppendLine(Encoding.UTF8.GetString(data, 0, data.Length));
+            multipartDataBuilder.AppendLine(string.Format("--{0}", Http.MULTIPART_BOUNDARY)); 
         }
 
         public void AddRequestHeader(string key, string value)
@@ -85,7 +110,17 @@ namespace HaoDouCookBook.Common
         {
             try
             {
-                await Http.POSTAsync(apiUrl, HaoDouApiUrlHelper.CombineURLParameters(postData), additionalRequestHeaders, (result) =>
+                string dataToPost = string.Empty;
+                if (IsMultipart)
+                {
+                    dataToPost = multipartDataBuilder.ToString();
+                }
+                else
+                {
+                    dataToPost = HaoDouApiUrlHelper.CombineURLParameters(postData);
+                }
+
+                await Http.POSTAsync(apiUrl, dataToPost, additionalRequestHeaders, (result) =>
                     {
                         if (PassLeechedDataDirectly)
                         {
@@ -118,7 +153,7 @@ namespace HaoDouCookBook.Common
                         {
                             onSuccess.Invoke(data["result"].GetObject().Stringify());
                         }
-                    });
+                    }, IsMultipart);
             }
             catch (Exception e)
             {

@@ -10,7 +10,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.BottomAppBar>
         <CommandBar Style="{StaticResource bottomAppbarStyle}">
-            <AppBarButton Icon="Forward" Label="下一步"/>
+            <AppBarButton x:Name="next" Icon="Forward" Label="下一步" Click="next_click"/>
+            <AppBarButton Visibility="Collapsed" x:Name="publish" Icon="Send" Label="发布" Click="publish_Click"/>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -20,86 +21,162 @@
             <TextBlock x:Name="title" Text="发布菜谱" Style="{StaticResource SubTitleStyle}"/>
         </Border>
         <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
-            <StackPanel Margin="20, 20, 20, 0">
-                <!--菜谱名称-->
-                <StackPanel Orientation="Vertical" >
-                    <StackPanel Orientation="Horizontal" Margin="5, 0, 0, 0">
-                        <TextBlock Text="*" Foreground="Red" FontSize="36" VerticalAlignment="Center" Height="32"/>
-                        <TextBox Text="{Binding RecipeName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+            <StackPanel>
+                <!--第一步骤-->
+                <StackPanel Visibility="{Binding IsInStepOne, Converter={StaticResource AnythingToVisiblityConverter}}" x:Name="StepOnePanel" Margin="20">
+                    <!--菜谱名称-->
+                    <StackPanel Orientation="Vertical" >
+                        <StackPanel Orientation="Horizontal" Margin="5, 0, 0, 0">
+                            <TextBlock Text="*" Foreground="Red" FontSize="36" VerticalAlignment="Center" Height="32"/>
+                            <TextBox Text="{Binding RecipeName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                  Style="{StaticResource TextBoxBase}" MaxLength="15"
                                  PlaceholderText="输入菜谱名称，最多15个字符"/>
+                        </StackPanel>
+                        <Image Source="../assets/images/textboxGreenLine.png"/>
                     </StackPanel>
-                    <Image Source="../assets/images/textboxGreenLine.png"/>
-                </StackPanel>
 
-                <!--主料-->
-                <StackPanel Orientation="Vertical" Margin="0, 40, 0, 20">
-                    <TextBlock Text="主料" FontSize="19"/>
-                    <Rectangle Style="{StaticResource LightGaryLine}" Height="2" Width="800" Margin="0, 8"/>
-                    <ItemsControl ItemsSource="{Binding MainStuffs}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <controls:StuffControl StuffName="{Binding StuffName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    <!--主料-->
+                    <StackPanel Orientation="Vertical" Margin="0, 40, 0, 20">
+                        <TextBlock Text="主料" FontSize="19"/>
+                        <Rectangle Style="{StaticResource LightGaryLine}" Height="2" Width="800" Margin="0, 8"/>
+                        <ItemsControl ItemsSource="{Binding MainStuffs}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <controls:StuffControl StuffName="{Binding StuffName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                        Weight="{Binding Weight, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                                    <Image Source="../assets/images/searchPage/clear.png" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                        <Image Source="../assets/images/searchPage/clear.png" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Center"
                                            Loaded="Clear_Loaded" Tapped="RemoveMainStuff_Tapped"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
 
-                    <TextBlock Foreground="{StaticResource GreenMain}" 
+                        <TextBlock Foreground="{StaticResource GreenMain}" 
                                Text="+   添加" Tapped="AddMainStuff_Tapped"
                                Style="{StaticResource PublishRecipe_AddStuffText_Style}"/>
-                </StackPanel>
+                    </StackPanel>
 
-                <!--辅料-->
-                <StackPanel Orientation="Vertical" Margin="0, 20">
-                    <TextBlock Text="辅料" FontSize="19"/>
-                    <Rectangle Style="{StaticResource LightGaryLine}" Height="2" Width="800" Margin="0, 8"/>
-                    <ItemsControl ItemsSource="{Binding OtherStuffs}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <controls:StuffControl StuffName="{Binding StuffName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    <!--辅料-->
+                    <StackPanel Orientation="Vertical" Margin="0, 20">
+                        <TextBlock Text="辅料" FontSize="19"/>
+                        <Rectangle Style="{StaticResource LightGaryLine}" Height="2" Width="800" Margin="0, 8"/>
+                        <ItemsControl ItemsSource="{Binding OtherStuffs}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <controls:StuffControl StuffName="{Binding StuffName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                        Weight="{Binding Weight, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                                    <Image Source="../assets/images/searchPage/clear.png" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                        <Image Source="../assets/images/searchPage/clear.png" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Center"
                                            Loaded="Clear_Loaded" Tapped="RemoveOtherStuff_Tapped"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
 
-                    <TextBlock Foreground="{StaticResource GreenMain}" 
+                        <TextBlock Foreground="{StaticResource GreenMain}" 
                                Text="+   添加" Tapped="AddOtherStuff_Tapped"
                                Style="{StaticResource PublishRecipe_AddStuffText_Style}"/>
-                </StackPanel>
+                    </StackPanel>
 
-                <StackPanel Orientation="Vertical">
-                    <TextBox Text="{Binding Intro, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Text="{Binding Intro, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                              Style="{StaticResource TextBoxBase}" TextWrapping="Wrap" AcceptsReturn="True"
                              PlaceholderText="填写这道菜的简介"/>
-                    <Image Source="../assets/images/textboxGrayLine.png"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <TextBox Text="{Binding Skills, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                        <Image Source="../assets/images/textboxGrayLine.png"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Text="{Binding Skills, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                              Style="{StaticResource TextBoxBase}" TextWrapping="Wrap" AcceptsReturn="True"
                              PlaceholderText="分享一下小技巧吧~"/>
-                    <Image Source="../assets/images/textboxGrayLine.png"/>
+                        <Image Source="../assets/images/textboxGrayLine.png"/>
+                    </StackPanel>
+
                 </StackPanel>
 
+                <!--第二步骤-->
+                <StackPanel Visibility="{Binding IsInStepOne, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}" x:Name="StepTwoPanel">
+                    <Grid Background="Transparent" Tapped="SelectPhoto_Tapped">
+                        <Border Background="#74a500" Height="240" VerticalAlignment="Top">
+                            <Image Source="../assets/images/camera.png" Stretch="None" 
+                       VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Visibility="{Binding RecipeCover, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}"/>
+                        </Border>
+                        <Image Stretch="Uniform" Source="{Binding RecipeCover}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+
+                    <StackPanel Orientation="Vertical" Margin="20">
+                        <Grid>
+                            <TextBlock Text="{Binding RecipeName}" FontSize="21" HorizontalAlignment="Left"/>
+                            <TextBlock Text="编辑" Tapped="edit_Tapped" FontSize="21" HorizontalAlignment="Right" Foreground="Gray" Margin="0, 0, 42, 0"/>
+                            <Image Source="../assets/images/mypage/more.png" Stretch="Uniform" Margin="0, -7, 0, 0"
+                               VerticalAlignment="Center" Height="36" Width="36" HorizontalAlignment="Right"/>
+                        </Grid>
+                        <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 10"/>
+
+                        <ItemsControl ItemsSource="{Binding RecipeSteps}" Margin="0, 0, -20, 0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapGrid Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="LightGray" BorderThickness="1" Width="110" Margin="0, 0, 10, 0" Height="215">
+                                        <Grid>
+                                            <Grid Name="withItems" Background="Transparent" Tapped="step_Tapped"
+                                                  Visibility="{Binding StepNumber, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                                <Border VerticalAlignment="Top" Background="#f2f2f2" Height="130" Margin="0, 5, 0, 0"/>
+
+                                                <Border Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,30,0,0">
+                                                    <Border.Background>
+                                                        <ImageBrush ImageSource="{Binding StepPhoto}"/>
+                                                    </Border.Background>
+                                                </Border>
+
+                                                <Border VerticalAlignment="Top" HorizontalAlignment="Left" Width="52" Height="35" Margin="0,16,0,0" >
+                                                    <Border.Background>
+                                                        <ImageBrush ImageSource="../assets/images/stepmark.png" Stretch="None"/>
+                                                    </Border.Background>
+                                                    <TextBlock FontSize="22" Foreground="White" Text="{Binding StepNumber}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                
+                                                <Image Source="../assets/images/stepcamera.png" Visibility="{Binding StepPhoto, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}"
+                                                       Stretch="None" VerticalAlignment="Top" Margin="0,60,0,0"/>
+
+                                                <TextBlock Text="{Binding StepIntro}" FontSize="21" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,150,-18,0"/>
+
+                                                <Border Background="#f2f2f2" Height="32" VerticalAlignment="Bottom" Tapped="delete_Step_Tapped">
+                                                    <TextBlock Foreground="Gray" Text="删除该步骤" FontSize="18" TextAlignment="Center" Margin="0, 4"/>
+                                                </Border>
+                                            </Grid>
+
+                                            <Grid Name="withoutItems" Background="Transparent" Tapped="step_Tapped"
+                                                  Visibility="{Binding StepNumber, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
+                                                <Image Source="../assets/images/addstep.png"  Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="添加步骤" Foreground="#6a9700" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="24" Margin="7,161,7,21"/>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <TextBlock Text="小提示:至少需要3个步骤才能发布哦~" FontSize="18" Foreground="Gray" Margin="0, 15"/>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
+        <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}" Margin="0, 360, 0, 0"/>
     </Grid>
 </Page>

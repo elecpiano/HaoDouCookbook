@@ -46,11 +46,5 @@ namespace HaoDouCookBook.HaoDou.API
 
             return string.Join("&", paras.ToArray());
         }
-
-        public static string RSABase64Encode(string s)
-        {
-            AsymmetricKeyAlgorithmProvider provider = AsymmetricKeyAlgorithmProvider.OpenAlgorithm(AsymmetricAlgorithmNames.RsaOaepSha1);
-            return string.Empty;
-        }
     }
 }

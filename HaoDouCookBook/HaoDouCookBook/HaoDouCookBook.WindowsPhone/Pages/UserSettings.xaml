@@ -60,7 +60,7 @@
 
                 <!--退出-->
                 <controls:SettingGroupTitle Margin="0, 30, 0, 0" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
-                <controls:SimpleSettingItem ItemText="退出" WithMoreTag="False" Tapped="Logout_Tapped" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                <controls:SimpleSettingItem ItemText="退出登录" WithMoreTag="False" Tapped="Logout_Tapped" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
 
             </StackPanel>
         </ScrollViewer>

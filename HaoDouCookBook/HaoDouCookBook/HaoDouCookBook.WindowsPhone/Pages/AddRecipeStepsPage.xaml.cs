@@ -17,11 +17,13 @@ namespace HaoDouCookBook.Pages
 
         public class AddRecipeStepsPageParams
         {
-            public RecipeStep Step { get; set; }
+            public PublishRecipeStep Step { get; set; }
+
+            public Action<PublishRecipeStep> CompletedAction { get; set; }
 
             public AddRecipeStepsPageParams()
             {
-                Step = new RecipeStep();
+                Step = new PublishRecipeStep();
             }
         }
 
@@ -29,8 +31,8 @@ namespace HaoDouCookBook.Pages
 
         #region Field && Property
 
-        private RecipeStep step = new RecipeStep();
-
+        private PublishRecipeStep step = new PublishRecipeStep();
+        private AddRecipeStepsPageParams pageParas;
 
         #endregion
 
@@ -53,11 +55,12 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            AddRecipeStepsPageParams paras = e.Parameter as  AddRecipeStepsPageParams;
-            if (paras != null && paras.Step != null)
+            pageParas = e.Parameter as AddRecipeStepsPageParams;
+            if (pageParas != null && pageParas.Step != null)
             {
-                step.Photo = paras.Step.Photo;
-                step.Description = paras.Step.Description;
+                DataBinding();
+                step.StepPhoto = pageParas.Step.StepPhoto;
+                step.StepIntro = pageParas.Step.StepIntro;
             }
         }
 
@@ -80,6 +83,22 @@ namespace HaoDouCookBook.Pages
             await dialog.ShowAsync();
         }
 
+        private void Completed_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(step.StepIntro.Trim()))
+            {
+                toast.Show("描述不能为空");
+                return;
+            }
+
+            if (pageParas != null && pageParas.CompletedAction != null)
+            {
+                pageParas.CompletedAction.Invoke(step);
+            }
+
+            App.Current.RootFrame.GoBack();
+        }
+
         #endregion
 
         #region Select Picture Result
@@ -88,11 +107,13 @@ namespace HaoDouCookBook.Pages
         {
             if (args.Files != null && args.Files.Count > 0)
             {
-                step.Photo = args.Files[0].Path;
+                step.StepPhoto = args.Files[0].Path;
             }
         }
 
         #endregion
+
+       
 
     }
 }
