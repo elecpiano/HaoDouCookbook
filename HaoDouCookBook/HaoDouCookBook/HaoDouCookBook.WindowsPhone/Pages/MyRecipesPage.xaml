@@ -23,6 +23,10 @@
         <Grid Margin="0, 105, 0, 0" Background="White">
             <controls:UserRecipesControl x:Name="recipesList" ItemsSource="{Binding Recipes}"/>
         </Grid>
+        <Grid Margin="0, 105, 0, 0" Visibility="{Binding Recipes.Count, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
+            <Image Source="../assets/images/user_norecipes.png" Style="{StaticResource NoItemImage_Style}"/>
+            <TextBlock x:Name="noItemsText" Style="{StaticResource NoItemText_Style}"/>
+        </Grid>
         <controls:NetworkLoading x:Name="loading" Margin="0, 105, 0, 0"/>
     </Grid>
 </controls:BackablePage>

@@ -3,6 +3,10 @@ using HaoDouCookBook.Controls;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Navigation;
 using HaoDouCookBook.ViewModels;
+using Windows.UI.Xaml.Media.Imaging;
+using Shared.Utility;
+using Windows.Storage;
+using HaoDouCookBook.Common;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -13,7 +17,7 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class AddRecipeStepsPage : BackablePage, IFileOpenPickerContinuable
     {
-        #region Page Parameter Definition 
+        #region Page Parameter Definition
 
         public class AddRecipeStepsPageParams
         {
@@ -103,17 +107,16 @@ namespace HaoDouCookBook.Pages
 
         #region Select Picture Result
 
-        public void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
+        public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
         {
             if (args.Files != null && args.Files.Count > 0)
             {
-                step.StepPhoto = args.Files[0].Path;
+                var file = args.Files[0];
+                step.StepPhoto = await IsolatedStorageHelper.CopyFromFileAsync(file, Constants.PUBLISH_RECIPES_TEMP_FOLDER);
             }
         }
 
         #endregion
-
-       
 
     }
 }

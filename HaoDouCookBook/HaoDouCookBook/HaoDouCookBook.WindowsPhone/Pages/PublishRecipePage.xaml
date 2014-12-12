@@ -132,7 +132,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border BorderBrush="LightGray" BorderThickness="1" Width="110" Margin="0, 0, 10, 0" Height="215">
+                                    <Border BorderBrush="LightGray" BorderThickness="1" Width="112" Margin="0, 0, 10, 0" Height="215">
                                         <Grid>
                                             <Grid Name="withItems" Background="Transparent" Tapped="step_Tapped"
                                                   Visibility="{Binding StepNumber, Converter={StaticResource AnythingToVisiblityConverter}}">

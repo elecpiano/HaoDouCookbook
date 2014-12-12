@@ -118,6 +118,18 @@ namespace HaoDouCookBook.Pages
 
         private void publish_Click(object sender, RoutedEventArgs e)
         {
+            if (viewModel.RecipeSteps.Count < 4)
+            {
+                toast.Show("至少需要3个步骤才能发布哦~");
+                return;
+            }
+
+            if(string.IsNullOrEmpty(viewModel.RecipeCover))
+            {
+                toast.Show("亲，要先上传封面图才能发布哦~");
+                return;
+            }
+
 
         }
 
@@ -195,17 +207,17 @@ namespace HaoDouCookBook.Pages
             await dialog.ShowAsync();
         }
 
-        public void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
+        public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
         {
             if (args.Files != null && args.Files.Count > 0)
             {
-                viewModel.RecipeCover = args.Files[0].Path;
+                var file = args.Files[0];
+                viewModel.RecipeCover = await IsolatedStorageHelper.CopyFromFileAsync(file, Constants.PUBLISH_RECIPES_TEMP_FOLDER);
             }
         }
 
         #endregion
 
         #endregion
-
     }
 }

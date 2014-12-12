@@ -233,6 +233,45 @@ namespace Shared.Utility
                 }
             }
         }
+
+        public static async Task<string> CopyFromFileAsync(IStorageFile file, string folderName)
+        {
+            if (!folderName.StartsWith(USER_DATA_FOLDER_NAME + "\\"))
+            {
+                folderName = USER_DATA_FOLDER_NAME + "\\" + folderName;
+            }
+
+            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+            if (local != null)
+            {
+                var dataFolder = await local.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
+                string newFileName = string.Format("{0}-{1}.png", MD5Core.GetHashString(file.Path), file.Name);
+                bool newFileExist = true;
+
+                try
+                {
+                    var fileAlreadyInLocal = await dataFolder.GetFileAsync(newFileName);
+                    return fileAlreadyInLocal.Path;
+                }
+                catch (FileNotFoundException)
+                {
+                    newFileExist = false;
+                }
+
+                if (!newFileExist)
+                {
+                    var newFile = await file.CopyAsync(dataFolder, newFileName);
+                    if (newFile != null)
+                    {
+                        return newFile.Path;
+                    }
+                }
+
+                return string.Empty;
+            }
+
+            return string.Empty;
+        }
     }
 
 }

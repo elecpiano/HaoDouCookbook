@@ -130,7 +130,7 @@ namespace HaoDouCookBook.Pages
                 App.Current.RunAsync(onStart);
             }
 
-            ulong size = await IsolatedStorageHelper.GetUserDataSizeAsync(Constants.LOCAL_USERDATA_FOLDER);
+            ulong size = await IsolatedStorageHelper.GetUserDataSizeAsync(Constants.LOCAL_USERDATA_FOLDER, Constants.PUBLISH_RECIPES_TEMP_FOLDER);
             string sizeDesc = "无缓存";
 
             if (size == 0)
@@ -170,7 +170,7 @@ namespace HaoDouCookBook.Pages
                 App.Current.RunAsync(onStart);
             }
 
-            await IsolatedStorageHelper.ClearUserDataAsync(Constants.LOCAL_USERDATA_FOLDER);
+            await IsolatedStorageHelper.ClearUserDataAsync(Constants.LOCAL_USERDATA_FOLDER, Constants.PUBLISH_RECIPES_TEMP_FOLDER);
 
             if (onCompleted != null)
             {

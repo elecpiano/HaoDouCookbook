@@ -40,6 +40,7 @@ namespace HaoDouCookBook.Pages
         {
             this.InitializeComponent();
             Recipes = new ObservableCollection<UserRecipe>();
+            this.noItemsText.Text = Constants.I_DONT_HAVE_RECIPES;
             DataBinding();
         }
 
