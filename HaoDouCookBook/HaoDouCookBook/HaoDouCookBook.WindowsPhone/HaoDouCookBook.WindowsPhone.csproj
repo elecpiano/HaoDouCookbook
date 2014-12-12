@@ -146,6 +146,9 @@
     <Compile Include="Controls\RecipeTile.xaml.cs">
       <DependentUpon>RecipeTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SelectPhotoDialog.xaml.cs">
+      <DependentUpon>SelectPhotoDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SettingGroupTitle.xaml.cs">
       <DependentUpon>SettingGroupTitle.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,9 @@
     </Compile>
     <Compile Include="Pages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddRecipeStepsPage.xaml.cs">
+      <DependentUpon>AddRecipeStepsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AdRecommendationPage.xaml.cs">
       <DependentUpon>AdRecommendationPage.xaml</DependentUpon>
@@ -303,6 +309,7 @@
     <Compile Include="ViewModels\NoticePageViewModel.cs" />
     <Compile Include="ViewModels\ProductPageViewModel.cs" />
     <Compile Include="ViewModels\PublishRecipePageViewModel.cs" />
+    <Compile Include="ViewModels\PulishReciepeStepsViewModel.cs" />
     <Compile Include="ViewModels\RankItemData.cs" />
     <Compile Include="ViewModels\RankViewPageViewModel.cs" />
     <Compile Include="ViewModels\RecipeCategoryTileData.cs" />
@@ -494,6 +501,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\SelectPhotoDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\SettingGroupTitle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -547,6 +558,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddRecipeStepsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

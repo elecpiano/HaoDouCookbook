@@ -74,6 +74,32 @@ namespace HaoDouCookBook
             throw new NotImplementedException();
         }
 
+#if WINDOWS_PHONE_APP
+
+        // 用于FileOpenPicker等
+        //
+        ContinuationManager continuationManager;
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            base.OnActivated(args);
+            continuationManager = new ContinuationManager();
+            var rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame == null)
+            {
+                rootFrame.Navigate(typeof(MainPage));
+            }
+
+            var continuationEventArgs = args as IContinuationActivatedEventArgs;
+            if (continuationEventArgs != null)
+            {
+                // Call ContinuationManager to handle continuation activation
+                continuationManager.Continue(continuationEventArgs);
+            }
+        }
+#endif
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used when the application is launched to open a specific file, to display

@@ -3,6 +3,7 @@ using Shared.Utility;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -121,6 +122,18 @@ namespace HaoDouCookBook.Common
 
                 return;
             }
+        }
+
+        public static void PickPicturesFromPicturesLibrary()
+        {
+            FileOpenPicker filePicker = new FileOpenPicker();
+            filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            filePicker.ViewMode = PickerViewMode.Thumbnail;
+            filePicker.FileTypeFilter.Add(".jpg");
+            filePicker.FileTypeFilter.Add(".jpeg");
+            filePicker.FileTypeFilter.Add(".png");
+
+            filePicker.PickSingleFileAndContinue();
         }
     }
 }

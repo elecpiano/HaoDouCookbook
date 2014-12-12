@@ -93,6 +93,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Interface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\JsonSerializable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\SingletonProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\ContinuationManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\CryptographyHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\MD5.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DataContextGetter.cs" />
