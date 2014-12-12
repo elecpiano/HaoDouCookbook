@@ -89,7 +89,7 @@
                     </PivotItem>
 
                     <PivotItem Header="草稿">
-                        <ScrollViewer Height="460"/>
+                        <controls:UserDraft Margin="-20, 0, -30, 0" x:Name="userDraft"/>
                     </PivotItem>
                 </Pivot>
             </StackPanel>

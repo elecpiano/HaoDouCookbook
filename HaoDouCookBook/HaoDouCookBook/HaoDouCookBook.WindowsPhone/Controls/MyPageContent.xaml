@@ -70,7 +70,7 @@
                                         Margin="0, 1.5, 0, 0"
                                         Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
                                         Tapped="SimpleSettingItem_Tapped"/>
-            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Draft.png"
+            <controls:SimpleSettingItem Tag ="mydrafts" Icon="../assets/images/MyPage/Draft.png"
                                         ItemText="我的草稿"
                                         Margin="0, 1.5, 0, 0" 
                                         Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"

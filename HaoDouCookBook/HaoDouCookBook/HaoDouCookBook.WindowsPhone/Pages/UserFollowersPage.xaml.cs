@@ -2,9 +2,7 @@
 using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.ViewModels;
-using System;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Shared.Utility;
 

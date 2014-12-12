@@ -3,9 +3,7 @@ using HaoDouCookBook.Controls;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Navigation;
 using HaoDouCookBook.ViewModels;
-using Windows.UI.Xaml.Media.Imaging;
 using Shared.Utility;
-using Windows.Storage;
 using HaoDouCookBook.Common;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556

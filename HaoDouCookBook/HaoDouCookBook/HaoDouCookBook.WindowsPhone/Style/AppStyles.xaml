@@ -14,6 +14,7 @@
     <common:ListCountToNoItemsVisibilityConverter x:Key="countToNoItemsVisiblityConverter" />
     <common:CountToDescriptionStringConverter x:Key="countToDescConverter"/>
     <common:ActivityTypeToStringConverter x:Key="activityTypeToStringConverter"/>
+    <common:ImageToDefaultImageConverter x:Key="imageToDefaultConverter"/>
 
     <!--Colors-->
     <SolidColorBrush x:Key="TopAppbarColor" Color="#fff8f8f8"/>

@@ -2,7 +2,6 @@
 using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.HaoDou.DataModels.Discovery;
-using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
 using Shared.Utility;
 using System.Threading.Tasks;

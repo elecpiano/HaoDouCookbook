@@ -2,8 +2,6 @@
 using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.HaoDou.DataModels.Choiceness;
-using HaoDouCookBook.Utility;
-using HaoDouCookBook.ViewModels;
 using Shared.Utility;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;

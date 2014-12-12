@@ -1,6 +1,5 @@
 ﻿using HaoDouCookBook.Pages;
 using HaoDouCookBook.ViewModels;
-using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Shared.Utility;

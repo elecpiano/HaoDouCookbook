@@ -1,5 +1,4 @@
-﻿using HaoDouCookBook.Common;
-using HaoDouCookBook.Pages;
+﻿using HaoDouCookBook.Pages;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Shared.Utility;

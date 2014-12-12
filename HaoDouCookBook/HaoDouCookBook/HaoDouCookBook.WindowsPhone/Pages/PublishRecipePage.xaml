@@ -48,7 +48,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <controls:StuffControl StuffName="{Binding StuffName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                        <controls:StuffControl StuffName="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                        Weight="{Binding Weight, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                         <Image Source="../assets/images/searchPage/clear.png" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Center"
                                            Loaded="Clear_Loaded" Tapped="RemoveMainStuff_Tapped"/>
@@ -75,7 +75,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <controls:StuffControl StuffName="{Binding StuffName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                        <controls:StuffControl StuffName="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                        Weight="{Binding Weight, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                         <Image Source="../assets/images/searchPage/clear.png" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Center"
                                            Loaded="Clear_Loaded" Tapped="RemoveOtherStuff_Tapped"/>
@@ -177,6 +177,7 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+
         <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}" Margin="0, 360, 0, 0"/>
     </Grid>
 </Page>

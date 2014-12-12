@@ -1,7 +1,6 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
-using HaoDouCookBook.Utility;
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;

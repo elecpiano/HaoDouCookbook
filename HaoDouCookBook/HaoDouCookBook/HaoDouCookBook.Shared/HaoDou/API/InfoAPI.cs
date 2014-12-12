@@ -1,6 +1,7 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.HaoDou.DataModels.Choiceness;
 using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
+using HaoDouCookBook.HaoDou.DataModels.My;
 using System;
 using System.Threading.Tasks;
 
@@ -63,6 +64,23 @@ namespace HaoDouCookBook.HaoDou.API
             postRequest.AddPostData("uuid", uuid.ToString());
 
             HaoDouJsonDataLoader<ShakePageData> loader = new HaoDouJsonDataLoader<ShakePageData>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+
+        public static async Task SaveInfo(string sign, int uid, string title, int rid, string ingts_m, string ingts_a, string tips, string intro, Action<SaveInfo> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "saveInfo";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("title", title);
+            postRequest.AddPostData("rid", rid == 0 ? string.Empty : rid.ToString());
+            postRequest.AddPostData("ingts_m", ingts_m);
+            postRequest.AddPostData("ingts_a", ingts_a);
+            postRequest.AddPostData("tips", tips);
+            postRequest.AddPostData("intro", intro);
+
+            HaoDouJsonDataLoader<SaveInfo> loader = new HaoDouJsonDataLoader<SaveInfo>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
         }
     }

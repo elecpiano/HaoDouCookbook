@@ -90,7 +90,9 @@
     <Compile Include="Common\FollowCountConverter.cs" />
     <Compile Include="Common\ListCountToNoItemsVisibilityConverter.cs" />
     <Compile Include="Common\MainStuffColorConverter.cs" />
+    <Compile Include="Common\RecipeImageToDefaultImageConverter.cs" />
     <Compile Include="Common\UserIdToVisibilityConverter.cs" />
+    <Compile Include="Common\UserRecipeDraft.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Controls\ActivitySupportAndComment.xaml.cs">
       <DependentUpon>ActivitySupportAndComment.xaml</DependentUpon>
@@ -184,6 +186,9 @@
     <Compile Include="Controls\UserActivity.xaml.cs">
       <DependentUpon>UserActivity.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserDraft.xaml.cs">
+      <DependentUpon>UserDraft.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserPhoto.xaml.cs">
       <DependentUpon>UserPhoto.xaml</DependentUpon>
     </Compile>
@@ -240,6 +245,9 @@
     </Compile>
     <Compile Include="Pages\MessagePage.xaml.cs">
       <DependentUpon>MessagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MyDraftPage.xaml.cs">
+      <DependentUpon>MyDraftPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MyRecipesPage.xaml.cs">
       <DependentUpon>MyRecipesPage.xaml</DependentUpon>
@@ -374,7 +382,8 @@
     <Content Include="Assets\Images\background1.png" />
     <Content Include="Assets\Images\camera.png" />
     <Content Include="Assets\Images\clear.png" />
-    <Content Include="Assets\Images\DefaultTopicImage.jpg" />
+    <Content Include="Assets\Images\DefaultImageBig.png" />
+    <Content Include="Assets\Images\DefaultImageSmall.png" />
     <Content Include="Assets\Images\down_arrow.png" />
     <Content Include="Assets\Images\findfriends.png" />
     <Content Include="Assets\Images\friends.png" />
@@ -567,6 +576,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\UserDraft.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\UserPhoto.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -644,6 +657,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\MessagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MyDraftPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

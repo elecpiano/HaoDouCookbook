@@ -1,6 +1,7 @@
 ﻿using Shared.Infrastructures;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace HaoDouCookBook.ViewModels
 {
@@ -80,11 +81,12 @@ namespace HaoDouCookBook.ViewModels
         }
     }
 
-
+    [DataContract]
     public class StuffItem : BindableBase
     {
         private string name;
 
+        [DataMember]
         public string Name
         {
             get { return name; }
@@ -93,6 +95,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string weight;
 
+        [DataMember]
         public string Weight
         {
             get { return weight; }

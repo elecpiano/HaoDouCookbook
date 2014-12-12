@@ -2,7 +2,6 @@
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Pages;
 using HaoDouCookBook.ViewModels;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -129,9 +128,17 @@ namespace HaoDouCookBook.Controls
                 case "friendscircle":
                     GotoFriendsCirclePage();
                     break;
+                case "mydrafts":
+                    GotoDraftsPage();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void GotoDraftsPage()
+        {
+            App.Current.RootFrame.Navigate(typeof(MyDraftPage));
         }
 
 

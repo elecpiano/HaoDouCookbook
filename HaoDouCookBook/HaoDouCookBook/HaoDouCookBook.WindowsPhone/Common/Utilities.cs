@@ -1,5 +1,4 @@
-﻿using HaoDouCookBook.HaoDou.DataModels.My;
-using Shared.Utility;
+﻿using Shared.Utility;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

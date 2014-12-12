@@ -1,0 +1,42 @@
+﻿<UserControl
+    x:Class="HaoDouCookBook.Controls.UserDraft"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid x:Name="root">
+        <ScrollViewer x:Name="rootScrollViewer">
+            <ItemsControl Margin="0, 0, 0, 15" x:Name="draftslist">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="130" Height="130" Margin="0, 0, 5, 5" Tapped="draft_Tapped">
+                            <FlyoutBase.AttachedFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="编辑草稿" Click="editDraft_Click"/>
+                                    <MenuFlyoutItem Text="删除草稿" Click="deleteDraft_Click"/>
+                                </MenuFlyout>
+                            </FlyoutBase.AttachedFlyout>
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding RecipeCover, Converter={StaticResource imageToDefaultConverter}}" AlignmentY="Center" Stretch="UniformToFill"/>
+                            </Border.Background>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Grid x:Name="noItemsPanel" Margin="0, 80, 0, 0" Visibility="{Binding Count, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
+            <Image Source="../assets/images/user_nodraft.png" Style="{StaticResource NoItemImage_Style}"/>
+            <TextBlock x:Name="noItemText" Style="{StaticResource NoItemText_Style}" Margin="0, 120, 0, 0"/>
+        </Grid>
+    </Grid>
+</UserControl>

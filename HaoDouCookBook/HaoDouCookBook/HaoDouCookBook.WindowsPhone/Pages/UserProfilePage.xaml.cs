@@ -256,6 +256,8 @@ namespace HaoDouCookBook.Pages
             this.userRecipes1.ResetScrollViewerToBegin();
             this.userRecipes2.ResetScrollViewerToBegin();
             this.rootScrollViewer.ScrollToVerticalOffset(0);
+            this.userDraft.ResetScrollViewerToBegin();
+            this.userDraft.UpdataViewModel();
             UpdateProductsData(0, 21, pageParams.UserId);
             UpdateRecipes(0, 21, pageParams.UserId);
             LoadDataAsync();

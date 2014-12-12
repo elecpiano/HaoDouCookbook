@@ -1,17 +1,25 @@
 ﻿using Shared.Infrastructures;
-using System;
-using System.Collections.Generic;
+using Shared.Utility;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace HaoDouCookBook.ViewModels
 {
+    [DataContract]
     public class PublishRecipePageViewModel : BindableBase
     {
+        private int recipeId;
+
+        [DataMember]
+        public int RecipeId
+        {
+            get { return recipeId; }
+            set { SetProperty<int>(ref recipeId, value); }
+        }
+
         private string recipeName;
 
+        [DataMember]
         public string RecipeName
         {
             get { return recipeName; }
@@ -24,6 +32,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string intro;
 
+        [DataMember]
         public string Intro
         {
             get { return intro; }
@@ -32,6 +41,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string skills;
 
+        [DataMember]
         public string Skills
         {
             get { return skills; }
@@ -40,10 +50,13 @@ namespace HaoDouCookBook.ViewModels
 
         public bool ContentChanged { get; set; }
 
+        [DataMember]
         public ObservableCollection<StuffItem> MainStuffs { get; set; }
 
+        [DataMember]
         public ObservableCollection<StuffItem> OtherStuffs { get; set; }
 
+        [DataMember]
         public ObservableCollection<PublishRecipeStep> RecipeSteps { get; set; }
 
         private bool isInStepOne;
@@ -56,12 +69,39 @@ namespace HaoDouCookBook.ViewModels
 
         private string recipeCover;
 
+        [DataMember]
         public string RecipeCover
         {
             get { return recipeCover; }
             set { SetProperty<string>(ref recipeCover, value); }
         }
 
+        public string GetMainStuffsJson()
+        {
+            if (MainStuffs.Count == 1)
+            {
+                if(string.IsNullOrEmpty(MainStuffs[0].Name)
+                    && string.IsNullOrEmpty(MainStuffs[0].Name))
+                {
+                    return "[]";
+                }
+            }
+
+            return JsonSerializer.Serialize(MainStuffs);
+        }
+
+        public string GetOtherStuffsJson()
+        {
+            if (OtherStuffs.Count == 1)
+            {
+                if(string.IsNullOrEmpty(OtherStuffs[0].Name)
+                    && string.IsNullOrEmpty(OtherStuffs[0].Weight))
+                {
+                    return "[]";
+                }
+            }
+            return JsonSerializer.Serialize(OtherStuffs);
+        }
 
         public PublishRecipePageViewModel()
         {
@@ -81,10 +121,12 @@ namespace HaoDouCookBook.ViewModels
         }
     }
 
+    [DataContract]
     public class PublishRecipeStep : BindableBase
     {
         private int stepNumber;
 
+        [DataMember]
         public int StepNumber
         {
             get { return stepNumber; }
@@ -93,6 +135,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string stepPhoto;
 
+        [DataMember]
         public string StepPhoto
         {
             get { return stepPhoto; }
@@ -101,6 +144,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string stepIntro;
 
+        [DataMember]
         public string StepIntro
         {
             get { return stepIntro; }

@@ -272,6 +272,21 @@ namespace Shared.Utility
 
             return string.Empty;
         }
+
+        public static async Task DeleteFolderAsync(string folderName)
+        {
+            if (!folderName.StartsWith(USER_DATA_FOLDER_NAME + "\\"))
+            {
+                folderName = USER_DATA_FOLDER_NAME + "\\" + folderName;
+            } 
+
+            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+            if (local != null)
+            {
+                var dataFolder = await local.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
+                await dataFolder.DeleteAsync();
+            }
+        }
     }
 
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 using Shared.Infrastructures;
 using Windows.Data.Json;
 using Shared.Utility;

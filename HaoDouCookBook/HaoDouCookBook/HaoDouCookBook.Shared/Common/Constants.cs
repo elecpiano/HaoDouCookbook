@@ -5,7 +5,8 @@ namespace HaoDouCookBook.Common
     public class Constants
     {
         public const string DEFAULT_USER_PHOTO = "../Assets/Images/noavatar_300.jpg";
-        public const string DEFAULT_TOPIC_IMAGE = "../Assets/Images/DefaultTopicImage.jpg";
+        public const string DEFAULT_IMAGE_BIG = "../Assets/Images/DefaultImageBig.png";
+        public const string DEFAULT_IMAGE_SMALL = "../Assets/Images/DefaultImageSmall.png";
 
         public const string LOCAL_USERDATA_FOLDER = "LocalUserData";
         public const string PUBLISH_RECIPES_TEMP_FOLDER = "RepublishRecipesTemp";

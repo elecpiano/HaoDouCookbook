@@ -1,8 +1,6 @@
 ﻿using HaoDouCookBook.Utility;
 using System;
 using System.Collections.Generic;
-using Windows.Security.Cryptography;
-using Windows.Security.Cryptography.Core;
 
 namespace HaoDouCookBook.HaoDou.API
 {

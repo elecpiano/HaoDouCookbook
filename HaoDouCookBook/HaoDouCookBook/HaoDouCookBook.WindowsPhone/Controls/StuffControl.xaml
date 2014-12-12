@@ -11,9 +11,9 @@
 
     <StackPanel Orientation="Vertical" Background="White" x:Name="root">
         <StackPanel Orientation="Horizontal">
-            <TextBox PlaceholderText="食材" Text="{Binding StuffName}" Style="{StaticResource TextBoxBase}" VerticalAlignment="Bottom" Width="210"/>
+            <TextBox PlaceholderText="食材" Text="{Binding StuffName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource TextBoxBase}" VerticalAlignment="Bottom" Width="210"/>
             <Rectangle Style="{StaticResource LightGaryLine}" Height="36" Width="0.5"/>
-            <TextBox PlaceholderText="用量" Text="{Binding Weight}"  Style="{StaticResource TextBoxBase}" VerticalAlignment="Bottom" Width="100"/>
+            <TextBox PlaceholderText="用量" Text="{Binding Weight, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Style="{StaticResource TextBoxBase}" VerticalAlignment="Bottom" Width="100"/>
             <Rectangle Style="{StaticResource LightGaryLine}" Height="36" Width="0.5"/>
         </StackPanel>
         <Image Source="../assets/images/textboxGrayLine.png" Stretch="Uniform" HorizontalAlignment="Left" Margin="0, 0, 0, 0"/>

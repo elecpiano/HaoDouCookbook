@@ -53,7 +53,7 @@ namespace HaoDouCookBook.ViewModels
         public SpecialRecipeAlbumData()
         {
             albumMarkImageSource = string.Empty;
-            mainImageSource = Constants.DEFAULT_TOPIC_IMAGE;
+            mainImageSource = Constants.DEFAULT_IMAGE_BIG;
             DetailsImageSources = new ObservableCollection<string>();
             title = string.Empty;
             description = string.Empty;
