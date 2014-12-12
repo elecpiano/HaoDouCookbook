@@ -81,8 +81,7 @@ namespace HaoDouCookBook.Controls
                                 CreateTime = item.CreateTime,
                                 Image = item.Pic,
                                 ProductId = item.ItemId,
-                                TypeId = item.Type,
-                                Type = Constants.ACTIVITY_TYPE_MAP.ContainsKey(item.Type) ? Constants.ACTIVITY_TYPE_MAP[item.Type] : string.Empty
+                                Type = item.Type,
                             };
 
                             if (dict.ContainsKey(item.FormatTime))
@@ -145,7 +144,7 @@ namespace HaoDouCookBook.Controls
         private void Activity_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             var dataContext = sender.GetDataContext<UserActivityItem>();
-            switch (dataContext.TypeId)
+            switch (dataContext.Type)
             {
                 case 10:
                     RecipeInfoPage.RecipeInfoPageParams para = new RecipeInfoPage.RecipeInfoPageParams();

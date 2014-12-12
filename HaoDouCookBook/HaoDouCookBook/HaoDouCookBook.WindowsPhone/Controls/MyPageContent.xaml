@@ -46,7 +46,7 @@
                                         Margin="0, 1.5, 0, 0"
                                         Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
                                         Tapped="SimpleSettingItem_Tapped"/>
-            <controls:SimpleSettingItem Icon="../assets/images/MyPage/Douquan.png"
+            <controls:SimpleSettingItem Tag="friendscircle" Icon="../assets/images/MyPage/Douquan.png"
                                         ItemText="豆圈"
                                         Margin="0, 1.5, 0, 0"
                                         Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"

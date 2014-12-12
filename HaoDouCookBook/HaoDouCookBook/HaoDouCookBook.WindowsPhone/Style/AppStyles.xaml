@@ -13,12 +13,14 @@
     <common:NotSignedInUserIdToVisibilityConverter x:Key="notSignedInUserIdToVisibilityConverter"/>
     <common:ListCountToNoItemsVisibilityConverter x:Key="countToNoItemsVisiblityConverter" />
     <common:CountToDescriptionStringConverter x:Key="countToDescConverter"/>
+    <common:ActivityTypeToStringConverter x:Key="activityTypeToStringConverter"/>
 
     <!--Colors-->
     <SolidColorBrush x:Key="TopAppbarColor" Color="#fff8f8f8"/>
     <SolidColorBrush x:Key="GreenMain" Color="#78a708"/>
     <SolidColorBrush x:Key="DarkerGreenMain" Color="#8cb446"/>
     <SolidColorBrush x:Key="SmartGridTouchColor" Color="#8837afd6"/>
+    <SolidColorBrush x:Key="hoverGray" Color="#10000000"/>
 
     <!--Default Font-->
     <Style x:Key="TextBlockBase" TargetType="TextBlock">
@@ -1034,6 +1036,14 @@
         <Setter Property="MaxLines" Value="2"/>
     </Style>
 
+    <Style x:Key="Activity_ItemContent_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Margin" Value="0, 5, 0, 0"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="MaxLines" Value="2"/>
+    </Style>
+
     <Style x:Key="NoItemText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="FontSize" Value="25"/>
         <Setter Property="TextAlignment" Value="Center"/>
@@ -1056,9 +1066,27 @@
         <Setter Property="Margin" Value="0, 240, 0, 0"/>
     </Style>
 
+
     <Style x:Name="PublishRecipe_AddStuffText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
         <Setter Property="FontSize" Value="21"/>
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0, 15"/>
     </Style>
+
+    <Style x:Key="DiggUserList_Description_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, 6, 0, 0"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="2"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="DiggUserList_Title_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+
 </ResourceDictionary>
