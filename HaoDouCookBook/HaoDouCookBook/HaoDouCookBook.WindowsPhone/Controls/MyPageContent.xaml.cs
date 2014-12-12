@@ -125,6 +125,7 @@ namespace HaoDouCookBook.Controls
                     break;
                 case "myrecipes":
                     GotoMyRecipesPage();
+                    break;
                 case "friendscircle":
                     GotoFriendsCirclePage();
                     break;
@@ -137,6 +138,7 @@ namespace HaoDouCookBook.Controls
         private void GotoMyRecipesPage()
         {
             App.Current.RootFrame.Navigate(typeof(MyRecipesPage));
+        }
 
         private void GotoFriendsCirclePage()
         {
