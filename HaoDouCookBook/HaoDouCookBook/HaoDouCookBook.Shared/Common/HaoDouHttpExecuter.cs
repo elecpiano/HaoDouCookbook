@@ -27,7 +27,7 @@ namespace HaoDouCookBook.Common
         private string apiUrl;
         private Dictionary<string, string> postData;
         private Dictionary<string, string> additionalRequestHeaders;
-        public StringBuilder multipartDataBuilder;
+        private StringBuilder multipartDataBuilder;
 
         public bool IsMultipart { get; set; }
 
@@ -51,6 +51,13 @@ namespace HaoDouCookBook.Common
 
         public void AddMultipart8BitData(string key, string value)
         {
+            if(multipartDataBuilder == null)
+            {
+                multipartDataBuilder = new StringBuilder();
+                multipartDataBuilder.Append(string.Format("--{0}", Http.MULTIPART_BOUNDARY));
+            }
+
+            multipartDataBuilder.AppendLine(string.Format(@"Content-Disposition: form-data; name=""{0}""", key));
             multipartDataBuilder.AppendLine("Content-Type: text/plain; charset=UTF-8");
             multipartDataBuilder.AppendLine("Content-Transfer-Encoding: 8bit");
             multipartDataBuilder.AppendLine();
@@ -58,13 +65,19 @@ namespace HaoDouCookBook.Common
             multipartDataBuilder.AppendLine(string.Format("--{0}", Http.MULTIPART_BOUNDARY)); 
         }
 
-        public void AddMultiparFileData(string key, byte[] data)
+        public void AddMultiparFileData(string key, string value)
         {
+            if(multipartDataBuilder == null)
+            {
+                multipartDataBuilder = new StringBuilder();
+                multipartDataBuilder.Append(string.Format("--{0}", Http.MULTIPART_BOUNDARY));
+            }
+
             multipartDataBuilder.AppendLine(string.Format(@"Content-Disposition: form-data; name=""filedata""; filename=""{0}""", key));
             multipartDataBuilder.AppendLine("Content-Type: application/octet-stream");
             multipartDataBuilder.AppendLine("Content-Transfer-Encoding: binary");
             multipartDataBuilder.AppendLine();
-            multipartDataBuilder.AppendLine(Encoding.UTF8.GetString(data, 0, data.Length));
+            multipartDataBuilder.AppendLine(value);
             multipartDataBuilder.AppendLine(string.Format("--{0}", Http.MULTIPART_BOUNDARY)); 
         }
 

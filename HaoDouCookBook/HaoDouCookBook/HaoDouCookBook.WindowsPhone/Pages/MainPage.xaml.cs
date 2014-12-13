@@ -68,7 +68,7 @@ namespace HaoDouCookBook
         }
 
         private const string CLASSIFICATION_APPBARBUTTON_TAG = "classification";
-        private const string PUBLISH_RECIPE_APPBARBUTTON_TAG = "publishRecipe";
+        private const string PUBLISH_PRODUCTS_APPBARBUTTON_TAG = "publishRecipe";
 
         private void BuildChocinessPageBottomAppBar()
         {
@@ -88,7 +88,7 @@ namespace HaoDouCookBook
             this.bottomAppBar.PrimaryCommands.Clear();
 
             AppBarButton publishRecipeAppbarButton = new AppBarButton();
-            publishRecipeAppbarButton.Tag = PUBLISH_RECIPE_APPBARBUTTON_TAG;
+            publishRecipeAppbarButton.Tag = PUBLISH_PRODUCTS_APPBARBUTTON_TAG;
             publishRecipeAppbarButton.Label = "晒一晒";
             publishRecipeAppbarButton.Icon = new SymbolIcon(Symbol.Edit);
             publishRecipeAppbarButton.Click += AppbarButton_Click;
@@ -106,11 +106,16 @@ namespace HaoDouCookBook
                 {
                     GotoCateogryPage();
                 }
-                else if (tag.Equals(PUBLISH_RECIPE_APPBARBUTTON_TAG, StringComparison.OrdinalIgnoreCase))
+                else if (tag.Equals(PUBLISH_PRODUCTS_APPBARBUTTON_TAG, StringComparison.OrdinalIgnoreCase))
                 {
-
+                    GotoPublishProductsPage();
                 }
             }
+        }
+
+        private void GotoPublishProductsPage()
+        {
+            App.Current.RootFrame.Navigate(typeof(PublishProductsPage));
         }
 
         private void GotoCateogryPage()

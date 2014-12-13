@@ -42,6 +42,7 @@ namespace HaoDouCookBook.Controls
             filePicker.FileTypeFilter.Add(".jpeg");
             filePicker.FileTypeFilter.Add(".png");
 
+            this.Hide();
             filePicker.PickSingleFileAndContinue();
         }
 

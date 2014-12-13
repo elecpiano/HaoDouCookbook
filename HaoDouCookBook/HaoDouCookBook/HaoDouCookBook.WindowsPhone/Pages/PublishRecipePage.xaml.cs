@@ -120,6 +120,7 @@ namespace HaoDouCookBook.Pages
 
         async void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
+            e.Handled = true;
             if (viewModel.IsInStepOne)
             {
                 await Utilities.ShowOKCancelDialog("好豆菜谱", "已经填写的内容将会丢失，您是否要继续离开此页面？", () =>
@@ -134,8 +135,6 @@ namespace HaoDouCookBook.Pages
                 App.Current.RootFrame.GoBack();
                 e.Handled = true;
             }
-
-            e.Handled = true;
         }
 
         #region Step One

@@ -23,11 +23,7 @@ namespace HaoDouCookBook.ViewModels
         public string RecipeName
         {
             get { return recipeName; }
-            set
-            {
-                ContentChanged = true;
-                SetProperty<string>(ref recipeName, value);
-            }
+            set { SetProperty<string>(ref recipeName, value); }
         }
 
         private string intro;
@@ -48,7 +44,6 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref skills, value); }
         }
 
-        public bool ContentChanged { get; set; }
 
         [DataMember]
         public ObservableCollection<StuffItem> MainStuffs { get; set; }
@@ -110,11 +105,8 @@ namespace HaoDouCookBook.ViewModels
             skills = string.Empty;
             MainStuffs = new ObservableCollection<StuffItem>();
             MainStuffs.Add(new StuffItem());
-            MainStuffs.CollectionChanged += (s, e) => { ContentChanged = true; };
             OtherStuffs = new ObservableCollection<StuffItem>();
             OtherStuffs.Add(new StuffItem());
-            OtherStuffs.CollectionChanged += (s, e) => { ContentChanged = true; };
-            ContentChanged = false;
             IsInStepOne = true;
             RecipeSteps = new ObservableCollection<PublishRecipeStep>();
             RecipeSteps.Add(new PublishRecipeStep());

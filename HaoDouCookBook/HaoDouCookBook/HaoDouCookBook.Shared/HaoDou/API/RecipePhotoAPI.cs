@@ -56,5 +56,47 @@ namespace HaoDouCookBook.HaoDou.API
             await loader.LoadAsync(postRequest, true, MODULE, cacheFilename, onSuccess, onFail);
         }
 
+        public static async Task GetTopicList(Action<TopicTagsData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getTopicList";
+            GETRequestExecuter getRequest = new GETRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+
+            HaoDouJsonDataLoader<TopicTagsData> loader = new HaoDouJsonDataLoader<TopicTagsData>();
+            await loader.LoadWithoutCacheAsnyc(getRequest, onSuccess, onFail);
+        }
+
+        public static async Task Upload(
+            string position,
+            int uid, 
+            int topicid,
+            string topicName,
+            string intro,
+            string title,
+            string sign,
+            string uuid,
+            string siteid,
+            string picName,
+            string picData,
+            Action<UploadResultInfo> onSuccess,
+            Action<Error> onFail)
+        {
+            string methodName = "upload";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.IsMultipart = true;
+
+            postRequest.AddMultipart8BitData("position", position);
+            postRequest.AddMultipart8BitData("uid", uid.ToString());
+            postRequest.AddMultipart8BitData("topicId", topicid != 0 ? topicid.ToString() : string.Empty);
+            postRequest.AddMultipart8BitData("topicName", topicName);
+            postRequest.AddMultipart8BitData("rtitle", title);
+            postRequest.AddMultipart8BitData("sign", sign);
+            postRequest.AddMultipart8BitData("uuid", uuid);
+            postRequest.AddMultipart8BitData("siteid", siteid);
+            postRequest.AddMultiparFileData(picName, picData);
+
+            HaoDouJsonDataLoader<UploadResultInfo> loader = new HaoDouJsonDataLoader<UploadResultInfo>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+
     }
 }

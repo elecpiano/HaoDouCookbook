@@ -174,6 +174,9 @@
     <Compile Include="Controls\StuffControl.xaml.cs">
       <DependentUpon>StuffControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TagControl.xaml.cs">
+      <DependentUpon>TagControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TagRecipeItem.xaml.cs">
       <DependentUpon>TagRecipeItem.xaml</DependentUpon>
     </Compile>
@@ -261,6 +264,9 @@
     <Compile Include="Pages\AllAlbumsListPage.xaml.cs">
       <DependentUpon>AllAlbumsListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PublishProductsPage.xaml.cs">
+      <DependentUpon>PublishProductsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PublishRecipePage.xaml.cs">
       <DependentUpon>PublishRecipePage.xaml</DependentUpon>
     </Compile>
@@ -327,6 +333,7 @@
     <Compile Include="ViewModels\NewbieTutorial.cs" />
     <Compile Include="ViewModels\NoticePageViewModel.cs" />
     <Compile Include="ViewModels\ProductPageViewModel.cs" />
+    <Compile Include="ViewModels\PublishProductsPageViewModel.cs" />
     <Compile Include="ViewModels\PublishRecipePageViewModel.cs" />
     <Compile Include="ViewModels\PulishReciepeStepsViewModel.cs" />
     <Compile Include="ViewModels\RankItemData.cs" />
@@ -423,6 +430,7 @@
     <Content Include="Assets\Images\ProductPage\position.png" />
     <Content Include="Assets\Images\ProductPage\social.png" />
     <Content Include="Assets\Images\qq.png" />
+    <Content Include="Assets\Images\qq_gray.png" />
     <Content Include="Assets\Images\Rank\rank-1.png" />
     <Content Include="Assets\Images\Rank\rank-2.png" />
     <Content Include="Assets\Images\Rank\rank-3.png" />
@@ -432,6 +440,7 @@
     <Content Include="Assets\Images\SearchPage\search_history.png" />
     <Content Include="Assets\Images\SearchPage\search_texbox.png" />
     <Content Include="Assets\Images\sina.png" />
+    <Content Include="Assets\Images\sina_gray.png" />
     <Content Include="Assets\Images\star.png" />
     <Content Include="Assets\Images\stepcamera.png" />
     <Content Include="Assets\Images\stepMark.png" />
@@ -560,6 +569,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\TagControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\TagRecipeItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -679,6 +692,10 @@
     <Page Include="Pages\AllAlbumsListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PublishProductsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PublishRecipePage.xaml">
       <SubType>Designer</SubType>
