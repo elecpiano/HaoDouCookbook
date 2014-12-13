@@ -30,7 +30,29 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class PersonalTagsPage : BackablePage
     {
+
+        #region Page Parameter Definition
+
+        public class PersonalTagsPageParams
+        {
+            public Action<string> AfterTagsSetSuccessAction{ get; set; }
+
+            public PersonalTagsPageParams()
+            {
+                AfterTagsSetSuccessAction = null;
+            }
+        }
+
+        #endregion
+
+        #region Field && Proprety
+
         public ObservableCollection<TopicTag> PersonalTags { get; set; }
+        private PersonalTagsPageParams pageParams;
+
+        #endregion
+
+        #region Life Cycle
 
         public PersonalTagsPage()
         {
@@ -54,9 +76,14 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
+            pageParams = e.Parameter as PersonalTagsPageParams;
             DataBinding();
             LoadTagsDataAsync();
         }
+
+        #endregion
+
+        #region Data Prepare
 
         private void DataBinding()
         {
@@ -88,6 +115,10 @@ namespace HaoDouCookBook.Pages
                 });
         }
 
+        #endregion
+
+        #region Event
+
         private async void completed_click(object sender, RoutedEventArgs e)
         {
             var selectedTagsId = PersonalTags.Where(t => t.Selected == true).Select(s => s.Id).ToArray();
@@ -98,6 +129,11 @@ namespace HaoDouCookBook.Pages
                     if(success.Message.Contains("成功"))
                     {
                         App.Current.RootFrame.GoBack(); 
+                        if(pageParams != null && pageParams.AfterTagsSetSuccessAction != null)
+                        {
+                            var tagsList = PersonalTags.Where(t => t.Selected == true).Select(s => s.Text).ToArray();
+                            pageParams.AfterTagsSetSuccessAction.Invoke(string.Join("、", tagsList));
+                        }
                     }
                     else
                     {
@@ -114,5 +150,7 @@ namespace HaoDouCookBook.Pages
                     toast.Show(error.Message);
                 });
         }
+
+        #endregion
     }
 }

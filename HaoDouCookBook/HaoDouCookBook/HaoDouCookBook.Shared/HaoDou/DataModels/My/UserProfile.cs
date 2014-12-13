@@ -24,18 +24,14 @@ namespace HaoDouCookBook.HaoDou.DataModels.My
         [DataMember]
         public int IsModify { get; set; }
 
-
         [DataMember]
         public int UserId { get; set; }
-
 
         [DataMember]
         public string UserName { get; set; }
 
-
         [DataMember]
         public int Vip { get; set; }
-
 
         [DataMember]
         public string Avatar { get; set; }
@@ -60,6 +56,10 @@ namespace HaoDouCookBook.HaoDou.DataModels.My
 
         [DataMember]
         public int Gender { get; set; }
+
+
+        [DataMember]
+        public string[] Favorite { get; set; }
 
         [DataMember]
         public int FavoriteCnt { get; set; }

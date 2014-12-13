@@ -220,8 +220,6 @@ namespace HaoDouCookBook.Pages
             this.myProfileSummary.CheckInAction = CheckIn;
         }
 
-
-
         private void Init(UserProfilePageParams paras)
         {
             viewModel = new UserProfilePageViewModel();
@@ -230,12 +228,10 @@ namespace HaoDouCookBook.Pages
             if (Utilities.IsSignedInUser(pageParams.UserId))
             {
                 this.pivoitMe.SelectedIndex = 0;
-                userActivities2.LoadFirstDataAsync(pageParams.UserId);
             }
             else
             {
                 this.pivotOtherUser.SelectedIndex = 0;
-                this.userActivities1.LoadFirstDataAsync(pageParams.UserId);
             }
 
             this.userActivities1.ResetScrollViewerToBegin();

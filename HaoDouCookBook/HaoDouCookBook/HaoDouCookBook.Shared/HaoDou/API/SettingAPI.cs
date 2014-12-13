@@ -35,8 +35,18 @@ namespace HaoDouCookBook.HaoDou.API
 
             HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
 
+        public static async Task UpdateUserName(string userName, int uid, string sign, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "updateUserName";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("user_name", userName);
+            postRequest.AddPostData("sign", sign);
 
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
         }
     }
 }

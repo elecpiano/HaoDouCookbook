@@ -35,6 +35,11 @@ namespace HaoDouCookBook.Pages
             public int MaxLength { get; set; }
 
             /// <summary>
+            /// 点确认后是否回退
+            /// </summary>
+            public bool GoBackAfterConfirmon { get; set; }
+
+            /// <summary>
             /// Callback action after ok appbarbutton click
             /// </summary>
             public Action<string> ConfirmAction { get; set; }
@@ -47,6 +52,7 @@ namespace HaoDouCookBook.Pages
                 Description = string.Empty;
                 AcceptReturn = true;
                 TextWrapping = Windows.UI.Xaml.TextWrapping.Wrap;
+                GoBackAfterConfirmon = true;
             }
         }
 
@@ -103,7 +109,10 @@ namespace HaoDouCookBook.Pages
                 pageParams.ConfirmAction.Invoke(text);
             }
 
-            App.Current.RootFrame.GoBack();
+            if(pageParams.GoBackAfterConfirmon)
+            {
+                App.Current.RootFrame.GoBack();
+            }
         }
 
         #endregion

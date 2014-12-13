@@ -1,5 +1,5 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
 namespace HaoDouCookBook.Common
 {
     public class Constants
@@ -38,6 +38,9 @@ namespace HaoDouCookBook.Common
         public const string NO_FAVORITE_TOPICS = "去收藏话题吧~\n一秒钟变成生活小达人";
         public const string NO_FAVORITE_RECIPES = "去收藏菜谱吧~\n出得了厅堂，下得了厨房";
         public const string NO_LIKE_RECIPES = "赞美他们快乐自己\n为你喜欢的菜谱送红心~";
+
+        public const string MODIFY_NAME_DESCRIPTION = "可以免费修改一次，以后每次修改将会扣除100豆币";
+        public const string MOIDFIED_DESCRIPTION = "非首次修改昵称，此次修改会\n扣除100豆币！是否继续？";
 
         public const int ERRORCODE_JSON_PARSE_FAILED = int.MaxValue;
         public const int ERRORCODE_METAJSON_PARSE_FAILED = int.MinValue;

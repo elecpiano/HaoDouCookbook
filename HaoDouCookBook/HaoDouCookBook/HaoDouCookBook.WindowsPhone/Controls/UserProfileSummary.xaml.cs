@@ -155,9 +155,12 @@ namespace HaoDouCookBook.Controls
             }
         }
 
+        private void Personal_click(object sender, RoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(PersonalInfoPage));
+        }
 
         #endregion
-
 
     }
 }

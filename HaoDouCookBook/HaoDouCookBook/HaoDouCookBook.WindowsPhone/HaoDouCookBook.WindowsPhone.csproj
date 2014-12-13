@@ -91,6 +91,7 @@
     <Compile Include="Common\ListCountToNoItemsVisibilityConverter.cs" />
     <Compile Include="Common\MainStuffColorConverter.cs" />
     <Compile Include="Common\RecipeImageToDefaultImageConverter.cs" />
+    <Compile Include="Common\SettingValueStringToDisplayNameConverter.cs" />
     <Compile Include="Common\UserIdToVisibilityConverter.cs" />
     <Compile Include="Common\UserRecipeDraft.cs" />
     <Compile Include="Common\Utilities.cs" />
@@ -271,6 +272,9 @@
     <Compile Include="Pages\NoticeDetailPage.xaml.cs">
       <DependentUpon>NoticeDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PersnalInfoPage.xaml.cs">
+      <DependentUpon>PersnalInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PersonalTagsPage.xaml.cs">
       <DependentUpon>PersonalTagsPage.xaml</DependentUpon>
     </Compile>
@@ -349,6 +353,7 @@
     <Compile Include="ViewModels\MyPageViewModel.cs" />
     <Compile Include="ViewModels\NewbieTutorial.cs" />
     <Compile Include="ViewModels\NoticePageViewModel.cs" />
+    <Compile Include="ViewModels\PersonalPageViewModel.cs" />
     <Compile Include="ViewModels\ProductPageViewModel.cs" />
     <Compile Include="ViewModels\PublishProductsPageViewModel.cs" />
     <Compile Include="ViewModels\PublishRecipePageViewModel.cs" />
@@ -717,6 +722,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\NoticeDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PersnalInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

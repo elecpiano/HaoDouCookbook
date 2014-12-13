@@ -61,6 +61,8 @@ namespace HaoDouCookBook.Controls
 
         #endregion
 
+        #region Private Methods
+
         private void ShowNetworkUnAvailableState()
         {
             this.loading.Visibility = Visibility.Collapsed;
@@ -84,6 +86,8 @@ namespace HaoDouCookBook.Controls
             this.noNetwork.Visibility = Visibility.Collapsed;
             this.loading.Visibility = Visibility.Visible;
         }
+
+        #endregion
 
         #region Event
 

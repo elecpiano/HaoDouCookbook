@@ -1089,5 +1089,17 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
     
+    <Style x:Key="PersonalInfo_ItemTitle_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="PersonalInfo_ItemText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="Gray"/>
+    </Style>
 
 </ResourceDictionary>

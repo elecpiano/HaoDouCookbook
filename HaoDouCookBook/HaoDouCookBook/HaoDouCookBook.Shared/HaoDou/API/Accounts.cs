@@ -71,5 +71,17 @@ namespace HaoDouCookBook.HaoDou.API
             HaoDouJsonDataLoader<CheckinData> loader = new HaoDouJsonDataLoader<CheckinData>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
         }
+
+        public static async Task ChangeIntro(string content, string sign, int uid, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "changeIntro";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("content", Uri.EscapeDataString(content));
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("uid", uid.ToString());
+
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
     }
 }

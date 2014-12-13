@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Shared.Utility;
 using HaoDouCookBook.Pages;
+using HaoDouCookBook.HaoDou.DataModels.My;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -66,57 +67,63 @@ namespace HaoDouCookBook.Controls
             ResetScrollViewerToBegin();
             this.loading.SetState(LoadingState.LOADING);
             DataBinding();
-            await UserFeedAPI.GetFollowUserFeed(0, 10, userId, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, data =>
+            await UserFeedAPI.GetFollowUserFeed(0, 10, userId, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, 
+                success =>
                 {
-                    if (data.Activities != null)
-                    {
-                        ActivitiesGroups.Clear();
-                        Dictionary<string, List<UserActivityItem>> dict = new Dictionary<string, List<UserActivityItem>>();
-                        foreach (var item in data.Activities)
-                        {
-
-                            UserActivityItem usi = new UserActivityItem() {
-                                Name = item.Name,
-                                Content = item.Content,
-                                CreateTime = item.CreateTime,
-                                Image = item.Pic,
-                                ProductId = item.ItemId,
-                                Type = item.Type,
-                            };
-
-                            if (dict.ContainsKey(item.FormatTime))
-                            {
-                                dict[item.FormatTime].Add(usi);
-                            }
-                            else
-                            {
-                                List<UserActivityItem> list = new List<UserActivityItem>();
-                                list.Add(usi);
-                                dict.Add(item.FormatTime, list);
-                            }
-                        }
-
-                        foreach (var kv in dict)
-                        {
-                            UserActivitiesGroup group = new UserActivitiesGroup();
-                            string[] temp = kv.Key.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
-                            group.Month = temp[0].Trim();
-                            group.Day = temp[1].Trim();
-
-                            foreach (var item in kv.Value)
-                            {
-                                group.Activities.Add(item);
-                            }
-                            ActivitiesGroups.Add(group);
-                        }
-                    }
-
+                    UpdateData(success);
                     loading.SetState(LoadingState.SUCCESS);
 
                 }, error =>
                 {
                     Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirstDataAsync(userId));
                 });
+        }
+
+        private void UpdateData(UserActivitiesData data)
+        {
+            if (data.Activities != null)
+            {
+                ActivitiesGroups.Clear();
+                Dictionary<string, List<UserActivityItem>> dict = new Dictionary<string, List<UserActivityItem>>();
+                foreach (var item in data.Activities)
+                {
+
+                    UserActivityItem usi = new UserActivityItem()
+                    {
+                        Name = item.Name,
+                        Content = item.Content,
+                        CreateTime = item.CreateTime,
+                        Image = item.Pic,
+                        ProductId = item.ItemId,
+                        Type = item.Type,
+                    };
+
+                    if (dict.ContainsKey(item.FormatTime))
+                    {
+                        dict[item.FormatTime].Add(usi);
+                    }
+                    else
+                    {
+                        List<UserActivityItem> list = new List<UserActivityItem>();
+                        list.Add(usi);
+                        dict.Add(item.FormatTime, list);
+                    }
+                }
+
+                foreach (var kv in dict)
+                {
+                    UserActivitiesGroup group = new UserActivitiesGroup();
+                    string[] temp = kv.Key.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
+                    group.Month = temp[0].Trim();
+                    group.Day = temp[1].Trim();
+
+                    foreach (var item in kv.Value)
+                    {
+                        group.Activities.Add(item);
+                    }
+                    ActivitiesGroups.Add(group);
+                }
+            }
         }
 
         #endregion

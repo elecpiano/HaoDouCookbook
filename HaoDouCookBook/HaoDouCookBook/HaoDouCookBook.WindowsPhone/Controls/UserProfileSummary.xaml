@@ -75,7 +75,7 @@
                             </Button.Content>
                         </Button>
 
-                        <Button x:Name="personal" Width="124">
+                        <Button x:Name="personal" Width="124" Click="Personal_click">
                             <Button.Content>
                                 <TextBlock Text="个人" FontWeight="Normal" Margin="15, 2"/>
                             </Button.Content>

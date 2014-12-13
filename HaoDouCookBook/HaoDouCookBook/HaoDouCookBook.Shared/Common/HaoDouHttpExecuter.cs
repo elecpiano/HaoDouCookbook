@@ -123,6 +123,16 @@ namespace HaoDouCookBook.Common
         {
             try
             {
+                if(!NetworkHelper.Current.IsInternetConnectionAvaiable)
+                {
+                    if(onFail != null)
+                    {
+                        onFail.Invoke(new Error() { ErrorCode = Constants.ERRORCODE_REMOTE_SERVER_UNAVAILABLE, Message = "网络连接不稳定" });
+                    }
+
+                    return;
+                }
+
                 string dataToPost = string.Empty;
                 if (IsMultipart)
                 {
@@ -212,6 +222,16 @@ namespace HaoDouCookBook.Common
         {
             try
             {
+                if(!NetworkHelper.Current.IsInternetConnectionAvaiable)
+                {
+                    if(onFail != null)
+                    {
+                        onFail.Invoke(new Error() { ErrorCode = Constants.ERRORCODE_REMOTE_SERVER_UNAVAILABLE, Message = "网络连接不稳定" });
+                    }
+
+                    return;
+                }
+
                 await Http.GETAsync(apiUrl, additionalRequestHeaders, (result) =>
                 {
                     JsonObject data = JsonObject.Parse(result.Content);
