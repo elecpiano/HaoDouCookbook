@@ -63,4 +63,24 @@ namespace HaoDouCookBook.HaoDou.DataModels.Discovery
             PhotoFlag = -1;
         }
     }
+
+
+    [DataContract]
+    public class AddCommentResult
+    {
+
+        [DataMember(Name = "cid")]
+        public string CId { get; set; }
+
+        [DataMember]
+        public string CreateTime { get; set; }
+
+        [DataMember(Name = "errormsg")]
+        public string Message { get; set; }
+        public AddCommentResult()
+        {
+
+        }
+    }
+
 }

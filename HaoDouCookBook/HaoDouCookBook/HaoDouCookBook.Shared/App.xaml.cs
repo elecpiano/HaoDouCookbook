@@ -66,7 +66,6 @@ namespace HaoDouCookBook
         void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             e.SetObserved();
-            throw new NotImplementedException();
         }
 
         void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)

@@ -68,7 +68,7 @@ namespace HaoDouCookBook.Pages
             {
                 viewModel = new ProductPageViewModel();
                 rooScrollViewer.ScrollToVerticalOffset(0);
-                LoadDataAsync(0, 20, paras.ProductId, paras.TopicId, paras.Type, string.Empty, null);
+                LoadFirstPageDataAsync(paras.ProductId, paras.TopicId, paras.Type);
             }
             
         }
@@ -82,13 +82,19 @@ namespace HaoDouCookBook.Pages
             this.root.DataContext = viewModel;
         }
 
-        private async Task LoadDataAsync(int offset, int limit, int productId, int topicId, int type, string sign, int? uid)
+        private async Task LoadFirstPageDataAsync(int productId, int topicId, int type)
         {
-            await RecipePhotoAPI.GetProdcuts(offset, limit, type, productId, topicId, sign, uid, UserGlobal.Instance.uuid, data =>
-                {
-                    UpdateData(data);
-
-                }, error => { });
+            loading.SetState(LoadingState.LOADING);
+            await RecipePhotoAPI.GetProdcuts(0, 20, type, productId, topicId,
+                UserGlobal.Instance.UserInfo.Sign, 
+                UserGlobal.Instance.GetInt32UserId(),
+                UserGlobal.Instance.uuid,
+                success => {
+                    UpdateData(success);
+                    loading.SetState(LoadingState.SUCCESS);
+                }, error => {
+                    Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirstPageDataAsync(productId, topicId, type));
+                });
         }
 
         private void UpdateData(ProductPageData data)
@@ -120,6 +126,7 @@ namespace HaoDouCookBook.Pages
                     recipeProduct.Intro = item.Intro;
                     recipeProduct.Position = item.Position;
                     recipeProduct.CommentCount = item.CommentCount;
+                    recipeProduct.IsDigg = item.IsDigg == 1 ? true : false;
 
                     if (item.CommentCount > 1)
                     {
@@ -200,11 +207,105 @@ namespace HaoDouCookBook.Pages
             App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
         }
 
+        private void comment_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.input.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            this.input.Focus(Windows.UI.Xaml.FocusState.Keyboard);
+            var dataContext = sender.GetDataContext<ViewModels.ProductPageRecipe>();
+            input.SendAction = async comment =>
+            {
+                await CommentAPI.AddComment(
+                    comment,
+                    UserGlobal.Instance.GetInt32UserId(),
+                    UserGlobal.Instance.UserInfo.Sign,
+                    dataContext.ProductId,
+                    2,
+                    success =>
+                    {
+                        if (success.Message.Contains("成功"))
+                        {
+                            var newComment = new ViewModels.ProductPageComment()
+                            {
+                                Content = comment,
+                                UserId = UserGlobal.Instance.GetInt32UserId(),
+                                UserName = UserGlobal.Instance.UserInfo.Name
+                            };
+
+                            dataContext.Comments.Insert(0, newComment);
+                            dataContext.CommentCount++;
+                            this.input.ClearText();
+                        }
+
+                        this.input.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                        toast.Show(success.Message);
+                    },
+                    error =>
+                    {
+                        toast.Show(error.Message);
+                        this.input.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    });
+            };
+        }
+
+        private async void Undigg_click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<ViewModels.ProductPageRecipe>();
+            await DiggAPI.Digg(
+                dataContext.ProductId,
+                UserGlobal.Instance.GetInt32UserId(),
+                1,
+                0,  // undigg
+                UserGlobal.Instance.uuid,
+                UserGlobal.Instance.UserInfo.Sign,
+                success =>
+                {
+                    if (success.Message.Contains("成功"))
+                    {
+                        dataContext.IsDigg = false;
+                        dataContext.LikeNumber--;
+                    }
+
+                    toast.Show(success.Message);
+
+
+                },
+               error =>
+               {
+                   toast.Show(error.Message);
+               });
+        }
+
+        private async void Digg_click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<ViewModels.ProductPageRecipe>();
+            await DiggAPI.Digg(
+                dataContext.ProductId,
+                UserGlobal.Instance.GetInt32UserId(),
+                1,
+                1, //digg
+                UserGlobal.Instance.uuid,
+                UserGlobal.Instance.UserInfo.Sign,
+                success =>
+                {
+                    if (success.Message.Contains("成功"))
+                    {
+                        dataContext.IsDigg = true;
+                        dataContext.LikeNumber++;
+                    }
+
+                    toast.Show(success.Message);
+
+
+                },
+               error =>
+               {
+                   toast.Show(error.Message);
+               });
+        }
+
         #endregion
 
-        
-
-
+       
 
     }
 }

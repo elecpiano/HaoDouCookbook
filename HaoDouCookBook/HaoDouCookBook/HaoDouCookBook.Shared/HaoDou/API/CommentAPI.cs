@@ -25,5 +25,24 @@ namespace HaoDouCookBook.HaoDou.API
             HaoDouJsonDataLoader<CommentListPageData> loader = new HaoDouJsonDataLoader<CommentListPageData>();
             await loader.LoadAsync(postRequest, true, MODULE, cacheFileName, onSuccess, onFail);
         }
+
+        public static async Task AddComment(string content, int uid, string sign, int rid, int type, Action<AddCommentResult> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "addComment";
+
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("type", type.ToString());
+            postRequest.AddPostData("rid", rid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("content", content);
+            postRequest.AddPostData("type", type.ToString());
+            postRequest.AddPostData("rrid", string.Empty);
+            postRequest.AddPostData("atuid", string.Empty);
+            postRequest.AddPostData("uid", uid.ToString());
+
+            HaoDouJsonDataLoader<AddCommentResult> loader = new HaoDouJsonDataLoader<AddCommentResult>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+
+        }
     }
 }
