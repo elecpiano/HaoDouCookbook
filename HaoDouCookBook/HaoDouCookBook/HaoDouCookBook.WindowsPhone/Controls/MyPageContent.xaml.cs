@@ -133,9 +133,17 @@ namespace HaoDouCookBook.Controls
                 case "mydrafts":
                     GotoDraftsPage();
                     break;
+                case "myproducts":
+                    GotoMyProductsPage();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void GotoMyProductsPage()
+        {
+            App.Current.RootFrame.Navigate(typeof(MyProductPage));
         }
 
         private void GotoDraftsPage()

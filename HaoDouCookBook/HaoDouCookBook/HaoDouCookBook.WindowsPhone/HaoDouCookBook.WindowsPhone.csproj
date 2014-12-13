@@ -262,6 +262,9 @@
     <Compile Include="Pages\MyDraftPage.xaml.cs">
       <DependentUpon>MyDraftPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MyProductPage.xaml.cs">
+      <DependentUpon>MyProductPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MyRecipesPage.xaml.cs">
       <DependentUpon>MyRecipesPage.xaml</DependentUpon>
     </Compile>
@@ -702,6 +705,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MyDraftPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MyProductPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -48,11 +48,11 @@
                     </PivotItem>
 
                     <PivotItem Header="作品" DataContext="{Binding}">
-                        <controls:UserRecipesControl Margin="-20, 0, -30, 0" x:Name="userProducts1" ItemsSource="{Binding Products}"/>
+                        <controls:UserRecipesControl Height="460" Margin="-20, 0, -30, 0" x:Name="userProducts1" ItemsSource="{Binding Products}"/>
                     </PivotItem>
 
                     <PivotItem Header="菜谱" DataContext="{Binding}">
-                        <controls:UserRecipesControl Margin="-20, 0, -30, 0" x:Name="userRecipes1" ItemsSource="{Binding Recipes}"/>
+                        <controls:UserRecipesControl Height="460" Margin="-20, 0, -30, 0" x:Name="userRecipes1" ItemsSource="{Binding Recipes}"/>
                     </PivotItem>
                 </Pivot>
 

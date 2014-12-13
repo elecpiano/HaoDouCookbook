@@ -62,7 +62,7 @@
                 <controls:SimpleSettingItem Icon="../assets/images/MyPage/LocalDownloads.png" ItemText="本地下载" Margin="0, 1.5, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
                 <controls:SimpleSettingItem Tag="shoppingList" Icon="../assets/images/MyPage/ShippingList.png" ItemText="购买清单" Margin="0, 1.5, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
 
-                <controls:SimpleSettingItem Icon="../assets/images/MyPage/MyArticle.png" 
+                <controls:SimpleSettingItem Tag="myproducts" Icon="../assets/images/MyPage/MyArticle.png" 
                                         ItemText="我的作品" 
                                         Margin="0, 20, 0, 0"
                                         Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
