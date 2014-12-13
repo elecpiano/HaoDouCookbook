@@ -189,7 +189,15 @@ namespace HaoDouCookBook.ViewModels
             get { return showAllCommentsTextVisible; }
             set { SetProperty<bool>(ref showAllCommentsTextVisible, value); }
         }
-        
+
+        private bool isDigg;
+
+        public bool IsDigg
+        {
+            get { return isDigg; }
+            set { SetProperty<bool>(ref isDigg, value); }
+        }
+
 
         public ProductPageRecipe()
         {

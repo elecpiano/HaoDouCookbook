@@ -409,6 +409,7 @@
     <Content Include="Assets\Images\findfriends.png" />
     <Content Include="Assets\Images\friends.png" />
     <Content Include="Assets\Images\likeheart.png" />
+    <Content Include="Assets\Images\ProductPage\like_white.png" />
     <Content Include="Assets\Images\messageNotice.png" />
     <Content Include="Assets\Images\messageSend.png" />
     <Content Include="Assets\Images\myFavoriteRecipeAlbum.png" />
