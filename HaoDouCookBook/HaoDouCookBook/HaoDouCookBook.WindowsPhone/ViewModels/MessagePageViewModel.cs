@@ -83,6 +83,15 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<int>(ref userId, value); }
         }
 
+        private int messageId;
+
+        public int MessageId
+        {
+            get { return messageId; }
+            set { SetProperty<int>(ref messageId, value); }
+        }
+
+
 
         public Message()
         {

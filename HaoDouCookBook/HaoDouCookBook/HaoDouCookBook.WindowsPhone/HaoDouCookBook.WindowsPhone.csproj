@@ -140,6 +140,12 @@
     <Compile Include="Controls\MealTile.xaml.cs">
       <DependentUpon>MealTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MessageBuble.xaml.cs">
+      <DependentUpon>MessageBuble.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MessageInput.xaml.cs">
+      <DependentUpon>MessageInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MyPageContent.xaml.cs">
       <DependentUpon>MyPageContent.xaml</DependentUpon>
     </Compile>
@@ -244,6 +250,9 @@
     <Compile Include="Pages\FriendsPage.xaml.cs">
       <DependentUpon>FriendsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\IMPage.xaml.cs">
+      <DependentUpon>IMPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -331,6 +340,7 @@
     <Compile Include="ViewModels\DishTileData.cs" />
     <Compile Include="ViewModels\FavoritePageViewlModel.cs" />
     <Compile Include="ViewModels\FavoriteRecipesAlbumPageViewModel.cs" />
+    <Compile Include="ViewModels\IMPageViewModel.cs" />
     <Compile Include="ViewModels\Meal.cs" />
     <Compile Include="ViewModels\MessagePageViewModel.cs" />
     <Compile Include="ViewModels\MyPageViewModel.cs" />
@@ -400,6 +410,7 @@
     <Content Include="Assets\Images\friends.png" />
     <Content Include="Assets\Images\likeheart.png" />
     <Content Include="Assets\Images\messageNotice.png" />
+    <Content Include="Assets\Images\messageSend.png" />
     <Content Include="Assets\Images\myFavoriteRecipeAlbum.png" />
     <Content Include="Assets\Images\myLikeRecipeAlbum.png" />
     <Content Include="Assets\Images\noactivity.png" />
@@ -528,6 +539,14 @@
     <Page Include="Controls\MealTile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MessageBuble.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MessageInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\MyPageContent.xaml">
       <SubType>Designer</SubType>
@@ -662,6 +681,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\FriendsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\IMPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

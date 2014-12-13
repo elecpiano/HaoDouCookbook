@@ -5,6 +5,7 @@ using HaoDouCookBook.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using Shared.Utility;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -77,7 +78,8 @@ namespace HaoDouCookBook.Pages
                                 UnreadCount = item.UnreadCount,
                                 UpdateTime = item.UpdateTime,
                                 UserName = item.UserName,
-                                UserId = item.UserId
+                                UserId = item.UserId,
+                                MessageId = item.MessageId
                             });
                         }
                     }
@@ -98,7 +100,19 @@ namespace HaoDouCookBook.Pages
             NoticeDetailPage.NoticeDetailPageParams paras = new NoticeDetailPage.NoticeDetailPageParams();
             App.Current.RootFrame.Navigate(typeof(NoticeDetailPage), paras);
         }
+        private void Message_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<Message>();
+            IMPage.IMPageParams paras = new IMPage.IMPageParams();
+            paras.messageId = dataContext.MessageId.ToString();
+            paras.userId = dataContext.UserId;
+            paras.UserName = dataContext.UserName;
+
+            App.Current.RootFrame.Navigate(typeof(IMPage), paras);
+        }
 
         #endregion
+
+       
     }
 }

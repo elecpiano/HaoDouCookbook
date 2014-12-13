@@ -22,6 +22,7 @@ namespace HaoDouCookBook.Controls
         public static readonly DependencyProperty AvatarProperty = DependencyProperty.Register("Avatar", typeof(string), typeof(UserProfileSummary), new PropertyMetadata(Constants.DEFAULT_USER_PHOTO));
         public static readonly DependencyProperty CanFollowProperty = DependencyProperty.Register("CanFollow", typeof(bool), typeof(UserProfileSummary), new PropertyMetadata(true));
         public static readonly DependencyProperty CheckInProperty = DependencyProperty.Register("CheckIn", typeof(bool), typeof(UserProfileSummary), new PropertyMetadata(false));
+        public static readonly DependencyProperty UserNameProperty = DependencyProperty.Register("UserName", typeof(string), typeof(UserProfileSummary), new PropertyMetadata(string.Empty));
 
         #endregion
 
@@ -75,6 +76,12 @@ namespace HaoDouCookBook.Controls
             set { SetValue(CanFollowProperty, value); }
         }
 
+        public string UserName
+        {
+            get { return (string)GetValue(UserNameProperty); }
+            set { SetValue(UserNameProperty, value); }
+        }
+
         #endregion
 
         public Action<UserProfileSummary> FollowAction { get; set; }
@@ -95,6 +102,16 @@ namespace HaoDouCookBook.Controls
 
         #region Event
 
+        private void Chat_click(object sender, RoutedEventArgs e)
+        {
+            IMPage.IMPageParams paras = new IMPage.IMPageParams();
+            paras.userId = UserId;
+            paras.messageId = string.Empty;
+            paras.UserName = UserName;
+
+            App.Current.RootFrame.Navigate(typeof(IMPage), paras);
+        }
+
         private void Follower_Tapped(object sender, TappedRoutedEventArgs e)
         {
             UserFollowersPage.UserFollowsPageParams paras = new UserFollowersPage.UserFollowsPageParams();
@@ -113,6 +130,7 @@ namespace HaoDouCookBook.Controls
             App.Current.RootFrame.Navigate(typeof(UserFollowersPage), paras);
 
         }
+
         private void follow_Click(object sender, RoutedEventArgs e)
         {
             if (FollowAction != null)
@@ -140,8 +158,6 @@ namespace HaoDouCookBook.Controls
 
         #endregion
 
-        
-       
 
     }
 }

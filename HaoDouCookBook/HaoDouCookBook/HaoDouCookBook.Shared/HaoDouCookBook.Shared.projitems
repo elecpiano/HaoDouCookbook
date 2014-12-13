@@ -76,6 +76,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\DiggUser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Favorite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Friends.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\IM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\MessagePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Notice.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Passport.cs" />

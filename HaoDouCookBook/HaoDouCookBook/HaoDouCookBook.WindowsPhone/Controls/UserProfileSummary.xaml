@@ -53,7 +53,7 @@
                             </Button.Content> 
                         </Button>
 
-                        <Button x:Name="chat" Width="124">
+                        <Button x:Name="chat" Width="124" Click="Chat_click">
                             <Button.Content>
                                 <TextBlock Text="聊天" FontWeight="Normal" Margin="15, 2"/>
                             </Button.Content>

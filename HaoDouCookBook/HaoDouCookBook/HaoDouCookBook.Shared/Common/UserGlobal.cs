@@ -124,12 +124,12 @@ namespace HaoDouCookBook.Common
                 {
                     await IsolatedStorageHelper.WriteToFileAsync(Constants.LOCAL_USERDATA_FOLDER, FILE_NAME, dataJson);
                 }
-                catch
+                catch(UnauthorizedAccessException)
                 {}
             }
         }
 
-        public async Task LoadDataAsync()
+        public async void LoadDataAsync()
         {
             string dataJson = await IsolatedStorageHelper.ReadFileAsync(Constants.LOCAL_USERDATA_FOLDER, FILE_NAME);
             if (string.IsNullOrEmpty(dataJson))

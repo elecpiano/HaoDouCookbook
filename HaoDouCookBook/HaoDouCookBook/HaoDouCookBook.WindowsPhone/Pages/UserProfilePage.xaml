@@ -32,6 +32,7 @@
                                     Avatar="{Binding UserAvatar}"
                                     UserIntro="{Binding UserIntro}"
                                     CanFollow="{Binding CanFollow}"
+                                    UserName="{Binding UserName}"
                                     CheckIn="{Binding CheckIn}"
                                     />
                             <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="-20, -10, -20, 20"/>

@@ -37,7 +37,8 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" IsHitTestVisible="True">
+                            <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}"
+                                                IsHitTestVisible="True" Tapped="Message_Tapped">
                                 <StackPanel Orientation="Vertical" Margin="0, 15, 0, 0">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
