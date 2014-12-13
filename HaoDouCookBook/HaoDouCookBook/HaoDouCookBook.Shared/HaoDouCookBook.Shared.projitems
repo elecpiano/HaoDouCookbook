@@ -37,6 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipePhotoAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipeUserAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\SearchAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\SettingAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\StuffAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\TopicAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\UserFeedAPI.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\MessagePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Notice.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Passport.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\PersonalTags.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\PublishRecipe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Recommendation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\UserFollower.cs" />

@@ -23,7 +23,7 @@ namespace HaoDouCookBook.Pages
 
             public NoticeDetailPageParams()
             {
-
+                SubType = string.Empty;
             }
         }
 
@@ -87,10 +87,17 @@ namespace HaoDouCookBook.Pages
                         foreach (var item in data.Notices)
                         {
                             string content = "回复了您，快去看看吧！";
-                            int recpieId = 0;
+                            int id = 0;
                             if(!string.IsNullOrEmpty(item.Content.Rid))
                             {
-                                recpieId = int.Parse(item.Content.Rid);
+                                id = int.Parse(item.Content.Rid);
+                            }
+                            else
+                            {
+                                if(!string.IsNullOrEmpty(item.Content.Pid))
+                                {
+                                    id = int.Parse(item.Content.Pid);
+                                }
                             }
 
                             viewModel.Notices.Add(new NoticeItem() { 
@@ -100,7 +107,7 @@ namespace HaoDouCookBook.Pages
                                 Type = item.Type,
                                 UserId = item.Uid,
                                 UserName = item.UserName,
-                                ContentId = recpieId
+                                ContentId = id
                             });
                         }
                     }
@@ -108,15 +115,7 @@ namespace HaoDouCookBook.Pages
                     loading.SetState(LoadingState.SUCCESS);
 
                 }, error => {
-                    if (Utilities.IsMatchNetworkFail(error.ErrorCode))
-                    {
-                        loading.RetryAction = async () => await LoadFirstPageDataAsync(subType);
-                        loading.SetState(LoadingState.NETWORK_UNAVAILABLE);
-                    }
-                    else
-                    {
-                        loading.SetState(LoadingState.DONE);
-                    }
+                    Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirstPageDataAsync(subType));
                 });
         }
 
@@ -131,14 +130,27 @@ namespace HaoDouCookBook.Pages
             switch (dataContext.Type)
             {
                 case 3:
-                    CommentListPage.CommentListPageParams paras = new CommentListPage.CommentListPageParams();
-                    paras.RecipeId = dataContext.ContentId;
-                    paras.Type = 0;
-                    paras.Cid = 0;
-                    paras.SourcePage = CommentListPage.SourcePage.NOTICE_PAGE;
+                    CommentListPage.CommentListPageParams paras3 = new CommentListPage.CommentListPageParams();
+                    paras3.RecipeId = dataContext.ContentId;
+                    paras3.Type = 0;
+                    paras3.Cid = 0;
+                    paras3.SourcePage = CommentListPage.SourcePage.NOTICE_PAGE;
 
-                    App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
+                    App.Current.RootFrame.Navigate(typeof(CommentListPage), paras3);
 
+                    break;
+                case 101:
+                    CommentListPage.CommentListPageParams paras101 = new CommentListPage.CommentListPageParams();
+                    paras101.RecipeId = dataContext.ContentId;
+                    paras101.Type = 2;
+                    paras101.Cid = 0;
+                    paras101.SourcePage = CommentListPage.SourcePage.NOTICE_PAGE;
+                    App.Current.RootFrame.Navigate(typeof(CommentListPage), paras101);
+                    break;
+                case 103:
+                    SingleProductViewPage.SingleProductViewPageParams paras103 = new SingleProductViewPage.SingleProductViewPageParams();
+                    paras103.ProductId = dataContext.ContentId;
+                    App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), paras103);
                     break;
                 default:
                     break;

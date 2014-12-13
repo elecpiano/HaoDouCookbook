@@ -64,6 +64,10 @@ namespace HaoDouCookBook.HaoDou.DataModels.My
         [DataMember]
         public string Rid { get; set; }
 
+
+        [DataMember]
+        public string Pid { get; set; }
+
         [DataMember]
         public string Name { get; set; }
 
@@ -79,6 +83,7 @@ namespace HaoDouCookBook.HaoDou.DataModels.My
             Name = string.Empty;
             Cid = string.Empty;
             Comment = string.Empty;
+            Pid = Pid;
         }
     }
 

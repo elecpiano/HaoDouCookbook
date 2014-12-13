@@ -259,6 +259,9 @@
     <Compile Include="Pages\NoticeDetailPage.xaml.cs">
       <DependentUpon>NoticeDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PersonalTagsPage.xaml.cs">
+      <DependentUpon>PersonalTagsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
@@ -683,6 +686,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\NoticeDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PersonalTagsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

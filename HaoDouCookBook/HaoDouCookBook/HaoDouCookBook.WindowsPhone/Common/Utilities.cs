@@ -1,4 +1,6 @@
-﻿using Shared.Utility;
+﻿using HaoDouCookBook.Controls;
+using HaoDouCookBook.Utility;
+using Shared.Utility;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,6 +22,27 @@ namespace HaoDouCookBook.Common
             }
 
             return false;
+        }
+
+        public static void ReloadWithDelay(Action action)
+        {
+            DelayHelper.Delay(TimeSpan.FromSeconds(0.7), action);
+        }
+
+        public static void CommonLoadingRetry(NetworkLoading loading, Error error, Action retryAction)
+        {
+            if (IsMatchNetworkFail(error.ErrorCode))
+            {
+                Utilities.ReloadWithDelay(() =>
+                {
+                    loading.RetryAction = retryAction;
+                    loading.SetState(LoadingState.NETWORK_UNAVAILABLE);
+                });
+            }
+            else
+            {
+                loading.SetState(LoadingState.DONE);
+            }
         }
 
         public static bool SignedIn()

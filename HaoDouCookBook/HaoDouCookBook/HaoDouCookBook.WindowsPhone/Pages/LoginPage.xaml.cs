@@ -1,6 +1,7 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.Controls;
 using HaoDouCookBook.Utility;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
@@ -14,6 +15,18 @@ namespace HaoDouCookBook.Pages
     /// </summary>
     public sealed partial class LoginPage : BackablePage
     {
+        public class LoginPageParams
+        {
+            public Action SignedInAction { get; set; }
+
+            public LoginPageParams()
+            {
+                SignedInAction = null;
+            }
+        }
+
+        public Action SignedInAction { get; set; }
+
         #region Life Cycle
 
         public LoginPage()
@@ -33,6 +46,12 @@ namespace HaoDouCookBook.Pages
             if (e.NavigationMode == NavigationMode.Back)
             {
                 return;
+            }
+
+            LoginPageParams paras = e.Parameter as LoginPageParams;
+            if(paras != null)
+            {
+                SignedInAction = paras.SignedInAction;
             }
         }
 
@@ -59,7 +78,12 @@ namespace HaoDouCookBook.Pages
 
             await UserGlobal.Instance.Login(userName, password, () =>
                 {
-                    App.Current.RootFrame.Navigate(typeof(MainPage));
+                    if (SignedInAction != null)
+                    {
+                        SignedInAction.Invoke();
+                    }
+
+                    App.Current.RootFrame.GoBack();
 
                 }, error =>
                 {

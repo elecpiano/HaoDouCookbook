@@ -85,15 +85,7 @@ namespace HaoDouCookBook.Pages
                     loading.SetState(LoadingState.SUCCESS);
                     
                 }, error => {
-                    if (Utilities.IsMatchNetworkFail(error.ErrorCode))
-                    {
-                        loading.RetryAction = async () => await LoadFirstDataAysnc();
-                        loading.SetState(LoadingState.NETWORK_UNAVAILABLE);
-                    }
-                    else
-                    {
-                        loading.SetState(LoadingState.DONE);
-                    }
+                    Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirstDataAysnc());
                 });
         }
 
@@ -102,8 +94,6 @@ namespace HaoDouCookBook.Pages
         private void Notice_Tapped(object sender, TappedRoutedEventArgs e)
         {
             NoticeDetailPage.NoticeDetailPageParams paras = new NoticeDetailPage.NoticeDetailPageParams();
-            paras.SubType = viewModel.SubType; 
-
             App.Current.RootFrame.Navigate(typeof(NoticeDetailPage), paras);
         }
     }

@@ -12,7 +12,7 @@
     <Page.BottomAppBar>
         <CommandBar x:Name="bottomAppbar" Style="{StaticResource bottomAppbarStyle}">
             <CommandBar.PrimaryCommands> 
-                <AppBarButton Icon="Edit" Label="偏好设置"/>
+                <AppBarButton Icon="Edit" Label="偏好设置" Click="personalTags_click"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
@@ -45,5 +45,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/>
     </Grid>
 </controls:BackablePage>

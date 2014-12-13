@@ -81,7 +81,7 @@ namespace HaoDouCookBook.Pages
                 }
 
                 DataBinding();
-                LoadFisrtPageDataAsync(pageParams.AlbumId);
+                LoadFirstPageDataAsync(pageParams.AlbumId);
             }
         }
 
@@ -93,38 +93,33 @@ namespace HaoDouCookBook.Pages
             this.root.DataContext = viewModel;
         }
 
-        private async Task LoadFisrtPageDataAsync(int albumId)
+        private async Task LoadFirstPageDataAsync(int albumId)
         {
-            await InfoAPI.GetAlbumInfo(0, 20, albumId, UserGlobal.Instance.UserInfo.Sign, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid,
-                                        data =>
-                                        {
-                                            if (data.Recipes != null)
-                                            {
-                                                foreach (var item in data.Recipes)
-                                                {
-                                                    viewModel.Recipes.Add(new FavoriteRecipe() {
-                                                        Cover = item.Cover,
-                                                        LikeNumber = item.LikeCount,
-                                                        ViewNumber = item.ViewCount,
-                                                        Title = item.Title,
-                                                        RecipeId = item.RecipeId,
-                                                        Intro = item.Stuff
-                                                    });
-                                                }
-                                            }
+            await InfoAPI.GetAlbumInfo(0, 20, albumId,
+                UserGlobal.Instance.UserInfo.Sign,
+                UserGlobal.Instance.GetInt32UserId(),
+                UserGlobal.Instance.uuid,
+                success => {
+                    if (success.Recipes != null)
+                    {
+                        foreach (var item in success.Recipes)
+                        {
+                            viewModel.Recipes.Add(new FavoriteRecipe()
+                            {
+                                Cover = item.Cover,
+                                LikeNumber = item.LikeCount,
+                                ViewNumber = item.ViewCount,
+                                Title = item.Title,
+                                RecipeId = item.RecipeId,
+                                Intro = item.Stuff
+                            });
+                        }
+                    }
 
-                                        }, error => {
-                                            if (Utilities.IsMatchNetworkFail(error.ErrorCode))
-                                            {
-                                                loading.RetryAction = async () => await LoadFisrtPageDataAsync(albumId);
-                                                loading.SetState(LoadingState.NETWORK_UNAVAILABLE);
-                                            }
-                                            else
-                                            {
-                                                loading.SetState(LoadingState.DONE);
-                                            }
-
-                                        });
+                },
+                error => {
+                    Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirstPageDataAsync(albumId));
+                });
         }
 
         #endregion

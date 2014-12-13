@@ -173,7 +173,10 @@ namespace HaoDouCookBook.Pages
             }
         }
 
-
+        private void publish_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(PublishProductsPage));
+        }
 
         private void RecipeImage_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -198,6 +201,8 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+        
 
 
 

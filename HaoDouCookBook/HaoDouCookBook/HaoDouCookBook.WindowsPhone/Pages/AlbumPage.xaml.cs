@@ -96,19 +96,8 @@ namespace HaoDouCookBook.Pages
                     loading.SetState(LoadingState.SUCCESS);
  
                 }, error => {
-                    if (Utilities.IsMatchNetworkFail(error.ErrorCode))
-                    {
-                        DelayHelper.Delay(TimeSpan.FromSeconds(0.7), () =>
-                            {
-                                // retry action
-                                //
-                                loading.RetryAction = async () => { await LoadFirstPageDataAsync(albumId); };
 
-                                // show netork unavailable
-                                //
-                                loading.SetState(LoadingState.NETWORK_UNAVAILABLE);
-                            });
-                    }
+                    Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirstPageDataAsync(albumId));
                 });
         }
 

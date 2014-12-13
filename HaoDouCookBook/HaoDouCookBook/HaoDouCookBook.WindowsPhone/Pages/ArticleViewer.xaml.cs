@@ -97,7 +97,10 @@ namespace HaoDouCookBook.Pages
                         this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
                     }
                 }, error => {
-                    toast.Show(error.Message);
+                    if(Utilities.SignedIn())
+                    {
+                        toast.Show(error.Message);
+                    }
                 });
         }
 

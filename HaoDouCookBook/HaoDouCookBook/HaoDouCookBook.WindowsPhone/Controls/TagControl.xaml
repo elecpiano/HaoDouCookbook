@@ -9,8 +9,7 @@
     d:DesignHeight="32"
     d:DesignWidth="400">
     
-    <Grid x:Name="grid" Background="#10000000" Tapped="Grid_Tapped"
-          HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock x:Name="text" Text="{Binding Text}" TextAlignment="Center" FontSize="18" Margin="10, 5"/>
+    <Grid x:Name="grid" Background="#10000000" Tapped="Grid_Tapped" >
+        <TextBlock x:Name="text" Text="{Binding Text}" VerticalAlignment="Center" TextAlignment="Center" FontSize="18" Margin="10, 7, 10, 5"/>
     </Grid>
 </UserControl>

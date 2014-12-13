@@ -143,47 +143,36 @@ namespace HaoDouCookBook.Pages
 
             int uid = Utilities.GetInt32UserId(UserGlobal.Instance.UserInfo.UserId);
 
-            await RecipeUserAPI.GetUserInfo(pageParams.UserId, uid, UserGlobal.Instance.UserInfo.Sign, data =>
-            {
-                if (pageParams != null)
-                {
-                    viewModel.UserId = pageParams.UserId;
-                }
-
-                if (data.SummaryInfo != null)
-                {
-                    viewModel.FollowCount = data.SummaryInfo.FollowCnt;
-                    viewModel.FansCount = data.SummaryInfo.FansCount;
-                    viewModel.Coin = data.SummaryInfo.Wealth;
-                    viewModel.UserAvatar = data.SummaryInfo.Avatar;
-                    viewModel.UserIntro = string.IsNullOrEmpty(data.SummaryInfo.Intro) ? Constants.DEFAULT_USER_INTRO : data.SummaryInfo.Intro;
-                    viewModel.UserName = data.SummaryInfo.UserName;
-                    viewModel.CanFollow = data.SummaryInfo.CanFollow == 1 ? true : false;
-                    viewModel.CheckIn = data.SummaryInfo.CheckIn;
-
-                    if (Utilities.IsSignedInUser(data.SummaryInfo.UserId))
+            await RecipeUserAPI.GetUserInfo(pageParams.UserId, uid, UserGlobal.Instance.UserInfo.Sign,
+                success => {
+                    if (pageParams != null)
                     {
-                        UserGlobal.Instance.UpdateUserInfoBySummary(data.SummaryInfo);
+                        viewModel.UserId = pageParams.UserId;
                     }
-                }
 
-                loading.SetState(LoadingState.SUCCESS);
-
-            }, error =>
-            {
-                if (Utilities.IsMatchNetworkFail(error.ErrorCode))
-                {
-                    DelayHelper.Delay(TimeSpan.FromSeconds(0.7), () =>
+                    if (success.SummaryInfo != null)
                     {
-                        loading.RetryAction = async () => await LoadDataAsync();
-                        loading.SetState(LoadingState.NETWORK_UNAVAILABLE);
-                    });
-                }
-                else
-                {
-                    loading.SetState(LoadingState.DONE);
-                }
-            });
+                        viewModel.FollowCount = success.SummaryInfo.FollowCnt;
+                        viewModel.FansCount = success.SummaryInfo.FansCount;
+                        viewModel.Coin = success.SummaryInfo.Wealth;
+                        viewModel.UserAvatar = success.SummaryInfo.Avatar;
+                        viewModel.UserIntro = string.IsNullOrEmpty(success.SummaryInfo.Intro) ? Constants.DEFAULT_USER_INTRO : success.SummaryInfo.Intro;
+                        viewModel.UserName = success.SummaryInfo.UserName;
+                        viewModel.CanFollow = success.SummaryInfo.CanFollow == 1 ? true : false;
+                        viewModel.CheckIn = success.SummaryInfo.CheckIn;
+
+                        if (Utilities.IsSignedInUser(success.SummaryInfo.UserId))
+                        {
+                            UserGlobal.Instance.UpdateUserInfoBySummary(success.SummaryInfo);
+                        }
+                    }
+
+                    loading.SetState(LoadingState.SUCCESS);
+
+                },
+                error => {
+                    Utilities.CommonLoadingRetry(loading, error, async () => await LoadDataAsync());
+                });
         }
 
         #endregion
@@ -231,7 +220,7 @@ namespace HaoDouCookBook.Pages
             this.myProfileSummary.CheckInAction = CheckIn;
         }
 
-        
+
 
         private void Init(UserProfilePageParams paras)
         {
@@ -304,7 +293,8 @@ namespace HaoDouCookBook.Pages
                 }
 
                 toast.Show(data.Message);
-            }, error => {
+            }, error =>
+            {
                 toast.Show(error.Message);
             });
         }

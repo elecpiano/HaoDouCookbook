@@ -9,6 +9,12 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <controls:BackablePage.BottomAppBar>
+        <CommandBar Style="{StaticResource bottomAppbarStyle}">
+            <AppBarButton Icon="Edit" Label="晒一晒" Click="publish_Click"/>
+        </CommandBar>
+    </controls:BackablePage.BottomAppBar>
+
     <Grid Margin="0, 0, 0, 0" x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="18, 5, 0, 0" Title="好豆菜谱"/>
         <Grid Margin="0, 55, 0, 0">

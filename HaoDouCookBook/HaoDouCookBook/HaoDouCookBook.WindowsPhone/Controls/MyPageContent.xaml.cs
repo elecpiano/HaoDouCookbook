@@ -71,7 +71,9 @@ namespace HaoDouCookBook.Controls
 
         private void GotoLogin_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(LoginPage));
+            LoginPage.LoginPageParams paras = new LoginPage.LoginPageParams();
+            paras.SignedInAction = () => toast.Show("登陆成功");
+            App.Current.RootFrame.Navigate(typeof(LoginPage), paras);
         }
 
         private void SimpleSettingItem_Tapped(object sender, TappedRoutedEventArgs e)

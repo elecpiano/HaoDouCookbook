@@ -71,7 +71,7 @@ namespace HaoDouCookBook.Pages
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 SetPageTypeRelatedItems(pageParams.UserId, pageParams.PageType);
                 DataBinding();
-                await LoadDataAsync(20, 0, pageParams.UserId);
+                await LoadFirstPageDataAsync(pageParams.UserId);
             }
             
         }
@@ -85,7 +85,7 @@ namespace HaoDouCookBook.Pages
             this.root.DataContext = viewModel;
         }
 
-        private async Task LoadDataAsync(int offset, int limit, int userid)
+        private async Task LoadFirstPageDataAsync(int userid)
         {
             loading.SetState(LoadingState.LOADING);
             int uid = Utilities.GetInt32UserId(UserGlobal.Instance.UserInfo.UserId);
@@ -98,11 +98,11 @@ namespace HaoDouCookBook.Pages
             switch (pageParams.PageType)
             {
                 case PageType.FOLLOW:
-                    await RecipeUserAPI.GetFollows(offset, limit, userid, uid, UserGlobal.Instance.UserInfo.Sign, data =>
-                        {
-                            if (data.Followers != null)
+                    await RecipeUserAPI.GetFollows(0, 20, userid, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, 
+                        success => {
+                            if (success.Followers != null)
                             {
-                                foreach (var item in data.Followers)
+                                foreach (var item in success.Followers)
                                 {
                                     viewModel.Followers.Add(new UserFollower() { 
                                         Avatar = item.Avatar,
@@ -116,24 +116,17 @@ namespace HaoDouCookBook.Pages
 
                             loading.SetState(LoadingState.SUCCESS);
 
-                        }, error =>
-                        {
-                            if (Utilities.IsMatchNetworkFail(error.ErrorCode))
-                            {
-                                loading.RetryAction = async () => await LoadDataAsync(offset, limit, userid);
-                            }
-                            else
-                            {
-                                loading.SetState(LoadingState.DONE);
-                            }
+                        },
+                        error => {
+                            Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirstPageDataAsync(userid));
                         });
                     break;
                 case PageType.FANS:
-                    await RecipeUserAPI.GetFans(offset, limit, userid, uid, UserGlobal.Instance.UserInfo.Sign, data =>
-                    {
-                        if (data.Followers != null)
+                    await RecipeUserAPI.GetFans(0, 20, userid, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, 
+                    success => {
+                        if (success.Followers != null)
                         {
-                            foreach (var item in data.Followers)
+                            foreach (var item in success.Followers)
                             {
                                 viewModel.Followers.Add(new UserFollower()
                                 {
@@ -148,16 +141,10 @@ namespace HaoDouCookBook.Pages
 
                         loading.SetState(LoadingState.SUCCESS);
 
-                    }, error =>
-                    {
-                        if (Utilities.IsMatchNetworkFail(error.ErrorCode))
-                        {
-                            loading.RetryAction = async () => await LoadDataAsync(offset, limit, userid);
-                        }
-                        else
-                        {
-                            loading.SetState(LoadingState.DONE);
-                        }
+                    }, 
+                    error => {
+                        Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirstPageDataAsync(userid));
+                       
                     });
                     break;
                 default:

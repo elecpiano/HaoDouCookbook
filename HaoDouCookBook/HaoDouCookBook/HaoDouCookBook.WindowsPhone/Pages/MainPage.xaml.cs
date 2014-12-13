@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.Pages;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Pages;
 using System;
 using Windows.UI;
 using Windows.UI.ViewManagement;
@@ -115,7 +116,15 @@ namespace HaoDouCookBook
 
         private void GotoPublishProductsPage()
         {
-            App.Current.RootFrame.Navigate(typeof(PublishProductsPage));
+            if (Utilities.SignedIn())
+            {
+                App.Current.RootFrame.Navigate(typeof(PublishProductsPage));
+            }
+            else
+            {
+                LoginPage.LoginPageParams paras = new LoginPage.LoginPageParams();
+                App.Current.RootFrame.Navigate(typeof(LoginPage));
+            }
         }
 
         private void GotoCateogryPage()

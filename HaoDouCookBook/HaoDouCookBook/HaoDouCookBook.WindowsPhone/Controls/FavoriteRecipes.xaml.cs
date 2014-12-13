@@ -44,15 +44,7 @@ namespace HaoDouCookBook.Controls
                 }, 
                 error => 
                 {
-                    if (Utilities.IsMatchNetworkFail(error.ErrorCode))
-                    {
-                        loading.RetryAction = async () => await LoadFirstPageDataAsync();
-                        loading.SetState(LoadingState.NETWORK_UNAVAILABLE);
-                    }
-                    else
-                    {
-                        loading.SetState(LoadingState.DONE);
-                    }
+                    Utilities.CommonLoadingRetry(loading, error, async() => await LoadFirstPageDataAsync());
                 });
         }
 

@@ -70,7 +70,7 @@ namespace HaoDouCookBook.Controls
         private void SetToNotSelectedState()
         {
             this.grid.Background = new SolidColorBrush(Color.FromArgb(0x10, 0x00, 0x00, 0x00));
-            this.text.Foreground = new SolidColorBrush(Colors.Black);
+            this.text.Foreground = new SolidColorBrush(Colors.Gray);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.Controls;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.ViewModels;
 using Shared.Utility;
@@ -125,6 +126,21 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+        private void personalTags_click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if(Utilities.SignedIn())
+            {
+                App.Current.RootFrame.Navigate(typeof(PersonalTagsPage));
+            }
+            else
+            {
+                LoginPage.LoginPageParams paras = new LoginPage.LoginPageParams();
+                paras.SignedInAction = () =>  toast.Show("登录成功");
+
+                App.Current.RootFrame.Navigate(typeof(LoginPage), paras);
+            }
+        }
 
     }
 }
