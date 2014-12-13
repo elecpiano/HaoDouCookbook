@@ -186,6 +186,7 @@
     <Compile Include="Controls\TopicTile.xaml.cs">
       <DependentUpon>TopicTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UniversalWrapPanel.cs" />
     <Compile Include="Controls\UserActivity.xaml.cs">
       <DependentUpon>UserActivity.xaml</DependentUpon>
     </Compile>

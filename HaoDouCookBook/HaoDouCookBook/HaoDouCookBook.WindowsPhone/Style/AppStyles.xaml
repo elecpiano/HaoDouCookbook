@@ -278,7 +278,7 @@
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Background" Value="#10000000"/>
-        <Setter Property="Margin" Value="0, 0, 20, 15"/>
+        <Setter Property="Margin" Value="0, 0, 12, 12"/>
     </Style>
 
     <Style x:Key="TagRecipeItem_CardText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">

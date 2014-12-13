@@ -71,12 +71,17 @@
                     <ItemsControl ItemsSource="{Binding DiggList}" Margin="0, 20, 0, 0">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapGrid Orientation="Horizontal"/>
+                                <controls:UniversalWrapPanel Orientation="Horizontal"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding UserAvatar}" Height="50" Width="50" Margin="0, 0, 2, 3"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding UserAvatar}" Height="50" Width="50" Margin="0, 0, 2, 3"/>
+                                    <TextBlock VerticalAlignment="Center" Foreground="Gray" FontSize="21" Visibility="Collapsed" Margin="8, 0, 0, 0" Loaded="DiggCount_Loaded">
+                                        <Run Text="{Binding DiggCount}"/>个赞
+                                    </TextBlock>
+                                </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -130,8 +135,8 @@
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Text="{Binding UserName}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{StaticResource GreenMain}" FontSize="22"/>
-                                            <TextBlock Text="{Binding CreateTime}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="Gray" FontSize="21"/>
+                                            <TextBlock Text="{Binding UserName}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{StaticResource GreenMain}" FontSize="21"/>
+                                            <TextBlock Text="{Binding CreateTime}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="Gray" FontSize="19"/>
                                             <TextBlock TextWrapping="Wrap"  Margin="0, 5, 0, 0" Grid.Row="1">
                                             <Run Text="回复" FontSize="19"/>
                                             <Run Text="{Binding AtUserName}" FontSize="19" Foreground="{StaticResource GreenMain}"/>

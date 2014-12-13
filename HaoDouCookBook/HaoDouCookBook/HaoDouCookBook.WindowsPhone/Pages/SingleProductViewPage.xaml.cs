@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.Controls;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.ViewModels;
 using System.Threading.Tasks;
@@ -100,12 +101,16 @@ namespace HaoDouCookBook.Pages
                     //
                     if (data.Info.DiggList != null)
                     {
+                        int diggCount = 0;
+                        int.TryParse(data.Info.DiggCount, out diggCount);
+
                         foreach (var item in data.Info.DiggList)
                         {
                             viewModel.DiggList.Add(new ProductViewPageDigg() { 
                                     UserAvatar = item.Avatar,
                                     UserId = int.Parse(item.UserId),
-                                    UserName = item.UserName
+                                    UserName = item.UserName,
+                                    DiggCount = diggCount
                             });
                         }
                     }
@@ -168,5 +173,11 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+
+        private void DiggCount_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.ElementInItemsControl_SetVisibleAtEnd<ProductViewPageDigg>(sender, true);
+        }
     }
 }

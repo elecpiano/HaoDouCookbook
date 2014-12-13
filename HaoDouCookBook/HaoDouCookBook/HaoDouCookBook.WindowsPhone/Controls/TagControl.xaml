@@ -11,6 +11,6 @@
     
     <Grid x:Name="grid" Background="#10000000" Tapped="Grid_Tapped"
           HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock x:Name="text" Text="{Binding Text}" TextAlignment="Center" FontSize="21" Margin="15, 3"/>
+        <TextBlock x:Name="text" Text="{Binding Text}" TextAlignment="Center" FontSize="18" Margin="10, 5"/>
     </Grid>
 </UserControl>

@@ -199,13 +199,13 @@
                     <ItemsControl ItemsSource="{Binding Tags}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapGrid Orientation="Horizontal"/>
+                                <controls:UniversalWrapPanel Orientation="Horizontal"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border Tapped="Tags_Tapped" Style="{StaticResource RecipeInfoPage_Tags_Style}">
-                                    <TextBlock Text="{Binding Text}" Margin="10, 6, 10, 6" FontSize="19" TextAlignment="Center"/>
+                                    <TextBlock Text="{Binding Text}" Margin="10, 6, 10, 6" FontSize="18" TextAlignment="Center"/>
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

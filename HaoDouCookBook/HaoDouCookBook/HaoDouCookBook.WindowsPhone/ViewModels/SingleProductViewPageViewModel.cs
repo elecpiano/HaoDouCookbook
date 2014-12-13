@@ -171,11 +171,21 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref userName, value); }
         }
 
+        private int diggCount;
+
+        public int DiggCount
+        {
+            get { return diggCount; }
+            set { SetProperty<int>(ref diggCount, value); }
+        }
+
+
         public ProductViewPageDigg()
         {
             userId = -1;
             userAvatar = string.Empty;
             UserName = string.Empty;
+            diggCount = 0;
         }
 
     }

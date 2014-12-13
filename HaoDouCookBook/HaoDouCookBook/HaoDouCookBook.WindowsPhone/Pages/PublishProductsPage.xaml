@@ -45,7 +45,7 @@
                 <ItemsControl ItemsSource="{Binding Tags}" Margin="0, 20">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="5"/>
+                            <controls:UniversalWrapPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
