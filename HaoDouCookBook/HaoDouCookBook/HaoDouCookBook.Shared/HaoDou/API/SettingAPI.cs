@@ -1,4 +1,5 @@
 ﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.DataModels;
 using HaoDouCookBook.HaoDou.DataModels.My;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,20 @@ namespace HaoDouCookBook.HaoDou.API
 
             HaoDouJsonDataLoader<PersonalTagsData> loader = new HaoDouJsonDataLoader<PersonalTagsData>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+
+        public static async Task SetFond(string ids, int uid, string sign, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "setFond";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("id", ids);
+
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+
+
         }
     }
 }

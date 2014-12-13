@@ -3,6 +3,7 @@ using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
+using Shared.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -67,10 +68,50 @@ namespace HaoDouCookBook.Pages
             loading.SetState(LoadingState.LOADING);
             await SettingAPI.Fond(UserGlobal.Instance.UserInfo.Sign, UserGlobal.Instance.GetInt32UserId(),
                 success => {
+                    if(success.Tags != null)
+                    {
+                        PersonalTags.Clear();
+                        foreach (var item in success.Tags)
+                        {
+                            PersonalTags.Add(new TopicTag() { 
+                                Id = item.Id,
+                                Selected = item.Check,
+                                Text = item.Name
+                            });
+                        }
+                    }
 
+                    loading.SetState(LoadingState.SUCCESS);
                 },
                 error => {
                     Utilities.CommonLoadingRetry(loading, error, async () => await LoadTagsDataAsync());
+                });
+        }
+
+        private async void completed_click(object sender, RoutedEventArgs e)
+        {
+            var selectedTagsId = PersonalTags.Where(t => t.Selected == true).Select(s => s.Id).ToArray();
+            string ids = string.Join(",", selectedTagsId);
+
+            await SettingAPI.SetFond(ids, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign,
+                success => {
+                    if(success.Message.Contains("成功"))
+                    {
+                        App.Current.RootFrame.GoBack(); 
+                    }
+                    else
+                    {
+                        toast.Show(success.Message);
+                    }
+                },
+                error => {
+                    if (!NetworkHelper.Current.IsInternetConnectionAvaiable)
+                    {
+                        toast.Show("网路不稳定，请稍后再试~");
+                        return;
+                    }
+
+                    toast.Show(error.Message);
                 });
         }
     }

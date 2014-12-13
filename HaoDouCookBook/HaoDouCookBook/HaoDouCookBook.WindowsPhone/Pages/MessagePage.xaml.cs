@@ -91,10 +91,14 @@ namespace HaoDouCookBook.Pages
 
         #endregion
 
+        #region Eevnt
+
         private void Notice_Tapped(object sender, TappedRoutedEventArgs e)
         {
             NoticeDetailPage.NoticeDetailPageParams paras = new NoticeDetailPage.NoticeDetailPageParams();
             App.Current.RootFrame.Navigate(typeof(NoticeDetailPage), paras);
         }
+
+        #endregion
     }
 }
