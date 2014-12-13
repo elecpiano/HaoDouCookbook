@@ -1,4 +1,5 @@
 ﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.DataModels;
 using HaoDouCookBook.HaoDou.DataModels.My;
 using System;
 using System.Threading.Tasks;
@@ -40,6 +41,33 @@ namespace HaoDouCookBook.HaoDou.API
             HaoDouJsonDataLoader<IMMessageList> loader = new HaoDouJsonDataLoader<IMMessageList>();
             await loader.LoadAsync(postRequest, true, MODULE, cacheFileName, onSuccess, onFail);
 
+        }
+
+        public static async Task SendMessage(string content, int userId, int uid, string sign, string uuid, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "sendMsg";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("userid", userId.ToString());
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("uuid", uuid);
+            postRequest.AddPostData("content", content);
+
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+
+        public static async Task ClearOneMessageList(int userId, int uid, string mid, string sign, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "clearOneMessageList";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("userid", userId.ToString());
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("mid", mid);
+
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
         }
     }
 }

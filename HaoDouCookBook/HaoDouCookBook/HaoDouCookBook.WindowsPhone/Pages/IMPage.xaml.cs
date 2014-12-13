@@ -56,6 +56,7 @@ namespace HaoDouCookBook.Pages
         public IMPage()
         {
             this.InitializeComponent();
+            this.input.SendAction = SendMessageAction;
         }
 
         /// <summary>
@@ -127,5 +128,58 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+        #region Event
+
+        private async void SendMessageAction(string message)
+        {
+            await MessageAPI.SendMessage(
+                message,
+                pageParams.userId,
+                UserGlobal.Instance.GetInt32UserId(),
+                UserGlobal.Instance.UserInfo.Sign,
+                UserGlobal.Instance.uuid,
+                success => {
+                    if (success.Message.Contains("成功"))
+                    {
+                        viewModel.Messages.Add(new IMMessage() {
+                            Avatar = UserGlobal.Instance.UserInfo.Avatar,
+                            CreateTime = "刚刚",
+                            IsSignedInUser = true,
+                            Message = message,
+                            UserId = UserGlobal.Instance.GetInt32UserId()
+                        });
+                    }
+
+                    toast.Show(success.Message);
+                    this.input.ClearText();
+                },
+                error => {
+                    toast.Show(error.Message);
+                });
+        }
+        private async void ClearMessage_Click(object sender, RoutedEventArgs e)
+        {
+            await Utilities.ShowOKCancelDialog("提示", "您确定要删除吗？", async () =>
+            {
+                await MessageAPI.ClearOneMessageList(pageParams.userId, UserGlobal.Instance.GetInt32UserId(), pageParams.messageId, UserGlobal.Instance.UserInfo.Sign,
+                    success =>
+                    {
+                        if (success.Message.Contains("成功"))
+                        {
+                            App.Current.RootFrame.GoBack();
+                        }
+                        toast.Show(success.Message);
+                    },
+                    error =>
+                    {
+                        toast.Show(error.Message);
+                    });
+            }, null);
+        }
+
+        #endregion
+
+      
     }
 }

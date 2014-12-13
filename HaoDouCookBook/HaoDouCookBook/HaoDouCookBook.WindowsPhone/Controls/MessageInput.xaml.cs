@@ -21,5 +21,10 @@ namespace HaoDouCookBook.Controls
                 SendAction.Invoke(this.textbox.Text);
             }
         }
+
+        public void ClearText()
+        {
+            this.textbox.Text = string.Empty;
+        }
     }
 }

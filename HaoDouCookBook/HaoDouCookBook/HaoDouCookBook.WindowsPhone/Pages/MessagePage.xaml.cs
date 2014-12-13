@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Shared.Utility;
+using HaoDouCookBook.HaoDou.DataModels.My;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -40,6 +41,7 @@ namespace HaoDouCookBook.Pages
             base.OnNavigatedTo(e);
             if (e.NavigationMode == NavigationMode.Back)
             {
+                ReloadFirtPageDataAsync();
                 return;
             }
 
@@ -61,34 +63,48 @@ namespace HaoDouCookBook.Pages
             loading.SetState(LoadingState.LOADING);
             await MessageAPI.GetListByUid(0, 20, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign, data =>
                 {
-                    if (data.Notices != null && data.Notices.Count > 0)
-                    {
-                        viewModel.NoticeContent = data.Notices[0].Content;
-                        viewModel.SubType = data.Notices[0].SubType;
-                    }
-
-                    if (data.Messages != null)
-                    {
-                        viewModel.Messages.Clear();
-                        foreach (var item in data.Messages)
-                        {
-                            viewModel.Messages.Add(new Message() {
-                                Avatar = item.Avatar,
-                                Content = item.LastMsg,
-                                UnreadCount = item.UnreadCount,
-                                UpdateTime = item.UpdateTime,
-                                UserName = item.UserName,
-                                UserId = item.UserId,
-                                MessageId = item.MessageId
-                            });
-                        }
-                    }
-
+                    UpdateData(data);
                     loading.SetState(LoadingState.SUCCESS);
                     
                 }, error => {
                     Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirstDataAysnc());
                 });
+        }
+
+        private async Task ReloadFirtPageDataAsync()
+        {
+            await MessageAPI.GetListByUid(0, 20, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign, data =>
+            {
+                UpdateData(data);
+
+            }, error => { });
+        }
+
+        private void UpdateData(MessagePageData data)
+        {
+            if (data.Notices != null && data.Notices.Count > 0)
+            {
+                viewModel.NoticeContent = data.Notices[0].Content;
+                viewModel.SubType = data.Notices[0].SubType;
+            }
+
+            if (data.Messages != null)
+            {
+                viewModel.Messages.Clear();
+                foreach (var item in data.Messages)
+                {
+                    viewModel.Messages.Add(new Message()
+                    {
+                        Avatar = item.Avatar,
+                        Content = item.LastMsg,
+                        UnreadCount = item.UnreadCount,
+                        UpdateTime = item.UpdateTime,
+                        UserName = item.UserName,
+                        UserId = item.ContactId,
+                        MessageId = item.MessageId
+                    });
+                }
+            }
         }
 
         #endregion
