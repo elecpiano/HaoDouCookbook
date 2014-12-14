@@ -11,6 +11,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using DataModels = HaoDouCookBook.HaoDou.DataModels;
+using System;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -27,9 +28,11 @@ namespace HaoDouCookBook.Pages
         {
             public int RecipeId { get; set; }
 
+            public RecipeInfoPageViewModel LocalDownloadData { get; set; }
+
             public RecipeInfoPageParams()
             {
-
+                LocalDownloadData = null;
             }
         }
 
@@ -65,10 +68,23 @@ namespace HaoDouCookBook.Pages
             RecipeInfoPageParams paras = e.Parameter as RecipeInfoPageParams;
             if(paras != null)
             {
-                viewModel = new RecipeInfoPageViewModel();
                 rootScrollViewer.ScrollToVerticalOffset(0);
-                DataBinding();
-                LoadDataAsync(string.Empty, null, paras.RecipeId);
+                if(paras.LocalDownloadData == null)
+                {
+                    viewModel = new RecipeInfoPageViewModel();
+                    DataBinding();
+                    this.download.Visibility = LocalDownloads.Instance.IsDownloaded(paras.RecipeId) ? Windows.UI.Xaml.Visibility.Collapsed : Windows.UI.Xaml.Visibility.Visible;
+                    LoadDataAsync(paras.RecipeId);
+                }
+                else
+                {
+                    viewModel = paras.LocalDownloadData;
+                    DataBinding();
+
+                    // from the local download page, so the download button shoul be not visible
+                    //
+                    this.download.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                }
 
             }
 
@@ -82,12 +98,17 @@ namespace HaoDouCookBook.Pages
             this.root.DataContext = viewModel;
         }
 
-        private async Task LoadDataAsync(string sign, int? uid, int recipeId)
+        private async Task LoadDataAsync(int recipeId)
         {
-            await InfoAPI.GetInfo(sign, uid, UserGlobal.Instance.uuid, recipeId, data =>
-                {
-                    UpdateViewModel(data);
-                }, error => { });
+            loaidng.SetState(LoadingState.LOADING);
+            await InfoAPI.GetInfo(UserGlobal.Instance.UserInfo.Sign, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, recipeId,
+                success => {
+                    UpdateViewModel(success);
+                    loaidng.SetState(LoadingState.SUCCESS);
+                }, 
+                error => {
+                    Utilities.CommonLoadingRetry(loaidng, error, async () => await LoadDataAsync(recipeId));
+                });
         }
 
         private void UpdateViewModel(InfoPageData data)
@@ -329,6 +350,76 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+        private async void Favorite_Click(object sender, RoutedEventArgs e)
+        {
+            await FavoriteAPI.Add(UserGlobal.Instance.GetInt32UserId(), 3, viewModel.RecipeId, UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign,
+                    success =>
+                    {
+                        toast.Show(success.Message);
+                        viewModel.IsLike = true;
+                        this.favorite.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                        this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    },
+                    error =>
+                    {
+                        toast.Show(error.Message);
+                    });
+        }
+
+        private async void removeFavorite_Click(object sender, RoutedEventArgs e)
+        {
+            await FavoriteAPI.Del(UserGlobal.Instance.GetInt32UserId(), 3, viewModel.RecipeId.ToString(), UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign, false,
+                    success =>
+                    {
+                        toast.Show(success.Message);
+                        viewModel.IsLike = false;
+                        this.favorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                        this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    },
+                    error =>
+                    {
+                        toast.Show(error.Message);
+                    });
+        }
+
+        private async void download_click(object sender, RoutedEventArgs e)
+        {
+            AddRecipeToLocalDownloadDialog dialog = new AddRecipeToLocalDownloadDialog();
+            dialog.onFolderTapped = folder =>
+            {
+                folder.Recipes.Add(viewModel);
+                folder.Cover = viewModel.Cover;
+                this.download.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                toast.Show("下载成功");
+                LocalDownloads.Instance.CommitData();
+            };
+            dialog.CreateNewFolderAction = () =>
+            {
+                dialog.Hide();
+                BigTextBox.BigTextBoxParams paras = new BigTextBox.BigTextBoxParams();
+                paras.MaxLength = 20;
+                paras.PlaceholderText = "输入分类名称，最多20个字符";
+                paras.ConfirmAction = newFolderName =>
+                {
+                    if (string.IsNullOrEmpty(newFolderName))
+                    {
+                        toast.Show("分类名不能为空");
+                        return;
+                    }
+
+                    LocalCateogoryFolder newFolder = new LocalCateogoryFolder() { FolderName = newFolderName };
+                    LocalDownloads.Instance.Folders.Add(newFolder);
+                    LocalDownloads.Instance.CommitData();
+
+                    dialog.ShowAsync();
+                };
+
+                App.Current.RootFrame.Navigate(typeof(BigTextBox), paras);
+            };
+
+            await dialog.ShowAsync();
+        }
 
     }
 }

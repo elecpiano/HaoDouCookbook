@@ -129,7 +129,7 @@ namespace HaoDouCookBook.Common
             }
         }
 
-        public async void LoadDataAsync()
+        public async void LoadData()
         {
             string dataJson = await IsolatedStorageHelper.ReadFileAsync(Constants.LOCAL_USERDATA_FOLDER, FILE_NAME);
             if (string.IsNullOrEmpty(dataJson))

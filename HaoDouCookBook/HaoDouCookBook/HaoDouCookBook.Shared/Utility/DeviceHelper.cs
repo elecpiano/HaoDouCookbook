@@ -92,6 +92,11 @@ namespace HaoDouCookBook.Utility
             return other == this;
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public Vector3()
         {
             X = 0;

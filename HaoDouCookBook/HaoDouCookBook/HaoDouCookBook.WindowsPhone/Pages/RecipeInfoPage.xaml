@@ -9,7 +9,15 @@
     xmlns:common="using:HaoDouCookBook.Common"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    
+    <controls:BackablePage.BottomAppBar>
+        <CommandBar x:Name="cmd" Style="{StaticResource bottomAppbarStyle}">
+            <AppBarButton x:Name="favorite" Icon="Favorite" Label="收藏" Click="Favorite_Click"/>
+            <AppBarButton x:Name="removeFavorite" Icon="Remove" Label="取消收藏" Click="removeFavorite_Click"/>
+            <AppBarButton x:Name="download" Icon="Download" Label="下载" Click="download_click"/>
+            <AppBarButton x:Name="share" Icon="Forward" Label="分享"/>
+        </CommandBar>
+    </controls:BackablePage.BottomAppBar>
     <controls:BackablePage.Resources>
         <common:MainStuffColorConverter x:Name="stuffColorConverter"/>
     </controls:BackablePage.Resources>
@@ -261,6 +269,8 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+
+        <controls:NetworkLoading x:Name="loaidng" Margin="0, 50, 0, 0"/>
         <controls:Toast x:Name="toast" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0, 0, 0, 120"/>
     </Grid>
 </controls:BackablePage>

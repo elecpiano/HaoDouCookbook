@@ -87,7 +87,11 @@
                                         <ColumnDefinition Width="60"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" Source="{Binding Cover}" VerticalAlignment="Center" Stretch="Uniform"/>
+                                    <Border Width="60" Height="60" Grid.Column="0">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Cover, Converter={StaticResource imageToDefaultConverter}, ConverterParameter=small}" AlignmentY="Center" Stretch="UniformToFill"/>
+                                        </Border.Background>
+                                    </Border>
                                     <TextBlock Grid.Column="1" Text="{Binding AlbumName}" Style="{StaticResource MyFavorite_RecipeAlbumTitle_Style}"/>
                                     <TextBlock Grid.Column="1" Style="{StaticResource MyFavorite_RecipeAlbumRecipeNumber_Style}">
                                     <Run Text="{Binding RecipeNumber}"/>道菜

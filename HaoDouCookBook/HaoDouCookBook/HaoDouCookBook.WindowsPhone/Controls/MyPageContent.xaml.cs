@@ -72,7 +72,7 @@ namespace HaoDouCookBook.Controls
         private void GotoLogin_Tapped(object sender, TappedRoutedEventArgs e)
         {
             LoginPage.LoginPageParams paras = new LoginPage.LoginPageParams();
-            paras.SignedInAction = () => toast.Show("登陆成功");
+            paras.SignedInAction = () => toast.Show("登录成功");
             App.Current.RootFrame.Navigate(typeof(LoginPage), paras);
         }
 
@@ -136,9 +136,17 @@ namespace HaoDouCookBook.Controls
                 case "myproducts":
                     GotoMyProductsPage();
                     break;
+                case "localdownloads":
+                    GotoLocalDownloadsPage();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void GotoLocalDownloadsPage()
+        {
+            App.Current.RootFrame.Navigate(typeof(LocalDownloadPage));
         }
 
         private void GotoMyProductsPage()

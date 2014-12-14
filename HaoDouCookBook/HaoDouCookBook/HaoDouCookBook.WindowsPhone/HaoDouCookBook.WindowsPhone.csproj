@@ -89,6 +89,7 @@
     <Compile Include="Common\FavoriteCountToStringConverter.cs" />
     <Compile Include="Common\FollowCountConverter.cs" />
     <Compile Include="Common\ListCountToNoItemsVisibilityConverter.cs" />
+    <Compile Include="Common\LocalDownlods.cs" />
     <Compile Include="Common\MainStuffColorConverter.cs" />
     <Compile Include="Common\RecipeImageToDefaultImageConverter.cs" />
     <Compile Include="Common\SettingValueStringToDisplayNameConverter.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Controls\ActivitySupportAndComment.xaml.cs">
       <DependentUpon>ActivitySupportAndComment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AddRecipeToLocalDownloadDialog.xaml.cs">
+      <DependentUpon>AddRecipeToLocalDownloadDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AdImagePivot.xaml.cs">
       <DependentUpon>AdImagePivot.xaml</DependentUpon>
@@ -137,6 +141,9 @@
     </Compile>
     <Compile Include="Controls\FavoriteAlbums.xaml.cs">
       <DependentUpon>FavoriteAlbums.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LocalDownloadsControl.xaml.cs">
+      <DependentUpon>LocalDownloadsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MealTile.xaml.cs">
       <DependentUpon>MealTile.xaml</DependentUpon>
@@ -256,6 +263,12 @@
     </Compile>
     <Compile Include="Pages\IMPage.xaml.cs">
       <DependentUpon>IMPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LocalDownloadFolderViewer.xaml.cs">
+      <DependentUpon>LocalDownloadFolderViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LocalDownloadPage.xaml.cs">
+      <DependentUpon>LocalDownloadPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -500,6 +513,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\AddRecipeToLocalDownloadDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AdImagePivot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -549,6 +566,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\FavoriteAlbums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LocalDownloadsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -705,6 +726,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\IMPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LocalDownloadFolderViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LocalDownloadPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

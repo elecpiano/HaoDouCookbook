@@ -1,12 +1,16 @@
 ﻿using Shared.Infrastructures;
 using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
+using System.Linq;
 
 namespace HaoDouCookBook.ViewModels
 {
+    [DataContract]
     public class RecipeInfoPageViewModel: BindableBase
     {
         private int recipeId;
 
+        [DataMember]
         public int RecipeId
         {
             get { return recipeId; }
@@ -15,6 +19,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string cover;
 
+        [DataMember]
         public string Cover
         {
             get { return cover; }
@@ -24,6 +29,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string title;
 
+        [DataMember]
         public string  Title
         {
             get { return title; }
@@ -32,6 +38,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string intro;
 
+        [DataMember]
         public string Intro
         {
             get { return intro; }
@@ -40,6 +47,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string cookTime;
 
+        [DataMember]
         public string CookTime
         {
             get { return cookTime; }
@@ -49,6 +57,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string readyTime;
 
+        [DataMember]
         public string ReadyTime
         {
             get { return readyTime; }
@@ -57,15 +66,16 @@ namespace HaoDouCookBook.ViewModels
 
         private string tips;
 
+        [DataMember]
         public string Tips
         {
             get { return tips; }
             set { SetProperty<string>(ref tips, value); }
         }
 
-
         private string userName;
 
+        [DataMember]
         public string UserName
         {
             get { return userName; }
@@ -74,6 +84,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int favoriteCount;
 
+        [DataMember]
         public int FavoriteCount
         {
             get { return favoriteCount; }
@@ -83,6 +94,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int photoCount;
 
+        [DataMember]
         public int PhotoCount
         {
             get { return photoCount; }
@@ -91,6 +103,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string reviewTime;
 
+        [DataMember]
         public string ReviewTime
         {
             get { return reviewTime; }
@@ -99,6 +112,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int userId;
 
+        [DataMember]
         public int UserId
         {
             get { return userId; }
@@ -107,6 +121,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string avatar;
 
+        [DataMember]
         public string Avatar
         {
             get { return avatar; }
@@ -115,6 +130,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int viewCount;
 
+        [DataMember]
         public int ViewCount
         {
             get { return viewCount; }
@@ -123,6 +139,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int type;
 
+        [DataMember]
         public int Type
         {
             get { return type; }
@@ -131,6 +148,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string userCount;
 
+        [DataMember]
         public string UserCount
         {
             get { return userCount; }
@@ -139,6 +157,7 @@ namespace HaoDouCookBook.ViewModels
 
         private ObservableCollection<TagItem> tags;
 
+        [DataMember]
         public ObservableCollection<TagItem> Tags
         {
             get { return tags; }
@@ -147,6 +166,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int likeCount;
 
+        [DataMember]
         public int LikeCount
         {
             get { return likeCount; }
@@ -155,6 +175,7 @@ namespace HaoDouCookBook.ViewModels
 
         private bool isLike;
 
+        [DataMember]
         public bool IsLike
         {
             get { return isLike; }
@@ -163,6 +184,7 @@ namespace HaoDouCookBook.ViewModels
 
         private ObservableCollection<string> photoList;
 
+        [DataMember]
         public ObservableCollection<string> PhotoList
         {
             get { return photoList; }
@@ -170,8 +192,10 @@ namespace HaoDouCookBook.ViewModels
         }
 
 
+        [DataMember]
         private ObservableCollection<CookStep> cookSteps;
 
+        [DataMember]
         public ObservableCollection<CookStep> CookSteps
         {
             get { return cookSteps; }
@@ -180,15 +204,28 @@ namespace HaoDouCookBook.ViewModels
 
         private ObservableCollection<FoodStuff> stuffs;
 
+        [DataMember]
         public ObservableCollection<FoodStuff> Stuffs
         {
             get { return stuffs; }
             set { SetProperty<ObservableCollection<FoodStuff>>(ref stuffs, value); }
         }
 
+        private string allStuffs;
+
+        /// <summary>
+        /// All stuff strings from Stuffs List, need call the GetAllStuffsString()
+        /// to update this property
+        /// </summary>
+        public string AllStuffs
+        {
+            get { return allStuffs; }
+            set { SetProperty<string>(ref allStuffs, value); }
+        }
 
         private int adFlag;
 
+        [DataMember]
         public int AdFlag
         {
             get { return adFlag; }
@@ -197,6 +234,7 @@ namespace HaoDouCookBook.ViewModels
 
         private AdItem ad;
 
+        [DataMember]
         public AdItem Ad
         {
             get { return ad; }
@@ -205,6 +243,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int commentCount;
 
+        [DataMember]
         public int CommentCount
         {
             get { return commentCount; }
@@ -213,6 +252,7 @@ namespace HaoDouCookBook.ViewModels
 
         private ObservableCollection<Comment> comments;
 
+        [DataMember]
         public ObservableCollection<Comment> Comments
         {
             get { return comments; }
@@ -221,6 +261,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int productCount;
 
+        [DataMember]
         public int ProductCount
         {
             get { return productCount; }
@@ -229,6 +270,7 @@ namespace HaoDouCookBook.ViewModels
 
         private ObservableCollection<Product> products;
 
+        [DataMember]
         public ObservableCollection<Product> Products
         {
             get { return products; }
@@ -237,10 +279,17 @@ namespace HaoDouCookBook.ViewModels
 
         private bool isVip;
 
+        [DataMember]
         public bool IsVip
         {
             get { return isVip; }
             set { SetProperty<bool>(ref isVip, value); }
+        }
+
+        public void GetAllStuffsString()
+        {
+            var nameList = Stuffs.Select(s => s.Name).ToArray();
+            AllStuffs =  string.Join("、", nameList);
         }
 
         public RecipeInfoPageViewModel()
@@ -273,13 +322,16 @@ namespace HaoDouCookBook.ViewModels
             ad = new AdItem();
             tags = new ObservableCollection<TagItem>();
             photoList = new ObservableCollection<string>();
+            allStuffs = string.Empty;
         }
     }
 
+    [DataContract]
     public class CookStep : BindableBase
     {
         private string photo;
 
+        [DataMember]
         public string Photo
         {
             get { return photo; }
@@ -288,6 +340,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string intro;
 
+        [DataMember]
         public string Intro
         {
             get { return intro; }
@@ -296,6 +349,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int stepNumber;
 
+        [DataMember]
         public int StepNumber
         {
             get { return stepNumber; }
@@ -311,10 +365,12 @@ namespace HaoDouCookBook.ViewModels
         }
     }
 
+    [DataContract]
     public class FoodStuff : BindableBase
     {
         private bool isMainStuff;
 
+        [DataMember]
         public bool IsMainStuff
         {
             get { return isMainStuff; }
@@ -324,6 +380,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string name;
 
+        [DataMember]
         public string Name
         {
             get { return name; }
@@ -332,6 +389,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string weight;
 
+        [DataMember]
         public string Weight
         {
             get { return weight; }
@@ -340,6 +398,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int id;
 
+        [DataMember]
         public int Id
         {
             get { return id; }
@@ -348,6 +407,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int type;
 
+        [DataMember]
         public int Type
         {
             get { return type; }
@@ -357,6 +417,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int categoryId;
 
+        [DataMember]
         public int CategoryId
         {
             get { return categoryId; }
@@ -365,6 +426,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string category;
 
+        [DataMember]
         public string Category
         {
             get { return category; }
@@ -373,6 +435,7 @@ namespace HaoDouCookBook.ViewModels
 
         private bool foodFlag;
 
+        [DataMember]
         public bool FoodFlag
         {
             get { return foodFlag; }
@@ -392,10 +455,12 @@ namespace HaoDouCookBook.ViewModels
         }
     }
 
+    [DataContract]
     public class AdItem : BindableBase
     {
         private string title;
 
+        [DataMember]
         public string Title
         {
             get { return title; }
@@ -404,6 +469,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string url;
 
+        [DataMember]
         public string Url
         {
             get { return url; }
@@ -412,6 +478,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string image;
 
+        [DataMember]
         public string Image
         {
             get { return image; }
@@ -427,10 +494,12 @@ namespace HaoDouCookBook.ViewModels
  
     }
 
+    [DataContract]
     public class Comment : BindableBase
     {
         private int userId;
 
+        [DataMember]
         public int UserId
         {
             get { return userId; }
@@ -439,6 +508,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string avatar;
 
+        [DataMember]
         public string Avatar
         {
             get { return avatar; }
@@ -447,6 +517,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string userName;
 
+        [DataMember]
         public string UserName
         {
             get { return userName; }
@@ -455,6 +526,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int atUserId;
 
+        [DataMember]
         public int AtUserId
         {
             get { return atUserId; }
@@ -463,6 +535,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string atUserName;
 
+        [DataMember]
         public string AtUserName
         {
             get { return atUserName; }
@@ -471,6 +544,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string content;
 
+        [DataMember]
         public string Content
         {
             get { return content; }
@@ -479,6 +553,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string createTime;
 
+        [DataMember]
         public string CreateTime
         {
             get { return createTime; }
@@ -498,10 +573,12 @@ namespace HaoDouCookBook.ViewModels
 
     }
 
+    [DataContract]
     public class Product : BindableBase
     {
         private string image;
 
+        [DataMember]
         public string Image
         {
             get { return image; }
@@ -510,6 +587,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string userName;
 
+        [DataMember]
         public string UserName
         {
             get { return userName; }
@@ -518,6 +596,7 @@ namespace HaoDouCookBook.ViewModels
 
         private string content;
 
+        [DataMember]
         public string Content
         {
             get { return content; }
@@ -526,6 +605,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int userId;
 
+        [DataMember]
         public int UserId
         {
             get { return userId; }
@@ -534,6 +614,7 @@ namespace HaoDouCookBook.ViewModels
 
         private int productId;
 
+        [DataMember]
         public int ProductId
         {
             get { return productId; }
