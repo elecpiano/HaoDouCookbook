@@ -13,7 +13,6 @@
     <controls:BackablePage.BottomAppBar>
         <CommandBar x:Name="cmd" Style="{StaticResource bottomAppbarStyle}">
             <AppBarButton x:Name="favorite" Icon="Favorite" Label="收藏" Click="Favorite_Click"/>
-            <AppBarButton x:Name="removeFavorite" Icon="Remove" Label="取消收藏" Click="removeFavorite_Click"/>
             <AppBarButton x:Name="download" Icon="Download" Label="下载" Click="download_click"/>
             <AppBarButton x:Name="share" Icon="Forward" Label="分享"/>
         </CommandBar>

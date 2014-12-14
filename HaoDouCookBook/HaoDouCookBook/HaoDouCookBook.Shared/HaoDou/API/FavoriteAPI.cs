@@ -103,6 +103,56 @@ namespace HaoDouCookBook.HaoDou.API
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
         }
 
+        public static async Task AddRecipe(int recipeId, int albumId, int uid, string uuid, string sign, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "addRecipe"; 
+
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("albumid", albumId.ToString());
+            postRequest.AddPostData("recipeid", recipeId.ToString());
+            postRequest.AddPostData("uuid", uuid);
+            postRequest.AddPostData("intro", string.Empty);
+
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+
+        // 移动菜谱
+        //
+        public static async Task RemoveRecipe(int rid, int fromid, int toid, int uid, string uuid, string sign, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "removeRecipe"; 
+
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("fromid", fromid.ToString());
+            postRequest.AddPostData("toid", toid.ToString());
+            postRequest.AddPostData("rid", rid.ToString());
+            postRequest.AddPostData("uuid", uuid);
+            postRequest.AddPostData("intro", string.Empty);
+
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+
+        public static async Task DelRecipe(int albumid, int recipeid, int uid, string sign, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "delRecipe"; 
+
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("recipeid", recipeid.ToString());
+            postRequest.AddPostData("albumid", albumid.ToString());
+            postRequest.AddPostData("intro", string.Empty);
+
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+
         public static async Task GetMyAlbum(int offset, int limit, int uid, string sign, string uuid, Action<FavoriteAlbumsData> onSuccess, Action<Error> onFail)
         {
             await LoadDataAsync<FavoriteAlbumsData>("getMyAlbum", offset, limit, uid, sign, uuid, onSuccess, onFail);

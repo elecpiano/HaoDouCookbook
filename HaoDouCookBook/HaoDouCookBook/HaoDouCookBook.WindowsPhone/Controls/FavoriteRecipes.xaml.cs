@@ -16,9 +16,25 @@ namespace HaoDouCookBook.Controls
 {
     public sealed partial class FavoriteRecipes : UserControl
     {
+        #region Dependency Proprety
+
+        public static readonly DependencyProperty ContextMenuEnabledProperty = DependencyProperty.Register("ContextMenuEnabled", typeof(bool), typeof(FavoriteRecipes), new PropertyMetadata(true));
+
+        #endregion
+
         #region Field && Property
 
         private FavoriteRecipesViewModel viewModel = new FavoriteRecipesViewModel();
+
+        public Action<RecipesAblum> OnAlbumTapped { get; set; }
+
+        public Action CreateNewAlubmTapped { get; set; }
+
+        public bool ContextMenuEnabled
+        {
+            get { return (bool)GetValue(ContextMenuEnabledProperty); }
+            set { SetValue(ContextMenuEnabledProperty, value); }
+        }
 
         #endregion
 
@@ -79,7 +95,7 @@ namespace HaoDouCookBook.Controls
                         {
                             AlbumId = item.Cid,
                             AlbumName = item.Title,
-                            Cover = item.Avatar,
+                            Cover = item.Cover,
                             RecipeNumber = item.RecipeCount
                         });
                     }
@@ -92,23 +108,7 @@ namespace HaoDouCookBook.Controls
             this.root.DataContext = viewModel; 
         }
 
-        private async void CreateNewAlbum(string newAlbumName)
-        {
-            if (string.IsNullOrEmpty(newAlbumName))
-            {
-                toast.Show("分类名不能为空");
-                return;
-            }
-
-            await FavoriteAPI.AddMyAlbum(UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, newAlbumName,  async success =>
-                {
-                    toast.Show(success.Message);
-                    await LoadFirstPageDataAsync();
-
-                }, error => {
-                    toast.Show(error.Message);
-                });
-        }
+        
 
         private async void RenameAlbum(int albumId, string newAlbumName)
         {
@@ -137,22 +137,20 @@ namespace HaoDouCookBook.Controls
         {
             var dataContext = sender.GetDataContext<RecipesAblum>();
 
-            FavoriteRecipeAlbumPage.FavoriteRecipeAlbumPageParams paras = new FavoriteRecipeAlbumPage.FavoriteRecipeAlbumPageParams();
-            paras.AlbumId = dataContext.AlbumId;
-            paras.Title = dataContext.AlbumName;
-
-            App.Current.RootFrame.Navigate(typeof(FavoriteRecipeAlbumPage), paras);
-
+            if(OnAlbumTapped != null)
+            {
+                OnAlbumTapped.Invoke(dataContext);
+            }
         }
 
         private void CreateNew_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            BigTextBox.BigTextBoxParams paras = new BigTextBox.BigTextBoxParams();
-            paras.MaxLength = 20;
-            paras.PlaceholderText = "输入分类名称，最多20个字符";
-            paras.ConfirmAction = CreateNewAlbum;
+            if (CreateNewAlubmTapped != null)
+            {
+                CreateNewAlubmTapped.Invoke();
+            }
 
-            App.Current.RootFrame.Navigate(typeof(BigTextBox), paras);
+            
         }
 
         private async void DeleteAlbum_Click(object sender, RoutedEventArgs e)
@@ -188,7 +186,10 @@ namespace HaoDouCookBook.Controls
 
         private void SmartGrid_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            sender.ShowFlayout(); 
+            if(ContextMenuEnabled)
+            {
+                sender.ShowFlayout(); 
+            }
         }
 
         private void EditAlbum_Click(object sender, RoutedEventArgs e)
@@ -206,5 +207,6 @@ namespace HaoDouCookBook.Controls
         }
 
         #endregion
+
     }
 }

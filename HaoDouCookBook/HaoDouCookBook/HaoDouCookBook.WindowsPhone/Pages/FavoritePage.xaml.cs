@@ -1,4 +1,6 @@
-﻿using HaoDouCookBook.Controls;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
+using HaoDouCookBook.HaoDou.API;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -46,6 +48,26 @@ namespace HaoDouCookBook.Pages
             // load data
             //
             favoriteRecipesAlubm.LoadFirstPageDataAsync();
+            favoriteRecipesAlubm.OnAlbumTapped = album =>
+            {
+                FavoriteRecipeAlbumPage.FavoriteRecipeAlbumPageParams paras = new FavoriteRecipeAlbumPage.FavoriteRecipeAlbumPageParams();
+                paras.AlbumId = album.AlbumId;
+                paras.Title = album.AlbumName;
+
+                App.Current.RootFrame.Navigate(typeof(FavoriteRecipeAlbumPage), paras);
+            };
+
+            favoriteRecipesAlubm.CreateNewAlubmTapped = ()=>
+            {
+                BigTextBox.BigTextBoxParams paras = new BigTextBox.BigTextBoxParams();
+                paras.MaxLength = 20;
+                paras.PlaceholderText = "输入分类名称，最多20个字符";
+                paras.ConfirmAction = CreateNewAlbum;
+
+                App.Current.RootFrame.Navigate(typeof(BigTextBox), paras);
+            };
+
+
             favoriteAlbums.LoadFirstPageDataAsync();
             favoriteAlbums.DeleteAllSuccessAction = (message) => toast.Show(message);
             favoriteAlbums.DeleteSingleSuccessAction = (message) => toast.Show(message);
@@ -58,6 +80,29 @@ namespace HaoDouCookBook.Pages
             favoriteTopics.DeleteSingleSuccessAction = (message) => toast.Show(message);
             favoriteTopics.DeleteAllFailAction = (error) => toast.Show(error.Message);
             favoriteTopics.DeleteSingleFailAction = (error) => toast.Show(error.Message);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private async void CreateNewAlbum(string newAlbumName)
+        {
+            if (string.IsNullOrEmpty(newAlbumName))
+            {
+                toast.Show("分类名不能为空");
+                return;
+            }
+
+            await FavoriteAPI.AddMyAlbum(UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, newAlbumName, async success =>
+            {
+                toast.Show(success.Message);
+                await favoriteRecipesAlubm.LoadFirstPageDataAsync();
+
+            }, error =>
+            {
+                toast.Show(error.Message);
+            });
         }
 
         #endregion

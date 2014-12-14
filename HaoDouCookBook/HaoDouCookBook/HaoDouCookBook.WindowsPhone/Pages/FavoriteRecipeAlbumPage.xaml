@@ -24,7 +24,13 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}"
-                                            Tapped="Recipe_Tapped">
+                                            Tapped="Recipe_Tapped" Holding="Recipe_Holding">
+                            <FlyoutBase.AttachedFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="移动" Click="move_click"/>
+                                    <MenuFlyoutItem Text="删除" Click="delete_click"/>
+                                </MenuFlyout>
+                            </FlyoutBase.AttachedFlyout>
                             <StackPanel Orientation="Vertical" Margin="0, 20, 0 0">
                                 <Grid VerticalAlignment="Top" Margin="20, 0">
                                     <Grid.ColumnDefinitions>
@@ -61,5 +67,6 @@
             <TextBlock x:Name="noItemsText" Style="{StaticResource NoItemText_Style}" Margin="0, 120, 0, 0"/>
         </Grid>
         <controls:NetworkLoading x:Name="loading" />
+        <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/>
     </Grid>
 </controls:BackablePage>

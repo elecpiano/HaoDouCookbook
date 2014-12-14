@@ -355,34 +355,44 @@ namespace HaoDouCookBook.Pages
 
         private async void Favorite_Click(object sender, RoutedEventArgs e)
         {
-            await FavoriteAPI.Add(UserGlobal.Instance.GetInt32UserId(), 3, viewModel.RecipeId, UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign,
-                    success =>
-                    {
-                        toast.Show(success.Message);
-                        viewModel.IsLike = true;
-                        this.favorite.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                        this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                    },
-                    error =>
-                    {
-                        toast.Show(error.Message);
-                    });
-        }
+            if(!Utilities.SignedIn())
+            {
+                toast.Show("您还没有登录，请先登录才能收藏哦~");
+                return;
+            }
 
-        private async void removeFavorite_Click(object sender, RoutedEventArgs e)
-        {
-            await FavoriteAPI.Del(UserGlobal.Instance.GetInt32UserId(), 3, viewModel.RecipeId.ToString(), UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign, false,
-                    success =>
-                    {
+            if (!NetworkHelper.Current.IsInternetConnectionAvaiable)
+            {
+                toast.Show(Constants.ERROR_MESSAGE_NETWORK_UNSTABLE);
+                return;
+            }
+
+            AddFavoriteRecipeDialog dialog = new AddFavoriteRecipeDialog();
+            dialog.OnAlbumTapped = async album => 
+            {
+                if (album.AlbumId == 0 && album.AlbumName.Equals("我喜欢的菜谱"))
+                {
+                    dialog.Hide();
+                    toast.Show("不能添加到此分类");
+                    return;
+                }
+
+                await FavoriteAPI.AddRecipe(
+                    viewModel.RecipeId,
+                    album.AlbumId,
+                    UserGlobal.Instance.GetInt32UserId(),
+                    UserGlobal.Instance.uuid,
+                    UserGlobal.Instance.UserInfo.Sign,
+                    success => {
+                        dialog.Hide();
                         toast.Show(success.Message);
-                        viewModel.IsLike = false;
-                        this.favorite.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                        this.removeFavorite.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                     },
-                    error =>
-                    {
+                    error => {
+                        dialog.Hide();
                         toast.Show(error.Message);
                     });
+            };
+            await dialog.ShowAsync();
         }
 
         private async void download_click(object sender, RoutedEventArgs e)

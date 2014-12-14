@@ -99,6 +99,9 @@
     <Compile Include="Controls\ActivitySupportAndComment.xaml.cs">
       <DependentUpon>ActivitySupportAndComment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AddFavoriteRecipeDialog.xaml.cs">
+      <DependentUpon>AddFavoriteRecipeDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AddRecipeToLocalDownloadDialog.xaml.cs">
       <DependentUpon>AddRecipeToLocalDownloadDialog.xaml</DependentUpon>
     </Compile>
@@ -221,6 +224,9 @@
     </Compile>
     <Compile Include="Pages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AddNewAlbumDialog.xaml.cs">
+      <DependentUpon>AddNewAlbumDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AddRecipeStepsPage.xaml.cs">
       <DependentUpon>AddRecipeStepsPage.xaml</DependentUpon>
@@ -513,6 +519,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\AddFavoriteRecipeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AddRecipeToLocalDownloadDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -670,6 +680,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AddNewAlbumDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

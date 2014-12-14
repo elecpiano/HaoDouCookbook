@@ -135,6 +135,63 @@ namespace HaoDouCookBook.Pages
             App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
+
+
+        private async void move_click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<FavoriteRecipe>();
+            AddFavoriteRecipeDialog dialog = new AddFavoriteRecipeDialog();
+            dialog.OnAlbumTapped = async album => 
+            {
+                await FavoriteAPI.RemoveRecipe(
+                    dataContext.RecipeId,
+                    pageParams.AlbumId,
+                    album.AlbumId,
+                    UserGlobal.Instance.GetInt32UserId(),
+                    UserGlobal.Instance.uuid,
+                    UserGlobal.Instance.UserInfo.Sign,
+                    success => {
+                        if(success.Message.Contains("成功"))
+                        {
+                            viewModel.Recipes.Remove(dataContext);
+                        }
+                        dialog.Hide();
+                        toast.Show(success.Message);
+                    },
+                    error => {
+                        dialog.Hide();
+                        toast.Show(error.Message);
+                    });
+            };
+
+            await dialog.ShowAsync();
+        }
+
+        private async void delete_click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<FavoriteRecipe>();
+            await FavoriteAPI.DelRecipe(
+                pageParams.AlbumId,
+                dataContext.RecipeId,
+                UserGlobal.Instance.GetInt32UserId(),
+                UserGlobal.Instance.UserInfo.Sign,
+                success => {
+                    if (success.Message.Contains("成功"))
+                    {
+                        viewModel.Recipes.Remove(dataContext);
+                    }
+                    toast.Show(success.Message);
+                },
+                error => {
+                    toast.Show(error.Message);
+                } );
+        }
+
+        private void Recipe_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            sender.ShowFlayout();
+        }
+
         #endregion
     }
 }
