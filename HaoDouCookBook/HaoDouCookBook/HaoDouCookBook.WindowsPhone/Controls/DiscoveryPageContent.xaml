@@ -10,31 +10,33 @@
     d:DesignHeight="3000"
     d:DesignWidth="400">
 
-    <ScrollViewer Name="root">
-        <StackPanel Orientation="Vertical">
-            <!--一日三餐-->
-            <Grid Height="180" HorizontalAlignment="Center">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="180"/>
-                    </Grid.ColumnDefinitions>
-                    <controls:MealTile x:Name="mealLeft" DataContext="{Binding DailyMeals[0]}" ImageSource="{Binding MealImageSource}"  Title="{Binding Title}" Number="{Binding Number}" Margin="3" Tapped="Meal_Tapped"/>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="90"/>
-                            <RowDefinition Height="90"/>
-                        </Grid.RowDefinitions>
-                        <controls:MealTile x:Name="mealRightTop" DataContext="{Binding DailyMeals[1]}"  Grid.Row="0" ImageSource="{Binding MealImageSource}" Title="{Binding Title}" Number="{Binding Number}" Margin="3" Tapped="Meal_Tapped"/>
-                        <controls:MealTile x:Name="mealRightBottom" DataContext="{Binding DailyMeals[2]}"  Grid.Row="1" ImageSource="{Binding MealImageSource}" Title="{Binding Title}" Number="{Binding Number}"  Margin="3" Tapped="Meal_Tapped"/>
+    <Grid>
+
+        <ScrollViewer Name="root">
+            <StackPanel Orientation="Vertical">
+                <!--一日三餐-->
+                <Grid Height="180" HorizontalAlignment="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+                        <controls:MealTile x:Name="mealLeft" DataContext="{Binding DailyMeals[0]}" ImageSource="{Binding MealImageSource}"  Title="{Binding Title}" Number="{Binding Number}" Margin="3" Tapped="Meal_Tapped"/>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="90"/>
+                                <RowDefinition Height="90"/>
+                            </Grid.RowDefinitions>
+                            <controls:MealTile x:Name="mealRightTop" DataContext="{Binding DailyMeals[1]}"  Grid.Row="0" ImageSource="{Binding MealImageSource}" Title="{Binding Title}" Number="{Binding Number}" Margin="3" Tapped="Meal_Tapped"/>
+                            <controls:MealTile x:Name="mealRightBottom" DataContext="{Binding DailyMeals[2]}"  Grid.Row="1" ImageSource="{Binding MealImageSource}" Title="{Binding Title}" Number="{Binding Number}"  Margin="3" Tapped="Meal_Tapped"/>
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
 
-            <Image x:Name="cookMasterImage" Height="120" Visibility="{Binding Masters[0], Converter={StaticResource AnythingToVisiblityConverter}}" Source="{Binding Masters[0].CookMasterImageSource}" Stretch="Uniform" Margin="5, 10, 5, 0" />
+                <Image x:Name="cookMasterImage" Height="120" Visibility="{Binding Masters[0], Converter={StaticResource AnythingToVisiblityConverter}}" Source="{Binding Masters[0].CookMasterImageSource}" Stretch="Uniform" Margin="5, 10, 5, 0" />
 
-            <!--新手教程-->
-            <!--<controls:CategoryTitle Title="{Binding Tutorial.Title}" Margin="10, 10, 5, 0"/>
+                <!--新手教程-->
+                <!--<controls:CategoryTitle Title="{Binding Tutorial.Title}" Margin="10, 10, 5, 0"/>
             <StackPanel x:Name="NewbieTutorTile" DataContext="{Binding Tutorial}" Orientation="Vertical" Margin="10, 30, 5, 00" Background="Transparent" Tapped="Tutorial_Tapped">
                 <Border Height="230">
                     <Border.Background>
@@ -75,39 +77,41 @@
                 </ItemsControl>
             </StackPanel>-->
 
-            <!--<Image Height="120" Visibility="{Binding Masters[1], Converter={StaticResource AnythingToVisiblityConverter}}" Source="{Binding Masters[1].CookMasterImageSource}" Stretch="Uniform" Margin="5, 10, 5, 0" />-->
+                <!--<Image Height="120" Visibility="{Binding Masters[1], Converter={StaticResource AnythingToVisiblityConverter}}" Source="{Binding Masters[1].CookMasterImageSource}" Stretch="Uniform" Margin="5, 10, 5, 0" />-->
 
 
-            <!--美食-->
-            <ItemsControl ItemsSource="{Binding Cates}" Margin="10, 30, 0, 0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <controls:Cate Loaded="Cate_Loaded" CateTitle="{Binding Title}" Recipes="{Binding Dishes}"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                <!--美食-->
+                <ItemsControl ItemsSource="{Binding Cates}" Margin="10, 30, 0, 0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:Cate Loaded="Cate_Loaded" CateTitle="{Binding Title}" Recipes="{Binding Dishes}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
-            <!--的作品很被赞-->
-            <controls:CategoryTitle Title="Ta的作品很被赞" Margin="10, 30, 5, 0"/>
-            <ItemsControl ItemsSource="{Binding StarredUsers}" Margin="12, 12, 12, 30">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <controls:UserPhoto UserId="{Binding UserID}" ImageSource="{Binding UserPhoto}" Width="58" Height="58" Margin="0,0,2.5,0"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
-    </ScrollViewer>
+                <!--的作品很被赞-->
+                <controls:CategoryTitle Title="Ta的作品很被赞" Margin="10, 30, 5, 0"/>
+                <ItemsControl ItemsSource="{Binding StarredUsers}" Margin="12, 12, 12, 30">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <controls:UserPhoto UserId="{Binding UserID}" ImageSource="{Binding UserPhoto}" Width="58" Height="58" Margin="0,0,2.5,0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+        <controls:NetworkLoading x:Name="loading"/>
+    </Grid>
 </UserControl>

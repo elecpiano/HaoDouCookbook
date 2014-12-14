@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.HaoDou.API;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.HaoDou.DataModels.Square;
 using HaoDouCookBook.Pages;
 using HaoDouCookBook.ViewModels;
@@ -40,15 +41,16 @@ namespace HaoDouCookBook.Controls
             this.CategoryList.ItemsSource = Categories;
         }
 
-        private async Task LoadPageDataAsync()
+        private async Task LoadFirstPageDataAsync()
         {
-            await TopicAPI.GetGroupIndexData(0, 20, (data) =>
-                {
-                    UpdatePageData(data);
-
-                }, error =>
-                {
-
+            loading.SetState(LoadingState.LOADING);
+            await TopicAPI.GetGroupIndexData(0, 20, 
+                success => {
+                    UpdatePageData(success);
+                    loading.SetState(LoadingState.SUCCESS);
+                }, 
+                error => {
+                    Utilities.CommonLoadingRetry(loading, async () => await LoadFirstPageDataAsync());
                 });
         }
 
@@ -67,8 +69,6 @@ namespace HaoDouCookBook.Controls
 
             // Topic
             //
-
-
             if (data.Topics != null)
             {
                 foreach (var item in data.Topics)
@@ -95,7 +95,7 @@ namespace HaoDouCookBook.Controls
         #region Private Method
         private void Init()
         {
-            LoadPageDataAsync();
+            LoadFirstPageDataAsync();
         }
 
         #endregion

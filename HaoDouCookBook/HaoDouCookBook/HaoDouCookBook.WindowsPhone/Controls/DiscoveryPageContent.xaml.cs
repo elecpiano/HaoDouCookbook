@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.HaoDou.API;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.HaoDou.DataModels.Discovery;
 using HaoDouCookBook.Pages;
 using HaoDouCookBook.ViewModels;
@@ -43,16 +44,16 @@ namespace HaoDouCookBook.Controls
 
         private async Task LoadDataAsync()
         {
-            await RecipeAPI.GetDiscoveryData(data =>
-                {
-                    UpdatePageData(data);
-
-                }, error =>
-                {
-
+            loading.SetState(LoadingState.LOADING);
+            await RecipeAPI.GetDiscoveryData(
+                success => {
+                    UpdatePageData(success);
+                    loading.SetState(LoadingState.SUCCESS);
+                }, 
+                error => {
+                    Utilities.CommonLoadingRetry(loading, async () => await LoadDataAsync());
                 });
         }
-
 
         private void UpdatePageData(DiscoveryPageData data)
         {
@@ -157,7 +158,6 @@ namespace HaoDouCookBook.Controls
             }
 
         }
-
 
         #endregion
 

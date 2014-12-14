@@ -29,6 +29,20 @@ namespace HaoDouCookBook.Common
             DelayHelper.Delay(TimeSpan.FromSeconds(0.7), action);
         }
 
+        /// <summary>
+        /// Only show the network unaviable page
+        /// </summary>
+        /// <param name="loading"></param>
+        /// <param name="retryAction"></param>
+        public static void CommonLoadingRetry(NetworkLoading loading, Action retryAction)
+        {
+            Utilities.ReloadWithDelay(() =>
+            {
+                loading.RetryAction = retryAction;
+                loading.SetState(LoadingState.NETWORK_UNAVAILABLE);
+            });
+        }
+
         public static void CommonLoadingRetry(NetworkLoading loading, Error error, Action retryAction)
         {
             if (IsMatchNetworkFail(error.ErrorCode))
@@ -72,7 +86,7 @@ namespace HaoDouCookBook.Common
         {
             FrameworkElement fe = sender as FrameworkElement;
 
-            if(fe != null)
+            if (fe != null)
             {
                 var parent = fe.GetParent<ItemsControl>();
                 if (parent != null)
@@ -96,7 +110,7 @@ namespace HaoDouCookBook.Common
         {
             FrameworkElement fe = sender as FrameworkElement;
 
-            if(fe != null)
+            if (fe != null)
             {
                 var parent = fe.GetParent<ItemsControl>();
                 if (parent != null)
@@ -118,7 +132,8 @@ namespace HaoDouCookBook.Common
 
         public static async Task ShowOKCancelDialog(string title, string content, Action okAction, Action cancelAction)
         {
-            ContentDialog dialog = new ContentDialog() { 
+            ContentDialog dialog = new ContentDialog()
+            {
                 Title = title,
                 Content = content,
                 PrimaryButtonText = "确定",

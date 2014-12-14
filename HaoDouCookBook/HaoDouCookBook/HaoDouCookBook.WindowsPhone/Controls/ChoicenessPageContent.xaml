@@ -15,118 +15,119 @@
             <Setter Property="Margin" Value="5, 0, 0, 0"/>
         </Style>
     </UserControl.Resources>
-    <ScrollViewer>
-        <StackPanel Orientation="Vertical">
-            <!--搜索-->
-            <Border Height="70" Background="#12000000" Name="searchBox" Tapped="searchBox_Tapped">
-                <Border Background="White" BorderBrush="DarkGray" BorderThickness="1" CornerRadius="7" Margin="17, 15, 17, 15">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Image Source="../Assets/Images/search.png" Height="24" Margin="0, 0, 6, 0"/>
-                        <TextBlock x:Name="searchText" Foreground="#88000000" VerticalAlignment="Bottom" FontSize="18"/>
-                    </StackPanel>
-                </Border>
-            </Border>
-
-            <StackPanel Orientation="Vertical" Margin="25, 10, 25, 0">
-                <!--标签分类-->
-                <Grid Height="100" Margin="0, 0, 0, 0" Visibility="{Binding Tag1.Text, Converter={StaticResource AnythingToVisiblityConverter}}" x:Name="TagsList" Background="Transparent">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag1}"  Orientation="Horizontal" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
-                    </StackPanel>
-                    <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag2}"  Orientation="Horizontal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
-                    </StackPanel>
-                    <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag3}"  Orientation="Horizontal" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
-                    </StackPanel>
-                    <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag4}"  Orientation="Horizontal" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
-                    </StackPanel>
-                    <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag5}"  Orientation="Horizontal" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
-                    </StackPanel>
-                    <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag6}"  Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
-                    </StackPanel>
-                    <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag7}" Orientation="Horizontal" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
-                    </StackPanel>
-                    <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag8}" Orientation="Horizontal" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Image Source="{Binding Icon}" Height="15" Width="15"/>
-                        <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
-                    </StackPanel>
-                </Grid>
-
-                <Rectangle Margin="0, 00, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
-                <!--广告-->
-                <Image x:Name="Ads" Source="{Binding}"/>
-
-                <Rectangle Margin="0, 15, 0, 15" Style="{StaticResource GrayLine}" Width="380"/>
-                <!--专辑-->
-                <StackPanel x:Name="SpecialRecipeAlbum" Orientation="Vertical" Background="Transparent" Tapped="SpecialRecipeAlbum_Tapped">
-                    <Border Height="160">
-                        <Border.Background>
-                            <ImageBrush ImageSource="{Binding MainImageSource}" AlignmentY="Center" Stretch="UniformToFill"/>
-                        </Border.Background>
-                        <Image Source="{Binding AlbumMarkImageSource}" Height="36" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+    <Grid>
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical">
+                <!--搜索-->
+                <Border Height="70" Background="#12000000" Name="searchBox" Tapped="searchBox_Tapped">
+                    <Border Background="White" BorderBrush="DarkGray" BorderThickness="1" CornerRadius="7" Margin="17, 15, 17, 15">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Image Source="../Assets/Images/search.png" Height="24" Margin="0, 0, 6, 0"/>
+                            <TextBlock x:Name="searchText" Foreground="#88000000" VerticalAlignment="Bottom" FontSize="18"/>
+                        </StackPanel>
                     </Border>
-                    <ItemsControl Margin="0, 2, 0, 0" ItemsSource="{Binding DetailsImageSources}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Image Height="72.2" Width="72.2" Source="{Binding}" Stretch="UniformToFill"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                    <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                        <TextBlock Text="{Binding Title}" Style="{StaticResource RecipeCategoryTileTitle}"/>
+                </Border>
+
+                <StackPanel Orientation="Vertical" Margin="25, 10, 25, 0">
+                    <!--标签分类-->
+                    <Grid Height="100" Margin="0, 0, 0, 0" Visibility="{Binding Tag1.Text, Converter={StaticResource AnythingToVisiblityConverter}}" x:Name="TagsList" Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag1}"  Orientation="Horizontal" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                            <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag2}"  Orientation="Horizontal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                            <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag3}"  Orientation="Horizontal" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                            <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag4}"  Orientation="Horizontal" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                            <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag5}"  Orientation="Horizontal" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                            <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag6}"  Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                            <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag7}" Orientation="Horizontal" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                            <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Tapped="Tag_Tapped" DataContext="{Binding Tag8}" Orientation="Horizontal" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Image Source="{Binding Icon}" Height="15" Width="15"/>
+                            <TextBlock Text="{Binding Text}" Style="{StaticResource TagTextStyle}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Rectangle Margin="0, 00, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
+                    <!--广告-->
+                    <Image x:Name="Ads" Source="{Binding}"/>
+
+                    <Rectangle Margin="0, 15, 0, 15" Style="{StaticResource GrayLine}" Width="380"/>
+                    <!--专辑-->
+                    <StackPanel x:Name="SpecialRecipeAlbum" Orientation="Vertical" Background="Transparent" Tapped="SpecialRecipeAlbum_Tapped">
+                        <Border Height="160">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding MainImageSource}" AlignmentY="Center" Stretch="UniformToFill"/>
+                            </Border.Background>
+                            <Image Source="{Binding AlbumMarkImageSource}" Height="36" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        </Border>
+                        <ItemsControl Margin="0, 2, 0, 0" ItemsSource="{Binding DetailsImageSources}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Height="72.2" Width="72.2" Source="{Binding}" Stretch="UniformToFill"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                            <TextBlock Text="{Binding Title}" Style="{StaticResource RecipeCategoryTileTitle}"/>
+                        </StackPanel>
+                        <TextBlock Text="{Binding Description}"  Margin="0, 10, 5, 0" Style="{StaticResource RecipeCategoryTileDescription}"/>
                     </StackPanel>
-                    <TextBlock Text="{Binding Description}"  Margin="0, 10, 5, 0" Style="{StaticResource RecipeCategoryTileDescription}"/>
-                </StackPanel>
 
-                <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
+                    <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
 
-                <!--厨房宝典-->
-                <controls:RecipeCategoryTile x:Name="chuFangBiaoDian"
+                    <!--厨房宝典-->
+                    <controls:RecipeCategoryTile x:Name="chuFangBiaoDian"
                 TileImage="{Binding TileImage}"
                 MarkText="{Binding MarkText}"
                 RecipeDescriptionOnImage="{Binding RecipeDescriptionOnImage}"                         
                 Title="{Binding Title}" Tapped="JustToWebPageRecipeTile_Tapped" />
 
-                <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
+                    <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
 
-                <!--菜谱-->
-                <ItemsControl x:Name="recipesList">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <controls:RecipeCategoryTile x:Name="reMenCaiPu"
+                    <!--菜谱-->
+                    <ItemsControl x:Name="recipesList">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <controls:RecipeCategoryTile x:Name="reMenCaiPu"
                                     TileImage="{Binding TileImage}"
                                     RecipeName="{Binding RecipeName}"
                                     Author="{Binding Author}"
@@ -136,14 +137,14 @@
                                     Tapped="RecipeCategoryTile_Tapped"
                                  />
 
-                                <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                                    <Rectangle Margin="0, 30, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
 
-                <!--营养餐桌-->
-                <controls:RecipeCategoryTile x:Name="yingYangCanZhuo"
+                    <!--营养餐桌-->
+                    <controls:RecipeCategoryTile x:Name="yingYangCanZhuo"
                 TileImage="{Binding TileImage}"
                 MarkText="{Binding MarkText}"
                 RecipeDescriptionOnImage="{Binding RecipeDescriptionOnImage}"                         
@@ -153,41 +154,42 @@
              />
 
 
-                <!--榜单-->
-                <StackPanel Orientation="Vertical" Margin="0, 40, 0, 0">
-                    <Grid>
-                        <controls:CategoryTitle Title="榜单" HorizontalAlignment="Left"/>
-                        <TextBlock x:Name="rankListMore" Text="更多榜单" FontSize="22" HorizontalAlignment="Right" Style="{StaticResource CategoryTitleStyle}" Foreground="#87000000" Tapped="rankListMore_Tapped"/>
-                    </Grid>
-                    <ItemsControl x:Name="rankList" Margin="0, 0, 0, 30">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0, 30, 0, 0" Background="Transparent" Tapped="RankItemGrid_Tapped">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="124"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Rectangle Width="122" Height="90" VerticalAlignment="Center" Grid.Column="0">
-                                        <Rectangle.Fill>
-                                            <ImageBrush ImageSource="{Binding CoverImage}"/>
-                                        </Rectangle.Fill>
-                                    </Rectangle>
-                                    <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="18, 0, 0, 0">
-                                        <TextBlock Text="{Binding Title}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0" TextTrimming="WordEllipsis"/>
-                                        <TextBlock Text="{Binding Description}" Style="{StaticResource TopicContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3"  TextWrapping="Wrap" MaxLines="2" TextTrimming="WordEllipsis"/>
+                    <!--榜单-->
+                    <StackPanel Orientation="Vertical" Margin="0, 40, 0, 0">
+                        <Grid>
+                            <controls:CategoryTitle Title="榜单" HorizontalAlignment="Left"/>
+                            <TextBlock x:Name="rankListMore" Text="更多榜单" FontSize="22" HorizontalAlignment="Right" Style="{StaticResource CategoryTitleStyle}" Foreground="#87000000" Tapped="rankListMore_Tapped"/>
+                        </Grid>
+                        <ItemsControl x:Name="rankList" Margin="0, 0, 0, 30">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0, 30, 0, 0" Background="Transparent" Tapped="RankItemGrid_Tapped">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="124"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Rectangle Width="122" Height="90" VerticalAlignment="Center" Grid.Column="0">
+                                            <Rectangle.Fill>
+                                                <ImageBrush ImageSource="{Binding CoverImage}"/>
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                        <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="18, 0, 0, 0">
+                                            <TextBlock Text="{Binding Title}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0" TextTrimming="WordEllipsis"/>
+                                            <TextBlock Text="{Binding Description}" Style="{StaticResource TopicContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3"  TextWrapping="Wrap" MaxLines="2" TextTrimming="WordEllipsis"/>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
-
-    </ScrollViewer>
+        </ScrollViewer>
+        <controls:NetworkLoading x:Name="loading"/>
+    </Grid>
 </UserControl>

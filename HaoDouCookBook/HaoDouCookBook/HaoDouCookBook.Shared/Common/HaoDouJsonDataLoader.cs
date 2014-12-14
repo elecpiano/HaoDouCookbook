@@ -107,10 +107,12 @@ namespace HaoDouCookBook.Common
                             }
                         }
                     }
-
-                    if(onFail != null)
+                    else
                     {
-                        onFail.Invoke(new Error() { ErrorCode = Constants.ERRORCODE_REMOTE_SERVER_UNAVAILABLE, Message = Constants.ERROR_MESSAGE_NETWORK_UNSTABLE });
+                        if (onFail != null)
+                        {
+                            onFail.Invoke(new Error() { ErrorCode = Constants.ERRORCODE_REMOTE_SERVER_UNAVAILABLE, Message = Constants.ERROR_MESSAGE_NETWORK_UNSTABLE });
+                        }
                     }
                     return;
                 }

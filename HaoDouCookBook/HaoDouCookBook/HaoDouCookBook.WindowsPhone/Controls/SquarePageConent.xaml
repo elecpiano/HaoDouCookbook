@@ -10,44 +10,47 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <ScrollViewer>
-        <StackPanel Orientation="Vertical" Margin="10, 10, 10, 0">
-            <!--分类-->
-            <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 40">
-                <ItemsControl x:Name="CategoryList">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical" Margin="10, 10, 10, 0">
+                <!--分类-->
+                <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 40">
+                    <ItemsControl x:Name="CategoryList">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <controls:CategoryImageTile Tapped="CategoryImageTile_Tapped" ImageSource="{Binding ImageSource}" Title="{Binding Title}" Margin="0, 0, 11.5, 0"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+                <!--最新话题-->
+                <controls:CategoryTitle Title="最新话题"/>
+                <ItemsControl x:Name="topicList" Margin="0, 0, 0, 35">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"/>
+                            <StackPanel Orientation="Vertical"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <controls:CategoryImageTile Tapped="CategoryImageTile_Tapped" ImageSource="{Binding ImageSource}" Title="{Binding Title}" Margin="0, 0, 11.5, 0"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-
-            <!--最新话题-->
-            <controls:CategoryTitle Title="最新话题"/>
-            <ItemsControl x:Name="topicList" Margin="0, 0, 0, 35">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
+                            <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
                                        Title="{Binding Title}"
                                        PreviewContent="{Binding PreviewContent}"
                                        Author="{Binding Author}"
                                        CreateTimeDescription="{Binding CreateTimeDescription}"
                                        HorizontalAlignment="Left" Margin="0, 30, 0, 0" Tapped="TopicTile_Tapped"
                                                 />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
-    </ScrollViewer>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+        <controls:NetworkLoading x:Name="loading"/>
+    </Grid>
 </UserControl>

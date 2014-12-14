@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.HaoDou.API;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
 using HaoDouCookBook.Pages;
 using HaoDouCookBook.ViewModels;
@@ -70,16 +71,19 @@ namespace HaoDouCookBook.Controls
 
         private async Task LoadDataAsync()
         {
-            await RecipeAPI.GetCollectList(1, 6, null, async (data) =>
-                          {
-                              await UpdatePageDataAsync(data);
-                          }, (error) =>
-                          {
-
-                          });
+            loading.SetState(LoadingState.LOADING);
+            await RecipeAPI.GetCollectList(1, 6, null,
+                success =>
+                {
+                    UpdatePageData(success);
+                    loading.SetState(LoadingState.SUCCESS);
+                }, 
+                error => {
+                    Utilities.CommonLoadingRetry(loading, error, async ()=> await LoadDataAsync());
+                });
         }
 
-        private async Task UpdatePageDataAsync(ChoicenessPageData data)
+        private void UpdatePageData(ChoicenessPageData data)
         {
             // Tags
             //
