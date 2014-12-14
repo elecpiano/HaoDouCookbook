@@ -176,7 +176,7 @@ namespace HaoDouCookBook.Pages
         {
             if (!NetworkHelper.Current.IsInternetConnectionAvaiable)
             {
-                toast.Show("网络链接不稳定，请稍后再试！");
+                toast.Show(Constants.ERROR_MESSAGE_NETWORK_UNSTABLE);
                 return;
             }
 
@@ -210,7 +210,7 @@ namespace HaoDouCookBook.Pages
                 error => {
                     if(!NetworkHelper.Current.IsInternetConnectionAvaiable)
                     {
-                        toast.Show("网络链接不稳定，请稍后再试！");
+                        toast.Show(Constants.ERROR_MESSAGE_NETWORK_UNSTABLE);
                     }
                 });
 
