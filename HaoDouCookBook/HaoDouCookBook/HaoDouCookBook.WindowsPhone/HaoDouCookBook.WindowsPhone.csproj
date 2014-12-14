@@ -145,6 +145,12 @@
     <Compile Include="Controls\FavoriteAlbums.xaml.cs">
       <DependentUpon>FavoriteAlbums.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LoadingCircle.xaml.cs">
+      <DependentUpon>LoadingCircle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LoadMoreControl.xaml.cs">
+      <DependentUpon>LoadMoreControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LocalDownloadsControl.xaml.cs">
       <DependentUpon>LocalDownloadsControl.xaml</DependentUpon>
     </Compile>
@@ -576,6 +582,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\FavoriteAlbums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LoadingCircle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LoadMoreControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -19,8 +19,6 @@ namespace HaoDouCookBook.Controls
     {
         #region Field && Property
 
-        private Storyboard loadingAni;
-
         public Action RetryAction { get; set; }
 
         #endregion
@@ -30,7 +28,7 @@ namespace HaoDouCookBook.Controls
         public NetworkLoading()
         {
             this.InitializeComponent();
-            loadingAni = this.Resources["loadingAnimation"] as Storyboard;
+            
             this.loading.Visibility = Visibility.Collapsed;
             this.noNetwork.Visibility = Visibility.Collapsed;
         }
@@ -66,25 +64,16 @@ namespace HaoDouCookBook.Controls
         private void ShowNetworkUnAvailableState()
         {
             this.loading.Visibility = Visibility.Collapsed;
+            this.loading.StopLoading();
             this.noNetwork.Visibility = Visibility.Visible;
-
-            if (loadingAni != null)
-            {
-                loadingAni.Stop();
-            }
-
         }
 
         private void ShowLoadingState()
         {
            
-            if (loadingAni != null)
-            {
-                loadingAni.Begin();
-            }
-
             this.noNetwork.Visibility = Visibility.Collapsed;
             this.loading.Visibility = Visibility.Visible;
+            this.loading.StartLoading();
         }
 
         #endregion

@@ -29,6 +29,30 @@ namespace HaoDouCookBook.Common
             DelayHelper.Delay(TimeSpan.FromSeconds(0.7), action);
         }
 
+        public static void RegistComonadLoadMoreBehavior<T>(object LoadMoreControl, Action<LoadMoreControl> loadMoreAction) where T : class
+        {
+            Utilities.ElementInItemsControl_SetVisibleAtEnd<T>(LoadMoreControl, true);
+
+            LoadMoreControl loadmoreControl = LoadMoreControl as LoadMoreControl;
+            if (loadmoreControl != null)
+            {
+                loadmoreControl.LoadMoreAction = loadMoreAction;
+            }
+        }
+
+        public static void CommondLoadMoreErrorBehavoir(LoadMoreControl loadMoreControl, Error error)
+        {
+            if (IsMatchNetworkFail(error.ErrorCode))
+            {
+                loadMoreControl.SetState(LoadingState.NETWORK_UNAVAILABLE);
+            }
+            else
+            {
+                loadMoreControl.SetState(LoadingState.DONE);
+            }
+        }
+
+
         /// <summary>
         /// Only show the network unaviable page
         /// </summary>
@@ -102,6 +126,10 @@ namespace HaoDouCookBook.Common
                     {
                         fe.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
                     }
+                    else
+                    {
+                        fe.Visibility = visible ? Visibility.Collapsed : Visibility.Visible;
+                    }
                 }
             }
         }
@@ -125,6 +153,10 @@ namespace HaoDouCookBook.Common
                     if (index == 0)
                     {
                         fe.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        fe.Visibility = visible ? Visibility.Collapsed : Visibility.Visible;
                     }
                 }
             }

@@ -48,6 +48,7 @@ namespace HaoDouCookBook.Controls
                 success => {
                     UpdatePageData(success);
                     loading.SetState(LoadingState.SUCCESS);
+                    page = 1;
                 }, 
                 error => {
                     Utilities.CommonLoadingRetry(loading, async () => await LoadFirstPageDataAsync());
@@ -120,6 +121,51 @@ namespace HaoDouCookBook.Controls
             paras.TopicId = dataContext.Id;
 
             App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
+        }
+
+        #endregion
+
+        #region Load More
+        int page = 1;
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior<TopicModel>(sender,
+                async loadmore =>
+                {
+                    loadmore.SetState(LoadingState.LOADING);
+                    await TopicAPI.GetGroupIndexData(page * 20, 20,
+                        success =>
+                        {
+                            if (success.Topics != null)
+                            {
+                                foreach (var item in success.Topics)
+                                {
+                                    int topicId = 0;
+                                    int.TryParse(item.TopicId.ToString(), out topicId);
+                                    LatestTopics.Add(new TopicModel()
+                                    {
+                                        Id = topicId,
+                                        Url = item.Url,
+                                        Author = item.UserName,
+                                        CreateTimeDescription = item.LastPostTime,
+                                        PreviewContent = item.PreviewContent,
+                                        Title = item.Title,
+                                        TopicPreviewImageSource = item.ImageUrl
+                                    });
+                                }
+
+                                page++;
+                            }
+
+                            loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                            loadmore.SetState(LoadingState.SUCCESS);
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
         }
 
         #endregion

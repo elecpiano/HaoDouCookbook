@@ -39,13 +39,16 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
+                            <StackPanel>
+                                <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
                                        Title="{Binding Title}"
                                        PreviewContent="{Binding PreviewContent}"
                                        Author="{Binding Author}"
                                        CreateTimeDescription="{Binding CreateTimeDescription}"
                                        HorizontalAlignment="Left" Margin="0, 30, 0, 0" Tapped="TopicTile_Tapped"
                                                 />
+                                <controls:LoadMoreControl Margin="0, 30, 0, 0" Loaded="loadMore_Loaded"/>
+                            </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
