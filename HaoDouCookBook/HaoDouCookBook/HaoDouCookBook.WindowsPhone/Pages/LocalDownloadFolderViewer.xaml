@@ -24,7 +24,15 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" Tapped="Recipe_Tapped">
+                        <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" 
+                                            Tapped="Recipe_Tapped" Holding="Recipe_Holding">
+                            <FlyoutBase.AttachedFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="移动" Click="moveTo_click"/>
+                                    <MenuFlyoutItem Text="删除" Click="deleteSingle_click"/>
+                                    <MenuFlyoutItem Text="删除全部" Click="deleteAll_click"/>
+                                </MenuFlyout>
+                            </FlyoutBase.AttachedFlyout>
                             <StackPanel>
                                 <Grid Margin="20, 20, 20, 0">
                                     <Grid.ColumnDefinitions>

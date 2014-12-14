@@ -351,6 +351,8 @@ namespace HaoDouCookBook.Pages
 
         #endregion
 
+        #region CommandBar
+
         private async void Favorite_Click(object sender, RoutedEventArgs e)
         {
             await FavoriteAPI.Add(UserGlobal.Instance.GetInt32UserId(), 3, viewModel.RecipeId, UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign,
@@ -421,5 +423,6 @@ namespace HaoDouCookBook.Pages
             await dialog.ShowAsync();
         }
 
+        #endregion
     }
 }

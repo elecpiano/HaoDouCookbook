@@ -4,6 +4,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Shared.Utility;
 using HaoDouCookBook.ViewModels;
+using System;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -29,6 +30,8 @@ namespace HaoDouCookBook.Pages
 
         #endregion
 
+        LocalDownloadFolderViewerParams pageParams;
+
         #region Life Cycle
 
         public LocalDownloadFolderViewer()
@@ -51,12 +54,12 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            LocalDownloadFolderViewerParams paras = e.Parameter as LocalDownloadFolderViewerParams;
-            if(paras !=null)
+            pageParams = e.Parameter as LocalDownloadFolderViewerParams;
+            if(pageParams!=null)
             {
                 rootScrollViewer.ScrollToVerticalOffset(0);
-                paras.ViewModel.UpdateAllStuffsStrings();
-                this.root.DataContext = paras.ViewModel;
+                pageParams.ViewModel.UpdateAllStuffsStrings();
+                this.root.DataContext = pageParams.ViewModel;
             }
         }
 
@@ -73,5 +76,70 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+        private async void deleteAll_click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await Utilities.ShowOKCancelDialog("温馨提示：", "您确定要删除该分类下的所有菜谱吗？",
+                () => {
+                    if (pageParams == null
+                        || pageParams.ViewModel == null
+                        || pageParams.ViewModel.Recipes == null)
+                    {
+                        return;
+                    }
+
+                    pageParams.ViewModel.Recipes.Clear();
+                    LocalDownloads.Instance.CommitData();
+                }, null);
+        }
+
+        private void Recipe_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            sender.ShowFlayout();
+        }
+
+        private async void deleteSingle_click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<RecipeInfoPageViewModel>();
+            await Utilities.ShowOKCancelDialog("温馨提示", "您确定要删除选中的菜谱吗？",
+                () => {
+
+                    if (pageParams == null
+                        || pageParams.ViewModel == null
+                        || pageParams.ViewModel.Recipes == null)
+                    {
+                        return;
+                    }
+
+                    pageParams.ViewModel.Recipes.Remove(dataContext);
+                }, null);
+        }
+
+        private async void moveTo_click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if(pageParams == null 
+                || pageParams.ViewModel == null 
+                || pageParams.ViewModel.Recipes == null)
+            {
+                return;
+            }
+
+            var dataContext = sender.GetDataContext<RecipeInfoPageViewModel>();
+
+            pageParams.ViewModel.Visible = false;
+            
+            AddRecipeToLocalDownloadDialog dialog = new AddRecipeToLocalDownloadDialog();
+            dialog.onFolderTapped = folder =>
+            {
+                pageParams.ViewModel.Recipes.Remove(dataContext);
+                folder.Recipes.Add(dataContext);
+
+                LocalDownloads.Instance.CommitData();
+                dialog.Hide();
+            };
+
+            await dialog.ShowAsync();
+            pageParams.ViewModel.Visible = true;
+        }
     }
 }
