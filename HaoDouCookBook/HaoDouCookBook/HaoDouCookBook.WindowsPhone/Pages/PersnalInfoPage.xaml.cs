@@ -66,7 +66,7 @@ namespace HaoDouCookBook.Pages
                     viewModel.Avatar = success.SummaryInfo.Avatar;
                     viewModel.UserName = success.SummaryInfo.UserName;
                     viewModel.Intro =success.SummaryInfo.Intro;
-                    viewModel.Gender = success.SummaryInfo.Gender == 2 ? "男" : "女";
+                    viewModel.Gender = success.SummaryInfo.Gender != 0 ? "男" : "女";
                     viewModel.CityName = success.SummaryInfo.Area.CityName;
                     viewModel.IsModity = success.SummaryInfo.IsModify == 1 ? true : false;
                     string tag = "点击修改";
@@ -193,6 +193,30 @@ namespace HaoDouCookBook.Pages
             }
         }
 
+        private async void Gender_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            SelectGenderDialog dialog = new SelectGenderDialog();
+            dialog.SetCompletedAction = gender =>
+                {
+                    viewModel.Gender = gender;
+                    toast.Show("修改成功");
+                };
+            dialog.SetFailedAction = error => toast.Show(error);
+            await dialog.ShowAsync();
+        }
+
         #endregion
+
+        private void City_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            SelectAreasPage.SelectAreasPagParams paras = new SelectAreasPage.SelectAreasPagParams();
+            paras.AfterSelectCompleted = newCity =>
+            {
+                viewModel.CityName = newCity;
+                toast.Show("修改成功");
+            };
+
+            App.Current.RootFrame.Navigate(typeof(SelectAreasPage), paras);
+        }
     }
 }

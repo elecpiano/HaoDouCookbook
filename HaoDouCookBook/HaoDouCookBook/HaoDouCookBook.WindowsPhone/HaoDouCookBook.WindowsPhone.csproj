@@ -159,6 +159,9 @@
     <Compile Include="Controls\RecipeTile.xaml.cs">
       <DependentUpon>RecipeTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SelectGenderDialog.xaml.cs">
+      <DependentUpon>SelectGenderDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SelectPhotoDialog.xaml.cs">
       <DependentUpon>SelectPhotoDialog.xaml</DependentUpon>
     </Compile>
@@ -305,6 +308,9 @@
     <Compile Include="Pages\SearchResultPage.xaml.cs">
       <DependentUpon>SearchResultPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SelectAreasPage.xaml.cs">
+      <DependentUpon>SelectAreasPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ShakePage.xaml.cs">
       <DependentUpon>ShakePage.xaml</DependentUpon>
     </Compile>
@@ -365,6 +371,7 @@
     <Compile Include="ViewModels\RecipeTileData.cs" />
     <Compile Include="ViewModels\SearchPageViewModel.cs" />
     <Compile Include="ViewModels\SearchResultPageViewModel.cs" />
+    <Compile Include="ViewModels\SelectAreasPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ShakePageViewModel.cs" />
     <Compile Include="ViewModels\ShoppingListPageViewModel.cs" />
@@ -573,6 +580,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\SelectGenderDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SelectPhotoDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -774,6 +785,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SearchResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SelectAreasPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

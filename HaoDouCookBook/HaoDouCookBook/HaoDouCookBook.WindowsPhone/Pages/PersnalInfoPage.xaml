@@ -51,7 +51,7 @@
                 </Grid>
                 <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 15"/>
 
-                <Grid Background="Transparent" IsHitTestVisible="True">
+                <Grid Background="Transparent" IsHitTestVisible="True" Tapped="Gender_Tapped">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -61,7 +61,7 @@
                 </Grid>
                 <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 15"/>
 
-                <Grid Background="Transparent" IsHitTestVisible="True">
+                <Grid Background="Transparent" IsHitTestVisible="True" Tapped="City_Tapped">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>

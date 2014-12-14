@@ -242,10 +242,11 @@ namespace Shared.Utility
             }
 
             StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+            var size = (await file.GetBasicPropertiesAsync()).Size;
             if (local != null)
             {
                 var dataFolder = await local.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
-                string newFileName = string.Format("{0}-{1}.png", MD5Core.GetHashString(file.Path), file.Name);
+                string newFileName = string.Format("{0}-{1}{2}", MD5Core.GetHashString(file.Path), size.ToString(), file.FileType);
                 bool newFileExist = true;
 
                 try

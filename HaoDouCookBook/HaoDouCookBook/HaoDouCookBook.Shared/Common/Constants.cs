@@ -45,6 +45,7 @@ namespace HaoDouCookBook.Common
         public const int ERRORCODE_JSON_PARSE_FAILED = int.MaxValue;
         public const int ERRORCODE_METAJSON_PARSE_FAILED = int.MinValue;
         public const int ERRORCODE_REMOTE_SERVER_UNAVAILABLE = -2146233079;
+        public const string ERROR_MESSAGE_NETWORK_UNSTABLE = "网络不稳定，请稍后再试";
 
         public readonly static Dictionary<int, string> ACTIVITY_TYPE_MAP = new Dictionary<int, string>() 
         {

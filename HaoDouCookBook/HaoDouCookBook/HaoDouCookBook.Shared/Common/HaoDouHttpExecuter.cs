@@ -49,33 +49,30 @@ namespace HaoDouCookBook.Common
             this.apiUrl = url;
         }
 
-        public void AddMultipart8BitData(string key, string value)
+        public void AddMultipartData(string key, string value)
         {
             if(multipartDataBuilder == null)
             {
                 multipartDataBuilder = new StringBuilder();
-                multipartDataBuilder.Append(string.Format("--{0}", Http.MULTIPART_BOUNDARY));
+                multipartDataBuilder.AppendLine(string.Format("--{0}", Http.MULTIPART_BOUNDARY));
             }
 
             multipartDataBuilder.AppendLine(string.Format(@"Content-Disposition: form-data; name=""{0}""", key));
-            multipartDataBuilder.AppendLine("Content-Type: text/plain; charset=UTF-8");
-            multipartDataBuilder.AppendLine("Content-Transfer-Encoding: 8bit");
             multipartDataBuilder.AppendLine();
             multipartDataBuilder.AppendLine(value);
             multipartDataBuilder.AppendLine(string.Format("--{0}", Http.MULTIPART_BOUNDARY)); 
         }
 
-        public void AddMultiparFileData(string key, string value)
+        public void AddMultiparFileData(string key, string filename, string value)
         {
             if(multipartDataBuilder == null)
             {
                 multipartDataBuilder = new StringBuilder();
-                multipartDataBuilder.Append(string.Format("--{0}", Http.MULTIPART_BOUNDARY));
+                multipartDataBuilder.AppendLine(string.Format("--{0}", Http.MULTIPART_BOUNDARY));
             }
 
-            multipartDataBuilder.AppendLine(string.Format(@"Content-Disposition: form-data; name=""filedata""; filename=""{0}""", key));
+            multipartDataBuilder.AppendLine(string.Format(@"Content-Disposition: form-data; name=""{0}""; filename=""{1}""", key, filename));
             multipartDataBuilder.AppendLine("Content-Type: application/octet-stream");
-            multipartDataBuilder.AppendLine("Content-Transfer-Encoding: binary");
             multipartDataBuilder.AppendLine();
             multipartDataBuilder.AppendLine(value);
             multipartDataBuilder.AppendLine(string.Format("--{0}", Http.MULTIPART_BOUNDARY)); 
@@ -127,7 +124,7 @@ namespace HaoDouCookBook.Common
                 {
                     if(onFail != null)
                     {
-                        onFail.Invoke(new Error() { ErrorCode = Constants.ERRORCODE_REMOTE_SERVER_UNAVAILABLE, Message = "网络连接不稳定" });
+                        onFail.Invoke(new Error() { ErrorCode = Constants.ERRORCODE_REMOTE_SERVER_UNAVAILABLE, Message = Constants.ERROR_MESSAGE_NETWORK_UNSTABLE });
                     }
 
                     return;
@@ -226,7 +223,7 @@ namespace HaoDouCookBook.Common
                 {
                     if(onFail != null)
                     {
-                        onFail.Invoke(new Error() { ErrorCode = Constants.ERRORCODE_REMOTE_SERVER_UNAVAILABLE, Message = "网络连接不稳定" });
+                        onFail.Invoke(new Error() { ErrorCode = Constants.ERRORCODE_REMOTE_SERVER_UNAVAILABLE, Message = Constants.ERROR_MESSAGE_NETWORK_UNSTABLE});
                     }
 
                     return;

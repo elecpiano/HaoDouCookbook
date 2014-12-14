@@ -83,5 +83,17 @@ namespace HaoDouCookBook.HaoDou.API
             HaoDouJsonDataLoader<SaveInfo> loader = new HaoDouJsonDataLoader<SaveInfo>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
         }
+
+        public static async Task GetAreas(string  sign, int uid, Action<Areas> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "getAreas";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("uid", uid.ToString());
+
+            HaoDouJsonDataLoader<Areas> loader = new HaoDouJsonDataLoader<Areas>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+
+        }
     }
 }

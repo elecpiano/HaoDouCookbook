@@ -1,7 +1,9 @@
 ﻿using System;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -14,6 +16,7 @@ namespace HaoDouCookBook.Controls
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(object), typeof(SimpleTreeListItem), new PropertyMetadata(null));
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(SimpleTreeListItem), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty ItemDataTemplateProperty = DependencyProperty.Register("ItemDataTemplate", typeof(DataTemplate), typeof(SimpleTreeListItem), new PropertyMetadata(null));
+        public static readonly DependencyProperty TitleForegroundProperty = DependencyProperty.Register("TitleForeground", typeof(SolidColorBrush), typeof(SimpleTreeListItem), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
 
         public ItemsPanelTemplate ItemsPanel
         {
@@ -45,6 +48,12 @@ namespace HaoDouCookBook.Controls
 
             this.stuffsList.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             root.DataContext = this;
+        }
+
+        public SolidColorBrush TitleForeground
+        {
+            get { return (SolidColorBrush)GetValue(TitleForegroundProperty); }
+            set { SetValue(TitleForegroundProperty, value); }
         }
 
         private void Header_Tapped(object sender, TappedRoutedEventArgs e)

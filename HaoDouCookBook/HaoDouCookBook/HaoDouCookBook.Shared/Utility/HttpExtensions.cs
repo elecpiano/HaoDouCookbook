@@ -72,7 +72,7 @@ namespace Shared.Utility
 
                 if (data != null)
                 {
-                    byte[] bytes = Encoding.GetEncoding("UTF-8").GetBytes(data);
+                    byte[] bytes = Encoding.UTF8.GetBytes(data);
                     using (Stream requestStream = await httpWebRequest.GetRequestStreamAsync())
                     {
                         await requestStream.WriteAsync(bytes, 0, bytes.Length);

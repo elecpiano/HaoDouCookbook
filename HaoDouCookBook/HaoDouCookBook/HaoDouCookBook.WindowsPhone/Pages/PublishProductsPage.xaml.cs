@@ -115,7 +115,7 @@ namespace HaoDouCookBook.Pages
             var tag = viewModel.Tags.FirstOrDefault(t => t.Selected == true);
             int tagId = 0;
             string tagName = string.Empty;
-            if(tag == null)
+            if(tag != null)
             {
                 tagId = tag.Id;
                 tagName = tag.Text;
@@ -131,6 +131,9 @@ namespace HaoDouCookBook.Pages
             {
                 return;
             }
+
+            var property = await file.GetBasicPropertiesAsync();
+            ulong size = property.Size;
 
             string content = string.Empty;
 
@@ -153,6 +156,7 @@ namespace HaoDouCookBook.Pages
                 UserGlobal.Instance.uuid,
                 string.Empty,
                 file.Name,
+                size,
                 content,
                 success => { 
 

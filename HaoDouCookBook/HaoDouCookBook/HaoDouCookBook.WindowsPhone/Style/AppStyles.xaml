@@ -711,7 +711,6 @@
 
     <!--Simple Tree list-->
     <Style x:Key="SimpleTreeList_Title_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
-        <Setter Property="Foreground" Value="#78a708"/>
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -1102,4 +1101,11 @@
         <Setter Property="Foreground" Value="Gray"/>
     </Style>
 
+    <Style x:Key="SelectAreasPage_CityName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="47, 15, 0, 15"/>
+        <Setter Property="Foreground" Value="Gray"/>
+    </Style>
 </ResourceDictionary>

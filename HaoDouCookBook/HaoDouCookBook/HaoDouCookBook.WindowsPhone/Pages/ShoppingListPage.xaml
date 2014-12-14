@@ -40,7 +40,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <controls:SimpleTreeListItem Title="{Binding Category}" ItemsSource="{Binding Stuffs}">
+                                    <controls:SimpleTreeListItem Title="{Binding Category}" TitleForeground="#78a708" ItemsSource="{Binding Stuffs}">
                                         <controls:SimpleTreeListItem.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <StackPanel Orientation="Vertical"/>

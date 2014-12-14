@@ -13,7 +13,7 @@
     <StackPanel x:Name="root" Visibility="{Binding ItemsSource.Count, Converter={StaticResource AnythingToVisiblityConverter}}">
         <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" Tapped="Header_Tapped">
             <Image x:Name="arrowImage" Source="../assets/images/down_arrow.png" Style="{StaticResource SimpleTreeList_Arrow_Style}" />
-            <TextBlock Text="{Binding Title}" Style="{StaticResource SimpleTreeList_Title_Style}"/>
+            <TextBlock Text="{Binding Title}" Foreground="{Binding TitleForeground}" Style="{StaticResource SimpleTreeList_Title_Style}"/>
         </controls:SmartGrid> 
         <Rectangle Width="800" Style="{StaticResource LightGaryLine}" Height="1"/>
         <ItemsControl x:Name="stuffsList" ItemsSource="{Binding ItemsSource}" ItemTemplate="{Binding ItemDataTemplate}" ItemsPanel="{Binding ItemsPanel}">

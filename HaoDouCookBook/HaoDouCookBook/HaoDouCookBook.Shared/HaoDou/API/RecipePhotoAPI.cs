@@ -76,6 +76,7 @@ namespace HaoDouCookBook.HaoDou.API
             string uuid,
             string siteid,
             string picName,
+            ulong lng,
             string picData,
             Action<UploadResultInfo> onSuccess,
             Action<Error> onFail)
@@ -84,15 +85,17 @@ namespace HaoDouCookBook.HaoDou.API
             POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
             postRequest.IsMultipart = true;
 
-            postRequest.AddMultipart8BitData("position", position);
-            postRequest.AddMultipart8BitData("uid", uid.ToString());
-            postRequest.AddMultipart8BitData("topicId", topicid != 0 ? topicid.ToString() : string.Empty);
-            postRequest.AddMultipart8BitData("topicName", topicName);
-            postRequest.AddMultipart8BitData("rtitle", title);
-            postRequest.AddMultipart8BitData("sign", sign);
-            postRequest.AddMultipart8BitData("uuid", uuid);
-            postRequest.AddMultipart8BitData("siteid", siteid);
-            postRequest.AddMultiparFileData(picName, picData);
+            postRequest.AddMultipartData("position", position);
+            postRequest.AddMultipartData("uid", uid.ToString());
+            postRequest.AddMultipartData("topicId", topicid != 0 ? topicid.ToString() : string.Empty);
+            postRequest.AddMultipartData("topicName", topicName);
+            postRequest.AddMultipartData("rtitle", title);
+            postRequest.AddMultipartData("sign", sign);
+            postRequest.AddMultipartData("uuid", uuid);
+            postRequest.AddMultipartData("lng", (lng / 1024.0).ToString());
+            postRequest.AddMultipartData("siteid", siteid);
+            postRequest.AddMultipartData("lat", "38");
+            postRequest.AddMultiparFileData("pic", picName, picData);
 
             HaoDouJsonDataLoader<UploadResultInfo> loader = new HaoDouJsonDataLoader<UploadResultInfo>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);

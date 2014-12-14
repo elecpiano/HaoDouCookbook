@@ -2,8 +2,6 @@
 using HaoDouCookBook.HaoDou.DataModels;
 using HaoDouCookBook.HaoDou.DataModels.My;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HaoDouCookBook.HaoDou.API
@@ -44,6 +42,30 @@ namespace HaoDouCookBook.HaoDou.API
             postRequest.AddPostData("uid", uid.ToString());
             postRequest.AddPostData("user_name", userName);
             postRequest.AddPostData("sign", sign);
+
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+
+        public static async Task UpdateGender(int gender, int uid, string sign, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "updateGender";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("gender", gender.ToString());
+
+            HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+        //Setting.updateCit
+        public static async Task UpdateCity(int cityId, int uid, string sign, Action<HaodouResultMessage> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "updateCity";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("uid", uid.ToString());
+            postRequest.AddPostData("sign", sign);
+            postRequest.AddPostData("city_id", cityId.ToString());
 
             HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
