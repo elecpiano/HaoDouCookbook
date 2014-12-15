@@ -29,17 +29,6 @@ namespace HaoDouCookBook.Common
             DelayHelper.Delay(TimeSpan.FromSeconds(0.7), action);
         }
 
-        public static void RegistComonadLoadMoreBehavior<T>(object LoadMoreControl, Action<LoadMoreControl> loadMoreAction) where T : class
-        {
-            Utilities.ElementInItemsControl_SetVisibleAtEnd<T>(LoadMoreControl, true);
-
-            LoadMoreControl loadmoreControl = LoadMoreControl as LoadMoreControl;
-            if (loadmoreControl != null)
-            {
-                loadmoreControl.LoadMoreAction = loadMoreAction;
-            }
-        }
-
         public static void RegistComonadLoadMoreBehavior(object LoadMoreControl, Action<LoadMoreControl> loadMoreAction)
         {
             LoadMoreControl loadmoreControl = LoadMoreControl as LoadMoreControl;

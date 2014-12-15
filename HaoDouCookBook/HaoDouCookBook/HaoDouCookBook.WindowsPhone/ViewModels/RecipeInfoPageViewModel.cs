@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using System.Linq;
+using Shared.Utility;
 
 namespace HaoDouCookBook.ViewModels
 {
@@ -495,7 +496,7 @@ namespace HaoDouCookBook.ViewModels
     }
 
     [DataContract]
-    public class Comment : BindableBase
+    public class Comment : BindableBase, ILoadMoreItem
     {
         private int userId;
 
@@ -560,6 +561,8 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref createTime, value); }
         }
 
+        public bool IsLoadMore { get; set; }
+
         public Comment()
         {
             UserId = -1;
@@ -569,6 +572,7 @@ namespace HaoDouCookBook.ViewModels
             Content = string.Empty;
             CreateTime = string.Empty;
             Avatar = string.Empty;
+            IsLoadMore = false;
         }
 
     }

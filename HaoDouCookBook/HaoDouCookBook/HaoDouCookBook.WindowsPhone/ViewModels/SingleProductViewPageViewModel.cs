@@ -119,6 +119,14 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref position, value); }
         }
 
+        private bool isDigg;
+
+        public bool IsDigg
+        {
+            get { return isDigg; }
+            set { SetProperty<bool>(ref isDigg, value); }
+        }
+
 
         public ObservableCollection<ProductViewPageDigg> DiggList { get; set; }
 
@@ -140,6 +148,7 @@ namespace HaoDouCookBook.ViewModels
             topicName = string.Empty;
             recipeId = -1;
             recipeName = string.Empty;
+            isDigg = false;
         }
 
 
