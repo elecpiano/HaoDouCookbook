@@ -1,4 +1,5 @@
 ﻿using Shared.Infrastructures;
+using Shared.Utility;
 using System.Collections.ObjectModel;
 
 namespace HaoDouCookBook.ViewModels
@@ -41,7 +42,7 @@ namespace HaoDouCookBook.ViewModels
     }
 
 
-    public class UserActivityItem : BindableBase
+    public class UserActivityItem : BindableBase, ILoadMoreItem
     {
         private string name;
 
@@ -131,6 +132,8 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<bool>(ref isDigg, value); }
         }
 
+        public bool IsLoadMore { get; set; }
+
         public UserActivityItem()
         {
             name = string.Empty;
@@ -142,6 +145,7 @@ namespace HaoDouCookBook.ViewModels
             userId = 0;
             avatar = string.Empty;
             isDigg = false;
+            IsLoadMore = false;
         }
     }
 

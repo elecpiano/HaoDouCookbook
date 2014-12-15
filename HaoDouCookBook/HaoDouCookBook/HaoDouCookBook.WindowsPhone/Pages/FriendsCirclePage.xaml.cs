@@ -64,12 +64,13 @@ namespace HaoDouCookBook.Pages
         private async Task LoadFirstPageDataAsync()
         {
             loading.SetState(LoadingState.LOADING);
-            await UserFeedAPI.GetFollowUserFeed(0, 10, null, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, 
+            await UserFeedAPI.GetFollowUserFeed(0, limit, null, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, 
                 success =>
                 {
                     if (success.Activities != null)
                     {
                         Activities.Clear();
+                        RemoveLoadMoreControl();
                         foreach (var item in success.Activities)
                         {
                             Activities.Add(new UserActivityItem() {
@@ -87,8 +88,13 @@ namespace HaoDouCookBook.Pages
                             });
                         }
 
+                        if(success.Activities.Length == limit)
+                        {
+                            EnusureLoadMoreControl();
+                        }
                     }
 
+                    page = 1;
                     loading.SetState(LoadingState.SUCCESS);
 
                 }, error =>
@@ -98,8 +104,6 @@ namespace HaoDouCookBook.Pages
             }
 
         #endregion
-
-        
 
         #region Event
 
@@ -134,8 +138,6 @@ namespace HaoDouCookBook.Pages
             }
         }
 
-        #endregion
-
         private void DiggPanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var dataContext = sender.GetDataContext<UserActivityItem>();
@@ -145,5 +147,88 @@ namespace HaoDouCookBook.Pages
             App.Current.RootFrame.Navigate(typeof(DiggUserListPage), paras);
 
         }
+
+        #endregion
+
+        #region Load More
+
+        int page = 1;
+        int limit = 10;
+
+        private UserActivityItem loadMoreControlDataContext = new UserActivityItem() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (Activities != null && !Activities.Contains(loadMoreControlDataContext))
+            {
+                Activities.Add(loadMoreControlDataContext);
+            }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (Activities != null && Activities.Contains(loadMoreControlDataContext))
+            {
+                Activities.Remove(loadMoreControlDataContext);
+            }
+        }
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await UserFeedAPI.GetFollowUserFeed(
+                         page * limit,
+                         limit,
+                         null,
+                         UserGlobal.Instance.GetInt32UserId(),
+                         UserGlobal.Instance.UserInfo.Sign,
+                         success =>
+                         {
+                             if (success.Activities != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.Activities)
+                                 {
+                                     Activities.Add(new UserActivityItem()
+                                     {
+                                         Content = item.Content,
+                                         CreateTime = item.CreateTime,
+                                         DiggCount = item.DiggCnt,
+                                         Image = item.Pic,
+                                         Name = item.Name,
+                                         ProductId = item.ItemId,
+                                         Type = item.Type,
+                                         UserId = item.UserId,
+                                         Avatar = item.Avatar,
+                                         ActivityId = item.FeedId,
+                                         IsDigg = item.IsDigg == 1 ? true : false
+                                     });
+                                 }
+
+                                 if (success.Activities.Length == limit)
+                                 {
+                                     EnusureLoadMoreControl();
+                                 }
+
+                                 page++;
+                                 loadmore.SetState(LoadingState.SUCCESS);
+                             }
+                             else
+                             {
+                                 loadmore.SetState(LoadingState.DONE);
+                             }
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
+        }
+
+        #endregion
+
     }
 }
