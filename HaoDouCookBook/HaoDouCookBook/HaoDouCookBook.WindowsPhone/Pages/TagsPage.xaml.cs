@@ -100,7 +100,7 @@ namespace HaoDouCookBook.Pages
         private async Task LoadFirstPageDataDataAsync(int? tagid, string keyword)
         {
             loading.SetState(LoadingState.LOADING);
-            await SearchAPI.GetList(0, 10, UserGlobal.Instance.uuid, tagid, keyword,
+            await SearchAPI.GetList(0, limit, UserGlobal.Instance.uuid, tagid, keyword,
                 success =>
                 {
                     if (paras != null && paras.FromPage == SourcePage.SEARCH_RESULT)
@@ -137,7 +137,11 @@ namespace HaoDouCookBook.Pages
                                 Card = item.Card
                             });
                         }
-                        EnusureLoadMoreControl();
+
+                        if(success.Items.Length == limit)
+                        {
+                            EnusureLoadMoreControl();
+                        }
                     }
                     else
                     {
@@ -237,13 +241,12 @@ namespace HaoDouCookBook.Pages
                                       
                                   }
 
-                                  if (success.Items.Length > 0)
+                                  page++;
+                                  loadmore.SetState(LoadingState.SUCCESS);
+                                  if (success.Items.Length == limit)
                                   {
                                       EnusureLoadMoreControl();
                                   }
-
-                                  page++;
-                                  loadmore.SetState(LoadingState.SUCCESS);
                               }
                               else
                               {

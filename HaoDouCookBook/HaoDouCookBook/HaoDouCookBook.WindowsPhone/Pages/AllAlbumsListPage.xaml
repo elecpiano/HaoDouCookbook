@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:HaoDouCookBook.Controls"
-    mc:Ignorable="d"
+    mc:Ignorable="d" xmlns:shared="using:Shared.Utility"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
@@ -24,25 +24,37 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical" Background="Transparent" Tapped="Album_Tapped">
-                            <Grid Margin="0, 0, 0, 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="124"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Rectangle Width="122" Height="90" VerticalAlignment="Center" Grid.Column="0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{Binding AlbumCover}"/>
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="18, 0, 0, 0">
-                                    <TextBlock Text="{Binding AlbumTitle}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0" TextWrapping="Wrap" MaxLines="2" TextTrimming="WordEllipsis"/>
-                                    <TextBlock Text="{Binding AlbumIntro}" Style="{StaticResource TopicContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3" TextTrimming="WordEllipsis"/>
-                                </Grid>
-                            </Grid>
-                            <Rectangle Width="800" Margin="0, 20, 0, 20" Style="{StaticResource GrayLine}" />
-                        </StackPanel>
+                        <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                            <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" Background="Transparent" Tapped="Album_Tapped">
+                                        <Grid Margin="0, 0, 0, 0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="124"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Rectangle Width="122" Height="90" VerticalAlignment="Center" Grid.Column="0">
+                                                <Rectangle.Fill>
+                                                    <ImageBrush ImageSource="{Binding AlbumCover}"/>
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                            <Grid Height="90" Grid.Column="1" VerticalAlignment="Center" Margin="18, 0, 0, 0">
+                                                <TextBlock Text="{Binding AlbumTitle}" VerticalAlignment="Top" Style="{StaticResource TopicTileStyle}" Margin="0, 3, 0, 0" TextWrapping="Wrap" MaxLines="2" TextTrimming="WordEllipsis"/>
+                                                <TextBlock Text="{Binding AlbumIntro}" Style="{StaticResource TopicContentStyle}" VerticalAlignment="Bottom" Margin="0,0,0,3" TextTrimming="WordEllipsis"/>
+                                            </Grid>
+                                        </Grid>
+                                        <Rectangle Width="800" Margin="0, 20, 0, 20" Style="{StaticResource GrayLine}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                            <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                <DataTemplate>
+                                    <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                </DataTemplate>
+                            </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                        </shared:LoadMoreDataTemplateSelector>
                     </DataTemplate>
+
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>

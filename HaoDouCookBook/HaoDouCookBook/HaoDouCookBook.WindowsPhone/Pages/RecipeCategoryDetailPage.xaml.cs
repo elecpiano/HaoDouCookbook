@@ -97,7 +97,7 @@ namespace HaoDouCookBook.Pages
             loading.SetState(LoadingState.LOADING);
             await RecipeAPI.GetCollectRecomment(
                 0, 
-                10, 
+                limit, 
                 UserGlobal.Instance.UserInfo.Sign, 
                 UserGlobal.Instance.GetInt32UserId(), 
                 UserGlobal.Instance.uuid, 
@@ -105,21 +105,29 @@ namespace HaoDouCookBook.Pages
                 recipeId, 
                 success =>
                 {
-                    RemoveLoadMoreControl();
-                    foreach (var item in success.Recipes)
+                    if(success.Recipes != null)
                     {
-                        Recipes.Add(new RecipeTileData() { 
-                            Author = item.UserName, 
-                            TagsText = item.GetTagsString(), 
-                            RecipeImage = item.Cover, 
-                            RecipeName = item.Title, 
-                            SupportNumber = item.LikeCount.ToString(),
-                            RecipeId = item.RecipeId
-                        });
+                        RemoveLoadMoreControl();
+                        foreach (var item in success.Recipes)
+                        {
+                            Recipes.Add(new RecipeTileData()
+                            {
+                                Author = item.UserName,
+                                TagsText = item.GetTagsString(),
+                                RecipeImage = item.Cover,
+                                RecipeName = item.Title,
+                                SupportNumber = item.LikeCount.ToString(),
+                                RecipeId = item.RecipeId
+                            });
 
-                        page = 1;
+                            page = 1;
+                        }
+
+                        if(success.Recipes.Length == limit)
+                        {
+                            EnusureLoadMoreControl();
+                        }
                     }
-                    EnusureLoadMoreControl();
                     loading.SetState(LoadingState.SUCCESS);
 
                 }, error => {
@@ -159,7 +167,7 @@ namespace HaoDouCookBook.Pages
         #region Load More
 
         int page = 1;
-        int limit = 20;
+        int limit = 10;
 
         private RecipeTileData loadMoreControlDataContext = new RecipeTileData() { IsLoadMore = true };
 
@@ -211,7 +219,7 @@ namespace HaoDouCookBook.Pages
                                      });
                                  }
 
-                                 if(success.Recipes.Length > 1)
+                                 if(success.Recipes.Length == limit)
                                  {
                                      EnusureLoadMoreControl();
                                  }

@@ -65,9 +65,11 @@ namespace HaoDouCookBook.Pages
         private async Task LoadFirstPageDataAsync()
         {
             loading.SetState(LoadingState.LOADING);
-            await RecipeAPI.GetAlbumList(0, 20, UserGlobal.Instance.uuid, success =>
+            await RecipeAPI.GetAlbumList(0, limit, UserGlobal.Instance.uuid, 
+                success =>
                 {
                     UpdateData(success);
+                    page = 1;
                     loading.SetState(LoadingState.SUCCESS);
                 }, 
                 error => {
@@ -79,6 +81,7 @@ namespace HaoDouCookBook.Pages
         {
             if (data.Albums != null)
             {
+                RemoveLoadMoreControl();
                 foreach (var item in data.Albums)
                 {
                     Albums.Add(new ViewModels.AlbumTile() { 
@@ -87,6 +90,11 @@ namespace HaoDouCookBook.Pages
                         AlbumId = item.Id,
                         AlbumIntro = item.Content
                     });
+                }
+
+                if (data.Albums.Length == limit)
+                {
+                    EnusureLoadMoreControl();
                 }
             }
         }
@@ -105,5 +113,77 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+
+        #region Load More
+
+        int page = 1;
+        int limit = 20;
+
+        private ViewModels.AlbumTile loadMoreControlDataContext = new ViewModels.AlbumTile() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (Albums != null && !Albums.Contains(loadMoreControlDataContext))
+            {
+                Albums.Add(loadMoreControlDataContext);
+            }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (Albums != null && Albums.Contains(loadMoreControlDataContext))
+            {
+                Albums.Remove(loadMoreControlDataContext);
+            }
+        }
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await RecipeAPI.GetAlbumList(
+                         page * limit,
+                         limit,
+                         UserGlobal.Instance.uuid,
+                         success =>
+                         {
+                             if (success.Albums != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.Albums)
+                                 {
+                                     Albums.Add(new ViewModels.AlbumTile()
+                                     {
+                                         AlbumTitle = item.Title,
+                                         AlbumCover = item.Cover,
+                                         AlbumId = item.Id,
+                                         AlbumIntro = item.Content
+                                     });
+                                 }
+
+                                 page++;
+                                 loadmore.SetState(LoadingState.SUCCESS);
+                                 if (success.Albums.Length == limit)
+                                 {
+                                     EnusureLoadMoreControl();
+                                 }
+                             }
+                             else
+                             {
+                                 loadmore.SetState(LoadingState.DONE);
+                             }
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
+        }
+
+        #endregion
+
     }
 }

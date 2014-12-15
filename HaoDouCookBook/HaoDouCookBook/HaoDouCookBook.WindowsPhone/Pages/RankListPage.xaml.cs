@@ -65,7 +65,7 @@ namespace HaoDouCookBook.Pages
             loading.SetState(LoadingState.LOADING);
             await RankAPI.GetRankList(
                 0, 
-                20, 
+                limit, 
                 UserGlobal.Instance.UserInfo.Sign,
                 UserGlobal.Instance.GetInt32UserId(),
                 UserGlobal.Instance.uuid, 
@@ -84,7 +84,11 @@ namespace HaoDouCookBook.Pages
                                 Id = int.Parse(item.Id)
                             });
                         }
-                        EnusureLoadMoreControl();
+
+                        if(success.Items.Length == limit)
+                        {
+                            EnusureLoadMoreControl();
+                        }
                     }
                     page = 1;
 
@@ -163,7 +167,7 @@ namespace HaoDouCookBook.Pages
                                      });
                                  }
 
-                                 if(success.Items.Length > 0)
+                                 if(success.Items.Length == limit)
                                  {
                                      EnusureLoadMoreControl();
                                  }

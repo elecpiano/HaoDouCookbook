@@ -103,7 +103,7 @@ namespace HaoDouCookBook.Pages
         private async Task LoadFirstPageDataByKeywordAsync(string keyword)
         {
             loading.SetState(LoadingState.LOADING);
-            await SearchAPI.GetTopicList(0, 20, UserGlobal.Instance.uuid, null, keyword, 
+            await SearchAPI.GetTopicList(0, limit, UserGlobal.Instance.uuid, null, keyword, 
                 success =>
                 {
                     viewModel.Count = success.Count;
@@ -123,7 +123,11 @@ namespace HaoDouCookBook.Pages
                                     CreateTimeDescription = item.CreateTime
                             });
                         }
-                        EnusureLoadMoreControl();
+
+                        if(success.Topics.Length == limit)
+                        {
+                            EnusureLoadMoreControl();
+                        }
                     }
                     page = 1;
                     loading.SetState(LoadingState.SUCCESS);
@@ -246,7 +250,7 @@ namespace HaoDouCookBook.Pages
                                          }
 
                                          page++;
-                                         if(success.Topics.Length > 0)
+                                         if(success.Topics.Length == limit)
                                          {
                                              EnusureLoadMoreControl();
                                          }
@@ -290,7 +294,7 @@ namespace HaoDouCookBook.Pages
                                              });
                                          }
 
-                                         if(success.Items.Length > 0)
+                                         if(success.Items.Length == limit)
                                          {
                                              EnusureLoadMoreControl();
                                          }

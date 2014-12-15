@@ -87,9 +87,8 @@ namespace HaoDouCookBook.Pages
             // show loading
             //
             loading.SetState(LoadingState.LOADING);
-            await InfoAPI.GetAlbumInfo(0, 20, albumId, UserGlobal.Instance.UserInfo.Sign, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, success=>
+            await InfoAPI.GetAlbumInfo(0, limit, albumId, UserGlobal.Instance.UserInfo.Sign, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, success=>
                 {
-                    
                     UpdateData(success);
                     page = 1;
                    
@@ -130,9 +129,9 @@ namespace HaoDouCookBook.Pages
 
             if (data.Recipes != null)
             {
+                RemoveLoadMoreControl();
                 foreach (var item in data.Recipes)
                 {
-                    RemoveLoadMoreControl();
                     viewModel.Recipes.Add(new RecipeTileData()
                     {
                         RecipeId = item.RecipeId,
@@ -142,6 +141,9 @@ namespace HaoDouCookBook.Pages
                         RecipeImage = item.Cover,
                         RecipeName = item.Title
                     });
+                }
+                if(data.Recipes.Length == limit)
+                {
                     EnusureLoadMoreControl();
                 }
             }

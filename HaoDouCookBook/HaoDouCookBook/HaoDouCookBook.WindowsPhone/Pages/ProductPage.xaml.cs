@@ -85,7 +85,7 @@ namespace HaoDouCookBook.Pages
         private async Task LoadFirstPageDataAsync(int productId, int topicId, int type)
         {
             loading.SetState(LoadingState.LOADING);
-            await RecipePhotoAPI.GetProdcuts(0, 20, type, productId, topicId,
+            await RecipePhotoAPI.GetProdcuts(0, limit, type, productId, topicId,
                 UserGlobal.Instance.UserInfo.Sign, 
                 UserGlobal.Instance.GetInt32UserId(),
                 UserGlobal.Instance.uuid,
@@ -151,7 +151,11 @@ namespace HaoDouCookBook.Pages
 
                     viewModel.Products.Add(recipeProduct);
                 }
-                EnusureLoadMoreControl();
+
+                if(data.Recipes.Length == limit)
+                {
+                    EnusureLoadMoreControl();
+                }
             }
         }
 
@@ -392,7 +396,7 @@ namespace HaoDouCookBook.Pages
 
                                 page++;
                                 loadmore.SetState(LoadingState.SUCCESS);
-                                if(success.Recipes.Length > 0)
+                                if(success.Recipes.Length == limit)
                                 {
                                     EnusureLoadMoreControl();
                                 }
