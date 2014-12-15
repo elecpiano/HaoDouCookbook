@@ -58,7 +58,7 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            AlbumListPageParams pageParams = e.Parameter as AlbumListPageParams;
+            pageParams = e.Parameter as AlbumListPageParams;
             if (pageParams != null)
             {
                 viewModel = new AlbumListPageViewModel();

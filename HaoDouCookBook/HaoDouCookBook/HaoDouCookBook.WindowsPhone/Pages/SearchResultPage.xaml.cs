@@ -85,6 +85,7 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadDataAsync(string keyword, string tagid)
         {
+            loading.SetState(LoadingState.LOADING);
             await SearchAPI.GetSearchIndex(keyword, tagid, UserGlobal.Instance.uuid, data =>
                 {
                     if (data.Food != null)
@@ -134,8 +135,11 @@ namespace HaoDouCookBook.Pages
                         viewModel.Topic.Url = topicData.Url;
                         viewModel.Topic.TopicPreviewImageSource = topicData.Cover;
                     }
-
-                }, error => { });
+                    loading.SetState(LoadingState.SUCCESS);
+                }, 
+                error => {
+                    Utilities.CommonLoadingRetry(loading, async () => await LoadDataAsync(keyword, tagid));
+                });
         }
 
         #endregion
