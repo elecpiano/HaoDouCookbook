@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:HaoDouCookBook.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:controls="using:HaoDouCookBook.Controls"
+    xmlns:controls="using:HaoDouCookBook.Controls" 
+    xmlns:shared="using:Shared.Utility"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
@@ -21,30 +22,42 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <controls:SmartGrid HoverOnBackground="{StaticResource hoverGray}" Tapped="User_Tapped"
+                        <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                            <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:SmartGrid HoverOnBackground="{StaticResource hoverGray}" Tapped="User_Tapped"
                                                                 IsHitTestVisible="True">
-                            <StackPanel Margin="20, 15, 20, 0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="65"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0">
-                                        <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding Avatar}" Width="65" Height="65"/>
-                                        <Image Source="../assets/images/vip_photo_mark.png" Stretch="None" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                        <StackPanel Margin="20, 15, 20, 0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="65"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="0">
+                                                    <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding Avatar}" Width="65" Height="65"/>
+                                                    <Image Source="../assets/images/vip_photo_mark.png" Stretch="None" VerticalAlignment="Bottom" HorizontalAlignment="Right"
                                                                    Visibility="{Binding IsVip, Converter={StaticResource AnythingToVisiblityConverter}}"/>
-                                    </Grid>
-                                    <Grid Grid.Column="1" Margin="10, 0, 0, 0" >
-                                        <StackPanel VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding UserName}" Style="{StaticResource DiggUserList_Title_Style}"/>
-                                            <TextBlock Text="{Binding Description}" Style="{StaticResource DiggUserList_Description_Style}"/>
+                                                </Grid>
+                                                <Grid Grid.Column="1" Margin="10, 0, 0, 0" >
+                                                    <StackPanel VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding UserName}" Style="{StaticResource DiggUserList_Title_Style}"/>
+                                                        <TextBlock Text="{Binding Description}" Style="{StaticResource DiggUserList_Description_Style}"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Grid>
+                                            <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="-20, 15, -20, 0"/>
                                         </StackPanel>
-                                    </Grid>
-                                </Grid>
-                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="-20, 15, -20, 0"/>
-                            </StackPanel>
-                        </controls:SmartGrid>
+                                    </controls:SmartGrid>
+                                </DataTemplate>
+                            </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                            <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                <DataTemplate>
+                                    <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                </DataTemplate>
+                            </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                        </shared:LoadMoreDataTemplateSelector>
                     </DataTemplate>
+
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>

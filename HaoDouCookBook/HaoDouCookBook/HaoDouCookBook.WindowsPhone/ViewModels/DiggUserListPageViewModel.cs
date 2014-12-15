@@ -1,8 +1,9 @@
 ﻿using Shared.Infrastructures;
+using Shared.Utility;
 
 namespace HaoDouCookBook.ViewModels
 {
-    public class DiggUser : BindableBase
+    public class DiggUser : BindableBase, ILoadMoreItem
     {
         private int userId;
 
@@ -44,6 +45,7 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref avatar, value); }
         }
 
+        public bool IsLoadMore { get; set; }
 
         public DiggUser()
         {
@@ -52,6 +54,7 @@ namespace HaoDouCookBook.ViewModels
             description = string.Empty;
             isVip = false;
             avatar = string.Empty;
+            IsLoadMore = false;
         }
     }
 

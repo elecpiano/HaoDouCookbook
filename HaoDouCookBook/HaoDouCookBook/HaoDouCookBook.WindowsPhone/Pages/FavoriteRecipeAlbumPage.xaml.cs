@@ -95,13 +95,15 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadFirstPageDataAsync(int albumId)
         {
-            await InfoAPI.GetAlbumInfo(0, 20, albumId,
+            loading.SetState(LoadingState.LOADING);
+            await InfoAPI.GetAlbumInfo(0, limit, albumId,
                 UserGlobal.Instance.UserInfo.Sign,
                 UserGlobal.Instance.GetInt32UserId(),
                 UserGlobal.Instance.uuid,
                 success => {
                     if (success.Recipes != null)
                     {
+                        RemoveLoadMoreControl();
                         foreach (var item in success.Recipes)
                         {
                             viewModel.Recipes.Add(new FavoriteRecipe()
@@ -114,8 +116,15 @@ namespace HaoDouCookBook.Pages
                                 Intro = item.Stuff
                             });
                         }
+
+                        if(success.Recipes.Length == limit)
+                        {
+                            EnusureLoadMoreControl();
+                        }
                     }
 
+                    page = 1;
+                    loading.SetState(LoadingState.SUCCESS);
                 },
                 error => {
                     Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirstPageDataAsync(albumId));
@@ -193,5 +202,82 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+
+        #region Load More
+
+        int page = 1;
+        int limit = 20;
+
+        private FavoriteRecipe loadMoreControlDataContext = new FavoriteRecipe() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (viewModel.Recipes != null && !viewModel.Recipes.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Recipes.Add(loadMoreControlDataContext);
+            }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (viewModel.Recipes != null && viewModel.Recipes.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Recipes.Remove(loadMoreControlDataContext);
+            }
+        }
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await InfoAPI.GetAlbumInfo(
+                         page * limit,
+                         limit,
+                         pageParams.AlbumId,
+                         UserGlobal.Instance.UserInfo.Sign,
+                         UserGlobal.Instance.GetInt32UserId(),
+                         UserGlobal.Instance.uuid,
+                         success =>
+                         {
+                             if (success.Recipes != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.Recipes)
+                                 {
+                                     viewModel.Recipes.Add(new FavoriteRecipe()
+                                     {
+                                         Cover = item.Cover,
+                                         LikeNumber = item.LikeCount,
+                                         ViewNumber = item.ViewCount,
+                                         Title = item.Title,
+                                         RecipeId = item.RecipeId,
+                                         Intro = item.Stuff
+                                     });
+                                 }
+
+                                 if (success.Recipes.Length == limit)
+                                 {
+                                     EnusureLoadMoreControl();
+                                 }
+                                 page++;
+                                 loadmore.SetState(LoadingState.SUCCESS);
+                             }
+                             else
+                             {
+                                 loadmore.SetState(LoadingState.DONE);
+                             }
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
+        }
+
+        #endregion
+
     }
 }

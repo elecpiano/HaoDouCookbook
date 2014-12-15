@@ -1,4 +1,5 @@
 ﻿using Shared.Infrastructures;
+using Shared.Utility;
 using System.Collections.ObjectModel;
 
 namespace HaoDouCookBook.ViewModels
@@ -13,7 +14,7 @@ namespace HaoDouCookBook.ViewModels
         }
     }
 
-    public class FavoriteRecipe : BindableBase
+    public class FavoriteRecipe : BindableBase, ILoadMoreItem
     {
         private int recipeId;
 
@@ -63,6 +64,8 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref intro, value); }
         }
 
+        public bool IsLoadMore { get; set; }
+
         public FavoriteRecipe()
         {
             recipeId = 0;
@@ -70,6 +73,7 @@ namespace HaoDouCookBook.ViewModels
             viewNumber = 0;
             title = string.Empty;
             cover = string.Empty;
+            IsLoadMore = false;
         }
     }
 

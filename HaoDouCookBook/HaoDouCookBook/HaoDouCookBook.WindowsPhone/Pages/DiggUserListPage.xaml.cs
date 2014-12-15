@@ -71,11 +71,12 @@ namespace HaoDouCookBook.Pages
         private async Task LoadFirstPageDataAsync()
         {
             loading.SetState(LoadingState.LOADING);
-            await DiggAPI.GetDiggUserList(0, 20, pageParams.ActivityId, 2,
+            await DiggAPI.GetDiggUserList(0, limit, pageParams.ActivityId, 2,
                 success => {
                     if (success.DiggUsers != null)
                     {
                         DiggUsers.Clear();
+                        RemoveLoadMoreControl();
                         foreach (var item in success.DiggUsers)
                         {
                             DiggUsers.Add(new DiggUser() { 
@@ -86,7 +87,13 @@ namespace HaoDouCookBook.Pages
                                 Avatar = item.Avatar
                             });
                         }
+
+                        if(success.DiggUsers.Length == limit)
+                        {
+                            EnusureLoadMoreControl();
+                        }
                     }
+                    page = 1;
                     loading.SetState(LoadingState.SUCCESS);
                 },
                 error => {
@@ -108,5 +115,79 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+
+        #region Load More
+
+        int page = 1;
+        int limit = 20;
+
+        private DiggUser loadMoreControlDataContext = new DiggUser() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (DiggUsers != null && !DiggUsers.Contains(loadMoreControlDataContext))
+            {
+                DiggUsers.Add(loadMoreControlDataContext);
+            }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (DiggUsers != null && DiggUsers.Contains(loadMoreControlDataContext))
+            {
+                DiggUsers.Remove(loadMoreControlDataContext);
+            }
+        }
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await DiggAPI.GetDiggUserList(
+                         page * limit,
+                         limit,
+                         pageParams.ActivityId,
+                         2,
+                         success =>
+                         {
+                             if (success.DiggUsers != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.DiggUsers)
+                                 {
+                                     DiggUsers.Add(new DiggUser()
+                                     {
+                                         Description = item.Intro,
+                                         UserId = int.Parse(item.UserId),
+                                         IsVip = item.Vip == 1 ? true : false,
+                                         UserName = item.UserName,
+                                         Avatar = item.Avatar
+                                     });
+                                 }
+
+                                 if (success.DiggUsers.Length == limit)
+                                 {
+                                     EnusureLoadMoreControl();
+                                 }
+                                 page++;
+                                 loadmore.SetState(LoadingState.SUCCESS);
+                             } 
+                             else
+                             {
+                                 loadmore.SetState(LoadingState.DONE);
+                             }
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
+        }
+
+        #endregion
+
     }
 }
