@@ -101,7 +101,11 @@ namespace HaoDouCookBook.Pages
                                     AlbumViewCount = item.ViewCount
                             });
                         }
-                        EnusureLoadMoreControl();
+                        
+                        if(success.AlbumItems.Length == 20)
+                        {
+                            EnusureLoadMoreControl();
+                        }
                     }
 
                     page = 1;
@@ -185,7 +189,7 @@ namespace HaoDouCookBook.Pages
                                  }
 
                                  page++;
-                                 if(success.AlbumItems.Length > 0)
+                                 if(success.AlbumItems.Length == limit)
                                  {
                                      EnusureLoadMoreControl();
                                  }

@@ -269,7 +269,7 @@ namespace HaoDouCookBook.Pages
                                       });
                                   }
 
-                                  if (success.Recipes.Length > 0)
+                                  if (success.Recipes.Length == limit)
                                   {
                                       EnusureLoadMoreControl();
                                   }

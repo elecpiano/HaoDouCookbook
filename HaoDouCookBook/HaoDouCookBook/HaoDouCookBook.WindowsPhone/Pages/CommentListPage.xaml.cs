@@ -1,4 +1,5 @@
-﻿using HaoDouCookBook.Controls;
+﻿using HaoDouCookBook.Common;
+using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.ViewModels;
 using System.Threading.Tasks;
@@ -85,7 +86,7 @@ namespace HaoDouCookBook.Pages
                 }
 
                 DataBinding();
-                LoadDataAsync(0, 20, pageParams.Type, pageParams.Cid, pageParams.RecipeId);
+                LoadDataAsync(pageParams.Type, pageParams.Cid, pageParams.RecipeId);
             }
         }
 
@@ -98,13 +99,19 @@ namespace HaoDouCookBook.Pages
             this.root.DataContext = viewModel;
         }
 
-        private async Task LoadDataAsync(int offset, int limit, int type, int cid, int recipeId)
+        private async Task LoadDataAsync(int type, int cid, int recipeId)
         {
-            await CommentAPI.GetList(offset, limit, type, cid, recipeId, data =>
-                {
-                    UpdatePageData(data);
+            loading.SetState(LoadingState.LOADING);
+            await CommentAPI.GetList(0, limit, type, cid, recipeId, 
+                success => {
+                    UpdatePageData(success);
+                    page = 1;
+                    loading.SetState(LoadingState.SUCCESS);
 
-                }, error => { });
+                },
+                error => {
+                    Utilities.CommonLoadingRetry(loading, error, async () => await LoadDataAsync(type, cid, recipeId));
+                });
         }
 
         private void UpdatePageData(HaoDou.DataModels.Discovery.CommentListPageData data)
@@ -121,6 +128,7 @@ namespace HaoDouCookBook.Pages
 
             if (data.Comments != null)
             {
+                RemoveLoadMoreControl();
                 foreach (var item in data.Comments)
                 {
                     string content = item.Content;
@@ -147,10 +155,17 @@ namespace HaoDouCookBook.Pages
                             UserName = item.UserName
                     });
                 }
+
+                if(data.Comments.Length == limit)
+                {
+                    EnusureLoadMoreControl();
+                }
             }
         }
 
         #endregion
+
+        #region Event
 
         private void Recipe_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
@@ -159,5 +174,97 @@ namespace HaoDouCookBook.Pages
 
             App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
+
+        #endregion
+
+        #region Load More
+
+        int page = 1;
+        int limit = 20;
+
+        private CommentListComment loadMoreControlDataContext = new CommentListComment() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (viewModel.Comments != null && !viewModel.Comments.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Comments.Add(loadMoreControlDataContext);
+            }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (viewModel.Comments != null && viewModel.Comments.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Comments.Remove(loadMoreControlDataContext);
+            }
+        }
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await CommentAPI.GetList(
+                         page * limit,
+                         limit,
+                         pageParams.Type,
+                         pageParams.Cid,
+                         pageParams.RecipeId,
+                         success =>
+                         {
+                             if (success.Comments != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.Comments)
+                                 {
+                                     string content = item.Content;
+                                     if (!string.IsNullOrEmpty(item.AtUserName))
+                                     {
+                                         string prefix = string.Format("@{0}:", item.AtUserName);
+                                         if (content.StartsWith(prefix))
+                                         {
+                                             content = content.Substring(prefix.Length);
+                                         }
+                                     }
+
+                                     viewModel.Comments.Add(new CommentListComment()
+                                     {
+                                         AtUserId = item.AtUserId,
+                                         AtUserName = item.AtUserName,
+                                         Avatar = item.Avatar,
+                                         Cid = item.Cid,
+                                         Content = content,
+                                         CreateTime = item.CreateTime,
+                                         PhotoFlag = item.PhotoFlag,
+                                         Photold = item.Photold,
+                                         PhotoUrl = item.PhotoUrl,
+                                         UserId = item.UserId,
+                                         UserName = item.UserName
+                                     });
+                                 }
+
+                                 page++;
+                                 loadmore.SetState(LoadingState.SUCCESS);
+                                 if (success.Comments.Length == limit)
+                                 {
+                                     EnusureLoadMoreControl();
+                                 } 
+                             } 
+                             else
+                             {
+                                 loadmore.SetState(LoadingState.DONE);
+                             }
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
+        }
+
+        #endregion
+
     }
 }

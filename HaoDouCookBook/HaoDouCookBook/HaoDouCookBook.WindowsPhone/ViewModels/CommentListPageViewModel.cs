@@ -1,4 +1,5 @@
 ﻿using Shared.Infrastructures;
+using Shared.Utility;
 using System.Collections.ObjectModel;
 
 namespace HaoDouCookBook.ViewModels
@@ -41,7 +42,7 @@ namespace HaoDouCookBook.ViewModels
         }
     }
 
-    public class CommentListComment : BindableBase
+    public class CommentListComment : BindableBase, ILoadMoreItem
     {
         private int cid;
 
@@ -132,6 +133,7 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref createTime, value); }
         }
 
+
         public CommentListComment()
         {
             cid = -1;
@@ -145,7 +147,10 @@ namespace HaoDouCookBook.ViewModels
             photold = 0;
             photoUrl = string.Empty; 
             createTime = string.Empty;
+            IsLoadMore = false;
         }
+
+        public bool IsLoadMore { get; set; }
     }
 
     public class CommentListRecipeInfo : BindableBase

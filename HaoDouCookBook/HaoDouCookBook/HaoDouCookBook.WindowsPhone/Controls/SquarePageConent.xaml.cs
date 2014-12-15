@@ -45,7 +45,7 @@ namespace HaoDouCookBook.Controls
         private async Task LoadFirstPageDataAsync()
         {
             loading.SetState(LoadingState.LOADING);
-            await TopicAPI.GetGroupIndexData(0, 20, 
+            await TopicAPI.GetGroupIndexData(0, limit, 
                 success => {
                     UpdatePageData(success);
                     loading.SetState(LoadingState.SUCCESS);
@@ -89,7 +89,11 @@ namespace HaoDouCookBook.Controls
                         TopicPreviewImageSource = item.ImageUrl
                     });
                 }
-                EnusureLoadMoreControl();
+
+                if(data.Topics.Length == limit)
+                {
+                    EnusureLoadMoreControl();
+                }
             }
         }
 
@@ -180,7 +184,7 @@ namespace HaoDouCookBook.Controls
                                     });
                                 }
 
-                                if(success.Topics.Length > 0)
+                                if(success.Topics.Length == 0)
                                 {
                                     EnusureLoadMoreControl();
                                 }

@@ -82,6 +82,6 @@
                 </ItemsControl>
             </StackPanel>
         </ScrollViewer>
-
+        <controls:NetworkLoading x:Name="loading" Margin="0, 105, 0, 0"/>
     </Grid>
 </controls:BackablePage>
