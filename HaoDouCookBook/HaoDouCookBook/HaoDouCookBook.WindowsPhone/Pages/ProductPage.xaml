@@ -75,7 +75,7 @@
                                                 </Grid>
 
                                                 <!--图片-->
-                                                <Border Height="360" Margin="0, 10, 0, 0" Tapped="RecipeImage_Tapped">
+                                                <Border Height="360" Width="380" Margin="0, 10, 0, 0" Tapped="RecipeImage_Tapped">
                                                     <Border.Background>
                                                         <ImageBrush ImageSource="{Binding PhotoUrl}" AlignmentY="Center" Stretch="UniformToFill"/>
                                                     </Border.Background>

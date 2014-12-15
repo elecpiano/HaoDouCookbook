@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:HaoDouCookBook.Controls"
-    mc:Ignorable="d"
+    mc:Ignorable="d"    xmlns:shared="using:Shared.Utility"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Margin="0, 0, 0, 0" x:Name="root" Background="{StaticResource TopAppbarColor}">
@@ -18,7 +18,7 @@
             <StackPanel Margin="0, 20, 0, 0">
                 <Border x:Name="recipeHeader" Height="120" Margin="0, -20, 0, 20" Background="#10000000"
                         Tapped="Recipe_Tapped">
-                       
+
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="94"/>
@@ -32,7 +32,7 @@
                         <TextBlock Grid.Column="1" Text="查看这个菜谱：" FontSize="18" Margin="10, 20, 0, 0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Column="1" Text="{Binding Info.Title}" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10, 55, 0, 0"/>
                         <Image Source="../assets/images/mypage/more.png" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Stretch="None"/>
-                    </Grid> 
+                    </Grid>
                 </Border>
                 <ItemsControl ItemsSource="{Binding Comments}">
                     <ItemsControl.ItemsPanel>
@@ -42,30 +42,41 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel>
-                                <Grid Margin="20, 0, 20, 0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="80"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <controls:UserPhoto ImageSource="{Binding Avatar}" UserId="{Binding UserId}" Grid.Column="0" Height="60" Width="60" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                    <Grid Grid.Column="1" VerticalAlignment="Center">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Text="{Binding UserName}" Grid.Row="0" Style="{StaticResource CommentListPage_UserName_Style}" />
-                                        <TextBlock Text="{Binding CreateTime}" Grid.Row="0" Style="{StaticResource CommentListPage_CreateTime_Style}"/>
-                                        <TextBlock Grid.Row="1" Style="{StaticResource CommentListPage_CommentContent_Style}">
-                                            <Run Text="回复"/>
-                                            <Run Text="{Binding AtUserName}" Foreground="{StaticResource GreenMain}"/>
-                                            <Run Text=":"/>
-                                            <Run Text="{Binding Content}"/>
-                                        </TextBlock>
-                                    </Grid>
-                                </Grid>
-                                <Rectangle Width="800" Style="{StaticResource LightGaryLine}" Margin="0, 10, 0, 10"/>
-                            </StackPanel>
+                            <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                                <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Grid Margin="20, 0, 20, 0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="80"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <controls:UserPhoto ImageSource="{Binding Avatar}" UserId="{Binding UserId}" Grid.Column="0" Height="60" Width="60" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                <Grid Grid.Column="1" VerticalAlignment="Center">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock Text="{Binding UserName}" Grid.Row="0" Style="{StaticResource CommentListPage_UserName_Style}" />
+                                                    <TextBlock Text="{Binding CreateTime}" Grid.Row="0" Style="{StaticResource CommentListPage_CreateTime_Style}"/>
+                                                    <TextBlock Grid.Row="1" Style="{StaticResource CommentListPage_CommentContent_Style}">
+                                                        <Run Text="回复"/>
+                                                        <Run Text="{Binding AtUserName}" Foreground="{StaticResource GreenMain}"/>
+                                                        <Run Text=":"/>
+                                                        <Run Text="{Binding Content}"/>
+                                                    </TextBlock>
+                                                </Grid>
+                                            </Grid>
+                                            <Rectangle Width="800" Style="{StaticResource LightGaryLine}" Margin="0, 10, 0, 10"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                    <DataTemplate>
+                                        <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                            </shared:LoadMoreDataTemplateSelector>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
