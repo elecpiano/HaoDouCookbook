@@ -58,9 +58,10 @@ namespace HaoDouCookBook.Pages
         private async Task LoadFirstPageDataAsync()
         {
             loading.SetState(LoadingState.LOADING);
-            await RecipeUserAPI.GetFriendList(0, 20, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, data =>
+            await RecipeUserAPI.GetFriendList(0, limit, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, data =>
                 {
                     UpateData(data);
+                    page = 1;
                     loading.SetState(LoadingState.SUCCESS);
 
                 }, error => {
@@ -82,6 +83,7 @@ namespace HaoDouCookBook.Pages
 
             if (data.FriendsNameCategories != null)
             {
+                RemoveLoadMoreControl();
                 foreach (var item in data.FriendsNameCategories)
                 {
                     ViewModels.FriendsNameCategory category = new ViewModels.FriendsNameCategory();
@@ -101,6 +103,11 @@ namespace HaoDouCookBook.Pages
                     }
 
                     viewModel.FriendsNameCategories.Add(category);
+                }
+
+                if (data.FriendsNameCategories.Length == limit)
+                {
+                    EnusureLoadMoreControl();
                 }
             }
         }
@@ -129,5 +136,86 @@ namespace HaoDouCookBook.Pages
 
         #endregion
 
+        #region Load More
+
+        int page = 1;
+        int limit = 20;
+
+        private ViewModels.FriendsNameCategory loadMoreControlDataContext = new ViewModels.FriendsNameCategory() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (viewModel.FriendsNameCategories != null && !viewModel.FriendsNameCategories.Contains(loadMoreControlDataContext))
+            {
+                viewModel.FriendsNameCategories.Add(loadMoreControlDataContext);
+            }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (viewModel.FriendsNameCategories != null && viewModel.FriendsNameCategories.Contains(loadMoreControlDataContext))
+            {
+                viewModel.FriendsNameCategories.Remove(loadMoreControlDataContext);
+            }
+        }
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await RecipeUserAPI.GetFriendList(
+                         page * limit,
+                         limit,
+                         UserGlobal.Instance.GetInt32UserId(),
+                         UserGlobal.Instance.UserInfo.Sign,
+                         success =>
+                         {
+                             if (success.FriendsNameCategories != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.FriendsNameCategories)
+                                 {
+                                     ViewModels.FriendsNameCategory category = new ViewModels.FriendsNameCategory();
+                                     category.FirstWord = item.FirstWord;
+                                     if (item.Friends != null)
+                                     {
+                                         foreach (var f in item.Friends)
+                                         {
+                                             category.Friends.Add(new ViewModes.Friend()
+                                             {
+                                                 Avatar = f.Avatar,
+                                                 Description = f.VipDesc,
+                                                 IsVip = f.Vip == 1 ? true : false,
+                                                 UserId = f.UserId,
+                                                 UserName = f.UserName
+                                             });
+                                         }
+                                     }
+
+                                     viewModel.FriendsNameCategories.Add(category);
+                                 }
+
+                                 if (success.FriendsNameCategories.Length == limit)
+                                 {
+                                     EnusureLoadMoreControl();
+                                 }
+                                 page++;
+                                 loadmore.SetState(LoadingState.SUCCESS);
+                             }
+                             else
+                             {
+                                 loadmore.SetState(LoadingState.DONE);
+                             }
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
+        }
+
+        #endregion
     }
 }

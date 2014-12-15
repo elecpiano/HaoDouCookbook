@@ -40,7 +40,7 @@ namespace HaoDouCookBook.ViewModels
         }
     }
 
-    public class FriendsNameCategory : BindableBase
+    public class FriendsNameCategory : BindableBase, ILoadMoreItem
     {
         private string firstWord;
 
@@ -52,10 +52,13 @@ namespace HaoDouCookBook.ViewModels
 
         public ObservableCollection<Friend> Friends { get; set; }
 
+        public bool IsLoadMore { get; set; }
+
         public FriendsNameCategory()
         {
             firstWord = string.Empty;
             Friends = new ObservableCollection<Friend>();
+            IsLoadMore = false;
         }
     }
 
