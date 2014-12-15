@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:HaoDouCookBook.Controls"
-    mc:Ignorable="d"
+    mc:Ignorable="d"    xmlns:shared="using:Shared.Utility"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
@@ -29,17 +29,27 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel>
-                                <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
-                                       Title="{Binding Title}"
-                                       PreviewContent="{Binding PreviewContent}"
-                                       Author="{Binding Author}"
-                                       CreateTimeDescription="{Binding CreateTimeDescription}"
-                                       HorizontalAlignment="Left" Tapped="TopicTile_Tapped"
+                            <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                                <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
+                                                   Title="{Binding Title}"
+                                                   PreviewContent="{Binding PreviewContent}"
+                                                   Author="{Binding Author}"
+                                                   CreateTimeDescription="{Binding CreateTimeDescription}"
+                                                   HorizontalAlignment="Left" Tapped="TopicTile_Tapped"
                                                 />
-                                <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="-100, 20, 0, 20"/>
-                                <controls:LoadMoreControl Margin="0, 10, 0, 20" Loaded="loadMore_Loaded"/>
-                            </StackPanel>
+                                            <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="-100, 20, 0, 20"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                    <DataTemplate>
+                                        <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                            </shared:LoadMoreDataTemplateSelector>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

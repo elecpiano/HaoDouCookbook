@@ -102,6 +102,7 @@ namespace HaoDouCookBook.Pages
 
         private async Task LoadFirstPageDataByKeywordAsync(string keyword)
         {
+            loading.SetState(LoadingState.LOADING);
             await SearchAPI.GetTopicList(0, 20, UserGlobal.Instance.uuid, null, keyword, 
                 success =>
                 {
@@ -109,6 +110,7 @@ namespace HaoDouCookBook.Pages
 
                     if (success.Topics != null)
                     {
+                        RemoveLoadMoreControl();
                         foreach (var item in success.Topics)
                         {
                             viewModel.Topics.Add(new TopicModel() { 
@@ -121,6 +123,7 @@ namespace HaoDouCookBook.Pages
                                     CreateTimeDescription = item.CreateTime
                             });
                         }
+                        EnusureLoadMoreControl();
                     }
                     page = 1;
                     loading.SetState(LoadingState.SUCCESS);
@@ -140,6 +143,7 @@ namespace HaoDouCookBook.Pages
 
                     if (success.Items != null)
                     {
+                        RemoveLoadMoreControl();
                         foreach (var item in success.Items)
                         {
                             int topicId = 0;
@@ -155,6 +159,7 @@ namespace HaoDouCookBook.Pages
                                 CreateTimeDescription = item.LastPostTime,
                             });
                         }
+                        EnusureLoadMoreControl();
                     }
                     
                     page = 1;
@@ -184,91 +189,126 @@ namespace HaoDouCookBook.Pages
         #endregion
 
         #region Load More
+
         int page = 1;
         int limit = 20;
 
+        private TopicModel loadMoreControlDataContext = new TopicModel() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (viewModel.Topics != null && !viewModel.Topics.Contains(loadMoreControlDataContext))
+           {
+               viewModel.Topics.Add(loadMoreControlDataContext);
+           }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (viewModel.Topics != null && viewModel.Topics.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Topics.Remove(loadMoreControlDataContext);
+            } 
+        }
+
         private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Utilities.RegistComonadLoadMoreBehavior<TopicModel>(sender,
-                async loadmore =>
-                {
-                    loadmore.SetState(LoadingState.LOADING);
-                    switch(pageParams.SourcePage)
-                    {
-                        case SourcePage.SEARCH_RESULT:
-                            await SearchAPI.GetTopicList(
-                                page * limit,
-                                limit,
-                                UserGlobal.Instance.uuid,
-                                null,
-                                pageParams.CategoryName,
-                                success =>
-                                {
-                                    if (success.Topics != null)
-                                    {
-                                        foreach (var item in success.Topics)
-                                        {
-                                            viewModel.Topics.Add(new TopicModel()
-                                            {
-                                                Id = item.TopicId,
-                                                Url = item.Url,
-                                                TopicPreviewImageSource = item.Cover,
-                                                Title = item.Title,
-                                                PreviewContent = item.Intro,
-                                                Author = item.UserName,
-                                                CreateTimeDescription = item.CreateTime
-                                            });
-                                        }
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     switch (pageParams.SourcePage)
+                     {
+                         case SourcePage.SEARCH_RESULT:
+                             await SearchAPI.GetTopicList(
+                                 page * limit,
+                                 limit,
+                                 UserGlobal.Instance.uuid,
+                                 null,
+                                 pageParams.CategoryName,
+                                 success =>
+                                 {
+                                     if (success.Topics != null)
+                                     {
+                                         RemoveLoadMoreControl();
+                                         foreach (var item in success.Topics)
+                                         {
+                                             viewModel.Topics.Add(new TopicModel()
+                                             {
+                                                 Id = item.TopicId,
+                                                 Url = item.Url,
+                                                 TopicPreviewImageSource = item.Cover,
+                                                 Title = item.Title,
+                                                 PreviewContent = item.Intro,
+                                                 Author = item.UserName,
+                                                 CreateTimeDescription = item.CreateTime
+                                             });
+                                         }
 
-                                        page++;
-                                    }
+                                         page++;
+                                         if(success.Topics.Length > 0)
+                                         {
+                                             EnusureLoadMoreControl();
+                                         }
+                                         loadmore.SetState(LoadingState.SUCCESS);
+                                     }
+                                     else
+                                     {
+                                         loadmore.SetState(LoadingState.DONE);
+                                     }
 
-                                    loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                                    loadmore.SetState(LoadingState.SUCCESS);
-                                },
-                                error =>
-                                {
-                                    Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
-                                });
-                            break;
-                        case SourcePage.NORMAL:
-                            await TopicAPI.GetList(
-                                page * limit,
-                                limit,
-                                pageParams.CategoryId,
-                                UserGlobal.Instance.GetInt32UserId(),
-                                success =>
-                                {
-                                    if (success.Items != null)
-                                    {
-                                        foreach (var item in success.Items)
-                                        {
-                                            int topicId = 0;
-                                            int.TryParse(item.TopicId.ToString(), out topicId);
-                                            viewModel.Topics.Add(new TopicModel()
-                                            {
-                                                Id = topicId,
-                                                Url = item.Url,
-                                                TopicPreviewImageSource = item.ImageUrl,
-                                                Title = item.Title,
-                                                PreviewContent = item.PreviewContent,
-                                                Author = item.UserName,
-                                                CreateTimeDescription = item.LastPostTime,
-                                            });
-                                        }
-                                        page++;
-                                    }
-                                    
-                                    loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                                    loadmore.SetState(LoadingState.SUCCESS);
-                                },
-                                error =>
-                                {
-                                    Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
-                                });
-                            break;
-                    }
-                   
+                                 },
+                                 error =>
+                                 {
+                                     Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                                 });
+                             break;
+                         case SourcePage.NORMAL:
+                             await TopicAPI.GetList(
+                                 page * limit,
+                                 limit,
+                                 pageParams.CategoryId,
+                                 UserGlobal.Instance.GetInt32UserId(),
+                                 success =>
+                                 {
+                                     if (success.Items != null)
+                                     {
+                                         RemoveLoadMoreControl();
+                                         foreach (var item in success.Items)
+                                         {
+                                             int topicId = 0;
+                                             int.TryParse(item.TopicId.ToString(), out topicId);
+                                             viewModel.Topics.Add(new TopicModel()
+                                             {
+                                                 Id = topicId,
+                                                 Url = item.Url,
+                                                 TopicPreviewImageSource = item.ImageUrl,
+                                                 Title = item.Title,
+                                                 PreviewContent = item.PreviewContent,
+                                                 Author = item.UserName,
+                                                 CreateTimeDescription = item.LastPostTime,
+                                             });
+                                         }
+
+                                         if(success.Items.Length > 0)
+                                         {
+                                             EnusureLoadMoreControl();
+                                         }
+
+                                         page++;
+                                         loadmore.SetState(LoadingState.SUCCESS);
+                                     }
+                                     else
+                                     {
+                                         loadmore.SetState(LoadingState.DONE);
+                                     }
+                                 },
+                                 error =>
+                                 {
+                                     Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                                 });
+                             break;
+                     }
                 });
         }
 

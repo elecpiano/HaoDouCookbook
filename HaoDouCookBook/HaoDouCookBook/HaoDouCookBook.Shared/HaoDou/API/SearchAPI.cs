@@ -101,9 +101,8 @@ namespace HaoDouCookBook.HaoDou.API
             postRequest.AddPostData("uuid", uuid);
             postRequest.AddPostData("keyword", Uri.EscapeDataString(keyword.Trim()));
 
-            string cacheFile = string.Format("{0}-{1}-{2}-{3}", methodName, offset, limit, tagid);
             HaoDouJsonDataLoader<SearchResultTopicListPageData> loader = new HaoDouJsonDataLoader<SearchResultTopicListPageData>();
-            await loader.LoadAsync(postRequest, true, MODULE, cacheFile, onSuccess, onFail);
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
         }
 
         public static async Task GetCateList(string uuid, Action<CategoryPageData> onSuccess, Action<Error> onFail)
