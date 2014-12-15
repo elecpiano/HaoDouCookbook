@@ -1,4 +1,5 @@
 ﻿using Shared.Infrastructures;
+using Shared.Utility;
 using System.Collections.ObjectModel;
 
 namespace HaoDouCookBook.ViewModels
@@ -23,7 +24,7 @@ namespace HaoDouCookBook.ViewModels
     }
 
 
-    public class AlbumTile : BindableBase
+    public class AlbumTile : BindableBase, ILoadMoreItem
     {
 
         private int albumId;
@@ -92,7 +93,10 @@ namespace HaoDouCookBook.ViewModels
             albumId = -1;
             albumIntro = string.Empty;
             albumTitle = string.Empty;
+            IsLoadMore = false;
         }
+
+        public bool IsLoadMore { get; set; }
     }
 
 }

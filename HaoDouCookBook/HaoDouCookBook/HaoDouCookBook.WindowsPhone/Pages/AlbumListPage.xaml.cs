@@ -88,6 +88,7 @@ namespace HaoDouCookBook.Pages
 
                     if (success.AlbumItems != null)
                     {
+                        RemoveLoadMoreControl();
                         foreach (var item in success.AlbumItems)
                         {
                             viewModel.AlbumItems.Add(new ViewModels.AlbumTile() { 
@@ -100,6 +101,7 @@ namespace HaoDouCookBook.Pages
                                     AlbumViewCount = item.ViewCount
                             });
                         }
+                        EnusureLoadMoreControl();
                     }
 
                     page = 1;
@@ -129,44 +131,70 @@ namespace HaoDouCookBook.Pages
         #endregion
 
         #region Load More
+
         int page = 1;
-        int limit = 10;
+        int limit = 20;
+
+        private ViewModels.AlbumTile loadMoreControlDataContext = new ViewModels.AlbumTile() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (viewModel.AlbumItems != null && !viewModel.AlbumItems.Contains(loadMoreControlDataContext))
+           {
+               viewModel.AlbumItems.Add(loadMoreControlDataContext);
+           }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (viewModel.AlbumItems != null && viewModel.AlbumItems.Contains(loadMoreControlDataContext))
+            {
+                viewModel.AlbumItems.Remove(loadMoreControlDataContext);
+            } 
+        }
 
         private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Utilities.RegistComonadLoadMoreBehavior<ViewModels.AlbumTile>(sender,
-                async loadmore =>
-                {
-                    loadmore.SetState(LoadingState.LOADING);
-                    await SearchAPI.GetAlbumList(
-                        page * limit,
-                        limit,
-                        UserGlobal.Instance.uuid,
-                        null,
-                        pageParams.Keyword,
-                        success =>
-                        {
-                            if (success.AlbumItems != null)
-                            {
-                                foreach (var item in success.AlbumItems)
-                                {
-                                    viewModel.AlbumItems.Add(new ViewModels.AlbumTile()
-                                    {
-                                        AlbumCover = item.Cover,
-                                        AlbumId = string.IsNullOrEmpty(item.AlbumId) ? -1 : int.Parse(item.AlbumId),
-                                        AlbumIntro = item.Intro,
-                                        AlbumLikeCount = item.LikeCount,
-                                        AlbumRecipeCount = item.RecipeCount,
-                                        AlbumTitle = item.Title,
-                                        AlbumViewCount = item.ViewCount
-                                    });
-                                }
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await SearchAPI.GetAlbumList(
+                         page * limit,
+                         limit,
+                         UserGlobal.Instance.uuid,
+                         null,
+                         pageParams.Keyword,
+                         success =>
+                         {
+                             if (success.AlbumItems != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.AlbumItems)
+                                 {
+                                     viewModel.AlbumItems.Add(new ViewModels.AlbumTile()
+                                     {
+                                         AlbumCover = item.Cover,
+                                         AlbumId = string.IsNullOrEmpty(item.AlbumId) ? -1 : int.Parse(item.AlbumId),
+                                         AlbumIntro = item.Intro,
+                                         AlbumLikeCount = item.LikeCount,
+                                         AlbumRecipeCount = item.RecipeCount,
+                                         AlbumTitle = item.Title,
+                                         AlbumViewCount = item.ViewCount
+                                     });
+                                 }
 
-                                page++;
-                            } 
-
-                            loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                            loadmore.SetState(LoadingState.SUCCESS);
+                                 page++;
+                                 if(success.AlbumItems.Length > 0)
+                                 {
+                                     EnusureLoadMoreControl();
+                                 }
+                                 loadmore.SetState(LoadingState.SUCCESS);
+                             } 
+                             else
+                             {
+                                 loadmore.SetState(LoadingState.DONE);
+                             }
                         },
                         error =>
                         {
