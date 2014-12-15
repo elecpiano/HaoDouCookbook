@@ -71,6 +71,8 @@ namespace HaoDouCookBook.Pages
                            EnusureLoadMoreControl();
                        }
                    }
+
+                   page = 1;
                    loading.SetState(LoadingState.SUCCESS);
 
                }, error => {

@@ -78,13 +78,13 @@ namespace HaoDouCookBook.Pages
         private async Task LoadFirstPageDataAsync(string subType)
         {
             loading.SetState(LoadingState.LOADING);
-            await NoticeAPI.GetUserNotice(0, 20, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, 0, subType, UserGlobal.Instance.UserInfo.Sign,
-                data => {
-
-                    if (data.Notices != null)
+            await NoticeAPI.GetUserNotice(0, limit, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, 0, subType, UserGlobal.Instance.UserInfo.Sign,
+                success => {
+                    if (success.Notices != null)
                     {
                         viewModel.Notices.Clear();
-                        foreach (var item in data.Notices)
+                        RemoveLoadMoreControl();
+                        foreach (var item in success.Notices)
                         {
                             string content = "回复了您，快去看看吧！";
                             int id = 0;
@@ -110,8 +110,14 @@ namespace HaoDouCookBook.Pages
                                 ContentId = id
                             });
                         }
+
+                        if(success.Notices.Length == limit)
+                        {
+                            EnusureLoadMoreControl();
+                        }
                     }
 
+                    page = 1;
                     loading.SetState(LoadingState.SUCCESS);
 
                 }, error => {
@@ -158,5 +164,99 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+
+        #region Load More
+
+        int page = 1;
+        int limit = 20;
+
+        private NoticeItem loadMoreControlDataContext = new NoticeItem() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (viewModel.Notices != null && !viewModel.Notices.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Notices.Add(loadMoreControlDataContext);
+            }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (viewModel.Notices != null && viewModel.Notices.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Notices.Remove(loadMoreControlDataContext);
+            }
+        }
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await NoticeAPI.GetUserNotice(
+                         page * limit,
+                         limit,
+                         UserGlobal.Instance.GetInt32UserId(),
+                         UserGlobal.Instance.uuid,
+                         0,
+                         pageParams.SubType,
+                         UserGlobal.Instance.UserInfo.Sign,
+                         success =>
+                         {
+                             if (success.Notices != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.Notices)
+                                 {
+                                     string content = "回复了您，快去看看吧！";
+                                     int id = 0;
+                                     if (!string.IsNullOrEmpty(item.Content.Rid))
+                                     {
+                                         id = int.Parse(item.Content.Rid);
+                                     }
+                                     else
+                                     {
+                                         if (!string.IsNullOrEmpty(item.Content.Pid))
+                                         {
+                                             id = int.Parse(item.Content.Pid);
+                                         }
+                                     }
+
+                                     viewModel.Notices.Add(new NoticeItem()
+                                     {
+                                         Avatar = item.Avatar,
+                                         Content = content,
+                                         Time = item.Time,
+                                         Type = item.Type,
+                                         UserId = item.Uid,
+                                         UserName = item.UserName,
+                                         ContentId = id
+                                     });
+                                 }
+
+                                 if (success.Notices.Length == limit)
+                                 {
+                                     EnusureLoadMoreControl();
+                                 }
+
+                                 page++;
+                                 loading.SetState(LoadingState.SUCCESS);
+                             }
+                             else
+                             {
+                                 loadmore.SetState(LoadingState.DONE);
+                             }
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
+        }
+
+        #endregion
+
     }
 }

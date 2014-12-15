@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:HaoDouCookBook.Controls"
-    mc:Ignorable="d"
+    mc:Ignorable="d" xmlns:shared="using:Shared.Utility"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
@@ -23,26 +23,38 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" IsHitTestVisible="True">
-                            <StackPanel Orientation="Vertical" Margin="0, 15, 0, 0" Tapped="Notice_Tapped">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="65"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0">
-                                        <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding Avatar}" Width="65" Height="65"/>
-                                    </Grid>
-                                    <Grid Grid.Column="1" Margin="10, 0, 0, 0">
-                                        <TextBlock Text="{Binding UserName}" Style="{StaticResource NoticePage_UserName_Style}"/>
-                                        <TextBlock Text="{Binding Time}" Style="{StaticResource NoticePage_UpdateTime_Style}"/>
-                                        <TextBlock Text="{Binding Content}" Style="{StaticResource NoticePage_MessageContent_Style}"/>
-                                    </Grid>
-                                </Grid>
-                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 15, 0, 0"/>
-                            </StackPanel>
-                        </controls:SmartGrid>
+                        <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                            <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" IsHitTestVisible="True">
+                                        <StackPanel Orientation="Vertical" Margin="0, 15, 0, 0" Tapped="Notice_Tapped">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="65"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="0">
+                                                    <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding Avatar}" Width="65" Height="65"/>
+                                                </Grid>
+                                                <Grid Grid.Column="1" Margin="10, 0, 0, 0">
+                                                    <TextBlock Text="{Binding UserName}" Style="{StaticResource NoticePage_UserName_Style}"/>
+                                                    <TextBlock Text="{Binding Time}" Style="{StaticResource NoticePage_UpdateTime_Style}"/>
+                                                    <TextBlock Text="{Binding Content}" Style="{StaticResource NoticePage_MessageContent_Style}"/>
+                                                </Grid>
+                                            </Grid>
+                                            <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 15, 0, 0"/>
+                                        </StackPanel>
+                                    </controls:SmartGrid>
+                                </DataTemplate>
+                            </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                            <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                <DataTemplate>
+                                    <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                </DataTemplate>
+                            </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                        </shared:LoadMoreDataTemplateSelector>
                     </DataTemplate>
+
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>

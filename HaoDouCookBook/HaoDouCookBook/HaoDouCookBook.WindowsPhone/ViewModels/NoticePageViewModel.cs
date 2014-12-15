@@ -1,4 +1,5 @@
 ﻿using Shared.Infrastructures;
+using Shared.Utility;
 using System.Collections.ObjectModel;
 
 namespace HaoDouCookBook.ViewModels
@@ -14,7 +15,7 @@ namespace HaoDouCookBook.ViewModels
     }
 
 
-    public class NoticeItem : BindableBase
+    public class NoticeItem : BindableBase, ILoadMoreItem
     {
         private int userId;
 
@@ -72,6 +73,8 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<int>(ref contentId, value); }
         }
 
+        public bool IsLoadMore { get; set; }
+
         public NoticeItem()
         {
             userId = 0;
@@ -80,6 +83,7 @@ namespace HaoDouCookBook.ViewModels
             avatar = string.Empty;
             content = string.Empty;
             time = string.Empty;
+            IsLoadMore = false;
 
 
         }
