@@ -105,6 +105,7 @@ namespace HaoDouCookBook.Pages
                 recipeId, 
                 success =>
                 {
+                    RemoveLoadMoreControl();
                     foreach (var item in success.Recipes)
                     {
                         Recipes.Add(new RecipeTileData() { 
@@ -118,6 +119,7 @@ namespace HaoDouCookBook.Pages
 
                         page = 1;
                     }
+                    EnusureLoadMoreControl();
                     loading.SetState(LoadingState.SUCCESS);
 
                 }, error => {
@@ -157,42 +159,65 @@ namespace HaoDouCookBook.Pages
         #region Load More
 
         int page = 1;
-        int limit = 10;
+        int limit = 20;
+
+        private RecipeTileData loadMoreControlDataContext = new RecipeTileData() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+           if(Recipes != null && !Recipes.Contains(loadMoreControlDataContext))
+           {
+               Recipes.Add(loadMoreControlDataContext);
+           }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (Recipes != null && Recipes.Contains(loadMoreControlDataContext))
+            {
+                Recipes.Remove(loadMoreControlDataContext);
+            } 
+        }
 
         private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Utilities.RegistComonadLoadMoreBehavior<RecipeTileData>(sender,
-                async loadmore =>
-                {
-                    loadmore.SetState(LoadingState.LOADING);
-                    await RecipeAPI.GetCollectRecomment(
-                        page * limit, 
-                        limit, 
-                        UserGlobal.Instance.UserInfo.Sign, 
-                        UserGlobal.Instance.GetInt32UserId(), 
-                        UserGlobal.Instance.uuid,
-                        pageParams.Title,
-                        pageParams.Id,
-                        success =>
-                        {
-                           if(success.Recipes != null) 
-                           {
-                               foreach (var item in success.Recipes)
-                               {
-                                   Recipes.Add(new RecipeTileData() { 
-                                        Author = item.UserName, 
-                                        TagsText = item.GetTagsString(), 
-                                        RecipeImage = item.Cover, 
-                                        RecipeName = item.Title, 
-                                        SupportNumber = item.LikeCount.ToString(),
-                                        RecipeId = item.RecipeId
-                                    });
-                               }
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await RecipeAPI.GetCollectRecomment(
+                         page * limit,
+                         limit,
+                         UserGlobal.Instance.UserInfo.Sign,
+                         UserGlobal.Instance.GetInt32UserId(),
+                         UserGlobal.Instance.uuid,
+                         pageParams.Title,
+                         pageParams.Id,
+                         success =>
+                         {
+                             if (success.Recipes != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.Recipes)
+                                 {
+                                     Recipes.Add(new RecipeTileData()
+                                     {
+                                         Author = item.UserName,
+                                         TagsText = item.GetTagsString(),
+                                         RecipeImage = item.Cover,
+                                         RecipeName = item.Title,
+                                         SupportNumber = item.LikeCount.ToString(),
+                                         RecipeId = item.RecipeId
+                                     });
+                                 }
 
-                               page++;
-                           }
+                                 if(success.Recipes.Length > 1)
+                                 {
+                                     EnusureLoadMoreControl();
+                                 }
+                                 page++;
+                             }
 
-                            loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                             loadmore.SetState(LoadingState.SUCCESS);
                         },
                         error =>

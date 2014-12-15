@@ -40,7 +40,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <shared:LoadMoreDataTemplateSelector Content="{Binding}">
+                            <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
                                 <shared:LoadMoreDataTemplateSelector.ItemTemplate>
                                     <DataTemplate>
                                         <controls:TopicTile TopicPreviewImageSource="{Binding TopicPreviewImageSource}"  
