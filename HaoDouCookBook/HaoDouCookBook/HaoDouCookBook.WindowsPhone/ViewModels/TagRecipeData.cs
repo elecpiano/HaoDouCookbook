@@ -1,8 +1,9 @@
 ﻿using Shared.Infrastructures;
+using Shared.Utility;
 
 namespace HaoDouCookBook.ViewModels
 {
-    public class TagRecipeData : BindableBase
+    public class TagRecipeData : BindableBase, ILoadMoreItem
     {
         private string recipeName;
 
@@ -68,7 +69,9 @@ namespace HaoDouCookBook.ViewModels
             viewNumber = 0;
             foodStuff = string.Empty;
             recipeId = -1;
+            IsLoadMore = false;
         }
-        
+
+        public bool IsLoadMore { get; set; }
     }
 }
