@@ -77,7 +77,7 @@
 
                     <Rectangle Margin="0, 00, 0, 22" Style="{StaticResource GrayLine}" Width="380"/>
                     <!--广告-->
-                    <Image x:Name="Ads" Source="{Binding}"/>
+                    <Image x:Name="Ads" Source="{Binding Cover}" Tapped="Ad_Tapped"/>
 
                     <Rectangle Margin="0, 15, 0, 15" Style="{StaticResource GrayLine}" Width="380"/>
                     <!--专辑-->

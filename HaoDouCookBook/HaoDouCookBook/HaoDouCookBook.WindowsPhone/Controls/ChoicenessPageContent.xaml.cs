@@ -1,5 +1,6 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.HaoDou.API;
+using HaoDouCookBook.HaoDou.DataModels.Choiceness;
 using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
 using HaoDouCookBook.Pages;
 using HaoDouCookBook.ViewModels;
@@ -117,7 +118,7 @@ namespace HaoDouCookBook.Controls
 
             // Ad
             //
-            this.Ads.DataContext = data.ADs[0].Cover;
+            this.Ads.DataContext = data.ADs[0];
 
             //Special Recipe AlbumData
             //
@@ -233,7 +234,6 @@ namespace HaoDouCookBook.Controls
             App.Current.RootFrame.Navigate(typeof(RecipeCategoryDetailPage), paras);
         }
 
-
         private void JustToWebPageRecipeTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var tiledata = sender.GetDataContext<RecipeCategoryTileData>();
@@ -253,6 +253,7 @@ namespace HaoDouCookBook.Controls
             }
 
         }
+
         private void RankItemGrid_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var rankItemData = sender.GetDataContext<RankItemData>();
@@ -262,7 +263,6 @@ namespace HaoDouCookBook.Controls
 
             App.Current.RootFrame.Navigate(typeof(RankViewPage), paras);
         }
-
 
         private void SpecialRecipeAlbum_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -275,6 +275,16 @@ namespace HaoDouCookBook.Controls
         private void searchBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
             App.Current.RootFrame.Navigate(typeof(SearchPage));
+        }
+
+        private void Ad_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<ADItem>();
+
+            ArticleViewer.ArticleViewerPageParams paras = new ArticleViewer.ArticleViewerPageParams();
+            paras.Url = dataContext.Url;
+
+            App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
         }
 
         #endregion

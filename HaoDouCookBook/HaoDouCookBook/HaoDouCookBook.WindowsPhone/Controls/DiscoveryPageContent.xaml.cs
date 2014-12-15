@@ -196,6 +196,18 @@ namespace HaoDouCookBook.Controls
         }
 
         #endregion
+
+        private void CookMaster_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if(viewModel.Masters.Count > 0)
+            {
+                ArticleViewer.ArticleViewerPageParams paras = new ArticleViewer.ArticleViewerPageParams();
+                paras.Url = viewModel.Masters[0].OpenUrl;
+
+                App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
+            }
+
+        }
         
     }
 }
