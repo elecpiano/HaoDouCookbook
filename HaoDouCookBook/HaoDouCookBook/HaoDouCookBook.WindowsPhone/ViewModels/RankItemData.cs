@@ -1,8 +1,9 @@
 ﻿using Shared.Infrastructures;
+using Shared.Utility;
 
 namespace HaoDouCookBook.ViewModels
 {
-    public class RankItemData : BindableBase
+    public class RankItemData : BindableBase, ILoadMoreItem
     {
         private string coverImage;
 
@@ -52,7 +53,9 @@ namespace HaoDouCookBook.ViewModels
             description = string.Empty;
             id = -1;
             type = -1;
+            IsLoadMore = false;
         }
 
+        public bool IsLoadMore { get; set; }
     }
 }

@@ -73,6 +73,7 @@ namespace HaoDouCookBook.Pages
                 {
                     if (success.Items != null)
                     {
+                        RemoveLoadMoreControl();
                         foreach (var item in success.Items)
                         {
                             rankListData.Add(new RankItemData() { 
@@ -83,6 +84,7 @@ namespace HaoDouCookBook.Pages
                                 Id = int.Parse(item.Id)
                             });
                         }
+                        EnusureLoadMoreControl();
                     }
                     page = 1;
 
@@ -110,41 +112,65 @@ namespace HaoDouCookBook.Pages
         #endregion
 
         #region Load More
+
         int page = 1;
-        int limit = 10;
+        int limit = 20;
+
+        private RankItemData loadMoreControlDataContext = new RankItemData() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (rankListData != null && !rankListData.Contains(loadMoreControlDataContext))
+           {
+               rankListData.Add(loadMoreControlDataContext);
+           }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (rankListData != null && rankListData.Contains(loadMoreControlDataContext))
+            {
+                rankListData.Remove(loadMoreControlDataContext);
+            } 
+        }
 
         private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Utilities.RegistComonadLoadMoreBehavior<RankItemData>(sender,
-                async loadmore =>
-                {
-                    loadmore.SetState(LoadingState.LOADING);
-                    await RankAPI.GetRankList(
-                        page * limit,
-                        limit,
-                        UserGlobal.Instance.UserInfo.Sign,
-                        UserGlobal.Instance.GetInt32UserId(),
-                        UserGlobal.Instance.uuid, 
-                        success =>
-                        {
-                            if(success.Items != null)
-                            {
-                                foreach (var item in success.Items)
-                                {
-                                    rankListData.Add(new RankItemData()
-                                    {
-                                        Title = item.Title,
-                                        CoverImage = item.Cover,
-                                        Description = item.Intro,
-                                        Type = item.RankType,
-                                        Id = int.Parse(item.Id)
-                                    });
-                                }
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await RankAPI.GetRankList(
+                         page * limit,
+                         limit,
+                         UserGlobal.Instance.UserInfo.Sign,
+                         UserGlobal.Instance.GetInt32UserId(),
+                         UserGlobal.Instance.uuid,
+                         success =>
+                         {
+                             if (success.Items != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.Items)
+                                 {
+                                     rankListData.Add(new RankItemData()
+                                     {
+                                         Title = item.Title,
+                                         CoverImage = item.Cover,
+                                         Description = item.Intro,
+                                         Type = item.RankType,
+                                         Id = int.Parse(item.Id)
+                                     });
+                                 }
 
-                                page++;
-                            }
+                                 if(success.Items.Length > 0)
+                                 {
+                                     EnusureLoadMoreControl();
+                                 }
 
-                            loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                                 page++;
+                             }
+
                             loadmore.SetState(LoadingState.SUCCESS);
                         },
                         error =>
