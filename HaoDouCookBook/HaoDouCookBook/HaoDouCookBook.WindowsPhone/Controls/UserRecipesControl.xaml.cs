@@ -4,6 +4,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Shared.Utility;
 using Windows.UI.Xaml;
+using System;
+using HaoDouCookBook.Common;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -38,6 +40,8 @@ namespace HaoDouCookBook.Controls
             get { return (string)GetValue(NoItemsImageProperty); }
             set { SetValue(NoItemsImageProperty, value); }
         }
+
+        public Action<LoadMoreControl> LoadMoreAction { get; set; }
 
         #endregion
 
@@ -82,6 +86,17 @@ namespace HaoDouCookBook.Controls
 
                 App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), paras);
             }
+        }
+
+        private void loadMore_Loaded(object sender, RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender, control =>
+                {
+                    if(LoadMoreAction != null)
+                    {
+                        LoadMoreAction.Invoke(control);
+                    }
+                });
         }
 
         #endregion

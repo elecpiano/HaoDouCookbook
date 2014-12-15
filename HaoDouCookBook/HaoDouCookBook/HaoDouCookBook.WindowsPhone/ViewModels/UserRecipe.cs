@@ -1,8 +1,9 @@
 ﻿using Shared.Infrastructures;
+using Shared.Utility;
 
 namespace HaoDouCookBook.ViewModels
 {
-    public class UserRecipeOrProductBase : BindableBase
+    public class UserRecipeOrProductBase : BindableBase, ILoadMoreItem
     {
         private int id;
 
@@ -19,13 +20,14 @@ namespace HaoDouCookBook.ViewModels
             get { return cover; }
             set { SetProperty<string>(ref cover, value); }
         }
-
         
+        public bool IsLoadMore { get; set; }
 
         public UserRecipeOrProductBase()
         {
             id = 0;
             cover = string.Empty;
+            IsLoadMore = false;
         }
     }
 

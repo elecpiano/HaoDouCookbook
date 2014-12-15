@@ -22,6 +22,7 @@ namespace HaoDouCookBook.Pages
             this.InitializeComponent();
             Products = new ObservableCollection<UserProduct>();
             this.prodcutsList.NoItemsText = Constants.I_DONT_HAVE_PRODUCTS;
+            this.prodcutsList.LoadMoreAction = LoadMore;
         }
 
         /// <summary>
@@ -51,17 +52,23 @@ namespace HaoDouCookBook.Pages
         {
             int userid = UserGlobal.Instance.GetInt32UserId();
             loading.SetState(LoadingState.LOADING);
-            await RecipePhotoAPI.GetList(0, 20, userid, userid, UserGlobal.Instance.UserInfo.Sign,
+            await RecipePhotoAPI.GetList(0, limit, userid, userid, UserGlobal.Instance.UserInfo.Sign,
                success => {
                    if(success.Products != null)
                    {
                        Products.Clear();
+                       RemoveLoadMoreControl();
                        foreach (var item in success.Products)
                        {
                            Products.Add(new UserProduct() { 
                                Cover = item.PhotoUrl,
                                Id = item.RecipePhotoId
                            });
+                       }
+
+                       if(success.Products.Length == limit)
+                       {
+                           EnusureLoadMoreControl();
                        }
                    }
                    loading.SetState(LoadingState.SUCCESS);
@@ -70,5 +77,72 @@ namespace HaoDouCookBook.Pages
                    Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirsPageDataAsync());
                });
         }
+
+
+        #region Load More
+
+        int page = 1;
+        int limit = 21;
+
+        private UserProduct loadMoreControlDataContext = new UserProduct() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (Products != null && !Products.Contains(loadMoreControlDataContext))
+            {
+                Products.Add(loadMoreControlDataContext);
+            }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (Products != null && Products.Contains(loadMoreControlDataContext))
+            {
+                Products.Remove(loadMoreControlDataContext);
+            }
+        }
+
+        private async void LoadMore(LoadMoreControl loadmore)
+        {
+            int uid = UserGlobal.Instance.GetInt32UserId();
+            loadmore.SetState(LoadingState.LOADING);
+            await RecipePhotoAPI.GetList(
+                page * limit,
+                limit,
+                uid,
+                uid,
+                UserGlobal.Instance.UserInfo.Sign,
+                success =>
+                {
+                    if (success.Products != null)
+                    {
+                        RemoveLoadMoreControl();
+                        foreach (var item in success.Products)
+                        {
+                            Products.Add(new UserProduct()
+                            {
+                                Cover = item.PhotoUrl,
+                                Id = item.RecipePhotoId
+                            });
+                        }
+
+                        if (success.Products.Length == limit)
+                        {
+                            EnusureLoadMoreControl();
+                        }
+                    }
+                    else
+                    {
+                        loadmore.SetState(LoadingState.DONE);
+                    }
+                },
+               error =>
+               {
+                   Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+               });
+        }
+
+        #endregion
+
     }
 }

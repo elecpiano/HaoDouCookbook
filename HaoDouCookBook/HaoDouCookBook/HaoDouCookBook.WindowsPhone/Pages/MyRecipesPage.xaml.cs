@@ -30,6 +30,13 @@ namespace HaoDouCookBook.Pages
             Recipes = new ObservableCollection<UserRecipe>();
             this.noItemsText.Text = Constants.I_DONT_HAVE_RECIPES;
             DataBinding();
+            Init();
+
+        }
+
+        private void Init()
+        {
+            this.recipesList.LoadMoreAction = LoadMore;
         }
 
         /// <summary>
@@ -64,11 +71,12 @@ namespace HaoDouCookBook.Pages
             int uid = UserGlobal.Instance.GetInt32UserId();
 
             loading.SetState(LoadingState.LOADING);
-            await RecipeUserAPI.GetUserRecipeList(0, 21, uid, uid, success =>
+            await RecipeUserAPI.GetUserRecipeList(0, limit, uid, uid, success =>
             {
                 if (success.Recipes != null)
                 {
                     Recipes.Clear();
+                    RemoveLoadMoreControl();
                     foreach (var item in success.Recipes)
                     {
                         Recipes.Add(new UserRecipe()
@@ -77,7 +85,14 @@ namespace HaoDouCookBook.Pages
                             Cover = item.Cover
                         });
                     }
+
+                    if(success.Recipes.Length == limit)
+                    {
+                        EnusureLoadMoreControl();
+                    }
                 }
+
+                page = 1;
                 loading.SetState(LoadingState.SUCCESS);
 
             }, error => {
@@ -92,6 +107,71 @@ namespace HaoDouCookBook.Pages
         private void Publish_Click(object sender, RoutedEventArgs e)
         {
             App.Current.RootFrame.Navigate(typeof(PublishRecipePage));
+        }
+
+        #endregion
+
+
+        #region Load More
+
+        int page = 1;
+        int limit = 21;
+
+        private UserRecipe loadMoreControlDataContext = new UserRecipe() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (Recipes != null && !Recipes.Contains(loadMoreControlDataContext))
+            {
+                Recipes.Add(loadMoreControlDataContext);
+            }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (Recipes != null && Recipes.Contains(loadMoreControlDataContext))
+            {
+                Recipes.Remove(loadMoreControlDataContext);
+            }
+        }
+
+        private async void LoadMore(LoadMoreControl loadmore)
+        {
+            int uid = UserGlobal.Instance.GetInt32UserId();
+            loadmore.SetState(LoadingState.LOADING);
+            await RecipeUserAPI.GetUserRecipeList(
+                page * limit,
+                limit,
+                uid,
+                uid,
+                success => {
+                    if (success.Recipes != null)
+                    {
+                        RemoveLoadMoreControl();
+                        foreach (var item in success.Recipes)
+                        {
+                            Recipes.Add(new UserRecipe()
+                            {
+                                Id = item.Rid,
+                                Cover = item.Cover
+                            });
+                        }
+
+                        if (success.Recipes.Length == limit)
+                        {
+                            EnusureLoadMoreControl();
+                        }
+                        page++;
+                        loadmore.SetState(LoadingState.SUCCESS);
+                    }
+                    else
+                    {
+                        loadmore.SetState(LoadingState.DONE);
+                    }
+                },
+               error => {
+                   Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+               });
         }
 
         #endregion
