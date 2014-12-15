@@ -11,19 +11,19 @@
 
     <Page.BottomAppBar>
         <CommandBar x:Name="bottomAppbar" Style="{StaticResource bottomAppbarStyle}">
-            <CommandBar.PrimaryCommands> 
+            <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Edit" Label="偏好设置" Click="personalTags_click"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
-    
+
     <Grid Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="18, 5, 0, 0" Title="好豆菜谱"/>
         <Border Style="{StaticResource PageTitleBorderStyle}">
             <TextBlock Margin="11, 0, 0, 13" x:Name="title" Style="{StaticResource SubTitleStyle}"/>
         </Border>
         <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
-            <ItemsControl Name="recipesList" Margin="18, 20, 15, 0">
+            <ItemsControl Name="recipesList" Margin="18, 20, 15, 20">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical"/>
@@ -32,19 +32,23 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <controls:RecipeTile 
-                            RecipeName="{Binding RecipeName}"
-                            RecipeImage="{Binding RecipeImage}"
-                            TagsText="{Binding TagsText}"
-                            Recommendation="{Binding Recommendation}"
-                            SupportNumber="{Binding SupportNumber, Converter={StaticResource favoriteCountToStringConverter}}"
-                            Author="{Binding Author}"
-                            Tapped="RecipeTile_Tapped"
-                            Margin="0, 0, 0, 30"/>
+                        <StackPanel>
+                            <controls:RecipeTile 
+                                RecipeName="{Binding RecipeName}"
+                                RecipeImage="{Binding RecipeImage}"
+                                TagsText="{Binding TagsText}"
+                                Recommendation="{Binding Recommendation}"
+                                SupportNumber="{Binding SupportNumber, Converter={StaticResource favoriteCountToStringConverter}}"
+                                Author="{Binding Author}"
+                                Tapped="RecipeTile_Tapped"
+                                Margin="0, 0, 0, 30"/>
+                            <controls:LoadMoreControl Margin="0, 10, 0, 0" Loaded="loadMore_Loaded"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        <controls:NetworkLoading x:Name="loading" Margin="0, 105, 0, 0"/>
         <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/>
     </Grid>
 </controls:BackablePage>

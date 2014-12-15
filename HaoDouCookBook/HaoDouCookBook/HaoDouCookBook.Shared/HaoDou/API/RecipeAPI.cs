@@ -65,13 +65,13 @@ namespace HaoDouCookBook.HaoDou.API
         /// <param name="onSuccess"></param>
         /// <param name="onFail"></param>
         /// <returns></returns>
-        public static async Task GetCollectRecomment(int offset, int limit, int? sign, int? uid, string uuid, string type, int recipeId, Action<RecipeRecommendPageData> onSuccess, Action<Error> onFail)
+        public static async Task GetCollectRecomment(int offset, int limit, string sign, int? uid, string uuid, string type, int recipeId, Action<RecipeRecommendPageData> onSuccess, Action<Error> onFail)
         {
             string methodName = "getCollectRecomment";
             POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(Moudle, methodName));
             postRequest.AddPostData("offset", offset.ToString());
             postRequest.AddPostData("limit", limit.ToString());
-            postRequest.AddPostData("sign", sign.HasValue ? sign.Value.ToString() : string.Empty);
+            postRequest.AddPostData("sign", sign);
             postRequest.AddPostData("uid", uid.HasValue ? uid.Value.ToString() : string.Empty);
             postRequest.AddPostData("uuid", uuid);
             postRequest.AddPostData("type", type);

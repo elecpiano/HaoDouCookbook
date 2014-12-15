@@ -34,6 +34,7 @@ namespace HaoDouCookBook.Pages
 
         #region Field && Property
         private ObservableCollection<RecipeTileData> Recipes = new ObservableCollection<RecipeTileData>();
+        RecipeCategoryDefailPageParams pageParams;
         #endregion
 
         #region Life Cycle
@@ -59,12 +60,12 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            RecipeCategoryDefailPageParams paras = e.Parameter as RecipeCategoryDefailPageParams;
-            if (paras != null)
+            pageParams = e.Parameter as RecipeCategoryDefailPageParams;
+            if (pageParams != null)
             {
                 // show the bottom appbar if the title is 私人定制
                 //
-                if (paras.Id == 391926 || paras.Title == "私人定制")
+                if (pageParams.Id == 391926 || pageParams.Title == "私人定制")
                 {
                     this.bottomAppbar.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 }
@@ -73,10 +74,10 @@ namespace HaoDouCookBook.Pages
                     this.bottomAppbar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 }
 
-                this.title.Text = paras.Title;
+                this.title.Text = pageParams.Title;
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 Recipes.Clear();
-                LoadDataAsync(0, 10, paras.Title, paras.Id);
+                LoadFirstPageDataAsync(pageParams.Title, pageParams.Id);
             }
 
         }
@@ -91,11 +92,20 @@ namespace HaoDouCookBook.Pages
             this.recipesList.ItemsSource = Recipes;
         }
 
-        private async Task LoadDataAsync(int offset, int limit, string typeName, int recipeId)
+        private async Task LoadFirstPageDataAsync(string typeName, int recipeId)
         {
-            await RecipeAPI.GetCollectRecomment(offset, limit, null, null, null, typeName, recipeId, data =>
+            loading.SetState(LoadingState.LOADING);
+            await RecipeAPI.GetCollectRecomment(
+                0, 
+                10, 
+                UserGlobal.Instance.UserInfo.Sign, 
+                UserGlobal.Instance.GetInt32UserId(), 
+                UserGlobal.Instance.uuid, 
+                typeName, 
+                recipeId, 
+                success =>
                 {
-                    foreach (var item in data.Recipes)
+                    foreach (var item in success.Recipes)
                     {
                         Recipes.Add(new RecipeTileData() { 
                             Author = item.UserName, 
@@ -105,11 +115,13 @@ namespace HaoDouCookBook.Pages
                             SupportNumber = item.LikeCount.ToString(),
                             RecipeId = item.RecipeId
                         });
+
+                        page = 1;
                     }
+                    loading.SetState(LoadingState.SUCCESS);
 
-                }, error =>
-                {
-
+                }, error => {
+                    Utilities.CommonLoadingRetry(loading, error, async ()=> await LoadFirstPageDataAsync(typeName, recipeId));
                 });
         }
 
@@ -124,8 +136,6 @@ namespace HaoDouCookBook.Pages
             paras.RecipeId = dataContext.RecipeId;
             App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
-
-        #endregion
 
         private void personalTags_click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
@@ -142,5 +152,54 @@ namespace HaoDouCookBook.Pages
             }
         }
 
+        #endregion
+
+        #region Load More
+
+        int page = 1;
+        int limit = 10;
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior<RecipeTileData>(sender,
+                async loadmore =>
+                {
+                    loadmore.SetState(LoadingState.LOADING);
+                    await RecipeAPI.GetCollectRecomment(
+                        page * limit, 
+                        limit, 
+                        UserGlobal.Instance.UserInfo.Sign, 
+                        UserGlobal.Instance.GetInt32UserId(), 
+                        UserGlobal.Instance.uuid,
+                        pageParams.Title,
+                        pageParams.Id,
+                        success =>
+                        {
+                           if(success.Recipes != null) 
+                           {
+                               foreach (var item in success.Recipes)
+                               {
+                                   Recipes.Add(new RecipeTileData() { 
+                                        Author = item.UserName, 
+                                        TagsText = item.GetTagsString(), 
+                                        RecipeImage = item.Cover, 
+                                        RecipeName = item.Title, 
+                                        SupportNumber = item.LikeCount.ToString(),
+                                        RecipeId = item.RecipeId
+                                    });
+                               }
+                           }
+
+                            loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                            loadmore.SetState(LoadingState.SUCCESS);
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
+        }
+
+        #endregion
     }
 }
