@@ -161,6 +161,8 @@ namespace HaoDouCookBook.Pages
                                         AlbumViewCount = item.ViewCount
                                     });
                                 }
+
+                                page++;
                             } 
 
                             loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;

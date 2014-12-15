@@ -140,6 +140,8 @@ namespace HaoDouCookBook.Pages
                                         Id = int.Parse(item.Id)
                                     });
                                 }
+
+                                page++;
                             }
 
                             loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;

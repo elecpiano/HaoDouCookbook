@@ -213,6 +213,7 @@ namespace HaoDouCookBook.Pages
                                     });
                                 }
 
+                                page++;
                             } 
 
                             loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;

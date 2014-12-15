@@ -244,6 +244,8 @@ namespace HaoDouCookBook.Pages
                                         RecipeName = item.Title
                                     });
                                 }
+
+                                page++;
                             } 
 
                             loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;

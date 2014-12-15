@@ -204,7 +204,7 @@ namespace HaoDouCookBook.Pages
             App.Current.RootFrame.Navigate(typeof(AlbumListPage), albumListPageParas);
         }
 
-        #endregion
+       
 
         private void ShowAllTopics_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -214,5 +214,7 @@ namespace HaoDouCookBook.Pages
 
             App.Current.RootFrame.Navigate(typeof(TopicListPage), topicListPageParams);
         }
+
+        #endregion
     }
 }

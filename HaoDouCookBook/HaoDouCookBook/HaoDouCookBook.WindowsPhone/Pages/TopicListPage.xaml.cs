@@ -43,7 +43,6 @@ namespace HaoDouCookBook.Pages
         #region Field && Property
 
         private TopicListPageViewModel viewModel = new TopicListPageViewModel();
-        private int pageOffset = 0;
         private TopicListPageParams pageParams;
 
         #endregion
@@ -81,11 +80,11 @@ namespace HaoDouCookBook.Pages
                 switch (pageParams.SourcePage)
                 {
                     case SourcePage.SEARCH_RESULT:
-                        LoadDataByKeywordAsync(pageParams.CategoryName);
+                        LoadFirstPageDataByKeywordAsync(pageParams.CategoryName);
                         break;
                     case SourcePage.NORMAL:
                     default:
-                        LoadDataByIdAsync(pageParams.CategoryId);
+                        LoadFirstPageDataByIdAsync(pageParams.CategoryId);
                         break;
                 }
             }
@@ -101,15 +100,16 @@ namespace HaoDouCookBook.Pages
             this.root.DataContext = viewModel;
         }
 
-        private async Task LoadDataByKeywordAsync(string keyword)
+        private async Task LoadFirstPageDataByKeywordAsync(string keyword)
         {
-            await SearchAPI.GetTopicList(pageOffset, 20, UserGlobal.Instance.uuid, null, keyword, data =>
+            await SearchAPI.GetTopicList(0, 20, UserGlobal.Instance.uuid, null, keyword, 
+                success =>
                 {
-                    viewModel.Count = data.Count;
+                    viewModel.Count = success.Count;
 
-                    if (data.Topics != null)
+                    if (success.Topics != null)
                     {
-                        foreach (var item in data.Topics)
+                        foreach (var item in success.Topics)
                         {
                             viewModel.Topics.Add(new TopicModel() { 
                                     Id = item.TopicId,
@@ -122,18 +122,25 @@ namespace HaoDouCookBook.Pages
                             });
                         }
                     }
-                }, error => { });
+                    page = 1;
+                    loading.SetState(LoadingState.SUCCESS);
+                }, 
+                error => {
+                    Utilities.CommonLoadingRetry(loading, async () => await LoadFirstPageDataByKeywordAsync(keyword));
+                });
         }
 
-        private async Task LoadDataByIdAsync(int cateId)
+        private async Task LoadFirstPageDataByIdAsync(int cateId)
         {
-            await TopicAPI.GetList(pageOffset, 20, cateId, null, data =>
+            loading.SetState(LoadingState.LOADING);
+            await TopicAPI.GetList(0, 20, cateId, UserGlobal.Instance.GetInt32UserId(), 
+                success =>
                 {
                     viewModel.Count = 0;
 
-                    if (data.Items != null)
+                    if (success.Items != null)
                     {
-                        foreach (var item in data.Items)
+                        foreach (var item in success.Items)
                         {
                             int topicId = 0;
                             int.TryParse(item.TopicId.ToString(), out topicId);
@@ -150,8 +157,11 @@ namespace HaoDouCookBook.Pages
                         }
                     }
 
-                }, error =>
-                {
+                    page = 1;
+                    loading.SetState(LoadingState.SUCCESS);
+                }, 
+                error => {
+                    Utilities.CommonLoadingRetry(loading, async () => await LoadFirstPageDataByIdAsync(cateId));
                 });
         }
 
@@ -172,5 +182,97 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+        #region Load More
+        int page = 1;
+        int limit = 20;
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior<TopicModel>(sender,
+                async loadmore =>
+                {
+                    loadmore.SetState(LoadingState.LOADING);
+                    switch(pageParams.SourcePage)
+                    {
+                        case SourcePage.SEARCH_RESULT:
+                            await SearchAPI.GetTopicList(
+                                page * limit,
+                                limit,
+                                UserGlobal.Instance.uuid,
+                                null,
+                                pageParams.CategoryName,
+                                success =>
+                                {
+                                    if (success.Topics != null)
+                                    {
+                                        foreach (var item in success.Topics)
+                                        {
+                                            viewModel.Topics.Add(new TopicModel()
+                                            {
+                                                Id = item.TopicId,
+                                                Url = item.Url,
+                                                TopicPreviewImageSource = item.Cover,
+                                                Title = item.Title,
+                                                PreviewContent = item.Intro,
+                                                Author = item.UserName,
+                                                CreateTimeDescription = item.CreateTime
+                                            });
+                                        }
+
+                                        page++;
+                                    }
+
+                                    loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                                    loadmore.SetState(LoadingState.SUCCESS);
+                                },
+                                error =>
+                                {
+                                    Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                                });
+                            break;
+                        case SourcePage.NORMAL:
+                            await TopicAPI.GetList(
+                                page * limit,
+                                limit,
+                                pageParams.CategoryId,
+                                UserGlobal.Instance.GetInt32UserId(),
+                                success =>
+                                {
+                                    if (success.Items != null)
+                                    {
+                                        foreach (var item in success.Items)
+                                        {
+                                            int topicId = 0;
+                                            int.TryParse(item.TopicId.ToString(), out topicId);
+                                            viewModel.Topics.Add(new TopicModel()
+                                            {
+                                                Id = topicId,
+                                                Url = item.Url,
+                                                TopicPreviewImageSource = item.ImageUrl,
+                                                Title = item.Title,
+                                                PreviewContent = item.PreviewContent,
+                                                Author = item.UserName,
+                                                CreateTimeDescription = item.LastPostTime,
+                                            });
+                                        }
+                                        page++;
+                                    }
+                                    
+                                    loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                                    loadmore.SetState(LoadingState.SUCCESS);
+                                },
+                                error =>
+                                {
+                                    Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                                });
+                            break;
+                    }
+                   
+                });
+        }
+
+        #endregion
     }
+
 }

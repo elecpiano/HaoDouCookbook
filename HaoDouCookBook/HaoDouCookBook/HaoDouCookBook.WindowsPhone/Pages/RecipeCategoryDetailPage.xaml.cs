@@ -188,6 +188,8 @@ namespace HaoDouCookBook.Pages
                                         RecipeId = item.RecipeId
                                     });
                                }
+
+                               page++;
                            }
 
                             loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
