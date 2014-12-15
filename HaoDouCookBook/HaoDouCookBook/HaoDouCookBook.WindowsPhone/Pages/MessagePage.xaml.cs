@@ -61,9 +61,10 @@ namespace HaoDouCookBook.Pages
         private async Task LoadFirstDataAysnc()
         {
             loading.SetState(LoadingState.LOADING);
-            await MessageAPI.GetListByUid(0, 20, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign, data =>
+            await MessageAPI.GetListByUid(0, limit, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign, data =>
                 {
                     UpdateData(data);
+                    page = 1;
                     loading.SetState(LoadingState.SUCCESS);
                     
                 }, error => {
@@ -73,9 +74,10 @@ namespace HaoDouCookBook.Pages
 
         private async Task ReloadFirtPageDataAsync()
         {
-            await MessageAPI.GetListByUid(0, 20, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign, data =>
+            await MessageAPI.GetListByUid(0, limit, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, UserGlobal.Instance.UserInfo.Sign, data =>
             {
                 UpdateData(data);
+                page = 1;
 
             }, error => { });
         }
@@ -91,6 +93,7 @@ namespace HaoDouCookBook.Pages
             if (data.Messages != null)
             {
                 viewModel.Messages.Clear();
+                RemoveLoadMoreControl();
                 foreach (var item in data.Messages)
                 {
                     viewModel.Messages.Add(new Message()
@@ -103,6 +106,11 @@ namespace HaoDouCookBook.Pages
                         UserId = item.ContactId,
                         MessageId = item.MessageId
                     });
+                }
+
+                if(data.Messages.Count == limit)
+                {
+                    EnusureLoadMoreControl();
                 }
             }
         }
@@ -125,6 +133,82 @@ namespace HaoDouCookBook.Pages
             paras.UserName = dataContext.UserName;
 
             App.Current.RootFrame.Navigate(typeof(IMPage), paras);
+        }
+
+        #endregion
+
+
+        #region Load More
+
+        int page = 1;
+        int limit = 20;
+
+        private Message loadMoreControlDataContext = new Message() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (viewModel.Messages != null && !viewModel.Messages.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Messages.Add(loadMoreControlDataContext);
+            }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (viewModel.Messages != null && viewModel.Messages.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Messages.Remove(loadMoreControlDataContext);
+            }
+        }
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await MessageAPI.GetListByUid(
+                         page * limit,
+                         limit,
+                         UserGlobal.Instance.GetInt32UserId(),
+                         UserGlobal.Instance.uuid,
+                         UserGlobal.Instance.UserInfo.Sign,
+                         success =>
+                         {
+                             if (success.Messages != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.Messages)
+                                 {
+                                     viewModel.Messages.Add(new Message()
+                                     {
+                                         Avatar = item.Avatar,
+                                         Content = item.LastMsg,
+                                         UnreadCount = item.UnreadCount,
+                                         UpdateTime = item.UpdateTime,
+                                         UserName = item.UserName,
+                                         UserId = item.ContactId,
+                                         MessageId = item.MessageId
+                                     });
+                                 }
+
+                                 if (success.Messages.Count == limit)
+                                 {
+                                     EnusureLoadMoreControl();
+                                 }
+                                 page++;
+                                 loadmore.SetState(LoadingState.SUCCESS);
+                             }
+                             else
+                             {
+                                 loadmore.SetState(LoadingState.DONE);
+                             }
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
         }
 
         #endregion
