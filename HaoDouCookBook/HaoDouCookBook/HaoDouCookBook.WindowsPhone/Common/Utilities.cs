@@ -40,6 +40,15 @@ namespace HaoDouCookBook.Common
             }
         }
 
+        public static void RegistComonadLoadMoreBehavior(object LoadMoreControl, Action<LoadMoreControl> loadMoreAction)
+        {
+            LoadMoreControl loadmoreControl = LoadMoreControl as LoadMoreControl;
+            if (loadmoreControl != null)
+            {
+                loadmoreControl.LoadMoreAction = loadMoreAction;
+            }
+        }
+
         public static void CommondLoadMoreErrorBehavoir(LoadMoreControl loadMoreControl, Error error)
         {
             if (IsMatchNetworkFail(error.ErrorCode))

@@ -116,5 +116,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utility\JsonSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\NetworkHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\UIExtersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\WeiboHelper.cs" />
   </ItemGroup>
 </Project>

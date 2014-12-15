@@ -18,6 +18,7 @@ namespace HaoDouCookBook.Controls
         #region Field && Property
 
         public ObservableCollection<TopicModel> LatestTopics = new ObservableCollection<TopicModel>();
+       
         public ObservableCollection<CategoryTileData> Categories = new ObservableCollection<CategoryTileData>();
 
         #endregion
@@ -72,6 +73,7 @@ namespace HaoDouCookBook.Controls
             //
             if (data.Topics != null)
             {
+                RemoveLoadMoreControl();
                 foreach (var item in data.Topics)
                 {
                     int topicId = 0;
@@ -87,7 +89,7 @@ namespace HaoDouCookBook.Controls
                         TopicPreviewImageSource = item.ImageUrl
                     });
                 }
-
+                EnusureLoadMoreControl();
             }
         }
 
@@ -126,19 +128,42 @@ namespace HaoDouCookBook.Controls
         #endregion
 
         #region Load More
+
         int page = 1;
+        int limit = 20;
+
+        private TopicModel loadMoreControlDataContext = new TopicModel() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (LatestTopics != null && !LatestTopics.Contains(loadMoreControlDataContext))
+            {
+                LatestTopics.Add(loadMoreControlDataContext);
+            } 
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (LatestTopics != null && LatestTopics.Contains(loadMoreControlDataContext))
+            {
+                LatestTopics.Remove(loadMoreControlDataContext);
+            }
+        }
 
         private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Utilities.RegistComonadLoadMoreBehavior<TopicModel>(sender,
+            Utilities.RegistComonadLoadMoreBehavior(sender,
                 async loadmore =>
                 {
                     loadmore.SetState(LoadingState.LOADING);
-                    await TopicAPI.GetGroupIndexData(page * 20, 20,
+                    await TopicAPI.GetGroupIndexData(
+                        page * limit, 
+                        limit,
                         success =>
                         {
                             if (success.Topics != null)
                             {
+                                RemoveLoadMoreControl();
                                 foreach (var item in success.Topics)
                                 {
                                     int topicId = 0;
@@ -155,10 +180,13 @@ namespace HaoDouCookBook.Controls
                                     });
                                 }
 
+                                if(success.Topics.Length > 0)
+                                {
+                                    EnusureLoadMoreControl();
+                                }
                                 page++;
                             }
 
-                            loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                             loadmore.SetState(LoadingState.SUCCESS);
                         },
                         error =>

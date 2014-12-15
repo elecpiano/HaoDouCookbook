@@ -1,8 +1,9 @@
 ﻿using Shared.Infrastructures;
+using Shared.Utility;
 
 namespace HaoDouCookBook.ViewModels
 {
-    public class TopicModel : BindableBase
+    public class TopicModel : BindableBase, ILoadMoreItem
     {
         private int id;
 
@@ -60,10 +61,13 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<string>(ref createTimeDescription, value); }
         }
 
+        public bool IsLoadMore { get; set; }
+
         public TopicModel()
         {
             id = 0;
             url = string.Empty;
+            IsLoadMore = false;
         }
     }
 }

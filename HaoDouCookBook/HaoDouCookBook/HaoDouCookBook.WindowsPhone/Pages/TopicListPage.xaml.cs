@@ -156,7 +156,7 @@ namespace HaoDouCookBook.Pages
                             });
                         }
                     }
-
+                    
                     page = 1;
                     loading.SetState(LoadingState.SUCCESS);
                 }, 
