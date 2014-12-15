@@ -78,7 +78,7 @@ namespace HaoDouCookBook.Pages
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 DataBinding();
                 this.title.Text = paras.TagText;
-                LoadDataAsync(0, 10, paras.Id, paras.TagText);
+                LoadFirstPageDataDataAsync(paras.Id, paras.TagText);
 
                 if(!string.IsNullOrEmpty(paras.TagText))
                 {
@@ -97,31 +97,33 @@ namespace HaoDouCookBook.Pages
             this.root.DataContext = viewModel;
         }
 
-        private async Task LoadDataAsync(int offset, int limit, int? tagid, string keyword)
+        private async Task LoadFirstPageDataDataAsync(int? tagid, string keyword)
         {
-            await SearchAPI.GetList(offset, limit, UserGlobal.Instance.uuid, tagid, keyword, data =>
+            loading.SetState(LoadingState.LOADING);
+            await SearchAPI.GetList(0, 10, UserGlobal.Instance.uuid, tagid, keyword, 
+                success =>
                 {
                     if(paras != null && paras.FromPage == SourcePage.SEARCH_RESULT)
                     {
-                        viewModel.Count = data.Count;
+                        viewModel.Count = success.Count;
                     }
 
-                    if(data.Food != null)
+                    if(success.Food != null)
                     {
-                        viewModel.Food.FoodCover = data.Food.Cover;
-                        viewModel.Food.FoodId = data.Food.Id;
-                        viewModel.Food.FoodIntro = data.Food.Intro;
-                        viewModel.Food.FoodName = data.Food.Name;
+                        viewModel.Food.FoodCover = success.Food.Cover;
+                        viewModel.Food.FoodId = success.Food.Id;
+                        viewModel.Food.FoodIntro = success.Food.Intro;
+                        viewModel.Food.FoodName = success.Food.Name;
                     }
 
-                    if (data.Items != null && data.Items.Length > 0)
+                    if (success.Items != null && success.Items.Length > 0)
                     {
                         if (noResultGrid.Visibility == Visibility.Visible)
                         {
                             noResultGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                         }
 
-                        foreach (var item in data.Items)
+                        foreach (var item in success.Items)
                         {
                             viewModel.Recipes.Add(new TagRecipeData()
                             {
@@ -134,14 +136,18 @@ namespace HaoDouCookBook.Pages
                                 Card = item.Card
                             });
                         }
-
+                      
                     }
                     else
                     {
                         this.noResultGrid.Visibility = Windows.UI.Xaml.Visibility.Visible;
                     }
+                    page = 1;
+                    loading.SetState(LoadingState.SUCCESS);
 
-                }, error => { });
+                }, error => {
+                    Utilities.CommonLoadingRetry(loading, async () => await LoadFirstPageDataDataAsync(tagid, keyword));
+                });
         }
 
         #endregion
@@ -164,6 +170,59 @@ namespace HaoDouCookBook.Pages
             paras.Title = viewModel.Food.FoodName;
 
             App.Current.RootFrame.Navigate(typeof(StuffInfoPage), paras);
+        }
+
+        #endregion
+
+        #region Load More
+        int page = 1;
+        int limit = 10;
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior<TagRecipeData>(sender,
+                async loadmore =>
+                {
+                    loadmore.SetState(LoadingState.LOADING);
+                    await SearchAPI.GetList(
+                        page * limit, 
+                        limit, 
+                        UserGlobal.Instance.uuid,
+                        paras.Id,
+                        paras.TagText,
+                        success =>
+                        {
+                            if (success.Items != null && success.Items.Length > 0)
+                            {
+                                if (noResultGrid.Visibility == Visibility.Visible)
+                                {
+                                    noResultGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                                }
+
+                                foreach (var item in success.Items)
+                                {
+                                    viewModel.Recipes.Add(new TagRecipeData()
+                                    {
+                                        FoodStuff = item.Stuff,
+                                        LikeNumber = item.LikeCount,
+                                        ViewNumber = item.ViewCount,
+                                        PreviewImageSource = item.Cover,
+                                        RecipeName = item.Title,
+                                        RecipeId = item.RecipeId,
+                                        Card = item.Card
+                                    });
+                                }
+
+                            } 
+
+                            loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                            loadmore.SetState(LoadingState.SUCCESS);
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
         }
 
         #endregion

@@ -48,7 +48,7 @@ namespace HaoDouCookBook.Pages
 
             rankListData.Clear();
             rootScrollViewer.ScrollToVerticalOffset(0);
-            LoadDataAsync(0, 20, null, null);
+            LoadFirstPageDataAsync();
         }
 
         #endregion
@@ -60,13 +60,20 @@ namespace HaoDouCookBook.Pages
             this.ranklist.ItemsSource = rankListData;
         }
 
-        private async Task LoadDataAsync(int offset, int limit, int? sign, int? uid)
+        private async Task LoadFirstPageDataAsync()
         {
-            await RankAPI.GetRankList(offset, limit, sign, uid, UserGlobal.Instance.uuid, data =>
+            loading.SetState(LoadingState.LOADING);
+            await RankAPI.GetRankList(
+                0, 
+                20, 
+                UserGlobal.Instance.UserInfo.Sign,
+                UserGlobal.Instance.GetInt32UserId(),
+                UserGlobal.Instance.uuid, 
+                success =>
                 {
-                    if (data.Items != null)
+                    if (success.Items != null)
                     {
-                        foreach (var item in data.Items)
+                        foreach (var item in success.Items)
                         {
                             rankListData.Add(new RankItemData() { 
                                 Title = item.Title, 
@@ -77,8 +84,14 @@ namespace HaoDouCookBook.Pages
                             });
                         }
                     }
+                    page = 1;
 
-                }, error => { });
+                    loading.SetState(LoadingState.SUCCESS);
+
+                }, 
+                error => {
+                    Utilities.CommonLoadingRetry(loading, async () => await LoadFirstPageDataAsync());
+                });
         }
 
         #endregion
@@ -96,6 +109,49 @@ namespace HaoDouCookBook.Pages
 
         #endregion
 
-       
+        #region Load More
+        int page = 1;
+        int limit = 10;
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior<RankItemData>(sender,
+                async loadmore =>
+                {
+                    loadmore.SetState(LoadingState.LOADING);
+                    await RankAPI.GetRankList(
+                        page * limit,
+                        limit,
+                        UserGlobal.Instance.UserInfo.Sign,
+                        UserGlobal.Instance.GetInt32UserId(),
+                        UserGlobal.Instance.uuid, 
+                        success =>
+                        {
+                            if(success.Items != null)
+                            {
+                                foreach (var item in success.Items)
+                                {
+                                    rankListData.Add(new RankItemData()
+                                    {
+                                        Title = item.Title,
+                                        CoverImage = item.Cover,
+                                        Description = item.Intro,
+                                        Type = item.RankType,
+                                        Id = int.Parse(item.Id)
+                                    });
+                                }
+                            }
+
+                            loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                            loadmore.SetState(LoadingState.SUCCESS);
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
+        }
+
+        #endregion
     }
 }

@@ -9,13 +9,13 @@ namespace HaoDouCookBook.HaoDou.API
     {
         public const string MODULE = "Rank";
 
-        public static async Task GetRankList(int offset, int limit, int? sign, int? uid, string uuid, Action<RankPageData> onSuccess, Action<Error> onFail)
+        public static async Task GetRankList(int offset, int limit, string sign, int? uid, string uuid, Action<RankPageData> onSuccess, Action<Error> onFail)
         {
             string methodName = "getRankList";
             POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
             postRequest.AddPostData("offset", offset.ToString());
             postRequest.AddPostData("limit", limit.ToString());
-            postRequest.AddPostData("sign", sign.HasValue ? sign.Value.ToString() : string.Empty);
+            postRequest.AddPostData("sign", sign);
             postRequest.AddPostData("uid", uid.HasValue ? uid.Value.ToString() : string.Empty);
             postRequest.AddPostData("uuid", uuid);
 
