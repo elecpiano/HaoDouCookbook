@@ -38,6 +38,7 @@
                                         AlbumIntro="{Binding AlbumIntro}"
                                         AlbumTitle="{Binding AlbumTitle}"/>
                                 <Rectangle Style="{StaticResource AlbumList_Line_Style}"/>
+                                <controls:LoadMoreControl Margin="0, 10, 0, 20" Loaded="loadMore_Loaded"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -45,5 +46,6 @@
 
             </StackPanel>
         </ScrollViewer>
+        <controls:NetworkLoading x:Name="loading" Margin="0, 110, 0, 0"/>
     </Grid>
 </controls:BackablePage>

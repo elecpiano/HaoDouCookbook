@@ -33,6 +33,7 @@ namespace HaoDouCookBook.Pages
         #region Filed && Property
 
         private AlbumListPageViewModel viewModel = new AlbumListPageViewModel();
+        private AlbumListPageParams pageParams;
 
         #endregion
 
@@ -57,14 +58,14 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            AlbumListPageParams paras = e.Parameter as AlbumListPageParams;
-            if (paras != null)
+            AlbumListPageParams pageParams = e.Parameter as AlbumListPageParams;
+            if (pageParams != null)
             {
                 viewModel = new AlbumListPageViewModel();
-                this.title.Text = paras.Keyword;
+                this.title.Text = pageParams.Keyword;
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 DataBinding();
-                LoadDataAsync(0, 20, paras.Keyword);
+                LoadFirstPageDataAsync(pageParams.Keyword);
             }
         }
 
@@ -77,15 +78,17 @@ namespace HaoDouCookBook.Pages
             this.root.DataContext = viewModel;
         }
 
-        private async Task LoadDataAsync(int offset, int limit, string keyword)
+        private async Task LoadFirstPageDataAsync(string keyword)
         {
-            await SearchAPI.GetAlbumList(offset, limit, UserGlobal.Instance.uuid, null, keyword, data =>
+            loading.SetState(LoadingState.LOADING);
+            await SearchAPI.GetAlbumList(0, 20, UserGlobal.Instance.uuid, null, keyword, 
+                success =>
                 {
-                    viewModel.Count = data.Count;
+                    viewModel.Count = success.Count;
 
-                    if (data.AlbumItems != null)
+                    if (success.AlbumItems != null)
                     {
-                        foreach (var item in data.AlbumItems)
+                        foreach (var item in success.AlbumItems)
                         {
                             viewModel.AlbumItems.Add(new ViewModels.AlbumTile() { 
                                     AlbumCover = item.Cover,
@@ -99,7 +102,13 @@ namespace HaoDouCookBook.Pages
                         }
                     }
 
-                }, error => { });
+                    page = 1;
+                    loading.SetState(LoadingState.SUCCESS);
+
+                }, 
+                error => {
+                    Utilities.CommonLoadingRetry(loading, async () => await LoadFirstPageDataAsync(keyword));
+                });
         }
 
         #endregion
@@ -115,6 +124,53 @@ namespace HaoDouCookBook.Pages
 
             App.Current.RootFrame.Navigate(typeof(AlbumPage), paras);
 
+        }
+
+        #endregion
+
+        #region Load More
+        int page = 1;
+        int limit = 10;
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior<ViewModels.AlbumTile>(sender,
+                async loadmore =>
+                {
+                    loadmore.SetState(LoadingState.LOADING);
+                    await SearchAPI.GetAlbumList(
+                        page * limit,
+                        limit,
+                        UserGlobal.Instance.uuid,
+                        null,
+                        pageParams.Keyword,
+                        success =>
+                        {
+                            if (success.AlbumItems != null)
+                            {
+                                foreach (var item in success.AlbumItems)
+                                {
+                                    viewModel.AlbumItems.Add(new ViewModels.AlbumTile()
+                                    {
+                                        AlbumCover = item.Cover,
+                                        AlbumId = string.IsNullOrEmpty(item.AlbumId) ? -1 : int.Parse(item.AlbumId),
+                                        AlbumIntro = item.Intro,
+                                        AlbumLikeCount = item.LikeCount,
+                                        AlbumRecipeCount = item.RecipeCount,
+                                        AlbumTitle = item.Title,
+                                        AlbumViewCount = item.ViewCount
+                                    });
+                                }
+                            } 
+
+                            loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                            loadmore.SetState(LoadingState.SUCCESS);
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
         }
 
         #endregion
