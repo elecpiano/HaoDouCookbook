@@ -38,7 +38,7 @@ namespace HaoDouCookBook.Pages
         #region Field && Property
 
         private ProductPageViewModel viewModel = new ProductPageViewModel();
-
+        private ProductPageParams pageParams;
 
         #endregion
 
@@ -63,12 +63,12 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            ProductPageParams paras = e.Parameter as ProductPageParams;
-            if (paras != null)
+            pageParams = e.Parameter as ProductPageParams;
+            if (pageParams != null)
             {
                 viewModel = new ProductPageViewModel();
                 rooScrollViewer.ScrollToVerticalOffset(0);
-                LoadFirstPageDataAsync(paras.ProductId, paras.TopicId, paras.Type);
+                LoadFirstPageDataAsync(pageParams.ProductId, pageParams.TopicId, pageParams.Type);
             }
             
         }
@@ -110,6 +110,7 @@ namespace HaoDouCookBook.Pages
 
             if (data.Recipes != null)
             {
+                RemoveLoadMoreControl();
                 foreach (var item in data.Recipes)
                 {
                     ViewModels.ProductPageRecipe recipeProduct = new ViewModels.ProductPageRecipe();
@@ -150,6 +151,7 @@ namespace HaoDouCookBook.Pages
 
                     viewModel.Products.Add(recipeProduct);
                 }
+                EnusureLoadMoreControl();
             }
         }
 
@@ -305,7 +307,109 @@ namespace HaoDouCookBook.Pages
 
         #endregion
 
-       
+        #region Load More
 
+        int page = 1;
+        int limit = 20;
+
+        private ViewModels.ProductPageRecipe loadMoreControlDataContext = new ViewModels.ProductPageRecipe() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (viewModel.Products != null && !viewModel.Products.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Products.Add(loadMoreControlDataContext);
+            } 
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (viewModel.Products != null && viewModel.Products.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Products.Remove(loadMoreControlDataContext);
+            }
+        }
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                async loadmore =>
+                {
+                    loadmore.SetState(LoadingState.LOADING);
+                    await RecipePhotoAPI.GetProdcuts(
+                        page * limit,
+                        limit,
+                        pageParams.Type,
+                        pageParams.ProductId,
+                        pageParams.TopicId,
+                        UserGlobal.Instance.UserInfo.Sign,
+                        UserGlobal.Instance.GetInt32UserId(),
+                        UserGlobal.Instance.uuid,
+                        success => {
+                            if (success.Recipes != null)
+                            {
+                                RemoveLoadMoreControl();
+                                foreach (var item in success.Recipes)
+                                {
+                                    ViewModels.ProductPageRecipe recipeProduct = new ViewModels.ProductPageRecipe();
+                                    recipeProduct.Title = item.Title;
+                                    recipeProduct.CreatTime = item.CreateTime;
+                                    recipeProduct.TimeStr = item.TimeStr;
+                                    recipeProduct.ProductId = item.Pid;
+                                    recipeProduct.RecipeId = item.Rid;
+                                    recipeProduct.UserAvatar = item.Avatar;
+                                    recipeProduct.UserName = item.UserName;
+                                    recipeProduct.UserId = item.UserId;
+                                    recipeProduct.LikeNumber = item.Digg;
+                                    recipeProduct.PhotoUrl = item.PhotoUrl;
+                                    recipeProduct.Intro = item.Intro;
+                                    recipeProduct.Position = item.Position;
+                                    recipeProduct.CommentCount = item.CommentCount;
+                                    recipeProduct.IsDigg = item.IsDigg == 1 ? true : false;
+
+                                    if (item.CommentCount > 1)
+                                    {
+                                        recipeProduct.ShowAllCommentsTextVisible = true;
+                                    }
+
+
+                                    if (item.Comment != null)
+                                    {
+                                        foreach (var comment in item.Comment)
+                                        {
+
+                                            recipeProduct.Comments.Add(new ViewModels.ProductPageComment()
+                                            {
+                                                Content = comment.Content,
+                                                UserId = int.Parse(comment.UserId),
+                                                UserName = comment.UserName
+                                            });
+                                        }
+                                    }
+
+                                    viewModel.Products.Add(recipeProduct);
+                                }
+
+                                page++;
+                                loadmore.SetState(LoadingState.SUCCESS);
+                                if(success.Recipes.Length > 0)
+                                {
+                                    EnusureLoadMoreControl();
+                                }
+                            }
+                            else
+                            {
+                                loadmore.SetState(LoadingState.DONE);
+                            }
+
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
+        }
+
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Shared.Infrastructures;
+using Shared.Utility;
 using System.Collections.ObjectModel;
 
 namespace HaoDouCookBook.ViewModels
@@ -71,7 +72,7 @@ namespace HaoDouCookBook.ViewModels
     }
 
 
-    public class ProductPageRecipe : BindableBase
+    public class ProductPageRecipe : BindableBase, ILoadMoreItem
     {
         private string title;
 
@@ -213,9 +214,12 @@ namespace HaoDouCookBook.ViewModels
             timeStr = string.Empty;
             showAllCommentsTextVisible = false;
             commentCount = 0;
+            IsLoadMore = false;
         }
 
 
+
+        public bool IsLoadMore { get; set; }
     }
 
     public class ProductPageComment : BindableBase 

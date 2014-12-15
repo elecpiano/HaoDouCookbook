@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:HaoDouCookBook.Controls"
     mc:Ignorable="d"
+    xmlns:shared="using:Shared.Utility"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <controls:BackablePage.BottomAppBar>
@@ -54,104 +55,115 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Vertical" Margin="0, 0, 0, 50">
-                                    <!--标题-->
-                                    <Grid>
-                                        <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding UserAvatar}" Height="48" Width="48" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                                        <StackPanel Orientation="Vertical" Margin="60, 0, 0, 0" VerticalAlignment="Bottom">
-                                            <Grid Margin="0, 0, 0, 12">
-                                                <TextBlock Text="{Binding UserName}" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                                <TextBlock Text="{Binding TimeStr}" Foreground="Gray" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                                            </Grid>
-                                            <StackPanel Orientation="Horizontal" Margin="-2, -15, 0, 0" Visibility="{Binding Position, Converter={StaticResource AnythingToVisiblityConverter}}">
-                                                <Image Source="../assets/images/ProductPage/Position.png" Height="16" Width="16"/>
-                                                <TextBlock Text="{Binding Position}" FontSize="21" Foreground="Gray" Margin="3, 3, 0, 0"/>
+                                <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                                    <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical" Margin="0, 0, 0, 50">
+                                                <!--标题-->
+                                                <Grid>
+                                                    <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding UserAvatar}" Height="48" Width="48" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                                    <StackPanel Orientation="Vertical" Margin="60, 0, 0, 0" VerticalAlignment="Bottom">
+                                                        <Grid Margin="0, 0, 0, 12">
+                                                            <TextBlock Text="{Binding UserName}" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                                            <TextBlock Text="{Binding TimeStr}" Foreground="Gray" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                                        </Grid>
+                                                        <StackPanel Orientation="Horizontal" Margin="-2, -15, 0, 0" Visibility="{Binding Position, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                                            <Image Source="../assets/images/ProductPage/Position.png" Height="16" Width="16"/>
+                                                            <TextBlock Text="{Binding Position}" FontSize="21" Foreground="Gray" Margin="3, 3, 0, 0"/>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </Grid>
+
+                                                <!--图片-->
+                                                <Border Height="360" Margin="0, 10, 0, 0" Tapped="RecipeImage_Tapped">
+                                                    <Border.Background>
+                                                        <ImageBrush ImageSource="{Binding PhotoUrl}" AlignmentY="Center" Stretch="UniformToFill"/>
+                                                    </Border.Background>
+                                                </Border>
+
+                                                <!--菜谱-->
+                                                <Grid Background="Transparent" Visibility="{Binding Title, Converter={StaticResource AnythingToVisiblityConverter}}" Tapped="Recipe_Tapped">
+                                                    <TextBlock Text="{Binding Title}" FontSize="21" Width="310" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0, 18, 0, 18"/>
+                                                    <Image Source="../assets/images/myPage/more.png" VerticalAlignment="Center" HorizontalAlignment="Right" Height="36" Width="36"/>
+                                                </Grid>
+
+                                                <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 0, 0, 0" Visibility="{Binding Title, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+
+                                                <!--赞-->
+                                                <StackPanel Orientation="Horizontal" Visibility="{Binding LikeNumber, Converter={StaticResource AnythingToVisiblityConverter}}" Margin="0, 15, 0, 0" >
+                                                    <Image Source="../assets/images/ProductPage/like_gray.png" Width="24" Height="24" VerticalAlignment="Top"/>
+                                                    <TextBlock Text="{Binding LikeNumber}" FontSize="19" Foreground="{StaticResource GreenMain}" Margin="5, 3, 0, 0"/>
+                                                    <TextBlock Text="次赞" FontSize="19" Foreground="#78a708" Margin="0, 3, 0, 0"/>
+                                                </StackPanel>
+
+                                                <!--说明-->
+                                                <StackPanel Orientation="Horizontal" Margin="0, 15, 0, 0" Visibility="{Binding Intro, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                                    <Image Source="../assets/images/ProductPage/comment_gray.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
+                                                    <TextBlock Text="{Binding Intro}" Width="320" FontSize="20" TextWrapping="Wrap"/>
+                                                </StackPanel>
+
+                                                <!--评论-->
+                                                <StackPanel Orientation="Vertical">
+
+                                                    <TextBlock FontSize="26" Foreground="Gray" HorizontalAlignment="Left"  Margin="30, 15, 0, 0" Visibility="{Binding ShowAllCommentsTextVisible, Converter={StaticResource AnythingToVisiblityConverter}}" Tapped="ShowAllComment_Tapped">
+                                                        查看所有<Run Text="{Binding CommentCount}"/>条评论
+                                                    </TextBlock>
+
+                                                    <TextBlock Margin="28, 15, 0, 0" TextWrapping="Wrap" FontSize="21" Visibility="{Binding Comments.Count, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                                        <Run Text="{Binding Comments[0].UserName}" Foreground="{StaticResource GreenMain}"/>
+                                                        <Run Text=":"/>
+                                                        <Run Text="{Binding Comments[0].Content}"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+
+                                                <!--按钮-->
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 20, 0, 0">
+                                                    <Button Click="Digg_click"
+                                                            Visibility="{Binding IsDigg, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
+                                                        <Button.Content>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Image Source="../assets/images/ProductPage/like_Green.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
+                                                                <TextBlock Text="赞" FontWeight="Normal" Margin="0, 4, 0, 0"/>
+                                                            </StackPanel>
+                                                        </Button.Content>
+                                                    </Button>
+
+                                                    <Button Background="{StaticResource GreenMain}" Click="Undigg_click"
+                                                            Visibility="{Binding IsDigg, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                                        <Button.Content>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Image Source="../assets/images/ProductPage/like_white.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
+                                                                <TextBlock Text="已赞" FontWeight="Normal" Margin="0, 4, 0, 0" Foreground="White"/>
+                                                            </StackPanel>
+                                                        </Button.Content>
+                                                    </Button>
+
+                                                    <Button Tapped="comment_Tapped">
+                                                        <Button.Content>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Image Source="../assets/images/ProductPage/Comment_green.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 2, 5, 0"/>
+                                                                <TextBlock Text="评论" FontWeight="Normal" Margin="0, 2, 0, 0"/>
+                                                            </StackPanel>
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button>
+                                                        <Button.Content>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Image Source="../assets/images/ProductPage/social.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 2, 5, 0"/>
+                                                                <TextBlock Text="分享" FontWeight="Normal" Margin="0, 2, 0, 0"/>
+                                                            </StackPanel>
+                                                        </Button.Content>
+                                                    </Button>
+                                                </StackPanel>
                                             </StackPanel>
-                                        </StackPanel>
-                                    </Grid>
-
-                                    <!--图片-->
-                                    <Border Height="360" Margin="0, 10, 0, 0" Tapped="RecipeImage_Tapped">
-                                        <Border.Background>
-                                            <ImageBrush ImageSource="{Binding PhotoUrl}" AlignmentY="Center" Stretch="UniformToFill"/>
-                                        </Border.Background>
-                                    </Border>
-
-                                    <!--菜谱-->
-                                    <Grid Background="Transparent" Visibility="{Binding Title, Converter={StaticResource AnythingToVisiblityConverter}}" Tapped="Recipe_Tapped">
-                                        <TextBlock Text="{Binding Title}" FontSize="21" Width="310" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0, 18, 0, 18"/>
-                                        <Image Source="../assets/images/myPage/more.png" VerticalAlignment="Center" HorizontalAlignment="Right" Height="36" Width="36"/>
-                                    </Grid>
-
-                                    <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 0, 0, 0" Visibility="{Binding Title, Converter={StaticResource AnythingToVisiblityConverter}}"/>
-
-                                    <!--赞-->
-                                    <StackPanel Orientation="Horizontal" Visibility="{Binding LikeNumber, Converter={StaticResource AnythingToVisiblityConverter}}" Margin="0, 15, 0, 0" >
-                                        <Image Source="../assets/images/ProductPage/like_gray.png" Width="24" Height="24" VerticalAlignment="Top"/>
-                                        <TextBlock Text="{Binding LikeNumber}" FontSize="19" Foreground="{StaticResource GreenMain}" Margin="5, 3, 0, 0"/>
-                                        <TextBlock Text="次赞" FontSize="19" Foreground="#78a708" Margin="0, 3, 0, 0"/>
-                                    </StackPanel>
-
-                                    <!--说明-->
-                                    <StackPanel Orientation="Horizontal" Margin="0, 15, 0, 0" Visibility="{Binding Intro, Converter={StaticResource AnythingToVisiblityConverter}}">
-                                        <Image Source="../assets/images/ProductPage/comment_gray.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
-                                        <TextBlock Text="{Binding Intro}" Width="320" FontSize="20" TextWrapping="Wrap"/>
-                                    </StackPanel>
-
-                                    <!--评论-->
-                                    <StackPanel Orientation="Vertical">
-
-                                        <TextBlock FontSize="26" Foreground="Gray" HorizontalAlignment="Left"  Margin="30, 15, 0, 0" Visibility="{Binding ShowAllCommentsTextVisible, Converter={StaticResource AnythingToVisiblityConverter}}" Tapped="ShowAllComment_Tapped">
-                                        查看所有<Run Text="{Binding CommentCount}"/>条评论
-                                        </TextBlock>
-
-                                        <TextBlock Margin="28, 15, 0, 0" TextWrapping="Wrap" FontSize="21" Visibility="{Binding Comments.Count, Converter={StaticResource AnythingToVisiblityConverter}}">
-                                        <Run Text="{Binding Comments[0].UserName}" Foreground="{StaticResource GreenMain}"/>
-                                        <Run Text=":"/>
-                                        <Run Text="{Binding Comments[0].Content}"/>
-                                        </TextBlock>
-                                    </StackPanel>
-
-                                    <!--按钮-->
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 20, 0, 0">
-                                        <Button Click="Digg_click"
-                                            Visibility="{Binding IsDigg, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
-                                            <Button.Content>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Image Source="../assets/images/ProductPage/like_Green.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
-                                                    <TextBlock Text="赞" FontWeight="Normal" Margin="0, 4, 0, 0"/>
-                                                </StackPanel>
-                                            </Button.Content>
-                                        </Button>
-
-                                        <Button Background="{StaticResource GreenMain}" Click="Undigg_click"
-                                            Visibility="{Binding IsDigg, Converter={StaticResource AnythingToVisiblityConverter}}">
-                                            <Button.Content>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Image Source="../assets/images/ProductPage/like_white.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 0, 5, 0"/>
-                                                    <TextBlock Text="已赞" FontWeight="Normal" Margin="0, 4, 0, 0" Foreground="White"/>
-                                                </StackPanel>
-                                            </Button.Content>
-                                        </Button>
-                                        
-                                        <Button Tapped="comment_Tapped">
-                                            <Button.Content>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Image Source="../assets/images/ProductPage/Comment_green.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 2, 5, 0"/>
-                                                    <TextBlock Text="评论" FontWeight="Normal" Margin="0, 2, 0, 0"/>
-                                                </StackPanel>
-                                            </Button.Content>
-                                        </Button>
-                                        <Button>
-                                            <Button.Content>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Image Source="../assets/images/ProductPage/social.png" Width="24" Height="24" VerticalAlignment="Top" Margin="0, 2, 5, 0"/>
-                                                    <TextBlock Text="分享" FontWeight="Normal" Margin="0, 2, 0, 0"/>
-                                                </StackPanel>
-                                            </Button.Content>
-                                        </Button>
-                                    </StackPanel>
-                                </StackPanel>
+                                        </DataTemplate>
+                                    </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                    <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                        <DataTemplate>
+                                            <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                        </DataTemplate>
+                                    </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                </shared:LoadMoreDataTemplateSelector>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
