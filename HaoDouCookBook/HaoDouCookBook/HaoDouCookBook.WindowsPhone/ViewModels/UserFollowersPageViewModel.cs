@@ -1,4 +1,5 @@
 ﻿using Shared.Infrastructures;
+using Shared.Utility;
 using System.Collections.ObjectModel;
 
 namespace HaoDouCookBook.ViewModels
@@ -21,7 +22,7 @@ namespace HaoDouCookBook.ViewModels
         }
     }
 
-    public class UserFollower : BindableBase
+    public class UserFollower : BindableBase, ILoadMoreItem
     {
         private int userId;
 
@@ -63,7 +64,7 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<bool>(ref isVip, value); }
         }
 
-
+        public bool IsLoadMore { get; set; }
 
         public UserFollower()
         {
@@ -71,6 +72,7 @@ namespace HaoDouCookBook.ViewModels
             userId = 0;
             userName = string.Empty;
             avatar = string.Empty;
+            IsLoadMore = false;
         }
     }
 

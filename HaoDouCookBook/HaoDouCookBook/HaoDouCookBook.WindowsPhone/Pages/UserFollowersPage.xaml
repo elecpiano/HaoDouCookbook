@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:HaoDouCookBook.Controls"
-    mc:Ignorable="d"
+    mc:Ignorable="d" xmlns:shared="using:Shared.Utility"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+
     <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
         <Border Style="{StaticResource PageTitleBorderStyle}">
@@ -24,32 +24,44 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <Grid>
-                                    <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding Avatar}" 
+                            <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                                <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <Grid>
+                                                <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding Avatar}" 
                                                         Style="{StaticResource FollowPage_UserPhoto_Style}"/>
-                                    <Image Source="../assets/images/vip_photo_mark.png" 
+                                                <Image Source="../assets/images/vip_photo_mark.png" 
                                            Visibility="{Binding IsVip, Converter={StaticResource AnythingToVisiblityConverter}}" 
                                            Style="{StaticResource FollowerPage_Vip_Style}"/>
-                                    <TextBlock Text="{Binding UserName}" Style="{StaticResource FollowPage_UserName_Style}"/>
-                                    <Button Tapped="Follow_Tapped" Visibility="{Binding CanFollow, Converter={StaticResource AnythingToVisiblityConverter}}"
+                                                <TextBlock Text="{Binding UserName}" Style="{StaticResource FollowPage_UserName_Style}"/>
+                                                <Button Tapped="Follow_Tapped" Visibility="{Binding CanFollow, Converter={StaticResource AnythingToVisiblityConverter}}"
                                             HorizontalAlignment="Right" VerticalAlignment="Center">
-                                        <Button.Content>
-                                            <TextBlock Text="+ 关注" FontWeight="Normal"/>
-                                        </Button.Content>
-                                    </Button>
-                                    <Button Tapped="CancelFollow_Tapped" 
-                                            Visibility="{Binding CanFollow, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}" 
-                                            HorizontalAlignment="Right" VerticalAlignment="Center" 
-                                            Background="{StaticResource GreenMain}" Foreground="White">
-                                        <Button.Content>
-                                            <TextBlock Text="已关注" FontWeight="Normal"/>
-                                        </Button.Content>
-                                    </Button>
-                                </Grid>
-                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="-20, 15, -20, 15"/>
-                            </StackPanel>
+                                                    <Button.Content>
+                                                        <TextBlock Text="+ 关注" FontWeight="Normal"/>
+                                                    </Button.Content>
+                                                </Button>
+                                                <Button Tapped="CancelFollow_Tapped" 
+                                                    Visibility="{Binding CanFollow, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}" 
+                                                    HorizontalAlignment="Right" VerticalAlignment="Center" 
+                                                    Background="{StaticResource GreenMain}" Foreground="White">
+                                                    <Button.Content>
+                                                        <TextBlock Text="已关注" FontWeight="Normal"/>
+                                                    </Button.Content>
+                                                </Button>
+                                            </Grid>
+                                            <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="-20, 15, -20, 15"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                    <DataTemplate>
+                                        <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                            </shared:LoadMoreDataTemplateSelector>
                         </DataTemplate>
+
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 <Grid Visibility="{Binding Followers.Count, Converter={StaticResource countToNoItemsVisiblityConverter}}">

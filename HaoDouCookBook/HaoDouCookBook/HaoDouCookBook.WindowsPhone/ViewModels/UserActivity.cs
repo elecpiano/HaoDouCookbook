@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace HaoDouCookBook.ViewModels
 {
-    public class UserActivitiesGroup : BindableBase
+    public class UserActivitiesGroup : BindableBase, ILoadMoreItem
     {
         private string key;
 
@@ -32,12 +32,15 @@ namespace HaoDouCookBook.ViewModels
 
         public ObservableCollection<UserActivityItem> Activities { get; set; }
 
+        public bool IsLoadMore { get; set; }
+
         public UserActivitiesGroup()
         {
             key = string.Empty;
             day = string.Empty;
             month = string.Empty;
             Activities = new ObservableCollection<UserActivityItem>();
+            IsLoadMore = false;
         }
     }
 

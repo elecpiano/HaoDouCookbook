@@ -49,7 +49,7 @@ namespace HaoDouCookBook.HaoDou.API
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
  
         }
-        public static async Task GetFans(int offset, int limit, int userId, int uid, string sign, Action<UserFollowersData> onSuccess, Action<Error> onFail)
+        public static async Task GetFans(int offset, int limit, int userId, int uid, string uuid, string sign, Action<UserFollowersData> onSuccess, Action<Error> onFail)
         {
             string methodName = "getFans";
             POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
@@ -58,7 +58,7 @@ namespace HaoDouCookBook.HaoDou.API
             postRequest.AddPostData("userid", userId.ToString());
             postRequest.AddPostData("offst", offset.ToString());
             postRequest.AddPostData("limit", limit.ToString());
-            postRequest.AddPostData("refresh", "1");
+            postRequest.AddPostData("uuid", uuid);
 
             HaoDouJsonDataLoader<UserFollowersData> loader = new HaoDouJsonDataLoader<UserFollowersData>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);

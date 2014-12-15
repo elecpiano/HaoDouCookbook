@@ -18,7 +18,7 @@ namespace HaoDouCookBook.Pages
         #region Page Parameter Definition
 
         public enum PageType
-        { 
+        {
             FOLLOW,
             FANS
         }
@@ -56,7 +56,7 @@ namespace HaoDouCookBook.Pages
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             if (e.NavigationMode == NavigationMode.Back)
@@ -71,11 +71,11 @@ namespace HaoDouCookBook.Pages
                 rootScrollViewer.ScrollToVerticalOffset(0);
                 SetPageTypeRelatedItems(pageParams.UserId, pageParams.PageType);
                 DataBinding();
-                await LoadFirstPageDataAsync(pageParams.UserId);
+                LoadFirstPageDataAsync(pageParams.UserId);
             }
-            
+
         }
-        
+
         #endregion
 
         #region Data Prepare
@@ -98,13 +98,15 @@ namespace HaoDouCookBook.Pages
             switch (pageParams.PageType)
             {
                 case PageType.FOLLOW:
-                    await RecipeUserAPI.GetFollows(0, 20, userid, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, 
+                    await RecipeUserAPI.GetFollows(0, limit, userid, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign,
                         success => {
                             if (success.Followers != null)
                             {
+                                RemoveLoadMoreControl();
                                 foreach (var item in success.Followers)
                                 {
-                                    viewModel.Followers.Add(new UserFollower() { 
+                                    viewModel.Followers.Add(new UserFollower()
+                                    {
                                         Avatar = item.Avatar,
                                         UserName = item.UserName,
                                         UserId = item.UserId,
@@ -112,8 +114,14 @@ namespace HaoDouCookBook.Pages
                                         IsVip = item.Vip == 1 ? true : false
                                     });
                                 }
+
+                                if (success.Followers.Length == limit)
+                                {
+                                    EnusureLoadMoreControl();
+                                }
                             }
 
+                            page = 1;
                             loading.SetState(LoadingState.SUCCESS);
 
                         },
@@ -122,30 +130,40 @@ namespace HaoDouCookBook.Pages
                         });
                     break;
                 case PageType.FANS:
-                    await RecipeUserAPI.GetFans(0, 20, userid, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.UserInfo.Sign, 
-                    success => {
-                        if (success.Followers != null)
-                        {
-                            foreach (var item in success.Followers)
+                    await RecipeUserAPI.GetFans(0, limit, userid, 
+                        UserGlobal.Instance.GetInt32UserId(), 
+                        UserGlobal.Instance.uuid, 
+                        UserGlobal.Instance.UserInfo.Sign,
+                        success => {
+                            if (success.Followers != null)
                             {
-                                viewModel.Followers.Add(new UserFollower()
+                                RemoveLoadMoreControl();
+                                foreach (var item in success.Followers)
                                 {
-                                    Avatar = item.Avatar,
-                                    UserName = item.UserName,
-                                    UserId = item.UserId,
-                                    CanFollow = item.CanFollow == 1 ? true : false,
-                                    IsVip = item.Vip == 1 ? true : false
-                                });
+                                    viewModel.Followers.Add(new UserFollower()
+                                    {
+                                        Avatar = item.Avatar,
+                                        UserName = item.UserName,
+                                        UserId = item.UserId,
+                                        CanFollow = item.CanFollow == 1 ? true : false,
+                                        IsVip = item.Vip == 1 ? true : false
+                                    });
+                                }
+
+                                if (success.Followers.Length == limit)
+                                {
+                                    EnusureLoadMoreControl();
+                                }
                             }
-                        }
 
-                        loading.SetState(LoadingState.SUCCESS);
+                            page = 1;
+                            loading.SetState(LoadingState.SUCCESS);
 
-                    }, 
-                    error => {
-                        Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirstPageDataAsync(userid));
-                       
-                    });
+                        },
+                        error => {
+                            Utilities.CommonLoadingRetry(loading, error, async () => await LoadFirstPageDataAsync(userid));
+
+                        });
                     break;
                 default:
                     break;
@@ -187,7 +205,7 @@ namespace HaoDouCookBook.Pages
                     break;
                 default:
                     break;
-            } 
+            }
         }
 
         #endregion
@@ -221,5 +239,125 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+
+        #region Load More
+
+        int page = 1;
+        int limit = 20;
+
+        private UserFollower loadMoreControlDataContext = new UserFollower() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (viewModel.Followers != null && !viewModel.Followers.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Followers.Add(loadMoreControlDataContext);
+            }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (viewModel.Followers != null && viewModel.Followers.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Followers.Remove(loadMoreControlDataContext);
+            }
+        }
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+
+                     switch (pageParams.PageType)
+                     {
+                         case PageType.FOLLOW:
+                             await RecipeUserAPI.GetFollows(
+                                     page * limit,
+                                     limit,
+                                     pageParams.UserId,
+                                     UserGlobal.Instance.GetInt32UserId(),
+                                     UserGlobal.Instance.UserInfo.Sign,
+                                     success => {
+                                         if (success.Followers != null)
+                                         {
+                                             RemoveLoadMoreControl();
+                                             foreach (var item in success.Followers)
+                                             {
+                                                 viewModel.Followers.Add(new UserFollower()
+                                                 {
+                                                     Avatar = item.Avatar,
+                                                     UserName = item.UserName,
+                                                     UserId = item.UserId,
+                                                     CanFollow = item.CanFollow == 1 ? true : false,
+                                                     IsVip = item.Vip == 1 ? true : false
+                                                 });
+                                             }
+
+                                             if (success.Followers.Length == limit)
+                                             {
+                                                 EnusureLoadMoreControl();
+                                             }
+                                             page++;
+                                             loadmore.SetState(LoadingState.SUCCESS);
+                                         }
+                                         else
+                                         {
+                                             loadmore.SetState(LoadingState.DONE);
+                                         }
+                                     },
+                                     error => {
+                                         Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                                     });
+                             break;
+                         case PageType.FANS:
+                             await RecipeUserAPI.GetFans(
+                                 page * limit,
+                                 limit,
+                                 pageParams.UserId,
+                                 UserGlobal.Instance.GetInt32UserId(),
+                                 UserGlobal.Instance.uuid,
+                                 UserGlobal.Instance.UserInfo.Sign,
+                                 success => {
+                                     if (success.Followers != null)
+                                     {
+                                         RemoveLoadMoreControl();
+                                         foreach (var item in success.Followers)
+                                         {
+                                             viewModel.Followers.Add(new UserFollower()
+                                             {
+                                                 Avatar = item.Avatar,
+                                                 UserName = item.UserName,
+                                                 UserId = item.UserId,
+                                                 CanFollow = item.CanFollow == 1 ? true : false,
+                                                 IsVip = item.Vip == 1 ? true : false
+                                             });
+                                         }
+
+                                         if (success.Followers.Length == limit)
+                                         {
+                                             EnusureLoadMoreControl();
+                                         }
+                                         page++;
+                                         loadmore.SetState(LoadingState.SUCCESS);
+                                     }
+                                     else
+                                     {
+                                         loadmore.SetState(LoadingState.DONE);
+                                     }
+                                 },
+                                 error => {
+                                     Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                                 });
+                             break;
+                     }
+
+                 });
+        }
+
+        #endregion
+
     }
 }
