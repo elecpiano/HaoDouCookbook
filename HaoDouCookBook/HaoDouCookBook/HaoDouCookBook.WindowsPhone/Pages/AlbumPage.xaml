@@ -6,14 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:HaoDouCookBook.Controls"
-    mc:Ignorable="d"
+    mc:Ignorable="d"    xmlns:shared="using:Shared.Utility"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <controls:BackablePage.BottomAppBar>
         <CommandBar x:Name="cmd" Style="{StaticResource bottomAppbarStyle}">
             <AppBarButton x:Name="allAlbums" Icon="AllApps" Label="所有专辑" Click="ShowAllAlbums_Click"/>
             <AppBarButton x:Name="favorite" Icon="Favorite" Label="收藏" Click="Favorite_Click"/>
-            <AppBarButton x:Name="removeFavorite" Icon="Remove" Label="取消收藏" Click="removeFavorite_Click"/> 
+            <AppBarButton x:Name="removeFavorite" Icon="Remove" Label="取消收藏" Click="removeFavorite_Click"/>
             <AppBarButton x:Name="comment" Icon="Comment" Label="评论" Click="Comments_Click"/>
             <AppBarButton x:Name="share" Icon="Forward" Label="分享"/>
         </CommandBar>
@@ -48,21 +48,27 @@
                             <StackPanel Orientation="Vertical"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel>
-                                <controls:RecipeTile 
-                                RecipeName="{Binding RecipeName}"
-                                RecipeImage="{Binding RecipeImage}"
-                                Recommendation="{Binding Recommendation}"
-                                SupportNumber="{Binding SupportNumber, Converter={StaticResource favoriteCountToStringConverter}}"
-                                Author="{Binding Author}"
-                                Tapped="RecipeTile_Tapped"
-                                Margin="0, 0, 0, 30"/>
-
-                                <controls:LoadMoreControl Margin="0, 10, 0, 20" Loaded="loadMore_Loaded"/>
-                            </StackPanel>
+                            <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                                <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                    <DataTemplate>
+                                        <controls:RecipeTile 
+                                                RecipeName="{Binding RecipeName}"
+                                                RecipeImage="{Binding RecipeImage}"
+                                                Recommendation="{Binding Recommendation}"
+                                                SupportNumber="{Binding SupportNumber, Converter={StaticResource favoriteCountToStringConverter}}"
+                                                Author="{Binding Author}"
+                                                Tapped="RecipeTile_Tapped"
+                                                Margin="0, 0, 0, 30"/>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                    <DataTemplate>
+                                        <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                            </shared:LoadMoreDataTemplateSelector>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

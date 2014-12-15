@@ -89,8 +89,10 @@ namespace HaoDouCookBook.Pages
             loading.SetState(LoadingState.LOADING);
             await InfoAPI.GetAlbumInfo(0, 20, albumId, UserGlobal.Instance.UserInfo.Sign, UserGlobal.Instance.GetInt32UserId(), UserGlobal.Instance.uuid, success=>
                 {
+                    
                     UpdateData(success);
                     page = 1;
+                   
                     // loaded
                     //
                     loading.SetState(LoadingState.SUCCESS);
@@ -130,6 +132,7 @@ namespace HaoDouCookBook.Pages
             {
                 foreach (var item in data.Recipes)
                 {
+                    RemoveLoadMoreControl();
                     viewModel.Recipes.Add(new RecipeTileData()
                     {
                         RecipeId = item.RecipeId,
@@ -139,6 +142,7 @@ namespace HaoDouCookBook.Pages
                         RecipeImage = item.Cover,
                         RecipeName = item.Title
                     });
+                    EnusureLoadMoreControl();
                 }
             }
         }
@@ -212,50 +216,78 @@ namespace HaoDouCookBook.Pages
         #endregion
 
         #region Load More
+
         int page = 1;
-        int limit = 10;
+        int limit = 20;
+
+        private RecipeTileData loadMoreControlDataContext = new RecipeTileData() { IsLoadMore = true };
+
+        public void EnusureLoadMoreControl()
+        {
+            if (viewModel.Recipes != null && !viewModel.Recipes.Contains(loadMoreControlDataContext))
+           {
+               viewModel.Recipes.Add(loadMoreControlDataContext);
+           }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (viewModel.Recipes != null && viewModel.Recipes.Contains(loadMoreControlDataContext))
+            {
+                viewModel.Recipes.Remove(loadMoreControlDataContext);
+            } 
+        }
 
         private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Utilities.RegistComonadLoadMoreBehavior<RecipeTileData>(sender,
-                async loadmore =>
-                {
-                    loadmore.SetState(LoadingState.LOADING);
-                    await InfoAPI.GetAlbumInfo(
-                        page * limit,
-                        limit,
-                        pageParams.AlbumId,
-                        UserGlobal.Instance.UserInfo.Sign,
-                        UserGlobal.Instance.GetInt32UserId(),
-                        UserGlobal.Instance.uuid,
-                        success =>
-                        {
-                            if (success.Recipes != null)
-                            {
-                                foreach (var item in success.Recipes)
-                                {
-                                    viewModel.Recipes.Add(new RecipeTileData()
-                                    {
-                                        RecipeId = item.RecipeId,
-                                        SupportNumber = item.LikeCount.ToString(),
-                                        Recommendation = item.Intro,
-                                        Author = item.UserName,
-                                        RecipeImage = item.Cover,
-                                        RecipeName = item.Title
-                                    });
-                                }
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                  async loadmore =>
+                  {
+                      loadmore.SetState(LoadingState.LOADING);
+                      await InfoAPI.GetAlbumInfo(
+                          page * limit,
+                          limit,
+                          pageParams.AlbumId,
+                          UserGlobal.Instance.UserInfo.Sign,
+                          UserGlobal.Instance.GetInt32UserId(),
+                          UserGlobal.Instance.uuid,
+                          success =>
+                          {
+                              if (success.Recipes != null)
+                              {
+                                  RemoveLoadMoreControl();
+                                  foreach (var item in success.Recipes)
+                                  {
+                                      viewModel.Recipes.Add(new RecipeTileData()
+                                      {
+                                          RecipeId = item.RecipeId,
+                                          SupportNumber = item.LikeCount.ToString(),
+                                          Recommendation = item.Intro,
+                                          Author = item.UserName,
+                                          RecipeImage = item.Cover,
+                                          RecipeName = item.Title
+                                      });
+                                  }
 
-                                page++;
-                            } 
+                                  if (success.Recipes.Length > 0)
+                                  {
+                                      EnusureLoadMoreControl();
+                                  }
 
-                            loadmore.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                            loadmore.SetState(LoadingState.SUCCESS);
-                        },
-                        error =>
-                        {
-                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
-                        });
-                });
+                                  page++;
+                                  loadmore.SetState(LoadingState.SUCCESS);
+                              }
+                              else
+                              {
+                                  loadmore.SetState(LoadingState.DONE);
+                              }
+
+                          },
+                          error =>
+                          {
+                              Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                          });
+                  });
         }
 
         #endregion

@@ -122,10 +122,10 @@ namespace HaoDouCookBook.Pages
                         {
                             noResultGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                         }
-
+                        RemoveLoadMoreControl();
                         foreach (var item in success.Items)
                         {
-                            RemoveLoadMoreControl();
+                            
                             viewModel.Recipes.Add(new TagRecipeData()
                             {
                                 FoodStuff = item.Stuff,
@@ -136,10 +136,8 @@ namespace HaoDouCookBook.Pages
                                 RecipeId = item.RecipeId,
                                 Card = item.Card
                             });
-
-                            EnusureLoadMoreControl();
                         }
-
+                        EnusureLoadMoreControl();
                     }
                     else
                     {
@@ -215,16 +213,17 @@ namespace HaoDouCookBook.Pages
                           paras.TagText,
                           success =>
                           {
-                              if (success.Items != null && success.Items.Length > 0)
+                              if (success.Items != null)
                               {
                                   if (noResultGrid.Visibility == Visibility.Visible)
                                   {
                                       noResultGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                                   }
 
+                                  RemoveLoadMoreControl();
                                   foreach (var item in success.Items)
                                   {
-                                      RemoveLoadMoreControl();
+                                      
                                       viewModel.Recipes.Add(new TagRecipeData()
                                       {
                                           FoodStuff = item.Stuff,
@@ -235,7 +234,6 @@ namespace HaoDouCookBook.Pages
                                           RecipeId = item.RecipeId,
                                           Card = item.Card
                                       });
-
                                       
                                   }
 
@@ -245,9 +243,14 @@ namespace HaoDouCookBook.Pages
                                   }
 
                                   page++;
+                                  loadmore.SetState(LoadingState.SUCCESS);
+                              }
+                              else
+                              {
+                                  loadmore.SetState(LoadingState.DONE);
                               }
 
-                              loadmore.SetState(LoadingState.SUCCESS);
+                              
                           },
                         error =>
                         {

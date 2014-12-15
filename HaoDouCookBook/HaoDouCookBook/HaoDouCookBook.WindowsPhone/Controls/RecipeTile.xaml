@@ -11,7 +11,7 @@
     d:DesignWidth="380">
     
     <StackPanel Orientation="Vertical" Name="root">
-        <Grid Height="240">
+        <Grid Height="240" Width="380">
             <Grid.Background>
                 <ImageBrush ImageSource="{Binding RecipeImage}" AlignmentY="Center" Stretch="UniformToFill"/>
             </Grid.Background>

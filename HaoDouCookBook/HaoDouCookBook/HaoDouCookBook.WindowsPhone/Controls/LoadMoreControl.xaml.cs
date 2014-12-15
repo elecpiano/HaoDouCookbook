@@ -41,10 +41,14 @@ namespace HaoDouCookBook.Controls
                     this.info.Text = "网路出错啦~~稍后再试试";
                     break;
                 case LoadingState.SUCCESS:
-                case LoadingState.DONE:
                     this.loading.StopLoading();
                     this.loading.Opacity = 0;
                     this.info.Text = "点我加载更多";
+                    break;
+                case LoadingState.DONE:
+                    this.loading.StopLoading();
+                    this.loading.Opacity = 0;
+                    this.info.Text = "好像没有了哦~再点我试试看~~";
                     break;
                 default:
                     break;

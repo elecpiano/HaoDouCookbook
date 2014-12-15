@@ -185,9 +185,13 @@ namespace HaoDouCookBook.Controls
                                     EnusureLoadMoreControl();
                                 }
                                 page++;
+                                loadmore.SetState(LoadingState.SUCCESS);
+                            }
+                            else
+                            {
+                                loadmore.SetState(LoadingState.DONE);
                             }
 
-                            loadmore.SetState(LoadingState.SUCCESS);
                         },
                         error =>
                         {
