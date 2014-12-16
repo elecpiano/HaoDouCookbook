@@ -49,7 +49,7 @@
                                 </StackPanel>
                             </Grid>
 
-                            <controls:UserPhoto Grid.Column="2" Height="60" Width="60" ImageSource="{Binding Avatar}"
+                            <controls:UserPhoto Grid.Column="2" Height="60" Width="60" ImageSource="{Binding Avatar}" VerticalAlignment="Top"
                                             Visibility="{Binding IsSignedInUser, Converter={StaticResource AnythingToVisiblityConverter}}"/>
                         </Grid>
                     </DataTemplate>

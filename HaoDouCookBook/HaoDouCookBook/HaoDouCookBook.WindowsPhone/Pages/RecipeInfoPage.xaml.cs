@@ -113,6 +113,11 @@ namespace HaoDouCookBook.Pages
 
         private void UpdateViewModel(InfoPageData data)
         {
+            if(data.Info.RecipeId == null)
+            {
+                return;
+            }
+
             CheckIfAddedToShoppingList(data.Info.RecipeId);
 
             var infoData = data.Info;

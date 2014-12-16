@@ -25,8 +25,12 @@ namespace HaoDouCookBook.Pages
         public class CommentListPageParams
         {
             public int Type { get; set; }
+
             public int Cid { get; set; }
+
             public int RecipeId { get; set; }
+
+            public int NoticeType { get; set; }
 
             public SourcePage SourcePage { get; set; }
 
@@ -35,6 +39,7 @@ namespace HaoDouCookBook.Pages
                 Type = 1;
                 Cid = 0;
                 RecipeId = 0;
+                NoticeType = 0;
                 SourcePage = CommentListPage.SourcePage.NORMAL;
             }
 
@@ -169,10 +174,23 @@ namespace HaoDouCookBook.Pages
 
         private void Recipe_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
-            paras.RecipeId = pageParams.RecipeId;
+            switch (pageParams.NoticeType)
+            {
+                case 101:
+                    ProductPage.ProductPageParams pparas = new ProductPage.ProductPageParams();
+                    pparas.ProductId = pageParams.RecipeId;
+                    pparas.TopicId = pageParams.RecipeId;
+                    pparas.Type = 3;
+                    App.Current.RootFrame.Navigate(typeof(ProductPage), pparas);
+                    break;
+                case 3:
+                    RecipeInfoPage.RecipeInfoPageParams rparas = new RecipeInfoPage.RecipeInfoPageParams();
+                    rparas.RecipeId = pageParams.RecipeId;
+                    App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), rparas);
+                    break;
 
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+            }
+            
         }
 
         #endregion
