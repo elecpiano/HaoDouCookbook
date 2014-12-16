@@ -71,14 +71,24 @@ namespace HaoDouCookBook.Common
         {
             await AccountAPI.Login(username, password, data =>
                 {
-                    UserInfo = data;
-
-                    if (onSuccess != null)
+                    if (!string.IsNullOrEmpty(data.Sign))
                     {
-                        onSuccess.Invoke();
-                    }
+                        UserInfo = data;
 
-                    CommitDataAsync();
+                        if (onSuccess != null)
+                        {
+                            onSuccess.Invoke();
+                        }
+
+                        CommitDataAsync();
+                    }
+                    else
+                    {
+                        if (onFail != null)
+                        {
+                            onFail.Invoke(new Error() { ErrorCode = Constants.ERROR_LOGIN_FAIL, Message = Constants.ERRORMESSAGE_LOGIN_FAIL });
+                        };
+                    }
 
                 }, error =>
                 {
