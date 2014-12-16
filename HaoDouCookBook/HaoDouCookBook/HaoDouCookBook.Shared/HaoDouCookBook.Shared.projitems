@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\AdAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\ApiUrlHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\CommentAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\CommonAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\DiggAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\FavoriteAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\InfoAPI.cs" />

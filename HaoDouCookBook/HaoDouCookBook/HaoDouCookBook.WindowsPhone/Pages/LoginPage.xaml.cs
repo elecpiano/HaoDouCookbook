@@ -59,6 +59,11 @@ namespace HaoDouCookBook.Pages
 
         #region Event
 
+        private void register_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(SignupPage));
+        }
+
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
             string userName = this.userName.Text.Trim();
@@ -98,5 +103,6 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
     }
 }

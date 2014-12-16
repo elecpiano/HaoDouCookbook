@@ -46,7 +46,7 @@ namespace HaoDouCookBook.HaoDou.API
                 });
         }
     }
-    public class AccountAPI 
+    public class AccountAPI
     {
         public const string MODULE = "Account";
 
@@ -82,6 +82,34 @@ namespace HaoDouCookBook.HaoDou.API
 
             HaoDouJsonDataLoader<HaodouResultMessage> loader = new HaoDouJsonDataLoader<HaodouResultMessage>();
             await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+        }
+
+        public static async Task RegByEmail(string email, string nickname, string password, Action<PassportLoginResultData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "reg";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("pwd", password);
+            postRequest.AddPostData("pwd2", password);
+            postRequest.AddPostData("nick", nickname);
+            postRequest.AddPostData("name", email);
+
+            HaoDouJsonDataLoader<PassportLoginResultData> loader = new HaoDouJsonDataLoader<PassportLoginResultData>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+
+        }
+        public static async Task RegByPhone(string phone, string code, string nickname, string password, Action<PassportLoginResultData> onSuccess, Action<Error> onFail)
+        {
+            string methodName = "reg";
+            POSTRequestExecuter postRequest = new POSTRequestExecuter(HaoDouApiUrlHelper.GetApiUrl(MODULE, methodName));
+            postRequest.AddPostData("pwd", password);
+            postRequest.AddPostData("pwd2", password);
+            postRequest.AddPostData("nick", nickname);
+            postRequest.AddPostData("name", phone);
+            postRequest.AddPostData("code", code);
+
+            HaoDouJsonDataLoader<PassportLoginResultData> loader = new HaoDouJsonDataLoader<PassportLoginResultData>();
+            await loader.LoadWithoutCacheAsnyc(postRequest, onSuccess, onFail);
+
         }
     }
 }

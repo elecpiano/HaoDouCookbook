@@ -1,0 +1,122 @@
+﻿<controls:BackablePage
+    x:Class="HaoDouCookBook.Pages.SignupPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Pivot x:Name="pivot" Background="{StaticResource TopAppbarColor}">
+            <Pivot.Title>
+                <StackPanel Orientation="Vertical">
+                    <controls:Banner x:Name="banner" VerticalAlignment="Top" Title="好豆菜谱" FontWeight="Normal"/>
+                    <Border Style="{StaticResource PageTitleBorderStyle}" Margin="-5, 0, 0, 0">
+                        <TextBlock x:Name="title" Text="我的收藏" Margin="0" FontWeight="Normal" Style="{StaticResource SubTitleStyle}"/>
+                    </Border>
+                </StackPanel>
+            </Pivot.Title>
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Width="180" FontSize="32"/>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <PivotItem Header="手机注册" Background="White" Margin="-20, 0">
+                <StackPanel Orientation="Vertical" Margin="20, 40, 20, 0">
+                    <StackPanel x:Name="phoneRegStepOne" Orientation="Horizontal" Margin="20, 0" >
+                        <Image Source="../assets/images/phone.png" Stretch="None" VerticalAlignment="Top" Margin="0, 5, 0, 0"/>
+                        <StackPanel Orientation="Vertical" Margin="10, 0, 0, 0" VerticalAlignment="Top">
+                            <TextBox x:Name="phone" Style="{StaticResource TextBoxBase}" HorizontalAlignment="Left" PlaceholderText="请输入手机号码" Width="280"/>
+                            <Image Source="../assets/images/textboxGrayLine.png"/>
+                            <Button Content="下一步" Width="280" FontWeight="Normal" Margin="0, 10" Tapped="GotoPhoneRegStepTwo_Tapped"/>
+                            <TextBlock Text="已有好豆账号，点击登录" Tapped="GotoLogin_Tapped"
+                                       FontSize="19" Margin="30, 0, 0, 0" Foreground="{StaticResource GreenMain}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="phoneRegStepTwo" Orientation="Vertical" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="58"/>
+                                <RowDefinition Height="58"/>
+                                <RowDefinition Height="58"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="30, 0">
+                                <Image Source="../assets/images/email.png" Stretch="None" HorizontalAlignment="Left"/>
+                                <StackPanel Orientation="Vertical" Margin="15, 0, 0, 0">
+                                    <TextBox x:Name="verifyCode" Style="{StaticResource TextBoxBase}" HorizontalAlignment="Left" PlaceholderText="输入验证码" Width="120"/>
+                                    <Image Source="../assets/images/textboxGrayLine.png"/>
+                                </StackPanel>
+                                <Border x:Name="resendVerifyCodeButton" HorizontalAlignment="Left" CornerRadius="5" Tapped="ReSendVerifyCode_Tapped"
+                                        Margin="-300, 0, 0, 0" BorderThickness="1" BorderBrush="Gray" VerticalAlignment="Center">
+                                    <TextBlock Text="重新获取(58)" x:Name="retryText" FontSize="21" VerticalAlignment="Center" Margin="10, 8, 10, 6" HorizontalAlignment="Center" Foreground="Gray"/> 
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel  Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="30, 0">
+                                <Image Source="../assets/images/username.png" Stretch="None" HorizontalAlignment="Left"/>
+                                <StackPanel Orientation="Vertical" Margin="15, 0, 0, 0">
+                                    <TextBox x:Name="phoneNick" Style="{StaticResource TextBoxBase}" HorizontalAlignment="Left" PlaceholderText="请输入昵称" Width="280"/>
+                                    <Image Source="../assets/images/textboxGrayLine.png"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="30, 0">
+                                <Image Source="../assets/images/password.png" Stretch="None" HorizontalAlignment="Left"/>
+                                <StackPanel Orientation="Vertical" Margin="15, 0, 0, 0">
+                                    <PasswordBox x:Name="phonePassword" Style="{StaticResource PasswordBoxBase}" HorizontalAlignment="Left" PlaceholderText="请输入密码" Width="280"/>
+                                    <Image Source="../assets/images/textboxGrayLine.png"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Row="3" Margin="55, 20, 0, 0" HorizontalAlignment="Left">
+                                <Button Content="完成" Width="280" FontWeight="Normal" Tapped="RegByPhone_Tapped"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+            </PivotItem>
+            <PivotItem Header="邮箱注册" Background="White" Margin="-20, 0">
+                <Grid Margin="20, 40, 20, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="58"/>
+                        <RowDefinition Height="58"/>
+                        <RowDefinition Height="58"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="30, 0">
+                        <Image Source="../assets/images/email.png" Stretch="None" HorizontalAlignment="Left"/>
+                        <StackPanel Orientation="Vertical" Margin="15, 0, 0, 0">
+                            <TextBox x:Name="emailAddress" Style="{StaticResource TextBoxBase}" HorizontalAlignment="Left" PlaceholderText="请输入邮箱地址" Width="280"/>
+                            <Image Source="../assets/images/textboxGrayLine.png"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="30, 0">
+                        <Image Source="../assets/images/username.png" Stretch="None" HorizontalAlignment="Left"/>
+                        <StackPanel Orientation="Vertical" Margin="15, 0, 0, 0">
+                            <TextBox x:Name="nick" Style="{StaticResource TextBoxBase}" HorizontalAlignment="Left" PlaceholderText="请输入昵称" Width="280"/>
+                            <Image Source="../assets/images/textboxGrayLine.png"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="30, 0">
+                        <Image Source="../assets/images/password.png" Stretch="None" HorizontalAlignment="Left"/>
+                        <StackPanel Orientation="Vertical" Margin="15, 0, 0, 0">
+                            <PasswordBox x:Name="passowrd" Style="{StaticResource PasswordBoxBase}" 
+                                         VerticalAlignment="Center" HorizontalAlignment="Left" PlaceholderText="请输入密码" Width="280"/>
+                            <Image Source="../assets/images/textboxGrayLine.png"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Margin="55, 20, 0, 0" HorizontalAlignment="Left">
+                        <Button Content="完成" Width="280" FontWeight="Normal" x:Name="registByEmail" Click="registByEmail_Click"/>
+                        <TextBlock Text="已有好豆账号，点击登录" Tapped="GotoLogin_Tapped"
+                                       FontSize="19" Margin="30, 0, 0, 0" Foreground="{StaticResource GreenMain}"/>
+                    </StackPanel>
+                </Grid>
+            </PivotItem>
+        </Pivot>
+        <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/>
+    </Grid>
+</controls:BackablePage>

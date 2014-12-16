@@ -59,7 +59,7 @@
             </ItemsControl>
         </ScrollViewer>
         <Grid Margin="0, 105, 0, 0" Visibility="{Binding Recipes.Count, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
-            <Image Source="" Style="{StaticResource NoItemImage_Style}"/>
+            <Image Source="../assets/images/download.png" Style="{StaticResource NoItemImage_Style}"/>
             <TextBlock x:Name="noItemText" Style="{StaticResource NoItemText_Style}"/>
         </Grid>
     </Grid>

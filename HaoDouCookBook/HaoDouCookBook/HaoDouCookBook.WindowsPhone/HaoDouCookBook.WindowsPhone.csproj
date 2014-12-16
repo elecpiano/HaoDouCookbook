@@ -347,6 +347,9 @@
     <Compile Include="Pages\ShoppingListPage.xaml.cs">
       <DependentUpon>ShoppingListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SignupPage.xaml.cs">
+      <DependentUpon>SignupPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SingleProductViewPage.xaml.cs">
       <DependentUpon>SingleProductViewPage.xaml</DependentUpon>
     </Compile>
@@ -450,10 +453,13 @@
     <Content Include="Assets\Images\clear.png" />
     <Content Include="Assets\Images\DefaultImageBig.png" />
     <Content Include="Assets\Images\DefaultImageSmall.png" />
+    <Content Include="Assets\Images\download.png" />
     <Content Include="Assets\Images\down_arrow.png" />
+    <Content Include="Assets\Images\email.png" />
     <Content Include="Assets\Images\findfriends.png" />
     <Content Include="Assets\Images\friends.png" />
     <Content Include="Assets\Images\likeheart.png" />
+    <Content Include="Assets\Images\phone.png" />
     <Content Include="Assets\Images\ProductPage\like_white.png" />
     <Content Include="Assets\Images\messageNotice.png" />
     <Content Include="Assets\Images\messageSend.png" />
@@ -863,6 +869,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ShoppingListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SignupPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

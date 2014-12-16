@@ -9,6 +9,12 @@
     mc:Ignorable="d" xmlns:shared="using:Shared.Utility"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <controls:BackablePage.BottomAppBar>
+        <CommandBar Style="{StaticResource bottomAppbarStyle}" x:Name="appbar">
+            <AppBarButton Icon="Clear" Label="清空" Click="Clear_Click"/>
+        </CommandBar>
+    </controls:BackablePage.BottomAppBar>
+
     <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
         <Border Style="{StaticResource PageTitleBorderStyle}">
@@ -58,10 +64,11 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <Grid Margin="0, 105, 0, 0" Visibility="{Binding Notices.Count, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
+        <Grid IsHitTestVisible="False" Margin="0, 105, 0, 0" Visibility="{Binding Notices.Count, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
             <Image Source="../assets/images/noMessage.png" Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBlock Text="暂时还没有收到通知" Foreground="Gray" FontSize="28" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 250, 0, 0"/>
         </Grid>
         <controls:NetworkLoading x:Name="loading" Margin="0, 105, 0, 0"/>
+        <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/>
     </Grid>
 </controls:BackablePage>

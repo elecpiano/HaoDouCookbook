@@ -42,6 +42,7 @@ namespace HaoDouCookBook.Common
 
         public const string MODIFY_NAME_DESCRIPTION = "可以免费修改一次，以后每次修改将会扣除100豆币";
         public const string MOIDFIED_DESCRIPTION = "非首次修改昵称，此次修改会\n扣除100豆币！是否继续？";
+        public const string PHONE_CODE_HAVE_SENT = "已向该手机发送了验证码，请注意查收";
 
         public const int ERRORCODE_JSON_PARSE_FAILED = int.MaxValue;
         public const int ERRORCODE_METAJSON_PARSE_FAILED = int.MinValue;
@@ -49,6 +50,11 @@ namespace HaoDouCookBook.Common
         public static readonly int ERROR_LOGIN_FAIL = int.MaxValue - 1;
         public const string ERRORMESSAGE_NETWORK_UNSTABLE = "网络不稳定，请稍后再试";
         public const string ERRORMESSAGE_LOGIN_FAIL = "登录失败，请检查您的账号和密码~";
+        public const string ERRORMESSAGE_INVALID_EMAIL = "请输入正确的邮箱地址";
+        public const string ERRORMESSAGE_INVALID_NICKNAME_LENGTH = "昵称长度需要在4-16个字符";
+        public const string ERRORMESSAGE_INVALID_NICKNAME_CHARS = "用户名包含非法字符[必须是字母、数字、中文或者下划线]";
+        public const string ERRORMESSAGE_INVALID_PASSWORD_LENGTH = "密码长度不能小于6个字符长度，也不能大于32个字符长度";
+        public const string ERRORMESSAGE_INVALIED_PHONE = "手机号码无效";
 
         public readonly static Dictionary<int, string> ACTIVITY_TYPE_MAP = new Dictionary<int, string>() 
         {

@@ -9,6 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+
     <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
         <Border Style="{StaticResource PageTitleBorderStyle}">
@@ -40,8 +41,10 @@
                     </Button>
                 </Grid>
                 
-                <TextBlock Text="忘记密码？" Style="{StaticResource LoginPage_ForgetPassword_Style}" Tapped="forgetPassword_Tapped"/>
-
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="注册" Margin="0, 30, 40, 0" Style="{StaticResource LoginPage_ForgetPassword_Style}" Tapped="register_Tapped"/>
+                    <TextBlock Text="忘记密码？" Style="{StaticResource LoginPage_ForgetPassword_Style}" Tapped="forgetPassword_Tapped"/>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="20, 50, 20, 0">
                     <Rectangle Style="{StaticResource DarkGrayLine}" Height="0.8" Width="80"/>
                     <TextBlock Text="或使用第三方登录" FontSize="18" Foreground="Gray" Margin="20, 0, 20, 0"/>

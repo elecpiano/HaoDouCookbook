@@ -177,6 +177,7 @@ namespace HaoDouCookBook.Pages
             switch (pageParams.NoticeType)
             {
                 case 101:
+                case 104:
                     ProductPage.ProductPageParams pparas = new ProductPage.ProductPageParams();
                     pparas.ProductId = pageParams.RecipeId;
                     pparas.TopicId = pageParams.RecipeId;

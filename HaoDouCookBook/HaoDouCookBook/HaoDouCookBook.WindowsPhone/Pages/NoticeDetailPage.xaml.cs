@@ -5,6 +5,7 @@ using HaoDouCookBook.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Shared.Utility;
+using HaoDouCookBook.HaoDou.DataModels.My;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -86,28 +87,14 @@ namespace HaoDouCookBook.Pages
                         RemoveLoadMoreControl();
                         foreach (var item in success.Notices)
                         {
-                            string content = "回复了您，快去看看吧！";
-                            int id = 0;
-                            if(!string.IsNullOrEmpty(item.Content.Rid))
-                            {
-                                id = int.Parse(item.Content.Rid);
-                            }
-                            else
-                            {
-                                if(!string.IsNullOrEmpty(item.Content.Pid))
-                                {
-                                    id = int.Parse(item.Content.Pid);
-                                }
-                            }
-
                             viewModel.Notices.Add(new NoticeItem() { 
                                 Avatar = item.Avatar,
-                                Content = content,
+                                Content = GetNoticeContentByType(item.Type),
                                 Time = item.Time,
                                 Type = item.Type,
                                 UserId = item.Uid,
                                 UserName = item.UserName,
-                                ContentId = id
+                                ContentId = GetNoticeContentId(item)
                             });
                         }
 
@@ -115,6 +102,8 @@ namespace HaoDouCookBook.Pages
                         {
                             EnusureLoadMoreControl();
                         }
+
+                        this.appbar.Visibility = success.Notices.Length > 0 ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
                     }
 
                     page = 1;
@@ -125,6 +114,51 @@ namespace HaoDouCookBook.Pages
                 });
         }
 
+        private string GetNoticeContentByType(int type)
+        {
+            string content = string.Empty;
+            switch (type)
+            {
+                case 101:
+                case 104:
+                case 3:
+                    content = "回复了您，快去看看吧！";
+                    break;
+                case 103:
+                    content = "赞了您的作品";
+                    break;
+                default:
+                    content = "回复了您，快去看看吧！";
+                    break;
+            }
+
+            return content;
+
+        }
+
+        private int GetNoticeContentId(Notice notice)
+        {
+            int id = 0;
+
+            if (notice.Content == null)
+            {
+                return id;
+            }
+
+            if (!string.IsNullOrEmpty(notice.Content.Rid))
+            {
+                id = int.Parse(notice.Content.Rid);
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(notice.Content.Pid))
+                {
+                    id = int.Parse(notice.Content.Pid);
+                }
+            }
+
+            return id;
+        }
 
         #endregion
 
@@ -140,17 +174,18 @@ namespace HaoDouCookBook.Pages
                     paras3.RecipeId = dataContext.ContentId;
                     paras3.Type = 3;
                     paras3.Cid = 0;
-                    paras3.NoticeType = 3;
+                    paras3.NoticeType = dataContext.Type;
                     paras3.SourcePage = CommentListPage.SourcePage.NOTICE_PAGE;
 
                     App.Current.RootFrame.Navigate(typeof(CommentListPage), paras3);
 
                     break;
                 case 101:
+                case 104:
                     CommentListPage.CommentListPageParams paras101 = new CommentListPage.CommentListPageParams();
                     paras101.RecipeId = dataContext.ContentId;
                     paras101.Type = 2;
-                    paras101.NoticeType = 101;
+                    paras101.NoticeType = dataContext.Type;
                     paras101.Cid = 0;
                     paras101.SourcePage = CommentListPage.SourcePage.NOTICE_PAGE;
                     App.Current.RootFrame.Navigate(typeof(CommentListPage), paras101);
@@ -166,9 +201,29 @@ namespace HaoDouCookBook.Pages
                     break;
             }
         }
+        private async void Clear_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await NoticeAPI.ClearNotice(
+                0,
+                UserGlobal.Instance.GetInt32UserId(),
+                UserGlobal.Instance.UserInfo.Sign,
+                UserGlobal.Instance.uuid,
+                success =>
+                {
+
+                    toast.Show(success.Message);
+                    if (success.Message.Contains("清理成功"))
+                    {
+                        viewModel.Notices.Clear();
+                    }
+                },
+                error =>
+                {
+                    toast.Show(error.Message);
+                });
+        }
 
         #endregion
-
 
         #region Load More
 
@@ -214,29 +269,15 @@ namespace HaoDouCookBook.Pages
                                  RemoveLoadMoreControl();
                                  foreach (var item in success.Notices)
                                  {
-                                     string content = "回复了您，快去看看吧！";
-                                     int id = 0;
-                                     if (!string.IsNullOrEmpty(item.Content.Rid))
-                                     {
-                                         id = int.Parse(item.Content.Rid);
-                                     }
-                                     else
-                                     {
-                                         if (!string.IsNullOrEmpty(item.Content.Pid))
-                                         {
-                                             id = int.Parse(item.Content.Pid);
-                                         }
-                                     }
-
                                      viewModel.Notices.Add(new NoticeItem()
                                      {
                                          Avatar = item.Avatar,
-                                         Content = content,
+                                         Content = GetNoticeContentByType(item.Type),
                                          Time = item.Time,
                                          Type = item.Type,
                                          UserId = item.Uid,
                                          UserName = item.UserName,
-                                         ContentId = id
+                                         ContentId = GetNoticeContentId(item)
                                      });
                                  }
 
@@ -261,6 +302,8 @@ namespace HaoDouCookBook.Pages
         }
 
         #endregion
+
+        
 
     }
 }

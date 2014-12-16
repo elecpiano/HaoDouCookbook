@@ -17,6 +17,18 @@ namespace HaoDouCookBook
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        #region Page Paramerter Definition
+        public class MainPageParams
+        {
+            public int PivotIndex { get; set; }
+
+            public MainPageParams()
+            {
+                PivotIndex = 0;
+            }
+        }
+        #endregion
+
         #region Life Cycle
 
         public MainPage()
@@ -42,6 +54,12 @@ namespace HaoDouCookBook
 
             ShowStatusBarAsync();
             myPage.UpdateViewModel();
+
+            var pageParams = e.Parameter as MainPageParams;
+            if(pageParams != null)
+            {
+                this.mainPivot.SelectedIndex = pageParams.PivotIndex;
+            }
         }
 
         #endregion
