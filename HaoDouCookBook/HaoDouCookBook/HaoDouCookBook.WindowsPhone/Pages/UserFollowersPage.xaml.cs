@@ -134,6 +134,7 @@ namespace HaoDouCookBook.Pages
                         UserGlobal.Instance.GetInt32UserId(), 
                         UserGlobal.Instance.uuid, 
                         UserGlobal.Instance.UserInfo.Sign,
+                        Utilities.IsSignedInUser(pageParams.UserId) ? true : false, //如果是"我的粉丝"页面则要刷新
                         success => {
                             if (success.Followers != null)
                             {
@@ -320,6 +321,7 @@ namespace HaoDouCookBook.Pages
                                  UserGlobal.Instance.GetInt32UserId(),
                                  UserGlobal.Instance.uuid,
                                  UserGlobal.Instance.UserInfo.Sign,
+                                 Utilities.IsSignedInUser(pageParams.UserId) ? true : false, //如果是"我的粉丝"页面则要刷新
                                  success => {
                                      if (success.Followers != null)
                                      {

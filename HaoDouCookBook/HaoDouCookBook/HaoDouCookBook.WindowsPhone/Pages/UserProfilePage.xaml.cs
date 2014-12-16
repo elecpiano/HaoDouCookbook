@@ -36,6 +36,10 @@ namespace HaoDouCookBook.Pages
         private UserProfilePageViewModel viewModel = new UserProfilePageViewModel();
         private UserProfilePageParams pageParams;
 
+        // 是否是刚跳转到这个页面
+        //
+        private bool justJumpToThisPage = true;
+
         #endregion
 
         #region Life Cycle
@@ -61,6 +65,7 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
+            justJumpToThisPage = true;
             pageParams = e.Parameter as UserProfilePageParams;
             if (pageParams != null)
             {
@@ -250,6 +255,19 @@ namespace HaoDouCookBook.Pages
 
             this.userActivities1.ResetScrollViewerToBegin();
             this.userActivities2.ResetScrollViewerToBegin();
+
+            if(justJumpToThisPage)
+            {
+                if (Utilities.IsSignedInUser(pageParams.UserId))
+                {
+                    this.userActivities2.LoadFirstDataAsync(pageParams.UserId);
+                }
+                else
+                {
+                    this.userActivities1.LoadFirstDataAsync(pageParams.UserId);
+                }
+            }
+
             this.userProducts1.ResetScrollViewerToBegin();
             this.userProducts2.ResetScrollViewerToBegin();
             this.userProducts1.LoadMoreAction = ProductLoadMoreAction;
@@ -320,6 +338,8 @@ namespace HaoDouCookBook.Pages
 
         private async void Pivot_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
         {
+            
+
             if (pageParams == null)
             {
                 return;
@@ -331,6 +351,11 @@ namespace HaoDouCookBook.Pages
                 switch (pivot.SelectedIndex)
                 {
                     case 0:  //动态
+                        if (justJumpToThisPage)
+                        {
+                            return;
+                        }
+
                         if (pageParams != null)
                         {
                             if (Utilities.IsSignedInUser(pageParams.UserId))
