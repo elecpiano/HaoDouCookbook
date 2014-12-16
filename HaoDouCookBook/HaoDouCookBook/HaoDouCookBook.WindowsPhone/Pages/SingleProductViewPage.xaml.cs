@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Shared.Utility;
 using System;
+using System.Linq;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -208,6 +209,13 @@ namespace HaoDouCookBook.Pages
                     if (success.Message.Contains("成功"))
                     {
                         viewModel.IsDigg = false;
+
+                        var userPhoto = viewModel.DiggList.FirstOrDefault(user => user.UserId == UserGlobal.Instance.GetInt32UserId());
+                        if(userPhoto != null)
+                        {
+                            viewModel.DiggList.Remove(userPhoto);
+                        }
+
                         foreach (var item in viewModel.DiggList)
                         {
                             item.DiggCount--;
@@ -236,6 +244,19 @@ namespace HaoDouCookBook.Pages
                     if (success.Message.Contains("成功"))
                     {
                         viewModel.IsDigg = true;
+
+
+                        var userPhoto = viewModel.DiggList.FirstOrDefault(user => user.UserId == UserGlobal.Instance.GetInt32UserId());
+                        if (userPhoto == null)
+                        {
+                            viewModel.DiggList.Insert(0, new ProductViewPageDigg() { 
+                                UserAvatar = UserGlobal.Instance.UserInfo.Avatar,
+                                UserId = UserGlobal.Instance.GetInt32UserId(),
+                                DiggCount = viewModel.DiggCount,
+                                UserName = UserGlobal.Instance.UserInfo.Name
+                            });
+                        }
+
                         foreach (var item in viewModel.DiggList)
                         {
                             item.DiggCount++;
