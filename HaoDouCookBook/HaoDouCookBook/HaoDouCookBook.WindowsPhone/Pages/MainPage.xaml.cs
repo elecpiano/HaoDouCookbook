@@ -1,6 +1,7 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.Pages;
 using System;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -160,6 +161,15 @@ namespace HaoDouCookBook
 
 
         #endregion
+
+        internal bool Dismissed;
+        internal Rect SplashImageRect;
+
+        public void SetExtendedSplashInfo(Rect splashRect, bool dismissStat)
+        {
+            SplashImageRect = splashRect;
+            Dismissed = dismissStat;
+        }
 
     }
 }

@@ -35,7 +35,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="60"/>
                             </Grid.ColumnDefinitions>
-                            <controls:UserPhoto Grid.Column="0" Height="60" Width="60" ImageSource="{Binding Avatar}"
+                            <controls:UserPhoto Grid.Column="0" Height="60" Width="60" ImageSource="{Binding Avatar}" VerticalAlignment="Top"
                                             Visibility="{Binding IsSignedInUser, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}"/>
                             <Grid Grid.Column="1">
                                 <StackPanel Orientation="Vertical" Visibility="{Binding IsSignedInUser, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
