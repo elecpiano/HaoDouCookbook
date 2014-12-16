@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
+using System.Runtime.Serialization;
 
 namespace HaoDouCookBook.HaoDou.DataModels.My
 {
@@ -41,6 +42,14 @@ namespace HaoDouCookBook.HaoDou.DataModels.My
 
         [DataMember]
         public int ItemId { get; set; }
+
+
+        [DataMember(Name = "Comment")]
+        public Comment[] Comments { get; set; }
+
+
+        [DataMember]
+        public int CommentCnt { get; set; }
 
         [DataMember]
         public string TopicUrl { get; set; }

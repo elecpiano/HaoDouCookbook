@@ -54,7 +54,7 @@
                                 </shared:LoadMoreDataTemplateSelector.ItemTemplate>
                                 <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
                                     <DataTemplate>
-                                        <controls:LoadMoreControl Margin="0, 30, 0, 0" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                        <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
                                     </DataTemplate>
                                 </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
                             </shared:LoadMoreDataTemplateSelector>

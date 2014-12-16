@@ -18,6 +18,9 @@ namespace HaoDouCookBook.Controls
 
         public Toast Toast { get; set; }
 
+        public MessageInput MessageInput { get; set; }
+
+
         public ActivitySupportAndComment()
         {
             this.InitializeComponent();
@@ -124,10 +127,62 @@ namespace HaoDouCookBook.Controls
             }
 
             Collapsed();
+            e.Handled = true;
         }
 
         private void Comment_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            var dataContext = sender.GetDataContext<UserActivityItem>();
+            if(MessageInput != null)
+            {
+                this.MessageInput.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                MessageInput.Focus(Windows.UI.Xaml.FocusState.Keyboard);
+                MessageInput.SendAction = async comment =>
+                {
+                    await CommentAPI.AddComment(
+                        comment,
+                        UserGlobal.Instance.GetInt32UserId(),
+                        UserGlobal.Instance.UserInfo.Sign,
+                        dataContext.ActivityId,
+                        4,
+                        success =>
+                        {
+                            if (success.Message.Contains("成功"))
+                            {
+                                var newComment = new Comment()
+                                {
+                                    Content = comment,
+                                    UserId = UserGlobal.Instance.GetInt32UserId(),
+                                    UserName = UserGlobal.Instance.UserInfo.Name,
+                                };
+
+                                dataContext.Comments.Insert(0, newComment);
+                                if(dataContext.Comments.Count > 5)
+                                {
+                                    dataContext.Comments.RemoveAt(dataContext.Comments.Count - 1);
+                                }
+                                dataContext.CommentsCount++;
+                                if(MessageInput != null)
+                                {
+                                    MessageInput.ClearText();
+                                    MessageInput.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                                }
+                            }
+
+                            if(Toast != null)
+                            {
+                                Toast.Show(success.Message);
+                            }
+                        },
+                        error =>
+                        {
+                            if(Toast != null)
+                            {
+                                Toast.Show(error.Message);
+                            }
+                        });
+                };
+            }
             Collapsed();
         }
     }

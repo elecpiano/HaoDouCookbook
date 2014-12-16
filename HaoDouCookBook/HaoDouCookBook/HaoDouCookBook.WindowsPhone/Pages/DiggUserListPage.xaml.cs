@@ -54,7 +54,7 @@ namespace HaoDouCookBook.Pages
             {
                 DiggUsers.Clear();
                 DataBinding();
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 DataBinding();
                 LoadFirstPageDataAsync();
             }

@@ -2,10 +2,8 @@
 using HaoDouCookBook.Controls;
 using HaoDouCookBook.HaoDou.API;
 using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
-using HaoDouCookBook.Utility;
 using HaoDouCookBook.ViewModels;
 using Shared.Utility;
-using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
@@ -66,7 +64,7 @@ namespace HaoDouCookBook.Pages
             if (pageParams != null)
             {
                 viewModel = new AlbumPageViewModel();
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 DataBinding();
                 LoadFirstPageDataAsync(pageParams.AlbumId);
             }

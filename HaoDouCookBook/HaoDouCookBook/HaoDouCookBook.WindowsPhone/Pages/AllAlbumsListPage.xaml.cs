@@ -48,7 +48,7 @@ namespace HaoDouCookBook.Pages
             }
 
             Albums.Clear();
-            rootScrollViewer.ScrollToVerticalOffset(0);
+            rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
             LoadFirstPageDataAsync();
         }
 

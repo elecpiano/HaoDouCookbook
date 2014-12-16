@@ -60,7 +60,7 @@ namespace HaoDouCookBook.Pages
             pageParams = e.Parameter as SelectAreasPagParams;
             if(pageParams != null)
             {
-                rootScrollViewer.ScrollToHorizontalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 viewModel = new SelectAreasPageViewModel();
                 DataBinding();
                 LoadAreasDataAsync();

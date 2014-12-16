@@ -68,7 +68,7 @@ namespace HaoDouCookBook.Pages
             RecipeInfoPageParams paras = e.Parameter as RecipeInfoPageParams;
             if(paras != null)
             {
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 if(paras.LocalDownloadData == null)
                 {
                     viewModel = new RecipeInfoPageViewModel();

@@ -52,8 +52,8 @@ namespace HaoDouCookBook.Pages
             }
 
             pivot.SelectedIndex = 0;
-            historyScrollViewer.ScrollToVerticalOffset(0);
-            hotSearchScrollViewer.ScrollToVerticalOffset(0);
+            historyScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
+            hotSearchScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
 
             LoadHotSearchDataAsync();
 

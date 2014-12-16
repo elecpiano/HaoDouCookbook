@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Calls;
 using Windows.Devices.Sensors;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
@@ -26,7 +25,7 @@ namespace HaoDouCookBook.Utility
 #if WINDOWS_PHONE_APP 
         public static void PhoneCall(string phoneNumber)
         {
-            PhoneCallManager.ShowPhoneCallUI(phoneNumber, "");
+            Windows.ApplicationModel.Calls.PhoneCallManager.ShowPhoneCallUI(phoneNumber, "");
         }
 #endif
         public async static Task OpenHttpURL(string url)

@@ -1,11 +1,9 @@
 ﻿using HaoDouCookBook.Common;
 using HaoDouCookBook.Controls;
 using HaoDouCookBook.ViewModels;
-using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using HaoDouCookBook.HaoDou.API;
-using HaoDouCookBook.Utility;
 using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -276,7 +274,7 @@ namespace HaoDouCookBook.Pages
             this.userRecipes2.ResetScrollViewerToBegin();
             this.userRecipes1.LoadMoreAction = RecipesLoadMoreAction;
             this.userRecipes2.LoadMoreAction = RecipesLoadMoreAction;
-            this.rootScrollViewer.ScrollToVerticalOffset(0);
+            this.rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
             LoadDataAsync();
             LoadFirstPageProductsDataAsync(pageParams.UserId);
             LoadFirstPageRecipesDataAsync(pageParams.UserId);

@@ -67,7 +67,7 @@ namespace HaoDouCookBook.Pages
             if (pageParams != null)
             {
                 viewModel = new ProductPageViewModel();
-                rooScrollViewer.ScrollToVerticalOffset(0);
+                rooScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 LoadFirstPageDataAsync(pageParams.ProductId, pageParams.TopicId, pageParams.Type);
             }
             

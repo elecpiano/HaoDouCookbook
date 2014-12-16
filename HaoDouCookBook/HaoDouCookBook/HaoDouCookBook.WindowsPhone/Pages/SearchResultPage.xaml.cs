@@ -68,7 +68,7 @@ namespace HaoDouCookBook.Pages
                 HaoDouSearchHelper.AddSearchKeywordAsync(paras.Keyword);
 
                 viewModel = new SearchResultPageViewModel();
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 DataBinding();
                 LoadDataAsync(paras.Keyword, paras.TagId);
             }

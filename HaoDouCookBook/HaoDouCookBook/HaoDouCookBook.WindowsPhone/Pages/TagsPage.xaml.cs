@@ -75,7 +75,7 @@ namespace HaoDouCookBook.Pages
             if (paras != null)
             {
                 viewModel = new TagsPageViewModel();
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 DataBinding();
                 this.title.Text = paras.TagText;
                 LoadFirstPageDataDataAsync(paras.Id, paras.TagText);

@@ -63,7 +63,7 @@ namespace HaoDouCookBook.Pages
             if(paras != null)
             {
                 viewModel = new RankViewPageViewModel();
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 LoadDataAsync(paras.Id, paras.Type, string.Empty, null);
             }
         }

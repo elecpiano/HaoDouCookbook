@@ -63,7 +63,7 @@ namespace HaoDouCookBook.Pages
             {
                 viewModel = new AlbumListPageViewModel();
                 this.title.Text = pageParams.Keyword;
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 DataBinding();
                 LoadFirstPageDataAsync(pageParams.Keyword);
             }

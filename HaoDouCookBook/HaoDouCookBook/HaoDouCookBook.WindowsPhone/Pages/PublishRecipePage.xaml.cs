@@ -76,7 +76,7 @@ namespace HaoDouCookBook.Pages
                 viewModel = new PublishRecipePageViewModel();
             }
 
-            rootScrollViewer.ScrollToVerticalOffset(0);
+            rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
             UpdateCommandBarState();
             DataBinding();
         }
@@ -198,7 +198,7 @@ namespace HaoDouCookBook.Pages
                 success => {
                     viewModel.IsInStepOne = false;
                     UpdateCommandBarState();
-                    this.rootScrollViewer.ScrollToVerticalOffset(0);
+                    this.rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
 
                     if(!UserRecipeDraft.Instance.Recipes.Contains(viewModel))
                     {
@@ -289,7 +289,7 @@ namespace HaoDouCookBook.Pages
         {
             viewModel.IsInStepOne = true;
             UpdateCommandBarState();
-            this.rootScrollViewer.ScrollToVerticalOffset(0);
+            this.rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
         }
 
         private async void SelectPhoto_Tapped(object sender, TappedRoutedEventArgs e)

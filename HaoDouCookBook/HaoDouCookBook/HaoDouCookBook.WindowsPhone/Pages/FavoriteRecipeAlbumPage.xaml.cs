@@ -65,7 +65,7 @@ namespace HaoDouCookBook.Pages
             pageParams = e.Parameter as FavoriteRecipeAlbumPageParams;
             if (pageParams != null)
             {
-                this.rootScrollViewer.ScrollToVerticalOffset(0);
+                this.rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 viewModel = new FavoriteRecipesAlbumPageViewModel();
                 this.title.Text = pageParams.Title;
 

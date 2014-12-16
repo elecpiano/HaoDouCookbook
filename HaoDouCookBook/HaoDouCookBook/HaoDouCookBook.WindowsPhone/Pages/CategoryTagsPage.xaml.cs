@@ -55,7 +55,7 @@ namespace HaoDouCookBook.Pages
 
             if(paras != null)
             {
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 this.title.Text = paras.Title;
                 this.tagsList.ItemsSource = paras.Tags;
             }

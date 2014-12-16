@@ -61,7 +61,7 @@ namespace HaoDouCookBook.Controls
 
         public void ResetScrollViewerToBegin()
         {
-            this.rootScrollViewer.ScrollToVerticalOffset(0);
+            this.rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
         }
 
         public async Task LoadFirstDataAsync(int userId)

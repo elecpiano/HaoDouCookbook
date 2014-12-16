@@ -5,8 +5,6 @@ using HaoDouCookBook.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-using Shared.Utility;
-using System;
 using System.Linq;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -66,7 +64,7 @@ namespace HaoDouCookBook.Pages
             if(pageParams != null)
             {
                 viewModel = new SingleProductViewPageViewModel();
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 DataBinding();
                 LoadFirstPageDataAsync(pageParams.ProductId);
             }

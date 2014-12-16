@@ -172,7 +172,7 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <controls:MessageInput Grid.Row="1" x:Name="input" VerticalAlignment="Bottom" />
+        <controls:MessageInput Grid.Row="1" x:Name="input" AutoHideWhenLostFocusWithEmptyText="false" VerticalAlignment="Bottom" />
         <controls:NetworkLoading x:Name="loading" Margin="0, 55, 0, 0"/>
         <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/>
     </Grid>

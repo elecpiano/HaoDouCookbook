@@ -60,7 +60,7 @@ namespace HaoDouCookBook.Pages
             if (pageParams != null)
             {
                 viewModel = new NoticePageViewModel();
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 DataBinding();
                 LoadFirstPageDataAsync(pageParams.SubType);
             }

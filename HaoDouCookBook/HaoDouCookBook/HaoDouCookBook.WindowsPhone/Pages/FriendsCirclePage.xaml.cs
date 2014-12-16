@@ -46,7 +46,7 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            rootScrollViewer.ScrollToVerticalOffset(0);
+            rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
             DataBinding();
             LoadFirstPageDataAsync();
         }
@@ -73,19 +73,38 @@ namespace HaoDouCookBook.Pages
                         RemoveLoadMoreControl();
                         foreach (var item in success.Activities)
                         {
-                            Activities.Add(new UserActivityItem() {
-                                Content = item.Content,
-                                CreateTime = item.CreateTime,
-                                DiggCount = item.DiggCnt,
-                                Image = item.Pic,
-                                Name = item.Name,
-                                ProductId = item.ItemId,
-                                Type = item.Type,
-                                UserId = item.UserId,
-                                Avatar = item.Avatar,
-                                ActivityId = item.FeedId,
-                                IsDigg = item.IsDigg == 1 ? true : false
-                            });
+                            UserActivityItem uai = new UserActivityItem();
+                            uai.Content = item.Content;
+                            uai.CreateTime = item.CreateTime;
+                            uai.DiggCount = item.DiggCnt;
+                            uai.Image = item.Pic;
+                            uai.Name = item.Name;
+                            uai.ProductId = item.ItemId;
+                            uai.Type = item.Type;
+                            uai.UserId = item.UserId;
+                            uai.Avatar = item.Avatar;
+                            uai.ActivityId = item.FeedId;
+                            uai.IsDigg = item.IsDigg == 1 ? true : false;
+                            uai.CommentsCount = item.CommentCnt;
+
+                            if(item.Comments != null)
+                            {
+                                foreach (var cmt in item.Comments)
+                                {
+                                    uai.Comments.Add(new Comment() { 
+                                        AtUserId = cmt.AtUserId,
+                                        AtUserName = cmt.AtUserName,
+                                        Avatar = cmt.Avatar,
+                                        Content = cmt.Content,
+                                        CreateTime = cmt.CreateTime,
+                                        IsLoadMore = false,
+                                        UserId = cmt.UserId,
+                                        UserName = cmt.UserName
+                                    });
+                                }
+                            }
+
+                            Activities.Add(uai);
                         }
 
                         if(success.Activities.Length == limit)
@@ -113,6 +132,7 @@ namespace HaoDouCookBook.Pages
             if (asac != null)
             {
                 asac.Toast = this.toast;
+                asac.MessageInput = this.input;
             }
         }
 
@@ -122,11 +142,13 @@ namespace HaoDouCookBook.Pages
             switch (dataContext.Type)
             {
                 case 10:
+                case 110:
                     RecipeInfoPage.RecipeInfoPageParams para = new RecipeInfoPage.RecipeInfoPageParams();
                     para.RecipeId = dataContext.ProductId;
 
                     App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), para);
                     break;
+                case 130:
                 case 30:
                     SingleProductViewPage.SingleProductViewPageParams p = new SingleProductViewPage.SingleProductViewPageParams();
                     p.ProductId = dataContext.ProductId;
@@ -147,7 +169,7 @@ namespace HaoDouCookBook.Pages
             App.Current.RootFrame.Navigate(typeof(DiggUserListPage), paras);
 
         }
-
+        
         #endregion
 
         #region Load More
@@ -192,20 +214,38 @@ namespace HaoDouCookBook.Pages
                                  RemoveLoadMoreControl();
                                  foreach (var item in success.Activities)
                                  {
-                                     Activities.Add(new UserActivityItem()
+                                     UserActivityItem uai = new UserActivityItem();
+                                     uai.Content = item.Content;
+                                     uai.CreateTime = item.CreateTime;
+                                     uai.DiggCount = item.DiggCnt;
+                                     uai.Image = item.Pic;
+                                     uai.Name = item.Name;
+                                     uai.ProductId = item.ItemId;
+                                     uai.Type = item.Type;
+                                     uai.UserId = item.UserId;
+                                     uai.Avatar = item.Avatar;
+                                     uai.ActivityId = item.FeedId;
+                                     uai.IsDigg = item.IsDigg == 1 ? true : false;
+
+                                     if (item.Comments != null)
                                      {
-                                         Content = item.Content,
-                                         CreateTime = item.CreateTime,
-                                         DiggCount = item.DiggCnt,
-                                         Image = item.Pic,
-                                         Name = item.Name,
-                                         ProductId = item.ItemId,
-                                         Type = item.Type,
-                                         UserId = item.UserId,
-                                         Avatar = item.Avatar,
-                                         ActivityId = item.FeedId,
-                                         IsDigg = item.IsDigg == 1 ? true : false
-                                     });
+                                         foreach (var cmt in item.Comments)
+                                         {
+                                             uai.Comments.Add(new Comment()
+                                             {
+                                                 AtUserId = cmt.AtUserId,
+                                                 AtUserName = cmt.AtUserName,
+                                                 Avatar = cmt.Avatar,
+                                                 Content = cmt.Content,
+                                                 CreateTime = cmt.CreateTime,
+                                                 IsLoadMore = false,
+                                                 UserId = cmt.UserId,
+                                                 UserName = cmt.UserName
+                                             });
+                                         }
+                                     }
+
+                                     Activities.Add(uai);
                                  }
 
                                  if (success.Activities.Length == limit)
@@ -228,7 +268,19 @@ namespace HaoDouCookBook.Pages
                 });
         }
 
+        private void ShowMoreComments_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<UserActivityItem>();
+            CommentListPage.CommentListPageParams paras = new CommentListPage.CommentListPageParams();
+            paras.Type = 4;
+            paras.RecipeId = dataContext.ActivityId;
+
+            App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
+            e.Handled = true;
+        }
+
         #endregion
 
+       
     }
 }

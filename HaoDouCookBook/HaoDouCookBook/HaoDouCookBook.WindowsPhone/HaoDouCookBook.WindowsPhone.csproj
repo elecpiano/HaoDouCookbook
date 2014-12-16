@@ -86,8 +86,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ActivityTypeToStringConverter.cs" />
+    <Compile Include="Common\DiggcountAndCommentsCountToActivityVisibilityConverter.cs" />
     <Compile Include="Common\FavoriteCountToStringConverter.cs" />
     <Compile Include="Common\FollowCountConverter.cs" />
+    <Compile Include="Common\FriendsCirclePageCommentsCountToVisibilityConverter.cs" />
     <Compile Include="Common\ListCountToNoItemsVisibilityConverter.cs" />
     <Compile Include="Common\LocalDownlods.cs" />
     <Compile Include="Common\MainStuffColorConverter.cs" />

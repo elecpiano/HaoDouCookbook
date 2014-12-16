@@ -75,7 +75,7 @@ namespace HaoDouCookBook.Pages
             if (pageParams != null)
             {
                 viewModel = new CommentListPageViewModel();
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 if (pageParams.SourcePage == SourcePage.NOTICE_PAGE)
                 {
                     this.recipeHeader.Visibility = Windows.UI.Xaml.Visibility.Visible;

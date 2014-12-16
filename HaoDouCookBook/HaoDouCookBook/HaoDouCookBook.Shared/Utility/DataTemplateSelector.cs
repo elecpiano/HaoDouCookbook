@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Shared.Utility

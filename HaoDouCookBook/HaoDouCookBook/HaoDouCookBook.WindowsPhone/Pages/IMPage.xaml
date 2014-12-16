@@ -57,7 +57,7 @@
             </ItemsControl>
         </ScrollViewer>
         <controls:NetworkLoading x:Name="loading" Margin="0, 105, 0, 60"/>
-        <controls:MessageInput Background="Transparent" x:Name="input" VerticalAlignment="Bottom"/>
+        <controls:MessageInput Background="Transparent" x:Name="input" AutoHideWhenLostFocusWithEmptyText="False" VerticalAlignment="Bottom"/>
         <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/>
     </Grid>
 </controls:BackablePage>

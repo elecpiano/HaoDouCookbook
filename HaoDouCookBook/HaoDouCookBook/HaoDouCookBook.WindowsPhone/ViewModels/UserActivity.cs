@@ -135,6 +135,17 @@ namespace HaoDouCookBook.ViewModels
             set { SetProperty<bool>(ref isDigg, value); }
         }
 
+        public ObservableCollection<Comment> Comments { get; set; }
+
+        private int commentsCount;
+
+        public int CommentsCount
+        {
+            get { return commentsCount; }
+            set { SetProperty<int>(ref commentsCount, value); }
+        }
+
+
         public bool IsLoadMore { get; set; }
 
         public UserActivityItem()
@@ -149,6 +160,7 @@ namespace HaoDouCookBook.ViewModels
             avatar = string.Empty;
             isDigg = false;
             IsLoadMore = false;
+            Comments = new ObservableCollection<Comment>();
         }
     }
 

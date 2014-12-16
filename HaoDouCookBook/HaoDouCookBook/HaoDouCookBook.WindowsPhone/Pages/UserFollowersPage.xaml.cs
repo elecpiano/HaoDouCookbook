@@ -68,7 +68,7 @@ namespace HaoDouCookBook.Pages
             if (pageParams != null)
             {
                 viewModel = new UserFollowersPageViewModel();
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 SetPageTypeRelatedItems(pageParams.UserId, pageParams.PageType);
                 DataBinding();
                 LoadFirstPageDataAsync(pageParams.UserId);

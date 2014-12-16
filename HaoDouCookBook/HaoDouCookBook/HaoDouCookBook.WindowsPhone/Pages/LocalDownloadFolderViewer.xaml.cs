@@ -57,7 +57,7 @@ namespace HaoDouCookBook.Pages
             pageParams = e.Parameter as LocalDownloadFolderViewerParams;
             if(pageParams!=null)
             {
-                rootScrollViewer.ScrollToVerticalOffset(0);
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
                 pageParams.ViewModel.UpdateAllStuffsStrings();
                 this.root.DataContext = pageParams.ViewModel;
             }

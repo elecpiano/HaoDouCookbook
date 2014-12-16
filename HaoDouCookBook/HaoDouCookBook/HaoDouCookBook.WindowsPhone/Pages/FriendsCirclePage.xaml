@@ -6,8 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:HaoDouCookBook.Controls"
+    xmlns:common="using:HaoDouCookBook.Common"
     mc:Ignorable="d" xmlns:shared="using:Shared.Utility"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <controls:BackablePage.Resources>
+        <common:FriendsCirclePageCommentsCountToVisibilityConverter x:Key="commentsCountToVisibilityConverter" />
+        <common:DiggcountAndCommentsCountToActivityVisibilityConverter x:Key="diggAndCommentConverter"/>
+    </controls:BackablePage.Resources>
 
     <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
         <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
@@ -60,16 +65,50 @@
                                                     <controls:ActivitySupportAndComment HorizontalAlignment="Right" Loaded="ActivitySupportAndComment_Loaded"/>
                                                 </Grid>
 
-                                                <Border Height="73" Margin="0, -7, 0, 0" Tapped="DiggPanel_Tapped"
-                                                    Visibility="{Binding DiggCount, Converter={StaticResource AnythingToVisiblityConverter}}">
-                                                    <Border.Background>
-                                                        <ImageBrush ImageSource="../assets/images/background1.png" Stretch="Uniform"/>
-                                                    </Border.Background>
-                                                    <StackPanel VerticalAlignment="Center" Margin="20, 3, 0, 0" Orientation="Horizontal">
-                                                        <Image Source="../assets/images/productpage/like_green.png" Stretch="Uniform" Height="24" HorizontalAlignment="Left"/>
-                                                        <TextBlock Foreground="{StaticResource GreenMain}" FontSize="18" VerticalAlignment="Center" Margin="10, 7, 0, 0">
-                                                            <Run Text="{Binding DiggCount}"/>次赞
-                                                        </TextBlock>
+                                                <!--点赞和评论数据框-->
+                                                <Border Margin="0, -7, 0, 0" Tapped="DiggPanel_Tapped"
+                                                    Visibility="{Binding Converter={StaticResource diggAndCommentConverter}}">
+                                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                                        <Polygon Points="30,10 40,0 50,10" Fill="#10000000"/>
+                                                        <StackPanel Orientation="Vertical" Background="#10000000">
+                                                            <StackPanel VerticalAlignment="Center" Margin="20, 13, 0, 20" Orientation="Horizontal" 
+                                                                        Visibility="{Binding DiggCount, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                                                <Image Source="../assets/images/productpage/like_green.png" Stretch="Uniform" Height="24" HorizontalAlignment="Left"/>
+                                                                <TextBlock Foreground="{StaticResource GreenMain}" FontSize="18" VerticalAlignment="Center" Margin="10, 7, 0, 0">
+                                                                    <Run Text="{Binding DiggCount}"/>次赞
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                                
+                                                            <Border Visibility="{Binding DiggCount, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800"
+                                                                       Visibility="{Binding Comments.Count, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                                                            </Border>
+                                                            <StackPanel Orientation="Vertical" Margin="20, 0, 0, 20"
+                                                                        Visibility="{Binding Comments.Count, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                                                <ItemsControl ItemsSource="{Binding Comments}">
+                                                                    <ItemsControl.ItemsPanel>
+                                                                        <ItemsPanelTemplate>
+                                                                            <StackPanel Orientation="Vertical"/>
+                                                                        </ItemsPanelTemplate>
+                                                                    </ItemsControl.ItemsPanel>
+                                                                    <ItemsControl.ItemTemplate>
+                                                                        <DataTemplate>
+                                                                            <TextBlock FontSize="18" Margin="0, 20, 0, 0">
+                                                                                <Run Text="{Binding UserName}" Foreground="{StaticResource GreenMain}"/>
+                                                                                <Run Text=" : "/>
+                                                                                <Run Text="{Binding Content}"/>
+                                                                            </TextBlock>
+                                                                        </DataTemplate>
+                                                                    </ItemsControl.ItemTemplate>
+                                                                </ItemsControl>
+                                                            </StackPanel>
+
+                                                            <StackPanel Orientation="Vertical" Visibility="{Binding CommentsCount, Converter={StaticResource commentsCountToVisibilityConverter}}">
+                                                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800"
+                                                                       Visibility="{Binding Comments.Count, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                                                                <TextBlock Text="点击查看更多评论" Margin="0, 20" Tapped="ShowMoreComments_Tapped" Foreground="Gray" FontSize="22" HorizontalAlignment="Center" TextAlignment="Center"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
                                                     </StackPanel>
                                                 </Border>
                                             </StackPanel>
@@ -99,5 +138,6 @@
 
         <controls:NetworkLoading x:Name="loading" Margin="0, 105, 0, 0"/>
         <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/>
+        <controls:MessageInput x:Name="input" Visibility="Collapsed"/>
     </Grid>
 </controls:BackablePage>

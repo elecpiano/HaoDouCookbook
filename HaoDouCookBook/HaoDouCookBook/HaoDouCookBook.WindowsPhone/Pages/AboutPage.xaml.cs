@@ -33,7 +33,7 @@ namespace HaoDouCookBook.Pages
                 return;
             }
 
-            rootScrollViewer.ScrollToVerticalOffset(0);
+            rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
             this.intro.Text = Constants.HAODOU_INTRODUCTION;
             this.HaoDouWebSite.Text = Constants.HAODOU_WEBSITE;
             this.HaouDouServiceCall.Text = Constants.HAODOU_SERVICE_PHONE_NUMBER_STRING;

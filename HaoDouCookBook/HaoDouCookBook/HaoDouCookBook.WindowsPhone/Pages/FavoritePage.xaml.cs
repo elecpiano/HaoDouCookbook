@@ -41,9 +41,9 @@ namespace HaoDouCookBook.Pages
             // init
             //
             this.pivot.SelectedIndex = 0;
-            favoriteRecipesAlbumsScrollViewer.ScrollToVerticalOffset(0);
-            favoriteAlbumsScrollViewer.ScrollToVerticalOffset(0);
-            favoriteTopicsScrollViewer.ScrollToVerticalOffset(0);
+            favoriteRecipesAlbumsScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
+            favoriteAlbumsScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
+            favoriteTopicsScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
 
             // load data
             //

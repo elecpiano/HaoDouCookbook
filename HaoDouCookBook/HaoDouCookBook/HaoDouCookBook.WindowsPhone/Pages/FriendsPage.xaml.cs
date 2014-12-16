@@ -40,7 +40,7 @@ namespace HaoDouCookBook.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            rootScrollViewer.ScrollToVerticalOffset(0);
+            rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
             viewModel = new FriendsPageViewModel();
             DataBinding();
             LoadFirstPageDataAsync();
