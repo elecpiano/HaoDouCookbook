@@ -172,7 +172,7 @@ namespace HaoDouCookBook.Controls
             paras.TopicId = meal.Id;
             paras.Type = 1;
 
-            App.Current.RootFrame.Navigate(typeof(ProductPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(ProductPage), paras);
         }
 
         private void Tutorial_Tapped(object sender, TappedRoutedEventArgs e)
@@ -180,7 +180,7 @@ namespace HaoDouCookBook.Controls
             TutorialViewPage.TutorialViewPageParams paras = new TutorialViewPage.TutorialViewPageParams();
             paras.Url = "http://m.haodou.com/app/recipe/act/novice.php";
 
-            App.Current.RootFrame.Navigate(typeof(TutorialViewPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(TutorialViewPage), paras);
         }
 
         private void Cate_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -204,7 +204,7 @@ namespace HaoDouCookBook.Controls
                 ArticleViewer.ArticleViewerPageParams paras = new ArticleViewer.ArticleViewerPageParams();
                 paras.Url = viewModel.Masters[0].OpenUrl;
 
-                App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(ArticleViewer), paras);
             }
 
         }

@@ -165,7 +165,7 @@ namespace HaoDouCookBook.Pages
             RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
             paras.RecipeId = sender.GetDataContext<TagRecipeData>().RecipeId;
 
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
 
@@ -175,7 +175,7 @@ namespace HaoDouCookBook.Pages
             paras.Id = viewModel.Food.FoodId;
             paras.Title = viewModel.Food.FoodName;
 
-            App.Current.RootFrame.Navigate(typeof(StuffInfoPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(StuffInfoPage), paras);
         }
 
         #endregion

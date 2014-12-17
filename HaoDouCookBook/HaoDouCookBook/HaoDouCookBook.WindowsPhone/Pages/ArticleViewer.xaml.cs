@@ -152,7 +152,7 @@ namespace HaoDouCookBook.Pages
                 paras.RecipeId = pageParams.TopicId;
                 paras.Type = 3;
 
-                App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(CommentListPage), paras);
             }
         }
 

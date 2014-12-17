@@ -117,7 +117,7 @@ namespace HaoDouCookBook.Pages
                 success => {
                     if(success.Message.Contains("成功"))
                     {
-                        App.Current.RootFrame.GoBack(); 
+                        App.CurrentInstance.RootFrame.GoBack(); 
                         if(pageParams != null && pageParams.AfterTagsSetSuccessAction != null)
                         {
                             var tagsList = PersonalTags.Where(t => t.Selected == true).Select(s => s.Text).ToArray();

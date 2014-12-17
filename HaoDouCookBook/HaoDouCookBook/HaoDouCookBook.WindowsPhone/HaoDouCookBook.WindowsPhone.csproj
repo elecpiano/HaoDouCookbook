@@ -275,8 +275,8 @@
     <Compile Include="Pages\FeebackHistory.xaml.cs">
       <DependentUpon>FeebackHistory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Feedback.xaml.cs">
-      <DependentUpon>Feedback.xaml</DependentUpon>
+    <Compile Include="Pages\FeedbackPage.xaml.cs">
+      <DependentUpon>FeedbackPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\FriendsCirclePage.xaml.cs">
       <DependentUpon>FriendsCirclePage.xaml</DependentUpon>
@@ -771,7 +771,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Feedback.xaml">
+    <Page Include="Pages\FeedbackPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -57,7 +57,7 @@ namespace HaoDouCookBook.Controls
             UserProfilePage.UserProfilePageParams paras = new UserProfilePage.UserProfilePageParams();
             paras.UserId = userData.UserId;
 
-            App.Current.RootFrame.Navigate(typeof(UserProfilePage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(UserProfilePage), paras);
         }
 
         #endregion

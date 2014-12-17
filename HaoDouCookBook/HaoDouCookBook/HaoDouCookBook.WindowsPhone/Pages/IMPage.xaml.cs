@@ -155,7 +155,7 @@ namespace HaoDouCookBook.Pages
                     {
                         if (success.Message.Contains("成功"))
                         {
-                            App.Current.RootFrame.GoBack();
+                            App.CurrentInstance.RootFrame.GoBack();
                         }
                         toast.Show(success.Message);
                     },

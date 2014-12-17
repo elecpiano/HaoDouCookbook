@@ -118,7 +118,7 @@ namespace HaoDouCookBook.Pages
                 }
             };
 
-            App.Current.RootFrame.Navigate(typeof(BigTextBox), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(BigTextBox), paras);
         }
 
         private async void UpdateUserName(string newUserName)
@@ -134,7 +134,7 @@ namespace HaoDouCookBook.Pages
                     toast.Show(error.Message);
                 });
 
-            App.Current.RootFrame.GoBack();
+            App.CurrentInstance.RootFrame.GoBack();
         }
 
         private void intro_Tapped(object sender, TappedRoutedEventArgs e)
@@ -159,7 +159,7 @@ namespace HaoDouCookBook.Pages
                     });
             };
 
-            App.Current.RootFrame.Navigate(typeof(BigTextBox), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(BigTextBox), paras);
 
         }
 
@@ -176,7 +176,7 @@ namespace HaoDouCookBook.Pages
                 viewModel.Tags = tags; 
             };
 
-            App.Current.RootFrame.Navigate(typeof(PersonalTagsPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(PersonalTagsPage), paras);
         }
 
         private async void selectPhoto_Tapped(object sender, TappedRoutedEventArgs e)
@@ -216,7 +216,7 @@ namespace HaoDouCookBook.Pages
                 toast.Show("修改成功");
             };
 
-            App.Current.RootFrame.Navigate(typeof(SelectAreasPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(SelectAreasPage), paras);
         }
     }
 }

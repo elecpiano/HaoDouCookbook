@@ -30,7 +30,7 @@ namespace HaoDouCookBook.Controls
 
         void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
-            App.Current.RootFrame.GoBack();
+            App.CurrentInstance.RootFrame.GoBack();
 
             // Need add this line, otherwise it will not back to last page.
             //

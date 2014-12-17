@@ -69,7 +69,7 @@ namespace HaoDouCookBook.Pages
 
         private void Feedback_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(Feedback));
+            App.CurrentInstance.RootFrame.Navigate(typeof(FeedbackPage));
         }
 
         private async void ClearCache_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
@@ -99,7 +99,7 @@ namespace HaoDouCookBook.Pages
         }
         private void About_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(AboutPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(AboutPage));
         }
 
         private async void Logout_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
@@ -118,7 +118,7 @@ namespace HaoDouCookBook.Pages
             {
                 await UserGlobal.Instance.Logout(() =>
                 {
-                    App.Current.RootFrame.Navigate(typeof(MainPage));
+                    App.CurrentInstance.RootFrame.Navigate(typeof(MainPage));
 
                 }, error => { });
             }
@@ -132,7 +132,7 @@ namespace HaoDouCookBook.Pages
         {
             if (onStart != null)
             {
-                App.Current.RunAsync(onStart);
+                App.CurrentInstance.RunAsync(onStart);
             }
 
             ulong size = await IsolatedStorageHelper.GetUserDataSizeAsync(Constants.LOCAL_USERDATA_FOLDER, Constants.PUBLISH_RECIPES_TEMP_FOLDER);
@@ -142,7 +142,7 @@ namespace HaoDouCookBook.Pages
             {
                 if (onCompleted != null)
                 {
-                    App.Current.RunAsync(() => onCompleted.Invoke(sizeDesc));
+                    App.CurrentInstance.RunAsync(() => onCompleted.Invoke(sizeDesc));
                 }
                 return;
             }
@@ -164,7 +164,7 @@ namespace HaoDouCookBook.Pages
 
             if (onCompleted != null)
             {
-                App.Current.RunAsync(() => onCompleted.Invoke(sizeDesc));
+                App.CurrentInstance.RunAsync(() => onCompleted.Invoke(sizeDesc));
             }
         }
 
@@ -172,14 +172,14 @@ namespace HaoDouCookBook.Pages
         {
             if (onStart != null)
             {
-                App.Current.RunAsync(onStart);
+                App.CurrentInstance.RunAsync(onStart);
             }
 
             await IsolatedStorageHelper.ClearUserDataAsync(Constants.LOCAL_USERDATA_FOLDER, Constants.PUBLISH_RECIPES_TEMP_FOLDER);
 
             if (onCompleted != null)
             {
-                App.Current.RunAsync(onCompleted);
+                App.CurrentInstance.RunAsync(onCompleted);
             }
         }
 

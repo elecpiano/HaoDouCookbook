@@ -126,7 +126,7 @@ namespace HaoDouCookBook.Pages
                         if(pageParams != null && pageParams.AfterSelectCompleted != null)
                         {
                             pageParams.AfterSelectCompleted.Invoke(dataContext.CityName);
-                            App.Current.RootFrame.GoBack();
+                            App.CurrentInstance.RootFrame.GoBack();
                         }
                     }
 

@@ -111,7 +111,7 @@ namespace HaoDouCookBook.Pages
 
             if(pageParams.GoBackAfterConfirmon)
             {
-                App.Current.RootFrame.GoBack();
+                App.CurrentInstance.RootFrame.GoBack();
             }
         }
 

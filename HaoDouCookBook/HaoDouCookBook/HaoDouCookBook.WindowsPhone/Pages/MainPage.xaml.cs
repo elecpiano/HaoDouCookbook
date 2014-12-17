@@ -137,18 +137,18 @@ namespace HaoDouCookBook
         {
             if (Utilities.SignedIn())
             {
-                App.Current.RootFrame.Navigate(typeof(PublishProductsPage));
+                App.CurrentInstance.RootFrame.Navigate(typeof(PublishProductsPage));
             }
             else
             {
                 LoginPage.LoginPageParams paras = new LoginPage.LoginPageParams();
-                App.Current.RootFrame.Navigate(typeof(LoginPage));
+                App.CurrentInstance.RootFrame.Navigate(typeof(LoginPage));
             }
         }
 
         private void GotoCateogryPage()
         {
-            App.Current.RootFrame.Navigate(typeof(CategoryPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(CategoryPage));
         }
 
         #endregion

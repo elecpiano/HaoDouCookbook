@@ -134,14 +134,14 @@ namespace HaoDouCookBook.Pages
 
         private void ShowAllRanks_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RankListPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(RankListPage));
         }
         private void RecipeItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
             RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
             paras.RecipeId = sender.GetDataContext<RankViewRecipeItem>().RecipeId;
 
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
         #endregion

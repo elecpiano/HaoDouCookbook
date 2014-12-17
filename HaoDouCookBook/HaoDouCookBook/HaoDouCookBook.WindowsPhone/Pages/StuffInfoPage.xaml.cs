@@ -115,7 +115,7 @@ namespace HaoDouCookBook.Pages
             paras.Id = null;
             paras.TagText = viewModel.StuffName;
 
-            App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(TagsPage), paras);
         }
 
 
@@ -125,7 +125,7 @@ namespace HaoDouCookBook.Pages
             RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
             paras.RecipeId = dataContext.RecipeId;
 
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
         #endregion

@@ -144,21 +144,21 @@ namespace HaoDouCookBook.Pages
             var dataContext = sender.GetDataContext<RecipeTileData>(); 
             RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
             paras.RecipeId = dataContext.RecipeId;
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
         private void personalTags_click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             if(Utilities.SignedIn())
             {
-                App.Current.RootFrame.Navigate(typeof(PersonalTagsPage));
+                App.CurrentInstance.RootFrame.Navigate(typeof(PersonalTagsPage));
             }
             else
             {
                 LoginPage.LoginPageParams paras = new LoginPage.LoginPageParams();
                 paras.SignedInAction = () =>  toast.Show("登录成功");
 
-                App.Current.RootFrame.Navigate(typeof(LoginPage), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(LoginPage), paras);
             }
         }
 

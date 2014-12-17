@@ -73,7 +73,7 @@ namespace HaoDouCookBook.Controls
             paras.ViewModel = dataContext;
             paras.ViewModel.IsInStepOne = false;
 
-            App.Current.RootFrame.Navigate(typeof(PublishRecipePage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(PublishRecipePage), paras);
         }
 
         #endregion

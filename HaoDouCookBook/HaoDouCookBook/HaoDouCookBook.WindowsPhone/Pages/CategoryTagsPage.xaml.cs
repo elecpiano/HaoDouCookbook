@@ -72,7 +72,7 @@ namespace HaoDouCookBook.Pages
             paras.Id = dataContext.Id;
             paras.TagText = dataContext.Name;
 
-            App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(TagsPage), paras);
         }
 
         #endregion

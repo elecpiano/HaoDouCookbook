@@ -88,7 +88,7 @@ namespace HaoDouCookBook.Controls
             AlbumPage.AlbumPageParams paras = new AlbumPage.AlbumPageParams();
             paras.AlbumId = dataContext.AlbumId;
 
-            App.Current.RootFrame.Navigate(typeof(AlbumPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(AlbumPage), paras);
         }
 
         private async void AllDelete_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)

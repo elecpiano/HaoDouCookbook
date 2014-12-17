@@ -188,6 +188,7 @@
                         </ItemsControl>
                     </StackPanel>
                 </StackPanel>
+                <TextBlock Text="意见反馈" Tapped="Feedback_Tapped" Style="{StaticResource FeedbackText_Style}" />
             </StackPanel>
         </ScrollViewer>
         <controls:NetworkLoading x:Name="loading"/>

@@ -98,7 +98,7 @@ namespace HaoDouCookBook.Pages
                 pageParas.CompletedAction.Invoke(step);
             }
 
-            App.Current.RootFrame.GoBack();
+            App.CurrentInstance.RootFrame.GoBack();
         }
 
         #endregion

@@ -122,7 +122,7 @@ namespace HaoDouCookBook.Pages
         private void Notice_Tapped(object sender, TappedRoutedEventArgs e)
         {
             NoticeDetailPage.NoticeDetailPageParams paras = new NoticeDetailPage.NoticeDetailPageParams();
-            App.Current.RootFrame.Navigate(typeof(NoticeDetailPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(NoticeDetailPage), paras);
         }
         private void Message_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -132,7 +132,7 @@ namespace HaoDouCookBook.Pages
             paras.userId = dataContext.UserId;
             paras.UserName = dataContext.UserName;
 
-            App.Current.RootFrame.Navigate(typeof(IMPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(IMPage), paras);
         }
 
         #endregion

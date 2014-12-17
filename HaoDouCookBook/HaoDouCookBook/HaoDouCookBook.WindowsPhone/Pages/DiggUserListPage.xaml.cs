@@ -111,7 +111,7 @@ namespace HaoDouCookBook.Pages
             UserProfilePage.UserProfilePageParams paras = new UserProfilePage.UserProfilePageParams();
             paras.UserId = dataContext.UserId;
 
-            App.Current.RootFrame.Navigate(typeof(UserProfilePage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(UserProfilePage), paras);
         }
 
         #endregion

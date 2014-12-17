@@ -125,14 +125,14 @@ namespace HaoDouCookBook.Pages
             {
                 await Utilities.ShowOKCancelDialog("好豆菜谱", "已经填写的内容将会丢失，您是否要继续离开此页面？", () =>
                 {
-                    App.Current.RootFrame.GoBack();
+                    App.CurrentInstance.RootFrame.GoBack();
                     e.Handled = true;
                 }, null);
                 e.Handled = true;
             }
             else
             {
-                App.Current.RootFrame.GoBack();
+                App.CurrentInstance.RootFrame.GoBack();
                 e.Handled = true;
             }
         }
@@ -280,7 +280,7 @@ namespace HaoDouCookBook.Pages
                 }
             };
 
-            App.Current.RootFrame.Navigate(typeof(AddRecipeStepsPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(AddRecipeStepsPage), paras);
         }
 
        

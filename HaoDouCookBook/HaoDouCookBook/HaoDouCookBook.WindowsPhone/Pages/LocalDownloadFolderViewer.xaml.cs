@@ -72,7 +72,7 @@ namespace HaoDouCookBook.Pages
             RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
             paras.LocalDownloadData = sender.GetDataContext<RecipeInfoPageViewModel>();
 
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
         #endregion

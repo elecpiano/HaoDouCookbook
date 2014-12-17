@@ -90,7 +90,7 @@ namespace HaoDouCookBook.Pages
             RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
             paras.RecipeId = sender.GetDataContext<TagRecipeData>().RecipeId;
 
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
         #endregion

@@ -109,7 +109,7 @@ namespace HaoDouCookBook.Pages
         #region Load More
 
         int page = 1;
-        int limit = 2;
+        int limit = 20;
 
         private ViewModels.Feedback loadMoreControlDataContext = new ViewModels.Feedback() { IsLoadMore = true };
 

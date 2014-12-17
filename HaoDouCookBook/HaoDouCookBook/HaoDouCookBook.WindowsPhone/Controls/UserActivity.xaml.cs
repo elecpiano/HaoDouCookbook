@@ -159,13 +159,13 @@ namespace HaoDouCookBook.Controls
                     RecipeInfoPage.RecipeInfoPageParams para = new RecipeInfoPage.RecipeInfoPageParams();
                     para.RecipeId = dataContext.ProductId;
 
-                    App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), para);
+                    App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), para);
                     break;
                 case 30:
                     SingleProductViewPage.SingleProductViewPageParams p = new SingleProductViewPage.SingleProductViewPageParams();
                     p.ProductId = dataContext.ProductId;
 
-                    App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), p);
+                    App.CurrentInstance.RootFrame.Navigate(typeof(SingleProductViewPage), p);
                     break;
                 default:
                     break;

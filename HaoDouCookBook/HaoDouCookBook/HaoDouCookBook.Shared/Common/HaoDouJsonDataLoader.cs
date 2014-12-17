@@ -61,7 +61,7 @@ namespace HaoDouCookBook.Common
                                 CustomJsonSerializableBase dataObject = t as CustomJsonSerializableBase;
                                 if (dataObject.Deserialize(cachedJson))
                                 {
-                                    App.Current.RunAsync(() =>
+                                    App.CurrentInstance.RunAsync(() =>
                                    {
                                        if (onSuccess != null)
                                        {
@@ -82,7 +82,7 @@ namespace HaoDouCookBook.Common
                                 T dataObject = JsonSerializer.Deserialize<T>(cachedJson);
                                 if (dataObject != null)
                                 {
-                                    App.Current.RunAsync(() =>
+                                    App.CurrentInstance.RunAsync(() =>
                                     {
                                         if (onSuccess != null)
                                         {
@@ -128,7 +128,7 @@ namespace HaoDouCookBook.Common
                             CustomJsonSerializableBase dataObject = t as CustomJsonSerializableBase;
                             if (dataObject.Deserialize(json))
                             {
-                                App.Current.RunAsync(async() =>
+                                App.CurrentInstance.RunAsync(async() =>
                                 {
                                     if (onSuccess != null)
                                     {
@@ -156,7 +156,7 @@ namespace HaoDouCookBook.Common
                             T dataObject = JsonSerializer.Deserialize<T>(json);
                             if (dataObject != null)
                             {
-                                App.Current.RunAsync(async() =>
+                                App.CurrentInstance.RunAsync(async() =>
                                 {
                                     if (onSuccess != null)
                                     {

@@ -187,7 +187,7 @@ namespace HaoDouCookBook.Pages
             paras.TopicId = dataContext.Id;
 
 
-            App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(ArticleViewer), paras);
         }
 
         #endregion

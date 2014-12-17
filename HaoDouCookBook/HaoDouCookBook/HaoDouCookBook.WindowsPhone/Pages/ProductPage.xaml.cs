@@ -178,20 +178,20 @@ namespace HaoDouCookBook.Pages
                 paras.Id = null;
                 paras.TagText = recipeData.Title;
 
-                App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(TagsPage), paras);
             }
             else // if recipeId is not equal to 0, just to RecipeInfoPage
             {
                 RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
                 paras.RecipeId = recipeData.RecipeId;
 
-                App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
             }
         }
 
         private void publish_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(PublishProductsPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(PublishProductsPage));
         }
 
         private void RecipeImage_Tapped(object sender, TappedRoutedEventArgs e)
@@ -200,7 +200,7 @@ namespace HaoDouCookBook.Pages
             SingleProductViewPage.SingleProductViewPageParams paras = new SingleProductViewPage.SingleProductViewPageParams();
             paras.ProductId = recipeData.ProductId;
 
-            App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(SingleProductViewPage), paras);
         }
 
 
@@ -213,7 +213,7 @@ namespace HaoDouCookBook.Pages
             paras.Type = 2;
             paras.Cid = 0;
 
-            App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(CommentListPage), paras);
         }
 
         private void comment_Tapped(object sender, TappedRoutedEventArgs e)

@@ -76,7 +76,7 @@ namespace HaoDouCookBook.Controls
                 RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
                 paras.RecipeId = recipe.Id;
 
-                App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
             }
             else if (dataContext is UserProduct)
             {
@@ -84,7 +84,7 @@ namespace HaoDouCookBook.Controls
                 SingleProductViewPage.SingleProductViewPageParams paras = new SingleProductViewPage.SingleProductViewPageParams();
                 paras.ProductId = product.Id;
 
-                App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(SingleProductViewPage), paras);
             }
         }
 

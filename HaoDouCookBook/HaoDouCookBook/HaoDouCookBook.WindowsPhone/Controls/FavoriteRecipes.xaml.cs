@@ -203,7 +203,7 @@ namespace HaoDouCookBook.Controls
                     RenameAlbum(dataContext.AlbumId, newAlbumName);
                 };
 
-            App.Current.RootFrame.Navigate(typeof(BigTextBox), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(BigTextBox), paras);
         }
 
         #endregion

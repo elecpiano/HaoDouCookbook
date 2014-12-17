@@ -74,7 +74,7 @@ namespace HaoDouCookBook.Controls
             paras.TopicId = dish.Id;
             paras.Type = 1;
 
-            App.Current.RootFrame.Navigate(typeof(ProductPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(ProductPage), paras);
         }
 
         #endregion

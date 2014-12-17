@@ -182,12 +182,12 @@ namespace HaoDouCookBook.Pages
                     pparas.ProductId = pageParams.RecipeId;
                     pparas.TopicId = pageParams.RecipeId;
                     pparas.Type = 3;
-                    App.Current.RootFrame.Navigate(typeof(ProductPage), pparas);
+                    App.CurrentInstance.RootFrame.Navigate(typeof(ProductPage), pparas);
                     break;
                 case 3:
                     RecipeInfoPage.RecipeInfoPageParams rparas = new RecipeInfoPage.RecipeInfoPageParams();
                     rparas.RecipeId = pageParams.RecipeId;
-                    App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), rparas);
+                    App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), rparas);
                     break;
 
             }

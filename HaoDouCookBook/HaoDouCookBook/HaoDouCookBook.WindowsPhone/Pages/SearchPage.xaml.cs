@@ -102,7 +102,7 @@ namespace HaoDouCookBook.Pages
 
         private void ShakenTracking()
         {
-            App.Current.RunAsync(() =>
+            App.CurrentInstance.RunAsync(() =>
                 {
                     // Only do somethings when the pivot item is "摇一摇"
                     //
@@ -121,7 +121,7 @@ namespace HaoDouCookBook.Pages
                             }
                         }
 
-                        App.Current.RootFrame.Navigate(typeof(ShakePage));
+                        App.CurrentInstance.RootFrame.Navigate(typeof(ShakePage));
                     }
                 });
         }
@@ -138,13 +138,13 @@ namespace HaoDouCookBook.Pages
             paras.Keyword = sender.GetDataContext<string>();
             paras.TagId = string.Empty;
 
-            App.Current.RootFrame.Navigate(typeof(SearchResultPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(SearchResultPage), paras);
 
         }
 
         private void Search_AppbarButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(SearchInputPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(SearchInputPage));
         }
 
         #endregion

@@ -97,7 +97,7 @@ namespace HaoDouCookBook.Pages
 
         private void Search_AppbarButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(SearchInputPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(SearchInputPage));
         }
         private void Category_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -115,7 +115,7 @@ namespace HaoDouCookBook.Pages
                     });
                 }
 
-                App.Current.RootFrame.Navigate(typeof(CategoryTagsPage), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(CategoryTagsPage), paras);
             }
         }
         #endregion

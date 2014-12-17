@@ -13,9 +13,9 @@ namespace HaoDouCookBook.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Feedback : BackablePage
+    public sealed partial class FeedbackPage : BackablePage
     {
-        public Feedback()
+        public FeedbackPage()
         {
             this.InitializeComponent();
             this.HaouDouServiceCall.Text = Constants.HAODOU_SERVICE_PHONE_NUMBER_STRING;
@@ -65,7 +65,7 @@ namespace HaoDouCookBook.Pages
 
         private void ShowHistory_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(FeebackHistory));
+            App.CurrentInstance.RootFrame.Navigate(typeof(FeebackHistory));
         }
     }
 }

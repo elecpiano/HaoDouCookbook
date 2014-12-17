@@ -106,7 +106,7 @@ namespace HaoDouCookBook.Pages
 
         private void Publish_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(PublishRecipePage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(PublishRecipePage));
         }
 
         #endregion

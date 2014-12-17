@@ -109,7 +109,7 @@ namespace HaoDouCookBook.Controls
             paras.messageId = string.Empty;
             paras.UserName = UserName;
 
-            App.Current.RootFrame.Navigate(typeof(IMPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(IMPage), paras);
         }
 
         private void Follower_Tapped(object sender, TappedRoutedEventArgs e)
@@ -118,7 +118,7 @@ namespace HaoDouCookBook.Controls
             paras.PageType = UserFollowersPage.PageType.FOLLOW;
             paras.UserId = UserId;
 
-            App.Current.RootFrame.Navigate(typeof(UserFollowersPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(UserFollowersPage), paras);
         }
 
         private void Fans_Tapped(object sender, TappedRoutedEventArgs e)
@@ -127,7 +127,7 @@ namespace HaoDouCookBook.Controls
             paras.PageType = UserFollowersPage.PageType.FANS;
             paras.UserId = UserId;
 
-            App.Current.RootFrame.Navigate(typeof(UserFollowersPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(UserFollowersPage), paras);
 
         }
 
@@ -157,7 +157,7 @@ namespace HaoDouCookBook.Controls
 
         private void Personal_click(object sender, RoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(PersonalInfoPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(PersonalInfoPage));
         }
 
         #endregion

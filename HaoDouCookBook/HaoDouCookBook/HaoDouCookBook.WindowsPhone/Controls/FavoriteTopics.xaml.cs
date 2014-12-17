@@ -92,7 +92,7 @@ namespace HaoDouCookBook.Controls
             paras.Url = dataContext.Url;
             paras.TopicId = dataContext.TopicId;
 
-            App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(ArticleViewer), paras);
         }
 
         private void Topic_Holding(object sender, HoldingRoutedEventArgs e)

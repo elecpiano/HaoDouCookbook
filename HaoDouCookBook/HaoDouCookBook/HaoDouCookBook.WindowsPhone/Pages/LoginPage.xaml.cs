@@ -61,7 +61,7 @@ namespace HaoDouCookBook.Pages
 
         private void register_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(SignupPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(SignupPage));
         }
 
         private async void Login_Click(object sender, RoutedEventArgs e)
@@ -88,7 +88,7 @@ namespace HaoDouCookBook.Pages
                         SignedInAction.Invoke();
                     }
 
-                    App.Current.RootFrame.GoBack();
+                    App.CurrentInstance.RootFrame.GoBack();
 
                 }, error =>
                 {

@@ -160,7 +160,7 @@ namespace HaoDouCookBook.Pages
             paras.Keyword = keyword;
             paras.TagId = string.Empty;
 
-            App.Current.RootFrame.Navigate(typeof(SearchResultPage), paras); 
+            App.CurrentInstance.RootFrame.Navigate(typeof(SearchResultPage), paras); 
         }
 
         #endregion

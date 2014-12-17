@@ -41,7 +41,7 @@ namespace HaoDouCookBook.Pages
                 LocalDownloadFolderViewer.LocalDownloadFolderViewerParams paras = new LocalDownloadFolderViewer.LocalDownloadFolderViewerParams();
                 paras.ViewModel = folder;
 
-                App.Current.RootFrame.Navigate(typeof(LocalDownloadFolderViewer), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(LocalDownloadFolderViewer), paras);
             };
 
             locadDownloadControl.CreatNewAction = () =>
@@ -62,7 +62,7 @@ namespace HaoDouCookBook.Pages
                     LocalDownloads.Instance.CommitData();
                 };
 
-                App.Current.RootFrame.Navigate(typeof(BigTextBox), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(BigTextBox), paras);
             };
         }
     }

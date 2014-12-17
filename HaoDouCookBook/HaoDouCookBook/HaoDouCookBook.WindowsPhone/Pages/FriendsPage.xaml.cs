@@ -122,7 +122,7 @@ namespace HaoDouCookBook.Pages
             paras.UserId = UserGlobal.Instance.GetInt32UserId();
             paras.PageType = UserFollowersPage.PageType.FANS;
 
-            App.Current.RootFrame.Navigate(typeof(UserFollowersPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(UserFollowersPage), paras);
             e.Handled = true;
         }
         private void Friend_Tapped(object sender, TappedRoutedEventArgs e)
@@ -131,7 +131,7 @@ namespace HaoDouCookBook.Pages
             UserProfilePage.UserProfilePageParams paras = new UserProfilePage.UserProfilePageParams();
             paras.UserId = dataContext.UserId;
 
-            App.Current.RootFrame.Navigate(typeof(UserProfilePage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(UserProfilePage), paras);
         }
 
         #endregion

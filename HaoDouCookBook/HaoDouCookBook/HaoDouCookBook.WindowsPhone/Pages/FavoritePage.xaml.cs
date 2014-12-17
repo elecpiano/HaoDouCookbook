@@ -54,7 +54,7 @@ namespace HaoDouCookBook.Pages
                 paras.AlbumId = album.AlbumId;
                 paras.Title = album.AlbumName;
 
-                App.Current.RootFrame.Navigate(typeof(FavoriteRecipeAlbumPage), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(FavoriteRecipeAlbumPage), paras);
             };
 
             favoriteRecipesAlubm.CreateNewAlubmTapped = ()=>
@@ -64,7 +64,7 @@ namespace HaoDouCookBook.Pages
                 paras.PlaceholderText = "输入分类名称，最多20个字符";
                 paras.ConfirmAction = CreateNewAlbum;
 
-                App.Current.RootFrame.Navigate(typeof(BigTextBox), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(BigTextBox), paras);
             };
 
 

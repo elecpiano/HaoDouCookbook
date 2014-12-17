@@ -50,7 +50,7 @@ namespace Shared.Utility
                         T obj = JsonSerializer.Deserialize<T>(cachedJson);
                         if (obj != null)
                         {
-                            App.Current.RunAsync(() =>
+                            App.CurrentInstance.RunAsync(() =>
                             {
                                 onCallback(obj);
                             });
@@ -95,7 +95,7 @@ namespace Shared.Utility
                     T obj = JsonSerializer.Deserialize<T>(json);
                     if (obj != null)
                     {
-                        App.Current.RunAsync(() =>
+                        App.CurrentInstance.RunAsync(() =>
                         {
                             onCallback(obj);
                         });
@@ -161,7 +161,7 @@ namespace Shared.Utility
                         JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(cachedJson);
                         if (wrapper != null && wrapper.data != null)
                         {
-                            App.Current.RunAsync(() =>
+                            App.CurrentInstance.RunAsync(() =>
                             {
                                 onCallback(wrapper.data);
                             });
@@ -206,7 +206,7 @@ namespace Shared.Utility
                     JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(json);
                     if (wrapper != null && wrapper.data != null)
                     {
-                        App.Current.RunAsync(() =>
+                        App.CurrentInstance.RunAsync(() =>
                         {
                             onCallback(wrapper.data);
                         });
@@ -279,7 +279,7 @@ namespace Shared.Utility
                         JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
                         if (wrapper != null && wrapper.data != null)
                         {
-                           App.Current.RunAsync(() =>
+                           App.CurrentInstance.RunAsync(() =>
                             {
                                 List<T> list = new List<T>();
                                 for (int i = 0; i < wrapper.data.Length; i++)
@@ -327,7 +327,7 @@ namespace Shared.Utility
                     JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(json);
                     if (wrapper != null && wrapper.data != null)
                     {
-                        App.Current.RunAsync(() =>
+                        App.CurrentInstance.RunAsync(() =>
                         {
                             List<T> list = new List<T>();
                             for (int i = 0; i < wrapper.data.Length; i++)
@@ -391,7 +391,7 @@ namespace Shared.Utility
                             JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
                             if (wrapper != null && wrapper.data != null)
                             {
-                                App.Current.RunAsync(() =>
+                                App.CurrentInstance.RunAsync(() =>
                                 {
                                     _LoadedList.Clear();
                                     for (int i = 0; i < wrapper.data.Length; i++)
@@ -440,7 +440,7 @@ namespace Shared.Utility
                     JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(json);
                     if (wrapper != null && wrapper.data != null)
                     {
-                        App.Current.RunAsync(() =>
+                        App.CurrentInstance.RunAsync(() =>
                         {
                             List<T> list = new List<T>();
                             for (int i = 0; i < wrapper.data.Length; i++)

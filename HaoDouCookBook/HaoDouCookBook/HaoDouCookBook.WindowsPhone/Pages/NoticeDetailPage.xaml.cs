@@ -177,7 +177,7 @@ namespace HaoDouCookBook.Pages
                     paras3.NoticeType = dataContext.Type;
                     paras3.SourcePage = CommentListPage.SourcePage.NOTICE_PAGE;
 
-                    App.Current.RootFrame.Navigate(typeof(CommentListPage), paras3);
+                    App.CurrentInstance.RootFrame.Navigate(typeof(CommentListPage), paras3);
 
                     break;
                 case 101:
@@ -188,14 +188,14 @@ namespace HaoDouCookBook.Pages
                     paras101.NoticeType = dataContext.Type;
                     paras101.Cid = 0;
                     paras101.SourcePage = CommentListPage.SourcePage.NOTICE_PAGE;
-                    App.Current.RootFrame.Navigate(typeof(CommentListPage), paras101);
+                    App.CurrentInstance.RootFrame.Navigate(typeof(CommentListPage), paras101);
                     break;
                 case 103:
                     ProductPage.ProductPageParams pparas = new ProductPage.ProductPageParams();
                     pparas.ProductId = dataContext.ContentId;
                     pparas.TopicId = dataContext.ContentId;
                     pparas.Type = 3;
-                    App.Current.RootFrame.Navigate(typeof(ProductPage), pparas);
+                    App.CurrentInstance.RootFrame.Navigate(typeof(ProductPage), pparas);
                     break;
                 default:
                     break;

@@ -110,7 +110,7 @@ namespace HaoDouCookBook.Pages
             RankViewPage.RankViewPageParams paras = new RankViewPage.RankViewPageParams();
             paras.Id = rankItemData.Id;
             paras.Type = rankItemData.Type;
-            App.Current.RootFrame.Navigate(typeof(RankViewPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(RankViewPage), paras);
         }
 
         #endregion

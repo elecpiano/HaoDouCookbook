@@ -167,14 +167,14 @@ namespace HaoDouCookBook.Pages
                 paras.Id = null;
                 paras.TagText = viewModel.RecipeName;
 
-                App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(TagsPage), paras);
             }
             else // if recipeId is not equal to 0, just to RecipeInfoPage
             {
                 RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
                 paras.RecipeId = viewModel.RecipeId;
 
-                App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
             }
         }
 
@@ -185,7 +185,7 @@ namespace HaoDouCookBook.Pages
             paras.TopicId = viewModel.TopicId;
             paras.Type = 1;
 
-            App.Current.RootFrame.Navigate(typeof(ProductPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(ProductPage), paras);
         }
 
         private void DiggCount_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)

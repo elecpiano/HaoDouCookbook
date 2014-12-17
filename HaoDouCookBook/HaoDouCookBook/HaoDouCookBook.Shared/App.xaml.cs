@@ -20,7 +20,7 @@ namespace HaoDouCookBook
     /// </summary>
     public sealed partial class App : Application
     {
-        public static App Current
+        public static App CurrentInstance
         {
             get;
             private set;
@@ -60,7 +60,7 @@ namespace HaoDouCookBook
             this.UnhandledException += App_UnhandledException;
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
 
-            Current = this;
+            CurrentInstance = this;
             Shared.Utility.NetworkHelper.Current.StartListening();
         }
 

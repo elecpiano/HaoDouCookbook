@@ -146,14 +146,14 @@ namespace HaoDouCookBook.Pages
                     RecipeInfoPage.RecipeInfoPageParams para = new RecipeInfoPage.RecipeInfoPageParams();
                     para.RecipeId = dataContext.ProductId;
 
-                    App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), para);
+                    App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), para);
                     break;
                 case 130:
                 case 30:
                     SingleProductViewPage.SingleProductViewPageParams p = new SingleProductViewPage.SingleProductViewPageParams();
                     p.ProductId = dataContext.ProductId;
 
-                    App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), p);
+                    App.CurrentInstance.RootFrame.Navigate(typeof(SingleProductViewPage), p);
                     break;
                 default:
                     break;
@@ -166,7 +166,7 @@ namespace HaoDouCookBook.Pages
             DiggUserListPage.DiggUserListPageParams paras = new DiggUserListPage.DiggUserListPageParams();
             paras.ActivityId = dataContext.ActivityId;
 
-            App.Current.RootFrame.Navigate(typeof(DiggUserListPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(DiggUserListPage), paras);
 
         }
         
@@ -275,7 +275,7 @@ namespace HaoDouCookBook.Pages
             paras.Type = 4;
             paras.RecipeId = dataContext.ActivityId;
 
-            App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(CommentListPage), paras);
             e.Handled = true;
         }
 

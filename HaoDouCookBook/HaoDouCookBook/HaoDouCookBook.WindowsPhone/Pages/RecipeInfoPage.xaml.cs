@@ -279,7 +279,7 @@ namespace HaoDouCookBook.Pages
                 StuffInfoPage.StuffInfoPageParams paras = new StuffInfoPage.StuffInfoPageParams();
                 paras.Id = dataContext.Id;
                 paras.Title = dataContext.Name;
-                App.Current.RootFrame.Navigate(typeof(StuffInfoPage), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(StuffInfoPage), paras);
             }
         }
 
@@ -321,7 +321,7 @@ namespace HaoDouCookBook.Pages
             paras.TopicId = viewModel.RecipeId;
             paras.Type = 2;
 
-            App.Current.RootFrame.Navigate(typeof(ProductPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(ProductPage), paras);
         }
 
         private void SingleProduct_Tapped(object sender, TappedRoutedEventArgs e)
@@ -331,7 +331,7 @@ namespace HaoDouCookBook.Pages
             var dataContext = sender.GetDataContext<ViewModels.Product>();
             paras.ProductId = dataContext.ProductId;
 
-            App.Current.RootFrame.Navigate(typeof(SingleProductViewPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(SingleProductViewPage), paras);
         }
 
         private void Tags_Tapped(object sender, TappedRoutedEventArgs e)
@@ -341,7 +341,7 @@ namespace HaoDouCookBook.Pages
             paras.TagText = dataContext.Text;
             paras.Id = dataContext.Id;
 
-            App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(TagsPage), paras);
         }
 
         private void ShowAllComment_Tapped(object sender, TappedRoutedEventArgs e)
@@ -351,7 +351,7 @@ namespace HaoDouCookBook.Pages
             paras.Type = 0;
             paras.Cid = 0;
 
-            App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(CommentListPage), paras);
         }
 
         #endregion
@@ -432,7 +432,7 @@ namespace HaoDouCookBook.Pages
                     dialog.ShowAsync();
                 };
 
-                App.Current.RootFrame.Navigate(typeof(BigTextBox), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(BigTextBox), paras);
             };
 
             await dialog.ShowAsync();

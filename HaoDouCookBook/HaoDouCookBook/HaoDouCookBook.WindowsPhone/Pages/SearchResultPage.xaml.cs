@@ -148,7 +148,7 @@ namespace HaoDouCookBook.Pages
 
         private void Search_AppbarButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(SearchInputPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(SearchInputPage));
         }
 
         private void Stuff_Tapped(object sender, TappedRoutedEventArgs e)
@@ -157,7 +157,7 @@ namespace HaoDouCookBook.Pages
             paras.Title = viewModel.Food.FoodName;
             paras.Id = viewModel.Food.FoodId;
 
-            App.Current.RootFrame.Navigate(typeof(StuffInfoPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(StuffInfoPage), paras);
         }
 
         private void RecipeItem_Tapped(object sender, TappedRoutedEventArgs e)
@@ -167,7 +167,7 @@ namespace HaoDouCookBook.Pages
             RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
             paras.RecipeId = dataContext.RecipeId;
 
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
         private void AlbumItem_Tapped(object sender, TappedRoutedEventArgs e)
@@ -175,7 +175,7 @@ namespace HaoDouCookBook.Pages
             AlbumPage.AlbumPageParams paras = new AlbumPage.AlbumPageParams();
             paras.AlbumId = viewModel.Album.AlbumId;
 
-            App.Current.RootFrame.Navigate(typeof(AlbumPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(AlbumPage), paras);
         }
 
         private void TopicItem_Tapped(object sender, TappedRoutedEventArgs e)
@@ -184,7 +184,7 @@ namespace HaoDouCookBook.Pages
             paras.Url = viewModel.Topic.Url;
             paras.TopicId = viewModel.Topic.Id;
 
-            App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(ArticleViewer), paras);
         }
 
         private void ShowAllRecipes_Tapped(object sender, TappedRoutedEventArgs e)
@@ -193,7 +193,7 @@ namespace HaoDouCookBook.Pages
             tagPageParams.TagText = paras.Keyword;
             tagPageParams.FromPage = TagsPage.SourcePage.SEARCH_RESULT;
 
-            App.Current.RootFrame.Navigate(typeof(TagsPage), tagPageParams);
+            App.CurrentInstance.RootFrame.Navigate(typeof(TagsPage), tagPageParams);
         }
 
         private void ShowAllAlbums_tapped(object sender, TappedRoutedEventArgs e)
@@ -201,7 +201,7 @@ namespace HaoDouCookBook.Pages
             AlbumListPage.AlbumListPageParams albumListPageParas = new AlbumListPage.AlbumListPageParams();
             albumListPageParas.Keyword = paras.Keyword;
 
-            App.Current.RootFrame.Navigate(typeof(AlbumListPage), albumListPageParas);
+            App.CurrentInstance.RootFrame.Navigate(typeof(AlbumListPage), albumListPageParas);
         }
 
        
@@ -212,7 +212,7 @@ namespace HaoDouCookBook.Pages
             topicListPageParams.CategoryName = paras.Keyword;
             topicListPageParams.SourcePage = TopicListPage.SourcePage.SEARCH_RESULT;
 
-            App.Current.RootFrame.Navigate(typeof(TopicListPage), topicListPageParams);
+            App.CurrentInstance.RootFrame.Navigate(typeof(TopicListPage), topicListPageParams);
         }
 
         #endregion

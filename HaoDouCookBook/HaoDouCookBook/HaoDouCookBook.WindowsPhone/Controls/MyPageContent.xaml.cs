@@ -66,14 +66,14 @@ namespace HaoDouCookBook.Controls
 
         private void PublishRecipe_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(PublishRecipePage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(PublishRecipePage));
         }
 
         private void GotoLogin_Tapped(object sender, TappedRoutedEventArgs e)
         {
             LoginPage.LoginPageParams paras = new LoginPage.LoginPageParams();
             paras.SignedInAction = () => toast.Show("登录成功");
-            App.Current.RootFrame.Navigate(typeof(LoginPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(LoginPage), paras);
         }
 
         private void SimpleSettingItem_Tapped(object sender, TappedRoutedEventArgs e)
@@ -89,7 +89,7 @@ namespace HaoDouCookBook.Controls
             UserProfilePage.UserProfilePageParams paras = new UserProfilePage.UserProfilePageParams();
             paras.UserId = int.Parse(UserGlobal.Instance.UserInfo.UserId);
 
-            App.Current.RootFrame.Navigate(typeof(UserProfilePage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(UserProfilePage), paras);
         }
 
 
@@ -146,59 +146,59 @@ namespace HaoDouCookBook.Controls
 
         private void GotoLocalDownloadsPage()
         {
-            App.Current.RootFrame.Navigate(typeof(LocalDownloadPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(LocalDownloadPage));
         }
 
         private void GotoMyProductsPage()
         {
-            App.Current.RootFrame.Navigate(typeof(MyProductPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(MyProductPage));
         }
 
         private void GotoDraftsPage()
         {
-            App.Current.RootFrame.Navigate(typeof(MyDraftPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(MyDraftPage));
         }
 
 
         private void GotoMyRecipesPage()
         {
-            App.Current.RootFrame.Navigate(typeof(MyRecipesPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(MyRecipesPage));
         }
 
         private void GotoFriendsCirclePage()
         {
-            App.Current.RootFrame.Navigate(typeof(FriendsCirclePage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(FriendsCirclePage));
 
         }
 
         private void GotoFavoritePage()
         {
-            App.Current.RootFrame.Navigate(typeof(FavoritePage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(FavoritePage));
         }
 
         private void GotoFriendsPage()
         {
-            App.Current.RootFrame.Navigate(typeof(FriendsPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(FriendsPage));
         }
 
         private void GotoMessagePage()
         {
-            App.Current.RootFrame.Navigate(typeof(MessagePage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(MessagePage));
         }
 
         private void GotoAdRecommendationPage()
         {
-            App.Current.RootFrame.Navigate(typeof(AdRecommendationPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(AdRecommendationPage));
         }
 
         private void GotoShoppingListPage()
         {
-            App.Current.RootFrame.Navigate(typeof(ShoppingListPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(ShoppingListPage));
         }
 
         private void GotoSettingsPage()
         {
-            App.Current.RootFrame.Navigate(typeof(UserSettings), "设置");
+            App.CurrentInstance.RootFrame.Navigate(typeof(UserSettings), "设置");
         }
 
         #endregion

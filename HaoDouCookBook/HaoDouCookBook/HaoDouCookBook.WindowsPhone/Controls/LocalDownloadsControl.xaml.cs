@@ -71,7 +71,7 @@ namespace HaoDouCookBook.Controls
                 LocalDownloads.Instance.CommitData();
             };
 
-            App.Current.RootFrame.Navigate(typeof(BigTextBox), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(BigTextBox), paras);
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

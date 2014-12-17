@@ -157,7 +157,7 @@ namespace HaoDouCookBook.Pages
             RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
             paras.RecipeId = dataContext.RecipeId;
 
-            App.Current.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
         }
 
         private void Comments_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -167,7 +167,7 @@ namespace HaoDouCookBook.Pages
                 CommentListPage.CommentListPageParams paras = new CommentListPage.CommentListPageParams();
                 paras.RecipeId = pageParams.AlbumId;
 
-                App.Current.RootFrame.Navigate(typeof(CommentListPage), paras);
+                App.CurrentInstance.RootFrame.Navigate(typeof(CommentListPage), paras);
             }
         }
 
@@ -190,7 +190,7 @@ namespace HaoDouCookBook.Pages
 
         private void ShowAllAlbums_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(AllAlbumListPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(AllAlbumListPage));
         }
 
 

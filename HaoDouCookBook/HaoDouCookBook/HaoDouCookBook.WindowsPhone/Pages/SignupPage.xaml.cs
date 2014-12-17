@@ -48,7 +48,7 @@ namespace HaoDouCookBook.Pages
 
         private void GotoLogin_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(LoginPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(LoginPage));
         }
 
 
@@ -72,7 +72,7 @@ namespace HaoDouCookBook.Pages
 
                         MainPage.MainPageParams paras = new MainPage.MainPageParams();
                         paras.PivotIndex = 3;
-                        App.Current.RootFrame.Navigate(typeof(MainPage), paras);
+                        App.CurrentInstance.RootFrame.Navigate(typeof(MainPage), paras);
                     }
                 },
                 error =>
@@ -155,7 +155,7 @@ namespace HaoDouCookBook.Pages
                     if(success.Message.Contains("成功"))
                     {
                         toast.Show(Constants.PHONE_CODE_HAVE_SENT);
-                        App.Current.RunAsync(() => {
+                        App.CurrentInstance.RunAsync(() => {
                             this.phoneRegStepOne.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                             this.phoneRegStepTwo.Visibility = Windows.UI.Xaml.Visibility.Visible;
                         });
@@ -218,7 +218,7 @@ namespace HaoDouCookBook.Pages
 
                     MainPage.MainPageParams paras = new MainPage.MainPageParams();
                     paras.PivotIndex = 3;
-                    App.Current.RootFrame.Navigate(typeof(MainPage), paras);
+                    App.CurrentInstance.RootFrame.Navigate(typeof(MainPage), paras);
                 },
                 error =>
                 {

@@ -116,7 +116,7 @@ namespace HaoDouCookBook.Controls
             paras.CategoryId = int.Parse(dataContext.Id);
             paras.CategoryName = dataContext.Title;
 
-            App.Current.RootFrame.Navigate(typeof(TopicListPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(TopicListPage), paras);
         }
 
         private void TopicTile_Tapped(object sender, TappedRoutedEventArgs e)
@@ -126,7 +126,7 @@ namespace HaoDouCookBook.Controls
             paras.Url = dataContext.Url;
             paras.TopicId = dataContext.Id;
 
-            App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(ArticleViewer), paras);
         }
 
         #endregion

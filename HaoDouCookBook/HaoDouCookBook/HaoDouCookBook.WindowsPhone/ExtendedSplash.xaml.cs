@@ -71,7 +71,7 @@ namespace HaoDouCookBook
 
             // Place the frame in the current Window
             Window.Current.Content = rootFrame;
-            App.Current.RootFrame = rootFrame;
+            App.CurrentInstance.RootFrame = rootFrame;
 
         }
 

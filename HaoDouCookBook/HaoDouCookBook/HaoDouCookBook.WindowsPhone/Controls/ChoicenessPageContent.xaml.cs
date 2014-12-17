@@ -210,7 +210,7 @@ namespace HaoDouCookBook.Controls
 
         private void rankListMore_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RankListPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(RankListPage));
         }
 
         private void Tag_Tapped(object sender, TappedRoutedEventArgs e)
@@ -220,7 +220,7 @@ namespace HaoDouCookBook.Controls
             paras.Id = dataContext.Id;
             paras.TagText = dataContext.Text;
 
-            App.Current.RootFrame.Navigate(typeof(TagsPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(TagsPage), paras);
 
         }
 
@@ -231,7 +231,7 @@ namespace HaoDouCookBook.Controls
             paras.Id = dataContext.Id;
             paras.Title = dataContext.Title;
 
-            App.Current.RootFrame.Navigate(typeof(RecipeCategoryDetailPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(RecipeCategoryDetailPage), paras);
         }
 
         private void JustToWebPageRecipeTile_Tapped(object sender, TappedRoutedEventArgs e)
@@ -249,7 +249,7 @@ namespace HaoDouCookBook.Controls
 
                 string haodouUrlPrefix = string.Format("haodourecipe://haodou.com/wiki/info/?id={0}&url=", tiledata.Id);
                 string targetUrl = tiledata.Url.Substring(index + searchMark.Length);
-                App.Current.RootFrame.Navigate(typeof(ArticleViewer), new ArticleViewer.ArticleViewerPageParams() { Url = targetUrl, TopicId = tiledata.Id });
+                App.CurrentInstance.RootFrame.Navigate(typeof(ArticleViewer), new ArticleViewer.ArticleViewerPageParams() { Url = targetUrl, TopicId = tiledata.Id });
             }
 
         }
@@ -261,7 +261,7 @@ namespace HaoDouCookBook.Controls
             paras.Id = rankItemData.Id;
             paras.Type = rankItemData.Type;
 
-            App.Current.RootFrame.Navigate(typeof(RankViewPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(RankViewPage), paras);
         }
 
         private void SpecialRecipeAlbum_Tapped(object sender, TappedRoutedEventArgs e)
@@ -269,12 +269,12 @@ namespace HaoDouCookBook.Controls
             var dataContext = sender.GetDataContext<SpecialRecipeAlbumData>();
             AlbumPage.AlbumPageParams paras = new AlbumPage.AlbumPageParams();
             paras.AlbumId = dataContext.Id;
-            App.Current.RootFrame.Navigate(typeof(AlbumPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(AlbumPage), paras);
         }
 
         private void searchBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(SearchPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(SearchPage));
         }
 
         private void Ad_Tapped(object sender, TappedRoutedEventArgs e)
@@ -284,10 +284,17 @@ namespace HaoDouCookBook.Controls
             ArticleViewer.ArticleViewerPageParams paras = new ArticleViewer.ArticleViewerPageParams();
             paras.Url = dataContext.Url;
 
-            App.Current.RootFrame.Navigate(typeof(ArticleViewer), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(ArticleViewer), paras);
+        }
+
+        private void Feedback_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.CurrentInstance.RootFrame.Navigate(typeof(FeedbackPage));
         }
 
         #endregion
+
+       
 
     }
 }

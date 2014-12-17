@@ -1108,4 +1108,12 @@
         <Setter Property="Margin" Value="47, 15, 0, 15"/>
         <Setter Property="Foreground" Value="Gray"/>
     </Style>
+
+    <Style x:Key="FeedbackText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="FontSize"  Value="19"/>
+        <Setter Property="Margin" Value="0, 40"/>
+        <Setter Property="Foreground" Value="#303030"/>
+    </Style>
 </ResourceDictionary>

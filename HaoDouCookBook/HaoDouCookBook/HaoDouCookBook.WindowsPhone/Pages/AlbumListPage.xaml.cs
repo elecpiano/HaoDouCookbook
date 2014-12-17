@@ -128,7 +128,7 @@ namespace HaoDouCookBook.Pages
             AlbumPage.AlbumPageParams paras = new AlbumPage.AlbumPageParams();
             paras.AlbumId = dataContext.AlbumId;
 
-            App.Current.RootFrame.Navigate(typeof(AlbumPage), paras);
+            App.CurrentInstance.RootFrame.Navigate(typeof(AlbumPage), paras);
 
         }
 
