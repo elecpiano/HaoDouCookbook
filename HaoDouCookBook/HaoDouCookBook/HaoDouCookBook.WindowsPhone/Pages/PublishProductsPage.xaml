@@ -1,0 +1,69 @@
+﻿<controls:BackablePage
+    x:Class="HaoDouCookBook.Pages.PublishProductsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls" 
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <controls:BackablePage.BottomAppBar>
+        <CommandBar Style="{StaticResource bottomAppbarStyle}">
+            <AppBarButton Icon="Send" Label="发布" Click="publish_click"/>
+        </CommandBar>
+    </controls:BackablePage.BottomAppBar>
+
+    <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Text="发布作品" Style="{StaticResource SubTitleStyle}"/>
+        </Border>
+        <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
+            <StackPanel Margin="20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Width="100" Height="120" HorizontalAlignment="Left" Tapped="Cover_Tapped">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding Cover, Converter={StaticResource imageToDefaultConverter}, ConverterParameter=small}" AlignmentY="Center" Stretch="UniformToFill"/>
+                        </Border.Background>
+                    </Border>
+                    <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBox Text="{Binding Intro, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" PlaceholderText="描述您的美味, 分享快乐" Style="{StaticResource TextBoxBase}" TextWrapping="Wrap" AcceptsReturn="True" HorizontalAlignment="Left" Width="235"/>
+                        <Image Source="../assets/images/TextBoxGreenLine.png" Height="6"/>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Orientation="Vertical">
+                    <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" PlaceholderText="输入作品名更容易被发现" Style="{StaticResource TextBoxBase}" TextWrapping="Wrap" AcceptsReturn="True" HorizontalAlignment="Left" Width="350"/>
+                    <Image Source="../assets/images/TextBoxGreenLine.png" Height="6"/>
+                </StackPanel>
+
+                <ItemsControl ItemsSource="{Binding Tags}" Margin="0, 20">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <controls:UniversalWrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:TagControl Text="{Binding Text}" Selected="{Binding Selected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0, 0, 10, 10"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 60, 0, 0"/>
+                <StackPanel Orientation="Horizontal" Margin=" 0, 20">
+                    <TextBlock Text="分享到：" Foreground="Gray" FontSize="21" VerticalAlignment="Center" Margin="0, 5, 0, 0"/>
+                    <Image Source="../assets/images/sina_gray.png" Stretch="None" Margin="10, 0, 0, 0"/>
+                    <Image Source="../assets/images/qq_gray.png" Stretch="None" Margin="15, 0, 0, 0"/>
+                </StackPanel>
+            </StackPanel>
+
+        </ScrollViewer>
+        <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/>
+    </Grid>
+</controls:BackablePage>

@@ -1,0 +1,94 @@
+﻿<UserControl
+    x:Class="HaoDouCookBook.Controls.UserProfileSummary"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:HaoDouCookBook.Common"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid x:Name="root">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left" Margin="0, 0, 0, 20">
+            <Border Height="100" Width="100">
+                <Ellipse>
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding Avatar}"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Border>
+            <StackPanel Orientation="Vertical" Margin="50, 0, 0, 0">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" Background="Transparent" Tapped="Follower_Tapped">
+                        <TextBlock Text="{Binding FollowCount, Converter={StaticResource countToDescConverter}}" Style="{StaticResource UserProfileSummary_PropretyValue_Style}"/>
+                        <TextBlock Text="关注" Style="{StaticResource UserProfileSummary_PropertyName_Style}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="35, 0, 0, 0" Background="Transparent" Tapped="Fans_Tapped">
+                        <TextBlock Text="{Binding FansCount, Converter={StaticResource countToDescConverter}}" Style="{StaticResource UserProfileSummary_PropretyValue_Style}"/>
+                        <TextBlock Text="粉丝" Style="{StaticResource UserProfileSummary_PropertyName_Style}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="35, 0, 0, 0">
+                        <TextBlock Text="{Binding Coin, Converter={StaticResource countToDescConverter}}"  Style="{StaticResource UserProfileSummary_PropretyValue_Style}"/>
+                        <TextBlock Text="豆币" Style="{StaticResource UserProfileSummary_PropertyName_Style}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="-30, 5, 0, 0">
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding UserId, Converter={StaticResource notSignedInUserIdToVisibilityConverter}}">
+                        <Button x:Name="follow" Click="follow_Click" Width="124" Visibility="{Binding CanFollow, Converter={StaticResource AnythingToVisiblityConverter}}">
+                            <Button.Content>
+                                <TextBlock Text="+关注" FontWeight="Normal" Margin="10, 2"/>
+                            </Button.Content>
+                        </Button>
+
+                        <Button x:Name="unFollow" Click="unFollow_Click" Width="124" Foreground="White" Background="{StaticResource DarkerGreenMain}"
+                                Visibility="{Binding CanFollow, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
+                            <Button.Content>
+                                <TextBlock Text="已关注" FontWeight="Normal" Margin="10, 2"/>
+                            </Button.Content> 
+                        </Button>
+
+                        <Button x:Name="chat" Width="124" Click="Chat_click">
+                            <Button.Content>
+                                <TextBlock Text="聊天" FontWeight="Normal" Margin="15, 2"/>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding UserId, Converter={StaticResource signedInUserIdToVisibilityConverter}}">
+                        <Button x:Name="checkin" Width="124" Tapped="checkIn_Tapped"
+                                Visibility="{Binding CheckIn, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
+                            <Button.Content>
+                                <TextBlock Text="签到" FontWeight="Normal" Margin="15, 2"/>
+                            </Button.Content>
+                        </Button>
+
+                        <Button x:Name="checkedIn" Width="124" BorderBrush="Gray" BorderThickness="2" Background="Transparent" Foreground="Gray" IsEnabled="False"
+                                Visibility="{Binding CheckIn, Converter={StaticResource AnythingToVisiblityConverter}}">
+                            <Button.Content>
+                                <TextBlock Text="已签到" FontWeight="Normal" Margin="15, 2"/>
+                            </Button.Content>
+                        </Button>
+
+                        <Button x:Name="personal" Width="124" Click="Personal_click">
+                            <Button.Content>
+                                <TextBlock Text="个人" FontWeight="Normal" Margin="15, 2"/>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                    
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <Border Grid.Row="1" >
+            <TextBlock Text="{Binding UserIntro}" Style="{StaticResource UserProfieSummary_Intro_Style}"/>
+        </Border>
+
+    </Grid>
+</UserControl>

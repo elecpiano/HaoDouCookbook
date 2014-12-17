@@ -1,0 +1,86 @@
+﻿<controls:BackablePage
+    x:Class="HaoDouCookBook.Pages.TagsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls ="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"    xmlns:shared="using:Shared.Utility"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Style="{StaticResource SubTitleStyle}"/>
+        </Border>
+        <ScrollViewer Name="rootScrollViewer" Margin="0, 110, 0, 0" Background="White">
+            <StackPanel Orientation="Vertical">
+                <Border Style="{StaticResource SearchResultPage_SectionTitleBackground_Style}" Visibility="{Binding Count, Converter={StaticResource AnythingToVisiblityConverter}}">
+                    <TextBlock Style="{StaticResource SearchResultPage_SectionTitle_style}">
+                        全部<Run Text="{Binding Count}" Foreground="{StaticResource GreenMain}"/>道菜谱
+                    </TextBlock>
+                </Border>
+                <StackPanel Orientation="Vertical" Margin="0, 20, 0, 0" Tapped="Food_Tapped"
+                            Visibility="{Binding Food.FoodName, Converter={StaticResource AnythingToVisiblityConverter}}">
+                    <Grid Margin="20, 0, 20, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="35"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding Food.FoodCover}" Grid.Column="0" Style="{StaticResource TagsPage_FoodCover_Style}"/>
+                        <TextBlock Text="{Binding Food.FoodName}" Grid.Column="1" Style="{StaticResource TagsPage_FoodName_Style}"/>
+                        <TextBlock Text="{Binding Food.FoodIntro}" Grid.Column="1" Style="{StaticResource TagsPage_FoodIntro_Style}"/>
+                        <Image Source="../assets/images/mypage/more.png" Grid.Column="2"/>
+                    </Grid>
+                    <Rectangle Style="{StaticResource GrayLine}" Width="800" />
+                </StackPanel>
+
+                <ItemsControl Name="recipeList" ItemsSource="{Binding Recipes}" Margin="20, 20, 20, 20">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                                <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Vertical" Background="Transparent" Tapped="Recipe_Tapped">
+                                                    <controls:TagRecipeItem Margin="0, 0, 10, 0" ViewNumber="{Binding ViewNumber}" 
+                                                                LikeNumber="{Binding LikeNumber}"
+                                                                PreviewImageSource="{Binding PreviewImageSource}"
+                                                                RecipeName="{Binding RecipeName}"
+                                                                CardText="{Binding Card}"
+                                                                FoodStuff="{Binding FoodStuff}"/>
+                                            </StackPanel>
+                                            <Rectangle Style="{StaticResource GrayLine}" Width="800" Margin="0, 20, 0, 20" VerticalAlignment="Bottom"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                    <DataTemplate>
+                                        <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                            </shared:LoadMoreDataTemplateSelector>
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid Name="noResultGrid" Visibility="Collapsed" Margin="0, 110, 0, 0" Background="White">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image Source="../assets/images/no_result_search.png" Stretch="None" HorizontalAlignment="Center" Margin="0, 0, 0, 30"/>
+                <TextBlock Text="没有搜索到相关的菜谱哦~" HorizontalAlignment="Center" FontSize="24" Foreground="Gray"/>
+                <TextBlock Text="去搜索别的美味吧~" HorizontalAlignment="Center" FontSize="24" Foreground="Gray"/>
+            </StackPanel>
+        </Grid>
+        <controls:NetworkLoading x:Name="loading" Margin="0, 110, 0, 0"/>
+    </Grid>
+</controls:BackablePage>

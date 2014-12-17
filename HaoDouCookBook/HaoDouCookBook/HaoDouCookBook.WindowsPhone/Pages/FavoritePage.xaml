@@ -1,0 +1,46 @@
+﻿<controls:BackablePage
+    x:Class="HaoDouCookBook.Pages.FavoritePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <Pivot x:Name="pivot">
+            <Pivot.Title>
+                <StackPanel Orientation="Vertical">
+                    <controls:Banner x:Name="banner" VerticalAlignment="Top" Title="好豆菜谱" FontWeight="Normal"/>
+                    <Border Style="{StaticResource PageTitleBorderStyle}" Margin="-5, 0, 0, 0">
+                        <TextBlock x:Name="title" Text="我的收藏" Margin="0" FontWeight="Normal" Style="{StaticResource SubTitleStyle}"/>
+                    </Border>
+                </StackPanel>
+            </Pivot.Title>
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Width="120" FontSize="32"/>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <PivotItem Header="菜谱" Margin="-20, 0" Background="White">
+                <ScrollViewer Margin="20, 0" x:Name="favoriteRecipesAlbumsScrollViewer">
+                    <controls:FavoriteRecipes x:Name="favoriteRecipesAlubm"/>
+                </ScrollViewer>
+            </PivotItem>
+            <PivotItem Header="专辑" Margin="-20, 0" Background="White">
+                <ScrollViewer Margin="20, 0" x:Name="favoriteAlbumsScrollViewer">
+                    <controls:FavoriteAlbums x:Name="favoriteAlbums"/>
+                </ScrollViewer>
+            </PivotItem>
+            <PivotItem Header="话题"  Margin="-20, 0" Background="White">
+                <ScrollViewer Margin="20, 0" x:Name="favoriteTopicsScrollViewer">
+                    <controls:FavoriteTopics x:Name="favoriteTopics"/>
+                </ScrollViewer>
+            </PivotItem>
+        </Pivot>
+
+        <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/> 
+    </Grid>
+</controls:BackablePage>

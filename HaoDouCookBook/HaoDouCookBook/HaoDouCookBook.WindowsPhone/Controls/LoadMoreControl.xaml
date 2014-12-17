@@ -1,0 +1,19 @@
+﻿<UserControl
+    x:Class="HaoDouCookBook.Controls.LoadMoreControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="42"
+    d:DesignWidth="400">
+    
+    <Grid Background="White"  Tapped="LoadMore_Tapped">
+        <StackPanel Orientation="Horizontal" Background="White" HorizontalAlignment="Center">
+            <controls:LoadingCircle x:Name="loading" CircleDiameter="24" Opacity="0"/>
+            <TextBlock x:Name="info" Text="点我加载更多 ..." VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20, 0" FontSize="18"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

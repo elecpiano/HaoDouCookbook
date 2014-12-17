@@ -1,4 +1,4 @@
-﻿<Page
+﻿<controls:BackablePage
     x:Class="HaoDouCookBook.Pages.UserSettings"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,14 +9,17 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid x:Name="root">
-        <controls:Banner/>
-        <ScrollViewer Margin="20, 40, 20, 30">
-            <StackPanel Orientation="Vertical">
+    <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="10, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Margin="2,0,0,0" Text="设置" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        </Border>
+        <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
+            <StackPanel Orientation="Vertical" Margin="10, 0, 10, 30">
                 <!--个人-->
-                <controls:SettingGroupTitle Title="个人"/>
-                <controls:SimpleSettingItem ItemText="社交绑定" WithMoreTag="False"/>
-                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
+                <controls:SettingGroupTitle Margin="0, 30, 0, 0" Title="个人" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                <controls:SimpleSettingItem ItemText="社交绑定" WithMoreTag="False" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
                 
                 <!--通用-->
                 <controls:SettingGroupTitle Title="通用" Margin="0, 30, 0, 0"/>
@@ -27,38 +30,40 @@
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <Grid>
                     <controls:SimpleSettingItem ItemText="开启摇一摇震动" WithMoreTag="False"/>
-                    <ToggleSwitch  OnContent="" OffContent="" VerticalAlignment="Bottom"  HorizontalAlignment="Right"/>
+                    <ToggleSwitch  OnContent="" OffContent="" IsOn="{Binding ShakeWithVibration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Bottom"  HorizontalAlignment="Right"/>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <Grid>
                     <controls:SimpleSettingItem ItemText="推送消息" WithMoreTag="False"/>
-                    <ToggleSwitch OnContent="" OffContent="" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                    <ToggleSwitch OnContent="" OffContent="" IsOn="{Binding PushMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
-                <Grid>
+                <Grid Background="Transparent" Tapped="ClearCache_Tapped">
                     <controls:SimpleSettingItem ItemText="清除缓存" WithMoreTag="False"/>
-                    <TextBlock Text="81.44M" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#66000000"/>
+                    <TextBlock Text="{Binding CacheSize}" Style="{StaticResource SettingPage_CacheSizeText_Style}"/>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
 
                 <!--支持-->
                 <controls:SettingGroupTitle Title="支持" Margin="0, 30, 0, 0"/>
-                <controls:SimpleSettingItem ItemText="关于"/>
+                <controls:SimpleSettingItem ItemText="关于" Tapped="About_Tapped"/>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <Grid>
-                    <controls:SimpleSettingItem ItemText="更新版本"/>
-                    <TextBlock Text="当前版本4.4.0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0, 0, 45, 0" Foreground="#66000000"/>
+                    <controls:SimpleSettingItem ItemText="当前版本"/>
+                    <TextBlock Style="{StaticResource CurrentVersionTextStyle}">
+                        当前版本<Run Text="{Binding Version}"/>
+                    </TextBlock>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
-                <controls:SimpleSettingItem ItemText="意见反馈"/>
-                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
+                <controls:SimpleSettingItem Tag="feedback" ItemText="意见反馈" Tapped="Feedback_Tapped"/>
+                <Rectangle Style="{StaticResource DarkGrayLine}" Width="380" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
 
                 <!--退出-->
-                <controls:SettingGroupTitle Margin="0, 30, 0, 0"/>
-                <controls:SimpleSettingItem ItemText="退出" WithMoreTag="False"/>
+                <controls:SettingGroupTitle Margin="0, 30, 0, 0" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                <controls:SimpleSettingItem ItemText="退出登录" WithMoreTag="False" Tapped="Logout_Tapped" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
 
             </StackPanel>
         </ScrollViewer>
 
     </Grid>
-</Page>
+</controls:BackablePage>

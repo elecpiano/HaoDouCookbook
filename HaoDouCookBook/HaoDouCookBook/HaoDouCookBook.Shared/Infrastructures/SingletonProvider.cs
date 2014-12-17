@@ -1,17 +1,19 @@
-﻿using System;
-
-public class SingletonProvider<T> where T : new()
+﻿
+namespace Shared.Infrastructures
 {
-    SingletonProvider() { }
-
-    public static T Instance
+    public class SingletonProvider<T> where T : new()
     {
-        get { return SingletonCreator.instance; }
-    }
+        SingletonProvider() { }
 
-    class SingletonCreator
-    {
-        static SingletonCreator() { }
-        internal static readonly T instance = new T();
+        public static T Instance
+        {
+            get { return SingletonCreator.instance; }
+        }
+
+        class SingletonCreator
+        {
+            static SingletonCreator() { }
+            internal static readonly T instance = new T();
+        }
     }
 }

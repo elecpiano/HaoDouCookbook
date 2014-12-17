@@ -1,0 +1,81 @@
+﻿<controls:BackablePage
+    x:Class="HaoDouCookBook.Pages.MessagePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d" xmlns:shared="using:Shared.Utility"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Text="消息" Style="{StaticResource SubTitleStyle}"/>
+        </Border>
+        <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
+            <StackPanel Margin="20, 20, 20, 0">
+                <Grid Background="Transparent" Tapped="Notice_Tapped">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="65"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="../assets/images/messageNotice.png" VerticalAlignment="Top" Stretch="None"/>
+                    <Grid Grid.Column="1" Margin="10, 0, 0, 0">
+                        <TextBlock Text="通知" FontSize="24" VerticalAlignment="Top"/>
+                        <TextBlock Text="{Binding NoticeContent}" Foreground="Gray" VerticalAlignment="Top" Margin="0, 40, 0, 0" FontSize="21" TextTrimming="WordEllipsis"/>
+                    </Grid>
+                </Grid>
+                <Rectangle Style="{StaticResource LightGaryLine}" Height="3" Margin="0, 10, 0, 0" Width="800"/>
+
+                <ItemsControl ItemsSource="{Binding Messages}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                                <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                    <DataTemplate>
+                                        <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}"
+                                                IsHitTestVisible="True" Tapped="Message_Tapped">
+                                            <StackPanel Orientation="Vertical" Margin="0, 15, 0, 0">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="65"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid Grid.Column="0">
+                                                        <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding Avatar}" Width="65" Height="65"/>
+                                                        <controls:CountMark Number="{Binding UnreadCount}" Width="28" Height="28"  VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                                                Visibility="{Binding UnreadCount, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                                                    </Grid>
+                                                    <Grid Grid.Column="1" Margin="10, 0, 0, 0">
+                                                        <TextBlock Text="{Binding UserName}" Style="{StaticResource MessagePage_UserName_Style}"/>
+                                                        <TextBlock Text="{Binding UpdateTime}" Style="{StaticResource MessagePage_UpdateTime_Style}"/>
+                                                        <TextBlock Text="{Binding Content}" Style="{StaticResource MessagePage_MessageContent_Style}"/>
+                                                    </Grid>
+                                                </Grid>
+                                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 15, 0, 0"/>
+                                            </StackPanel>
+                                        </controls:SmartGrid>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                    <DataTemplate>
+                                        <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                            </shared:LoadMoreDataTemplateSelector>
+                        </DataTemplate>
+                        
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+        <controls:NetworkLoading x:Name="loading" Margin="0, 105, 0, 0"/>
+    </Grid>
+</controls:BackablePage>

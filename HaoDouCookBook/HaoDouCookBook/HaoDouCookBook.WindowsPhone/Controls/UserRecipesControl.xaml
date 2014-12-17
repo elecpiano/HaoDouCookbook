@@ -1,0 +1,47 @@
+﻿<UserControl
+    x:Class="HaoDouCookBook.Controls.UserRecipesControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d" xmlns:shared="using:Shared.Utility"
+    d:DesignWidth="460">
+
+    <Grid x:Name="root">
+        <ScrollViewer x:Name="rootScrollViewer">
+            <ItemsControl ItemsSource="{Binding ItemsSource}" Margin="0, 0, 0, 15">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <controls:UniversalWrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                            <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Width="130" Height="130" Margin="0, 0, 5, 5" Tapped="Recipe_Tapped">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Cover}" AlignmentY="Center" Stretch="UniformToFill"/>
+                                        </Border.Background>
+                                    </Border>
+                                </DataTemplate>
+                            </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                            <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                <DataTemplate>
+                                    <controls:LoadMoreControl Width="800" Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                </DataTemplate>
+                            </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                        </shared:LoadMoreDataTemplateSelector>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Grid Margin="0, 80, 0, 0" Visibility="{Binding ItemsSource.Count, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
+            <Image Source="{Binding NoItemsImage}" Stretch="None" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding NoItemsText}" Style="{StaticResource UserProfile_NoItemsText_Style}"/>
+        </Grid>
+    </Grid>
+</UserControl>

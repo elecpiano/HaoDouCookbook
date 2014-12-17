@@ -1,19 +1,11 @@
 ﻿using HaoDouCookBook.Common;
-using HaoDouCookBook.Models;
-using System;
-using System.Collections.Generic;
+using HaoDouCookBook.Controls;
+using HaoDouCookBook.HaoDou.API;
+using HaoDouCookBook.ViewModels;
+using Shared.Utility;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -23,12 +15,12 @@ namespace HaoDouCookBook.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RankListPage : Page
+    public sealed partial class RankListPage : BackablePage
     {
 
         #region Field && Property
 
-        private ObservableCollection<TopicModel> rankListData = new ObservableCollection<TopicModel>();
+        private ObservableCollection<RankItemData> rankListData = new ObservableCollection<RankItemData>();
 
         #endregion
 
@@ -37,7 +29,7 @@ namespace HaoDouCookBook.Pages
         public RankListPage()
         {
             this.InitializeComponent();
-            this.ranklist.ItemsSource = rankListData;
+            DataBinding();
         }
 
         /// <summary>
@@ -47,53 +39,153 @@ namespace HaoDouCookBook.Pages
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            Test();
+            base.OnNavigatedTo(e);
+
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                return;
+            }
+
+            rankListData.Clear();
+            rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
+            LoadFirstPageDataAsync();
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        #endregion
+
+        #region Data Prepare
+
+        private void DataBinding()
         {
-            base.OnNavigatedFrom(e);
-            Windows.Phone.UI.Input.HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+            this.ranklist.ItemsSource = rankListData;
+        }
+
+        private async Task LoadFirstPageDataAsync()
+        {
+            loading.SetState(LoadingState.LOADING);
+            await RankAPI.GetRankList(
+                0, 
+                limit, 
+                UserGlobal.Instance.UserInfo.Sign,
+                UserGlobal.Instance.GetInt32UserId(),
+                UserGlobal.Instance.uuid, 
+                success =>
+                {
+                    if (success.Items != null)
+                    {
+                        RemoveLoadMoreControl();
+                        foreach (var item in success.Items)
+                        {
+                            rankListData.Add(new RankItemData() { 
+                                Title = item.Title, 
+                                CoverImage = item.Cover, 
+                                Description = item.Intro, 
+                                Type = item.RankType,
+                                Id = int.Parse(item.Id)
+                            });
+                        }
+
+                        if(success.Items.Length == limit)
+                        {
+                            EnsureLoadMoreControl();
+                        }
+                    }
+                    page = 1;
+
+                    loading.SetState(LoadingState.SUCCESS);
+
+                }, 
+                error => {
+                    Utilities.CommonLoadingRetry(loading, async () => await LoadFirstPageDataAsync());
+                });
         }
 
         #endregion
 
         #region Event
 
-        void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        private void RecipeItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.GoBack();
-
-            // Need add this line, otherwise it will not back to last page.
-            //
-            e.Handled = true;
+            var rankItemData = sender.GetDataContext<RankItemData>();
+            RankViewPage.RankViewPageParams paras = new RankViewPage.RankViewPageParams();
+            paras.Id = rankItemData.Id;
+            paras.Type = rankItemData.Type;
+            App.CurrentInstance.RootFrame.Navigate(typeof(RankViewPage), paras);
         }
 
         #endregion
 
-        #region Test
+        #region Load More
 
-        private void Test()
+        int page = 1;
+        int limit = 20;
+
+        private RankItemData loadMoreControlDataContext = new RankItemData() { IsLoadMore = true };
+
+        public void EnsureLoadMoreControl()
         {
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "制作清汤火锅的小窍门", PreviewContent = "昨天为大家推荐了番茄鱼火锅，大家都很喜欢，" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "好豆里那些优秀的“国际范”", PreviewContent = "上个月fishmama给大家介绍了很多咱们好豆里优秀的豆亲，受到很多豆亲的关注，" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "酥脆的酒鬼花生也能自己做", PreviewContent = "草儿喜欢在做事的时候打开收音机或者手机，听听音乐看看视屏" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "制作清汤火锅的小窍门", PreviewContent = "昨天为大家推荐了番茄鱼火锅，大家都很喜欢，" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "好豆里那些优秀的“国际范”", PreviewContent = "上个月fishmama给大家介绍了很多咱们好豆里优秀的豆亲，受到很多豆亲的关注，" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "酥脆的酒鬼花生也能自己做", PreviewContent = "草儿喜欢在做事的时候打开收音机或者手机，听听音乐看看视屏" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "制作清汤火锅的小窍门", PreviewContent = "昨天为大家推荐了番茄鱼火锅，大家都很喜欢，" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "好豆里那些优秀的“国际范”", PreviewContent = "上个月fishmama给大家介绍了很多咱们好豆里优秀的豆亲，受到很多豆亲的关注，" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "酥脆的酒鬼花生也能自己做", PreviewContent = "草儿喜欢在做事的时候打开收音机或者手机，听听音乐看看视屏" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "制作清汤火锅的小窍门", PreviewContent = "昨天为大家推荐了番茄鱼火锅，大家都很喜欢，" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "好豆里那些优秀的“国际范”", PreviewContent = "上个月fishmama给大家介绍了很多咱们好豆里优秀的豆亲，受到很多豆亲的关注，" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "酥脆的酒鬼花生也能自己做", PreviewContent = "草儿喜欢在做事的时候打开收音机或者手机，听听音乐看看视屏" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "制作清汤火锅的小窍门", PreviewContent = "昨天为大家推荐了番茄鱼火锅，大家都很喜欢，" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "好豆里那些优秀的“国际范”", PreviewContent = "上个月fishmama给大家介绍了很多咱们好豆里优秀的豆亲，受到很多豆亲的关注，" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "酥脆的酒鬼花生也能自己做", PreviewContent = "草儿喜欢在做事的时候打开收音机或者手机，听听音乐看看视屏" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "制作清汤火锅的小窍门", PreviewContent = "昨天为大家推荐了番茄鱼火锅，大家都很喜欢，" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "好豆里那些优秀的“国际范”", PreviewContent = "上个月fishmama给大家介绍了很多咱们好豆里优秀的豆亲，受到很多豆亲的关注，" });
-            rankListData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "酥脆的酒鬼花生也能自己做", PreviewContent = "草儿喜欢在做事的时候打开收音机或者手机，听听音乐看看视屏" });
+            if (rankListData != null && !rankListData.Contains(loadMoreControlDataContext))
+           {
+               rankListData.Add(loadMoreControlDataContext);
+           }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (rankListData != null && rankListData.Contains(loadMoreControlDataContext))
+            {
+                rankListData.Remove(loadMoreControlDataContext);
+            } 
+        }
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await RankAPI.GetRankList(
+                         page * limit,
+                         limit,
+                         UserGlobal.Instance.UserInfo.Sign,
+                         UserGlobal.Instance.GetInt32UserId(),
+                         UserGlobal.Instance.uuid,
+                         success =>
+                         {
+                             if (success.Items != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.Items)
+                                 {
+                                     rankListData.Add(new RankItemData()
+                                     {
+                                         Title = item.Title,
+                                         CoverImage = item.Cover,
+                                         Description = item.Intro,
+                                         Type = item.RankType,
+                                         Id = int.Parse(item.Id)
+                                     });
+                                 }
+
+                                 if(success.Items.Length == limit)
+                                 {
+                                     EnsureLoadMoreControl();
+                                 }
+
+                                 page++;
+                                 loadmore.SetState(LoadingState.SUCCESS);
+                             }
+                             else
+                             {
+                                 loadmore.SetState(LoadingState.DONE);
+                             }
+
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
         }
 
         #endregion

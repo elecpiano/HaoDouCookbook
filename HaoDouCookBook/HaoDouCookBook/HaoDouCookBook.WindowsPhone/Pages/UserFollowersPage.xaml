@@ -1,0 +1,76 @@
+﻿<controls:BackablePage
+    x:Class="HaoDouCookBook.Pages.UserFollowersPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d" xmlns:shared="using:Shared.Utility"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Text="{Binding Title}" Style="{StaticResource SubTitleStyle}"/>
+        </Border>
+        <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
+            <Grid>
+                <ItemsControl ItemsSource="{Binding Followers}" Margin="20">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                                <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <Grid>
+                                                <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding Avatar}" 
+                                                        Style="{StaticResource FollowPage_UserPhoto_Style}"/>
+                                                <Image Source="../assets/images/vip_photo_mark.png" 
+                                           Visibility="{Binding IsVip, Converter={StaticResource AnythingToVisiblityConverter}}" 
+                                           Style="{StaticResource FollowerPage_Vip_Style}"/>
+                                                <TextBlock Text="{Binding UserName}" Style="{StaticResource FollowPage_UserName_Style}"/>
+                                                <Button Tapped="Follow_Tapped" Visibility="{Binding CanFollow, Converter={StaticResource AnythingToVisiblityConverter}}"
+                                            HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                    <Button.Content>
+                                                        <TextBlock Text="+ 关注" FontWeight="Normal"/>
+                                                    </Button.Content>
+                                                </Button>
+                                                <Button Tapped="CancelFollow_Tapped" 
+                                                    Visibility="{Binding CanFollow, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}" 
+                                                    HorizontalAlignment="Right" VerticalAlignment="Center" 
+                                                    Background="{StaticResource GreenMain}" Foreground="White">
+                                                    <Button.Content>
+                                                        <TextBlock Text="已关注" FontWeight="Normal"/>
+                                                    </Button.Content>
+                                                </Button>
+                                            </Grid>
+                                            <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="-20, 15, -20, 15"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                    <DataTemplate>
+                                        <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                            </shared:LoadMoreDataTemplateSelector>
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Grid Visibility="{Binding Followers.Count, Converter={StaticResource countToNoItemsVisiblityConverter}}">
+                    <Image Source="../assets/images/nofollow.png" Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="noItemText" Style="{StaticResource FollowerPage_NOItemText_Style}" />
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+        <controls:NetworkLoading x:Name="loading" Margin="0, 105, 0, 0"/>
+        <controls:Toast x:Name="toast" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0, 0, 0, 140"/>
+    </Grid>
+</controls:BackablePage>

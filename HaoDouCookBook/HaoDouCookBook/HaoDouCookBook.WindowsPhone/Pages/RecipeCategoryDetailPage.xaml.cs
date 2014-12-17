@@ -1,19 +1,11 @@
 ﻿using HaoDouCookBook.Common;
-using HaoDouCookBook.Models;
-using System;
-using System.Collections.Generic;
+using HaoDouCookBook.Controls;
+using HaoDouCookBook.HaoDou.API;
+using HaoDouCookBook.ViewModels;
+using Shared.Utility;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -23,11 +15,26 @@ namespace HaoDouCookBook.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RecipeCategoryDetailPage : Page
+    public sealed partial class RecipeCategoryDetailPage : BackablePage
     {
+        #region Page Parameters Definition
+
+        public class RecipeCategoryDefailPageParams
+        {
+            public int Id { get; set; }
+            public string Title { get; set; }
+
+            public RecipeCategoryDefailPageParams()
+            {
+
+            }
+        }
+
+        #endregion
 
         #region Field && Property
         private ObservableCollection<RecipeTileData> Recipes = new ObservableCollection<RecipeTileData>();
+        RecipeCategoryDefailPageParams pageParams;
         #endregion
 
         #region Life Cycle
@@ -35,8 +42,7 @@ namespace HaoDouCookBook.Pages
         public RecipeCategoryDetailPage()
         {
             this.InitializeComponent();
-            this.recipesList.ItemsSource = Recipes;
-            Test();
+            DataBinding();
         }
 
 
@@ -47,45 +53,190 @@ namespace HaoDouCookBook.Pages
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
-            Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            base.OnNavigatedTo(e);
+
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                return;
+            }
+
+            pageParams = e.Parameter as RecipeCategoryDefailPageParams;
+            if (pageParams != null)
+            {
+                // show the bottom appbar if the title is 私人定制
+                //
+                if (pageParams.Id == 391926 || pageParams.Title == "私人定制")
+                {
+                    this.bottomAppbar.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                }
+                else
+                {
+                    this.bottomAppbar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                }
+
+                this.title.Text = pageParams.Title;
+                rootScrollViewer.ChangeViewExtersion(0, 0, 1.0f);
+                Recipes.Clear();
+                LoadFirstPageDataAsync(pageParams.Title, pageParams.Id);
+            }
+
         }
 
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        #endregion
+
+        #region Data Prepare
+
+        private void DataBinding()
         {
-            base.OnNavigatedFrom(e);
-            Windows.Phone.UI.Input.HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+            this.recipesList.ItemsSource = Recipes;
         }
 
-        void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        private async Task LoadFirstPageDataAsync(string typeName, int recipeId)
         {
-            App.Current.RootFrame.GoBack();
-            e.Handled = true;
+            loading.SetState(LoadingState.LOADING);
+            await RecipeAPI.GetCollectRecomment(
+                0, 
+                limit, 
+                UserGlobal.Instance.UserInfo.Sign, 
+                UserGlobal.Instance.GetInt32UserId(), 
+                UserGlobal.Instance.uuid, 
+                typeName, 
+                recipeId, 
+                success =>
+                {
+                    if(success.Recipes != null)
+                    {
+                        RemoveLoadMoreControl();
+                        foreach (var item in success.Recipes)
+                        {
+                            Recipes.Add(new RecipeTileData()
+                            {
+                                Author = item.UserName,
+                                TagsText = item.GetTagsString(),
+                                RecipeImage = item.Cover,
+                                RecipeName = item.Title,
+                                SupportNumber = item.LikeCount.ToString(),
+                                RecipeId = item.RecipeId
+                            });
+
+                            page = 1;
+                        }
+
+                        if(success.Recipes.Length == limit)
+                        {
+                            EnsureLoadMoreControl();
+                        }
+                    }
+                    loading.SetState(LoadingState.SUCCESS);
+
+                }, error => {
+                    Utilities.CommonLoadingRetry(loading, error, async ()=> await LoadFirstPageDataAsync(typeName, recipeId));
+                });
         }
 
         #endregion
 
-        #region Test
+        #region Event
 
-        private void Test()
+        private void RecipeTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "12", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "0", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "888", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "343+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "豆皮是去比较大型的超市买回来的，我们这边的超市和市场好像都没有见有卖的，而且我跟老公都是爱吃豆腐皮的呢，觉得直接吃没有那么香口，所以决定加点葱丝一起炒.豆皮是去比较大型的超市买回来的，我们这边的超市和市场好像都没有见有卖的，而且我跟老公都是爱吃豆腐皮的呢，觉得直接吃没有那么香口，所以决定加点葱丝一起炒", SupportNumber = "342+", TagsText = "" });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
-            Recipes.Add(new RecipeTileData() { Author = "二丫香厨", RecipeImage = Constants.DEFAULT_TOPIC_IMAGE, RecipeName = "炒西葫芦条", Recommendation = "", SupportNumber = "999+", TagsText = "午餐   夏天  身体好  家常菜   炒锅  炒   烧烤 " });
+            var dataContext = sender.GetDataContext<RecipeTileData>(); 
+            RecipeInfoPage.RecipeInfoPageParams paras = new RecipeInfoPage.RecipeInfoPageParams();
+            paras.RecipeId = dataContext.RecipeId;
+            App.CurrentInstance.RootFrame.Navigate(typeof(RecipeInfoPage), paras);
+        }
+
+        private void personalTags_click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if(Utilities.SignedIn())
+            {
+                App.CurrentInstance.RootFrame.Navigate(typeof(PersonalTagsPage));
+            }
+            else
+            {
+                LoginPage.LoginPageParams paras = new LoginPage.LoginPageParams();
+                paras.SignedInAction = () =>  toast.Show("登录成功");
+
+                App.CurrentInstance.RootFrame.Navigate(typeof(LoginPage), paras);
+            }
+        }
+
+        #endregion
+
+        #region Load More
+
+        int page = 1;
+        int limit = 10;
+
+        private RecipeTileData loadMoreControlDataContext = new RecipeTileData() { IsLoadMore = true };
+
+        public void EnsureLoadMoreControl()
+        {
+           if(Recipes != null && !Recipes.Contains(loadMoreControlDataContext))
+           {
+               Recipes.Add(loadMoreControlDataContext);
+           }
+        }
+
+        public void RemoveLoadMoreControl()
+        {
+            if (Recipes != null && Recipes.Contains(loadMoreControlDataContext))
+            {
+                Recipes.Remove(loadMoreControlDataContext);
+            } 
+        }
+
+        private void loadMore_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Utilities.RegistComonadLoadMoreBehavior(sender,
+                 async loadmore =>
+                 {
+                     loadmore.SetState(LoadingState.LOADING);
+                     await RecipeAPI.GetCollectRecomment(
+                         page * limit,
+                         limit,
+                         UserGlobal.Instance.UserInfo.Sign,
+                         UserGlobal.Instance.GetInt32UserId(),
+                         UserGlobal.Instance.uuid,
+                         pageParams.Title,
+                         pageParams.Id,
+                         success =>
+                         {
+                             if (success.Recipes != null)
+                             {
+                                 RemoveLoadMoreControl();
+                                 foreach (var item in success.Recipes)
+                                 {
+                                     Recipes.Add(new RecipeTileData()
+                                     {
+                                         Author = item.UserName,
+                                         TagsText = item.GetTagsString(),
+                                         RecipeImage = item.Cover,
+                                         RecipeName = item.Title,
+                                         SupportNumber = item.LikeCount.ToString(),
+                                         RecipeId = item.RecipeId
+                                     });
+                                 }
+
+                                 if(success.Recipes.Length == limit)
+                                 {
+                                     EnsureLoadMoreControl();
+                                 }
+                                 page++;
+                                 loadmore.SetState(LoadingState.SUCCESS);
+                             }
+                             else
+                             {
+                                 loadmore.SetState(LoadingState.DONE);
+                             }
+
+                        },
+                        error =>
+                        {
+                            Utilities.CommondLoadMoreErrorBehavoir(loadmore, error);
+                        });
+                });
         }
 
         #endregion

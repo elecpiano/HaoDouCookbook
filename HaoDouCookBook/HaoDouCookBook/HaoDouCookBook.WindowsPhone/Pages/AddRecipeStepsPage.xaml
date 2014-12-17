@@ -1,0 +1,45 @@
+﻿<controls:BackablePage
+    x:Class="HaoDouCookBook.Pages.AddRecipeStepsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <controls:BackablePage.BottomAppBar>
+        <CommandBar Style="{StaticResource bottomAppbarStyle}">
+            <AppBarButton Icon="Accept" Label="完成" Click="Completed_Click"/>
+        </CommandBar>
+    </controls:BackablePage.BottomAppBar>
+
+    <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Text="分类" Style="{StaticResource SubTitleStyle}"/>
+        </Border>
+        <StackPanel Orientation="Vertical" Margin="0, 105, 0, 0" Background="White">
+            <Grid Background="Transparent" Tapped="SelectPhoto_Tapped">
+                <Border Background="#74a500" Height="240" VerticalAlignment="Top">
+                    <Image Source="../assets/images/camera.png" Stretch="None" 
+                       VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        Visibility="{Binding StepPhoto, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}"/>
+                </Border>
+                <Image Stretch="Uniform" Source="{Binding StepPhoto}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+
+            <StackPanel Orientation="Vertical" Margin="20" >
+                <StackPanel Orientation="Horizontal" Margin="5, 0, 0, 0">
+                    <TextBlock Text="*" Foreground="Red" FontSize="36" VerticalAlignment="Center" Height="32"/>
+                    <TextBox Text="{Binding StepIntro, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                 Style="{StaticResource TextBoxBase}" MaxLength="100" AcceptsReturn="True" TextWrapping="Wrap"
+                                 PlaceholderText="请填写步骤说明(不超过100字)"/>
+                </StackPanel>
+                <Image Source="../assets/images/textboxGreenLine.png"/>
+            </StackPanel>
+        </StackPanel>
+        <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}" Margin="0, 380, 0, 0"/>
+    </Grid>
+</controls:BackablePage>

@@ -16,42 +16,85 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\Constants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\UserSettingsConfig.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\Banner.xaml.cs">
-      <DependentUpon>Banner.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\CategoryImageTile.xaml.cs">
-      <DependentUpon>CategoryImageTile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\CategoryTitle.xaml.cs">
-      <DependentUpon>CategoryTitle.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\DishTile.xaml.cs">
-      <DependentUpon>DishTile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\MealTile.xaml.cs">
-      <DependentUpon>MealTile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\RecipeCategoryTile.xaml.cs">
-      <DependentUpon>RecipeCategoryTile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\RecipeTile.xaml.cs">
-      <DependentUpon>RecipeTile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\SettingGroupTitle.xaml.cs">
-      <DependentUpon>SettingGroupTitle.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\SimpleSettingItem.xaml.cs">
-      <DependentUpon>SimpleSettingItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\TopicTile.xaml.cs">
-      <DependentUpon>TopicTile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\UserPhoto.xaml.cs">
-      <DependentUpon>UserPhoto.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\UserGlobal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouHttpExecuter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouJsonDataLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\HaoDouSearchHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ShoppingList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\AnythingToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\AdAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\ApiUrlHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\CommentAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\CommonAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\DiggAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\FavoriteAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\FeedbackAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\InfoAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\Accounts.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\MessageAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\NoticeAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RankAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipeAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipePhotoAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\RecipeUserAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\SearchAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\SettingAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\StuffAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\TopicAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\API\UserFeedAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\ADItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\AlbumItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\AlbumPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\AllAlbumsListData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\Category.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\ChoicenessPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\Comment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\FoodPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\HaodouMetaData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\InfoPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RankItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RankListItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RecipeItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RecipeRecommend.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\SearchPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\ShakePageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\StuffInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\TagItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\RankViewPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Choiceness\WikiOrTableItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\Actor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\Cate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\CommentListPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\DiscoveryPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\Meal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\NewbieTutorial.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\ProductPageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\PublishProducts.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\SingleProductViewPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Discovery\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Activity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Area.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\CheckInData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\DiggUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Favorite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Feedback.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Friends.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\IM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\MessagePage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Notice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Passport.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\PersonalTags.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\PublishRecipe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\Recommendation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\UserFollower.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\UserProducts.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\UserProfile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\My\UserRecipes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Square\CateInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Square\SquarePageData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HaoDou\DataModels\Square\Topic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\AnimationBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\FadeAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\MoveAnimation.cs" />
@@ -59,94 +102,24 @@
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\ScaleAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Animations\VibrateAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\BindableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\Interface.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\JsonSerializable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructures\SingletonProvider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryTileData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\CookMaster.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\DishTileData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Meal.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\NewbieTutorial.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\RecipeCategoryTileData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\RecipeTileData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Topic.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\UserData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\ContinuationManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\CryptographyHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\Cryptography\MD5.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DataContextGetter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DataLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\DataTemplateSelector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\DateTimeExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\DelayHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\DeviceHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\HttpExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\ImageHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\IsolatedStorageHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\JsonSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utility\NetworkHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\Banner.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\CategoryImageTile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\CategoryTitle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\DishTile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\MealTile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\RecipeCategoryTile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\RecipeTile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\SettingGroupTitle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\SimpleSettingItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\TopicTile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\UserPhoto.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Style\AppStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\DefaultTopicImage.jpg" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\like.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\logo_recipe.jpg" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\AppGems.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Douquan.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Draft.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Favorite.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Friends.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Localdownloads.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Message.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\More.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\MyArticle.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\MyRecipe.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\Settings.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MyPage\ShippingList.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\noavatar_300.jpg" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\tags.png" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\UIExtersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\WeiboHelper.cs" />
   </ItemGroup>
 </Project>

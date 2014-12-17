@@ -1,0 +1,21 @@
+﻿<controls:BackablePage
+    x:Class="HaoDouCookBook.Pages.MyDraftPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Text="草稿" Style="{StaticResource SubTitleStyle}"/>
+        </Border>
+        <Border Background="White" Margin="0, 105, 0, 0" >
+            <controls:UserDraft x:Name="draftsList" Margin="0, 0, -10, 0" Background="White" />
+        </Border>
+    </Grid>
+</controls:BackablePage>

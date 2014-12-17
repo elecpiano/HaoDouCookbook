@@ -46,11 +46,11 @@ namespace Shared.Utility
                 {
                     try
                     {
-                        var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                        var cachedJson = await IsolatedStorageHelper.ReadFileAsync(moduleName, fileName);
                         T obj = JsonSerializer.Deserialize<T>(cachedJson);
                         if (obj != null)
                         {
-                            App.Current.RunAsync(() =>
+                            App.CurrentInstance.RunAsync(() =>
                             {
                                 onCallback(obj);
                             });
@@ -95,7 +95,7 @@ namespace Shared.Utility
                     T obj = JsonSerializer.Deserialize<T>(json);
                     if (obj != null)
                     {
-                        App.Current.RunAsync(() =>
+                        App.CurrentInstance.RunAsync(() =>
                         {
                             onCallback(obj);
                         });
@@ -103,7 +103,7 @@ namespace Shared.Utility
 
                     if (toCacheData)
                     {
-                        await IsolatedStorageHelper.WriteToFile(moduleName, fileName, json);
+                        await IsolatedStorageHelper.WriteToFileAsync(moduleName, fileName, json);
                     }
                 }
                 Loaded = true;
@@ -157,11 +157,11 @@ namespace Shared.Utility
                 {
                     try
                     {
-                        var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                        var cachedJson = await IsolatedStorageHelper.ReadFileAsync(moduleName, fileName);
                         JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(cachedJson);
                         if (wrapper != null && wrapper.data != null)
                         {
-                            App.Current.RunAsync(() =>
+                            App.CurrentInstance.RunAsync(() =>
                             {
                                 onCallback(wrapper.data);
                             });
@@ -206,7 +206,7 @@ namespace Shared.Utility
                     JsonObjectWrapper<T> wrapper = JsonSerializer.Deserialize<JsonObjectWrapper<T>>(json);
                     if (wrapper != null && wrapper.data != null)
                     {
-                        App.Current.RunAsync(() =>
+                        App.CurrentInstance.RunAsync(() =>
                         {
                             onCallback(wrapper.data);
                         });
@@ -214,7 +214,7 @@ namespace Shared.Utility
 
                     if (toCacheData)
                     {
-                        await IsolatedStorageHelper.WriteToFile(moduleName, fileName, json);
+                        await IsolatedStorageHelper.WriteToFileAsync(moduleName, fileName, json);
                     }
                 }
                 Loaded = true;
@@ -275,11 +275,11 @@ namespace Shared.Utility
                 {
                     try
                     {
-                        var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                        var cachedJson = await IsolatedStorageHelper.ReadFileAsync(moduleName, fileName);
                         JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
                         if (wrapper != null && wrapper.data != null)
                         {
-                           App.Current.RunAsync(() =>
+                           App.CurrentInstance.RunAsync(() =>
                             {
                                 List<T> list = new List<T>();
                                 for (int i = 0; i < wrapper.data.Length; i++)
@@ -327,7 +327,7 @@ namespace Shared.Utility
                     JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(json);
                     if (wrapper != null && wrapper.data != null)
                     {
-                        App.Current.RunAsync(() =>
+                        App.CurrentInstance.RunAsync(() =>
                         {
                             List<T> list = new List<T>();
                             for (int i = 0; i < wrapper.data.Length; i++)
@@ -340,7 +340,7 @@ namespace Shared.Utility
 
                     if (toCacheData)
                     {
-                        await IsolatedStorageHelper.WriteToFile(moduleName, fileName, json);
+                        await IsolatedStorageHelper.WriteToFileAsync(moduleName, fileName, json);
                     }
                 }
                 Loaded = true;
@@ -387,11 +387,11 @@ namespace Shared.Utility
                     {
                         try
                         {
-                            var cachedJson = await IsolatedStorageHelper.ReadFile(moduleName, fileName);
+                            var cachedJson = await IsolatedStorageHelper.ReadFileAsync(moduleName, fileName);
                             JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(cachedJson);
                             if (wrapper != null && wrapper.data != null)
                             {
-                                App.Current.RunAsync(() =>
+                                App.CurrentInstance.RunAsync(() =>
                                 {
                                     _LoadedList.Clear();
                                     for (int i = 0; i < wrapper.data.Length; i++)
@@ -440,7 +440,7 @@ namespace Shared.Utility
                     JsonArrayWrapper<T> wrapper = JsonSerializer.Deserialize<JsonArrayWrapper<T>>(json);
                     if (wrapper != null && wrapper.data != null)
                     {
-                        App.Current.RunAsync(() =>
+                        App.CurrentInstance.RunAsync(() =>
                         {
                             List<T> list = new List<T>();
                             for (int i = 0; i < wrapper.data.Length; i++)
@@ -458,7 +458,7 @@ namespace Shared.Utility
 
                     if (toCacheData)
                     {
-                        await IsolatedStorageHelper.WriteToFile(moduleName, fileName, json);
+                        await IsolatedStorageHelper.WriteToFileAsync(moduleName, fileName, json);
                     }
                 }
                 Loaded = true;

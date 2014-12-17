@@ -1,0 +1,124 @@
+﻿<controls:BackablePage
+    x:Class="HaoDouCookBook.Pages.ShoppingListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    xmlns:common="using:HaoDouCookBook.Common"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  
+    <Grid Margin="0, 0, 0, 0" x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <Pivot>
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <Grid Width="180" Margin="0, 10, 0, 0">
+                        <TextBlock Text="{Binding}" HorizontalAlignment="Left" FontSize="28"/>
+                    </Grid>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <Pivot.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <controls:Banner Title="好豆菜谱" FontWeight="Normal"/>
+                        <Border Margin="0" Style="{StaticResource PageTitleBorderStyle}">
+                            <TextBlock Margin="-3, 0, 0, 0" Text="购买清单" FontWeight="Normal" Style="{StaticResource SubTitleStyle}"/>
+                        </Border>
+                    </StackPanel>
+                </DataTemplate>
+            </Pivot.TitleTemplate>
+            <PivotItem Header="清单查看">
+                <ScrollViewer x:Name="stuffCategoryScrollViewer" Background="White" Margin="-20, -15, -20, 20">
+                    <Grid>
+                        <ItemsControl ItemsSource="{Binding StuffCategories}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:SimpleTreeListItem Title="{Binding Category}" TitleForeground="#78a708" ItemsSource="{Binding Stuffs}">
+                                        <controls:SimpleTreeListItem.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Vertical"/>
+                                            </ItemsPanelTemplate>
+                                        </controls:SimpleTreeListItem.ItemsPanel>
+                                        <controls:SimpleTreeListItem.ItemDataTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Vertical" Background="Transparent" Tapped="StuffItem_Tapped">
+                                                    <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" IsHitTestVisible="True">
+                                                        <TextBlock Text="{Binding Name}" Style="{StaticResource ShoppingListPage_StuffCategoryItem_Style}"/>
+                                                    </controls:SmartGrid>
+                                                    <Rectangle Width="800" Style="{StaticResource LightGaryLine}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </controls:SimpleTreeListItem.ItemDataTemplate>
+                                    </controls:SimpleTreeListItem>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding Recipes.Count, Converter={StaticResource countToNoItemsVisiblityConverter}}">
+                            <Image Source="../assets/images/noshopping.png" Stretch="None"/>
+                            <TextBlock Text="购物篮里啥都没有" Foreground="#c7c7c7" FontSize="24" Margin="0, 30, 0, 0"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </PivotItem>
+            <PivotItem Header="菜谱查看">
+                <ScrollViewer x:Name="recipesScrollViewer" Background="White" Margin="-20, -15, -20, 20" BringIntoViewOnFocusChange="True">
+                    <Grid>
+                        <ItemsControl ItemsSource="{Binding Recipes}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:SimpleTreeListItem Title="{Binding Name}" ItemsSource="{Binding Stuffs}" Holding="Recipe_Hoding">
+                                        <FlyoutBase.AttachedFlyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem Text="删除" Click="DeleteRecipe_Click"/>
+                                                <MenuFlyoutItem Text="删除全部" Click="DeleteAllRecipes_Click"/>
+                                            </MenuFlyout>
+                                        </FlyoutBase.AttachedFlyout>
+                                        <controls:SimpleTreeListItem.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Name="recipeStuffPanel" Orientation="Vertical"/>
+                                            </ItemsPanelTemplate>
+                                        </controls:SimpleTreeListItem.ItemsPanel>
+                                        <controls:SimpleTreeListItem.ItemDataTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Vertical" Background="Transparent">
+                                                    <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" Tapped="ShowRecipe_Tapped" Loaded="ShowRecipe_Loaded" IsHitTestVisible="True">
+                                                        <TextBlock Text="查看这道菜的做法" Style="{StaticResource ShoppingListPage_StuffCategoryItem_Style}"/>
+                                                        <Image Source="../Assets/Images/MyPage/more.png" Style="{StaticResource ShoppingListPage_ShowRecipeImge_Style}"/>
+                                                    </controls:SmartGrid>
+                                                    <Rectangle Width="800" Style="{StaticResource LightGaryLine}"/>
+                                                    <controls:SmartGrid HoverOnBackground="{StaticResource SmartGridTouchColor}" IsHitTestVisible="True">
+                                                        <TextBlock Text="{Binding Name}" Style="{StaticResource ShoppingListPage_StuffCategoryItem_Style}"/>
+                                                        <TextBlock Text="{Binding Weight}" Style="{StaticResource ShoppingListPage_StuffItemWeight_Style}"/>
+                                                    </controls:SmartGrid>
+                                                    <Rectangle Width="800" Style="{StaticResource LightGaryLine}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </controls:SimpleTreeListItem.ItemDataTemplate>
+                                    </controls:SimpleTreeListItem>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding Recipes.Count, Converter={StaticResource countToNoItemsVisiblityConverter}}">
+                            <Image Source="../assets/images/noshopping.png" Stretch="None"/>
+                            <TextBlock Text="购物篮里啥都没有" Foreground="#c7c7c7" FontSize="24" Margin="0, 30, 0, 0"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </PivotItem>
+        </Pivot>
+
+        <controls:Toast x:Name="toast" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0, 0, 0, 120"/>
+    </Grid>
+</controls:BackablePage>

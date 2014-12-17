@@ -1,21 +1,16 @@
 ﻿using HaoDouCookBook.Common;
-using HaoDouCookBook.Models;
+using HaoDouCookBook.HaoDou.API;
+using HaoDouCookBook.HaoDou.DataModels.Choiceness;
+using HaoDouCookBook.HaoDou.DataModels.ChoicenessPage;
 using HaoDouCookBook.Pages;
-using System;
-using System.Collections.Generic;
+using HaoDouCookBook.ViewModels;
+using Shared.Utility;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -25,23 +20,12 @@ namespace HaoDouCookBook.Controls
     {
         #region Field && Property
 
-        private ObservableCollection<TopicModel> ranklistData = new ObservableCollection<TopicModel>();
-        private RecipeCategoryTileData cookGemsData = new RecipeCategoryTileData()
-        {
-            MarkText = "厨房宝典"
-        };
-
-        private RecipeCategoryTileData hotRecipesData = new RecipeCategoryTileData()
-        {
-            Title = "热门菜谱",
-            Description = "500道超高人气菜谱随便挑"
-        };
-
-        private RecipeCategoryTileData personalRecipesData = new RecipeCategoryTileData()
-        {
-            Title = "私人定制",
-            Description = "特别为您定制100道菜，可能您会喜欢"
-        };
+        private TagsListData tags = new TagsListData();
+        private SpecialRecipeAlbumData specialRecipeAlbumData = new SpecialRecipeAlbumData();
+        private ObservableCollection<RankItemData> ranklistData = new ObservableCollection<RankItemData>();
+        private RecipeCategoryTileData chuFangBaoDianData = new RecipeCategoryTileData();
+        private ObservableCollection<RecipeCategoryTileData> recipes = new ObservableCollection<RecipeCategoryTileData>();
+        private RecipeCategoryTileData yingYangCanZhuoData = new RecipeCategoryTileData();
 
         #endregion
 
@@ -50,14 +34,16 @@ namespace HaoDouCookBook.Controls
         public ChoicenessPageContent()
         {
             this.InitializeComponent();
+            DataBiding();
+            LoadDataAsync();
             this.Loaded += ChoicenessPageContent_Loaded;
+            searchText.Text = "搜索菜谱、专题、话题";
 
         }
 
         void ChoicenessPageContent_Loaded(object sender, RoutedEventArgs e)
         {
-            DataBiding();
-            Test();
+
         }
 
         #endregion
@@ -72,9 +58,11 @@ namespace HaoDouCookBook.Controls
 
         private void BindRecipeCategories()
         {
-            this.cookGemsTile.DataContext = cookGemsData;
-            this.hotRecipesTile.DataContext = hotRecipesData;
-            this.personalRecipesTile.DataContext = personalRecipesData;
+            this.SpecialRecipeAlbum.DataContext = specialRecipeAlbumData;
+            this.chuFangBiaoDian.DataContext = chuFangBaoDianData;
+            this.yingYangCanZhuo.DataContext = yingYangCanZhuoData;
+            this.recipesList.ItemsSource = recipes;
+            this.TagsList.DataContext = tags;
         }
 
         private void BindRankList()
@@ -82,57 +70,231 @@ namespace HaoDouCookBook.Controls
             this.rankList.ItemsSource = ranklistData;
         }
 
-        #endregion
-
-        #region Test
-
-        private void Test()
+        private async Task LoadDataAsync()
         {
-            // recipe category
-            //
-            cookGemsData.RecipeDescriptionOnImage = "市场上的餐具琳琅满目，如何挑选餐具是大家感到困惑的事情？小便为各位介绍一些选购玩具的小姐窍门，学起来～";
-            cookGemsData.TileImage = Constants.DEFAULT_TOPIC_IMAGE;
-            cookGemsData.Title = "你必须知道的买碗技巧";
-
-            hotRecipesData.RecipeName = "芝麻酥饼";
-            hotRecipesData.Author = "美美家的厨房";
-            hotRecipesTile.AuthorRecipeComment = "因为害怕黄油长肉肉，所以哦哦";
-            hotRecipesData.TileImage = Constants.DEFAULT_TOPIC_IMAGE;
-
-            personalRecipesData.TileImage = Constants.DEFAULT_TOPIC_IMAGE;
-            personalRecipesData.RecipeName = "红焖养肉山药";
-            personalRecipesData.Author = "尚食之文";
-            personalRecipesData.AuthorRecipeComment = "山药可以提供人体大量的能量啊啊啊啊啊";
-            personalRecipesData.TitleIcon = Constants.DEFAULT_USER_PHOTO;
-
-
-            // rank list
-            //
-            RankListTest();
+            loading.SetState(LoadingState.LOADING);
+            await RecipeAPI.GetCollectList(1, 6, null,
+                success =>
+                {
+                    UpdatePageData(success);
+                    loading.SetState(LoadingState.SUCCESS);
+                }, 
+                error => {
+                    Utilities.CommonLoadingRetry(loading, error, async ()=> await LoadDataAsync());
+                });
         }
 
-        private void RankListTest()
+        private void UpdatePageData(ChoicenessPageData data)
         {
-            ranklistData.Clear();
-            ranklistData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "制作清汤火锅的小窍门", PreviewContent = "昨天为大家推荐了番茄鱼火锅，大家都很喜欢，" });
-            ranklistData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "好豆里那些优秀的“国际范”", PreviewContent = "上个月fishmama给大家介绍了很多咱们好豆里优秀的豆亲，受到很多豆亲的关注，" });
-            ranklistData.Add(new TopicModel() { TopicPreviewImageSource = Constants.DEFAULT_TOPIC_IMAGE, Title = "酥脆的酒鬼花生也能自己做", PreviewContent = "草儿喜欢在做事的时候打开收音机或者手机，听听音乐看看视屏" });
+            // Tags
+            //
+            if (data.Tags != null && data.Tags.Length == 8)
+            {
+                tags.Tag1.Icon = data.Tags[0].Icon;
+                tags.Tag1.Text = data.Tags[0].Title;
+
+                tags.Tag2.Icon = data.Tags[1].Icon;
+                tags.Tag2.Text = data.Tags[1].Title;
+
+                tags.Tag3.Icon = data.Tags[2].Icon;
+                tags.Tag3.Text = data.Tags[2].Title;
+
+                tags.Tag4.Icon = data.Tags[3].Icon;
+                tags.Tag4.Text = data.Tags[3].Title;
+
+                tags.Tag5.Icon = data.Tags[4].Icon;
+                tags.Tag5.Text = data.Tags[4].Title;
+
+                tags.Tag6.Icon = data.Tags[5].Icon;
+                tags.Tag6.Text = data.Tags[5].Title;
+
+                tags.Tag7.Icon = data.Tags[6].Icon;
+                tags.Tag7.Text = data.Tags[6].Title;
+
+                tags.Tag8.Icon = data.Tags[7].Icon;
+                tags.Tag8.Text = data.Tags[7].Title;
+            }
+
+
+            // Ad
+            //
+            this.Ads.DataContext = data.ADs[0];
+
+            //Special Recipe AlbumData
+            //
+            if (data.Album != null && data.Album.Length > 0)
+            {
+                var albumData = data.Album[0];
+                specialRecipeAlbumData.Description = albumData.Intro;
+                specialRecipeAlbumData.Title = albumData.Title;
+                specialRecipeAlbumData.MainImageSource = albumData.Cover;
+                specialRecipeAlbumData.Id = albumData.Id;
+                foreach (var smallCover in albumData.SmallCover)
+                {
+                    specialRecipeAlbumData.DetailsImageSources.Add(smallCover);
+                }
+                specialRecipeAlbumData.AlbumMarkImageSource = albumData.Icon;
+            }
+
+            //Chu Fang Biao Dian 
+            //
+            if (data.RecipesWiki != null && data.RecipesWiki.Length > 0)
+            {
+                var baoDianData = data.RecipesWiki[0];
+                chuFangBaoDianData.RecipeDescriptionOnImage = baoDianData.Intro;
+                chuFangBaoDianData.Title = baoDianData.Title;
+                chuFangBaoDianData.MarkText = baoDianData.Icon;
+                chuFangBaoDianData.RecipeDescriptionOnImage = baoDianData.Intro;
+                chuFangBaoDianData.TileImage = baoDianData.Cover;
+                chuFangBaoDianData.Url = baoDianData.Url;
+                chuFangBaoDianData.Id = baoDianData.Id;
+            }
+
+            // recipes
+            //
+            if (data.Recipes != null)
+            {
+                foreach (var item in data.Recipes)
+                {
+                    recipes.Add(new RecipeCategoryTileData()
+                        {
+                            Id = item.Id,
+                            TileImage = item.Cover,
+                            TitleIcon = item.Icon,
+                            Title = item.Title,
+                            Description = item.Intro,
+                            Author = item.UserName,
+                            AuthorRecipeComment = item.Desc,
+                            RecipeName = item.RTitle,
+                            Url = item.Url
+                        });
+                }
+            }
+
+
+            // Ying Yao Can Zhuo
+            //
+            if (data.RecipeTables != null && data.RecipeTables.Length > 0)
+            {
+                var tableData = data.RecipeTables[0];
+                yingYangCanZhuoData.Id = tableData.Id;
+                yingYangCanZhuoData.MarkText = tableData.Icon;
+                yingYangCanZhuoData.TileImage = tableData.Cover;
+                yingYangCanZhuoData.Title = tableData.Title;
+                yingYangCanZhuoData.Description = tableData.Intro;
+                yingYangCanZhuoData.Url = tableData.Url;
+            }
+
+            // Rank
+            //
+            if (data.Rank != null)
+            {
+                foreach (var rankItem in data.Rank)
+                {
+                    ranklistData.Add(new RankItemData()
+                    {
+                        CoverImage = rankItem.Cover,
+                        Description = rankItem.Intro,
+                        Title = rankItem.Title,
+                        Id = rankItem.Id,
+                        Type = rankItem.RankType
+                    });
+                }
+            }
+
         }
+
         #endregion
 
         #region Envent
 
         private void rankListMore_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RankListPage));
+            App.CurrentInstance.RootFrame.Navigate(typeof(RankListPage));
         }
 
+        private void Tag_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<ViewModels.TagItem>();
+            TagsPage.TagPageParams paras = new TagsPage.TagPageParams();
+            paras.Id = dataContext.Id;
+            paras.TagText = dataContext.Text;
+
+            App.CurrentInstance.RootFrame.Navigate(typeof(TagsPage), paras);
+
+        }
 
         private void RecipeCategoryTile_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.Current.RootFrame.Navigate(typeof(RecipeCategoryDetailPage));
+            RecipeCategoryDetailPage.RecipeCategoryDefailPageParams paras = new RecipeCategoryDetailPage.RecipeCategoryDefailPageParams();
+            var dataContext = sender.GetDataContext<ViewModels.RecipeCategoryTileData>();
+            paras.Id = dataContext.Id;
+            paras.Title = dataContext.Title;
+
+            App.CurrentInstance.RootFrame.Navigate(typeof(RecipeCategoryDetailPage), paras);
+        }
+
+        private void JustToWebPageRecipeTile_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var tiledata = sender.GetDataContext<RecipeCategoryTileData>();
+            if (tiledata != null)
+            {
+                string searchMark = "&url=";
+                int index = tiledata.Url.IndexOf(searchMark);
+
+                if (index == -1)
+                {
+                    return;
+                }
+
+                string haodouUrlPrefix = string.Format("haodourecipe://haodou.com/wiki/info/?id={0}&url=", tiledata.Id);
+                string targetUrl = tiledata.Url.Substring(index + searchMark.Length);
+                App.CurrentInstance.RootFrame.Navigate(typeof(ArticleViewer), new ArticleViewer.ArticleViewerPageParams() { Url = targetUrl, TopicId = tiledata.Id });
+            }
+
+        }
+
+        private void RankItemGrid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var rankItemData = sender.GetDataContext<RankItemData>();
+            RankViewPage.RankViewPageParams paras = new RankViewPage.RankViewPageParams();
+            paras.Id = rankItemData.Id;
+            paras.Type = rankItemData.Type;
+
+            App.CurrentInstance.RootFrame.Navigate(typeof(RankViewPage), paras);
+        }
+
+        private void SpecialRecipeAlbum_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<SpecialRecipeAlbumData>();
+            AlbumPage.AlbumPageParams paras = new AlbumPage.AlbumPageParams();
+            paras.AlbumId = dataContext.Id;
+            App.CurrentInstance.RootFrame.Navigate(typeof(AlbumPage), paras);
+        }
+
+        private void searchBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.CurrentInstance.RootFrame.Navigate(typeof(SearchPage));
+        }
+
+        private void Ad_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataContext = sender.GetDataContext<ADItem>();
+
+            ArticleViewer.ArticleViewerPageParams paras = new ArticleViewer.ArticleViewerPageParams();
+            paras.Url = dataContext.Url;
+
+            App.CurrentInstance.RootFrame.Navigate(typeof(ArticleViewer), paras);
+        }
+
+        private void Feedback_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.CurrentInstance.RootFrame.Navigate(typeof(FeedbackPage));
         }
 
         #endregion
+
+       
+
     }
 }

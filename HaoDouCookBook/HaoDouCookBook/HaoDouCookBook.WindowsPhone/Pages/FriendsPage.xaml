@@ -1,0 +1,117 @@
+﻿<controls:BackablePage
+    x:Class="HaoDouCookBook.Pages.FriendsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d" xmlns:shared="using:Shared.Utility"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Text="豆友" Style="{StaticResource SubTitleStyle}"/>
+        </Border>
+        <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0" Background="White">
+            <StackPanel Orientation="Vertical" Margin="20, 0, 20, 0">
+                <controls:SmartGrid Margin="0, 0, 0, 15" HoverOnBackground="{StaticResource hoverGray}"
+                                    Tapped="InfoPanel_Tapped" IsHitTestVisible="True">
+                    <StackPanel Margin="0, 15, 0, 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="65"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Visibility="{Binding Info.UserName, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                <controls:UserPhoto UserId="{Binding Info.UserId}" ImageSource="{Binding Info.Avatar}" Width="65" Height="65"/>
+                                <Image Source="../assets/images/vip_photo_mark.png" Stretch="None" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                               Visibility="{Binding Info.IsVip, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                            </Grid>
+                            <Grid Grid.Column="0" Visibility="{Binding Info.UserName, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}">
+                                <Image Source="../assets/images/friends.png"/>
+                            </Grid>
+                            <Grid Grid.Column="1" Margin="10, 0, 0, 0">
+                                <TextBlock Text="新的豆友" Style="{StaticResource FriendsPage_Title_Style}"/>
+                                <TextBlock Style="{StaticResource FriendsPage_Content_Style}" Visibility="{Binding Info.UserName, Converter={StaticResource AnythingToVisiblityConverter}}">
+                                    <Run Text="{Binding Info.UserName}"/>关注了你
+                                </TextBlock>
+                                <TextBlock Style="{StaticResource FriendsPage_Content_Style}" Text="暂时没有人关注您哦"
+                                           Visibility="{Binding Info.UserName, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}"/>
+                                <controls:CountMark Number="{Binding FansCount}" Height="36" Width="36" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                                    Visibility="{Binding FansCount, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                            </Grid>
+                        </Grid>
+                        <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 15, 0, 0"/>
+                    </StackPanel>
+                </controls:SmartGrid>
+
+                <ItemsControl ItemsSource="{Binding FriendsNameCategories}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <shared:LoadMoreDataTemplateSelector HorizontalAlignment="Center" Content="{Binding}">
+                                <shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="{Binding FirstWord}" Foreground="Gray" FontSize="26"/>
+                                            <Rectangle Style="{StaticResource DarkGrayLine}" Height="4" Width="800"/>
+                                            <ItemsControl ItemsSource="{Binding Friends}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Vertical"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <controls:SmartGrid Margin="0, 0, 0, 15" HoverOnBackground="{StaticResource hoverGray}"
+                                                                IsHitTestVisible="True">
+                                                            <StackPanel Margin="0, 15, 0, 0">
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="65"/>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Grid Grid.Column="0">
+                                                                        <controls:UserPhoto UserId="{Binding UserId}" ImageSource="{Binding Avatar}" Width="65" Height="65"/>
+                                                                        <Image Source="../assets/images/vip_photo_mark.png" Stretch="None" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                                                           Visibility="{Binding IsVip, Converter={StaticResource AnythingToVisiblityConverter}}"/>
+                                                                    </Grid>
+                                                                    <Grid Grid.Column="1" Margin="10, 0, 0, 0" Tapped="Friend_Tapped" >
+                                                                        <TextBlock Text="{Binding UserName}" Style="{StaticResource FriendsPage_Title_Style}"/>
+                                                                        <TextBlock Text="{Binding Description}" Style="{StaticResource FriendsPage_Description_Style}"/>
+                                                                    </Grid>
+                                                                </Grid>
+                                                                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 15, 0, 0"/>
+                                                            </StackPanel>
+                                                        </controls:SmartGrid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.ItemTemplate>
+                                <shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                                    <DataTemplate>
+                                        <controls:LoadMoreControl Margin="0, 10, 0, 20" HorizontalAlignment="Center" Loaded="loadMore_Loaded"/>
+                                    </DataTemplate>
+                                </shared:LoadMoreDataTemplateSelector.LoadMoreTemplate>
+                            </shared:LoadMoreDataTemplateSelector>
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid Margin="0, 105, 0, 0" Visibility="{Binding AllFansCount, Converter={StaticResource AnythingToVisiblityConverter}, ConverterParameter=neg}" >
+            <Image Source="../assets/images/findfriends.png" Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="NoItemsText" Style="{StaticResource FriendsPage_NOItemText_Style}"/>
+        </Grid>
+        <controls:NetworkLoading x:Name="loading" Margin="0, 105, 0, 0"/>
+    </Grid>
+</controls:BackablePage>

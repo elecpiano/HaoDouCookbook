@@ -1,0 +1,69 @@
+﻿<controls:BackablePage
+    x:Class="HaoDouCookBook.Pages.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+    <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Text="登录" Style="{StaticResource SubTitleStyle}"/>
+        </Border>
+        <Border Margin="0, 105, 0, 0" Background="White">
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="20, 20, 20, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Margin="0, 30, 0, 0">
+                        <Image Stretch="None" Source="../assets/images/username.png" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBox Name="userName" Style="{StaticResource LoginPage_UserName_Style}"/>
+                        <Image Source="../Assets/images/textboxGrayLine.png" Style="{StaticResource LoginPage_TextBox_line_Style}"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="0, 30, 0, 0">
+                        <Image Stretch="None" Source="../assets/images/password.png" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <PasswordBox Name="userPwd" Style="{StaticResource LoginPage_Password_Style}"/>
+                        <Image Source="../Assets/images/textboxGrayLine.png" Style="{StaticResource LoginPage_TextBox_line_Style}"/>
+                    </Grid>
+
+                    <Button Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0, 20, 0, 0" Click="Login_Click">
+                        <Button.Content>
+                            <TextBlock FontSize="24" Text="登录好豆" FontWeight="Normal" Margin="80, 3, 80, 3"/>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+                
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="注册" Margin="0, 30, 40, 0" Style="{StaticResource LoginPage_ForgetPassword_Style}" Tapped="register_Tapped"/>
+                    <TextBlock Text="忘记密码？" Style="{StaticResource LoginPage_ForgetPassword_Style}" Tapped="forgetPassword_Tapped"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="20, 50, 20, 0">
+                    <Rectangle Style="{StaticResource DarkGrayLine}" Height="0.8" Width="80"/>
+                    <TextBlock Text="或使用第三方登录" FontSize="18" Foreground="Gray" Margin="20, 0, 20, 0"/>
+                    <Rectangle Style="{StaticResource DarkGrayLine}" Height="0.8" Width="80"/>
+                </StackPanel>
+
+                <Grid Margin="0, 30, 0, 0">
+                    <StackPanel Orientation="Vertical" Margin="0, 0, 120, 0">
+                        <Image Source="../assets/images/qq.png" Style="{StaticResource LoginPage_QQorSina_Style}"/>
+                        <TextBlock Text="QQ" Style="{StaticResource LoginPage_QQorSinaText_Style}"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Vertical" Margin="120, 0, 0, 0">
+                        <Image Source="../assets/images/sina.png" Style="{StaticResource LoginPage_QQorSina_Style}"/>
+                        <TextBlock Text="微博" Style="{StaticResource LoginPage_QQorSinaText_Style}"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <controls:Toast x:Name="toast" VerticalAlignment="Bottom" Margin="0, 0, 0, 180" HorizontalAlignment="Center"/>
+    </Grid>
+</controls:BackablePage>

@@ -9,12 +9,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HaoDouCookBook</RootNamespace>
     <AssemblyName>HaoDouCookBook.WindowsPhone</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{76F1466A-8B6D-4E39-A767-685A06062A39};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -81,21 +83,348 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Folder Include="Assets\Images\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ActivityTypeToStringConverter.cs" />
+    <Compile Include="Common\DiggcountAndCommentsCountToActivityVisibilityConverter.cs" />
+    <Compile Include="Common\FavoriteCountToStringConverter.cs" />
+    <Compile Include="Common\FollowCountConverter.cs" />
+    <Compile Include="Common\FriendsCirclePageCommentsCountToVisibilityConverter.cs" />
+    <Compile Include="Common\ListCountToNoItemsVisibilityConverter.cs" />
+    <Compile Include="Common\LocalDownlods.cs" />
+    <Compile Include="Common\MainStuffColorConverter.cs" />
+    <Compile Include="Common\RecipeImageToDefaultImageConverter.cs" />
+    <Compile Include="Common\SettingValueStringToDisplayNameConverter.cs" />
+    <Compile Include="Common\UserIdToVisibilityConverter.cs" />
+    <Compile Include="Common\UserRecipeDraft.cs" />
+    <Compile Include="Common\Utilities.cs" />
+    <Compile Include="Controls\ActivitySupportAndComment.xaml.cs">
+      <DependentUpon>ActivitySupportAndComment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AddFavoriteRecipeDialog.xaml.cs">
+      <DependentUpon>AddFavoriteRecipeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AddRecipeToLocalDownloadDialog.xaml.cs">
+      <DependentUpon>AddRecipeToLocalDownloadDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdImagePivot.xaml.cs">
+      <DependentUpon>AdImagePivot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AlbumTile.xaml.cs">
+      <DependentUpon>AlbumTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BackablePage.cs" />
+    <Compile Include="Controls\Banner.xaml.cs">
+      <DependentUpon>Banner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Cate.xaml.cs">
+      <DependentUpon>Cate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CategoryImageTile.xaml.cs">
+      <DependentUpon>CategoryImageTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CategoryTitle.xaml.cs">
+      <DependentUpon>CategoryTitle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ChoicenessPageContent.xaml.cs">
       <DependentUpon>ChoicenessPageContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CountMark.xaml.cs">
+      <DependentUpon>CountMark.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DiscoveryPageContent.xaml.cs">
       <DependentUpon>DiscoveryPageContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DishTile.xaml.cs">
+      <DependentUpon>DishTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FavoriteRecipes.xaml.cs">
+      <DependentUpon>FavoriteRecipes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FavoriteTopics.xaml.cs">
+      <DependentUpon>FavoriteTopics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FavoriteAlbums.xaml.cs">
+      <DependentUpon>FavoriteAlbums.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LoadingCircle.xaml.cs">
+      <DependentUpon>LoadingCircle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LoadMoreControl.xaml.cs">
+      <DependentUpon>LoadMoreControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LocalDownloadsControl.xaml.cs">
+      <DependentUpon>LocalDownloadsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MealTile.xaml.cs">
+      <DependentUpon>MealTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MessageBuble.xaml.cs">
+      <DependentUpon>MessageBuble.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MessageInput.xaml.cs">
+      <DependentUpon>MessageInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MyPageContent.xaml.cs">
       <DependentUpon>MyPageContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NetworkLoading.xaml.cs">
+      <DependentUpon>NetworkLoading.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RecipeCategoryTile.xaml.cs">
+      <DependentUpon>RecipeCategoryTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RecipeTile.xaml.cs">
+      <DependentUpon>RecipeTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SelectGenderDialog.xaml.cs">
+      <DependentUpon>SelectGenderDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SelectPhotoDialog.xaml.cs">
+      <DependentUpon>SelectPhotoDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SettingGroupTitle.xaml.cs">
+      <DependentUpon>SettingGroupTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ShadowTextBlock.xaml.cs">
+      <DependentUpon>ShadowTextBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SimpleSettingItem.xaml.cs">
+      <DependentUpon>SimpleSettingItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SimpleTreeListItem.xaml.cs">
+      <DependentUpon>SimpleTreeListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SmartGrid.cs" />
     <Compile Include="Controls\SquarePageConent.xaml.cs">
       <DependentUpon>SquarePageConent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StuffControl.xaml.cs">
+      <DependentUpon>StuffControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TagControl.xaml.cs">
+      <DependentUpon>TagControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TagRecipeItem.xaml.cs">
+      <DependentUpon>TagRecipeItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Toast.xaml.cs">
+      <DependentUpon>Toast.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TopicTile.xaml.cs">
+      <DependentUpon>TopicTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UniversalWrapPanel.cs" />
+    <Compile Include="Controls\UserActivity.xaml.cs">
+      <DependentUpon>UserActivity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserDraft.xaml.cs">
+      <DependentUpon>UserDraft.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserPhoto.xaml.cs">
+      <DependentUpon>UserPhoto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserProfileSummary.xaml.cs">
+      <DependentUpon>UserProfileSummary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserRecipesControl.xaml.cs">
+      <DependentUpon>UserRecipesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AddNewAlbumDialog.xaml.cs">
+      <DependentUpon>AddNewAlbumDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddRecipeStepsPage.xaml.cs">
+      <DependentUpon>AddRecipeStepsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdRecommendationPage.xaml.cs">
+      <DependentUpon>AdRecommendationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AlbumListPage.xaml.cs">
+      <DependentUpon>AlbumListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AlbumPage.xaml.cs">
+      <DependentUpon>AlbumPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ArticleViewer.xaml.cs">
+      <DependentUpon>ArticleViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CategoryPage.xaml.cs">
+      <DependentUpon>CategoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CategoryTagsPage.xaml.cs">
+      <DependentUpon>CategoryTagsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CommentListPage.xaml.cs">
+      <DependentUpon>CommentListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DiggUserListPage.xaml.cs">
+      <DependentUpon>DiggUserListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExtendedSplash.xaml.cs">
+      <DependentUpon>ExtendedSplash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FavoritePage.xaml.cs">
+      <DependentUpon>FavoritePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FavoriteRecipeAlbumPage.xaml.cs">
+      <DependentUpon>FavoriteRecipeAlbumPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FeebackHistory.xaml.cs">
+      <DependentUpon>FeebackHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FeedbackPage.xaml.cs">
+      <DependentUpon>FeedbackPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FriendsCirclePage.xaml.cs">
+      <DependentUpon>FriendsCirclePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FriendsPage.xaml.cs">
+      <DependentUpon>FriendsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\IMPage.xaml.cs">
+      <DependentUpon>IMPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LocalDownloadFolderViewer.xaml.cs">
+      <DependentUpon>LocalDownloadFolderViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LocalDownloadPage.xaml.cs">
+      <DependentUpon>LocalDownloadPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MessagePage.xaml.cs">
+      <DependentUpon>MessagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MyDraftPage.xaml.cs">
+      <DependentUpon>MyDraftPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MyProductPage.xaml.cs">
+      <DependentUpon>MyProductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MyRecipesPage.xaml.cs">
+      <DependentUpon>MyRecipesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NoticeDetailPage.xaml.cs">
+      <DependentUpon>NoticeDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PersnalInfoPage.xaml.cs">
+      <DependentUpon>PersnalInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PersonalTagsPage.xaml.cs">
+      <DependentUpon>PersonalTagsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProductPage.xaml.cs">
+      <DependentUpon>ProductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AllAlbumsListPage.xaml.cs">
+      <DependentUpon>AllAlbumsListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PublishProductsPage.xaml.cs">
+      <DependentUpon>PublishProductsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PublishRecipePage.xaml.cs">
+      <DependentUpon>PublishRecipePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RankViewPage.xaml.cs">
+      <DependentUpon>RankViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RecipeInfoPage.xaml.cs">
+      <DependentUpon>RecipeInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SearchInputPage.xaml.cs">
+      <DependentUpon>SearchInputPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SearchPage.xaml.cs">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SearchResultPage.xaml.cs">
+      <DependentUpon>SearchResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SelectAreasPage.xaml.cs">
+      <DependentUpon>SelectAreasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShakePage.xaml.cs">
+      <DependentUpon>ShakePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShoppingListPage.xaml.cs">
+      <DependentUpon>ShoppingListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SignupPage.xaml.cs">
+      <DependentUpon>SignupPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SingleProductViewPage.xaml.cs">
+      <DependentUpon>SingleProductViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StuffInfoPage.xaml.cs">
+      <DependentUpon>StuffInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TagsPage.xaml.cs">
+      <DependentUpon>TagsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BigTextBox.xaml.cs">
+      <DependentUpon>BigTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TopicListPage.xaml.cs">
+      <DependentUpon>TopicListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TutorialViewPage.xaml.cs">
+      <DependentUpon>TutorialViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserFollowersPage.xaml.cs">
+      <DependentUpon>UserFollowersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserProfilePage.xaml.cs">
+      <DependentUpon>UserProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AdRecommendationPageViewModel.cs" />
+    <Compile Include="ViewModels\AlbumListPageViewModel.cs" />
+    <Compile Include="ViewModels\AlbumPageViewModel.cs" />
+    <Compile Include="ViewModels\CategoryPageViewModel.cs" />
+    <Compile Include="ViewModels\CategoryTileData.cs" />
+    <Compile Include="ViewModels\CommentListPageViewModel.cs" />
+    <Compile Include="ViewModels\CookMaster.cs" />
+    <Compile Include="ViewModels\DiggUserListPageViewModel.cs" />
+    <Compile Include="ViewModels\DiscoveryPageViewModel.cs" />
+    <Compile Include="ViewModels\DishTileData.cs" />
+    <Compile Include="ViewModels\FavoritePageViewlModel.cs" />
+    <Compile Include="ViewModels\FavoriteRecipesAlbumPageViewModel.cs" />
+    <Compile Include="ViewModels\FeedbackViewModel.cs" />
+    <Compile Include="ViewModels\IMPageViewModel.cs" />
+    <Compile Include="ViewModels\Meal.cs" />
+    <Compile Include="ViewModels\MessagePageViewModel.cs" />
+    <Compile Include="ViewModels\MyPageViewModel.cs" />
+    <Compile Include="ViewModels\NewbieTutorial.cs" />
+    <Compile Include="ViewModels\NoticePageViewModel.cs" />
+    <Compile Include="ViewModels\PersonalPageViewModel.cs" />
+    <Compile Include="ViewModels\ProductPageViewModel.cs" />
+    <Compile Include="ViewModels\PublishProductsPageViewModel.cs" />
+    <Compile Include="ViewModels\PublishRecipePageViewModel.cs" />
+    <Compile Include="ViewModels\PulishReciepeStepsViewModel.cs" />
+    <Compile Include="ViewModels\RankItemData.cs" />
+    <Compile Include="ViewModels\RankViewPageViewModel.cs" />
+    <Compile Include="ViewModels\RecipeCategoryTileData.cs" />
+    <Compile Include="ViewModels\RecipeInfoPageViewModel.cs" />
+    <Compile Include="ViewModels\RecipeTileData.cs" />
+    <Compile Include="ViewModels\SearchPageViewModel.cs" />
+    <Compile Include="ViewModels\SearchResultPageViewModel.cs" />
+    <Compile Include="ViewModels\SelectAreasPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\ShakePageViewModel.cs" />
+    <Compile Include="ViewModels\ShoppingListPageViewModel.cs" />
+    <Compile Include="ViewModels\SingleProductViewPageViewModel.cs" />
+    <Compile Include="ViewModels\SpecialRecipeAlbumData.cs" />
+    <Compile Include="ViewModels\StuffInfoViewModel.cs" />
+    <Compile Include="ViewModels\TagRecipeData.cs" />
+    <Compile Include="ViewModels\TagsList.cs" />
+    <Compile Include="ViewModels\TagsPageViewModel.cs" />
+    <Compile Include="ViewModels\TopciListPageViewModel.cs" />
+    <Compile Include="ViewModels\Topic.cs" />
+    <Compile Include="ViewModels\UserActivity.cs" />
+    <Compile Include="ViewModels\UserData.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -112,6 +441,10 @@
     <Compile Include="SharedLibraryTest.xaml.cs">
       <DependentUpon>SharedLibraryTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\UserFollowersPageViewModel.cs" />
+    <Compile Include="ViewModels\UserProfilePageViewModel.cs" />
+    <Compile Include="ViewModels\UserRecipe.cs" />
+    <Compile Include="ViewModels\FriendsPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -119,6 +452,85 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\activitycomment.png" />
+    <Content Include="Assets\Images\addRecipeAlbum.png" />
+    <Content Include="Assets\Images\addstep.png" />
+    <Content Include="Assets\Images\background1.png" />
+    <Content Include="Assets\Images\camera.png" />
+    <Content Include="Assets\Images\clear.png" />
+    <Content Include="Assets\Images\DefaultImageBig.png" />
+    <Content Include="Assets\Images\DefaultImageSmall.png" />
+    <Content Include="Assets\Images\download.png" />
+    <Content Include="Assets\Images\down_arrow.png" />
+    <Content Include="Assets\Images\email.png" />
+    <Content Include="Assets\Images\findfriends.png" />
+    <Content Include="Assets\Images\friends.png" />
+    <Content Include="Assets\Images\likeheart.png" />
+    <Content Include="Assets\Images\phone.png" />
+    <Content Include="Assets\Images\ProductPage\like_white.png" />
+    <Content Include="Assets\Images\messageNotice.png" />
+    <Content Include="Assets\Images\messageSend.png" />
+    <Content Include="Assets\Images\myFavoriteRecipeAlbum.png" />
+    <Content Include="Assets\Images\myLikeRecipeAlbum.png" />
+    <Content Include="Assets\Images\noactivity.png" />
+    <Content Include="Assets\Images\nofollow.png" />
+    <Content Include="Assets\Images\InfoTag.png" />
+    <Content Include="Assets\Images\like.png" />
+    <Content Include="Assets\Images\loading.png" />
+    <Content Include="Assets\Images\logo.png" />
+    <Content Include="Assets\Images\logo_recipe.jpg" />
+    <Content Include="Assets\Images\MyPage\AppGems.png" />
+    <Content Include="Assets\Images\MyPage\Douquan.png" />
+    <Content Include="Assets\Images\MyPage\Draft.png" />
+    <Content Include="Assets\Images\MyPage\Favorite.png" />
+    <Content Include="Assets\Images\MyPage\Friends.png" />
+    <Content Include="Assets\Images\MyPage\Localdownloads.png" />
+    <Content Include="Assets\Images\MyPage\Message.png" />
+    <Content Include="Assets\Images\MyPage\More.png" />
+    <Content Include="Assets\Images\MyPage\MyArticle.png" />
+    <Content Include="Assets\Images\MyPage\MyRecipe.png" />
+    <Content Include="Assets\Images\MyPage\Settings.png" />
+    <Content Include="Assets\Images\MyPage\ShippingList.png" />
+    <Content Include="Assets\Images\noavatar_300.jpg" />
+    <Content Include="Assets\Images\noMessage.png" />
+    <Content Include="Assets\Images\nonetwork.png" />
+    <Content Include="Assets\Images\noshopping.png" />
+    <Content Include="Assets\Images\no_result_search.png" />
+    <Content Include="Assets\Images\password.png" />
+    <Content Include="Assets\Images\ProductPage\comment_gray.png" />
+    <Content Include="Assets\Images\ProductPage\comment_green.png" />
+    <Content Include="Assets\Images\ProductPage\like_gray.png" />
+    <Content Include="Assets\Images\ProductPage\like_Green.png" />
+    <Content Include="Assets\Images\ProductPage\position.png" />
+    <Content Include="Assets\Images\ProductPage\social.png" />
+    <Content Include="Assets\Images\qq.png" />
+    <Content Include="Assets\Images\qq_gray.png" />
+    <Content Include="Assets\Images\Rank\rank-1.png" />
+    <Content Include="Assets\Images\Rank\rank-2.png" />
+    <Content Include="Assets\Images\Rank\rank-3.png" />
+    <Content Include="Assets\Images\Rank\rank-4.png" />
+    <Content Include="Assets\Images\search.png" />
+    <Content Include="Assets\Images\SearchPage\clear.png" />
+    <Content Include="Assets\Images\SearchPage\search_history.png" />
+    <Content Include="Assets\Images\SearchPage\search_texbox.png" />
+    <Content Include="Assets\Images\sina.png" />
+    <Content Include="Assets\Images\sina_gray.png" />
+    <Content Include="Assets\Images\star.png" />
+    <Content Include="Assets\Images\stepcamera.png" />
+    <Content Include="Assets\Images\stepMark.png" />
+    <Content Include="Assets\Images\supportandcomment.png" />
+    <Content Include="Assets\Images\tags.png" />
+    <Content Include="Assets\Images\TextBoxBlueLine.png" />
+    <Content Include="Assets\Images\TextBoxGrayLine.png" />
+    <Content Include="Assets\Images\TextBoxGreenLine.png" />
+    <Content Include="Assets\Images\up_arrow.png" />
+    <Content Include="Assets\Images\username.png" />
+    <Content Include="Assets\Images\user_noactivities.png" />
+    <Content Include="Assets\Images\user_nodraft.png" />
+    <Content Include="Assets\Images\user_noproducts.png" />
+    <Content Include="Assets\Images\user_norecipes.png" />
+    <Content Include="Assets\Images\vip.png" />
+    <Content Include="Assets\Images\vip_photo_mark.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
@@ -127,7 +539,47 @@
     <Content Include="Assets\WideLogo.scale-240.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\ActivitySupportAndComment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AddFavoriteRecipeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AddRecipeToLocalDownloadDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AdImagePivot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AlbumTile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Banner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Cate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CategoryImageTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CategoryTitle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\ChoicenessPageContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CountMark.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,11 +587,215 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\DishTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FavoriteRecipes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FavoriteTopics.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FavoriteAlbums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LoadingCircle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LoadMoreControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LocalDownloadsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MealTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MessageBuble.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MessageInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MyPageContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\NetworkLoading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RecipeCategoryTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RecipeTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SelectGenderDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SelectPhotoDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SettingGroupTitle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ShadowTextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SimpleSettingItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SimpleTreeListItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\SquarePageConent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StuffControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TagControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TagRecipeItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Toast.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TopicTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UserActivity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserDraft.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserPhoto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UserProfileSummary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserRecipesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AddNewAlbumDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddRecipeStepsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdRecommendationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AlbumListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ArticleViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CategoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CategoryTagsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CommentListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DiggUserListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExtendedSplash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FavoritePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FavoriteRecipeAlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FeebackHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FeedbackPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FriendsCirclePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FriendsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\IMPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LocalDownloadFolderViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LocalDownloadPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,11 +803,123 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\MessagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MyDraftPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MyProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MyRecipesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\NoticeDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PersnalInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PersonalTagsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AllAlbumsListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PublishProductsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PublishRecipePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RankListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\RankViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RecipeCategoryDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RecipeInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SearchInputPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SearchResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SelectAreasPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ShakePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ShoppingListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SignupPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SingleProductViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StuffInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TagsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BigTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TopicListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TutorialViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UserFollowersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UserProfilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,6 +928,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SharedLibraryTest.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\AppStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

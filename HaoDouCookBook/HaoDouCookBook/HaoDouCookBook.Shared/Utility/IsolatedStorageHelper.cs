@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.FileProperties;
 using Windows.Storage.Streams;
+using System.Linq;
 
 namespace Shared.Utility
 {
@@ -35,7 +36,7 @@ namespace Shared.Utility
             }
         }
 
-        public static async Task WriteToFile(string folderName, string fileName, string content)
+        public static async Task WriteToFileAsync(string folderName, string fileName, string content)
         {
             if (!folderName.StartsWith(USER_DATA_FOLDER_NAME + "\\"))
             {
@@ -62,7 +63,7 @@ namespace Shared.Utility
             }
         }
 
-        public static async Task<string> ReadFile(string folderName, string fileName)
+        public static async Task<string> ReadFileAsync(string folderName, string fileName)
         {
             if (!folderName.StartsWith(USER_DATA_FOLDER_NAME + "\\"))
             {
@@ -75,19 +76,42 @@ namespace Shared.Utility
             if (local != null)
             {
                 // Get the DataFolder folder.
-                var dataFolder = await local.GetFolderAsync(folderName);
+                StorageFolder dataFolder = null;
+
+                try
+                {
+                    dataFolder = await local.GetFolderAsync(folderName);
+                }
+                catch (FileNotFoundException)
+                {
+                    return null;
+                }
 
                 if (dataFolder == null)
                 {
                     return null;
                 }
-                // Get the file.
-                var file = await dataFolder.OpenStreamForReadAsync(fileName);
 
-                // Read the data.
-                using (StreamReader streamReader = new StreamReader(file))
+                try
                 {
-                    return streamReader.ReadToEnd();
+
+                    // Get the file.
+                    var file = await dataFolder.OpenStreamForReadAsync(fileName);
+
+                    if (file == null)
+                    {
+                        return null;
+                    }
+
+                    // Read the data.
+                    using (StreamReader streamReader = new StreamReader(file))
+                    {
+                        return streamReader.ReadToEnd();
+                    }
+                }
+                catch (FileNotFoundException)
+                {
+                    return null;
                 }
             }
             return null;
@@ -123,14 +147,38 @@ namespace Shared.Utility
             return null;
         }
 
-        public static async Task<ulong> GetUserDataSize()
+        public static async Task<ulong> GetUserDataSizeAsync()
         {
             StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
             var folder = await local.CreateFolderAsync(USER_DATA_FOLDER_NAME, CreationCollisionOption.OpenIfExists);
-            return await GetFolderSize(folder);
+            return await GetFolderSizeAsync(folder);
         }
 
-        public static async Task<ulong> GetFolderSize(StorageFolder folder)
+        public static async Task<ulong> GetUserDataSizeAsync(params string[] excludedFolders)
+        {
+            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+            ulong totalSize = 0;
+
+            if (local == null)
+            {
+                return totalSize;
+            }
+
+
+            var folder = await local.CreateFolderAsync(USER_DATA_FOLDER_NAME, CreationCollisionOption.OpenIfExists);
+            var subFolders = await folder.GetFoldersAsync();
+            foreach (var subFolder in subFolders)
+            {
+                if (!excludedFolders.Contains(subFolder.Name))
+                {
+                    totalSize += await GetFolderSizeAsync(subFolder);
+                }
+            }
+
+            return totalSize;
+        }
+
+        public static async Task<ulong> GetFolderSizeAsync(StorageFolder folder)
         {
             ulong size = 0;
 
@@ -138,7 +186,7 @@ namespace Shared.Utility
             {
                 foreach (StorageFolder thisFolder in await folder.GetFoldersAsync())
                 {
-                    size += await GetFolderSize(thisFolder);
+                    size += await GetFolderSizeAsync(thisFolder);
                 }
 
                 foreach (StorageFile thisFile in await folder.GetFilesAsync())
@@ -150,17 +198,94 @@ namespace Shared.Utility
             catch (Exception ex)
             {
             }
-            
+
             return size;
         }
 
-        public static async Task ClearUserData()
+        public static async Task ClearUserDataAsync()
         {
             StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
             var folder = await local.GetFolderAsync(USER_DATA_FOLDER_NAME);
             if (folder != null)
             {
                 await folder.DeleteAsync(StorageDeleteOption.PermanentDelete);
+            }
+        }
+
+        public static async Task ClearUserDataAsync(params string[] excludedFolders)
+        {
+            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+            if (local == null)
+            {
+                return;
+            }
+
+            var folder = await local.GetFolderAsync(USER_DATA_FOLDER_NAME);
+            if (folder != null)
+            {
+                var subFolders = await folder.GetFoldersAsync();
+                foreach (var subFolder in subFolders)
+                {
+                    if (!excludedFolders.Contains(subFolder.Name))
+                    {
+                        await subFolder.DeleteAsync(StorageDeleteOption.PermanentDelete);
+                    }
+                }
+            }
+        }
+
+        public static async Task<string> CopyFromFileAsync(IStorageFile file, string folderName)
+        {
+            if (!folderName.StartsWith(USER_DATA_FOLDER_NAME + "\\"))
+            {
+                folderName = USER_DATA_FOLDER_NAME + "\\" + folderName;
+            }
+
+            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+            var size = (await file.GetBasicPropertiesAsync()).Size;
+            if (local != null)
+            {
+                var dataFolder = await local.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
+                string newFileName = string.Format("{0}-{1}{2}", MD5Core.GetHashString(file.Path), size.ToString(), file.FileType);
+                bool newFileExist = true;
+
+                try
+                {
+                    var fileAlreadyInLocal = await dataFolder.GetFileAsync(newFileName);
+                    return fileAlreadyInLocal.Path;
+                }
+                catch (FileNotFoundException)
+                {
+                    newFileExist = false;
+                }
+
+                if (!newFileExist)
+                {
+                    var newFile = await file.CopyAsync(dataFolder, newFileName);
+                    if (newFile != null)
+                    {
+                        return newFile.Path;
+                    }
+                }
+
+                return string.Empty;
+            }
+
+            return string.Empty;
+        }
+
+        public static async Task DeleteFolderAsync(string folderName)
+        {
+            if (!folderName.StartsWith(USER_DATA_FOLDER_NAME + "\\"))
+            {
+                folderName = USER_DATA_FOLDER_NAME + "\\" + folderName;
+            } 
+
+            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+            if (local != null)
+            {
+                var dataFolder = await local.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
+                await dataFolder.DeleteAsync();
             }
         }
     }

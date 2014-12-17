@@ -1,0 +1,1119 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib" 
+    xmlns:converters="using:Shared.Converters"
+    xmlns:common ="using:HaoDouCookBook.Common"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    >
+    <!--Converters-->
+    <converters:AnythingToVisibilityConverter x:Key="AnythingToVisiblityConverter"/>
+    <common:FavoriteCountToStringConverter x:Key="favoriteCountToStringConverter"/>
+    <common:SignedInUserIdToVisibilityConverter x:Key="signedInUserIdToVisibilityConverter"/>
+    <common:NotSignedInUserIdToVisibilityConverter x:Key="notSignedInUserIdToVisibilityConverter"/>
+    <common:ListCountToNoItemsVisibilityConverter x:Key="countToNoItemsVisiblityConverter" />
+    <common:CountToDescriptionStringConverter x:Key="countToDescConverter"/>
+    <common:ActivityTypeToStringConverter x:Key="activityTypeToStringConverter"/>
+    <common:ImageToDefaultImageConverter x:Key="imageToDefaultConverter"/>
+
+    <!--Colors-->
+    <SolidColorBrush x:Key="TopAppbarColor" Color="#fff8f8f8"/>
+    <SolidColorBrush x:Key="GreenMain" Color="#78a708"/>
+    <SolidColorBrush x:Key="DarkerGreenMain" Color="#8cb446"/>
+    <SolidColorBrush x:Key="SmartGridTouchColor" Color="#8837afd6"/>
+    <SolidColorBrush x:Key="hoverGray" Color="#10000000"/>
+
+    <!--Default Font-->
+    <Style x:Key="TextBlockBase" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18"/>
+        <!--<Setter Property="FontFamily" Value="Rosewood Std Regular"/>-->
+    </Style>
+
+    <!--App Bar-->
+    <Style x:Key="bottomAppbarStyle" TargetType="CommandBar">
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <!--SubTitle-->
+    <Style x:Key="SubTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Margin" Value="12, 0, 0, 15"/>
+        <Setter Property="FontSize" Value="42"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="Width" Value="370"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <!--Topic Tile-->
+    <Style x:Key="TopicTileStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="MaxLines" Value="2"/>
+    </Style>
+
+
+    <Style x:Key="TopicContentStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="MaxLines" Value="2"/>
+    </Style>
+
+    <!--Category-->
+    <Style x:Key="CategoryTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Foreground" Value="#8cb446"/>
+    </Style>
+
+    <Style x:Key="CategoryTileTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="19"/>
+    </Style>
+
+    <Style x:Key="DishTileTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="0, 6, 0, 0"/>
+    </Style>
+
+    <Style x:Key="DishTileSupportLineStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="#AA000000"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <!--Line Style-->
+    <Style x:Key="GrayLine" TargetType="Rectangle">
+        <Setter Property="Stroke" Value="#dedede"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Height" Value="1"/>
+        <Setter Property="Fill" Value="#dedede"/>
+    </Style>
+
+    <Style x:Key="LightGaryLine" TargetType="Rectangle">
+        <Setter Property="Stroke" Value="#dfdfdf"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Height" Value="1"/>
+        <Setter Property="Fill" Value="#dfdfdf"/>
+    </Style>
+
+    <Style x:Key="DarkGrayLine" TargetType="Rectangle">
+        <Setter Property="Stroke" Value="#d1d1d1"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Height" Value="1.5"/>
+        <Setter Property="Fill" Value="#d1d1d1"/>
+    </Style>
+
+    <Style x:Key="GreenLine" TargetType="Rectangle">
+        <Setter Property="Stroke" Value="Green"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Height" Value="1.5"/>
+        <Setter Property="Fill" Value="Green"/>
+    </Style>
+
+
+    <!--Meal Text Style-->
+    <Style x:Key="MealText" TargetType="controls:ShadowTextBlock">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+    </Style>
+
+
+    <!--Newbie Tutorial-->
+    <Style x:Key="NewbieTutorialText" TargetType="controls:ShadowTextBlock">
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+    </Style>
+
+    <!--Recipe Category Tile-->
+    <Style x:Key="RecipeCategoryTileTitle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="23"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="RecipeCategoryTileDescription" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="MaxLines" Value="3"/>
+        <Setter Property="Foreground" Value="#99000000"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+
+    <Style x:Name="RecipeCategoryTextOnImage" TargetType="controls:ShadowTextBlock">
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style x:Name="RecipeCategoryLittleTextOnImage" TargetType="controls:ShadowTextBlock">
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style x:Name="RecipeCategoryDescOnImageShadowText" TargetType="controls:ShadowTextBlock">
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="4"/>
+    </Style>
+
+    <Style x:Name="RecipeCategoryDescriptionOnImage" TargetType="TextBlock">
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="4"/>
+    </Style>
+
+    <!--Recipe Tile-->
+    <Style x:Key="RecipeTileSupportNumber" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Margin" Value="0, 0, 21, 25"/>
+    </Style>
+
+    <Style x:Key="RecipTile_Like_Image" TargetType="Image">
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="Margin" Value="0, 0, 20, 20"/>
+        <Setter Property="Width" Value="68"/>
+    </Style>
+
+    <Style x:Key="RecipeTileTagsStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#CC000000"/>
+        <Setter Property="Margin" Value="10, 0, 0, 0"/>
+        <Setter Property="Width" Value="320"/>
+    </Style>
+
+    <Style x:Key="RecipeTileRecommendationStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#CC000000"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="4"/>
+        <Setter Property="Margin" Value="0, 5, 0, 0"/>
+    </Style>
+
+    <!--My Page-->
+    <Style x:Key="MyPage_LoginNotifyInfo_style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Margin" Value="40, 40, 40, 30"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
+
+    <!--Settings-->
+    <Style x:Key="SettingGroupTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="#8cb446"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+
+    <Style x:Key="ToggleSwitchNoTextStyle" TargetType="ToggleSwitch">
+        <Setter Property="OnContent" Value=""/>
+        <Setter Property="OffContent" Value=""/>
+    </Style>
+
+    <!--Tags-->
+    <Style x:Key="TagsContentStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="TagsPage_FoodCover_Style" TargetType="Image">
+        <Setter Property="Stretch" Value="UniformToFill"/>
+        <Setter Property="Margin" Value="3, 0, 0, 0"/>
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <Style x:Key="TagsPage_FoodName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="24"/>
+    </Style>
+
+    <Style x:Key="TagsPage_FoodIntro_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="0, 30, 0, 20"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="2"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="RecipeInfoPage_Tags_Style" TargetType="Border">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Background" Value="#10000000"/>
+        <Setter Property="Margin" Value="0, 0, 12, 12"/>
+    </Style>
+
+    <Style x:Key="TagRecipeItem_CardText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="5, 2, 5, 1"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!--Page Title-->
+    <Style x:Key="PageTitleBorderStyle" TargetType="Border">
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Width" Value="800"/>
+        <Setter Property="Background" Value="{StaticResource TopAppbarColor}"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="5, 52, 0, 0"/>
+    </Style>
+
+    <!--Rank view Page-->
+    <Style x:Key="RankViewTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="MaxLines" Value="2"/>
+    </Style>
+
+    <Style x:Key="RankViewIntroductionStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="20, 20, 20, 0"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="FontSize" Value="23"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
+
+    <!--Button-->
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="#78a708"/>
+        <Setter Property="Foreground" Value="#78a708"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="Grid" Background="Transparent">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="Pressed" To="PointerOver">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition From="PointerOver" To="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition From="Pressed" To="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver"/>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <PointerDownThemeAnimation Storyboard.TargetName="Grid"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="White"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="#78a708"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="Border" CornerRadius="7" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="9.5">
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SearchPage_ListItemText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Margin" Value="5, 2, 0, 0"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Width" Value="320"/>
+        <Setter Property="MaxLines" Value="2"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="SearchPage_ClearSearchHistoryText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Margin" Value="20, 15"/>
+    </Style>
+
+    <!--Comments-->
+    <Style x:Key="CommentListPage_CommentContent_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="Margin" Value="0, 10, 0, 0"/>
+    </Style>
+
+    <Style x:Key="CommentListPage_UserName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="#78a708"/>
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <Style x:Key="CommentListPage_CreateTime_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Foreground" Value="#78000000"/>
+        <Setter Property="FontSize" Value="17"/>
+    </Style>
+
+    <Style x:Key="RecipeInfoPage_CommentContent_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Width" Value="260"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="RecipeInfoPage_CommentCreateTimeText_style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="#78000000"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="19"/>
+    </Style>
+
+    <Style x:Key="RecipeInfoPage_CommentUserName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="Foreground" Value="#78a708"/>
+    </Style>
+
+    <!--Search Result Page-->
+    <Style x:Key="SearchResultPage_SectionTitle_style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Margin" Value="15, 8, 0, 8"/>
+    </Style>
+
+    <Style x:Key="SearchResultPage_SectionTitleBackground_Style" TargetType="Border">
+        <Setter Property="Background" Value="#22000000"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="BorderThickness" Value="0.3"/>
+        <Setter Property="Margin" Value="-1, 0"/>
+    </Style>
+
+    <Style x:Key="SearchResultPage_AlbumRecipeCountText_style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Margin" Value="3, 0, 0, 3"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="SearchResultPage_AlbumIntro_Style" TargetType="TextBlock" BasedOn="{StaticResource TagsContentStyle}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Margin" Value="0, 0, 0, 0"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="SearchResultPage_RecipeLine_Style" TargetType="Rectangle">
+        <Setter Property="Height" Value="1.5"/>
+        <Setter Property="Fill" Value="#22000000"/>
+        <Setter Property="Margin" Value="-20, 20, -20, 20"/>
+        <Setter Property="Width" Value="800"/>
+    </Style>
+
+    <!--Album List Page-->
+    <Style x:Key="AlbumList_Line_Style" TargetType="Rectangle" BasedOn="{StaticResource SearchResultPage_RecipeLine_Style}">
+        <Setter Property="Height" Value="1"/>
+    </Style>
+
+    <!--Settings Page-->
+    <Style x:Key="SettingItem_Icon" TargetType="Image" >
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="Stretch" Value="UniformToFill"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="15, 0, 10, 0"/>
+    </Style>
+
+    <Style x:Key="SettingItem_Text" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment"  Value="Left"/>
+        <Setter Property="Margin" Value="0, 15, 0, 15"/>
+    </Style>
+
+    <Style x:Key="SettingItem_MoreTag" TargetType="Image">
+        <Setter Property="Height" Value="48"/>
+        <Setter Property="Stretch" Value="None"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="3, 2, 5, 0"/>
+    </Style>
+
+    <Style x:Key="CurrentVersionTextStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0, 0, 45, 0"/>
+        <Setter Property="Foreground" Value="#66000000"/>
+    </Style>
+
+    <Style x:Key="SettingPage_CacheSizeText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Foreground" Value="#66000000"/>
+    </Style>
+
+    <!--TextBox-->
+    <Style x:Key="TextBoxBase" TargetType="TextBox">
+        <Setter Property="MinWidth" Value="51"/>
+        <Setter Property="MinHeight" Value="34"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="SelectionHighlightColor" Value="{ThemeResource TextSelectionHighlightColorThemeBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="20.26"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+        <Setter Property="Padding" Value="7, 0.8, 8, 0"/>
+        <Setter Property="Margin" Value="0, 9.5, 0, 9.5"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BorderElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledBackgroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="BorderElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledBorderThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledForegroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="PlaceholderTextContentPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledForegroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="HeaderContentPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledHeaderForegroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="{ThemeResource TextControlBorderThemeOpacity}" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BorderElement"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="BorderElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextSelectionHighlightColorThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PlaceholderTextContentPresenter"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BorderElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Trasparent"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="BorderElement" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.Row="1">
+                            <Border.Background>
+                                <ImageBrush ImageSource=""/>
+                            </Border.Background>
+                        </Border>
+                        <ContentPresenter x:Name="HeaderContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Margin="{ThemeResource TextControlHeaderMarginThemeThickness}" Grid.Row="0" Style="{StaticResource HeaderContentPresenterStyle}"/>
+                        <ScrollViewer x:Name="ContentElement" AutomationProperties.AccessibilityView="Raw" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsTabStop="False" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" Margin="{TemplateBinding BorderThickness}" MinHeight="{ThemeResource TextControlThemeMinHeight}" Padding="{TemplateBinding Padding}" Grid.Row="1" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="Disabled"/>
+                        <ContentControl x:Name="PlaceholderTextContentPresenter" Content="{TemplateBinding PlaceholderText}" Foreground="{ThemeResource TextBoxPlaceholderTextThemeBrush}" FontSize="{ThemeResource ContentControlFontSize}" IsTabStop="False" Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PasswordBoxBase" TargetType="PasswordBox">
+        <Setter Property="MinWidth" Value="51"/>
+        <Setter Property="MinHeight" Value="34"/>
+        <Setter Property="SelectionHighlightColor" Value="{ThemeResource TextSelectionHighlightColorThemeBrush}"/>
+        <Setter Property="Foreground" Value="{ThemeResource TextBoxForegroundThemeBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="20.26"/>
+        <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="Padding" Value="7, 0.8, 8, 0"/>
+        <Setter Property="Margin" Value="0, 9.5, 0, 9.5"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Grid Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BorderElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledBackgroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="BorderElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledBorderThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledForegroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="PlaceholderTextContentPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledForegroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="HeaderContentPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxDisabledHeaderForegroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="{ThemeResource TextControlBorderThemeOpacity}" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BorderElement"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver"/>
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="BorderElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextSelectionHighlightColorThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PlaceholderTextContentPresenter"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BorderElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextBoxFocusedBackgroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="ButtonStates">
+                                <VisualState x:Name="ButtonVisible">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="RevealButton">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsChecked" Storyboard.TargetName="RevealButton">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="ButtonCollapsed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="RevealButton">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsChecked" Storyboard.TargetName="RevealButton">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="BorderElement" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="1"/>
+                        <ContentPresenter x:Name="HeaderContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Margin="{ThemeResource TextControlHeaderMarginThemeThickness}" Grid.Row="0" Style="{StaticResource HeaderContentPresenterStyle}"/>
+                        <ScrollViewer x:Name="ContentElement" AutomationProperties.AccessibilityView="Raw" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsTabStop="False" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" Margin="{ThemeResource RichEditBoxTextThemeMargin}" MinHeight="{ThemeResource TextControlThemeMinHeight}" Padding="{TemplateBinding Padding}" Grid.Row="1" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="Disabled"/>
+                        <ContentControl x:Name="PlaceholderTextContentPresenter" Content="{TemplateBinding PlaceholderText}" Foreground="{ThemeResource TextBoxPlaceholderTextThemeBrush}" IsTabStop="False" Margin="{ThemeResource RichEditBoxTextThemeMargin}" Padding="{TemplateBinding Padding}" Grid.Row="1"/>
+                        <CheckBox x:Name="RevealButton" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" HorizontalAlignment="Left" IsTabStop="False" Margin="{ThemeResource PasswordBoxCheckBoxThemeMargin}" Grid.Row="2" Visibility="Collapsed" VerticalAlignment="Top"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Search Input Page-->
+    <Style x:Key="SearchInputPage_ClearImae_Style" TargetType="Image">
+        <Setter Property="Width" Value="26"/>
+        <Setter Property="Height" Value="26"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Opacity" Value="0"/>
+    </Style>
+
+    <Style x:Key="SearchInputPage_KeywordTextBox_Style" TargetType="TextBox" BasedOn="{StaticResource TextBoxBase}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="10, 5, 30, 0"/>
+    </Style>
+
+    <!--Simple Tree list-->
+    <Style x:Key="SimpleTreeList_Title_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="47, 15, 0, 15"/>
+    </Style>
+
+    <Style x:Key="SimpleTreeList_Arrow_Style" TargetType="Image">
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="Margin" Value="17, 0, 0, 0"/>
+    </Style>
+
+    <Style x:Key="ShoppingListPage_StuffCategoryItem_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="47, 15, 0, 15"/>
+    </Style>
+
+    <Style x:Key="ShoppingListPage_StuffItemWeight_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0, 15, 47, 15"/>
+    </Style>
+
+    <Style x:Key="ShoppingListPage_ShowRecipeImge_Style" TargetType="Image">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0, 15, 47, 5"/>
+        <Setter Property="Height" Value="42"/>
+        <Setter Property="Width" Value="42"/>
+    </Style>
+
+    <!--Category Page-->
+    <Style x:Key="CategoryPage_CategoryIcon_Style" TargetType="Image">
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+    </Style>
+
+    <Style x:Key="CategoryPage_CategoryName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="48, 15, 0, 15"/>
+    </Style>
+
+    <Style x:Key="CategoryPage_MoreTag_Style" TargetType="Image">
+        <Setter Property="Stretch" Value="None"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, 0, 8, 0"/>
+    </Style>
+
+    <!--About Page-->
+    <Style x:Key="AboutPage_ItemKeyText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkerGreenMain}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="AboutPage_HaoDouIntroduction_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="24.5"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Margin" Value="25, 30, 40, 30"/>
+    </Style>
+
+    <!--Ad Recommendation Page-->
+    <Style x:Key="AdRecommendation_Title_style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="15, 0, 0, 20"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="AdRecommendation_Description_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="15, 35, 0, 0"/>
+    </Style>
+
+    <!--Login Page-->
+    <Style x:Key="LoginPage_UserName_Style" TargetType="TextBox" BasedOn="{StaticResource TextBoxBase}">
+        <Setter Property="PlaceholderText" Value="请输入邮箱或者手机号码"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="40, 0, 0, 0"/>
+        <Setter Property="Width" Value="280"/>
+    </Style>
+
+    <Style x:Key="LoginPage_TextBox_line_Style" TargetType="Image">
+        <Setter Property="Height" Value="4"/>
+        <Setter Property="Stretch" Value="Fill"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="40, 0, 0, 0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Width" Value="280"/>
+    </Style>
+
+    <Style x:Key="LoginPage_Password_Style" TargetType="PasswordBox" BasedOn="{StaticResource PasswordBoxBase}">
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="PlaceholderText" Value="请输入密码"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="40, 0, 0, 0"/>
+        <Setter Property="Width" Value="280"/>
+    </Style>
+
+    <Style x:Key="LoginPage_ForgetPassword_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="Foreground" Value="{StaticResource GreenMain}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, 30, 0, 0"/>
+    </Style>
+
+    <Style x:Key="LoginPage_QQorSina_Style" TargetType="Image">
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Width" Value="60"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="LoginPage_QQorSinaText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="Margin" Value="0, 20, 0, 0"/>
+    </Style>
+
+    <!--User Profile-->
+    <Style x:Key="UserProfileSummary_PropretyValue_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+
+    <Style x:Key="UserProfileSummary_PropertyName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, 5, 0, 0"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+    <Style x:Key="UserProfieSummary_Intro_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="0, 0, 20, 30"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+    <Style x:Key="FollowerPage_Vip_Style" TargetType="Image">
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="46, 32, 0, 0"/>
+    </Style>
+
+    <Style x:Key="FollowPage_UserPhoto_Style" TargetType="controls:UserPhoto">
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Width" Value="60"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="FollowPage_UserName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Width" Value="280"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="75, 0, 0, 0"/>
+    </Style>
+
+    <Style x:Key="FollowerPage_NOItemText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Margin" Value="0, 180, 0, 0"/>
+    </Style>
+
+    <Style x:Key="UserProfile_NoItemsText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Margin" Value="0, 165, 0, 0"/>
+    </Style>
+
+    <Style x:Key="MessagePage_UpdateTime_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+
+    <Style x:Key="MessagePage_UserName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <Style x:Key="MessagePage_MessageContent_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0, 42, 0, 0"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="NoticePage_UpdateTime_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+
+    <Style x:Key="NoticePage_UserName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <Style x:Key="NoticePage_MessageContent_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0, 42, 0, 0"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="FriendsPage_NOItemText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Margin" Value="0, 180, 0, 0"/>
+    </Style>
+
+    <Style x:Key="FriendsPage_Title_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <Style x:Key="FriendsPage_Content_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0, 42, 0, 0"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="FriendsPage_Description_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0, 35, 0, 0"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="2"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="MyFavorite_TileInto_Style" TargetType="TextBlock" BasedOn="{StaticResource TopicContentStyle}">
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="0, 0, 0, 3"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="MyFavorite_Title_Style" TargetType="TextBlock" BasedOn="{StaticResource TopicTileStyle}">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0, 3, 0, 0"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="2"/>
+    </Style>
+    
+    <Style x:Name="MyFavorite_CreateNewRecipeAblum_Text_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#70000000"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Margin" Value="15, 0, 0, 0"/>
+    </Style>
+
+    <Style x:Name="MyFavorite_RecipeAlbumTitle_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Margin" Value="15, 0, 0, 35"/>
+    </Style>
+
+    <Style x:Key="MyFavorite_RecipeAlbumRecipeNumber_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="15, 45, 0, 0"/>
+        <Setter Property="Foreground" Value="#70000000"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+
+    <Style x:Key="FavoriteRecipesAlbum_Content_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="FavoriteRecipesAlbum_Title_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="MaxLines" Value="2"/>
+    </Style>
+
+    <Style x:Key="Activity_ItemContent_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Margin" Value="0, 5, 0, 0"/>
+        <Setter Property="FontSize" Value="19"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="MaxLines" Value="2"/>
+    </Style>
+
+    <Style x:Key="NoItemText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Margin" Value="0, 180, 0, 0"/>
+    </Style>
+
+    <Style x:Key="NoItemImage_Style" TargetType="Image">
+        <Setter Property="Stretch" Value="None"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, -120, 0, 0"/>
+    </Style>
+    
+    <Style x:Name="Toast_Common_Style" TargetType="controls:Toast">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, 240, 0, 0"/>
+    </Style>
+
+
+    <Style x:Name="PublishRecipe_AddStuffText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, 15"/>
+    </Style>
+
+    <Style x:Key="DiggUserList_Description_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0, 6, 0, 0"/>
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="MaxLines" Value="2"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+
+    <Style x:Key="DiggUserList_Title_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="PersonalInfo_ItemTitle_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="PersonalInfo_ItemText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="Gray"/>
+    </Style>
+
+    <Style x:Key="SelectAreasPage_CityName_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="21"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="47, 15, 0, 15"/>
+        <Setter Property="Foreground" Value="Gray"/>
+    </Style>
+
+    <Style x:Key="FeedbackText_Style" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="FontSize"  Value="19"/>
+        <Setter Property="Margin" Value="0, 40"/>
+        <Setter Property="Foreground" Value="#303030"/>
+    </Style>
+</ResourceDictionary>
