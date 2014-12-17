@@ -110,7 +110,7 @@ namespace HaoDouCookBook.Pages
 
                 if(data.Messages.Count == limit)
                 {
-                    EnusureLoadMoreControl();
+                    EnsureLoadMoreControl();
                 }
             }
         }
@@ -145,7 +145,7 @@ namespace HaoDouCookBook.Pages
 
         private Message loadMoreControlDataContext = new Message() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (viewModel.Messages != null && !viewModel.Messages.Contains(loadMoreControlDataContext))
             {
@@ -194,7 +194,7 @@ namespace HaoDouCookBook.Pages
 
                                  if (success.Messages.Count == limit)
                                  {
-                                     EnusureLoadMoreControl();
+                                     EnsureLoadMoreControl();
                                  }
                                  page++;
                                  loadmore.SetState(LoadingState.SUCCESS);

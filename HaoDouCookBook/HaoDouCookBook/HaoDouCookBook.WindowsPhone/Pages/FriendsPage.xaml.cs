@@ -107,7 +107,7 @@ namespace HaoDouCookBook.Pages
 
                 if (data.FriendsNameCategories.Length == limit)
                 {
-                    EnusureLoadMoreControl();
+                    EnsureLoadMoreControl();
                 }
             }
         }
@@ -143,7 +143,7 @@ namespace HaoDouCookBook.Pages
 
         private ViewModels.FriendsNameCategory loadMoreControlDataContext = new ViewModels.FriendsNameCategory() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (viewModel.FriendsNameCategories != null && !viewModel.FriendsNameCategories.Contains(loadMoreControlDataContext))
             {
@@ -199,7 +199,7 @@ namespace HaoDouCookBook.Pages
 
                                  if (success.FriendsNameCategories.Length == limit)
                                  {
-                                     EnusureLoadMoreControl();
+                                     EnsureLoadMoreControl();
                                  }
                                  page++;
                                  loadmore.SetState(LoadingState.SUCCESS);

@@ -90,7 +90,7 @@ namespace HaoDouCookBook.Pages
 
                         if(success.DiggUsers.Length == limit)
                         {
-                            EnusureLoadMoreControl();
+                            EnsureLoadMoreControl();
                         }
                     }
                     page = 1;
@@ -124,7 +124,7 @@ namespace HaoDouCookBook.Pages
 
         private DiggUser loadMoreControlDataContext = new DiggUser() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (DiggUsers != null && !DiggUsers.Contains(loadMoreControlDataContext))
             {
@@ -170,7 +170,7 @@ namespace HaoDouCookBook.Pages
 
                                  if (success.DiggUsers.Length == limit)
                                  {
-                                     EnusureLoadMoreControl();
+                                     EnsureLoadMoreControl();
                                  }
                                  page++;
                                  loadmore.SetState(LoadingState.SUCCESS);

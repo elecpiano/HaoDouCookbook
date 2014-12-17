@@ -163,7 +163,7 @@ namespace HaoDouCookBook.Pages
 
                 if(data.Comments.Length == limit)
                 {
-                    EnusureLoadMoreControl();
+                    EnsureLoadMoreControl();
                 }
             }
         }
@@ -203,7 +203,7 @@ namespace HaoDouCookBook.Pages
 
         private CommentListComment loadMoreControlDataContext = new CommentListComment() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (viewModel.Comments != null && !viewModel.Comments.Contains(loadMoreControlDataContext))
             {
@@ -268,7 +268,7 @@ namespace HaoDouCookBook.Pages
                                  loadmore.SetState(LoadingState.SUCCESS);
                                  if (success.Comments.Length == limit)
                                  {
-                                     EnusureLoadMoreControl();
+                                     EnsureLoadMoreControl();
                                  } 
                              } 
                              else

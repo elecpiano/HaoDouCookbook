@@ -140,7 +140,7 @@ namespace HaoDouCookBook.Pages
 
                         if(success.Items.Length == limit)
                         {
-                            EnusureLoadMoreControl();
+                            EnsureLoadMoreControl();
                         }
                     }
                     else
@@ -187,7 +187,7 @@ namespace HaoDouCookBook.Pages
 
         private TagRecipeData loadMoreControlDataContext = new TagRecipeData() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (viewModel.Recipes != null && !viewModel.Recipes.Contains(loadMoreControlDataContext))
             {
@@ -245,7 +245,7 @@ namespace HaoDouCookBook.Pages
                                   loadmore.SetState(LoadingState.SUCCESS);
                                   if (success.Items.Length == limit)
                                   {
-                                      EnusureLoadMoreControl();
+                                      EnsureLoadMoreControl();
                                   }
                               }
                               else

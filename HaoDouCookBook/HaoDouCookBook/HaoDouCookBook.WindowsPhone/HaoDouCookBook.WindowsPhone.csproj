@@ -272,6 +272,12 @@
     <Compile Include="Pages\FavoriteRecipeAlbumPage.xaml.cs">
       <DependentUpon>FavoriteRecipeAlbumPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\FeebackHistory.xaml.cs">
+      <DependentUpon>FeebackHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Feedback.xaml.cs">
+      <DependentUpon>Feedback.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\FriendsCirclePage.xaml.cs">
       <DependentUpon>FriendsCirclePage.xaml</DependentUpon>
     </Compile>
@@ -386,6 +392,7 @@
     <Compile Include="ViewModels\DishTileData.cs" />
     <Compile Include="ViewModels\FavoritePageViewlModel.cs" />
     <Compile Include="ViewModels\FavoriteRecipesAlbumPageViewModel.cs" />
+    <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\IMPageViewModel.cs" />
     <Compile Include="ViewModels\Meal.cs" />
     <Compile Include="ViewModels\MessagePageViewModel.cs" />
@@ -757,6 +764,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\FavoriteRecipeAlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FeebackHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Feedback.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

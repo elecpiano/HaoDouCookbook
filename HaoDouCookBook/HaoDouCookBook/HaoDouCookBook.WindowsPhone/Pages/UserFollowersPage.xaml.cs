@@ -117,7 +117,7 @@ namespace HaoDouCookBook.Pages
 
                                 if (success.Followers.Length == limit)
                                 {
-                                    EnusureLoadMoreControl();
+                                    EnsureLoadMoreControl();
                                 }
                             }
 
@@ -153,7 +153,7 @@ namespace HaoDouCookBook.Pages
 
                                 if (success.Followers.Length == limit)
                                 {
-                                    EnusureLoadMoreControl();
+                                    EnsureLoadMoreControl();
                                 }
                             }
 
@@ -249,7 +249,7 @@ namespace HaoDouCookBook.Pages
 
         private UserFollower loadMoreControlDataContext = new UserFollower() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (viewModel.Followers != null && !viewModel.Followers.Contains(loadMoreControlDataContext))
             {
@@ -299,7 +299,7 @@ namespace HaoDouCookBook.Pages
 
                                              if (success.Followers.Length == limit)
                                              {
-                                                 EnusureLoadMoreControl();
+                                                 EnsureLoadMoreControl();
                                              }
                                              page++;
                                              loadmore.SetState(LoadingState.SUCCESS);
@@ -340,7 +340,7 @@ namespace HaoDouCookBook.Pages
 
                                          if (success.Followers.Length == limit)
                                          {
-                                             EnusureLoadMoreControl();
+                                             EnsureLoadMoreControl();
                                          }
                                          page++;
                                          loadmore.SetState(LoadingState.SUCCESS);

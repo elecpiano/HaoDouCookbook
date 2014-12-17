@@ -78,7 +78,7 @@
                                         Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"
                                         Tapped="SimpleSettingItem_Tapped"/>
 
-                <controls:SimpleSettingItem Tag="adrecommendation" Icon="../assets/images/MyPage/AppGems.png" ItemText="精品推荐" Margin="0, 20, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
+                <controls:SimpleSettingItem Tag="adrecommendation" Icon="../assets/images/MyPage/AppGems.png" Visibility="Collapsed" ItemText="精品推荐" Margin="0, 20, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
                 <controls:SimpleSettingItem Tag="settings" Icon="../assets/images/MyPage/Settings.png" ItemText="设置" Margin="0, 1.5, 0, 0" Tapped="SimpleSettingItem_Tapped"/>
 
                 <Border Background="White" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}" 

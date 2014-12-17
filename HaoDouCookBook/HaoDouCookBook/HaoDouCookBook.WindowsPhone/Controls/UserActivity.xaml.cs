@@ -131,7 +131,7 @@ namespace HaoDouCookBook.Controls
 
                 if (data.Activities.Length == limit)
                 {
-                    EnusureLoadMoreControl();
+                    EnsureLoadMoreControl();
                 }
             }
         }
@@ -181,7 +181,7 @@ namespace HaoDouCookBook.Controls
 
         private UserActivitiesGroup loadMoreControlDataContext = new UserActivitiesGroup() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (ActivitiesGroups != null && !ActivitiesGroups.Contains(loadMoreControlDataContext))
             {
@@ -280,7 +280,7 @@ namespace HaoDouCookBook.Controls
 
                                  if (success.Activities.Length == limit)
                                  {
-                                     EnusureLoadMoreControl();
+                                     EnsureLoadMoreControl();
                                  }
                                  page++;
                                  loadmore.SetState(LoadingState.SUCCESS);

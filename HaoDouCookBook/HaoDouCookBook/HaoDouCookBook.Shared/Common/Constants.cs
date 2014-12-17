@@ -39,6 +39,7 @@ namespace HaoDouCookBook.Common
         public const string NO_FAVORITE_RECIPES = "去收藏菜谱吧~\n出得了厅堂，下得了厨房";
         public const string NO_LIKE_RECIPES = "赞美他们快乐自己\n为你喜欢的菜谱送红心~";
         public const string NO_RECIPES_IN_LOACL_FOLDER = "下载菜谱\n节省流量 So easy~";
+        public const string NO_FEEDBACK = "还没有反馈记录呢\n难道这就是传说中的真爱";
 
         public const string MODIFY_NAME_DESCRIPTION = "可以免费修改一次，以后每次修改将会扣除100豆币";
         public const string MOIDFIED_DESCRIPTION = "非首次修改昵称，此次修改会\n扣除100豆币！是否继续？";

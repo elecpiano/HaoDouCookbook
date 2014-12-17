@@ -100,7 +100,7 @@ namespace HaoDouCookBook.Pages
 
                         if(success.Notices.Length == limit)
                         {
-                            EnusureLoadMoreControl();
+                            EnsureLoadMoreControl();
                         }
 
                         this.appbar.Visibility = success.Notices.Length > 0 ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
@@ -232,7 +232,7 @@ namespace HaoDouCookBook.Pages
 
         private NoticeItem loadMoreControlDataContext = new NoticeItem() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (viewModel.Notices != null && !viewModel.Notices.Contains(loadMoreControlDataContext))
             {
@@ -283,7 +283,7 @@ namespace HaoDouCookBook.Pages
 
                                  if (success.Notices.Length == limit)
                                  {
-                                     EnusureLoadMoreControl();
+                                     EnsureLoadMoreControl();
                                  }
 
                                  page++;

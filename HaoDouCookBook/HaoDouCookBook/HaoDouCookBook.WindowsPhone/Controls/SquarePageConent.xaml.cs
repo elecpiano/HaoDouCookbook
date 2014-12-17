@@ -92,7 +92,7 @@ namespace HaoDouCookBook.Controls
 
                 if(data.Topics.Length == limit)
                 {
-                    EnusureLoadMoreControl();
+                    EnsureLoadMoreControl();
                 }
             }
         }
@@ -138,7 +138,7 @@ namespace HaoDouCookBook.Controls
 
         private TopicModel loadMoreControlDataContext = new TopicModel() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (LatestTopics != null && !LatestTopics.Contains(loadMoreControlDataContext))
             {
@@ -186,7 +186,7 @@ namespace HaoDouCookBook.Controls
 
                                 if(success.Topics.Length == 0)
                                 {
-                                    EnusureLoadMoreControl();
+                                    EnsureLoadMoreControl();
                                 }
                                 page++;
                                 loadmore.SetState(LoadingState.SUCCESS);

@@ -67,6 +67,11 @@ namespace HaoDouCookBook.Pages
 
         #region Event
 
+        private void Feedback_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            App.Current.RootFrame.Navigate(typeof(Feedback));
+        }
+
         private async void ClearCache_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             ContentDialog dialog = new ContentDialog()
@@ -180,6 +185,7 @@ namespace HaoDouCookBook.Pages
 
 
         #endregion
+
 
     }
 }

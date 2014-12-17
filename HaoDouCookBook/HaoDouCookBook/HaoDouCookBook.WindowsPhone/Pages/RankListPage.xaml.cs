@@ -87,7 +87,7 @@ namespace HaoDouCookBook.Pages
 
                         if(success.Items.Length == limit)
                         {
-                            EnusureLoadMoreControl();
+                            EnsureLoadMoreControl();
                         }
                     }
                     page = 1;
@@ -122,7 +122,7 @@ namespace HaoDouCookBook.Pages
 
         private RankItemData loadMoreControlDataContext = new RankItemData() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (rankListData != null && !rankListData.Contains(loadMoreControlDataContext))
            {
@@ -169,7 +169,7 @@ namespace HaoDouCookBook.Pages
 
                                  if(success.Items.Length == limit)
                                  {
-                                     EnusureLoadMoreControl();
+                                     EnsureLoadMoreControl();
                                  }
 
                                  page++;

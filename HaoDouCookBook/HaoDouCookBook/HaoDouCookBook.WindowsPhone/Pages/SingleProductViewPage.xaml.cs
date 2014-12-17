@@ -141,7 +141,7 @@ namespace HaoDouCookBook.Pages
 
                         if (viewModel.Comments.Count == limit)
                         {
-                            EnusureLoadMoreControl();
+                            EnsureLoadMoreControl();
                         }
                     }
 
@@ -317,7 +317,7 @@ namespace HaoDouCookBook.Pages
 
         private Comment loadMoreControlDataContext = new Comment() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (viewModel.Comments != null && !viewModel.Comments.Contains(loadMoreControlDataContext))
             {
@@ -365,7 +365,7 @@ namespace HaoDouCookBook.Pages
 
                                  if (viewModel.Comments.Count == limit)
                                  {
-                                     EnusureLoadMoreControl();
+                                     EnsureLoadMoreControl();
                                  }
 
                                  page++;

@@ -47,7 +47,7 @@ namespace HaoDouCookBook.Pages
             }
 
             Keywords.Clear();
-            rootScrollViewer.ScrollToVerticalOffset(0);
+            rootScrollViewer.ChangeViewExtersion(0, int.MaxValue, 1.0f);
         }
 
         #endregion

@@ -126,7 +126,7 @@ namespace HaoDouCookBook.Pages
 
                         if(success.Topics.Length == limit)
                         {
-                            EnusureLoadMoreControl();
+                            EnsureLoadMoreControl();
                         }
                     }
                     page = 1;
@@ -163,7 +163,7 @@ namespace HaoDouCookBook.Pages
                                 CreateTimeDescription = item.LastPostTime,
                             });
                         }
-                        EnusureLoadMoreControl();
+                        EnsureLoadMoreControl();
                     }
                     
                     page = 1;
@@ -199,7 +199,7 @@ namespace HaoDouCookBook.Pages
 
         private TopicModel loadMoreControlDataContext = new TopicModel() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (viewModel.Topics != null && !viewModel.Topics.Contains(loadMoreControlDataContext))
            {
@@ -252,7 +252,7 @@ namespace HaoDouCookBook.Pages
                                          page++;
                                          if(success.Topics.Length == limit)
                                          {
-                                             EnusureLoadMoreControl();
+                                             EnsureLoadMoreControl();
                                          }
                                          loadmore.SetState(LoadingState.SUCCESS);
                                      }
@@ -296,7 +296,7 @@ namespace HaoDouCookBook.Pages
 
                                          if(success.Items.Length == limit)
                                          {
-                                             EnusureLoadMoreControl();
+                                             EnsureLoadMoreControl();
                                          }
 
                                          page++;

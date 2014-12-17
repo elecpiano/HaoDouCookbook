@@ -49,13 +49,13 @@
                 <controls:SimpleSettingItem ItemText="关于" Tapped="About_Tapped"/>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
                 <Grid>
-                    <controls:SimpleSettingItem ItemText="更新版本"/>
+                    <controls:SimpleSettingItem ItemText="当前版本"/>
                     <TextBlock Style="{StaticResource CurrentVersionTextStyle}">
                         当前版本<Run Text="{Binding Version}"/>
                     </TextBlock>
                 </Grid>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380"/>
-                <controls:SimpleSettingItem ItemText="意见反馈"/>
+                <controls:SimpleSettingItem Tag="feedback" ItemText="意见反馈" Tapped="Feedback_Tapped"/>
                 <Rectangle Style="{StaticResource DarkGrayLine}" Width="380" Visibility="{Binding SignedIn, Converter={StaticResource AnythingToVisiblityConverter}}"/>
 
                 <!--退出-->

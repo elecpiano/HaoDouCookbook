@@ -109,7 +109,7 @@ namespace HaoDouCookBook.Pages
 
                         if(success.Activities.Length == limit)
                         {
-                            EnusureLoadMoreControl();
+                            EnsureLoadMoreControl();
                         }
                     }
 
@@ -179,7 +179,7 @@ namespace HaoDouCookBook.Pages
 
         private UserActivityItem loadMoreControlDataContext = new UserActivityItem() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (Activities != null && !Activities.Contains(loadMoreControlDataContext))
             {
@@ -250,7 +250,7 @@ namespace HaoDouCookBook.Pages
 
                                  if (success.Activities.Length == limit)
                                  {
-                                     EnusureLoadMoreControl();
+                                     EnsureLoadMoreControl();
                                  }
 
                                  page++;

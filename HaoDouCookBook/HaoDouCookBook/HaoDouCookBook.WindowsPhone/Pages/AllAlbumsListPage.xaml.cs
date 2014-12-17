@@ -94,7 +94,7 @@ namespace HaoDouCookBook.Pages
 
                 if (data.Albums.Length == limit)
                 {
-                    EnusureLoadMoreControl();
+                    EnsureLoadMoreControl();
                 }
             }
         }
@@ -122,7 +122,7 @@ namespace HaoDouCookBook.Pages
 
         private ViewModels.AlbumTile loadMoreControlDataContext = new ViewModels.AlbumTile() { IsLoadMore = true };
 
-        public void EnusureLoadMoreControl()
+        public void EnsureLoadMoreControl()
         {
             if (Albums != null && !Albums.Contains(loadMoreControlDataContext))
             {
@@ -168,7 +168,7 @@ namespace HaoDouCookBook.Pages
                                  loadmore.SetState(LoadingState.SUCCESS);
                                  if (success.Albums.Length == limit)
                                  {
-                                     EnusureLoadMoreControl();
+                                     EnsureLoadMoreControl();
                                  }
                              }
                              else

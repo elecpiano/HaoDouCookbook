@@ -1,0 +1,53 @@
+﻿<controls:BackablePage
+    x:Class="HaoDouCookBook.Pages.Feedback"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HaoDouCookBook.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HaoDouCookBook.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <controls:BackablePage.BottomAppBar>
+        <CommandBar Style="{StaticResource bottomAppbarStyle}">
+            <AppBarButton Icon="Accept" Label="完成" Click="sendFeedback_Tapped"/>
+        </CommandBar>
+    </controls:BackablePage.BottomAppBar>
+
+    <Grid x:Name="root" Background="{StaticResource TopAppbarColor}">
+        <controls:Banner x:Name="banner" VerticalAlignment="Top" Margin="20, 5, 0, 0" Title="好豆菜谱"/>
+        <Border Style="{StaticResource PageTitleBorderStyle}">
+            <TextBlock x:Name="title" Text="分类" Style="{StaticResource SubTitleStyle}"/>
+        </Border>
+        <ScrollViewer Name="rootScrollViewer" Margin="0, 105, 0, 0">
+            <StackPanel Orientation="Vertical">
+                <Grid Background="White">
+                    <StackPanel Orientation="Vertical" Margin="20, 50, 20, 30">
+                        <TextBox Style="{StaticResource TextBoxBase}" x:Name="feedbackContent"
+                                 PlaceholderText="亲，希望能留下您的联系方式，若您的意见被采纳，我们会赠送精美礼物一份哦！" 
+                                 TextWrapping="Wrap" AcceptsReturn="True"/>
+                        <Image Source="../assets/images/textboxgreenline.png"/>
+                    </StackPanel>
+                </Grid>
+                
+                <Grid Background="White" Tapped="PhoneCall_Tapped" Margin="0, 40, 0, 0">
+                    <controls:SimpleSettingItem Margin="20, 0" ItemText="客服电话:" VerticalAlignment="Center" />
+                    <TextBlock x:Name="HaouDouServiceCall" Margin="120, 0, 0, 0" Style="{StaticResource AboutPage_ItemKeyText_Style}"/>
+                </Grid>
+                <Rectangle Style="{StaticResource LightGaryLine}" Width="800" Margin="0, 0, 20, 0"/>
+
+                <Grid Background="White">
+                    <controls:SimpleSettingItem ItemText="客服QQ:" Margin="20, 0" VerticalAlignment="Center" />
+                    <TextBlock x:Name="kfQQ" Margin="110, 0, 0, 0" Style="{StaticResource AboutPage_ItemKeyText_Style}"/>
+                </Grid>
+
+                <Grid Background="White" Margin="0, 30, 0, 0" Tapped="ShowHistory_Tapped">
+                    <controls:SimpleSettingItem ItemText="查看历史记录" Margin="20, 0"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+
+        <controls:Toast x:Name="toast" Style="{StaticResource Toast_Common_Style}"/>
+    </Grid>
+</controls:BackablePage>
